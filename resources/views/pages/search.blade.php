@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Search Fragrance Vault: ' . ($q ? e($q) : 'All') . ' | Maison d\'Orient Pakistan')
+@section('title', 'Search Fragrance Vault: ' . ($q ? e($q) : 'All') . ' | Perfumes Collection Pakistan')
 
 @section('content')
 
 <!-- Search Results Banner -->
-<section class="relative py-16 md:py-20 bg-[#0A0405] border-b border-[#C9A24B]/20">
-    <div class="container max-w-3xl mx-auto text-center">
+<section class="relative py-16 md:py-20 bg-gradient-to-b from-[#18050b] via-[#0d0305] to-[#050203] border-b border-[#d6aa62]/20">
+    <div class="container max-w-3xl mx-auto text-center px-4">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Vault Search']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] mb-2 font-medium">OLFACTORY DISCOVERY</span>
-        <h1 class="font-serif text-3xl md:text-4xl text-[#F5EFE6] mb-6">
+        <span class="inline-block text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] mb-2 font-semibold">OLFACTORY DISCOVERY</span>
+        <h1 class="font-serif text-3xl md:text-5xl text-[#f5efe7] mb-6 font-normal">
             Search Results for "{{ $q }}"
         </h1>
 
@@ -24,10 +24,10 @@
                 type="text" 
                 name="q" 
                 value="{{ $q }}" 
-                placeholder="Search notes (Oud, Amber, Taif Rose), concentration..." 
-                class="w-full bg-[#120709] border border-[#C9A24B]/40 rounded px-5 py-3 text-sm text-[#F5EFE6] focus:outline-none focus:border-[#C9A24B] shadow-inner"
+                placeholder="Search notes (Oud, Amber, Taif Rose), designer names..." 
+                class="w-full bg-[#080204] border border-[#d6aa62]/35 rounded-xl px-5 py-3 text-sm text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62] shadow-inner"
             >
-            <button type="submit" class="absolute right-2 top-2 bg-[#C9A24B] text-[#080304] px-4 py-1.5 rounded text-xs font-semibold uppercase tracking-wider hover:bg-[#E6C77A] transition">
+            <button type="submit" class="absolute right-2 top-2 btn-gold px-5 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider">
                 Search
             </button>
         </form>
@@ -35,14 +35,14 @@
 </section>
 
 <!-- Search Results Grid -->
-<section class="py-16 bg-[#080304]">
-    <div class="container">
+<section class="py-16 bg-[#050203]">
+    <div class="container mx-auto px-4 lg:px-8">
         @if($products->count() > 0)
-            <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#C9A24B]/15">
-                <p class="text-xs text-[#F5EFE6]/60 tracking-wider">
-                    Found <span class="text-[#C9A24B] font-semibold">{{ $products->total() }}</span> matching compositions
+            <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#d6aa62]/20">
+                <p class="text-xs text-[#b8a9a2] tracking-wider">
+                    Found <span class="text-[#d6aa62] font-semibold">{{ $products->total() }}</span> matching compositions
                 </p>
-                <a href="{{ route('collections.show', 'all') }}" class="text-xs text-[#C9A24B] hover:underline uppercase tracking-wider">
+                <a href="{{ route('collections.show', 'all') }}" class="text-xs text-[#d6aa62] hover:text-[#f0d59d] hover:underline uppercase tracking-wider">
                     Browse All Masterpieces &rarr;
                 </a>
             </div>
@@ -57,15 +57,17 @@
                 {{ $products->links() }}
             </div>
         @else
-            <div class="text-center py-20 bg-[#0E0507] border border-[#C9A24B]/20 rounded-lg max-w-2xl mx-auto p-8">
-                <i class="fas fa-search text-4xl text-[#C9A24B]/40 mb-4"></i>
-                <h3 class="font-serif text-2xl text-[#F5EFE6] mb-2">No Matching Compositions</h3>
-                <p class="text-xs text-[#F5EFE6]/60 mb-6">
-                    We could not find any perfumes matching "{{ $q }}". Try searching for fragrance notes like "Oud", "Saffron", "Vanilla", or "Amber".
+            <div class="text-center py-20 bg-[#140408] border border-[#d6aa62]/25 rounded-2xl max-w-2xl mx-auto p-8 space-y-4">
+                <i class="fas fa-search text-4xl text-[#d6aa62]/50 mb-2"></i>
+                <h3 class="font-serif text-2xl text-[#f5efe7]">No Matching Compositions</h3>
+                <p class="text-xs text-[#b8a9a2] max-w-md mx-auto">
+                    We could not find any perfumes matching "{{ $q }}". Try searching for fragrance notes like "Oud", "Saffron", "Taif Rose", or "Amber".
                 </p>
-                <a href="{{ route('collections.show', 'all') }}" class="btn-gold">
-                    EXPLORE ALL PERFUMES
-                </a>
+                <div class="pt-2">
+                    <a href="{{ route('collections.show', 'all') }}" class="btn-gold py-3 px-8 text-xs uppercase tracking-widest inline-block">
+                        EXPLORE ALL PERFUMES
+                    </a>
+                </div>
             </div>
         @endif
     </div>

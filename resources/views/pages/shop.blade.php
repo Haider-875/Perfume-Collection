@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'The Fragrance Vault | RAVAHA Parfums Pakistan')
+@section('title', 'The Fragrance Vault | Perfumes Collection Pakistan')
 
 @section('content')
 
 <!-- Header Breadcrumb & Title -->
-<section style="padding: 50px 0 40px; background: #F9FAFB; border-bottom: 1px solid var(--border-subtle);">
-    <div class="container">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px;">
+<section class="py-12 md:py-16 bg-gradient-to-b from-[#18050b] via-[#0d0305] to-[#050203] border-b border-[#d6aa62]/20">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex flex-wrap justify-between items-end gap-6">
             <div>
-                <span class="section-pretitle">ARTISANAL CREATIONS</span>
-                <h1 style="font-size: 2.6rem; margin-bottom: 8px; font-family: var(--font-serif); color: #111827;">
+                <span class="text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] font-semibold block mb-2">ARTISANAL CREATIONS</span>
+                <h1 class="font-serif text-3xl md:text-5xl text-[#f5efe7] mb-2 font-normal">
                     @if($currentCategory)
                         {{ $currentCategory->name }}
                     @elseif($currentFamily)
@@ -21,7 +21,7 @@
                         All Fragrance Impressions
                     @endif
                 </h1>
-                <p style="font-family: var(--font-serif); font-size: 1.1rem; color: #4B5563; max-width: 600px;">
+                <p class="font-serif text-base md:text-lg text-[#b8a9a2] max-w-2xl leading-relaxed">
                     @if($currentCategory)
                         {{ $currentCategory->description }}
                     @else
@@ -30,9 +30,9 @@
                 </p>
             </div>
 
-            <div style="display: flex; gap: 12px; align-items: center;">
-                <span style="font-size: 0.85rem; color: #6B7280;">
-                    Showing <strong>{{ $products->total() }}</strong> Artisan Flacons
+            <div class="flex items-center gap-3">
+                <span class="text-xs uppercase tracking-wider text-[#b8a9a2]">
+                    Showing <strong class="text-[#d6aa62]">{{ $products->total() }}</strong> Artisan Flacons
                 </span>
             </div>
         </div>
@@ -40,51 +40,55 @@
 </section>
 
 <!-- Main Catalog Body -->
-<section style="padding: 50px 0 90px; background: #FFFFFF;">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;">
+<section class="py-12 md:py-16 bg-[#050203]">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- Left: Luxury Olfactory Filter Sidebar -->
-            <aside style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 26px; position: sticky; top: 100px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #E5E7EB; padding-bottom: 14px;">
-                    <h3 style="font-size: 0.95rem; color: #111827; display: flex; align-items: center; gap: 8px; font-weight: 700;">
-                        <i class="fas fa-sliders-h text-gold"></i> FILTER SCENTS
+            <!-- Left: Luxury Olfactory Filter Sidebar (lg:col-span-3) -->
+            <aside class="lg:col-span-3 bg-[#140408] border border-[#d6aa62]/25 rounded-2xl p-6 sticky top-28 shadow-xl space-y-6">
+                <div class="flex justify-between items-center pb-4 border-b border-[#d6aa62]/20">
+                    <h3 class="text-xs uppercase tracking-[0.2em] text-[#f5efe7] flex items-center gap-2 font-bold">
+                        <i class="fas fa-sliders-h text-[#d6aa62]"></i> FILTER SCENTS
                     </h3>
-                    <a href="{{ route('shop.index') }}" style="font-size: 0.75rem; color: #6B7280; text-decoration: none;">Reset All</a>
+                    <a href="{{ route('shop.index') }}" class="text-[11px] text-[#b8a9a2] hover:text-[#d6aa62] transition uppercase tracking-wider">Reset All</a>
                 </div>
 
-                <form action="{{ route('shop.index') }}" method="GET" id="catalogFilterForm">
+                <form action="{{ route('shop.index') }}" method="GET" id="catalogFilterForm" class="space-y-6">
                     <!-- Search Input -->
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 8px; font-weight: 600;">Keywords / Impressions</label>
-                        <div style="position: relative;">
-                            <input type="text" name="q" value="{{ request('q') }}" placeholder="Search notes, designer names..." style="width: 100%; background: #F9FAFB; border: 1px solid #D1D5DB; padding: 10px 14px; border-radius: 8px; color: #111827; font-size: 0.85rem;">
-                        </div>
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-2">Keywords / Impressions</label>
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Search notes, designer names..." class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded-lg px-3 py-2 text-xs text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62]">
                     </div>
 
                     <!-- Collections / Categories -->
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 10px; font-weight: 600;">Categories</label>
-                        <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; cursor: pointer; color: {{ !request('category') ? '#B8860B; font-weight: 600;' : '#4B5563;' }}">
-                                <span><input type="radio" name="category" value="" {{ !request('category') ? 'checked' : '' }} onchange="this.form.submit()"> All Categories</span>
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-3">Categories</label>
+                        <div class="flex flex-col gap-2">
+                            <label class="flex items-center justify-between text-xs cursor-pointer {{ !request('category') ? 'text-[#d6aa62] font-bold' : 'text-[#f5efe7] hover:text-[#d6aa62]' }}">
+                                <span class="flex items-center gap-2">
+                                    <input type="radio" name="category" value="" {{ !request('category') ? 'checked' : '' }} onchange="this.form.submit()" class="text-[#d6aa62]"> 
+                                    All Categories
+                                </span>
                             </label>
                             @foreach($categories as $cat)
-                                <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; cursor: pointer; color: {{ request('category') == $cat->slug ? '#B8860B; font-weight: 600;' : '#4B5563;' }}">
-                                    <span><input type="radio" name="category" value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'checked' : '' }} onchange="this.form.submit()"> {{ $cat->name }}</span>
-                                    <span style="font-size: 0.75rem; color: #9CA3AF;">({{ $cat->active_products_count }})</span>
+                                <label class="flex items-center justify-between text-xs cursor-pointer {{ request('category') == $cat->slug ? 'text-[#d6aa62] font-bold' : 'text-[#f5efe7] hover:text-[#d6aa62]' }}">
+                                    <span class="flex items-center gap-2">
+                                        <input type="radio" name="category" value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'checked' : '' }} onchange="this.form.submit()" class="text-[#d6aa62]"> 
+                                        {{ $cat->name }}
+                                    </span>
+                                    <span class="text-[10px] text-[#b8a9a2]">({{ $cat->active_products_count }})</span>
                                 </label>
                             @endforeach
                         </div>
                     </div>
 
                     <!-- Olfactory Families -->
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 10px; font-weight: 600;">Fragrance Family</label>
-                        <select name="family" onchange="this.form.submit()" style="width: 100%; background: #F9FAFB; border: 1px solid #D1D5DB; padding: 10px 12px; border-radius: 8px; color: #111827; font-size: 0.85rem;">
-                            <option value="">All Fragrance Families</option>
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-2">Fragrance Family</label>
+                        <select name="family" onchange="this.form.submit()" class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded-lg px-3 py-2 text-xs text-[#f5efe7] focus:outline-none focus:border-[#d6aa62]">
+                            <option value="" class="bg-[#140408]">All Fragrance Families</option>
                             @foreach($fragranceFamilies as $fam)
-                                <option value="{{ $fam->slug }}" {{ request('family') == $fam->slug ? 'selected' : '' }}>
+                                <option value="{{ $fam->slug }}" {{ request('family') == $fam->slug ? 'selected' : '' }} class="bg-[#140408]">
                                     {{ $fam->name }} ({{ $fam->products_count }})
                                 </option>
                             @endforeach
@@ -92,40 +96,36 @@
                     </div>
 
                     <!-- Gender / Aura -->
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 10px; font-weight: 600;">Gender Persona</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
-                            <label style="background: {{ request('gender') == 'Unisex' ? '#FEF3C7' : '#F9FAFB' }}; border: 1px solid {{ request('gender') == 'Unisex' ? '#B8860B' : '#E5E7EB' }}; padding: 8px 4px; border-radius: 8px; text-align: center; font-size: 0.78rem; cursor: pointer; color: #111827; font-weight: {{ request('gender') == 'Unisex' ? '600' : 'normal' }};">
-                                <input type="radio" name="gender" value="Unisex" {{ request('gender') == 'Unisex' ? 'checked' : '' }} style="display: none;" onchange="this.form.submit()"> Unisex
-                            </label>
-                            <label style="background: {{ request('gender') == 'Men' ? '#FEF3C7' : '#F9FAFB' }}; border: 1px solid {{ request('gender') == 'Men' ? '#B8860B' : '#E5E7EB' }}; padding: 8px 4px; border-radius: 8px; text-align: center; font-size: 0.78rem; cursor: pointer; color: #111827; font-weight: {{ request('gender') == 'Men' ? '600' : 'normal' }};">
-                                <input type="radio" name="gender" value="Men" {{ request('gender') == 'Men' ? 'checked' : '' }} style="display: none;" onchange="this.form.submit()"> Men
-                            </label>
-                            <label style="background: {{ request('gender') == 'Women' ? '#FEF3C7' : '#F9FAFB' }}; border: 1px solid {{ request('gender') == 'Women' ? '#B8860B' : '#E5E7EB' }}; padding: 8px 4px; border-radius: 8px; text-align: center; font-size: 0.78rem; cursor: pointer; color: #111827; font-weight: {{ request('gender') == 'Women' ? '600' : 'normal' }};">
-                                <input type="radio" name="gender" value="Women" {{ request('gender') == 'Women' ? 'checked' : '' }} style="display: none;" onchange="this.form.submit()"> Women
-                            </label>
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-2">Gender Persona</label>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            @foreach(['Unisex', 'Men', 'Women'] as $g)
+                                <label class="p-2 border rounded-lg text-center text-xs cursor-pointer transition {{ request('gender') == $g ? 'bg-[#4a0915] border-[#d6aa62] text-[#f0d59d] font-bold' : 'bg-[#18050b] border-[#d6aa62]/25 text-[#f5efe7] hover:border-[#d6aa62]' }}">
+                                    <input type="radio" name="gender" value="{{ $g }}" {{ request('gender') == $g ? 'checked' : '' }} class="hidden" onchange="this.form.submit()">
+                                    {{ $g }}
+                                </label>
+                            @endforeach
                         </div>
                     </div>
 
                     <!-- Price Range (PKR) -->
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 10px; font-weight: 600;">Price Range (PKR)</label>
-                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px;">
-                            <input type="number" name="min_price" value="{{ request('min_price', 1500) }}" placeholder="Min" style="width: 50%; background: #F9FAFB; border: 1px solid #D1D5DB; padding: 8px; border-radius: 8px; color: #111827; font-size: 0.8rem;">
-                            <span style="color: #9CA3AF;">-</span>
-                            <input type="number" name="max_price" value="{{ request('max_price', 15000) }}" placeholder="Max" style="width: 50%; background: #F9FAFB; border: 1px solid #D1D5DB; padding: 8px; border-radius: 8px; color: #111827; font-size: 0.8rem;">
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-2">Price Range (PKR)</label>
+                        <div class="flex gap-2 items-center mb-3">
+                            <input type="number" name="min_price" value="{{ request('min_price', 1500) }}" placeholder="Min" class="w-1/2 bg-[#080204] border border-[#d6aa62]/30 rounded-lg p-2 text-xs text-[#f5efe7] focus:outline-none focus:border-[#d6aa62]">
+                            <span class="text-[#b8a9a2]">-</span>
+                            <input type="number" name="max_price" value="{{ request('max_price', 15000) }}" placeholder="Max" class="w-1/2 bg-[#080204] border border-[#d6aa62]/30 rounded-lg p-2 text-xs text-[#f5efe7] focus:outline-none focus:border-[#d6aa62]">
                         </div>
-                        <button type="submit" class="btn-outline-gold" style="width: 100%; padding: 8px; font-size: 0.75rem; border-radius: 8px;">Apply Price Filter</button>
+                        <button type="submit" class="w-full btn-gold py-2 text-[11px] tracking-wider uppercase font-semibold">Apply Price Filter</button>
                     </div>
 
                     <!-- Key Scent Notes -->
-                    <div style="margin-bottom: 10px;">
-                        <label style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin-bottom: 10px; font-weight: 600;">Signature Note Accord</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 160px; overflow-y: auto;">
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider text-[#d6aa62] font-semibold mb-2">Signature Note Accord</label>
+                        <div class="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto no-scrollbar">
                             @foreach($scentNotes as $note)
                                 <a href="{{ request()->fullUrlWithQuery(['note' => $note->slug]) }}" 
-                                   class="note-chip" 
-                                   style="font-size: 0.72rem; padding: 4px 8px; text-decoration: none; border-radius: 6px; border: 1px solid {{ request('note') == $note->slug ? '#B8860B' : '#E5E7EB' }}; background: {{ request('note') == $note->slug ? '#FEF3C7' : '#F9FAFB' }}; color: #111827;">
+                                   class="text-[11px] px-2.5 py-1 rounded-md border transition {{ request('note') == $note->slug ? 'bg-[#4a0915] border-[#d6aa62] text-[#f0d59d] font-bold' : 'bg-[#18050b] border-[#d6aa62]/20 text-[#b8a9a2] hover:border-[#d6aa62] hover:text-[#f5efe7]' }}">
                                     {{ $note->name }}
                                 </a>
                             @endforeach
@@ -134,47 +134,47 @@
                 </form>
             </aside>
 
-            <!-- Right: Products Grid & Top Sort Bar -->
-            <div>
+            <!-- Right: Products Grid & Top Sort Bar (lg:col-span-9) -->
+            <div class="lg:col-span-9 space-y-6">
                 <!-- Top Sorting Bar -->
-                <div style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
-                    <div style="font-size: 0.85rem; color: #4B5563;">
-                        Showing <strong>{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of {{ $products->total() }} Flacons
+                <div class="bg-[#140408] border border-[#d6aa62]/25 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4 shadow-md">
+                    <div class="text-xs text-[#b8a9a2]">
+                        Showing <strong class="text-[#f5efe7]">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-[#d6aa62]">{{ $products->total() }}</strong> Flacons
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <label style="font-size: 0.8rem; color: #6B7280; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Sort By:</label>
-                        <select onchange="location = this.value;" style="background: #F9FAFB; border: 1px solid #D1D5DB; padding: 8px 12px; border-radius: 6px; color: #111827; font-size: 0.82rem; font-weight: 600;">
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }}>Curated / Featured</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Bestsellers</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }}>Top Rated</option>
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs uppercase tracking-wider text-[#d6aa62] font-semibold">Sort By:</label>
+                        <select onchange="location = this.value;" class="bg-[#080204] border border-[#d6aa62]/30 rounded-lg px-3 py-1.5 text-xs text-[#f5efe7] focus:outline-none focus:border-[#d6aa62]">
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-[#140408]">Curated / Featured</option>
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-[#140408]">Bestsellers</option>
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-[#140408]">Newest Releases</option>
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-[#140408]">Price: Low to High</option>
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-[#140408]">Price: High to Low</option>
+                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-[#140408]">Top Rated</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Products Grid -->
                 @if($products->count() > 0)
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px;">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                         @foreach($products as $product)
                             <x-product-card :product="$product" />
                         @endforeach
                     </div>
 
                     <!-- Pagination -->
-                    <div style="margin-top: 50px; display: flex; justify-content: center;">
+                    <div class="mt-12 flex justify-center">
                         {{ $products->links() }}
                     </div>
                 @else
-                    <div style="background: #FFFFFF; border: 1px solid #E5E7EB; padding: 60px 30px; text-align: center; border-radius: 12px;">
-                        <i class="fas fa-search text-gold" style="font-size: 3rem; margin-bottom: 20px; display: block; color: #B8860B;"></i>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #111827;">No Fragrances Matching Your Criteria</h3>
-                        <p style="font-family: var(--font-serif); font-size: 1.1rem; color: #6B7280; margin-bottom: 24px;">
+                    <div class="bg-[#140408] border border-[#d6aa62]/25 p-12 text-center rounded-2xl space-y-4">
+                        <i class="fas fa-search text-3xl text-[#d6aa62]"></i>
+                        <h3 class="font-serif text-2xl text-[#f5efe7]">No Fragrances Matching Your Criteria</h3>
+                        <p class="font-serif text-base text-[#b8a9a2] max-w-md mx-auto">
                             We could not find perfumes fitting your specific filter combinations. Try resetting filters or search by impression name.
                         </p>
-                        <a href="{{ route('shop.index') }}" class="btn-gold" style="padding: 12px 24px; border-radius: 8px;">RESET ALL FILTERS</a>
+                        <a href="{{ route('shop.index') }}" class="btn-gold inline-block py-3 px-8 text-xs uppercase tracking-widest">RESET ALL FILTERS</a>
                     </div>
                 @endif
             </div>

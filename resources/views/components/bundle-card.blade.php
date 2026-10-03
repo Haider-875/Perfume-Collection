@@ -1,68 +1,77 @@
 @props(['bundle'])
 
-<div class="bundle-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 30px; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-card); transition: var(--transition-smooth);">
+<div class="bundle-card group relative bg-gradient-to-b from-[#18050b] via-[#100306] to-[#070103] border border-[#d6aa62]/30 hover:border-[#d6aa62]/80 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_12px_35px_rgba(214,170,98,0.2)] transition-all duration-300 flex flex-col justify-between p-5 sm:p-6">
     
     <!-- Top Savings Badge -->
-    <div style="position: absolute; top: 18px; left: 18px; z-index: 5;">
-        <span class="badge-luxury" style="background: linear-gradient(135deg, #801313, #B03A2E); color: #FFF; font-size: 0.72rem; padding: 5px 12px; border-radius: 3px; font-weight: 700;">
-            {{ $bundle->badge_text ?? 'SAVE RS. ' . number_format($bundle->savings_amount, 0) }}
+    <div class="absolute top-4 left-4 z-10">
+        <span class="bg-gradient-to-r from-[#851a31] to-[#4a0915] text-[#fff7ed] text-[11px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wider border border-[#d6aa62]/40">
+            {{ $bundle->badge_text ?? 'SAVE ' . $bundle->formatted_savings }}
         </span>
     </div>
 
     <!-- Image Preview -->
-    <div style="background: radial-gradient(circle, rgba(201, 162, 75, 0.12) 0%, rgba(8, 3, 4, 0.7) 70%); border-radius: var(--radius-md); padding: 24px; text-align: center; margin-bottom: 20px;">
-        <img src="{{ $bundle->image_url }}" alt="{{ $bundle->name }}" style="max-height: 220px; width: auto; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.85)); transition: transform 0.5s ease;">
+    <div class="relative w-full aspect-square sm:h-64 rounded-xl overflow-hidden bg-[#0c0305] border border-[#d6aa62]/20 flex items-center justify-center mb-4">
+        <img src="{{ $bundle->image_url }}" 
+             alt="{{ $bundle->name }}" 
+             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_discovery_coffret.jpg') }}';"
+             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+             loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#050203]/70 via-transparent to-transparent pointer-events-none"></div>
     </div>
 
     <!-- Bundle Title & Tagline -->
-    <h3 style="font-size: 1.35rem; margin-bottom: 8px; color: var(--text-ivory); font-family: var(--font-heading);">
-        {{ $bundle->name }}
-    </h3>
-    <p style="font-family: var(--font-serif); font-size: 1rem; color: var(--gold-champagne); font-style: italic; margin-bottom: 16px;">
-        "{{ $bundle->tagline }}"
-    </p>
-
-    <!-- Included Flacons Breakdown -->
-    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 14px; margin-bottom: 20px; flex-grow: 1;">
-        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold-primary); margin-bottom: 8px; font-weight: 700;">
-            <i class="fas fa-layer-group text-gold"></i> Included Masterpieces:
-        </div>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
-            @foreach($bundle->items as $bItem)
-                <li style="font-size: 0.85rem; color: var(--text-sub); display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-check text-gold" style="font-size: 0.7rem;"></i>
-                    <span><strong>{{ $bItem->product->name ?? 'Luxury Flacon' }}</strong> ({{ $bItem->custom_size_label ?? '100ml Extrait' }})</span>
-                </li>
-            @endforeach
-        </ul>
+    <div class="mb-3">
+        <h3 class="font-serif text-xl sm:text-2xl font-medium text-[#f5efe7] group-hover:text-[#f0d59d] transition-colors leading-snug mb-1">
+            {{ $bundle->name }}
+        </h3>
+        @if($bundle->tagline)
+            <p class="text-xs text-[#b8a9a2] font-serif italic">
+                "{{ $bundle->tagline }}"
+            </p>
+        @endif
     </div>
 
+    <!-- Included Flacons Breakdown -->
+    @if($bundle->items && $bundle->items->count() > 0)
+        <div class="bg-[#160409]/70 border border-[#d6aa62]/20 rounded-xl p-3 mb-4 flex-grow">
+            <div class="text-[10px] uppercase tracking-wider text-[#d6aa62] font-bold mb-2 flex items-center gap-1.5">
+                <i class="fas fa-layer-group text-[#d6aa62]"></i> Included in this Coffret:
+            </div>
+            <ul class="space-y-1.5">
+                @foreach($bundle->items as $bItem)
+                    <li class="text-xs text-[#dfd5cb] flex items-center gap-2">
+                        <i class="fas fa-check text-[#d6aa62] text-[10px]"></i>
+                        <span><strong class="text-[#f5efe7]">{{ $bItem->product->name ?? 'Luxury Flacon' }}</strong> <span class="text-[#8e7c75]">({{ $bItem->custom_size_label ?? '100ml Extrait' }})</span></span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- Pricing and Savings Summary -->
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+    <div class="flex items-baseline justify-between pt-3 border-t border-[#d6aa62]/20 mb-4">
         <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Bundle Price</div>
-            <div style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--gold-champagne);">
+            <div class="text-[10px] text-[#8e7c75] uppercase tracking-wider font-semibold">Special Bundle Price</div>
+            <div class="font-serif text-2xl font-bold text-[#f0d59d]">
                 {{ $bundle->formatted_bundle_price }}
             </div>
         </div>
-        <div style="text-align: right;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-decoration: line-through;">
+        <div class="text-right">
+            <div class="text-xs text-[#8e7c75] line-through">
                 {{ $bundle->formatted_original_price }}
             </div>
-            <div style="font-size: 0.78rem; color: #2ecc71; font-weight: 700;">
-                You Save {{ $bundle->formatted_savings }}
+            <div class="text-[11px] text-[#f0d59d] font-bold">
+                Save {{ $bundle->formatted_savings }}
             </div>
         </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div style="display: flex; gap: 10px;">
-        <button onclick="addBundleToCart({{ $bundle->id }})" class="btn-gold" style="flex-grow: 1; padding: 12px 18px; font-size: 0.82rem;">
-            <i class="fas fa-shopping-bag"></i> ADD BUNDLE TO CART
+    <!-- Actions -->
+    <div class="space-y-2">
+        <button onclick="addBundleToCart({{ $bundle->id }})" 
+                class="w-full btn-gold py-3 text-xs tracking-wider uppercase rounded-xl flex items-center justify-center gap-2">
+            <i class="fas fa-cart-shopping text-xs"></i>
+            <span>ADD BUNDLE TO BAG</span>
         </button>
-        <a href="https://wa.me/923001234567?text={{ urlencode('Salam! I want to order the ' . $bundle->name . ' for ' . $bundle->formatted_bundle_price) }}" target="_blank" class="btn-whatsapp" style="padding: 12px 14px;" title="Order via WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
     </div>
-
 </div>

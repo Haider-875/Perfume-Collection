@@ -1,65 +1,69 @@
 @extends('layouts.app')
 
-@section('title', 'Patron Sign In — Perfumes Collection')
+@section('title', 'Sign In — Perfumes Collection')
 
 @section('content')
-<div class="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-[#080304]">
-    <div class="max-w-md w-full bg-[#0d0608] border border-brand-gold/30 p-8 md:p-10 rounded-sm shadow-2xl relative">
+<div class="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-[#050203] luxury-wine-bg">
+    <div class="max-w-md w-full bg-gradient-to-b from-[#18050b] via-[#100306] to-[#070103] border border-[#d6aa62]/35 p-8 md:p-10 rounded-2xl shadow-2xl relative">
         <div class="text-center mb-8">
-            <span class="text-[10px] uppercase tracking-[0.3em] text-brand-gold px-3 py-1 bg-brand-maroon/20 border border-brand-gold/30 rounded-full inline-block mb-3">
-                Private Vault Access
+            <span class="text-[11px] uppercase tracking-[0.25em] text-[#f0d59d] font-semibold px-3 py-1 bg-[#3b0711]/70 border border-[#d6aa62]/40 rounded-full inline-block mb-3">
+                Customer Account
             </span>
-            <h1 class="font-serif text-2xl md:text-3xl text-brand-gold font-light">Patron Sign In</h1>
-            <p class="text-xs text-brand-ivory/60 mt-1">Access your bespoke dossiers, saved addresses & privileges.</p>
+            <h1 class="font-serif text-3xl md:text-4xl text-[#f5efe7] font-normal tracking-tight">Welcome Back</h1>
+            <p class="text-sm text-[#b8a9a2] mt-2 font-light">Sign in to track orders, manage addresses & enjoy fast checkout.</p>
         </div>
 
         @if(session('success'))
-            <div class="mb-6 p-3 bg-green-950/60 border border-green-500/40 text-green-300 text-xs rounded">
-                {{ session('success') }}
+            <div class="mb-6 p-4 bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-sm rounded-lg flex items-center gap-2">
+                <i class="fas fa-check-circle text-emerald-400"></i>
+                <span>{{ session('success') }}</span>
             </div>
         @endif
 
         @if($errors->any())
-            <div class="mb-6 p-3 bg-red-950/60 border border-red-500/40 text-red-300 text-xs rounded">
+            <div class="mb-6 p-4 bg-red-950/60 border border-red-500/40 text-red-300 text-sm rounded-lg space-y-1">
                 @foreach($errors->all() as $error)
-                    <div>{{ $error }}</div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-circle-exclamation text-red-400 text-xs"></i>
+                        <span>{{ $error }}</span>
+                    </div>
                 @endforeach
             </div>
         @endif
 
-        <form action="{{ route('login') }}" method="POST" class="space-y-4 text-xs">
+        <form action="{{ route('login') }}" method="POST" class="space-y-5 text-sm">
             @csrf
             <div>
-                <label class="block uppercase tracking-[0.15em] text-brand-gold/90 mb-1 font-medium">Email Address</label>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-2">Email Address</label>
                 <input type="email" name="email" value="{{ old('email') }}" required autofocus
-                       placeholder="patron@domain.com"
-                       class="w-full bg-black/60 border border-brand-gold/30 px-4 py-3 text-sm text-brand-ivory placeholder-brand-ivory/30 focus:border-brand-gold focus:outline-none rounded-sm">
+                       placeholder="yourname@domain.com"
+                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-3 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
             </div>
 
             <div>
-                <div class="flex justify-between items-center mb-1">
-                    <label class="uppercase tracking-[0.15em] text-brand-gold/90 font-medium">Password</label>
-                    <a href="{{ route('password.request') }}" class="text-[11px] text-brand-gold hover:underline">Forgot password?</a>
+                <div class="flex justify-between items-center mb-2">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-[#d6aa62]">Password</label>
+                    <a href="{{ route('password.request') }}" class="text-xs text-[#f0d59d] hover:text-[#ffd987] font-medium transition">Forgot password?</a>
                 </div>
                 <input type="password" name="password" required
                        placeholder="••••••••"
-                       class="w-full bg-black/60 border border-brand-gold/30 px-4 py-3 text-sm text-brand-ivory placeholder-brand-ivory/30 focus:border-brand-gold focus:outline-none rounded-sm">
+                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-3 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
             </div>
 
             <div class="flex items-center gap-2 pt-1">
-                <input type="checkbox" id="remember" name="remember" class="accent-brand-gold w-4 h-4">
-                <label for="remember" class="text-brand-ivory/70 cursor-pointer">Remember my private access</label>
+                <input type="checkbox" id="remember" name="remember" class="accent-[#d6aa62] w-4 h-4 rounded bg-[#0c0305] border-[#d6aa62]/30">
+                <label for="remember" class="text-xs text-[#b8a9a2] cursor-pointer select-none">Remember my login</label>
             </div>
 
-            <button type="submit" class="w-full py-4 bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold text-black font-semibold text-xs uppercase tracking-[0.25em] hover:brightness-110 transition-all rounded-sm shadow-lg mt-2">
-                Enter The Vault
+            <button type="submit" class="w-full btn-gold py-3.5 text-xs font-bold uppercase tracking-widest rounded-lg shadow-xl mt-2">
+                Sign In
             </button>
         </form>
 
-        <div class="text-center pt-6 mt-6 border-t border-white/10 text-xs text-brand-ivory/60">
-            <span>New patron?</span>
-            <a href="{{ route('register') }}" class="text-brand-gold font-semibold hover:underline ml-1 uppercase tracking-wider">
-                Create An Account
+        <div class="text-center pt-6 mt-6 border-t border-[#d6aa62]/20 text-sm text-[#b8a9a2]">
+            <span>Don't have an account?</span>
+            <a href="{{ route('register') }}" class="text-[#f0d59d] font-semibold hover:text-[#ffd987] ml-1 uppercase tracking-wider text-xs">
+                Create Account
             </a>
         </div>
     </div>

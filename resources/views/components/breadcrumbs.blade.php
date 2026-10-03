@@ -1,24 +1,35 @@
-@props(['links' => []])
+@props(['links' => [], 'items' => []])
 
-<nav aria-label="Breadcrumb" style="background: #0E080A; border-bottom: 1px solid var(--border-subtle); padding: 12px 0;">
-    <div class="container">
-        <ol style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted);">
-            <li>
-                <a href="{{ route('home') }}" style="color: var(--text-muted); text-decoration: none; transition: var(--transition-smooth);">
-                    <i class="fas fa-home text-gold" style="font-size: 0.75rem;"></i> Home
-                </a>
-            </li>
+@php
+    $breadcrumbList = [];
+    if (!empty($items)) {
+        foreach ($items as $item) {
+            $breadcrumbList[$item['label'] ?? ''] = $item['url'] ?? null;
+        }
+    } elseif (!empty($links)) {
+        $breadcrumbList = $links;
+    }
+@endphp
 
-            @foreach($links as $title => $url)
-                <li style="color: var(--border-gold);"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i></li>
+<nav aria-label="Breadcrumb" class="py-3 px-4 bg-[#080204]/80 border-b border-[#d6aa62]/20 mb-4 inline-block rounded-lg">
+    <ol class="list-none flex flex-wrap items-center gap-2 text-xs text-[#b8a9a2] m-0 p-0">
+        <li>
+            <a href="{{ route('home') }}" class="text-[#b8a9a2] hover:text-[#d6aa62] transition flex items-center gap-1.5 no-underline">
+                <i class="fas fa-home text-[#d6aa62] text-[11px]"></i> <span>Home</span>
+            </a>
+        </li>
+
+        @foreach($breadcrumbList as $title => $url)
+            @if($title && $title !== 'Home')
+                <li class="text-[#d6aa62]/50 text-[10px]"><i class="fas fa-chevron-right"></i></li>
                 <li>
                     @if($url)
-                        <a href="{{ $url }}" style="color: var(--gold-champagne); text-decoration: none; transition: var(--transition-smooth);">{{ $title }}</a>
+                        <a href="{{ $url }}" class="text-[#f0d59d] hover:text-[#d6aa62] transition no-underline">{{ $title }}</a>
                     @else
-                        <span style="color: var(--text-ivory); font-weight: 600;">{{ $title }}</span>
+                        <span class="text-[#f5efe7] font-semibold">{{ $title }}</span>
                     @endif
                 </li>
-            @endforeach
-        </ol>
-    </div>
+            @endif
+        @endforeach
+    </ol>
 </nav>

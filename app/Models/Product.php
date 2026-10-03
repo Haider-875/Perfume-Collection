@@ -184,7 +184,7 @@ class Product extends Model
         if ($this->thumbnail_image) {
             return asset($this->thumbnail_image);
         }
-        return asset('assets/images/perfumes/oud_royale.svg');
+        return asset('assets/images/perfumes/prod_signature.jpg');
     }
 
     public function getHoverImageUrlAttribute()

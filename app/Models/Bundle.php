@@ -62,6 +62,6 @@ class Bundle extends Model
 
     public function getImageUrlAttribute()
     {
-        return asset($this->image ?? 'assets/images/perfumes/discovery_set.svg');
+        return asset($this->image ?? 'assets/images/perfumes/prod_discovery_coffret.jpg');
     }
 }
