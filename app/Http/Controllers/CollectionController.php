@@ -16,7 +16,7 @@ class CollectionController extends Controller
     {
         // Special case: Bundles page
         if ($slug === 'bundles') {
-            $bundles = Bundle::where('is_active', true)->with('items.product')->get();
+            $bundles = Bundle::where('is_active', true)->with(['items.product', 'products'])->get();
             $bundleProducts = Product::where('is_bundle', true)->active()->get();
             return view('pages.bundles', compact('bundles', 'bundleProducts'));
         }

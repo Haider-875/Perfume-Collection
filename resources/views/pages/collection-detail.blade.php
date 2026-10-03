@@ -1,50 +1,49 @@
 @extends('layouts.app')
 
-@section('title', ($collection ? $collection->name : 'All Fragrance Masterpieces') . ' | Maison d\'Orient Haute Parfumerie Pakistan')
-@section('meta_description', $collection ? $collection->description : 'Explore our private reserve collection of pure Extrait de Parfum and Dehn al Oud crafted for connoisseurs in Pakistan.')
+@section('title', ($collection ? $collection->name : 'All Fragrance Masterpieces') . ' | RAVAHA Parfums Pakistan')
+@section('meta_description', $collection ? $collection->description : 'Explore our private reserve collection of pure Extrait de Parfum impressions crafted for connoisseurs in Pakistan.')
 
 @section('content')
 
 <!-- Collection Hero Banner -->
-<section class="relative py-16 md:py-24 bg-[#0A0405] border-b border-[#C9A24B]/20 overflow-hidden">
-    <div class="absolute inset-0 bg-radial-gradient opacity-25 pointer-events-none"></div>
-    <div class="container relative z-10 text-center">
+<section class="relative py-12 md:py-16 bg-gray-900 text-white border-b border-amber-600/30 overflow-hidden">
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Collections', 'url' => route('collections.show', 'all')],
-            ['label' => $collection ? $collection->name : 'All Perfumes']
+            ['label' => $collection ? $collection->name : 'All Impressions']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] mb-2 font-medium">HAUTE PARFUMERIE COLLECTION</span>
-        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-[#F5EFE6] mb-4 font-normal tracking-wide">
-            {{ $collection ? $collection->name : 'Private Vault Reserve' }}
+        <span class="inline-block text-[11px] uppercase tracking-[0.25em] text-amber-400 mb-2 font-bold">HAUTE PARFUMERIE COLLECTION</span>
+        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-white mb-3 font-normal tracking-wide">
+            {{ $collection ? $collection->name : 'All Fragrance Impressions' }}
         </h1>
-        <p class="max-w-2xl mx-auto text-[#F5EFE6]/70 text-sm md:text-base font-light leading-relaxed">
-            {{ $collection && $collection->description ? $collection->description : 'Handcrafted French-Oriental compositions macerated with up to 40% natural perfume compounds for unprecedented sillage in Pakistan.' }}
+        <p class="max-w-2xl mx-auto text-gray-300 text-sm md:text-base font-light leading-relaxed">
+            {{ $collection && $collection->description ? $collection->description : 'Handcrafted French-Oriental compositions macerated with up to 40% natural perfume compounds for unprecedented 14+ hours sillage in Pakistan.' }}
         </p>
     </div>
 </section>
 
 <!-- Collection Main Content -->
-<section class="py-12 md:py-16 bg-[#080304]" x-data="{ mobileFiltersOpen: false }">
-    <div class="container">
+<section class="py-12 md:py-16 bg-white" x-data="{ mobileFiltersOpen: false }">
+    <div class="container mx-auto px-4 lg:px-8">
         
         <!-- Filter Bar & Sort Controls Header -->
-        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-[#C9A24B]/20">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-200">
             <!-- Mobile Filter Toggle -->
             <button 
                 type="button" 
                 @click="mobileFiltersOpen = !mobileFiltersOpen"
-                class="lg:hidden flex items-center space-x-2 px-4 py-2 border border-[#C9A24B]/40 text-[#C9A24B] text-xs uppercase tracking-widest rounded hover:bg-[#C9A24B]/10 transition"
+                class="lg:hidden flex items-center space-x-2 px-4 py-2 border border-gray-300 text-gray-800 text-xs uppercase tracking-widest rounded-lg hover:bg-gray-50 transition"
             >
-                <i class="fas fa-sliders-h"></i>
+                <i class="fas fa-sliders-h text-amber-700"></i>
                 <span>Filters & Notes</span>
             </button>
 
             <!-- Results Counter -->
-            <div class="text-xs text-[#F5EFE6]/60 tracking-wider">
-                Showing <span class="text-[#C9A24B] font-semibold">{{ $products->total() }}</span> Extrait Masterpieces
+            <div class="text-xs text-gray-500 tracking-wider">
+                Showing <span class="text-gray-900 font-bold">{{ $products->total() }}</span> Extrait Masterpieces
             </div>
 
             <!-- Sort Form -->
@@ -59,13 +58,13 @@
                     @endif
                 @endforeach
                 
-                <label for="sortSelect" class="text-xs uppercase tracking-widest text-[#F5EFE6]/70 hidden sm:inline">Sort By:</label>
+                <label for="sortSelect" class="text-xs uppercase tracking-widest text-gray-600 hidden sm:inline font-medium">Sort By:</label>
                 <div class="relative">
                     <select 
                         name="sort" 
                         id="sortSelect" 
                         onchange="this.form.submit()" 
-                        class="bg-[#120709] border border-[#C9A24B]/40 text-[#F5EFE6] text-xs uppercase tracking-wider py-2 pl-3 pr-8 rounded focus:outline-none focus:border-[#C9A24B] cursor-pointer"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xs uppercase tracking-wider py-2 pl-3 pr-8 rounded-lg focus:outline-none focus:border-amber-600 cursor-pointer"
                     >
                         <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
                         <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
@@ -82,13 +81,13 @@
             
             <!-- Sidebar Filters -->
             <aside 
-                :class="mobileFiltersOpen ? 'fixed inset-0 z-50 bg-[#080304] p-6 overflow-y-auto block' : 'hidden lg:block'"
+                :class="mobileFiltersOpen ? 'fixed inset-0 z-50 bg-white p-6 overflow-y-auto block' : 'hidden lg:block'"
                 class="lg:col-span-1 space-y-6"
             >
                 <!-- Mobile Filter Close Button -->
-                <div class="flex lg:hidden items-center justify-between pb-4 border-b border-[#C9A24B]/30 mb-6">
-                    <h3 class="font-serif text-lg text-[#F5EFE6]">Refine Selection</h3>
-                    <button type="button" @click="mobileFiltersOpen = false" class="text-2xl text-[#C9A24B]">&times;</button>
+                <div class="flex lg:hidden items-center justify-between pb-4 border-b border-gray-200 mb-6">
+                    <h3 class="font-serif text-lg text-gray-900">Refine Selection</h3>
+                    <button type="button" @click="mobileFiltersOpen = false" class="text-2xl text-gray-600">&times;</button>
                 </div>
 
                 <form action="{{ url()->current() }}" method="GET" id="collectionFilterForm">
@@ -98,57 +97,57 @@
 
                     <!-- Quick Search in Collection -->
                     <div class="mb-6">
-                        <label class="block text-xs uppercase tracking-widest text-[#C9A24B] font-semibold mb-2">Search Collection</label>
+                        <label class="block text-xs uppercase tracking-widest text-gray-700 font-bold mb-2">Search Catalog</label>
                         <div class="relative">
                             <input 
                                 type="text" 
                                 name="q" 
                                 value="{{ request('q') }}" 
-                                placeholder="Search note or name..." 
-                                class="w-full bg-[#120709] border border-[#C9A24B]/30 rounded px-3 py-2 text-xs text-[#F5EFE6] placeholder-stone-600 focus:outline-none focus:border-[#C9A24B]"
+                                placeholder="Search note or impression..." 
+                                class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-amber-600"
                             >
                             @if(request('q'))
-                                <a href="{{ url()->current() }}" class="absolute right-3 top-2 text-stone-500 hover:text-stone-300 text-xs">&times;</a>
+                                <a href="{{ url()->current() }}" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600 text-xs">&times;</a>
                             @endif
                         </div>
                     </div>
 
                     <!-- Filter 1: Collections Navigation -->
-                    <div class="border-t border-[#C9A24B]/15 pt-5 mb-5">
-                        <h4 class="text-xs uppercase tracking-[0.2em] text-[#C9A24B] font-semibold mb-3 flex items-center justify-between">
-                            <span>Houses & Vaults</span>
-                            <i class="fas fa-chevron-down text-[10px]"></i>
+                    <div class="border-t border-gray-200 pt-5 mb-5">
+                        <h4 class="text-xs uppercase tracking-[0.18em] text-gray-900 font-bold mb-3 flex items-center justify-between">
+                            <span>Houses & Categories</span>
+                            <i class="fas fa-chevron-down text-[10px] text-gray-400"></i>
                         </h4>
                         <ul class="space-y-2 text-xs">
                             <li>
-                                <a href="{{ route('collections.show', 'all') }}" class="block py-1 {{ $slug === 'all' ? 'text-[#C9A24B] font-semibold' : 'text-[#F5EFE6]/70 hover:text-[#C9A24B]' }}">
-                                    All Masterpieces
+                                <a href="{{ route('collections.show', 'all') }}" class="block py-1 {{ $slug === 'all' ? 'text-amber-800 font-bold' : 'text-gray-600 hover:text-amber-800' }}">
+                                    All Impressions
                                 </a>
                             </li>
                             @foreach($allCollections as $col)
                                 <li>
-                                    <a href="{{ route('collections.show', $col->slug) }}" class="block py-1 {{ $slug === $col->slug ? 'text-[#C9A24B] font-semibold' : 'text-[#F5EFE6]/70 hover:text-[#C9A24B]' }}">
+                                    <a href="{{ route('collections.show', $col->slug) }}" class="block py-1 {{ $slug === $col->slug ? 'text-amber-800 font-bold' : 'text-gray-600 hover:text-amber-800' }}">
                                         {{ $col->name }}
                                     </a>
                                 </li>
                             @endforeach
                             <li>
-                                <a href="{{ route('collections.show', 'bundles') }}" class="block py-1 text-[#C9A24B] hover:underline flex items-center justify-between">
+                                <a href="{{ route('collections.show', 'bundles') }}" class="block py-1 text-amber-800 font-semibold hover:underline flex items-center justify-between">
                                     <span>Curated Bundles</span>
-                                    <span class="text-[9px] bg-[#4A0E17] text-[#F5EFE6] px-1.5 py-0.5 rounded">SAVE 25%</span>
+                                    <span class="text-[9px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">SAVE 25%</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Filter 2: Fragrance Family -->
-                    <div class="border-t border-[#C9A24B]/15 pt-5 mb-5">
-                        <h4 class="text-xs uppercase tracking-[0.2em] text-[#C9A24B] font-semibold mb-3">
+                    <div class="border-t border-gray-200 pt-5 mb-5">
+                        <h4 class="text-xs uppercase tracking-[0.18em] text-gray-900 font-bold mb-3">
                             Fragrance Family
                         </h4>
-                        <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-2">
+                        <div class="space-y-2 max-h-48 overflow-y-auto pr-2">
                             @foreach($fragranceFamilies as $family)
-                                <label class="flex items-center justify-between text-xs text-[#F5EFE6]/80 cursor-pointer hover:text-[#C9A24B]">
+                                <label class="flex items-center justify-between text-xs text-gray-700 cursor-pointer hover:text-amber-800">
                                     <span class="flex items-center space-x-2">
                                         <input 
                                             type="radio" 
@@ -156,26 +155,26 @@
                                             value="{{ $family->slug }}" 
                                             {{ request('family') == $family->slug ? 'checked' : '' }} 
                                             onchange="this.form.submit()"
-                                            class="text-[#C9A24B] focus:ring-0 bg-[#120709] border-[#C9A24B]/40"
+                                            class="text-amber-800 focus:ring-0"
                                         >
                                         <span>{{ $family->name }}</span>
                                     </span>
-                                    <span class="text-[10px] text-[#F5EFE6]/40">({{ $family->products_count }})</span>
+                                    <span class="text-[10px] text-gray-400">({{ $family->products_count }})</span>
                                 </label>
                             @endforeach
                         </div>
                     </div>
 
                     <!-- Filter 3: Scent Notes -->
-                    <div class="border-t border-[#C9A24B]/15 pt-5 mb-5">
-                        <h4 class="text-xs uppercase tracking-[0.2em] text-[#C9A24B] font-semibold mb-3">
+                    <div class="border-t border-gray-200 pt-5 mb-5">
+                        <h4 class="text-xs uppercase tracking-[0.18em] text-gray-900 font-bold mb-3">
                             Signature Notes
                         </h4>
                         <div class="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto pr-1">
                             @foreach($scentNotes as $note)
                                 <a 
                                     href="{{ request()->fullUrlWithQuery(['note' => request('note') == $note->slug ? null : $note->slug]) }}" 
-                                    class="px-2.5 py-1 text-[11px] rounded border {{ request('note') == $note->slug ? 'bg-[#C9A24B] text-[#080304] border-[#C9A24B] font-semibold' : 'border-[#C9A24B]/30 text-[#F5EFE6]/70 hover:border-[#C9A24B] hover:text-[#F5EFE6]' }} transition"
+                                    class="px-2.5 py-1 text-[11px] rounded border {{ request('note') == $note->slug ? 'bg-amber-800 text-white border-amber-800 font-semibold' : 'border-gray-300 text-gray-700 hover:border-amber-700 hover:text-amber-800' }} transition"
                                 >
                                     {{ $note->name }}
                                 </a>
@@ -184,16 +183,16 @@
                     </div>
 
                     <!-- Filter 4: Volume / Size (ml) -->
-                    <div class="border-t border-[#C9A24B]/15 pt-5 mb-5">
-                        <h4 class="text-xs uppercase tracking-[0.2em] text-[#C9A24B] font-semibold mb-3">
+                    <div class="border-t border-gray-200 pt-5 mb-5">
+                        <h4 class="text-xs uppercase tracking-[0.18em] text-gray-900 font-bold mb-3">
                             Flacon Volume
                         </h4>
                         <div class="grid grid-cols-3 gap-2 text-xs">
-                            @foreach([12, 50, 100] as $vol)
+                            @foreach([10, 50, 100] as $vol)
                                 <button 
                                     type="button" 
                                     onclick="window.location.href='{{ request()->fullUrlWithQuery(['volume_ml' => request('volume_ml') == $vol ? null : $vol]) }}'"
-                                    class="py-2 text-center rounded border {{ request('volume_ml') == $vol ? 'bg-[#C9A24B] text-[#080304] border-[#C9A24B] font-semibold' : 'border-[#C9A24B]/30 text-[#F5EFE6]/80 hover:border-[#C9A24B]' }} transition"
+                                    class="py-2 text-center rounded-lg border {{ request('volume_ml') == $vol ? 'bg-amber-800 text-white border-amber-800 font-semibold' : 'border-gray-300 text-gray-700 hover:border-amber-700' }} transition"
                                 >
                                     {{ $vol }} ml
                                 </button>
@@ -202,8 +201,8 @@
                     </div>
 
                     <!-- Filter 5: Price Range (PKR) -->
-                    <div class="border-t border-[#C9A24B]/15 pt-5 mb-6">
-                        <h4 class="text-xs uppercase tracking-[0.2em] text-[#C9A24B] font-semibold mb-3">
+                    <div class="border-t border-gray-200 pt-5 mb-6">
+                        <h4 class="text-xs uppercase tracking-[0.18em] text-gray-900 font-bold mb-3">
                             Price Range (PKR)
                         </h4>
                         <div class="flex items-center space-x-2 mb-3">
@@ -212,25 +211,25 @@
                                 name="min_price" 
                                 value="{{ request('min_price') }}" 
                                 placeholder="Min Rs." 
-                                class="w-1/2 bg-[#120709] border border-[#C9A24B]/30 rounded px-2 py-1.5 text-xs text-[#F5EFE6] placeholder-stone-600 focus:outline-none"
+                                class="w-1/2 bg-gray-50 border border-gray-300 rounded px-2 py-1.5 text-xs text-gray-900 placeholder-gray-400 focus:outline-none"
                             >
-                            <span class="text-stone-500">-</span>
+                            <span class="text-gray-400">-</span>
                             <input 
                                 type="number" 
                                 name="max_price" 
                                 value="{{ request('max_price') }}" 
                                 placeholder="Max Rs." 
-                                class="w-1/2 bg-[#120709] border border-[#C9A24B]/30 rounded px-2 py-1.5 text-xs text-[#F5EFE6] placeholder-stone-600 focus:outline-none"
+                                class="w-1/2 bg-gray-50 border border-gray-300 rounded px-2 py-1.5 text-xs text-gray-900 placeholder-gray-400 focus:outline-none"
                             >
                         </div>
-                        <button type="submit" class="w-full btn-outline-gold py-1.5 text-[10px] tracking-widest uppercase">
+                        <button type="submit" class="w-full btn-outline-gold py-1.5 text-[10px] tracking-widest uppercase border-gray-400 text-gray-800 hover:bg-gray-100">
                             Apply Price
                         </button>
                     </div>
 
                     <!-- Reset Filters -->
                     @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
-                        <a href="{{ url()->current() }}" class="block text-center text-xs text-red-400 hover:text-red-300 py-2 border border-red-500/30 rounded uppercase tracking-wider">
+                        <a href="{{ url()->current() }}" class="block text-center text-xs text-red-600 hover:text-red-700 py-2 border border-red-300 rounded uppercase tracking-wider font-semibold">
                             <i class="fas fa-undo mr-1"></i> Clear All Filters
                         </a>
                     @endif
@@ -251,10 +250,10 @@
                         {{ $products->links() }}
                     </div>
                 @else
-                    <div class="text-center py-20 bg-[#0E0507] border border-[#C9A24B]/20 rounded-lg p-8">
-                        <i class="fas fa-gem text-4xl text-[#C9A24B]/50 mb-4"></i>
-                        <h3 class="font-serif text-2xl text-[#F5EFE6] mb-2">No Fragrance Masterpieces Found</h3>
-                        <p class="text-[#F5EFE6]/60 text-sm max-w-md mx-auto mb-6">
+                    <div class="text-center py-20 bg-gray-50 border border-gray-200 rounded-xl p-8">
+                        <i class="fas fa-gem text-4xl text-amber-600/50 mb-4"></i>
+                        <h3 class="font-serif text-2xl text-gray-900 mb-2 font-normal">No Fragrance Impressions Found</h3>
+                        <p class="text-gray-500 text-sm max-w-md mx-auto mb-6">
                             No creations matched your refined criteria. Try broadening your notes or price selection.
                         </p>
                         <a href="{{ route('collections.show', 'all') }}" class="btn-gold">

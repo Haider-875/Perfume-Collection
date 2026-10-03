@@ -1,304 +1,504 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin Concierge') | Perfumes Collection Haute Parfumerie</title>
+    <title>@yield('title', 'Admin Panel') | Perfumes Collection</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: DM Sans & Jost -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
+    <!-- Bootstrap 5.3 CSS ONLY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Chart.js CDN for Analytics -->
+    <!-- Chart.js for Analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#080304',
-                            surface: '#11070A',
-                            card: '#160B0E',
-                            border: '#2A151B',
-                            gold: '#C9A24B',
-                            goldLight: '#E6C77A',
-                            goldDark: '#8F6E26',
-                            text: '#F5EFE6',
-                            muted: '#9E8E81',
-                            maroon: '#4A0E17',
-                            maroonDark: '#2C080E'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        display: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
+        :root {
+            --sidebar-width: 260px;
+            --sidebar-bg: #1e293b;
+            --sidebar-hover: #334155;
+            --sidebar-active: #0d6efd;
+            --body-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-border: #e2e8f0;
+        }
+
         body {
-            background-color: #080304;
-            color: #F5EFE6;
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
         }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #C9A24B 0%, #E6C77A 50%, #8F6E26 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Sidebar Styling */
+        #adminSidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.06);
         }
-        .gold-border-glow {
-            border: 1px solid rgba(201, 162, 75, 0.25);
-            box-shadow: 0 0 15px rgba(201, 162, 75, 0.05);
+
+        .sidebar-brand {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
         }
-        .gold-btn {
-            background: linear-gradient(135deg, #C9A24B 0%, #E6C77A 100%);
-            color: #080304;
+
+        .sidebar-brand img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .sidebar-brand-text {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
+            line-height: 1.2;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 0.75rem;
+        }
+
+        .sidebar-heading {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #94a3b8;
+            padding: 0.75rem 0.75rem 0.35rem;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 0.15rem;
+        }
+
+        .sidebar-link i {
+            width: 1.25rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .sidebar-link:hover {
+            color: #ffffff;
+            background-color: var(--sidebar-hover);
+        }
+
+        .sidebar-link:hover i {
+            color: #ffffff;
+        }
+
+        .sidebar-link.active {
+            color: #ffffff;
+            background-color: var(--sidebar-active);
             font-weight: 600;
-            letter-spacing: 0.05em;
+        }
+
+        .sidebar-link.active i {
+            color: #ffffff;
+        }
+
+        .sidebar-footer {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Main Content Wrapper */
+        #adminMain {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             transition: all 0.3s ease;
         }
+
+        .admin-topbar {
+            height: 70px;
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        .admin-content {
+            padding: 1.75rem 1.5rem;
+            flex: 1;
+        }
+
+        /* Mobile Sidebar adjustments */
+        @media (max-width: 991.98px) {
+            #adminSidebar {
+                margin-left: calc(-1 * var(--sidebar-width));
+            }
+            #adminSidebar.show {
+                margin-left: 0;
+            }
+            #adminMain {
+                margin-left: 0;
+            }
+            .sidebar-backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1030;
+                display: none;
+            }
+            .sidebar-backdrop.show {
+                display: block;
+            }
+        }
+
+        /* Clean Bootstrap Bridge for Existing Admin Views */
+        .bg-brand-surface, .bg-brand-card {
+            background-color: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+            color: #1e293b !important;
+        }
+
+        .text-brand-text { color: #1e293b !important; }
+        .text-brand-muted { color: #64748b !important; }
+        .text-brand-gold { color: #0d6efd !important; }
+        .border-brand-border, [class*="border-brand-border"] { border-color: #e2e8f0 !important; }
+        
+        .gold-btn {
+            background-color: #0d6efd !important;
+            border: 1px solid #0d6efd !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            border-radius: 0.375rem !important;
+            padding: 0.45rem 1rem !important;
+            font-size: 0.85rem !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            transition: all 0.15s ease;
+        }
         .gold-btn:hover {
-            box-shadow: 0 0 20px rgba(201, 162, 75, 0.4);
-            transform: translateY(-1px);
+            background-color: #0b5ed7 !important;
+            border-color: #0a58ca !important;
+            color: #ffffff !important;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+
+        /* Clean Forms & Inputs */
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], input[type="date"], select, textarea {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 0.375rem !important;
+            padding: 0.5rem 0.75rem !important;
+            font-size: 0.875rem !important;
+            width: 100%;
         }
-        ::-webkit-scrollbar-track {
-            background: #080304;
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0d6efd !important;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
+            outline: none !important;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #2A151B;
-            border-radius: 3px;
+
+        /* Clean Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #1e293b !important;
+            background-color: #ffffff !important;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #C9A24B;
+
+        th {
+            background-color: #f8fafc !important;
+            color: #475569 !important;
+            font-weight: 600 !important;
+            font-size: 0.75rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            padding: 0.75rem 1rem !important;
         }
+
+        td {
+            padding: 0.75rem 1rem !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            font-size: 0.875rem !important;
+            vertical-align: middle !important;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc !important;
+        }
+
+        /* Grid Utilities Bridge */
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .md\:col-span-2 { grid-column: span 2 / span 2; }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .lg\:col-span-2 { grid-column: span 2 / span 2; }
+            .lg\:col-span-3 { grid-column: span 3 / span 3; }
+        }
+
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
     </style>
     @stack('styles')
 </head>
-<body class="h-full flex overflow-hidden" x-data="{ sidebarOpen: false }">
+<body x-data="{ mobileNav: false }">
 
-    <!-- Mobile Sidebar Backdrop -->
-    <div x-show="sidebarOpen" 
-         x-transition:enter="transition-opacity ease-linear duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition-opacity ease-linear duration-300"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         @click="sidebarOpen = false"
-         class="fixed inset-0 bg-black/80 z-40 lg:hidden"></div>
+    <!-- Mobile Backdrop -->
+    <div class="sidebar-backdrop" :class="{ 'show': mobileNav }" @click="mobileNav = false"></div>
 
-    <!-- Sidebar Navigation -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-           class="fixed inset-y-0 left-0 z-50 w-72 bg-brand-surface border-r border-brand-border/60 flex flex-col transition-transform duration-300 ease-in-out">
-        
-        <!-- Brand Header -->
-        <div class="h-20 px-6 border-b border-brand-border/40 flex items-center justify-between">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center bg-brand-maroon/30 text-brand-gold">
-                    <i class="fa-solid fa-crown text-sm"></i>
-                </div>
-                <div>
-                    <span class="font-serif tracking-widest text-base font-bold gold-gradient-text block leading-none">PERFUMES COLLECTION</span>
-                    <span class="text-[9px] uppercase tracking-[0.25em] text-brand-gold/70 block mt-1">Admin Concierge</span>
-                </div>
-            </a>
-            <button @click="sidebarOpen = false" class="lg:hidden text-brand-muted hover:text-brand-text">
-                <i class="fa-solid fa-times text-lg"></i>
-            </button>
-        </div>
-
-        <!-- Live Pulse Bar -->
-        <div class="px-6 py-2.5 bg-brand-black/40 border-b border-brand-border/30 flex items-center justify-between text-xs">
-            <div class="flex items-center gap-2">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span class="text-brand-muted text-[11px] tracking-wider uppercase">Live Telemetry</span>
+    <!-- Simple Modern Bootstrap Sidebar -->
+    <aside id="adminSidebar" :class="{ 'show': mobileNav }">
+        <!-- Brand Header (Left Logo + Perfumes Collection) -->
+        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
+            <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" class="me-2">
+            <div>
+                <div class="sidebar-brand-text">PERFUMES COLLECTION</div>
+                <small class="text-secondary text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.15em;">Admin Center</small>
             </div>
-            <a href="{{ route('home') }}" target="_blank" class="text-brand-gold hover:text-brand-goldLight text-[11px] flex items-center gap-1 transition">
-                <span>View Store</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
-        </div>
+        </a>
 
         <!-- Navigation Links -->
-        <nav class="flex-1 overflow-y-auto px-4 py-4 space-y-1.5 text-sm">
-            <a href="{{ route('admin.dashboard') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-chart-pie w-5 text-center text-xs"></i>
-                <span>Overview & Analytics</span>
+        <nav class="sidebar-nav">
+            <div class="sidebar-heading">MAIN</div>
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
             </a>
 
-            <div class="pt-3 pb-1 px-3.5 text-[10px] uppercase tracking-[0.2em] text-brand-gold/60 font-semibold">Catalogue Suite</div>
-
-            <a href="{{ route('admin.products.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.products.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-spray-can-sparkles w-5 text-center text-xs"></i>
-                <span>Fragrances Vault</span>
+            <div class="sidebar-heading">CATALOGUE</div>
+            <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-spray-can-sparkles"></i>
+                <span>Products & Impressions</span>
             </a>
 
-            <a href="{{ route('admin.bundles.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.bundles.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-gift w-5 text-center text-xs"></i>
-                <span>Luxury Bundles</span>
+            <a href="{{ route('admin.bundles.index') }}" class="sidebar-link {{ request()->routeIs('admin.bundles.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-gift"></i>
+                <span>Bundles & Sets</span>
             </a>
 
-            <a href="{{ route('admin.categories.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.categories.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-layer-group w-5 text-center text-xs"></i>
-                <span>Collections & Categories</span>
+            <a href="{{ route('admin.categories.index') }}" class="sidebar-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Categories</span>
             </a>
 
-            <div class="pt-3 pb-1 px-3.5 text-[10px] uppercase tracking-[0.2em] text-brand-gold/60 font-semibold">Sales & Patrons</div>
-
-            <a href="{{ route('admin.orders.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.orders.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-receipt w-5 text-center text-xs"></i>
+            <div class="sidebar-heading">SALES & CUSTOMERS</div>
+            <a href="{{ route('admin.orders.index') }}" class="sidebar-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-receipt"></i>
                 <span>Orders & Receipts</span>
             </a>
 
-            <a href="{{ route('admin.customers.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.customers.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-users-viewfinder w-5 text-center text-xs"></i>
-                <span>Patrons Intelligence</span>
+            <a href="{{ route('admin.customers.index') }}" class="sidebar-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
             </a>
 
-            <a href="{{ route('admin.coupons.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.coupons.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-ticket-simple w-5 text-center text-xs"></i>
-                <span>Privilege Coupons</span>
+            <a href="{{ route('admin.coupons.index') }}" class="sidebar-link {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Coupons & Discounts</span>
             </a>
 
-            <div class="pt-3 pb-1 px-3.5 text-[10px] uppercase tracking-[0.2em] text-brand-gold/60 font-semibold">Content & Brand</div>
-
-            <a href="{{ route('admin.blogs.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.blogs.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-feather-pointed w-5 text-center text-xs"></i>
-                <span>Fragrance Journal</span>
+            <div class="sidebar-heading">CONTENT</div>
+            <a href="{{ route('admin.hero-slides.index') }}" class="sidebar-link {{ request()->routeIs('admin.hero-slides.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-images"></i>
+                <span>Hero Banners</span>
             </a>
 
-            <a href="{{ route('admin.hero-slides.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.hero-slides.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-images w-5 text-center text-xs"></i>
-                <span>Showcase Slides</span>
+            <a href="{{ route('admin.blogs.index') }}" class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Blog Articles</span>
             </a>
 
-            <div class="pt-3 pb-1 px-3.5 text-[10px] uppercase tracking-[0.2em] text-brand-gold/60 font-semibold">Control & Security</div>
-
-            <a href="{{ route('admin.settings.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.settings.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-sliders w-5 text-center text-xs"></i>
-                <span>Gateways & Settings</span>
+            <div class="sidebar-heading">ADMINISTRATION</div>
+            <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Staff & Roles</span>
             </a>
 
-            <a href="{{ route('admin.activity-logs.index') }}" 
-               class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg transition {{ request()->routeIs('admin.activity-logs.*') ? 'bg-brand-gold/15 text-brand-gold font-medium border border-brand-gold/30' : 'text-brand-muted hover:text-brand-text hover:bg-brand-card' }}">
-                <i class="fa-solid fa-shield-halved w-5 text-center text-xs"></i>
-                <span>Audit & Security Logs</span>
+            <a href="{{ route('admin.settings.index') }}" class="sidebar-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-gear"></i>
+                <span>Store Settings</span>
+            </a>
+
+            <a href="{{ route('admin.activity-logs.index') }}" class="sidebar-link {{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Activity Logs</span>
             </a>
         </nav>
 
-        <!-- Admin Profile Footer -->
-        <div class="p-4 border-t border-brand-border/60 bg-brand-black/50 flex items-center justify-between">
-            <div class="flex items-center gap-3 min-w-0">
-                <div class="w-9 h-9 rounded-full bg-brand-maroon/60 border border-brand-gold/40 flex items-center justify-center font-bold text-xs text-brand-gold">
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="d-flex align-items-center text-white text-decoration-none">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 34px; height: 34px; font-size: 0.85rem;">
                     {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                 </div>
-                <div class="min-w-0">
-                    <div class="text-xs font-medium text-brand-text truncate">{{ Auth::user()->name ?? 'Administrator' }}</div>
-                    <div class="text-[10px] text-brand-gold tracking-wider uppercase truncate">Maison Admin</div>
+                <div class="overflow-hidden" style="max-width: 130px;">
+                    <div class="small fw-semibold text-truncate text-white">{{ Auth::user()->name ?? 'Admin' }}</div>
+                    <small class="text-secondary d-block text-truncate" style="font-size: 0.7rem;">{{ Auth::user()->role ?? 'Administrator' }}</small>
                 </div>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
-                <button type="submit" title="Logout" class="w-8 h-8 rounded-lg flex items-center justify-center text-brand-muted hover:text-rose-400 hover:bg-rose-950/30 transition">
-                    <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+                <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-1" title="Logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
             </form>
         </div>
     </aside>
 
-    <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col min-w-0 lg:pl-72">
-
-        <!-- Top Bar -->
-        <header class="h-20 bg-brand-surface/90 backdrop-blur border-b border-brand-border/60 px-6 flex items-center justify-between sticky top-0 z-30">
-            <div class="flex items-center gap-4">
-                <button @click="sidebarOpen = true" class="lg:hidden text-brand-muted hover:text-brand-text p-2">
-                    <i class="fa-solid fa-bars text-lg"></i>
+    <!-- Main Content Layout -->
+    <div id="adminMain">
+        <!-- Top Navbar -->
+        <header class="admin-topbar">
+            <div class="d-flex align-items-center gap-3">
+                <button type="button" class="btn btn-sm btn-light border d-lg-none" @click="mobileNav = true">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
                 <div>
-                    <h1 class="font-serif text-xl lg:text-2xl font-semibold text-brand-text tracking-wide">@yield('page_title', 'Dashboard')</h1>
-                    <p class="text-xs text-brand-muted hidden sm:block">@yield('page_subtitle', 'Haute Parfumerie Operations Center')</p>
+                    <h5 class="mb-0 fw-bold text-dark font-['Jost']">@yield('page_title', 'Dashboard')</h5>
+                    <small class="text-muted d-none d-sm-inline">@yield('page_subtitle', 'Perfumes Collection Management Suite')</small>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
+            <div class="d-flex align-items-center gap-2">
                 @yield('header_actions')
+
+                <!-- View Store Button -->
+                <a href="{{ route('home') }}" target="_blank" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1">
+                    <i class="fa-solid fa-arrow-up-right-from-square small"></i>
+                    <span class="d-none d-sm-inline">View Store</span>
+                </a>
+
+                <!-- User Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light border dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span class="d-none d-md-inline">{{ Auth::user()->name ?? 'Admin' }}</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                        <li><a class="dropdown-item" href="{{ route('admin.settings.index') }}"><i class="fa-solid fa-gear me-2 text-muted"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </header>
 
         <!-- Flash Messages -->
-        @if(session('success'))
-            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" 
-                 class="mx-6 mt-4 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 flex items-center justify-between text-sm shadow-lg">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
-                    <span>{{ session('success') }}</span>
+        <div class="px-4 pt-3">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-between mb-3 shadow-xs" role="alert">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-success"></i>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <button @click="show = false" class="text-emerald-400 hover:text-emerald-200"><i class="fa-solid fa-times"></i></button>
-            </div>
-        @endif
+            @endif
 
-        @if(session('error'))
-            <div x-data="{ show: true }" x-show="show" 
-                 class="mx-6 mt-4 p-4 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300 flex items-center justify-between text-sm shadow-lg">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-triangle-exclamation text-rose-400 text-lg"></i>
-                    <span>{{ session('error') }}</span>
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-between mb-3 shadow-xs" role="alert">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation text-danger"></i>
+                        <span>{{ session('error') }}</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <button @click="show = false" class="text-rose-400 hover:text-rose-200"><i class="fa-solid fa-times"></i></button>
-            </div>
-        @endif
+            @endif
 
-        @if(session('warning'))
-            <div x-data="{ show: true }" x-show="show" 
-                 class="mx-6 mt-4 p-4 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-300 flex items-center justify-between text-sm shadow-lg">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-circle-exclamation text-amber-400 text-lg"></i>
-                    <span>{{ session('warning') }}</span>
+            @if(session('warning'))
+                <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-between mb-3 shadow-xs" role="alert">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                        <span>{{ session('warning') }}</span>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <button @click="show = false" class="text-amber-400 hover:text-amber-200"><i class="fa-solid fa-times"></i></button>
-            </div>
-        @endif
+            @endif
+        </div>
 
-        <!-- Scrollable Page Body -->
-        <main class="flex-1 overflow-y-auto p-6 space-y-6">
+        <!-- Main Body -->
+        <main class="admin-content">
             @yield('content')
         </main>
     </div>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @stack('scripts')
 </body>

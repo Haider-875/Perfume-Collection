@@ -20,90 +20,175 @@ use App\Models\Blog;
 use App\Models\HeroSlide;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Payment;
+use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class LuxuryPerfumeSeeder extends Seeder
 {
     public function run()
     {
-        // 1. Users
-        $admin = User::create([
-            'name' => 'Haute Parfumerie Admin',
-            'email' => 'admin@maisondorient.pk',
+        // 0. Clean slate reset
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        User::truncate();
+        Setting::truncate();
+        HeroSlide::truncate();
+        Collection::truncate();
+        Category::truncate();
+        Brand::truncate();
+        FragranceFamily::truncate();
+        ScentNote::truncate();
+        Product::truncate();
+        ProductImage::truncate();
+        ProductVariant::truncate();
+        Bundle::truncate();
+        BundleItem::truncate();
+        Review::truncate();
+        Blog::truncate();
+        Coupon::truncate();
+        Order::truncate();
+        OrderItem::truncate();
+        Payment::truncate();
+        ActivityLog::truncate();
+        DB::table('product_collection')->truncate();
+        DB::table('product_scent_notes')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // 1. Staff & Patron Users with Granular Permissions
+        $superAdmin = User::create([
+            'name' => 'Ravaha Super Admin',
+            'email' => 'admin@ravaha.pk',
+            'password' => Hash::make('admin123456'),
+            'role' => 'super_admin',
+            'permissions' => ['*'],
+            'is_active' => true,
+            'phone' => '0300-8765432',
+            'city' => 'Lahore',
+            'address' => 'Executive Suite, Phase 5 DHA, Lahore',
+        ]);
+
+        $storeManager = User::create([
+            'name' => 'Asad Khan (Store Manager)',
+            'email' => 'manager@ravaha.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'admin',
-            'phone' => '0300-1234567',
+            'permissions' => ['view_products', 'manage_products', 'view_orders', 'manage_orders', 'view_customers', 'manage_settings', 'view_analytics'],
+            'is_active' => true,
+            'phone' => '0321-4567890',
             'city' => 'Lahore',
-            'address' => 'Suite 402, MM Alam Road, Gulberg III, Lahore',
+            'address' => 'Gulberg III, Lahore',
+        ]);
+
+        $orderSpecialist = User::create([
+            'name' => 'Zainab Order Specialist',
+            'email' => 'orders@ravaha.pk',
+            'password' => Hash::make('admin123456'),
+            'role' => 'order_manager',
+            'permissions' => ['view_orders', 'manage_orders', 'view_customers'],
+            'is_active' => true,
+            'phone' => '0333-1122334',
+            'city' => 'Karachi',
+            'address' => 'Clifton Block 2, Karachi',
+        ]);
+
+        $catalogLead = User::create([
+            'name' => 'Hamza Catalog Lead',
+            'email' => 'catalog@ravaha.pk',
+            'password' => Hash::make('admin123456'),
+            'role' => 'catalog_manager',
+            'permissions' => ['view_products', 'manage_products'],
+            'is_active' => true,
+            'phone' => '0345-9988776',
+            'city' => 'Islamabad',
+            'address' => 'F-8 Markaz, Islamabad',
         ]);
 
         $customer = User::create([
             'name' => 'Tariq Al-Hashmi',
-            'email' => 'customer@maisondorient.pk',
-            'password' => Hash::make('customer123456'),
+            'email' => 'customer@ravaha.pk',
+            'password' => Hash::make('admin123456'),
             'role' => 'customer',
+            'permissions' => [],
+            'is_active' => true,
             'phone' => '0321-7654321',
             'city' => 'Karachi',
             'address' => 'DHA Phase 6, Karachi',
         ]);
 
-        // 2. Settings
+        // 2. Settings (RAVAHA Store Details & Gateways)
         $settings = [
-            'store_name' => "Perfumes Collection",
+            'store_name' => "RAVAHA Parfums",
+            'site_tagline' => "Artisanal Luxury Impressions • Extrait de Parfum",
             'currency' => 'PKR',
             'currency_symbol' => 'Rs. ',
-            'phone' => '+92 300 1234567',
-            'whatsapp' => '923001234567',
-            'email' => 'concierge@perfumescollection.pk',
-            'address_lahore' => 'MM Alam Road, Gulberg III, Lahore, Pakistan',
-            'address_karachi' => 'Clifton Block 4, Karachi, Pakistan',
-            'address_islamabad' => 'F-7 Markaz, Jinnah Super, Islamabad, Pakistan',
-            'free_shipping_threshold' => '4999',
-            'default_shipping_cost' => '250',
+            'phone' => '+92 300 8765432',
+            'whatsapp' => '923008765432',
+            'email' => 'concierge@ravaha.pk',
+            'address_lahore' => 'Plaza 18, Commercial Zone, Phase 5 DHA, Lahore, Pakistan',
+            'address_karachi' => 'Bukhari Commercial Area, Phase 6 DHA, Karachi, Pakistan',
+            'address_islamabad' => 'Beverly Centre, Blue Area, Islamabad, Pakistan',
+            'free_shipping_threshold' => '3000',
+            'default_shipping_cost' => '200',
+            'announcement_bar_enabled' => '1',
+            'announcement_text' => '✨ EID SPECIAL: 15% OFF On All Luxury Impressions Over Rs. 4,000 + Free Nationwide Shipping | Code: RAVAHA15',
+            'payment_cod_enabled' => '1',
+            'payment_bank_enabled' => '1',
+            'payment_easypaisa_enabled' => '1',
+            'payment_jazzcash_enabled' => '1',
+            'payment_safepay_enabled' => '1',
             'bank_name' => 'Bank Alfalah Limited / Raast',
-            'bank_account_title' => 'Perfumes Collection (Pvt) Ltd',
+            'bank_account_title' => 'Ravaha Parfums (Pvt) Ltd',
             'bank_account_number' => '0142-1007894561',
             'bank_iban' => 'PK36ALFH01421007894561',
-            'easypaisa_number' => '03001234567',
-            'jazzcash_number' => '03001234567',
+            'bank_raast_id' => '03008765432',
+            'bank_branch' => 'Phase 5 DHA, Lahore',
+            'easypaisa_number' => '03008765432',
+            'easypaisa_account_title' => 'Ravaha Parfums',
+            'jazzcash_number' => '03008765432',
+            'jazzcash_account_title' => 'Ravaha Parfums',
+            'instagram_url' => 'https://instagram.com/ravahaparfums',
+            'facebook_url' => 'https://facebook.com/ravahaparfums',
         ];
         foreach ($settings as $k => $v) {
-            Setting::create(['key' => $k, 'value' => $v, 'group' => 'store']);
+            Setting::create(['key' => $k, 'value' => $v, 'group' => str_starts_with($k, 'payment_') || str_contains($k, 'bank_') || str_contains($k, 'easypaisa') || str_contains($k, 'jazzcash') ? 'payments' : 'store']);
         }
 
         // 3. Hero Slides (Swiper Slider for Homepage)
         HeroSlide::create([
-            'title' => "Imperial Extrait & Royal Cambodian Oud",
-            'subtitle' => "40% Pure Perfume Concentration • Hand-Macerated for 36 Months • 18+ Hours Beast Mode",
-            'badge_text' => "HAUTE PARFUMERIE • PRIVATE RESERVE",
+            'title' => "Artisanal Luxury Impressions & Extraits",
+            'subtitle' => "35-40% Extrait Concentration • French Imported Oils • 14+ Hours Beast Mode Longevity",
+            'badge_text' => "HAND-CRAFTED LUXURY IMPRESSIONS",
             'image' => 'assets/images/perfumes/hero_slide_1.svg',
-            'cta_text' => "EXPLORE THE VAULT",
+            'cta_text' => "SHOP IMPRESSIONS",
             'cta_url' => "/collections/exclusive",
-            'secondary_cta_text' => "FIND YOUR SIGNATURE SCENT",
+            'secondary_cta_text' => "FIND YOUR SCENT",
             'secondary_cta_url' => "#scent-advisor",
             'sort_order' => 1,
             'is_active' => true,
         ]);
 
         HeroSlide::create([
-            'title' => "100% Pure Concentrated Dehn al Oud",
-            'subtitle' => "Hydro-distilled 15-year aged Koh Kong Agarwood in Hand-Cut Crystal Flacons",
-            'badge_text' => "ALCOHOL-FREE SACRED ATTAR",
+            'title' => "Master Impressions of Niche Legends",
+            'subtitle' => "Tuscan Leather, Baccarat Rouge 540, Aventus & Tuxedo in Hand-Cut Glass Flacons",
+            'badge_text' => "RESERVE COUTURE COLLECTION",
             'image' => 'assets/images/perfumes/hero_slide_2.svg',
-            'cta_text' => "ACQUIRE PURE OUD",
-            'cta_url' => "/collections/exclusive",
+            'cta_text' => "EXPLORE COUTURE",
+            'cta_url' => "/collections/men",
             'secondary_cta_text' => "WHATSAPP ADVISOR",
-            'secondary_cta_url' => "https://wa.me/923001234567",
+            'secondary_cta_url' => "https://wa.me/923008765432",
             'sort_order' => 2,
             'is_active' => true,
         ]);
 
         HeroSlide::create([
-            'title' => "Curated Luxury Bundles & Discovery Sets",
-            'subtitle' => "Experience the complete Perfumes Collection universe and save up to Rs. 6,000",
+            'title' => "Curated Discovery Sets & Gifting Coffrets",
+            'subtitle' => "Experience 5 iconic impressions in 10ml pressurized atomizers • Save Rs. 3,500",
             'badge_text' => "BESPOKE GIFTING",
             'image' => 'assets/images/perfumes/hero_slide_3.svg',
-            'cta_text' => "EXPLORE BUNDLES",
+            'cta_text' => "EXPLORE SETS",
             'cta_url' => "/collections/bundles",
             'secondary_cta_text' => "VIEW DISCOVERY SET",
             'secondary_cta_url' => "/perfume/the-imperial-discovery-coffret-set-of-5",
@@ -181,9 +266,9 @@ class LuxuryPerfumeSeeder extends Seeder
         $catDiscovery = Category::create(['name' => 'Discovery Sets & Gifting', 'slug' => 'discovery-sets-gifting', 'badge_text' => 'Bespoke', 'sort_order' => 5, 'image' => 'assets/images/categories/cat_discovery.svg']);
 
         // 7. Brands
-        $brandRoyal = Brand::create(['name' => "Perfumes Collection Private Reserve", 'slug' => 'perfumes-collection-private-reserve', 'origin_country' => 'Paris / Lahore Atelier', 'is_featured' => true]);
-        $brandImperial = Brand::create(['name' => 'L\'Héritage Mughal', 'slug' => 'heritage-mughal', 'origin_country' => 'Lahore / Taif', 'is_featured' => true]);
-        $brandModern = Brand::create(['name' => 'Élixir Nocturne Paris', 'slug' => 'elixir-nocturne-paris', 'origin_country' => 'Grasse, France', 'is_featured' => true]);
+        $brandRoyal = Brand::create(['name' => "RAVAHA Signature Ateliers", 'slug' => 'ravaha-signature-ateliers', 'origin_country' => 'Paris / Lahore Atelier', 'is_featured' => true]);
+        $brandImperial = Brand::create(['name' => 'RAVAHA Private Reserve', 'slug' => 'ravaha-private-reserve', 'origin_country' => 'Lahore / Taif', 'is_featured' => true]);
+        $brandModern = Brand::create(['name' => 'RAVAHA Couture Paris', 'slug' => 'ravaha-couture-paris', 'origin_country' => 'Grasse, France', 'is_featured' => true]);
 
         // 8. Scent Notes
         $notesList = [
@@ -1093,10 +1178,43 @@ class LuxuryPerfumeSeeder extends Seeder
             ],
         ];
 
+        $impressionsMap = [
+            'oud-royale-1947-extrait' => 'Cambodian Agarwood & Smoked Leather (TF Blend)',
+            'dehn-al-oud-cambodi-pure-attar' => 'Pure Koh Kong Hydro-Distilled Agarwood',
+            'noor-e-gulab-rose-absolute' => 'Taif Rose & Saffron (MFK Oud Satin Mood)',
+            'lahore-nights-smoked-amber' => 'Tom Ford Tobacco Vanille & Amber Absolute',
+            'murree-mist-silver-bergamot' => 'Creed Silver Mountain Water',
+            'sultans-cuir-tuscan-tobacco' => 'Tom Ford Tuscan Leather & YSL Tuxedo',
+            'imperial-motia-saffron-nectar' => 'Kilian Love Don\'t Be Shy & Jasmin 17',
+            'kashmir-saffron-noir-extrait' => 'Matiere Premiere Crystal Saffron',
+            'cardamom-noir-extrait' => 'BDK Parfums Gris Charnel Extrait',
+            'ambergris-imperial-blue-waves' => 'Roja Parfums Elysium Pour Homme',
+            'gourmand-tonka-spiced-cocoa' => 'Kilian Angels\' Share / Feve Delicieuse',
+            'vetiver-imperiale-smoked-birch' => 'Tom Ford Grey Vetiver & Terre d\'Hermes',
+            'atlas-cedarwood-black-pepper' => 'Creed Royal Oud',
+            'smoked-birch-vintage-saddle' => 'Memo Paris Irish Leather',
+            'taif-rose-1888-private-flacon' => 'Clive Christian No. 1 / Taif Rose Niche',
+            'white-royal-musk-silk-petals' => 'Initio Musk Therapy',
+            'bakhoor-cashmere-extrait' => 'Louis Vuitton Ombre Nomade',
+            'midnight-peony-wild-berries' => 'Parfums de Marly Delina Exclusif',
+            'silk-bourbon-vanille-absolue' => 'Nishane Ani',
+            'spiced-kahwa-smoked-cardamom' => 'Xerjoff Starlight',
+            'sandalwood-supreme-warm-saffron' => 'Le Labo Santal 33',
+            'marine-ambergris-italian-bergamot' => 'Louis Vuitton Afternoon Swim / Imagination',
+            'velvet-orchid-midnight-jasmine' => 'Tom Ford Black Orchid',
+            'jasmine-royale-golden-sandalwood' => 'Xerjoff Naxos',
+            'the-grasse-accord-limited-flacon' => 'Baccarat Rouge 540 Extrait',
+            'the-imperial-discovery-coffret-set-of-5' => 'Curated Top 5 Luxury Impressions Coffret',
+        ];
+
         $createdProducts = [];
         foreach ($perfumesData as $item) {
             $colIds = $item['collections'] ?? [];
             unset($item['collections']);
+
+            if (empty($item['impression_of']) && isset($impressionsMap[$item['slug']])) {
+                $item['impression_of'] = $impressionsMap[$item['slug']];
+            }
 
             $product = Product::create($item);
             $createdProducts[$product->slug] = $product;
@@ -1125,27 +1243,51 @@ class LuxuryPerfumeSeeder extends Seeder
                 ]);
             }
 
-            // Variants
-            if (!$product->is_bundle && $product->volume_ml == 100) {
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'size_label' => '50ml Flacon',
-                    'volume_ml' => 50,
-                    'price' => $product->price * 0.6,
-                    'sale_price' => $product->sale_price ? $product->sale_price * 0.6 : null,
-                    'sku' => $product->sku . '-50',
-                    'stock' => 25,
-                ]);
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'size_label' => '100ml Collector Edition',
-                    'volume_ml' => 100,
-                    'price' => $product->price,
-                    'sale_price' => $product->sale_price,
-                    'sku' => $product->sku . '-100',
-                    'stock' => 30,
-                    'is_default' => true,
-                ]);
+            // Variants (10ml Travel, 50ml Flacon, 100ml Collector)
+            if (!$product->is_bundle) {
+                if ($product->volume_ml == 100) {
+                    ProductVariant::create([
+                        'product_id' => $product->id,
+                        'size_label' => '10ml Travel Atomizer',
+                        'volume_ml' => 10,
+                        'price' => 1199.00,
+                        'sale_price' => 999.00,
+                        'sku' => $product->sku . '-10ML',
+                        'stock' => 50,
+                        'is_default' => false,
+                    ]);
+                    ProductVariant::create([
+                        'product_id' => $product->id,
+                        'size_label' => '50ml Flacon',
+                        'volume_ml' => 50,
+                        'price' => round($product->price * 0.62, -1),
+                        'sale_price' => $product->sale_price ? round($product->sale_price * 0.62, -1) : null,
+                        'sku' => $product->sku . '-50ML',
+                        'stock' => 35,
+                        'is_default' => false,
+                    ]);
+                    ProductVariant::create([
+                        'product_id' => $product->id,
+                        'size_label' => '100ml Collector Flacon',
+                        'volume_ml' => 100,
+                        'price' => $product->price,
+                        'sale_price' => $product->sale_price,
+                        'sku' => $product->sku . '-100ML',
+                        'stock' => 30,
+                        'is_default' => true,
+                    ]);
+                } else {
+                    ProductVariant::create([
+                        'product_id' => $product->id,
+                        'size_label' => $product->volume_ml . 'ml Crystal Flacon',
+                        'volume_ml' => $product->volume_ml,
+                        'price' => $product->price,
+                        'sale_price' => $product->sale_price,
+                        'sku' => $product->sku . '-' . $product->volume_ml . 'ML',
+                        'stock' => $product->stock,
+                        'is_default' => true,
+                    ]);
+                }
             }
 
             // Reviews
@@ -1287,6 +1429,302 @@ class LuxuryPerfumeSeeder extends Seeder
             'min_spend' => 8000.00,
             'expires_at' => now()->addMonths(12),
             'is_active' => true,
+        ]);
+
+        // 13. Realistic Customer Orders (Fulfillment & Payment Lifecycle)
+        $oudRoyale = $createdProducts['oud-royale-1947-extrait'] ?? Product::first();
+        $sultanCuir = $createdProducts['sultans-cuir-tuscan-tobacco'] ?? Product::skip(1)->first();
+        $noorGulab = $createdProducts['noor-e-gulab-rose-absolute'] ?? Product::skip(2)->first();
+        $lahoreNights = $createdProducts['lahore-nights-smoked-amber'] ?? Product::skip(3)->first();
+        $murreeMist = $createdProducts['murree-mist-silver-bergamot'] ?? Product::skip(4)->first();
+
+        // Order 1: Delivered COD in Lahore
+        $order1 = Order::create([
+            'order_number' => 'RAV-2026-1001',
+            'user_id' => $customer->id,
+            'customer_name' => 'Kamran Akram',
+            'customer_email' => 'kamran.akram@gmail.com',
+            'customer_phone' => '0300-8451234',
+            'shipping_address' => 'House 42, Street 8, Sector C, Phase 6 DHA',
+            'area' => 'DHA Phase 6',
+            'city' => 'Lahore',
+            'province' => 'Punjab',
+            'postal_code' => '54792',
+            'order_notes' => 'Please deliver before 5 PM. Call upon arrival.',
+            'subtotal' => 27498.00,
+            'discount_amount' => 0.00,
+            'shipping_cost' => 0.00,
+            'total_amount' => 27498.00,
+            'payment_method' => 'cod',
+            'payment_status' => 'paid',
+            'order_status' => 'delivered',
+            'courier_name' => 'TCS',
+            'tracking_number' => 'TCS-92817462',
+            'tracking_link' => 'https://www.tcsexpress.com/tracking?track=TCS-92817462',
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subDays(5),
+        ]);
+        OrderItem::create([
+            'order_id' => $order1->id,
+            'product_id' => $oudRoyale->id,
+            'product_name' => $oudRoyale->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => $oudRoyale->sale_price ?? $oudRoyale->price,
+            'quantity' => 1,
+            'total' => $oudRoyale->sale_price ?? $oudRoyale->price,
+        ]);
+        OrderItem::create([
+            'order_id' => $order1->id,
+            'product_id' => $murreeMist->id,
+            'product_name' => $murreeMist->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => $murreeMist->sale_price ?? $murreeMist->price,
+            'quantity' => 1,
+            'total' => $murreeMist->sale_price ?? $murreeMist->price,
+        ]);
+
+        // Order 2: Pending Bank Transfer Verification (Receipt Attached!)
+        $order2 = Order::create([
+            'order_number' => 'RAV-2026-1002',
+            'user_id' => null,
+            'customer_name' => 'Ayesha Siddiqui',
+            'customer_email' => 'ayesha.s@outlook.com',
+            'customer_phone' => '0321-9876543',
+            'shipping_address' => 'Apartment 5B, Creek Vistas, Phase 8 DHA',
+            'area' => 'Creek Vistas',
+            'city' => 'Karachi',
+            'province' => 'Sindh',
+            'postal_code' => '75500',
+            'order_notes' => 'Transferred via Bank Alfalah online banking. Receipt attached.',
+            'subtotal' => 12499.00,
+            'discount_amount' => 0.00,
+            'shipping_cost' => 0.00,
+            'total_amount' => 12499.00,
+            'payment_method' => 'bank_transfer',
+            'payment_status' => 'pending_verification',
+            'payment_receipt' => 'assets/images/perfumes/oud_royale.svg',
+            'bank_transaction_id' => 'ALFH-9837190',
+            'order_status' => 'pending',
+            'courier_name' => null,
+            'tracking_number' => null,
+            'tracking_link' => null,
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subHours(4),
+        ]);
+        OrderItem::create([
+            'order_id' => $order2->id,
+            'product_id' => $noorGulab->id,
+            'product_name' => $noorGulab->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => 12499.00,
+            'quantity' => 1,
+            'total' => 12499.00,
+        ]);
+        Payment::create([
+            'order_id' => $order2->id,
+            'payment_method' => 'bank_transfer',
+            'amount' => 12499.00,
+            'transaction_id' => 'ALFH-9837190',
+            'receipt_image' => 'assets/images/perfumes/oud_royale.svg',
+            'status' => 'pending_verification',
+            'notes' => 'Customer uploaded Bank Alfalah internet banking receipt.',
+        ]);
+
+        // Order 3: Shipped via Leopards to Islamabad
+        $order3 = Order::create([
+            'order_number' => 'RAV-2026-1003',
+            'user_id' => null,
+            'customer_name' => 'Dr. Omar Farooq',
+            'customer_email' => 'omar.farooq@shifa.pk',
+            'customer_phone' => '0333-5128901',
+            'shipping_address' => 'House 17, Street 24, Sector F-7/2',
+            'area' => 'F-7/2',
+            'city' => 'Islamabad',
+            'province' => 'Federal',
+            'postal_code' => '44000',
+            'order_notes' => 'Leave with security guard if not available.',
+            'subtotal' => 14999.00,
+            'discount_amount' => 0.00,
+            'shipping_cost' => 0.00,
+            'total_amount' => 14999.00,
+            'payment_method' => 'bank_transfer',
+            'payment_status' => 'paid',
+            'bank_transaction_id' => 'RAAST-8829103',
+            'order_status' => 'shipped',
+            'courier_name' => 'Leopards Courier',
+            'tracking_number' => 'LEO-74628192',
+            'tracking_link' => 'https://www.leopardscourier.com/tracking?track_numbers=LEO-74628192',
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subDays(2),
+        ]);
+        OrderItem::create([
+            'order_id' => $order3->id,
+            'product_id' => $sultanCuir->id,
+            'product_name' => $sultanCuir->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => 14999.00,
+            'quantity' => 1,
+            'total' => 14999.00,
+        ]);
+
+        // Order 4: Shipped via PostEx to Peshawar
+        $order4 = Order::create([
+            'order_number' => 'RAV-2026-1004',
+            'user_id' => null,
+            'customer_name' => 'Zainab Tariq',
+            'customer_email' => 'zainab.tariq@gmail.com',
+            'customer_phone' => '0345-2233445',
+            'shipping_address' => 'Bungalow 12, Officers Colony, Mall Road Cantt',
+            'city' => 'Peshawar',
+            'province' => 'KPK',
+            'postal_code' => '25000',
+            'subtotal' => 13999.00,
+            'discount_amount' => 1000.00,
+            'coupon_code' => 'FIRSTORDER',
+            'shipping_cost' => 0.00,
+            'total_amount' => 12999.00,
+            'payment_method' => 'easypaisa',
+            'payment_status' => 'paid',
+            'order_status' => 'shipped',
+            'courier_name' => 'PostEx',
+            'tracking_number' => 'PTX-662910',
+            'tracking_link' => 'https://postex.pk/tracking?order_id=PTX-662910',
+            'is_whatsapp_order' => true,
+            'created_at' => now()->subDay(),
+        ]);
+        OrderItem::create([
+            'order_id' => $order4->id,
+            'product_id' => $lahoreNights->id,
+            'product_name' => $lahoreNights->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => 13999.00,
+            'quantity' => 1,
+            'total' => 13999.00,
+        ]);
+
+        // Order 5: Processing COD in Faisalabad
+        $order5 = Order::create([
+            'order_number' => 'RAV-2026-1005',
+            'user_id' => null,
+            'customer_name' => 'Bilal Hassan',
+            'customer_email' => 'bilal.hassan@yahoo.com',
+            'customer_phone' => '0312-3456789',
+            'shipping_address' => 'Street 4, Madina Town',
+            'city' => 'Faisalabad',
+            'province' => 'Punjab',
+            'postal_code' => '38000',
+            'subtotal' => 7999.00,
+            'discount_amount' => 0.00,
+            'shipping_cost' => 0.00,
+            'total_amount' => 7999.00,
+            'payment_method' => 'cod',
+            'payment_status' => 'unpaid',
+            'order_status' => 'processing',
+            'courier_name' => 'Trax Logistics',
+            'tracking_number' => 'TRX-83719201',
+            'tracking_link' => 'https://trax.pk/tracking?tracking_number=TRX-83719201',
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subHours(12),
+        ]);
+        if (isset($createdProducts['the-imperial-discovery-coffret-set-of-5'])) {
+            $disc = $createdProducts['the-imperial-discovery-coffret-set-of-5'];
+            OrderItem::create([
+                'order_id' => $order5->id,
+                'product_id' => $disc->id,
+                'product_name' => $disc->name,
+                'variant_label' => 'Set of 5 (10ml Extraits)',
+                'price' => 7999.00,
+                'quantity' => 1,
+                'total' => 7999.00,
+            ]);
+        }
+
+        // Order 6: Pending Verification with Bank Receipt
+        $order6 = Order::create([
+            'order_number' => 'RAV-2026-1006',
+            'user_id' => null,
+            'customer_name' => 'Usman Ghani',
+            'customer_email' => 'usman.ghani@gmail.com',
+            'customer_phone' => '0322-4455667',
+            'shipping_address' => 'Sector B-17, Multi Gardens, Block C',
+            'city' => 'Islamabad',
+            'province' => 'Federal',
+            'postal_code' => '44000',
+            'subtotal' => 21500.00,
+            'discount_amount' => 0.00,
+            'shipping_cost' => 0.00,
+            'total_amount' => 21500.00,
+            'payment_method' => 'bank_transfer',
+            'payment_status' => 'pending_verification',
+            'payment_receipt' => 'assets/images/perfumes/dehn_oud_attar.svg',
+            'bank_transaction_id' => 'HBL-7821903',
+            'order_status' => 'pending',
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subHours(2),
+        ]);
+        if (isset($createdProducts['dehn-al-oud-cambodi-pure-attar'])) {
+            $attar = $createdProducts['dehn-al-oud-cambodi-pure-attar'];
+            OrderItem::create([
+                'order_id' => $order6->id,
+                'product_id' => $attar->id,
+                'product_name' => $attar->name,
+                'variant_label' => '12ml Crystal Flacon',
+                'price' => 21500.00,
+                'quantity' => 1,
+                'total' => 21500.00,
+            ]);
+        }
+
+        // Order 7: Confirmed COD in Rawalpindi
+        $order7 = Order::create([
+            'order_number' => 'RAV-2026-1007',
+            'user_id' => null,
+            'customer_name' => 'Murtaza Shah',
+            'customer_email' => 'murtaza.shah@gmail.com',
+            'customer_phone' => '0334-9988112',
+            'shipping_address' => 'House 19, Saddar Road, Cantt',
+            'city' => 'Rawalpindi',
+            'province' => 'Punjab',
+            'postal_code' => '46000',
+            'subtotal' => 14999.00,
+            'discount_amount' => 1499.90,
+            'coupon_code' => 'ROYAL10',
+            'shipping_cost' => 0.00,
+            'total_amount' => 13499.10,
+            'payment_method' => 'cod',
+            'payment_status' => 'unpaid',
+            'order_status' => 'confirmed',
+            'is_whatsapp_order' => false,
+            'created_at' => now()->subHours(8),
+        ]);
+        OrderItem::create([
+            'order_id' => $order7->id,
+            'product_id' => $sultanCuir->id,
+            'product_name' => $sultanCuir->name,
+            'variant_label' => '100ml Collector Flacon',
+            'price' => 14999.00,
+            'quantity' => 1,
+            'total' => 14999.00,
+        ]);
+
+        // 14. Activity Logs for Admin Dashboard Stream
+        ActivityLog::create([
+            'user_id' => $superAdmin->id,
+            'action' => 'system_bootstrapped',
+            'description' => 'RAVAHA Parfums master vault initialized with 26 luxury impressions & administrative security policies.',
+            'created_at' => now()->subDays(6),
+        ]);
+        ActivityLog::create([
+            'user_id' => $orderSpecialist->id,
+            'action' => 'order_verified',
+            'description' => 'Verified Raast transaction RAAST-8829103 for order #RAV-2026-1003.',
+            'created_at' => now()->subDays(2),
+        ]);
+        ActivityLog::create([
+            'user_id' => $catalogLead->id,
+            'action' => 'product_created',
+            'description' => 'Updated olfactory composition notes for Sovereign Aventus and Roman Leather.',
+            'created_at' => now()->subHours(5),
         ]);
     }
 }

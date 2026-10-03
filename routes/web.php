@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\AdminHeroSlideController;
 use App\Http\Controllers\Admin\AdminCouponController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminActivityLogController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,8 @@ use App\Http\Controllers\Admin\AdminActivityLogController;
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Collections
+// Collections & Bundles
+Route::get('/collections/bundles', [CollectionController::class, 'show'])->defaults('slug', 'bundles')->name('bundles.index');
 Route::get('/collections', [CollectionController::class, 'show'])->name('collections.index');
 Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 
@@ -121,6 +124,13 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
 });
 
 // ==========================================
+// Admin Authentication (Public /admin/login)
+// ==========================================
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+// ==========================================
 // Admin Control Center (Restricted to role=admin)
 // ==========================================
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -191,6 +201,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Settings & Payment Gateways
     Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+
+    // Staff & Roles Permissions Management
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+    Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
 
     // Activity Logs & Audit Trail
     Route::get('/activity-logs', [AdminActivityLogController::class, 'index'])->name('activity-logs.index');

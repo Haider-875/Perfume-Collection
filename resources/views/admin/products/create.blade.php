@@ -26,11 +26,20 @@
                     <span>Fragrance Identity & Story</span>
                 </h3>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Fragrance Name *</label>
-                    <input type="text" name="name" value="{{ old('name') }}" required placeholder="e.g. Royal Oud Extrait"
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text placeholder-brand-muted/50 focus:outline-none focus:border-brand-gold">
-                    @error('name') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Fragrance Formulation Name *</label>
+                        <input type="text" name="name" value="{{ old('name') }}" required placeholder="e.g. Santal Desire"
+                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text placeholder-brand-muted/50 focus:outline-none focus:border-brand-gold">
+                        @error('name') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-1 font-medium">Impression of (Designer / Niche Perfume) *</label>
+                        <input type="text" name="impression_of" value="{{ old('impression_of') }}" placeholder="e.g. Santal 33 by Le Labo"
+                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text placeholder-brand-muted/50 focus:outline-none focus:border-brand-gold">
+                        <span class="text-[10px] text-brand-muted">Used for prominent impression subtitle (buyrawaha style)</span>
+                    </div>
                 </div>
 
                 <div>
@@ -272,15 +281,22 @@
 
             <!-- Imagery Upload -->
             <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Presentation Assets
+                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-camera text-brand-gold text-xs"></i>
+                    <span>Presentation Assets</span>
                 </h3>
 
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-2">Bottle & Box Photography (Multiple Images)</label>
-                    <input type="file" name="images[]" multiple accept="image/*"
+                    <label class="block text-xs uppercase tracking-wider text-brand-gold mb-1 font-medium">Main Flacon Image (Featured)</label>
+                    <input type="file" name="primary_image" accept="image/*"
                            class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-gold file:text-brand-black hover:file:bg-brand-goldLight cursor-pointer">
-                    <span class="text-[10px] text-brand-muted mt-1 block">Supports PNG, JPG, WEBP, SVG (Max 2MB per asset)</span>
+                    <span class="text-[10px] text-brand-muted mt-1 block">Supports PNG, JPG, WEBP, SVG</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Secondary / Box Image</label>
+                    <input type="file" name="hover_image" accept="image/*"
+                           class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-card file:text-brand-text hover:file:bg-brand-border cursor-pointer">
                 </div>
             </div>
 

@@ -119,8 +119,8 @@ window.showLuxuryToast = function(message, type = 'success') {
     toast.innerHTML = `
         <i class="fas ${icon}" style="color: var(--gold-primary); font-size: 1.1rem;"></i>
         <div>
-            <div style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--gold-champagne);">MAISON D'ORIENT</div>
-            <div style="font-size: 0.82rem; color: var(--text-ivory);">${message}</div>
+            <div style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: #92400e;">RAVAHA PARFUMS</div>
+            <div style="font-size: 0.82rem; color: #1f2937;">${message}</div>
         </div>
     `;
 
@@ -175,6 +175,7 @@ function renderCartUI(data) {
     const body = document.getElementById('cartDrawerItems');
     const subtotalEl = document.getElementById('cartDrawerSubtotal');
     const countEl = document.getElementById('cartDrawerHeaderCount');
+    const footerEl = document.getElementById('cartDrawerFooter');
 
     if (countEl) countEl.innerText = `${data.count} items`;
     if (subtotalEl) subtotalEl.innerText = data.subtotal;
@@ -182,33 +183,36 @@ function renderCartUI(data) {
     if (!body) return;
 
     if (data.items.length === 0) {
+        if (footerEl) footerEl.style.display = 'none';
         body.innerHTML = `
-            <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
-                <i class="fas fa-shopping-bag text-gold" style="font-size: 2.5rem; margin-bottom: 16px; display: block;"></i>
-                <h4 style="font-size: 1.2rem; margin-bottom: 8px; color: var(--text-ivory);">Your Private Vault is Empty</h4>
-                <p style="font-size: 0.88rem; margin-bottom: 20px;">Explore our handcrafted Extraits and pure Cambodian agarwood.</p>
-                <a href="/collections/exclusive" class="btn-gold" style="padding: 10px 20px; font-size: 0.8rem;">EXPLORE EXCLUSIVES</a>
+            <div style="text-align: center; padding: 60px 20px; color: #6b7280;">
+                <i class="fas fa-shopping-bag" style="font-size: 2.5rem; margin-bottom: 16px; display: block; color: #d97706;"></i>
+                <h4 style="font-size: 1.15rem; margin-bottom: 8px; color: #111827; font-weight: 600;">Your Fragrance Bag is Empty</h4>
+                <p style="font-size: 0.85rem; margin-bottom: 20px;">Explore our handcrafted impressions with 14+ hours longevity.</p>
+                <a href="/collections/all" class="btn-gold" style="padding: 10px 24px; font-size: 0.8rem; text-decoration: none;">EXPLORE IMPRESSIONS</a>
             </div>
         `;
         return;
     }
 
+    if (footerEl) footerEl.style.display = 'block';
+
     body.innerHTML = data.items.map(item => `
-        <div style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-subtle); align-items: center;">
-            <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: contain; background: #150A0E; border: 1px solid var(--border-subtle); border-radius: 4px; padding: 4px;">
+        <div style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #E5E7EB; align-items: center;">
+            <img src="${item.image}" alt="${item.name}" style="width: 64px; height: 64px; object-fit: contain; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 4px;">
             <div style="flex-grow: 1;">
-                <a href="${item.url}" style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; color: var(--text-ivory); text-decoration: none; display: block; line-height: 1.3;">${item.name}</a>
-                <span style="font-size: 0.75rem; color: var(--gold-bright);">${item.variant}</span>
+                <a href="${item.url}" style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; color: #111827; text-decoration: none; display: block; line-height: 1.3;">${item.name}</a>
+                <span style="font-size: 0.75rem; color: #B8860B; font-weight: 600;">${item.variant}</span>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-                    <div style="display: flex; align-items: center; border: 1px solid var(--border-gold); border-radius: 3px; background: #080304;">
-                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" style="background: transparent; border: none; color: #FFF; padding: 2px 8px; cursor: pointer;">-</button>
-                        <span style="font-size: 0.8rem; padding: 0 6px; font-weight: 700; color: var(--gold-champagne);">${item.quantity}</span>
-                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" style="background: transparent; border: none; color: #FFF; padding: 2px 8px; cursor: pointer;">+</button>
+                    <div style="display: flex; align-items: center; border: 1px solid #D1D5DB; border-radius: 4px; background: #F9FAFB;">
+                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" style="background: transparent; border: none; color: #374151; padding: 2px 8px; cursor: pointer; font-weight: bold;">-</button>
+                        <span style="font-size: 0.8rem; padding: 0 6px; font-weight: 700; color: #111827;">${item.quantity}</span>
+                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" style="background: transparent; border: none; color: #374151; padding: 2px 8px; cursor: pointer; font-weight: bold;">+</button>
                     </div>
-                    <span style="font-family: var(--font-heading); font-weight: 700; color: var(--gold-champagne); font-size: 1rem;">${item.total}</span>
+                    <span style="font-family: var(--font-heading); font-weight: 700; color: #111827; font-size: 1rem;">${item.total}</span>
                 </div>
             </div>
-            <button onclick="removeCartItem(${item.id})" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 4px;" title="Remove">
+            <button onclick="removeCartItem(${item.id})" style="background: transparent; border: none; color: #9CA3AF; cursor: pointer; padding: 6px;" title="Remove" onmouseover="this.style.color='#DC2626'" onmouseout="this.style.color='#9CA3AF'">
                 <i class="fas fa-trash-alt" style="font-size: 0.85rem;"></i>
             </button>
         </div>

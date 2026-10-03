@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         // 1. Administrative Activity Audit Logs
@@ -40,6 +39,7 @@ return new class extends Migration
                 $table->string('utm_source')->nullable();
                 $table->timestamp('visited_at')->useCurrent()->index();
                 $table->timestamps();
+
             });
         }
     }

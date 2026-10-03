@@ -36,6 +36,7 @@ class AdminSettingController extends Controller
         $toggleKeys = [
             'payment_cod_enabled',
             'payment_bank_enabled',
+            'payment_wallet_enabled',
             'payment_easypaisa_enabled',
             'payment_jazzcash_enabled',
             'payment_safepay_enabled',

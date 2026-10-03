@@ -46,6 +46,10 @@ class AuthController extends Controller
                 return redirect()->intended();
             }
 
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome to the Admin Control Center, ' . Auth::user()->name . '.');
+            }
+
             return redirect()->route('account.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name . '.');
         }
 

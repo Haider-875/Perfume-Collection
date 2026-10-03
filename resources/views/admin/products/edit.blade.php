@@ -33,11 +33,19 @@
                     <span>Fragrance Identity & Story</span>
                 </h3>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Fragrance Name *</label>
-                    <input type="text" name="name" value="{{ old('name', $product->name) }}" required
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-                    @error('name') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Fragrance Name *</label>
+                        <input type="text" name="name" value="{{ old('name', $product->name) }}" required
+                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+                        @error('name') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-1 font-medium">Impression Of (Designer / Niche Reference)</label>
+                        <input type="text" name="impression_of" value="{{ old('impression_of', $product->impression_of) }}" placeholder="e.g. Tom Ford Tuscan Leather / Creed Aventus"
+                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+                        @error('impression_of') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+                    </div>
                 </div>
 
                 <div>
@@ -64,17 +72,17 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs uppercase tracking-wider text-brand-gold mb-1 font-medium">Top Notes</label>
-                        <textarea name="top_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('top_notes', $topNotes) }}</textarea>
+                        <textarea name="top_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('top_notes', $product->top_notes_summary ?? '') }}</textarea>
                         <span class="text-[10px] text-brand-muted">Initial impression</span>
                     </div>
                     <div>
                         <label class="block text-xs uppercase tracking-wider text-brand-goldLight mb-1 font-medium">Heart / Middle Notes</label>
-                        <textarea name="heart_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('heart_notes', $heartNotes) }}</textarea>
+                        <textarea name="heart_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('heart_notes', $product->heart_notes_summary ?? '') }}</textarea>
                         <span class="text-[10px] text-brand-muted">Core bouquet</span>
                     </div>
                     <div>
                         <label class="block text-xs uppercase tracking-wider text-brand-goldDark mb-1 font-medium">Base Notes</label>
-                        <textarea name="base_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('base_notes', $baseNotes) }}</textarea>
+                        <textarea name="base_notes" rows="2" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('base_notes', $product->base_notes_summary ?? '') }}</textarea>
                         <span class="text-[10px] text-brand-muted">Deep dry-down</span>
                     </div>
                 </div>
@@ -143,29 +151,51 @@
                 </div>
             </div>
 
-            <!-- Existing Images Gallery & New Asset Upload -->
+            <!-- Visual Assets & Imagery -->
             <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
                 <h3 class="font-serif text-base font-semibold text-brand-text flex items-center gap-2 border-b border-brand-border/40 pb-3">
                     <i class="fa-solid fa-images text-brand-gold text-xs"></i>
-                    <span>Visual Assets Gallery</span>
+                    <span>Visual Assets & Flacon Imagery</span>
                 </h3>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    @foreach($product->images as $img)
-                        <div class="relative bg-brand-black rounded-lg p-2 border border-brand-border/50 group">
-                            <img src="{{ asset($img->image_path) }}" alt="{{ $product->name }}" class="w-full h-24 object-contain rounded">
-                            @if($img->is_primary)
-                                <span class="absolute top-2 left-2 bg-brand-gold text-brand-black text-[9px] font-bold px-1.5 py-0.5 rounded">PRIMARY</span>
-                            @endif
-                        </div>
-                    @endforeach
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-brand-black/50 p-3 rounded-lg border border-brand-border/40">
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-2 font-medium">Primary Flacon Image</label>
+                        @if($product->thumbnail_image)
+                            <div class="mb-2 w-24 h-24 bg-brand-black rounded flex items-center justify-center p-2 border border-brand-border/60">
+                                <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}" class="max-h-full max-w-full object-contain">
+                            </div>
+                        @endif
+                        <input type="file" name="primary_image" accept="image/*"
+                               class="w-full text-xs text-brand-muted file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brand-gold file:text-brand-black hover:file:bg-brand-goldLight cursor-pointer">
+                        <span class="text-[10px] text-brand-muted mt-1 block">Leave empty to keep existing flacon shot.</span>
+                    </div>
+
+                    <div class="bg-brand-black/50 p-3 rounded-lg border border-brand-border/40">
+                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-2 font-medium">Hover / Box Image</label>
+                        @if($product->hover_image)
+                            <div class="mb-2 w-24 h-24 bg-brand-black rounded flex items-center justify-center p-2 border border-brand-border/60">
+                                <img src="{{ asset($product->hover_image) }}" alt="{{ $product->name }}" class="max-h-full max-w-full object-contain">
+                            </div>
+                        @endif
+                        <input type="file" name="hover_image" accept="image/*"
+                               class="w-full text-xs text-brand-muted file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brand-card file:text-brand-text hover:file:bg-brand-border cursor-pointer">
+                        <span class="text-[10px] text-brand-muted mt-1 block">Secondary image on hover.</span>
+                    </div>
                 </div>
 
+                @if($product->images->count() > 0)
                 <div class="pt-3 border-t border-brand-border/40">
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-2">Upload Additional Imagery</label>
-                    <input type="file" name="images[]" multiple accept="image/*"
-                           class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-gold file:text-brand-black hover:file:bg-brand-goldLight cursor-pointer">
+                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-2">Extra Gallery Shots</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        @foreach($product->images as $img)
+                            <div class="relative bg-brand-black rounded-lg p-2 border border-brand-border/50 group">
+                                <img src="{{ asset($img->image_path) }}" alt="{{ $product->name }}" class="w-full h-24 object-contain rounded">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+                @endif
             </div>
 
             <!-- SEO Parameters -->
@@ -213,7 +243,7 @@
                     </label>
 
                     <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" name="is_best_seller" value="1" {{ old('is_best_seller', $product->is_best_seller) ? 'checked' : '' }}
+                        <input type="checkbox" name="is_bestseller" value="1" {{ old('is_bestseller', $product->is_bestseller ?? false) ? 'checked' : '' }}
                                class="rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
                         <span class="text-xs text-brand-text">Best Seller Badge</span>
                     </label>
@@ -248,6 +278,12 @@
                     <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1">Master SKU *</label>
                     <input type="text" name="sku" value="{{ old('sku', $product->sku) }}" required
                            class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text uppercase focus:outline-none focus:border-brand-gold">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1">Standard Bottle Volume (ml) *</label>
+                    <input type="number" name="volume_ml" value="{{ old('volume_ml', $product->volume_ml ?? 50) }}" required min="1"
+                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
                 </div>
 
                 <div>
@@ -328,7 +364,7 @@
 <script>
     function variantManager() {
         const initialVariants = @json($product->variants->map(fn($v) => [
-            'size' => $v->size,
+            'size' => $v->size_label ?? $v->size ?? '',
             'sku' => $v->sku,
             'price' => $v->price,
             'stock' => $v->stock

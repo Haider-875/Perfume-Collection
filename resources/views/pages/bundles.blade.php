@@ -1,84 +1,83 @@
 @extends('layouts.app')
 
-@section('title', 'Curated Fragrance Bundles & Discovery Coffrets | Maison d\'Orient Pakistan')
-@section('meta_description', 'Explore handcrafted luxury perfume bundles, royal oud pairing sets, and grand bridal coffrets with exclusive savings up to Rs. 10,000.')
+@section('title', 'Curated Fragrance Bundles & Discovery Sets | Perfumes Collection Pakistan')
+@section('meta_description', 'Explore handcrafted luxury perfume bundles, impression pairings, and discovery coffrets with exclusive savings up to 30% across Pakistan.')
 
 @section('content')
 
-<!-- Bundles Hero Banner -->
-<section class="relative py-16 md:py-24 bg-[#0A0405] border-b border-[#C9A24B]/20 overflow-hidden">
-    <div class="absolute inset-0 bg-radial-gradient opacity-25 pointer-events-none"></div>
-    <div class="container relative z-10 text-center">
+<!-- Bundles Hero Banner (BuyRawaha Style) -->
+<section class="relative py-10 md:py-14 bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Collections', 'url' => route('collections.show', 'all')],
-            ['label' => 'Luxury Bundles & Coffrets']
+            ['label' => 'Curated Bundles & Sets']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] mb-2 font-medium">CURATED PAIRINGS & SIGNATURE SETS</span>
-        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-[#F5EFE6] mb-4 font-normal tracking-wide">
-            Imperial Fragrance Bundles
+        <span class="inline-block text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-1.5 font-bold">CURATED PAIRINGS & SIGNATURE SETS</span>
+        <h1 class="font-['Jost'] text-3xl md:text-4xl lg:text-5xl text-black mb-2 font-bold tracking-tight">
+            Curated Fragrance Bundles
         </h1>
-        <p class="max-w-2xl mx-auto text-[#F5EFE6]/70 text-sm md:text-base font-light leading-relaxed">
-            Master perfumer curated pairings presented in gold-embossed velvet coffrets. Enjoy complimentary luxury gifting boxes and privileged savings of up to 30% across Pakistan.
+        <p class="max-w-2xl mx-auto text-gray-600 text-sm md:text-base leading-relaxed">
+            Curated pairings presented in luxury packaging. Enjoy complimentary presentation boxes and savings of up to 30% across Pakistan.
         </p>
     </div>
 </section>
 
 <!-- Bundles Showcase Grid -->
-<section class="py-16 bg-[#080304]">
-    <div class="container">
+<section class="py-16 bg-white border-b border-gray-200">
+    <div class="container mx-auto px-4 lg:px-8">
         
         <!-- Value Proposition Bar -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 p-6 bg-[#0E0507] border border-[#C9A24B]/25 rounded-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 bg-gray-50 border border-gray-200 rounded-xl">
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/40 flex items-center justify-center text-[#C9A24B] text-xl">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 text-xl flex-shrink-0">
                     <i class="fas fa-gift"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif text-base text-[#F5EFE6]">Velvet Presentation Box</h4>
-                    <p class="text-xs text-[#F5EFE6]/60">Complimentary luxury unboxing experience</p>
+                    <h4 class="font-serif text-base text-gray-900 font-semibold">Velvet Presentation Box</h4>
+                    <p class="text-xs text-gray-500">Complimentary luxury unboxing experience</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/40 flex items-center justify-center text-[#C9A24B] text-xl">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 text-xl flex-shrink-0">
                     <i class="fas fa-percent"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif text-base text-[#F5EFE6]">Guaranteed Savings</h4>
-                    <p class="text-xs text-[#F5EFE6]/60">Save up to Rs. 10,000 compared to individual bottles</p>
+                    <h4 class="font-serif text-base text-gray-900 font-semibold">Guaranteed Savings</h4>
+                    <p class="text-xs text-gray-500">Save up to 30% compared to individual bottles</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/40 flex items-center justify-center text-[#C9A24B] text-xl">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 text-xl flex-shrink-0">
                     <i class="fas fa-truck-fast"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif text-base text-[#F5EFE6]">Complimentary Express Air</h4>
-                    <p class="text-xs text-[#F5EFE6]/60">24-48 Hour insured TCS delivery to all cities</p>
+                    <h4 class="font-serif text-base text-gray-900 font-semibold">Complimentary Express Air</h4>
+                    <p class="text-xs text-gray-500">24-48 Hour insured TCS delivery to all cities</p>
                 </div>
             </div>
         </div>
 
         <!-- Master Bundles List -->
-        <div class="space-y-12">
+        <div class="space-y-10">
             @forelse($bundles as $bundle)
-                <div class="bg-[#0C0507] border border-[#C9A24B]/30 rounded-lg p-6 lg:p-8 shadow-2xl hover:border-[#C9A24B]/60 transition-all duration-300">
+                <div class="bg-gray-50/70 border border-gray-200 rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-md hover:border-amber-400 transition-all duration-300">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         
                         <!-- Left: Bundle Image Showcase -->
                         <div class="lg:col-span-4 relative group">
-                            <div class="relative overflow-hidden rounded border border-[#C9A24B]/20 bg-[#120709] p-4 text-center">
+                            <div class="relative overflow-hidden rounded-xl border border-gray-200 bg-white p-4 text-center">
                                 <img 
                                     src="{{ asset($bundle->image_url ?? 'assets/images/perfumes/bundle_royale.svg') }}" 
                                     alt="{{ $bundle->name }}" 
                                     class="w-full h-64 object-contain mx-auto transform group-hover:scale-105 transition-transform duration-500"
                                 >
                                 @if($bundle->savings_amount > 0)
-                                    <div class="absolute top-3 left-3 bg-[#4A0E17] text-[#F5EFE6] border border-[#C9A24B]/40 px-3 py-1 text-[11px] font-semibold tracking-wider uppercase rounded shadow">
+                                    <div class="absolute top-3 left-3 bg-amber-800 text-white px-3 py-1 text-[11px] font-bold tracking-wider uppercase rounded shadow">
                                         SAVE RS. {{ number_format($bundle->savings_amount) }}
                                     </div>
                                 @endif
@@ -88,47 +87,59 @@
                         <!-- Center: Bundle Details & Included Flacons -->
                         <div class="lg:col-span-5 space-y-4">
                             <div>
-                                <span class="text-[10px] uppercase tracking-[0.25em] text-[#C9A24B] font-semibold">EXCLUSIVE DUO / TRIO SET</span>
-                                <h3 class="font-serif text-2xl lg:text-3xl text-[#F5EFE6] mt-1">{{ $bundle->name }}</h3>
-                                <p class="text-xs lg:text-sm text-[#F5EFE6]/70 mt-2 leading-relaxed">
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-[#C19E66] font-bold">EXCLUSIVE COFFRET SET</span>
+                                <h3 class="font-['Jost'] text-2xl lg:text-3xl text-black mt-1 font-semibold">{{ $bundle->name }}</h3>
+                                <p class="text-xs lg:text-sm text-gray-600 mt-2 leading-relaxed">
                                     {{ $bundle->description }}
                                 </p>
                             </div>
 
                             <!-- Included Items Preview -->
-                            <div class="border-t border-b border-[#C9A24B]/15 py-4 my-4">
-                                <h5 class="text-[11px] uppercase tracking-widest text-[#C9A24B] font-medium mb-3">
-                                    <i class="fas fa-layer-group mr-1"></i> Included in this Imperial Coffret:
+                            <div class="border-t border-b border-gray-200 py-4 my-4">
+                                <h5 class="text-[11px] uppercase tracking-widest text-black font-bold mb-3">
+                                    Fragrances Included in Set:
                                 </h5>
-                                
                                 <div class="grid grid-cols-2 gap-3">
-                                    @foreach($bundle->items as $item)
-                                        <div class="flex items-center space-x-3 bg-[#14080B] p-2.5 rounded border border-[#C9A24B]/15">
-                                            @if($item->product && $item->product->primaryImage)
-                                                <img src="{{ asset($item->product->primaryImage->image_path) }}" alt="{{ $item->product->name }}" class="w-10 h-10 object-contain rounded bg-[#080304] p-0.5">
+                                    @if(isset($bundle->items) && $bundle->items->count() > 0)
+                                        @foreach($bundle->items as $bItem)
+                                            @php $bProd = $bItem->product; @endphp
+                                            @if($bProd)
+                                                <div class="flex items-center space-x-2.5 p-2 bg-white border border-gray-200 rounded-lg">
+                                                    <img src="{{ asset($bProd->primary_image_url) }}" alt="{{ $bProd->name }}" class="w-10 h-10 object-contain">
+                                                    <div class="truncate">
+                                                        <div class="text-xs font-semibold text-gray-900 truncate">{{ $bProd->name }}</div>
+                                                        <div class="text-[10px] text-gray-500">{{ $bProd->volume_ml ?? 50 }}ml Extrait</div>
+                                                    </div>
+                                                </div>
                                             @endif
-                                            <div class="min-w-0">
-                                                <p class="text-xs text-[#F5EFE6] font-serif truncate">{{ $item->product->name ?? 'Perfume Flacon' }}</p>
-                                                <p class="text-[10px] text-[#C9A24B]">{{ $item->variant_label ?? '100ml Extrait' }} &bull; Qty: {{ $item->quantity }}</p>
+                                        @endforeach
+                                    @elseif(isset($bundle->products) && $bundle->products->count() > 0)
+                                        @foreach($bundle->products as $bProd)
+                                            <div class="flex items-center space-x-2.5 p-2 bg-white border border-gray-200 rounded-lg">
+                                                <img src="{{ asset($bProd->primary_image_url) }}" alt="{{ $bProd->name }}" class="w-10 h-10 object-contain">
+                                                <div class="truncate">
+                                                    <div class="text-xs font-semibold text-gray-900 truncate">{{ $bProd->name }}</div>
+                                                    <div class="text-[10px] text-gray-500">{{ $bProd->volume_ml }}ml Extrait</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
                         <!-- Right: Pricing & Call to Action -->
-                        <div class="lg:col-span-3 bg-[#110609] border border-[#C9A24B]/30 rounded-lg p-6 text-center space-y-4">
+                        <div class="lg:col-span-3 bg-white border border-gray-200 rounded-xl p-6 text-center space-y-4 shadow-sm">
                             <div>
-                                <span class="text-[10px] uppercase tracking-widest text-[#F5EFE6]/50 block mb-1">Bundle Privilege Price</span>
-                                <div class="font-serif text-3xl text-[#C9A24B] font-bold">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-500 block mb-1">Bundle Set Price</span>
+                                <div class="font-['Jost'] text-3xl text-black font-bold">
                                     Rs. {{ number_format($bundle->price) }}
                                 </div>
                                 @if($bundle->original_price > $bundle->price)
-                                    <div class="text-xs text-[#F5EFE6]/40 line-through mt-1">
+                                    <div class="text-xs text-gray-400 line-through mt-1">
                                         Rs. {{ number_format($bundle->original_price) }}
                                     </div>
-                                    <div class="text-[11px] text-emerald-400 font-medium mt-1">
+                                    <div class="text-[11px] text-red-600 font-bold mt-1">
                                         You Save: Rs. {{ number_format($bundle->savings_amount) }} ({{ round((($bundle->original_price - $bundle->price)/$bundle->original_price)*100) }}%)
                                     </div>
                                 @endif
@@ -136,16 +147,15 @@
 
                             <button 
                                 type="button"
-                                class="w-full btn-gold py-3 text-xs tracking-widest uppercase quick-add-btn flex items-center justify-center space-x-2"
-                                data-product-id="{{ $bundle->id }}"
-                                data-is-bundle="true"
+                                onclick="addBundleToCart({{ $bundle->id }})"
+                                class="w-full btn-gold py-3 text-xs tracking-widest uppercase flex items-center justify-center space-x-2"
                             >
                                 <i class="fas fa-shopping-bag"></i>
-                                <span>ADD BUNDLE TO CART</span>
+                                <span>ADD BUNDLE TO BAG</span>
                             </button>
 
                             <a 
-                                href="https://wa.me/923001234567?text={{ urlencode('Salam! I would like to order the ' . $bundle->name . ' for Rs. ' . number_format($bundle->price)) }}" 
+                                href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I would like to order the ' . $bundle->name . ' for Rs. ' . number_format($bundle->price) . ' with Cash on Delivery.') }}" 
                                 target="_blank" 
                                 class="w-full btn-whatsapp py-2.5 text-xs tracking-wider flex items-center justify-center space-x-2 block"
                             >
@@ -153,16 +163,16 @@
                                 <span>ORDER ON WHATSAPP</span>
                             </a>
 
-                            <div class="text-[10px] text-[#F5EFE6]/50">
-                                <i class="fas fa-shield-alt text-[#C9A24B] mr-1"></i> 100% Guaranteed Authentic Extrait
+                            <div class="text-[10px] text-gray-500">
+                                <i class="fas fa-shield-alt text-amber-700 mr-1"></i> 100% Guaranteed Authentic Extrait
                             </div>
                         </div>
 
                     </div>
                 </div>
             @empty
-                <div class="text-center py-16 bg-[#0C0507] border border-[#C9A24B]/20 rounded-lg p-8">
-                    <p class="text-[#F5EFE6]/70">No bundles currently active. Check back shortly for seasonal discovery coffrets.</p>
+                <div class="text-center py-16 bg-gray-50 border border-gray-200 rounded-xl p-8">
+                    <p class="text-gray-500">No bundles currently active. Check back shortly for seasonal discovery coffrets.</p>
                 </div>
             @endforelse
         </div>

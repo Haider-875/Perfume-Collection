@@ -35,6 +35,16 @@ class Bundle extends Model
         return $this->hasMany(BundleItem::class);
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'bundle_items', 'bundle_id', 'product_id');
+    }
+
+    public function getPriceAttribute()
+    {
+        return $this->bundle_price;
+    }
+
     public function getFormattedOriginalPriceAttribute()
     {
         return 'Rs. ' . number_format($this->original_price, 0);
