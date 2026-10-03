@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_SULTAN'S CUIR" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A0522D" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#080304" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldGrad_SULTAN'S CUIR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF6DD"/>
+      <stop offset="25%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#9A7B38"/>
+      <stop offset="75%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#FFEAA7"/>
+    </linearGradient>
+    <linearGradient id="bottleBody_SULTAN'S CUIR" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1C1510"/>
+      <stop offset="35%" stop-color="#362315"/>
+      <stop offset="50%" stop-color="#1C1510"/>
+      <stop offset="70%" stop-color="#362315"/>
+      <stop offset="100%" stop-color="#1C1510"/>
+    </linearGradient>
+    <linearGradient id="glassShine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="15%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="85%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.85"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080304"/>
+  <circle cx="300" cy="450" r="280" fill="url(#bgGlow_SULTAN'S CUIR)"/>
+  <ellipse cx="300" cy="720" rx="190" ry="24" fill="#020101" opacity="0.95" filter="url(#dropShadow)"/>
+
+  <g filter="url(#dropShadow)">
+    <rect x="230" y="110" width="140" height="110" rx="6" fill="url(#goldGrad_SULTAN'S CUIR)" stroke="#664D1B" stroke-width="1.5"/>
+    <rect x="245" y="120" width="110" height="90" rx="3" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="300" cy="165" r="22" fill="none" stroke="#5A4315" stroke-width="2"/>
+    <path d="M290 170 L300 155 L310 170 Z" fill="#5A4315"/>
+    <circle cx="300" cy="154" r="3" fill="#FFEAA7"/>
+
+    <rect x="260" y="220" width="80" height="25" fill="url(#goldGrad_SULTAN'S CUIR)"/>
+    <rect x="270" y="245" width="60" height="15" fill="#140E0A"/>
+
+    <path d="M165 290 Q165 260 200 260 L400 260 Q435 260 435 290 L435 670 Q435 690 410 690 L190 690 Q165 690 165 670 Z" fill="url(#bottleBody_SULTAN'S CUIR)" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-width="2.5"/>
+    <path d="M175 640 L425 640 L420 680 L180 680 Z" fill="#050203" opacity="0.7"/>
+
+    <path d="M175 275 L205 275 L205 675 L175 675 Z" fill="url(#glassShine)"/>
+    <path d="M395 275 L425 275 L425 675 L395 675 Z" fill="url(#glassShine)"/>
+
+    <rect x="200" y="360" width="200" height="230" rx="4" fill="#080304" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-width="2"/>
+    <rect x="208" y="368" width="184" height="214" rx="2" fill="none" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-opacity="0.4" stroke-width="1"/>
+    
+    <circle cx="300" cy="405" r="16" fill="none" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-width="1.5"/>
+    <text x="300" y="410" font-family="'Cinzel', 'Playfair Display', serif" font-size="11" font-weight="bold" fill="url(#goldGrad_SULTAN'S CUIR)" text-anchor="middle" letter-spacing="2">MD</text>
+    
+    <text x="300" y="445" font-family="'Cinzel', serif" font-size="10" fill="#E5C158" text-anchor="middle" letter-spacing="4">MAISON D'ORIENT</text>
+    <line x1="240" y1="455" x2="360" y2="455" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-width="1"/>
+
+    <text x="300" y="485" font-family="'Cinzel', serif" font-size="14" font-weight="bold" fill="#F5EFE6" text-anchor="middle" letter-spacing="2">SULTAN'S CUIR</text>
+    <text x="300" y="508" font-family="'Montserrat', sans-serif" font-size="8.5" fill="#D4AF37" text-anchor="middle" letter-spacing="3">TUSCAN TOBACCO</text>
+    
+    <line x1="260" y1="525" x2="340" y2="525" stroke="url(#goldGrad_SULTAN'S CUIR)" stroke-width="0.8" stroke-dasharray="3,3"/>
+    
+    <text x="300" y="550" font-family="'Cinzel', serif" font-size="8" fill="#B3B3B3" text-anchor="middle" letter-spacing="2">100 ML • 3.4 FL.OZ</text>
+    <text x="300" y="565" font-family="'Montserrat', sans-serif" font-size="7" fill="#888888" text-anchor="middle" letter-spacing="1.5">PARIS • LAHORE</text>
+  </g>
+</svg>

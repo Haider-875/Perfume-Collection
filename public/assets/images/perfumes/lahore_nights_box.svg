@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="boxGlow_LAHORE NIGHTS" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E67E22" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#080304" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="boxGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF9"/>
+      <stop offset="35%" stop-color="#F39C12"/>
+      <stop offset="70%" stop-color="#8C6D2C"/>
+      <stop offset="100%" stop-color="#F39C12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="800" fill="#080304"/>
+  <circle cx="300" cy="420" r="280" fill="url(#boxGlow_LAHORE NIGHTS)"/>
+
+  <g>
+    <rect x="130" y="160" width="340" height="520" rx="8" fill="#0E0C12" stroke="url(#boxGold)" stroke-width="3"/>
+    <rect x="145" y="175" width="310" height="490" rx="4" fill="none" stroke="url(#boxGold)" stroke-opacity="0.3" stroke-width="1.5"/>
+
+    <path d="M150 200 L150 180 L170 180" fill="none" stroke="url(#boxGold)" stroke-width="2"/>
+    <path d="M450 200 L450 180 L430 180" fill="none" stroke="url(#boxGold)" stroke-width="2"/>
+    <path d="M150 640 L150 660 L170 660" fill="none" stroke="url(#boxGold)" stroke-width="2"/>
+    <path d="M450 640 L450 660 L430 660" fill="none" stroke="url(#boxGold)" stroke-width="2"/>
+
+    <circle cx="300" cy="310" r="42" fill="none" stroke="url(#boxGold)" stroke-width="2"/>
+    <circle cx="300" cy="310" r="34" fill="none" stroke="url(#boxGold)" stroke-width="1" stroke-dasharray="4,2"/>
+    <text x="300" y="318" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="url(#boxGold)" text-anchor="middle" letter-spacing="3">MD</text>
+
+    <text x="300" y="390" font-family="'Cinzel', serif" font-size="12" fill="url(#boxGold)" text-anchor="middle" letter-spacing="5">MAISON D'ORIENT</text>
+    <text x="300" y="410" font-family="'Montserrat', sans-serif" font-size="8" fill="#888888" text-anchor="middle" letter-spacing="3">HAUTE PARFUMERIE</text>
+
+    <line x1="220" y1="440" x2="380" y2="440" stroke="url(#boxGold)" stroke-width="1.5"/>
+
+    <text x="300" y="480" font-family="'Cinzel', serif" font-size="16" font-weight="bold" fill="#F5EFE6" text-anchor="middle" letter-spacing="3">LAHORE NIGHTS</text>
+    <text x="300" y="510" font-family="'Montserrat', sans-serif" font-size="10" fill="#F39C12" text-anchor="middle" letter-spacing="4">EXTRAIT NOCTURNE</text>
+
+    <text x="300" y="580" font-family="'Cinzel', serif" font-size="9" fill="#999999" text-anchor="middle" letter-spacing="2">EXTRAIT DE PARFUM • 40% VOL</text>
+    <text x="300" y="605" font-family="'Montserrat', sans-serif" font-size="8" fill="#666666" text-anchor="middle" letter-spacing="2">PARIS • LAHORE • DUBAI</text>
+  </g>
+</svg>
