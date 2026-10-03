@@ -126,7 +126,7 @@ return new class extends Migration
             $table->integer('views_count')->default(0);
             
             // Media
-            $table->string('thumbnail_image');
+            $table->string('thumbnail_image')->default('assets/images/perfumes/oud_royale.svg');
             $table->string('hover_image')->nullable();
             $table->string('lifestyle_image')->nullable();
             
@@ -400,14 +400,19 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // 23. Page Visits / Analytics
+        // 23. Page Visits / Analytics Telemetry
         Schema::create('page_visits', function (Blueprint $table) {
             $table->id();
-            $table->string('ip_address')->nullable();
-            $table->string('page_url');
-            $table->string('referer')->nullable();
-            $table->string('user_agent')->nullable();
-            $table->timestamp('visited_at')->useCurrent();
+            $table->string('session_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable()->index();
+            $table->text('page_url')->nullable();
+            $table->string('path')->nullable()->index();
+            $table->string('device_type')->default('desktop'); // mobile, desktop, tablet
+            $table->text('referer')->nullable();
+            $table->string('utm_source')->nullable();
+            $table->text('user_agent')->nullable();
+            $table->timestamp('visited_at')->useCurrent()->index();
+            $table->timestamps();
         });
 
         // 24. Newsletter Subscribers

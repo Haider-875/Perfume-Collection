@@ -12,6 +12,17 @@ use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\OrderTrackingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminBundleController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminCustomerController;
+use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminHeroSlideController;
+use App\Http\Controllers\Admin\AdminCouponController;
+use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminActivityLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,4 +118,80 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
     
     Route::get('/reviews', [AccountController::class, 'reviews'])->name('reviews');
     Route::post('/reviews/store', [AccountController::class, 'storeReview'])->name('review.store');
+});
+
+// ==========================================
+// Admin Control Center (Restricted to role=admin)
+// ==========================================
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Overview Dashboard & Live Analytics
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Products Management Suite
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+    Route::post('/products/bulk-action', [AdminProductController::class, 'bulkAction'])->name('products.bulk');
+    Route::get('/products/import', [AdminProductController::class, 'importView'])->name('products.import');
+    Route::post('/products/import', [AdminProductController::class, 'importProcess'])->name('products.import.process');
+    Route::get('/products/sample-csv', [AdminProductController::class, 'sampleCsv'])->name('products.sample-csv');
+    Route::get('/products/export-csv', [AdminProductController::class, 'exportCsv'])->name('products.export-csv');
+
+    // Bundles Suite
+    Route::get('/bundles', [AdminBundleController::class, 'index'])->name('bundles.index');
+    Route::get('/bundles/create', [AdminBundleController::class, 'create'])->name('bundles.create');
+    Route::post('/bundles', [AdminBundleController::class, 'store'])->name('bundles.store');
+    Route::get('/bundles/{id}/edit', [AdminBundleController::class, 'edit'])->name('bundles.edit');
+    Route::put('/bundles/{id}', [AdminBundleController::class, 'update'])->name('bundles.update');
+    Route::delete('/bundles/{id}', [AdminBundleController::class, 'destroy'])->name('bundles.destroy');
+
+    // Categories & Collections
+    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{id}', [AdminCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+
+    // Orders Management & Receipt Verification
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('orders.show');
+    Route::put('/orders/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.update-status');
+    Route::post('/orders/{id}/approve-receipt', [AdminOrderController::class, 'approveReceipt'])->name('orders.approve-receipt');
+    Route::post('/orders/{id}/reject-receipt', [AdminOrderController::class, 'rejectReceipt'])->name('orders.reject-receipt');
+    Route::get('/orders/{id}/invoice', [AdminOrderController::class, 'invoice'])->name('orders.invoice');
+    Route::get('/orders/{id}/packing-slip', [AdminOrderController::class, 'packingSlip'])->name('orders.packing-slip');
+    Route::get('/orders-export-csv', [AdminOrderController::class, 'exportCsv'])->name('orders.export-csv');
+
+    // Customers Intelligence
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+    Route::get('/customers/{id}', [AdminCustomerController::class, 'show'])->name('customers.show');
+
+    // Blogs & Olfactory Journal
+    Route::get('/blogs', [AdminBlogController::class, 'index'])->name('blogs.index');
+    Route::get('/blogs/create', [AdminBlogController::class, 'create'])->name('blogs.create');
+    Route::post('/blogs', [AdminBlogController::class, 'store'])->name('blogs.store');
+    Route::get('/blogs/{id}/edit', [AdminBlogController::class, 'edit'])->name('blogs.edit');
+    Route::put('/blogs/{id}', [AdminBlogController::class, 'update'])->name('blogs.update');
+    Route::delete('/blogs/{id}', [AdminBlogController::class, 'destroy'])->name('blogs.destroy');
+
+    // Hero Showcase Carousel Slides
+    Route::get('/hero-slides', [AdminHeroSlideController::class, 'index'])->name('hero-slides.index');
+    Route::post('/hero-slides', [AdminHeroSlideController::class, 'store'])->name('hero-slides.store');
+    Route::put('/hero-slides/{id}', [AdminHeroSlideController::class, 'update'])->name('hero-slides.update');
+    Route::delete('/hero-slides/{id}', [AdminHeroSlideController::class, 'destroy'])->name('hero-slides.destroy');
+
+    // Privilege Coupons & Vouchers
+    Route::get('/coupons', [AdminCouponController::class, 'index'])->name('coupons.index');
+    Route::post('/coupons', [AdminCouponController::class, 'store'])->name('coupons.store');
+    Route::put('/coupons/{id}', [AdminCouponController::class, 'update'])->name('coupons.update');
+    Route::delete('/coupons/{id}', [AdminCouponController::class, 'destroy'])->name('coupons.destroy');
+
+    // Settings & Payment Gateways
+    Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+
+    // Activity Logs & Audit Trail
+    Route::get('/activity-logs', [AdminActivityLogController::class, 'index'])->name('activity-logs.index');
 });

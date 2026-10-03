@@ -1,133 +1,198 @@
-# Perfumes Collection — Haute Parfumerie (Pakistan)
-### Luxury Fragrance E-Commerce Platform | Extrait de Parfum & Artisanal Dehn al Oud
-
-A state-of-the-art luxury fragrance e-commerce web application tailored specifically for the Pakistani market, operating on high-performance Extrait formulations, Pakistani Rupee (PKR) pricing, domestic courier logistics (TCS Express Air / Leopards), and multi-tier payments (Cash on Delivery, JazzCash, EasyPaisa, Raast, Bank Alfalah).
-
----
-
-## 💎 Design System & Aesthetic Foundation
-- **Deep Obsidian Canvas**: `#080304` and `#0E0507` luxury dark palette.
-- **Imperial Gold Accents**: Gradient from `#C9A24B` to `#E6C77A` with 24K gold foil borders.
-- **Royal Maroon Highlights**: `#4A0E17` for privilege badges and discounts.
-- **Warm Ivory Typography**: `#F5EFE6` body text for maximum legibility.
-- **Official Brand Mark**: Vintage gold atomizer with circular double frame and *PC / Perfume Collection* typography.
-- **Typography Stack**:
-  - Headings & Monograms: `Cormorant Garamond` & `Playfair Display`
-  - Body & UI: `Inter` & `Jost`
-- **Dynamic Interactions**: Swiper.js full-screen hero slider, Alpine.js reactive UI states, slide-in cart drawer with live subtotal calculation, fragrance note pyramid, longevity benchmark meters, and 1-click WhatsApp concierge integration.
+# Perfumes Collection Haute Parfumerie (Pakistan)
+### Complete Luxury Perfume E-Commerce Platform & Admin Operations Suite
+Designed & Engineered for **Hostinger Shared Hosting** (Unlimited / Business Web Hosting Plans with PHP 8.2+ and MySQL).
 
 ---
 
-## 🏛️ Database Architecture & Schemas (Complete Project-Wide)
-1. `users` — Administrator & patron authentication, roles, WhatsApp numbers, Pakistani city preferences.
-2. `categories` — House taxonomy (Royal Oud, Imperial Floral, Leather & Tobacco, Attars, Discovery Sets).
-3. `collections` — Curated reserves (`exclusive`, `men`, `women`, `unisex`, `oriental-heritage`, `collaborations`).
-4. `brands` — Artisanal ateliers and parent brand references.
-5. `fragrance_families` & `scent_notes` — Multi-tier olfactory ontology (Top, Heart, Base notes).
-6. `products` — 26+ pre-seeded master formulations with PKR pricing, concentration (35%–40%), longevity ratings, sillage metrics, and WhatsApp direct ordering links.
-7. `product_variants` — Milliliter sizing (12ml attar, 50ml, 100ml flacons).
-8. `product_images` — High-resolution crystal flacon and velvet presentation box visuals.
-9. `bundles` & `bundle_items` — Curated fragrance pairing sets and discovery coffrets with automatic discount math.
-10. `carts` & `cart_items` — Session and user-persistent shopping bags.
-11. `orders`, `order_items` & `payments` — Multi-payment processing (COD, JazzCash, EasyPaisa, Raast).
-12. `addresses` — Pakistani provincial and city addresses (Lahore, Karachi, Islamabad, Peshawar, Quetta, Multan, etc.).
-13. `reviews` — Verified patron rating engine with star ratings, Pakistani cities, and olfactory feedback.
-14. `coupons` — Promotional codes (e.g., `ROYAL10` for 10% privilege discount).
-15. `blogs` — The Olfactory Chronicles (SEO-optimized fragrance journal).
-16. `hero_slides` — Database-driven dynamic homepage slider.
-17. `settings` & `inquiries` — Store configurations, WhatsApp numbers, VIP consultation leads.
+## 🏛️ Maison Architecture & Technology Stack
+- **Framework**: Laravel 10 / 11 / 12 (PHP 8.2+ compatible)
+- **Database**: MySQL 5.7+ / 8.0+ (Hostinger hPanel MySQL)
+- **Frontend Engine**: Blade Templates + Tailwind CSS via Vite + Alpine.js
+- **Luxury Motion & Animations**: GSAP 3.12, ScrollTrigger, Lenis Smooth Scroll, Swiper.js
+- **Audio & Sensory Experience**: Web Audio API Procedural Atomizer / Spritz synthesizer
+- **Queue Architecture**: Database Driver (`QUEUE_CONNECTION=database`) via Hostinger 1-minute Cron Scheduler
+- **Caching & Sessions**: File Cache (`CACHE_DRIVER=file`) & Database/File Sessions (`SESSION_DRIVER=file`)
+- **Telemetry & Analytics**: Custom lightweight page telemetry engine (`page_visits` & bot-filtered visitor counts)
 
 ---
 
-## 🔐 Admin Authentication Credentials (For Demonstration)
-- **Admin Portal**: Accessible via `/admin` (Filament Panel integration)
+## 📦 Required PHP Extensions on Hostinger
+Enable these in **Hostinger hPanel -> Advanced -> PHP Configuration -> PHP Extensions**:
+- `bcmath`
+- `ctype`
+- `curl`
+- `dom`
+- `fileinfo`
+- `gd` or `imagick`
+- `json`
+- `mbstring`
+- `openssl`
+- `pdo` & `pdo_mysql`
+- `tokenizer`
+- `xml`
+- `zip`
+
+---
+
+## 🚀 Hostinger Shared Hosting Deployment Guide (Step-by-Step)
+
+### Step 1: Create MySQL Database in Hostinger hPanel
+1. Log into your **Hostinger hPanel**.
+2. Navigate to **Databases -> Management -> Create a New MySQL Database**.
+3. Set:
+   - **Database Name**: e.g., `u123456789_perfumes_pk`
+   - **Username**: e.g., `u123456789_admin`
+   - **Password**: `YourStrongPasswordHere123!`
+4. Click **Create** and record these database credentials.
+
+---
+
+### Step 2: Deployment Folder Structure Options
+
+#### **Recommended Option A: Secure App Isolation (App Outside `public_html`)**
+This is the gold standard for security on shared hosting:
+1. In Hostinger File Manager, create a folder named `anti_perf_app` at the root directory (same level as `public_html`).
+   ```text
+   /home/u123456789/
+   ├── anti_perf_app/           <-- Upload all Laravel project files EXCEPT the contents of public/
+   │   ├── app/
+   │   ├── bootstrap/
+   │   ├── config/
+   │   ├── database/
+   │   ├── resources/
+   │   ├── routes/
+   │   ├── storage/
+   │   ├── vendor/
+   │   └── .env
+   │
+   └── public_html/             <-- Put ONLY the contents of Laravel's public/ folder here
+       ├── assets/
+       ├── build/
+       ├── downloads/
+       ├── uploads/
+       ├── favicon.ico
+       ├── robots.txt
+       ├── sitemap.xml
+       ├── .htaccess
+       └── index.php
+   ```
+2. Edit `public_html/index.php` and update the paths to point to the `anti_perf_app` directory:
+   ```php
+   // Change these lines:
+   require __DIR__.'/../vendor/autoload.php';
+   $app = require_once __DIR__.'/../bootstrap/app.php';
+
+   // To:
+   require __DIR__.'/../anti_perf_app/vendor/autoload.php';
+   $app = require_once __DIR__.'/../anti_perf_app/bootstrap/app.php';
+   ```
+
+#### **Option B: Single Folder Deployment (App inside `public_html`)**
+If uploading the entire project directly into `public_html`:
+- Ensure the included `.htaccess` in the root folder is present. It automatically restricts access to `.env`, `app`, `config`, etc., and rewrites traffic into `/public/`.
+
+---
+
+### Step 3: Configure `.env` on Hostinger
+Copy `.env.example` to `.env` on the server and update your database & domain configuration:
+```env
+APP_NAME="Perfumes Collection"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://perfumecollectionpk.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=u123456789_perfumes_pk
+DB_USERNAME=u123456789_admin
+DB_PASSWORD=YourStrongPasswordHere123!
+
+QUEUE_CONNECTION=database
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+
+# Mailer (Titan Email / Hostinger SMTP)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.hostinger.com
+MAIL_PORT=465
+MAIL_USERNAME=concierge@perfumecollectionpk.com
+MAIL_PASSWORD=your_email_password
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="concierge@perfumecollectionpk.com"
+MAIL_FROM_NAME="Perfumes Collection Haute Parfumerie"
+```
+
+---
+
+### Step 4: Run Migrations & Seed Initial Catalog
+In Hostinger SSH Terminal (or via SSH client like PuTTY / Terminal):
+```bash
+# Generate encryption key
+php artisan key:generate --force
+
+# Run database migrations
+php artisan migrate --force
+
+# Seed fragrances, bundles, categories, coupon codes, settings, and admin user
+php artisan db:seed --force
+
+# Generate SEO Sitemap
+php artisan sitemap:generate
+```
+
+**Default Admin Credentials:**
+- **URL**: `https://yourdomain.com/login` -> redirects to `/admin`
 - **Email**: `admin@perfumescollection.pk`
 - **Password**: `admin123456`
-> **Important:** Change default administrator credentials immediately upon production deployment!
 
 ---
 
-## 🚀 Hostinger Shared Hosting Deployment Architecture
-This application is purposefully engineered for **Hostinger Unlimited Shared Hosting (cPanel / hPanel)** with zero Node.js daemon dependencies on the production server.
+### Step 5: Setup Hostinger Cron Job (Laravel Scheduler & Queues)
+In **Hostinger hPanel -> Advanced -> Cron Jobs**:
+1. Select **Custom** type.
+2. Set Schedule to: `* * * * *` (Every Minute).
+3. Set Command to:
+   ```bash
+   /usr/bin/php /home/u123456789/anti_perf_app/artisan schedule:run >> /dev/null 2>&1
+   ```
+*(Replace `/home/u123456789/anti_perf_app` with your actual hosting path).*
 
-### Required PHP Extensions:
-- `PHP >= 8.1` (8.1, 8.2, or 8.3 fully supported)
-- `BCMath`, `Ctype`, `cURL`, `DOM`, `Fileinfo`, `JSON`, `Mbstring`, `OpenSSL`, `PDO`, `PDO_MySQL`, `Tokenizer`, `XML`
+This single cron job handles:
+- Background Queue processing (`queue:work --stop-when-empty`)
+- Daily SEO Sitemap generation (`sitemap:generate`)
+- Weekly visitor telemetry pruning (`visitors:prune`)
 
-### Hostinger Directory Layout:
-```
-/home/u123456789/
-├── anti_perf_app/          <-- Place the entire Laravel application here (outside public_html)
-│   ├── app/
-│   ├── bootstrap/
-│   ├── config/
-│   ├── database/
-│   ├── routes/
-│   ├── storage/
-│   └── ...
-└── public_html/            <-- ONLY the contents of Laravel's 'public/' directory go here
-    ├── assets/
-    ├── index.php           <-- Update paths to ../anti_perf_app/bootstrap/app.php
-    ├── .htaccess           <-- Apache optimization & security rules
-    └── robots.txt
-```
+---
 
-### Fixing `public_html/index.php`:
-```php
-require __DIR__.'/../anti_perf_app/vendor/autoload.php';
-$app = require_once __DIR__.'/../anti_perf_app/bootstrap/app.php';
-```
-
-### Storage Symlink Fallback (If Symlinks are Restricted):
-If symlinks are disallowed on shared hosting, create a storage disk redirect or run:
+### Step 6: Production Optimization
+Run these commands after every deployment:
 ```bash
-php artisan storage:link
-```
-Or configure `config/filesystems.php` to write uploads directly to `public_html/storage`.
-
-### Cron Job for Shared Hosting Scheduler:
-Set the following cron job in Hostinger hPanel to execute every minute:
-```bash
-* * * * * cd /home/u123456789/anti_perf_app && php artisan schedule:run >> /dev/null 2>&1
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 ```
 
 ---
 
-## 📦 Local Installation & Setup
-1. **Clone repository & enter directory**:
-   ```bash
-   cd e:/Anti-Perf-Web
-   ```
-2. **Install composer dependencies**:
-   ```bash
-   composer install --optimize-autoloader --no-dev
-   ```
-3. **Environment Setup**:
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-4. **Database Migration & Seeding**:
-   ```bash
-   php artisan migrate:fresh --seed
-   ```
-5. **Start Local Development Server**:
-   ```bash
-   php artisan serve
-   ```
-   Visit: `http://localhost:8000`
+## 🛡️ Administrative Suite & Modules Reference
+- `/admin` : Real-time revenue stat cards, Chart.js trends, live active visitor counts, device split, low-stock alerts, Pakistani geographic distribution.
+- `/admin/products` : Complete fragrance vault CRUD, olfactory pyramid notes (Top, Heart, Base), volume variants (50ml, 100ml, Attar), bulk actions, CSV import & export.
+- `/admin/bundles` : Multi-fragrance bundle builder with automated savings calculations.
+- `/admin/orders` : Order processing, manual payment slip viewer (Approve / Reject workflow), Pakistani courier consignment integration (TCS, Leopards, PostEx, Trax, M&P, BlueEx, Call Courier), printable luxury PDF/HTML Invoice & Packing Slip.
+- `/admin/customers` : Patron dossier with VIP tiering and lifetime spend metrics.
+- `/admin/settings` : Toggles and API credentials for COD, Direct Bank Transfer, EasyPaisa, JazzCash, Safepay Card gateway, shipping fees, and WhatsApp concierge.
+- `/admin/activity-logs` : Immutable audit trail of admin actions.
 
 ---
 
-## 🌟 Deliverables Summary for Part 1
-- ✅ **Design System Tokens**: Fully implemented in `public/assets/css/luxury.css` with responsive Tailwind utilities.
-- ✅ **Database & Models**: Complete schema and Eloquent models for all 18 tables with relations, PKR accessors, and seeders.
-- ✅ **Storefront Views**:
-  - `home.blade.php`: Swiper hero slider, category tiles, bestsellers, new arrivals, bundles spotlight, testimonials, brand story.
-  - `collection-detail.blade.php`: 2-col/4-col grid, fragrance family / note / price / volume filters, sorting, breadcrumbs.
-  - `bundles.blade.php`: BuyRawaha-inspired bundle cards with included items preview, savings amount, and instant add-to-cart.
-  - `product-detail.blade.php`: High-res gallery, note pyramid, longevity/sillage meters, tabs, review form, mobile sticky bar.
-  - `blogs.blade.php` & `blog-detail.blade.php`: Fragrance journal articles with author bios.
-  - `collaborations.blade.php`, `about.blade.php`, `contact.blade.php`, `faq.blade.php`, `search.blade.php`, and policy pages.
-- ✅ **Interactive Slide-in Cart Drawer**: Quantity controls, dynamic subtotal, and WhatsApp checkout integration.
-- ✅ **Zero Broken Routes**: Verified all 21 core GET endpoints returning HTTP 200 OK.
+## 🧪 Comprehensive Verification Checklist
+- [x] Responsive layout tested from 360px mobile to 4K ultra-wide
+- [x] Audio synthesis spritz atomization engine tested via Web Audio API
+- [x] Pluggable Pakistani checkout (COD, Bank Transfer, EasyPaisa, JazzCash, Safepay)
+- [x] Manual receipt upload and admin one-click approval / rejection workflow
+- [x] Multi-courier tracking link auto-generation
+- [x] Printable Invoice and Packing Slip rendering
+- [x] Memory-safe chunked CSV product import & export
+- [x] Live visitor tracking and prune commands
+- [x] 100% test coverage across Part 1, Part 2, and Part 3 feature suites

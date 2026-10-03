@@ -17,6 +17,53 @@ use Tests\TestCase;
 
 class Part2CheckoutAndAccountTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (\App\Models\Category::count() === 0) {
+            \App\Models\Category::create([
+                'name' => 'Royal Extraits',
+                'slug' => 'royal-extraits',
+                'is_active' => true,
+            ]);
+        }
+
+        if (\App\Models\Product::count() === 0) {
+            $cat = \App\Models\Category::first();
+            \App\Models\Product::create([
+                'name' => 'Royal Oud Extrait',
+                'slug' => 'royal-oud-extrait',
+                'sku' => 'PC-ROYAL-OUD-01',
+                'category_id' => $cat->id,
+                'price' => 12500,
+                'stock' => 50,
+                'volume_ml' => 50,
+                'thumbnail_image' => 'assets/images/perfumes/oud_royale.svg',
+                'is_active' => true,
+            ]);
+        }
+
+        if (\App\Models\User::count() === 0) {
+            \App\Models\User::create([
+                'name' => 'Test Patron',
+                'email' => 'patron_test@perfumescollection.pk',
+                'password' => bcrypt('password123'),
+                'role' => 'customer',
+            ]);
+        }
+
+        \App\Models\Coupon::firstOrCreate(
+            ['code' => 'ROYAL10'],
+            [
+                'type' => 'percentage',
+                'value' => 10,
+                'min_spend' => 0,
+                'is_active' => true,
+            ]
+        );
+    }
+
     public function test_cart_page_renders_successfully()
     {
         $response = $this->get('/cart');

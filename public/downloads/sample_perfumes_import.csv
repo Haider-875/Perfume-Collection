@@ -1,0 +1,4 @@
+name,sku,price,compare_at_price,stock,category,scent_family,gender,top_notes,heart_notes,base_notes,description,image_url
+Sovereign Amber Extrait,PC-SOV-AMB,14500,17000,35,Exclusive Edition,Oriental Amber,Unisex,"Bergamot, Cardamom","Taif Rose, Amber Resin","Madagascar Vanilla, Oud",An opulent amber formulation crafted for royalty.,assets/images/perfumes/oud_royale.svg
+Imperial Rose Velvet,PC-IMP-ROS,11500,13500,40,Women Collection,Floral Woody,Women,"Pink Pepper, Mandarin","Damascena Rose, Peony","Cashmere Wood, Musk",A velvety bouquet of midnight roses.,assets/images/perfumes/imperial_rose.svg
+Noir Leather Intense,PC-NOIR-LTH,13000,15500,30,Men Collection,Leather Woody,Men,"Thyme, Saffron, Raspberry","Olibanum, Night Jasmine","Black Leather, Suede, Amberwood",A bold dark leather formulation for evening wear.,assets/images/perfumes/black_afgano.svg
