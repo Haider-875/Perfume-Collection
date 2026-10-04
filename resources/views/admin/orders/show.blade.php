@@ -116,8 +116,9 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center gap-4">
-                    <div class="w-full sm:w-48 h-32 bg-brand-black rounded-lg border border-brand-border/60 overflow-hidden flex items-center justify-center cursor-pointer"
-                         @click="receiptModal = true">
+                    <div class="w-full sm:w-48 h-32 bg-white rounded-lg border border-slate-200 overflow-hidden flex items-center justify-center cursor-pointer shadow-sm hover:border-primary transition"
+                         onclick="window.previewImage('{{ asset($order->payment_receipt) }}', 'Payment Receipt for Order #{{ $order->order_number }}')"
+                         title="Click to inspect receipt screenshot">
                         <img src="{{ asset($order->payment_receipt) }}" alt="Receipt" class="h-full w-full object-cover">
                     </div>
                     <div class="flex-1 space-y-2 text-xs">

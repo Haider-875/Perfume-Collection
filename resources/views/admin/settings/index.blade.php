@@ -349,8 +349,8 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="p-4 bg-brand-surface border border-brand-border/60 rounded-xl">
-            <button type="submit" class="gold-btn px-6 py-3 rounded-lg text-xs font-semibold uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+        <div class="p-4 admin-card flex justify-end">
+            <button type="submit" class="admin-btn-primary">
                 <i class="fa-solid fa-floppy-disk"></i>
                 <span>Save All Store Settings</span>
             </button>

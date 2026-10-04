@@ -6,63 +6,86 @@
 
 @section('content')
 <!-- Filter Bar -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl p-4">
+<div class="admin-filter-bar">
     <form method="GET" action="{{ route('admin.activity-logs.index') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <!-- Search -->
-        <div class="sm:col-span-2 relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted text-xs"></i>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by description, admin user, or IP..."
-                   class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg pl-9 pr-4 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+        <div class="sm:col-span-2 position-relative">
+            <input type="text" name="search" value="{{ request('search') }}" 
+                   placeholder="Search by description, admin user, or IP address..." class="ps-3">
         </div>
 
-        <!-- Action Filter -->
-        <div class="flex items-center gap-2">
-            <select name="action" class="flex-1 bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-                <option value="">All Actions</option>
+        <!-- Action Filter & Buttons -->
+        <div class="d-flex align-items-center gap-2">
+            <select name="action" class="flex-fill">
+                <option value="">All Audit Actions</option>
                 @foreach($actions as $act)
-                    <option value="{{ $act }}" {{ request('action') === $act ? 'selected' : '' }}>{{ ucwords(str_replace('_', ' ', $act)) }}</option>
+                    <option value="{{ $act }}" {{ request('action') === $act ? 'selected' : '' }}>
+                        {{ ucwords(str_replace('_', ' ', $act)) }}
+                    </option>
                 @endforeach
             </select>
-            <button type="submit" class="bg-brand-card hover:bg-brand-border text-brand-gold border border-brand-border/60 rounded-lg px-4 py-2 text-xs font-medium transition">
-                Filter
+            <button type="submit" class="admin-btn-primary">
+                <i class="fa-solid fa-filter small"></i>
+                <span>Filter</span>
             </button>
+            @if(request()->hasAny(['search', 'action']))
+                <a href="{{ route('admin.activity-logs.index') }}" class="admin-btn-reset" title="Clear Filters">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </a>
+            @endif
         </div>
     </form>
 </div>
 
-<!-- Logs Table -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs text-brand-muted">
-            <thead class="bg-brand-card/70 uppercase tracking-wider text-[10px] text-brand-gold/80 border-b border-brand-border/50">
+<!-- Logs Table Card -->
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead>
                 <tr>
-                    <th class="px-4 py-3">Timestamp</th>
-                    <th class="px-4 py-3">Concierge / Admin</th>
-                    <th class="px-4 py-3">Action Type</th>
-                    <th class="px-4 py-3">Description</th>
-                    <th class="px-4 py-3">Target Subject</th>
-                    <th class="px-4 py-3 text-right">IP Address</th>
+                    <th style="width: 170px;">Timestamp</th>
+                    <th>Concierge / Admin</th>
+                    <th class="text-center" style="width: 140px;">Action Type</th>
+                    <th>Description</th>
+                    <th>Target Subject</th>
+                    <th class="text-end" style="width: 130px;">IP Address</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-brand-border/30">
+            <tbody>
                 @forelse($logs as $log)
-                    <tr class="hover:bg-brand-card/30 transition">
-                        <td class="px-4 py-3 font-mono text-[11px] text-brand-muted whitespace-nowrap">{{ $log->created_at->format('d M Y, H:i:s') }}</td>
-                        <td class="px-4 py-3 font-medium text-brand-text">{{ $log->user_name ?? 'System' }}</td>
-                        <td class="px-4 py-3">
-                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-mono font-semibold bg-brand-card text-brand-gold border border-brand-border/50">
+                    <tr>
+                        <td class="small text-muted font-monospace" style="font-size: 0.75rem;">
+                            {{ $log->created_at->format('d M Y, H:i:s') }}
+                        </td>
+                        <td>
+                            <span class="fw-semibold text-dark">{{ $log->user_name ?? 'System' }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="admin-badge admin-badge-info font-monospace" style="font-size: 0.65rem;">
                                 {{ $log->action }}
                             </span>
                         </td>
-                        <td class="px-4 py-3 text-brand-text font-medium">{{ $log->description }}</td>
-                        <td class="px-4 py-3 text-brand-muted font-mono text-[11px]">
-                            {{ $log->subject_type ? $log->subject_type . ' #' . $log->subject_id : 'General' }}
+                        <td>
+                            <span class="text-dark">{{ $log->description }}</span>
                         </td>
-                        <td class="px-4 py-3 text-right font-mono text-[11px] text-brand-muted">{{ $log->ip_address ?? '127.0.0.1' }}</td>
+                        <td>
+                            <span class="font-monospace small text-muted">
+                                {{ $log->subject_type ? $log->subject_type . ' #' . $log->subject_id : 'General' }}
+                            </span>
+                        </td>
+                        <td class="text-end font-monospace small text-muted">
+                            {{ $log->ip_address ?? '127.0.0.1' }}
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-4 py-12 text-center text-brand-muted">No activity logs recorded.</td>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <div class="py-3">
+                                <i class="fa-solid fa-shield-halved fs-2 text-muted opacity-50 mb-2 d-block"></i>
+                                <h6 class="fw-semibold text-dark mb-1">No activity logs recorded</h6>
+                                <p class="small text-muted mb-0">System updates and administrative actions will log automatically here.</p>
+                            </div>
+                        </td>
                     </tr>
                 @endforelse
             </tbody>
@@ -70,7 +93,7 @@
     </div>
 
     @if($logs->hasPages())
-        <div class="px-5 py-3 border-t border-brand-border/40 bg-brand-card/20">
+        <div class="admin-pagination-bar">
             {{ $logs->links() }}
         </div>
     @endif

@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Curate boutique collections (Exclusive, Men, Women, Unisex, Discovery Sets)')
 
 @section('header_actions')
-<button @click="openCreateModal = true" class="gold-btn px-4 py-2 rounded-lg text-xs flex items-center gap-2 shadow-lg">
+<button type="button" @click="openCreateModal = true" class="admin-btn-primary">
     <i class="fa-solid fa-plus"></i>
     <span>New Collection</span>
 </button>
@@ -14,83 +14,139 @@
 @section('content')
 <div x-data="{ openCreateModal: false, editModal: false, activeCat: {} }">
     
-    <!-- Collections Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach($categories as $category)
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-5 relative overflow-hidden group hover:border-brand-gold/50 transition">
-                <div class="flex items-start justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="w-12 h-12 object-contain rounded-lg bg-brand-black p-1 border border-brand-border/40">
-                        <div>
-                            <h3 class="font-serif text-base font-semibold text-brand-text">{{ $category->name }}</h3>
-                            <div class="text-[11px] font-mono text-brand-gold mt-0.5">/collections/{{ $category->slug }}</div>
-                        </div>
-                    </div>
-                    <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold
-                        {{ $category->is_active ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/30' : 'bg-brand-card text-brand-muted' }}">
-                        {{ $category->is_active ? 'Active' : 'Draft' }}
-                    </span>
-                </div>
-
-                @if($category->description)
-                    <p class="text-xs text-brand-muted mt-3 line-clamp-2">{{ $category->description }}</p>
-                @endif
-
-                <div class="mt-4 pt-3 border-t border-brand-border/40 flex items-center justify-between text-xs">
-                    <span class="text-brand-muted font-medium">
-                        <strong class="text-brand-text">{{ $category->products_count }}</strong> Formulations
-                    </span>
-
-                    <div class="flex items-center gap-2">
-                        <button @click="activeCat = {{ json_encode($category) }}; editModal = true" 
-                                class="w-7 h-7 rounded bg-brand-card hover:bg-brand-border text-brand-gold flex items-center justify-center transition" title="Edit Collection">
-                            <i class="fa-solid fa-pen-to-square text-[10px]"></i>
-                        </button>
-                        @if($category->products_count === 0)
-                            <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" onsubmit="return confirm('Delete this empty category?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="w-7 h-7 rounded bg-brand-card hover:bg-rose-950/40 text-brand-muted hover:text-rose-400 flex items-center justify-center transition" title="Delete">
-                                    <i class="fa-solid fa-trash text-[10px]"></i>
-                                </button>
-                            </form>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        @endforeach
+    <!-- Table Container Card -->
+    <div class="admin-card">
+        <div class="table-responsive">
+            <table class="table mb-0 align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Imagery</th>
+                        <th>Collection Name</th>
+                        <th>Boutique Route</th>
+                        <th>Highlight Badge</th>
+                        <th class="text-end">Formulations</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-end" style="width: 100px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($categories as $category)
+                        <tr>
+                            <td>
+                                <div class="admin-thumb-box" 
+                                     onclick="window.previewImage('{{ asset($category->image) }}', '{{ addslashes($category->name) }}')"
+                                     title="Click to preview image">
+                                    <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" 
+                                         class="admin-thumb-img"
+                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-semibold text-dark">{{ $category->name }}</div>
+                                @if($category->description)
+                                    <small class="text-muted d-block text-truncate" style="max-width: 300px; font-size: 0.75rem;">
+                                        {{ $category->description }}
+                                    </small>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('collections.show', $category->slug) }}" target="_blank" 
+                                   class="font-monospace text-primary text-decoration-none small" style="font-size: 0.75rem;">
+                                    /collections/{{ $category->slug }}
+                                    <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.65rem;"></i>
+                                </a>
+                            </td>
+                            <td>
+                                @if($category->badge_text)
+                                    <span class="admin-badge admin-badge-warning" style="font-size: 0.65rem;">
+                                        <i class="fa-solid fa-tag"></i> {{ $category->badge_text }}
+                                    </span>
+                                @else
+                                    <span class="text-muted small">&mdash;</span>
+                                @endif
+                            </td>
+                            <td class="text-end font-monospace">
+                                <span class="fw-bold text-dark fs-6">{{ $category->products_count }}</span>
+                                <small class="text-muted" style="font-size: 0.7rem;">items</small>
+                            </td>
+                            <td class="text-center">
+                                @if($category->is_active)
+                                    <span class="admin-badge admin-badge-success">Active</span>
+                                @else
+                                    <span class="admin-badge admin-badge-secondary">Draft</span>
+                                @endif
+                            </td>
+                            <td class="text-end">
+                                <div class="d-inline-flex align-items-center gap-1.5">
+                                    <button type="button" 
+                                            @click="activeCat = {{ json_encode($category) }}; editModal = true" 
+                                            class="admin-action-btn admin-action-edit" title="Edit Collection">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    @if($category->products_count === 0)
+                                        <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" onsubmit="return confirm('Delete this empty category?');" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="admin-action-btn admin-action-delete" title="Delete Collection">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <div class="py-3">
+                                    <i class="fa-solid fa-layer-group fs-2 text-muted opacity-50 mb-2 d-block"></i>
+                                    <h6 class="fw-semibold text-dark mb-1">No collections found</h6>
+                                    <p class="small text-muted mb-3">Begin by curating your first fragrance collection.</p>
+                                    <button type="button" @click="openCreateModal = true" class="admin-btn-primary">
+                                        <i class="fa-solid fa-plus"></i> New Collection
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Create Modal -->
-    <div x-show="openCreateModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" style="display: none;">
-        <div class="bg-brand-surface border border-brand-border rounded-xl p-6 w-full max-w-md space-y-4" @click.outside="openCreateModal = false">
-            <h3 class="font-serif text-lg font-semibold text-brand-text border-b border-brand-border/40 pb-3">Craft New Fragrance Collection</h3>
-            <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data" class="space-y-4">
+    <div x-show="openCreateModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm" style="display: none;">
+        <div class="bg-white border border-slate-200 rounded-xl shadow-2xl p-4 sm:p-5 w-full max-w-md space-y-3" @click.outside="openCreateModal = false">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-2.5">
+                <h6 class="fw-bold text-dark mb-0">Craft New Fragrance Collection</h6>
+                <button type="button" @click="openCreateModal = false" class="btn-close small"></button>
+            </div>
+            <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data" class="space-y-3">
                 @csrf
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Collection Name *</label>
-                    <input type="text" name="name" required placeholder="e.g. Exclusive Edition" class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Collection Name *</label>
+                    <input type="text" name="name" required placeholder="e.g. Exclusive Edition">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Description</label>
-                    <textarea name="description" rows="2" placeholder="Poetic summary..." class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text"></textarea>
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Description</label>
+                    <textarea name="description" rows="2" placeholder="Poetic summary..."></textarea>
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Badge Text</label>
-                    <input type="text" name="badge_text" placeholder="e.g. ULTRA LUXURY" class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Badge Text</label>
+                    <input type="text" name="badge_text" placeholder="e.g. ULTRA LUXURY">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Collection Imagery</label>
-                    <input type="file" name="image" class="w-full text-xs text-brand-muted file:mr-2 file:py-1 file:px-3 file:rounded file:bg-brand-gold file:text-brand-black">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Collection Imagery</label>
+                    <input type="file" name="image" class="form-control form-control-sm">
                 </div>
-                <div class="flex items-center justify-between pt-3 border-t border-brand-border/40">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" name="is_active" value="1" checked class="rounded bg-brand-black border-brand-border text-brand-gold">
-                        <span class="text-xs text-brand-text">Active</span>
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-3">
+                    <label class="form-check-label d-flex align-items-center gap-2 cursor-pointer mb-0">
+                        <input type="checkbox" name="is_active" value="1" checked class="form-check-input mt-0">
+                        <span class="small fw-semibold text-dark">Active on Store</span>
                     </label>
-                    <div class="flex gap-2">
-                        <button type="button" @click="openCreateModal = false" class="px-3 py-1.5 rounded-lg text-xs bg-brand-card text-brand-muted">Cancel</button>
-                        <button type="submit" class="gold-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Save</button>
+                    <div class="d-flex gap-2">
+                        <button type="button" @click="openCreateModal = false" class="admin-btn-secondary">Cancel</button>
+                        <button type="submit" class="admin-btn-primary">Save Collection</button>
                     </div>
                 </div>
             </form>
@@ -98,36 +154,39 @@
     </div>
 
     <!-- Edit Modal -->
-    <div x-show="editModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" style="display: none;">
-        <div class="bg-brand-surface border border-brand-border rounded-xl p-6 w-full max-w-md space-y-4" @click.outside="editModal = false">
-            <h3 class="font-serif text-lg font-semibold text-brand-text border-b border-brand-border/40 pb-3">Edit Collection</h3>
-            <form method="POST" :action="'/admin/categories/' + activeCat.id" enctype="multipart/form-data" class="space-y-4">
+    <div x-show="editModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm" style="display: none;">
+        <div class="bg-white border border-slate-200 rounded-xl shadow-2xl p-4 sm:p-5 w-full max-w-md space-y-3" @click.outside="editModal = false">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-2.5">
+                <h6 class="fw-bold text-dark mb-0">Edit Collection</h6>
+                <button type="button" @click="editModal = false" class="btn-close small"></button>
+            </div>
+            <form method="POST" :action="'/admin/categories/' + activeCat.id" enctype="multipart/form-data" class="space-y-3">
                 @csrf
                 @method('PUT')
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Collection Name *</label>
-                    <input type="text" name="name" :value="activeCat.name" required class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Collection Name *</label>
+                    <input type="text" name="name" :value="activeCat.name" required>
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Description</label>
-                    <textarea name="description" rows="2" :value="activeCat.description" class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text"></textarea>
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Description</label>
+                    <textarea name="description" rows="2" :value="activeCat.description"></textarea>
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Badge Text</label>
-                    <input type="text" name="badge_text" :value="activeCat.badge_text" class="w-full bg-brand-black/60 border border-brand-border rounded-lg px-3 py-2 text-xs text-brand-text">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Badge Text</label>
+                    <input type="text" name="badge_text" :value="activeCat.badge_text">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-brand-muted mb-1">Update Imagery</label>
-                    <input type="file" name="image" class="w-full text-xs text-brand-muted file:mr-2 file:py-1 file:px-3 file:rounded file:bg-brand-gold file:text-brand-black">
+                    <label class="form-label small text-muted text-uppercase mb-1" style="font-size: 0.72rem;">Update Imagery</label>
+                    <input type="file" name="image" class="form-control form-control-sm">
                 </div>
-                <div class="flex items-center justify-between pt-3 border-t border-brand-border/40">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" name="is_active" value="1" :checked="activeCat.is_active" class="rounded bg-brand-black border-brand-border text-brand-gold">
-                        <span class="text-xs text-brand-text">Active</span>
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-3">
+                    <label class="form-check-label d-flex align-items-center gap-2 cursor-pointer mb-0">
+                        <input type="checkbox" name="is_active" value="1" :checked="activeCat.is_active" class="form-check-input mt-0">
+                        <span class="small fw-semibold text-dark">Active on Store</span>
                     </label>
-                    <div class="flex gap-2">
-                        <button type="button" @click="editModal = false" class="px-3 py-1.5 rounded-lg text-xs bg-brand-card text-brand-muted">Cancel</button>
-                        <button type="submit" class="gold-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Update</button>
+                    <div class="d-flex gap-2">
+                        <button type="button" @click="editModal = false" class="admin-btn-secondary">Cancel</button>
+                        <button type="submit" class="admin-btn-primary">Update Collection</button>
                     </div>
                 </div>
             </form>

@@ -5,64 +5,79 @@
 @section('page_subtitle', 'Editorial stories, perfumery heritage guides, and seasonal scent chronicles')
 
 @section('header_actions')
-<a href="{{ route('admin.blogs.create') }}" class="gold-btn px-4 py-2 rounded-lg text-xs flex items-center gap-2 shadow-lg">
+<a href="{{ route('admin.blogs.create') }}" class="admin-btn-primary">
     <i class="fa-solid fa-plus"></i>
     <span>Write New Chronicle</span>
 </a>
 @endsection
 
 @section('content')
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs text-brand-muted">
-            <thead class="bg-brand-card/70 uppercase tracking-wider text-[10px] text-brand-gold/80 border-b border-brand-border/50">
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead>
                 <tr>
-                    <th class="px-4 py-3">Chronicle Title</th>
-                    <th class="px-4 py-3">Category</th>
-                    <th class="px-4 py-3">Author</th>
-                    <th class="px-4 py-3">Read Time</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Published Date</th>
-                    <th class="px-4 py-3 text-right">Actions</th>
+                    <th>Chronicle Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th class="text-center">Read Time</th>
+                    <th class="text-center">Status</th>
+                    <th>Published Date</th>
+                    <th class="text-end" style="width: 110px;">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-brand-border/30">
+            <tbody>
                 @forelse($blogs as $blog)
-                    <tr class="hover:bg-brand-card/30 transition">
-                        <td class="px-4 py-3">
-                            <div class="flex items-center gap-3">
-                                <img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" class="w-10 h-10 object-cover rounded-lg bg-brand-black border border-brand-border/40">
-                                <div>
-                                    <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="text-brand-text hover:text-brand-gold font-medium block truncate max-w-[280px]">
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="admin-thumb-box" 
+                                     onclick="window.previewImage('{{ $blog->image_url }}', '{{ addslashes($blog->title) }}')"
+                                     title="Click to preview article banner">
+                                    <img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" 
+                                         class="admin-thumb-img-cover"
+                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
+                                </div>
+                                <div class="overflow-hidden">
+                                    <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="text-dark fw-semibold text-decoration-none d-block text-truncate" style="max-width: 280px;">
                                         {{ $blog->title }}
                                     </a>
-                                    <span class="text-[10px] text-brand-muted font-mono">/blogs/{{ $blog->slug }}</span>
+                                    <small class="text-muted font-monospace d-block" style="font-size: 0.72rem;">/blogs/{{ $blog->slug }}</small>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-4 py-3"><span class="text-brand-gold">{{ $blog->category }}</span></td>
-                        <td class="px-4 py-3">{{ $blog->author_name }}</td>
-                        <td class="px-4 py-3">{{ $blog->read_time }}</td>
-                        <td class="px-4 py-3">
-                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold
-                                {{ $blog->is_published ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/30' : 'bg-brand-card text-brand-muted' }}">
-                                {{ $blog->is_published ? 'Published' : 'Draft' }}
+                        <td>
+                            <span class="badge bg-light text-dark border fw-normal" style="font-size: 0.75rem;">
+                                {{ $blog->category }}
                             </span>
                         </td>
-                        <td class="px-4 py-3 text-[11px]">{{ $blog->published_at ? $blog->published_at->format('d M Y') : 'Unpublished' }}</td>
-                        <td class="px-4 py-3 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('blogs.show', $blog->slug) }}" target="_blank" class="w-7 h-7 rounded bg-brand-card hover:bg-brand-border text-brand-muted flex items-center justify-center transition">
-                                    <i class="fa-solid fa-eye text-[10px]"></i>
+                        <td class="small text-dark">{{ $blog->author_name }}</td>
+                        <td class="text-center font-monospace small text-muted">{{ $blog->read_time }}</td>
+                        <td class="text-center">
+                            @if($blog->is_published)
+                                <span class="admin-badge admin-badge-success">Published</span>
+                            @else
+                                <span class="admin-badge admin-badge-secondary">Draft</span>
+                            @endif
+                        </td>
+                        <td class="small text-muted font-monospace" style="font-size: 0.75rem;">
+                            {{ $blog->published_at ? $blog->published_at->format('d M Y') : 'Unpublished' }}
+                        </td>
+                        <td class="text-end">
+                            <div class="d-inline-flex align-items-center gap-1.5">
+                                <a href="{{ route('blogs.show', $blog->slug) }}" target="_blank" 
+                                   class="admin-action-btn admin-action-view" title="Preview Article">
+                                    <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="w-7 h-7 rounded bg-brand-card hover:bg-brand-border text-brand-gold flex items-center justify-center transition">
-                                    <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" 
+                                   class="admin-action-btn admin-action-edit" title="Edit Article">
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <form method="POST" action="{{ route('admin.blogs.destroy', $blog->id) }}" onsubmit="return confirm('Delete this chronicle?');">
+                                <form method="POST" action="{{ route('admin.blogs.destroy', $blog->id) }}" onsubmit="return confirm('Delete this chronicle?');" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="w-7 h-7 rounded bg-brand-card hover:bg-rose-950/40 text-brand-muted hover:text-rose-400 flex items-center justify-center transition">
-                                        <i class="fa-solid fa-trash text-[10px]"></i>
+                                    <button type="submit" class="admin-action-btn admin-action-delete" title="Delete Article">
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
                             </div>
@@ -70,7 +85,16 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-4 py-12 text-center text-brand-muted">No journal chronicles found.</td>
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <div class="py-3">
+                                <i class="fa-solid fa-newspaper fs-2 text-muted opacity-50 mb-2 d-block"></i>
+                                <h6 class="fw-semibold text-dark mb-1">No journal chronicles found</h6>
+                                <p class="small text-muted mb-3">Share scent stories, notes breakdowns, and perfumery knowledge.</p>
+                                <a href="{{ route('admin.blogs.create') }}" class="admin-btn-primary">
+                                    <i class="fa-solid fa-plus"></i> Write First Chronicle
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 @endforelse
             </tbody>
@@ -78,7 +102,7 @@
     </div>
 
     @if($blogs->hasPages())
-        <div class="px-5 py-3 border-t border-brand-border/40 bg-brand-card/20">
+        <div class="admin-pagination-bar">
             {{ $blogs->links() }}
         </div>
     @endif

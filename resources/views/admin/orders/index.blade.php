@@ -5,9 +5,9 @@
 @section('page_subtitle', 'Process acquisitions, verify payment slips, update fulfillment status, and track couriers')
 
 @section('header_actions')
-<div class="flex items-center gap-2">
-    <a href="{{ route('admin.orders.export-csv', request()->query()) }}" class="px-3 py-2 rounded-lg text-xs bg-brand-card hover:bg-brand-border text-brand-text border border-brand-border/60 flex items-center gap-1.5 transition">
-        <i class="fa-solid fa-file-export"></i>
+<div class="d-flex align-items-center gap-2">
+    <a href="{{ route('admin.orders.export-csv', request()->query()) }}" class="admin-btn-secondary">
+        <i class="fa-solid fa-file-export text-muted"></i>
         <span>Export Orders CSV</span>
     </a>
 </div>
@@ -15,18 +15,17 @@
 
 @section('content')
 <!-- Search & Filter Bar -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl p-4">
+<div class="admin-filter-bar">
     <form method="GET" action="{{ route('admin.orders.index') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
         <!-- Search -->
-        <div class="lg:col-span-2 relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted text-xs"></i>
+        <div class="lg:col-span-2 position-relative">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Order #, name, phone, email..."
-                   class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg pl-9 pr-4 py-2 text-xs text-brand-text placeholder-brand-muted/60 focus:outline-none focus:border-brand-gold">
+                   class="ps-3">
         </div>
 
         <!-- Order Status Filter -->
         <div>
-            <select name="status" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+            <select name="status">
                 <option value="">All Fulfillment Status</option>
                 <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
                 <option value="confirmed" {{ request('status') === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
@@ -39,7 +38,7 @@
 
         <!-- Payment Status Filter -->
         <div>
-            <select name="payment_status" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+            <select name="payment_status">
                 <option value="">All Payment Status</option>
                 <option value="pending_verification" {{ request('payment_status') === 'pending_verification' ? 'selected' : '' }}>Pending Verification</option>
                 <option value="paid" {{ request('payment_status') === 'paid' ? 'selected' : '' }}>Paid</option>
@@ -50,7 +49,7 @@
 
         <!-- Province Filter -->
         <div>
-            <select name="province" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+            <select name="province">
                 <option value="">All Provinces</option>
                 @foreach($provinces as $prov)
                     <option value="{{ $prov }}" {{ request('province') === $prov ? 'selected' : '' }}>{{ $prov }}</option>
@@ -58,13 +57,14 @@
             </select>
         </div>
 
-        <!-- Submit Button -->
-        <div class="flex items-center gap-2">
-            <button type="submit" class="flex-1 bg-brand-card hover:bg-brand-border text-brand-gold border border-brand-border/60 rounded-lg py-2 text-xs font-medium transition">
-                Filter
+        <!-- Submit & Reset Buttons -->
+        <div class="d-flex align-items-center gap-2">
+            <button type="submit" class="admin-btn-primary flex-fill">
+                <i class="fa-solid fa-filter small"></i>
+                <span>Filter</span>
             </button>
             @if(request()->hasAny(['search', 'status', 'payment_status', 'province']))
-                <a href="{{ route('admin.orders.index') }}" class="px-3 py-2 rounded-lg bg-brand-black/60 text-brand-muted hover:text-brand-text border border-brand-border/60 text-xs">
+                <a href="{{ route('admin.orders.index') }}" class="admin-btn-reset" title="Clear Filters">
                     <i class="fa-solid fa-rotate-left"></i>
                 </a>
             @endif
@@ -72,68 +72,102 @@
     </form>
 </div>
 
-<!-- Orders Table -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs text-brand-muted">
-            <thead class="bg-brand-card/70 uppercase tracking-wider text-[10px] text-brand-gold/80 border-b border-brand-border/50">
+<!-- Orders Table Card -->
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead>
                 <tr>
-                    <th class="px-4 py-3">Order Number</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Customer</th>
-                    <th class="px-4 py-3">Destination</th>
-                    <th class="px-4 py-3">Total (PKR)</th>
-                    <th class="px-4 py-3">Payment</th>
-                    <th class="px-4 py-3">Fulfillment</th>
-                    <th class="px-4 py-3 text-right">Inspect</th>
+                    <th>Order Number</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Destination</th>
+                    <th class="text-end">Total (PKR)</th>
+                    <th class="text-center">Payment</th>
+                    <th class="text-center">Fulfillment</th>
+                    <th class="text-end" style="width: 100px;">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-brand-border/30">
+            <tbody>
                 @forelse($orders as $order)
-                    <tr class="hover:bg-brand-card/30 transition">
-                        <td class="px-4 py-3">
-                            <a href="{{ route('admin.orders.show', $order->id) }}" class="font-mono font-medium text-brand-gold hover:underline">
+                    <tr>
+                        <td>
+                            <a href="{{ route('admin.orders.show', $order->id) }}" class="font-monospace fw-bold text-primary text-decoration-none d-block">
                                 #{{ $order->order_number }}
                             </a>
                             @if($order->payment_receipt)
-                                <span class="block text-[9px] text-amber-400 font-sans mt-0.5"><i class="fa-solid fa-paperclip"></i> Receipt Attached</span>
+                                <button type="button" 
+                                        onclick="window.previewImage('{{ asset($order->payment_receipt) }}', 'Payment Receipt for Order #{{ $order->order_number }}')"
+                                        class="badge bg-warning-subtle text-warning border border-warning-subtle text-decoration-none mt-1 d-inline-flex align-items-center gap-1 border-0"
+                                        style="font-size: 0.68rem; cursor: pointer;"
+                                        title="Click to inspect receipt screenshot">
+                                    <i class="fa-solid fa-receipt"></i> Receipt
+                                </button>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-[11px]">{{ $order->created_at->format('d M Y, h:i A') }}</td>
-                        <td class="px-4 py-3">
-                            <div class="text-brand-text font-medium">{{ $order->customer_name }}</div>
-                            <div class="text-[10px] text-brand-muted">{{ $order->customer_phone }}</div>
+                        <td class="small text-muted font-monospace" style="font-size: 0.75rem;">
+                            {{ $order->created_at->format('d M Y, h:i A') }}
                         </td>
-                        <td class="px-4 py-3">
-                            <div class="text-brand-text">{{ $order->city }}</div>
-                            <div class="text-[10px] text-brand-muted">{{ $order->province }}</div>
+                        <td>
+                            <div class="fw-semibold text-dark">{{ $order->customer_name }}</div>
+                            <small class="text-muted font-monospace" style="font-size: 0.72rem;">{{ $order->customer_phone }}</small>
                         </td>
-                        <td class="px-4 py-3 font-serif font-bold text-brand-text">{{ $order->formatted_total }}</td>
-                        <td class="px-4 py-3">
-                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold
-                                {{ $order->payment_status === 'paid' ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/30' : ($order->payment_status === 'pending_verification' ? 'bg-amber-950/40 text-amber-400 border border-amber-500/30' : 'bg-brand-card text-brand-muted border border-brand-border/40') }}">
-                                {{ str_replace('_', ' ', $order->payment_status) }}
-                            </span>
-                            <span class="block text-[9px] text-brand-muted mt-0.5 uppercase">{{ $order->payment_method }}</span>
+                        <td>
+                            <div class="text-dark">{{ $order->city }}</div>
+                            <small class="text-muted" style="font-size: 0.72rem;">{{ $order->province }}</small>
                         </td>
-                        <td class="px-4 py-3">
-                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold
-                                {{ $order->order_status === 'delivered' ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-500/30' : ($order->order_status === 'shipped' ? 'bg-purple-950/40 text-purple-400 border border-purple-500/30' : ($order->order_status === 'confirmed' ? 'bg-brand-gold/20 text-brand-gold border border-brand-gold/40' : 'bg-brand-card text-brand-text')) }}">
-                                {{ $order->order_status }}
-                            </span>
+                        <td class="text-end font-monospace">
+                            <span class="fw-bold text-dark fs-6">{{ $order->formatted_total }}</span>
+                        </td>
+                        <td class="text-center">
+                            @if($order->payment_status === 'paid')
+                                <span class="admin-badge admin-badge-success">Paid</span>
+                            @elseif($order->payment_status === 'pending_verification')
+                                <span class="admin-badge admin-badge-warning">Verification</span>
+                            @elseif($order->payment_status === 'failed')
+                                <span class="admin-badge admin-badge-danger">Failed</span>
+                            @else
+                                <span class="admin-badge admin-badge-secondary">Unpaid / COD</span>
+                            @endif
+                            <small class="text-muted d-block text-uppercase mt-0.5" style="font-size: 0.65rem;">
+                                {{ $order->payment_method }}
+                            </small>
+                        </td>
+                        <td class="text-center">
+                            @if($order->order_status === 'delivered')
+                                <span class="admin-badge admin-badge-success">Delivered</span>
+                            @elseif($order->order_status === 'shipped')
+                                <span class="admin-badge admin-badge-info">Shipped</span>
+                            @elseif($order->order_status === 'processing')
+                                <span class="admin-badge admin-badge-purple">Processing</span>
+                            @elseif($order->order_status === 'confirmed')
+                                <span class="admin-badge admin-badge-info">Confirmed</span>
+                            @elseif($order->order_status === 'cancelled')
+                                <span class="admin-badge admin-badge-danger">Cancelled</span>
+                            @else
+                                <span class="admin-badge admin-badge-warning">Pending</span>
+                            @endif
                             @if($order->courier_name)
-                                <span class="block text-[9px] text-brand-muted mt-0.5">{{ $order->courier_name }}</span>
+                                <small class="text-muted d-block mt-0.5" style="font-size: 0.65rem;">
+                                    <i class="fa-solid fa-truck-fast me-1"></i>{{ $order->courier_name }}
+                                </small>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-right">
-                            <a href="{{ route('admin.orders.show', $order->id) }}" class="px-2.5 py-1 rounded bg-brand-card hover:bg-brand-border text-brand-gold text-[11px] font-medium border border-brand-border/50 transition">
-                                Manage &rarr;
+                        <td class="text-end">
+                            <a href="{{ route('admin.orders.show', $order->id) }}" class="admin-action-btn admin-action-view" title="Manage order details">
+                                <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="px-4 py-12 text-center text-brand-muted">No orders found matching criteria.</td>
+                        <td colspan="8" class="text-center py-5 text-muted">
+                            <div class="py-3">
+                                <i class="fa-solid fa-receipt fs-2 text-muted opacity-50 mb-2 d-block"></i>
+                                <h6 class="fw-semibold text-dark mb-1">No orders found</h6>
+                                <p class="small text-muted mb-0">No customer acquisitions match your filter criteria.</p>
+                            </div>
+                        </td>
                     </tr>
                 @endforelse
             </tbody>
@@ -141,7 +175,7 @@
     </div>
 
     @if($orders->hasPages())
-        <div class="px-5 py-3 border-t border-brand-border/40 bg-brand-card/20">
+        <div class="admin-pagination-bar">
             {{ $orders->links() }}
         </div>
     @endif

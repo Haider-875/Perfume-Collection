@@ -6,11 +6,11 @@
 
 @section('header_actions')
 <div class="flex items-center gap-2">
-    <a href="{{ route('admin.products.sample-csv') }}" class="gold-btn px-4 py-2 rounded-lg text-xs flex items-center gap-2 shadow-lg">
+    <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-primary">
         <i class="fa-solid fa-download"></i>
         <span>Download Sample CSV</span>
     </a>
-    <a href="{{ route('admin.products.index') }}" class="px-4 py-2 rounded-lg text-xs bg-brand-card hover:bg-brand-border text-brand-text border border-brand-border/60 flex items-center gap-2 transition">
+    <a href="{{ route('admin.products.index') }}" class="admin-btn-secondary">
         <i class="fa-solid fa-arrow-left"></i>
         <span>Back to Vault</span>
     </a>
@@ -21,7 +21,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Upload Card -->
     <div class="lg:col-span-2 space-y-6">
-        <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6">
+        <div class="admin-card p-6">
             <h3 class="font-serif text-base font-semibold text-brand-text mb-2">Upload Inventory CSV File</h3>
             <p class="text-xs text-brand-muted mb-6">Files are parsed row-by-row in memory-safe chunks optimized for Hostinger shared hosting environments.</p>
 
@@ -42,8 +42,8 @@
                     <div class="text-rose-400 text-xs">{{ $message }}</div>
                 @enderror
 
-                <div class="pt-2">
-                    <button type="submit" class="w-full gold-btn py-3 rounded-lg text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2">
+                <div class="pt-2 flex justify-end">
+                    <button type="submit" class="admin-btn-primary">
                         <i class="fa-solid fa-file-import"></i>
                         <span>Commence Batch Import</span>
                     </button>
@@ -52,30 +52,30 @@
         </div>
 
         <!-- Column Reference Table -->
-        <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6">
+        <div class="admin-card p-6">
             <h3 class="font-serif text-base font-semibold text-brand-text mb-4">Supported CSV Schema Columns</h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs text-brand-muted">
                     <thead class="bg-brand-card uppercase tracking-wider text-[10px] text-brand-gold">
                         <tr>
-                            <th class="px-3 py-2">Column Name</th>
-                            <th class="px-3 py-2">Required</th>
-                            <th class="px-3 py-2">Example Value</th>
+                            <th class="px-4 py-3">Column Name</th>
+                            <th class="px-4 py-3 text-center">Required</th>
+                            <th class="px-4 py-3">Example Value</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-brand-border/30">
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">name</td><td class="px-3 py-2 text-emerald-400">Yes</td><td class="px-3 py-2">Oud Royale Extrait</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">sku</td><td class="px-3 py-2 text-emerald-400">Yes</td><td class="px-3 py-2">PC-OUD-ROYALE</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">price</td><td class="px-3 py-2 text-emerald-400">Yes</td><td class="px-3 py-2">12500</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">compare_at_price</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">15000</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">stock</td><td class="px-3 py-2 text-emerald-400">Yes</td><td class="px-3 py-2">45</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">category</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Exclusive Edition</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">scent_family</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Oriental Woody</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">gender</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Unisex</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">top_notes</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Saffron, Bergamot</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">heart_notes</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Taif Rose, Cardamom</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">base_notes</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">Cambodian Oud, Amber</td></tr>
-                        <tr><td class="px-3 py-2 font-mono text-brand-text">description</td><td class="px-3 py-2 text-brand-muted">No</td><td class="px-3 py-2">An opulent composition...</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">name</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-success">Yes</span></td><td class="px-4 py-3">Oud Royale Extrait</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">sku</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-success">Yes</span></td><td class="px-4 py-3">PC-OUD-ROYALE</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">price</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-success">Yes</span></td><td class="px-4 py-3">12500</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">compare_at_price</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">15000</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">stock</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-success">Yes</span></td><td class="px-4 py-3">45</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">category</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Exclusive Edition</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">scent_family</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Oriental Woody</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">gender</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Unisex</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">top_notes</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Saffron, Bergamot</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">heart_notes</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Taif Rose, Cardamom</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">base_notes</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">Cambodian Oud, Amber</td></tr>
+                        <tr><td class="px-4 py-3 font-mono text-brand-text">description</td><td class="px-4 py-3 text-center"><span class="admin-badge admin-badge-info">No</span></td><td class="px-4 py-3">An opulent composition...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -84,7 +84,7 @@
 
     <!-- Right Column: Hostinger Shared Hosting Optimization Guide -->
     <div class="space-y-6">
-        <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-3">
+        <div class="admin-card p-6 space-y-3">
             <h3 class="font-serif text-base font-semibold text-brand-gold flex items-center gap-2">
                 <i class="fa-solid fa-server text-xs"></i>
                 <span>Shared Hosting Guard</span>

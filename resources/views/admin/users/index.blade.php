@@ -5,173 +5,174 @@
 @section('page_subtitle', 'Manage team accounts, define roles, grant fine-grained permissions, and audit security access')
 
 @section('header_actions')
-<a href="{{ route('admin.users.create') }}" class="gold-btn px-4 py-2 rounded-lg text-xs flex items-center gap-2 shadow-lg">
+<a href="{{ route('admin.users.create') }}" class="admin-btn-primary">
     <i class="fa-solid fa-user-plus"></i>
     <span>Provision Staff Member</span>
 </a>
 @endsection
 
 @section('content')
-<!-- Staff Overview & Search -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl p-4">
+<!-- Staff Overview & Search Bar -->
+<div class="admin-filter-bar">
     <form method="GET" action="{{ route('admin.users.index') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div class="sm:col-span-2 relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted text-xs"></i>
+        <div class="sm:col-span-2 position-relative">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name, email, phone..."
-                   class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg pl-9 pr-4 py-2 text-xs text-brand-text placeholder-brand-muted/60 focus:outline-none focus:border-brand-gold">
+                   class="ps-3">
         </div>
-        <div class="flex items-center gap-2">
-            <select name="role" class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+        <div class="d-flex align-items-center gap-2">
+            <select name="role" class="flex-fill">
                 <option value="">All Administrative Roles</option>
                 <option value="super_admin" {{ request('role') === 'super_admin' ? 'selected' : '' }}>Super Administrator</option>
                 <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Administrator</option>
                 <option value="order_manager" {{ request('role') === 'order_manager' ? 'selected' : '' }}>Order Specialist</option>
                 <option value="catalog_manager" {{ request('role') === 'catalog_manager' ? 'selected' : '' }}>Catalog Manager</option>
             </select>
-            <button type="submit" class="bg-brand-card hover:bg-brand-border text-brand-gold border border-brand-border/60 rounded-lg px-4 py-2 text-xs font-medium transition">
-                Filter
+            <button type="submit" class="admin-btn-primary">
+                <i class="fa-solid fa-filter small"></i>
+                <span>Filter</span>
             </button>
+            @if(request()->hasAny(['search', 'role']))
+                <a href="{{ route('admin.users.index') }}" class="admin-btn-reset" title="Clear Filters">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </a>
+            @endif
         </div>
     </form>
 </div>
 
 <!-- Role Matrix Reference Cards -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    <div class="bg-brand-surface border border-amber-500/30 rounded-xl p-4">
-        <div class="flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-1">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+    <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #f59e0b !important;">
+        <div class="d-flex align-items-center gap-2 text-warning small fw-bold text-uppercase tracking-wider mb-1">
             <i class="fa-solid fa-crown"></i>
             <span>Super Administrator</span>
         </div>
-        <p class="text-[11px] text-brand-muted">Total authority over all systems, revenue, settings, staff roles, and audit trail.</p>
+        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Total authority over all systems, revenue, settings, staff roles, and audit trail.</p>
     </div>
 
-    <div class="bg-brand-surface border border-blue-500/30 rounded-xl p-4">
-        <div class="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1">
+    <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #0d6efd !important;">
+        <div class="d-flex align-items-center gap-2 text-primary small fw-bold text-uppercase tracking-wider mb-1">
             <i class="fa-solid fa-user-shield"></i>
             <span>Store Administrator</span>
         </div>
-        <p class="text-[11px] text-brand-muted">Full catalog, orders, patrons, marketing, and operational management.</p>
+        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Full catalog, orders, patrons, marketing, and operational management.</p>
     </div>
 
-    <div class="bg-brand-surface border border-emerald-500/30 rounded-xl p-4">
-        <div class="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
+    <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #10b981 !important;">
+        <div class="d-flex align-items-center gap-2 text-success small fw-bold text-uppercase tracking-wider mb-1">
             <i class="fa-solid fa-dolly"></i>
             <span>Order Specialist</span>
         </div>
-        <p class="text-[11px] text-brand-muted">Order processing, bank slip verification, courier tracking (TCS, Trax, Leopards).</p>
+        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Order processing, bank slip verification, courier tracking (TCS, Trax, Leopards).</p>
     </div>
 
-    <div class="bg-brand-surface border border-purple-500/30 rounded-xl p-4">
-        <div class="flex items-center gap-2 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-1">
+    <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #8b5cf6 !important;">
+        <div class="d-flex align-items-center gap-2 text-purple small fw-bold text-uppercase tracking-wider mb-1">
             <i class="fa-solid fa-spray-can"></i>
             <span>Catalog Manager</span>
         </div>
-        <p class="text-[11px] text-brand-muted">Formulations, olfactory notes, pricing tiers, discounts, and inventory control.</p>
+        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Formulations, olfactory notes, pricing tiers, discounts, and inventory control.</p>
     </div>
 </div>
 
-<!-- Staff Users Table -->
-<div class="bg-brand-surface border border-brand-border/60 rounded-xl overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs text-brand-muted">
-            <thead class="bg-brand-card/70 uppercase tracking-wider text-[10px] text-brand-gold/80 border-b border-brand-border/50">
+<!-- Staff Users Table Card -->
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead>
                 <tr>
-                    <th class="px-5 py-3">Team Member</th>
-                    <th class="px-4 py-3">Assigned Role</th>
-                    <th class="px-4 py-3">Permissions Scope</th>
-                    <th class="px-4 py-3">Phone / Location</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Created</th>
-                    <th class="px-5 py-3 text-right">Actions</th>
+                    <th>Team Member</th>
+                    <th>Assigned Role</th>
+                    <th>Permissions Scope</th>
+                    <th>Phone / Location</th>
+                    <th class="text-center">Status</th>
+                    <th>Created</th>
+                    <th class="text-end" style="width: 100px;">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-brand-border/30">
+            <tbody>
                 @forelse($staffUsers as $staff)
-                    <tr class="hover:bg-brand-card/30 transition">
-                        <td class="px-5 py-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-brand-maroon/60 border border-brand-gold/40 flex items-center justify-center font-bold text-xs text-brand-gold">
-                                    {{ substr($staff->name, 0, 1) }}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle bg-light border text-primary d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px; min-width: 38px; font-size: 0.85rem;">
+                                    {{ strtoupper(substr($staff->name, 0, 1)) }}
                                 </div>
-                                <div>
-                                    <div class="font-medium text-brand-text">{{ $staff->name }}</div>
-                                    <div class="text-[11px] text-brand-muted font-mono">{{ $staff->email }}</div>
+                                <div class="overflow-hidden">
+                                    <div class="fw-semibold text-dark text-truncate" style="max-width: 200px;">{{ $staff->name }}</div>
+                                    <small class="text-muted font-monospace d-block text-truncate" style="font-size: 0.72rem;">{{ $staff->email }}</small>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-4 py-4">
+                        <td>
                             @if($staff->role === 'super_admin')
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1.5 w-max">
-                                    <i class="fa-solid fa-crown text-[9px]"></i> Super Admin
+                                <span class="admin-badge admin-badge-warning">
+                                    <i class="fa-solid fa-crown small"></i> Super Admin
                                 </span>
                             @elseif($staff->role === 'admin')
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center gap-1.5 w-max">
-                                    <i class="fa-solid fa-user-shield text-[9px]"></i> Administrator
+                                <span class="admin-badge admin-badge-info">
+                                    <i class="fa-solid fa-user-shield small"></i> Administrator
                                 </span>
                             @elseif($staff->role === 'order_manager')
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 w-max">
-                                    <i class="fa-solid fa-dolly text-[9px]"></i> Order Specialist
+                                <span class="admin-badge admin-badge-success">
+                                    <i class="fa-solid fa-dolly small"></i> Order Specialist
                                 </span>
                             @else
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center gap-1.5 w-max">
-                                    <i class="fa-solid fa-spray-can text-[9px]"></i> Catalog Manager
+                                <span class="admin-badge admin-badge-purple">
+                                    <i class="fa-solid fa-spray-can small"></i> Catalog Manager
                                 </span>
                             @endif
                         </td>
-                        <td class="px-4 py-4">
+                        <td>
                             @if($staff->role === 'super_admin')
-                                <span class="text-xs text-amber-300/90 font-medium">★ Unrestricted Access (All Modules)</span>
+                                <span class="small text-warning fw-semibold">★ Unrestricted Access (All Modules)</span>
                             @else
-                                <div class="flex flex-wrap gap-1 max-w-xs">
+                                <div class="d-flex flex-wrap gap-1" style="max-width: 280px;">
                                     @php
                                         $perms = is_array($staff->permissions) ? $staff->permissions : (json_decode($staff->permissions ?? '[]', true) ?: []);
                                     @endphp
                                     @if(count($perms) > 0)
                                         @foreach(array_slice($perms, 0, 3) as $p)
-                                            <span class="px-2 py-0.5 rounded text-[9px] bg-brand-card text-brand-gold border border-brand-border/60">
+                                            <span class="badge bg-light text-dark border fw-normal" style="font-size: 0.68rem;">
                                                 {{ $availablePermissions[$p]['label'] ?? $p }}
                                             </span>
                                         @endforeach
                                         @if(count($perms) > 3)
-                                            <span class="px-1.5 py-0.5 rounded text-[9px] bg-brand-card text-brand-muted">
+                                            <span class="badge bg-light text-muted border fw-normal" style="font-size: 0.68rem;">
                                                 +{{ count($perms) - 3 }} more
                                             </span>
                                         @endif
                                     @else
-                                        <span class="text-[11px] text-brand-muted italic">Default role permissions</span>
+                                        <span class="small text-muted fst-italic" style="font-size: 0.75rem;">Default role permissions</span>
                                     @endif
                                 </div>
                             @endif
                         </td>
-                        <td class="px-4 py-4">
-                            <div class="text-brand-text">{{ $staff->phone ?: '—' }}</div>
-                            <div class="text-[10px] text-brand-muted">{{ $staff->city ?: 'Pakistan' }}</div>
+                        <td>
+                            <div class="text-dark small">{{ $staff->phone ?: '—' }}</div>
+                            <small class="text-muted" style="font-size: 0.72rem;">{{ $staff->city ?: 'Pakistan' }}</small>
                         </td>
-                        <td class="px-4 py-4">
+                        <td class="text-center">
                             @if($staff->is_active !== false)
-                                <span class="inline-flex items-center gap-1 text-emerald-400 text-[11px]">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Active
-                                </span>
+                                <span class="admin-badge admin-badge-success">Active</span>
                             @else
-                                <span class="inline-flex items-center gap-1 text-rose-400 text-[11px]">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> Suspended
-                                </span>
+                                <span class="admin-badge admin-badge-danger">Suspended</span>
                             @endif
                         </td>
-                        <td class="px-4 py-4 text-[11px]">
+                        <td class="small text-muted font-monospace" style="font-size: 0.75rem;">
                             {{ $staff->created_at ? $staff->created_at->format('M d, Y') : '—' }}
                         </td>
-                        <td class="px-5 py-4 text-right">
-                            <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('admin.users.edit', $staff->id) }}" class="p-2 rounded-lg bg-brand-card hover:bg-brand-border text-brand-gold transition" title="Edit Permissions">
+                        <td class="text-end">
+                            <div class="d-inline-flex align-items-center gap-1.5">
+                                <a href="{{ route('admin.users.edit', $staff->id) }}" class="admin-action-btn admin-action-edit" title="Edit Permissions">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 @if($staff->id !== auth()->id())
-                                    <form method="POST" action="{{ route('admin.users.destroy', $staff->id) }}" onsubmit="return confirm('Are you certain you wish to revoke and delete this staff account?');" class="inline">
+                                    <form method="POST" action="{{ route('admin.users.destroy', $staff->id) }}" onsubmit="return confirm('Are you certain you wish to revoke and delete this staff account?');" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="p-2 rounded-lg bg-brand-card hover:bg-rose-950/40 text-brand-muted hover:text-rose-400 transition" title="Revoke Staff Member">
-                                            <i class="fa-solid fa-trash-can"></i>
+                                        <button type="submit" class="admin-action-btn admin-action-delete" title="Revoke Staff Account">
+                                            <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
                                 @endif
@@ -180,9 +181,15 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-5 py-8 text-center text-brand-muted">
-                            <i class="fa-solid fa-users-slash text-2xl text-brand-border mb-2 block"></i>
-                            No staff accounts match your current query.
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <div class="py-3">
+                                <i class="fa-solid fa-users-slash fs-2 text-muted opacity-50 mb-2 d-block"></i>
+                                <h6 class="fw-semibold text-dark mb-1">No staff accounts found</h6>
+                                <p class="small text-muted mb-3">Provision accounts for administrators and dispatch managers.</p>
+                                <a href="{{ route('admin.users.create') }}" class="admin-btn-primary">
+                                    <i class="fa-solid fa-user-plus"></i> Provision Staff Member
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @endforelse
@@ -191,7 +198,7 @@
     </div>
 
     @if($staffUsers->hasPages())
-        <div class="p-4 border-t border-brand-border/40">
+        <div class="admin-pagination-bar">
             {{ $staffUsers->links() }}
         </div>
     @endif
