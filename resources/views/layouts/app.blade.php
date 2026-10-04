@@ -211,7 +211,7 @@
                         class="position-relative border-0 bg-transparent text-ivory opacity-75 p-1 fs-5"
                         title="Your Cart">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count-badge position-absolute bg-gradient-gold-pill text-theme-main rounded-circle d-flex align-items-center justify-center fw-bold shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px;">
+                        <span class="cart-count-badge position-absolute bg-gradient-gold-pill text-theme-main rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px;">
                             0
                         </span>
                     </button>
@@ -609,7 +609,7 @@
     <div class="position-fixed bottom-0 end-0 m-4 d-flex flex-column align-items-center gap-3" style="z-index: 1040;">
         <!-- Back to top button -->
         <button type="button" id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-            class="rounded-circle bg-theme-dark border border-gold-50 text-gold shadow-lg d-flex align-items-center justify-center opacity-0 pe-none transition-smooth"
+            class="rounded-circle bg-theme-dark border border-gold-50 text-gold shadow-lg d-flex align-items-center justify-content-center opacity-0 pe-none transition-smooth"
             style="width: 2.75rem; height: 2.75rem;"
             title="Back to Top">
             <i class="fas fa-arrow-up text-xs"></i>
@@ -618,7 +618,7 @@
         <!-- Floating WhatsApp Concierge Button -->
         <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out from your website for fragrance assistance.') }}"
             target="_blank"
-            class="rounded-circle btn-whatsapp shadow-lg d-flex align-items-center justify-center text-white text-decoration-none"
+            class="rounded-circle btn-whatsapp shadow-lg d-flex align-items-center justify-content-center text-white text-decoration-none"
             style="width: 3.25rem; height: 3.25rem;"
             title="WhatsApp Concierge">
             <i class="fab fa-whatsapp fs-3"></i>

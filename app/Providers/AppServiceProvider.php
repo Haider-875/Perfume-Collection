@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
+
         \Illuminate\Support\Facades\View::composer('*', function ($view) {
             $whatsapp = function_exists('settings') ? settings('site_whatsapp', '923008765432') : '923008765432';
             $cleanWhatsapp = preg_replace('/[^0-9]/', '', (string)$whatsapp);

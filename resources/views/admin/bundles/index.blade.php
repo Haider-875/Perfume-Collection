@@ -80,5 +80,10 @@
             </tbody>
         </table>
     </div>
+    @if(method_exists($bundles, 'links') && $bundles->hasPages())
+        <div class="p-4 border-top border-brand-border/30 d-flex justify-content-center">
+            {{ $bundles->links() }}
+        </div>
+    @endif
 </div>
 @endsection

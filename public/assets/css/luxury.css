@@ -572,5 +572,220 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .accent-gold { accent-color: var(--gold) !important; }
 .hover-gold:hover { color: var(--gold) !important; }
 .hover-danger:hover { color: #f87171 !important; border-color: #ef4444 !important; }
+.justify-center { justify-content: center !important; }
+.items-center { align-items: center !important; }
+
+/* ==========================================================================
+   CART COUNT BADGE - PERFECT CENTERING
+   ========================================================================== */
+.cart-count-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   BACK TO TOP BUTTON - PERFECT CENTERING
+   ========================================================================== */
+#backToTopBtn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+}
+
+#backToTopBtn i {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   SWIPER LUXURY ARROWS & PAGINATION (ELIMINATES DEFAULT BLUE)
+   ========================================================================== */
+:root {
+    --swiper-theme-color: #d6aa62;
+    --swiper-navigation-color: #d6aa62;
+    --swiper-pagination-color: #d6aa62;
+}
+
+.swiper-button-next,
+.swiper-button-prev,
+.luxury-swiper-next,
+.luxury-swiper-prev {
+    color: #d6aa62 !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(22, 4, 9, 0.88) !important;
+    border: 1px solid rgba(214, 170, 98, 0.45) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 20 !important;
+}
+
+.swiper-button-prev,
+.luxury-swiper-prev {
+    left: 1.5rem !important;
+}
+
+.swiper-button-next,
+.luxury-swiper-next {
+    right: 1.5rem !important;
+}
+
+@media (max-width: 768px) {
+    .swiper-button-prev,
+    .luxury-swiper-prev {
+        left: 0.75rem !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .swiper-button-next,
+    .luxury-swiper-next {
+        right: 0.75rem !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: #d6aa62 !important;
+    line-height: 1 !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover,
+.luxury-swiper-next:hover,
+.luxury-swiper-prev:hover {
+    background: #25050a !important;
+    border-color: #ffd987 !important;
+    color: #ffd987 !important;
+    box-shadow: 0 0 20px rgba(214, 170, 98, 0.5) !important;
+    transform: scale(1.08) !important;
+}
+
+.swiper-button-next:hover:after,
+.swiper-button-prev:hover:after {
+    color: #ffd987 !important;
+}
+
+/* Swiper Pagination Bullets (Gold Theme) */
+.swiper-pagination-bullet {
+    background: rgba(214, 170, 98, 0.45) !important;
+    opacity: 0.7 !important;
+    width: 8px !important;
+    height: 8px !important;
+    margin: 0 4px !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: linear-gradient(135deg, #ffd987 0%, #d6aa62 100%) !important;
+    opacity: 1 !important;
+    width: 26px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 10px rgba(214, 170, 98, 0.6) !important;
+}
+
+/* ==========================================================================
+   LUXURY PAGINATION SYSTEM - BUTTONS & LINKS
+   ========================================================================== */
+.pagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-wrap: wrap !important;
+}
+
+.pagination .page-item {
+    margin: 0 !important;
+}
+
+.pagination .page-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    padding: 6px 14px !important;
+    font-family: var(--font-sans), 'Montserrat', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    color: var(--ivory, #f5efe7) !important;
+    background: var(--bg-card, #120408) !important;
+    border: 1px solid rgba(214, 170, 98, 0.3) !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Hover & Focus State */
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    color: var(--gold-bright, #ffd987) !important;
+    background: var(--wine, #25050a) !important;
+    border-color: var(--gold, #d6aa62) !important;
+    box-shadow: 0 0 16px rgba(214, 170, 98, 0.4) !important;
+    transform: translateY(-2px) !important;
+    z-index: 2 !important;
+}
+
+/* Active Page Button */
+.pagination .page-item.active .page-link,
+.pagination .page-link.active {
+    color: #0d0305 !important;
+    background: linear-gradient(135deg, #ffd987 0%, #d6aa62 50%, #9a6b25 100%) !important;
+    border-color: #ffd987 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 18px rgba(214, 170, 98, 0.55) !important;
+    transform: translateY(-1px) !important;
+    cursor: default !important;
+}
+
+/* Disabled Page Button */
+.pagination .page-item.disabled .page-link,
+.pagination .page-link:disabled,
+.pagination .page-link[aria-disabled="true"] {
+    color: rgba(184, 169, 162, 0.35) !important;
+    background: rgba(18, 4, 8, 0.65) !important;
+    border-color: rgba(214, 170, 98, 0.12) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    pointer-events: none !important;
+}
+
+/* Icons & SVGs inside Pagination Links */
+.pagination .page-link svg,
+.pagination .page-link i {
+    width: 14px !important;
+    height: 14px !important;
+    fill: currentColor !important;
+    line-height: 1 !important;
+}
+
 
 

@@ -183,6 +183,12 @@
             @endforelse
         </div>
 
+        @if(method_exists($bundles, 'links') && $bundles->hasPages())
+            <div class="mt-5 d-flex justify-content-center">
+                {{ $bundles->links() }}
+            </div>
+        @endif
+
     </div>
 </section>
 

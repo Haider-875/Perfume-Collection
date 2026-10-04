@@ -121,9 +121,9 @@
         </div>
 
         <!-- Carousel Navigation Arrows & Pagination Dots -->
-        <div class="swiper-button-prev !text-[#d6aa62] !w-12 !h-12 rounded-full border border-[#d6aa62]/40 !bg-[#160409]/85 hover:!bg-[#25050a] backdrop-blur-md after:!text-base transition-all shadow-xl !left-4 sm:!left-8"></div>
-        <div class="swiper-button-next !text-[#d6aa62] !w-12 !h-12 rounded-full border border-[#d6aa62]/40 !bg-[#160409]/85 hover:!bg-[#25050a] backdrop-blur-md after:!text-base transition-all shadow-xl !right-4 sm:!right-8"></div>
-        <div class="swiper-pagination !bottom-6 !text-[#d6aa62]"></div>
+        <div class="swiper-button-prev luxury-swiper-prev shadow-lg"></div>
+        <div class="swiper-button-next luxury-swiper-next shadow-lg"></div>
+        <div class="swiper-pagination luxury-swiper-pagination pb-3"></div>
     </div>
 </section>
 
@@ -196,7 +196,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="swiper-pagination !-bottom-8"></div>
+            <div class="swiper-pagination position-relative mt-3"></div>
         </div>
 
         <!-- View Full Collection CTA -->
