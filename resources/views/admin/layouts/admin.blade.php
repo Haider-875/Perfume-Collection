@@ -524,6 +524,23 @@
         .space-y-3 > * + * { margin-top: 0.75rem; }
         .space-y-4 > * + * { margin-top: 1rem; }
         .space-y-6 > * + * { margin-top: 1.5rem; }
+
+        [x-cloak] { display: none !important; }
+        .form-label {
+            margin-bottom: 0.35rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+        }
+        .form-check-input {
+            cursor: pointer;
+        }
+        .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
     </style>
     @stack('styles')
 </head>

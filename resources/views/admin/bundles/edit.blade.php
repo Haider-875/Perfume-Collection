@@ -5,131 +5,139 @@
 @section('page_subtitle', 'SKU: ' . $bundle->sku)
 
 @section('header_actions')
-<a href="{{ route('admin.bundles.index') }}" class="px-4 py-2 rounded-lg text-xs bg-brand-card hover:bg-brand-border text-brand-text border border-brand-border/60 flex items-center gap-2 transition">
+<a href="{{ route('admin.bundles.index') }}" class="admin-btn-secondary">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back to Bundles</span>
 </a>
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('admin.bundles.update', $bundle->id) }}" enctype="multipart/form-data" class="space-y-6" x-data="bundleCalculator()">
+<form method="POST" action="{{ route('admin.bundles.update', $bundle->id) }}" enctype="multipart/form-data" x-data="bundleCalculator()">
     @csrf
     @method('PUT')
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Main Form -->
-        <div class="lg:col-span-2 space-y-6">
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Bundle Information
-                </h3>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Bundle Name *</label>
-                    <input type="text" name="name" value="{{ old('name', $bundle->name) }}" required
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+    <div class="row g-4">
+        <!-- Main Form Column -->
+        <div class="col-lg-8">
+            <!-- Basic Information -->
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-gift text-primary small"></i>
+                        <span>Bundle Information</span>
+                    </h6>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Bundle SKU *</label>
-                        <input type="text" name="sku" value="{{ old('sku', $bundle->sku) }}" required
-                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text uppercase focus:outline-none focus:border-brand-gold">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Bundle Name *</label>
+                        <input type="text" name="name" value="{{ old('name', $bundle->name) }}" required>
+                        @error('name') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
                     </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Badge Text</label>
-                        <input type="text" name="badge_text" value="{{ old('badge_text', $bundle->badge_text) }}"
-                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Bundle SKU *</label>
+                            <input type="text" name="sku" value="{{ old('sku', $bundle->sku) }}" required style="text-transform: uppercase;">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Badge Text</label>
+                            <input type="text" name="badge_text" value="{{ old('badge_text', $bundle->badge_text) }}">
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Tagline / Highlight</label>
-                    <input type="text" name="tagline" value="{{ old('tagline', $bundle->tagline) }}"
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Tagline / Highlight</label>
+                        <input type="text" name="tagline" value="{{ old('tagline', $bundle->tagline) }}">
+                    </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Description *</label>
-                    <textarea name="description" rows="4" required
-                              class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('description', $bundle->description) }}</textarea>
+                    <div class="mb-0">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Description *</label>
+                        <textarea name="description" rows="4" required>{{ old('description', $bundle->description) }}</textarea>
+                    </div>
                 </div>
             </div>
 
             <!-- Products Selection Card -->
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3 flex items-center justify-between">
-                    <span>Select Included Fragrances</span>
-                    <span class="text-xs text-brand-gold font-sans font-normal" x-text="selectedCount + ' fragrances selected'"></span>
-                </h3>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-72 overflow-y-auto pr-2">
-                    @foreach($products as $prod)
-                        <label class="flex items-center gap-3 p-2.5 bg-brand-card/40 border border-brand-border/40 rounded-lg cursor-pointer hover:border-brand-gold/40 transition">
-                            <input type="checkbox" name="products[]" value="{{ $prod->id }}" @change="updateSelection()"
-                                   {{ in_array($prod->id, $selectedProductIds) ? 'checked' : '' }}
-                                   class="bundle-product-cb rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
-                            <div class="min-w-0">
-                                <div class="text-xs text-brand-text font-medium truncate">{{ $prod->name }}</div>
-                                <div class="text-[10px] text-brand-gold font-serif">Rs. {{ number_format($prod->price, 0) }}</div>
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom d-flex align-items-center justify-content-between">
+                    <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-spray-can-sparkles text-primary small"></i>
+                        <span>Select Included Fragrances</span>
+                    </h6>
+                    <span class="admin-badge admin-badge-info" x-text="selectedCount + ' fragrances selected'"></span>
+                </div>
+                <div class="p-4">
+                    <div class="row g-2" style="max-height: 320px; overflow-y: auto;">
+                        @foreach($products as $prod)
+                            <div class="col-sm-6">
+                                <label class="p-2.5 bg-light border rounded d-flex align-items-center gap-2.5 cursor-pointer h-100 mb-0 hover-shadow transition">
+                                    <input type="checkbox" name="products[]" value="{{ $prod->id }}" @change="updateSelection()"
+                                           {{ in_array($prod->id, $selectedProductIds) ? 'checked' : '' }}
+                                           class="bundle-product-cb form-check-input mt-0 flex-shrink-0">
+                                    <div class="min-w-0">
+                                        <div class="small fw-semibold text-dark text-truncate">{{ $prod->name }}</div>
+                                        <div class="small text-muted font-monospace" style="font-size: 0.72rem;">Rs. {{ number_format($prod->price, 0) }}</div>
+                                    </div>
+                                </label>
                             </div>
-                        </label>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column: Pricing & Cover -->
-        <div class="space-y-6">
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Bundle Pricing & Savings
-                </h3>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1">Combined Original Price (PKR) *</label>
-                    <input type="number" name="original_price" x-model.number="originalPrice" required min="0"
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+        <!-- Sidebar Column: Pricing & Cover -->
+        <div class="col-lg-4">
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0">Bundle Pricing & Savings</h6>
                 </div>
+                <div class="p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Combined Original Price (PKR) *</label>
+                        <input type="number" name="original_price" x-model.number="originalPrice" required min="0">
+                    </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-gold mb-1 font-semibold">Special Bundle Price (PKR) *</label>
-                    <input type="number" name="bundle_price" x-model.number="bundlePrice" required min="0"
-                           class="w-full bg-brand-black/60 border border-brand-gold/60 rounded-lg px-3 py-2 text-xs text-brand-text font-bold focus:outline-none focus:border-brand-gold">
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-primary text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Special Bundle Price (PKR) *</label>
+                        <input type="number" name="bundle_price" x-model.number="bundlePrice" required min="0" class="fw-bold">
+                    </div>
 
-                <div class="p-3 bg-emerald-950/30 border border-emerald-500/30 rounded-lg text-xs flex items-center justify-between">
-                    <span class="text-emerald-400">Calculated Patron Savings:</span>
-                    <strong class="text-emerald-300 font-serif" x-text="'Rs. ' + Math.max(0, originalPrice - bundlePrice).toLocaleString()"></strong>
-                </div>
+                    <div class="p-3 bg-success-subtle border border-success-subtle rounded d-flex align-items-center justify-content-between mb-3">
+                        <span class="small fw-semibold text-success">Calculated Patron Savings:</span>
+                        <strong class="text-success font-monospace" x-text="'Rs. ' + Math.max(0, originalPrice - bundlePrice).toLocaleString()"></strong>
+                    </div>
 
-                <div class="pt-2">
-                    <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" name="is_active" value="1" {{ $bundle->is_active ? 'checked' : '' }} class="rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
-                        <span class="text-xs text-brand-text font-medium">Publish Bundle on Storefront</span>
-                    </label>
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" name="is_active" id="isActiveCheck" value="1" {{ $bundle->is_active ? 'checked' : '' }}>
+                        <label class="form-check-label small fw-semibold text-dark cursor-pointer" for="isActiveCheck">
+                            Publish Bundle on Storefront
+                        </label>
+                    </div>
                 </div>
             </div>
 
             <!-- Imagery Upload -->
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Presentation Image
-                </h3>
-                @if($bundle->image)
-                    <div class="bg-brand-black rounded-lg p-2 border border-brand-border/40 flex justify-center">
-                        <img src="{{ $bundle->image_url }}" alt="{{ $bundle->name }}" class="h-28 object-contain">
-                    </div>
-                @endif
-                <div>
-                    <input type="file" name="image" accept="image/*"
-                           class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-gold file:text-brand-black hover:file:bg-brand-goldLight cursor-pointer">
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-camera text-primary small"></i>
+                    <h6 class="fw-bold text-dark mb-0">Presentation Image</h6>
+                </div>
+                <div class="p-4">
+                    @if($bundle->image)
+                        <div class="mb-3 p-2 bg-light border rounded d-flex justify-content-center">
+                            <img src="{{ $bundle->image_url }}" alt="{{ $bundle->name }}" class="object-fit-contain rounded" style="max-height: 120px;" onclick="window.previewImage('{{ $bundle->image_url }}', '{{ $bundle->name }}')">
+                        </div>
+                    @endif
+                    <input type="file" name="image" accept="image/*" class="form-control form-control-sm">
+                    <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Upload bundle presentation coffret image.</small>
                 </div>
             </div>
 
-            <div class="p-4 bg-brand-surface border border-brand-border/60 rounded-xl">
-                <button type="submit" class="w-full gold-btn py-3 rounded-lg text-xs font-semibold uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-floppy-disk"></i>
+            <!-- Action Button -->
+            <div class="admin-card mb-4 p-3 bg-white">
+                <button type="submit" class="admin-btn-primary w-100 py-2.5 fs-6">
+                    <i class="fa-solid fa-floppy-disk me-1"></i>
                     <span>Save Bundle Changes</span>
                 </button>
             </div>

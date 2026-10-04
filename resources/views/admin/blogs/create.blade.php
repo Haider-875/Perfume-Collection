@@ -5,93 +5,95 @@
 @section('page_subtitle', 'Author editorial content, perfumery heritage stories, and scent composition insights')
 
 @section('header_actions')
-<a href="{{ route('admin.blogs.index') }}" class="px-4 py-2 rounded-lg text-xs bg-brand-card hover:bg-brand-border text-brand-text border border-brand-border/60 flex items-center gap-2 transition">
+<a href="{{ route('admin.blogs.index') }}" class="admin-btn-secondary">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back to Journal</span>
 </a>
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('admin.blogs.store') }}" enctype="multipart/form-data" class="space-y-6">
+<form method="POST" action="{{ route('admin.blogs.store') }}" enctype="multipart/form-data">
     @csrf
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Main Form -->
-        <div class="lg:col-span-2 space-y-6">
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Chronicle Content
-                </h3>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Article Title *</label>
-                    <input type="text" name="title" value="{{ old('title') }}" required placeholder="e.g. The Sacred Art of Cambodian Agarwood Distillation"
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-                    @error('title') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
+    <div class="row g-4">
+        <!-- Main Form Column -->
+        <div class="col-lg-8">
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-newspaper text-primary small"></i>
+                        <span>Chronicle Content</span>
+                    </h6>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Category / Topic *</label>
-                        <input type="text" name="category" value="{{ old('category', 'Heritage & Ingredients') }}" required
-                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+                <div class="p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Article Title *</label>
+                        <input type="text" name="title" value="{{ old('title') }}" required placeholder="e.g. The Sacred Art of Cambodian Agarwood Distillation">
+                        @error('title') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
                     </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Estimated Read Time</label>
-                        <input type="text" name="read_time" value="{{ old('read_time', '5 min read') }}"
-                               class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Category / Topic *</label>
+                            <input type="text" name="category" value="{{ old('category', 'Heritage & Ingredients') }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Estimated Read Time</label>
+                            <input type="text" name="read_time" value="{{ old('read_time', '5 min read') }}">
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Short Excerpt / Lead Summary *</label>
-                    <textarea name="excerpt" rows="2" required placeholder="A brief poetic teaser displayed on blog cards..."
-                              class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('excerpt') }}</textarea>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Short Excerpt / Lead Summary *</label>
+                        <textarea name="excerpt" rows="3" required placeholder="A brief poetic teaser displayed on blog cards...">{{ old('excerpt') }}</textarea>
+                    </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Full Editorial Narrative *</label>
-                    <textarea name="content" rows="12" required placeholder="Write the complete article with rich historical anecdotes and composition notes..."
-                              class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">{{ old('content') }}</textarea>
+                    <div class="mb-0">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Full Editorial Narrative *</label>
+                        <textarea name="content" rows="12" required placeholder="Write the complete article with rich historical anecdotes and composition notes...">{{ old('content') }}</textarea>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column -->
-        <div class="space-y-6">
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Publishing Parameters
-                </h3>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1">Author Name</label>
-                    <input type="text" name="author_name" value="{{ old('author_name', 'Maison Perfumer') }}"
-                           class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3 py-2 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
+        <!-- Sidebar Column -->
+        <div class="col-lg-4">
+            <!-- Publishing Parameters -->
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0">Publishing Parameters</h6>
                 </div>
+                <div class="p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Author Name</label>
+                        <input type="text" name="author_name" value="{{ old('author_name', 'Maison Perfumer') }}">
+                    </div>
 
-                <div class="pt-2">
-                    <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" name="is_published" value="1" checked class="rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
-                        <span class="text-xs text-brand-text font-medium">Publish Immediately</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Header Cover Image -->
-            <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-                <h3 class="font-serif text-base font-semibold text-brand-text border-b border-brand-border/40 pb-3">
-                    Editorial Cover Photography
-                </h3>
-                <div>
-                    <input type="file" name="image" accept="image/*"
-                           class="w-full text-xs text-brand-muted file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-gold file:text-brand-black hover:file:bg-brand-goldLight cursor-pointer">
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" name="is_published" id="isPublishedCheck" value="1" checked>
+                        <label class="form-check-label small fw-semibold text-dark cursor-pointer" for="isPublishedCheck">
+                            Publish Immediately
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="p-4 bg-brand-surface border border-brand-border/60 rounded-xl">
-                <button type="submit" class="w-full gold-btn py-3 rounded-lg text-xs font-semibold uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-feather"></i>
+            <!-- Cover Photography -->
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-camera text-primary small"></i>
+                    <h6 class="fw-bold text-dark mb-0">Editorial Cover Photography</h6>
+                </div>
+                <div class="p-4">
+                    <input type="file" name="image" accept="image/*" class="form-control form-control-sm">
+                    <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Upload a high-resolution cover photo.</small>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="admin-card mb-4 p-3 bg-white">
+                <button type="submit" class="admin-btn-primary w-100 py-2.5 fs-6">
+                    <i class="fa-solid fa-feather me-1"></i>
                     <span>Publish Chronicle</span>
                 </button>
             </div>

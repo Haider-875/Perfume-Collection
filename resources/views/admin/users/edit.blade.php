@@ -5,131 +5,149 @@
 @section('page_subtitle', 'Adjust role elevation, toggle account status, and calibrate granular permission grants')
 
 @section('header_actions')
-<a href="{{ route('admin.users.index') }}" class="px-4 py-2 rounded-lg text-xs bg-brand-card hover:bg-brand-border text-brand-text border border-brand-border/60 flex items-center gap-2 transition">
+<a href="{{ route('admin.users.index') }}" class="admin-btn-secondary">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back to Staff Directory</span>
 </a>
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('admin.users.update', $user->id) }}" class="space-y-6 max-w-4xl">
+<form method="POST" action="{{ route('admin.users.update', $user->id) }}">
     @csrf
     @method('PUT')
 
-    <!-- Credentials & Identity -->
-    <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-        <h3 class="font-serif text-base font-semibold text-brand-text flex items-center gap-2 border-b border-brand-border/40 pb-3">
-            <i class="fa-solid fa-id-badge text-brand-gold text-xs"></i>
-            <span>Team Member Profile</span>
-        </h3>
+    <div class="row g-4 justify-content-center">
+        <div class="col-xl-10">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Full Name *</label>
-                <input type="text" name="name" value="{{ old('name', $user->name) }}" required
-                       class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-                @error('name') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
-            </div>
+            <!-- Credentials & Identity -->
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-id-badge text-primary small"></i>
+                        <span>Team Member Profile</span>
+                    </h6>
+                </div>
+                <div class="p-4">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Full Name *</label>
+                            <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
+                            @error('name') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
+                        </div>
 
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Email Address (Login Username) *</label>
-                <input type="email" name="email" value="{{ old('email', $user->email) }}" required
-                       class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold font-mono">
-                @error('email') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Reset Password (Leave blank to keep current)</label>
-                <input type="password" name="password" placeholder="Enter new password to reset"
-                       class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text placeholder-brand-muted/40 focus:outline-none focus:border-brand-gold">
-                @error('password') <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">Direct Phone / WhatsApp</label>
-                <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="e.g. 0300-1234567"
-                       class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-brand-muted mb-1 font-medium">City / Office Branch</label>
-                <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="e.g. Lahore / Karachi"
-                       class="w-full bg-brand-black/60 border border-brand-border/60 rounded-lg px-3.5 py-2.5 text-xs text-brand-text focus:outline-none focus:border-brand-gold">
-            </div>
-
-            <div class="flex items-center pt-5">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', $user->is_active !== false) ? 'checked' : '' }}
-                           class="rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
-                    <div>
-                        <span class="text-xs text-brand-text font-medium block">Account Enabled & Active</span>
-                        <span class="text-[10px] text-brand-muted block">Uncheck to instantly suspend access to the administrative suite</span>
-                    </div>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <!-- Role Selection -->
-    <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-        <h3 class="font-serif text-base font-semibold text-brand-text flex items-center gap-2 border-b border-brand-border/40 pb-3">
-            <i class="fa-solid fa-shield-halved text-brand-gold text-xs"></i>
-            <span>Administrative Role</span>
-        </h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @foreach($roles as $key => $r)
-                <label class="relative p-4 rounded-xl border {{ $user->role === $key ? 'border-brand-gold bg-brand-gold/10' : 'border-brand-border/60 bg-brand-card/40' }} hover:border-brand-gold/60 cursor-pointer transition block group">
-                    <div class="flex items-start gap-3">
-                        <input type="radio" name="role" value="{{ $key }}" {{ old('role', $user->role) === $key ? 'checked' : '' }}
-                               class="mt-1 text-brand-gold focus:ring-0 bg-brand-black border-brand-border">
-                        <div>
-                            <div class="font-semibold text-xs text-brand-text group-hover:text-brand-gold transition">{{ $r['label'] }}</div>
-                            <div class="text-[11px] text-brand-muted mt-1 leading-relaxed">{{ $r['description'] }}</div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Email Address (Login) *</label>
+                            <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="font-monospace">
+                            @error('email') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
                         </div>
                     </div>
-                </label>
-            @endforeach
-        </div>
-    </div>
 
-    <!-- Granular Permissions Matrix -->
-    @php
-        $userPerms = is_array($user->permissions) ? $user->permissions : (json_decode($user->permissions ?? '[]', true) ?: []);
-    @endphp
-    <div class="bg-brand-surface border border-brand-border/60 rounded-xl p-6 space-y-4">
-        <div class="border-b border-brand-border/40 pb-3">
-            <h3 class="font-serif text-base font-semibold text-brand-text flex items-center gap-2">
-                <i class="fa-solid fa-key text-brand-gold text-xs"></i>
-                <span>Explicit Granular Permissions</span>
-            </h3>
-            <p class="text-[11px] text-brand-muted mt-0.5">Customize individual capabilities (Super Admins inherently possess all permissions).</p>
-        </div>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Reset Password</label>
+                            <input type="password" name="password" placeholder="Leave blank to keep current password">
+                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Only enter a new password if resetting credentials.</small>
+                            @error('password') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
+                        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            @foreach($availablePermissions as $pKey => $pMeta)
-                <label class="p-3 bg-brand-card/30 border border-brand-border/40 rounded-lg flex items-start gap-3 hover:bg-brand-card/60 transition cursor-pointer">
-                    <input type="checkbox" name="permissions[]" value="{{ $pKey }}"
-                           {{ in_array($pKey, old('permissions', $userPerms)) ? 'checked' : '' }}
-                           class="mt-0.5 rounded bg-brand-black border-brand-border text-brand-gold focus:ring-0">
-                    <div>
-                        <span class="text-xs font-medium text-brand-text block">{{ $pMeta['label'] }}</span>
-                        <span class="text-[10px] text-brand-muted block leading-snug">{{ $pMeta['description'] }}</span>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Direct Phone / WhatsApp</label>
+                            <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="e.g. 0300-1234567">
+                        </div>
                     </div>
-                </label>
-            @endforeach
-        </div>
-    </div>
 
-    <!-- Actions -->
-    <div class="flex items-center justify-end gap-3 pt-2">
-        <a href="{{ route('admin.users.index') }}" class="px-5 py-2.5 rounded-lg text-xs text-brand-muted hover:text-brand-text border border-brand-border/60 bg-brand-card transition">
-            Cancel
-        </a>
-        <button type="submit" class="gold-btn px-6 py-2.5 rounded-lg text-xs shadow-lg flex items-center gap-2">
-            <i class="fa-solid fa-check"></i>
-            <span>Save Staff Changes</span>
-        </button>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">City / Office Branch</label>
+                            <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="e.g. Lahore / Karachi">
+                        </div>
+
+                        <div class="col-md-6 pt-md-3">
+                            <div class="form-check form-switch p-3 bg-light border rounded">
+                                <input class="form-check-input ms-0 me-3" type="checkbox" name="is_active" id="isActiveCheck" value="1" {{ old('is_active', $user->is_active !== false) ? 'checked' : '' }}>
+                                <label class="form-check-label cursor-pointer" for="isActiveCheck">
+                                    <span class="small fw-semibold text-dark d-block">Account Enabled & Active</span>
+                                    <small class="text-muted d-block" style="font-size: 0.72rem;">Uncheck to instantly suspend access to the portal</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role Selection -->
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom">
+                    <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-primary small"></i>
+                        <span>Administrative Role</span>
+                    </h6>
+                </div>
+                <div class="p-4">
+                    <div class="row g-3">
+                        @foreach($roles as $key => $r)
+                            <div class="col-md-6">
+                                <label class="p-3 border rounded d-block cursor-pointer h-100 transition {{ old('role', $user->role) === $key ? 'border-primary bg-primary-subtle' : 'bg-light' }}">
+                                    <div class="d-flex align-items-start gap-2.5">
+                                        <input type="radio" name="role" value="{{ $key }}" {{ old('role', $user->role) === $key ? 'checked' : '' }}
+                                               class="form-check-input mt-1 flex-shrink-0">
+                                        <div>
+                                            <div class="fw-bold small text-dark">{{ $r['label'] }}</div>
+                                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem; line-height: 1.35;">{{ $r['description'] }}</small>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Granular Permissions Matrix -->
+            @php
+                $userPerms = is_array($user->permissions) ? $user->permissions : (json_decode($user->permissions ?? '[]', true) ?: []);
+            @endphp
+            <div class="admin-card mb-4">
+                <div class="px-4 py-3 bg-white border-bottom d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-key text-primary small"></i>
+                            <span>Explicit Granular Permissions</span>
+                        </h6>
+                        <small class="text-muted" style="font-size: 0.72rem;">Customize individual capabilities (Super Admins inherently possess all permissions).</small>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="row g-3">
+                        @foreach($availablePermissions as $pKey => $pMeta)
+                            <div class="col-md-6">
+                                <label class="p-3 bg-light border rounded d-flex align-items-start gap-2.5 cursor-pointer h-100 transition mb-0">
+                                    <input type="checkbox" name="permissions[]" value="{{ $pKey }}"
+                                           {{ in_array($pKey, old('permissions', $userPerms)) ? 'checked' : '' }}
+                                           class="form-check-input mt-1 flex-shrink-0">
+                                    <div>
+                                        <div class="fw-semibold small text-dark">{{ $pMeta['label'] }}</div>
+                                        <small class="text-muted d-block mt-0.5" style="font-size: 0.72rem; line-height: 1.35;">{{ $pMeta['description'] }}</small>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Submit Buttons -->
+            <div class="d-flex align-items-center justify-content-end gap-2 pb-4">
+                <a href="{{ route('admin.users.index') }}" class="admin-btn-secondary px-4">
+                    Cancel
+                </a>
+                <button type="submit" class="admin-btn-primary px-4 py-2 fs-6">
+                    <i class="fa-solid fa-check me-1"></i>
+                    <span>Save Staff Changes</span>
+                </button>
+            </div>
+
+        </div>
     </div>
 </form>
 @endsection
