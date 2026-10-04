@@ -11,6 +11,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $attributes = [
+        'is_active' => true,
+        'role' => 'customer',
+    ];
+
     protected $fillable = [
         'name',
         'email',

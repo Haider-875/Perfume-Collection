@@ -365,15 +365,21 @@
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    function variantManager() {
-        const initialVariants = @json($product->variants->map(fn($v) => [
+@php
+    $initialVariants = $product->variants->map(function($v) {
+        return [
             'size' => $v->size_label ?? $v->size ?? '',
             'sku' => $v->sku,
             'price' => $v->price,
-            'stock' => $v->stock
-        ]));
+            'stock' => $v->stock,
+        ];
+    })->values()->toArray();
+@endphp
+
+@push('scripts')
+<script>
+    function variantManager() {
+        const initialVariants = @json($initialVariants);
 
         return {
             variants: initialVariants.length > 0 ? initialVariants : [

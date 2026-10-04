@@ -57,7 +57,7 @@ class Part3AdminSuiteTest extends TestCase
     {
         // Unauthenticated guest
         $response = $this->get('/admin');
-        $response->assertRedirect('/login');
+        $response->assertRedirect(route('admin.login'));
 
         // Normal customer
         $response = $this->actingAs($this->customerUser)->get('/admin');

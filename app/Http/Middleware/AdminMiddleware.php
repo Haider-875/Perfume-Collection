@@ -22,7 +22,7 @@ class AdminMiddleware
         }
 
         if (!$user->isAdmin()) {
-            return redirect()->route('admin.login')->with('error', 'Access denied. You must possess administrative privileges.');
+            abort(403, 'Access denied. You must possess administrative privileges.');
         }
 
         if ($permission && !$user->hasPermission($permission)) {
