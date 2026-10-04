@@ -341,3 +341,236 @@ h1, h2, h3, h4, h5, h6 {
 .luxury-modal-overlay.active .luxury-modal-content {
     transform: scale(1);
 }
+
+/* ==========================================================================
+   BOOTSTRAP 5.3 LUXURY BRIDGE & DESIGN SYSTEM UTILITIES
+   Ensures 100% visual parity across all components and templates
+   ========================================================================== */
+
+/* 1. Global Reset & Bootstrap Overrides */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+a:hover {
+    color: var(--gold-soft);
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+    color: var(--ivory);
+    font-weight: 600;
+}
+
+/* Selection Color */
+::selection {
+    background-color: #4a0915;
+    color: #f0d59d;
+}
+
+/* 2. Color Utilities */
+.bg-theme-main, .bg-themebg { background-color: #050203 !important; }
+.bg-theme-secondary { background-color: #0d0407 !important; }
+.bg-theme-card { background-color: #120408 !important; }
+.bg-theme-card-alt { background-color: #1c060d !important; }
+.bg-theme-dark { background-color: #020102 !important; }
+
+.bg-wine { background-color: #25050a !important; }
+.bg-wine-2 { background-color: #4a0915 !important; }
+.bg-wine-dark { background-color: #160409 !important; }
+.bg-wine-light { background-color: #5f071d !important; }
+.bg-wine-accent { background-color: #3b0711 !important; }
+.bg-maroon-dark { background-color: #851a31 !important; }
+
+.text-gold { color: #d6aa62 !important; }
+.text-gold-soft { color: #f0d59d !important; }
+.text-gold-bright { color: #ffd987 !important; }
+.text-gold-dark { color: #8d5a22 !important; }
+.text-gold-champagne { color: #f5eadc !important; }
+.text-ivory { color: #f5efe7 !important; }
+.text-sub { color: #dfd5cb !important; }
+.text-muted-luxury { color: #b8a9a2 !important; }
+.text-light-luxury { color: #8e7c75 !important; }
+
+/* 3. Border Utilities */
+.border-gold { border-color: #d6aa62 !important; }
+.border-gold-15 { border-color: rgba(214, 170, 98, 0.15) !important; }
+.border-gold-20 { border-color: rgba(214, 170, 98, 0.20) !important; }
+.border-gold-25 { border-color: rgba(214, 170, 98, 0.25) !important; }
+.border-gold-30 { border-color: rgba(214, 170, 98, 0.30) !important; }
+.border-gold-40 { border-color: rgba(214, 170, 98, 0.40) !important; }
+.border-gold-50 { border-color: rgba(214, 170, 98, 0.50) !important; }
+.border-gold-60 { border-color: rgba(214, 170, 98, 0.60) !important; }
+.border-gold-80 { border-color: rgba(214, 170, 98, 0.80) !important; }
+.border-wine { border-color: rgba(95, 7, 29, 0.45) !important; }
+.border-line { border-color: rgba(214, 170, 98, 0.30) !important; }
+
+/* 4. Luxury Gradients */
+.bg-gradient-wine-ticker {
+    background: linear-gradient(90deg, #160409 0%, #3b0711 50%, #160409 100%) !important;
+}
+.bg-gradient-wine-radial {
+    background: radial-gradient(circle at 50% 15%, rgba(133, 26, 49, 0.35), transparent 65%) !important;
+}
+.bg-gradient-wine-card {
+    background: linear-gradient(180deg, #18050b 0%, #100306 50%, #070103 100%) !important;
+}
+.bg-gradient-wine-badge {
+    background: linear-gradient(90deg, #4a0915 0%, #25050a 100%) !important;
+}
+.bg-gradient-discount-badge {
+    background: linear-gradient(90deg, #851a31 0%, #4a0915 100%) !important;
+}
+.bg-gradient-gold-pill {
+    background: linear-gradient(90deg, #d6aa62 0%, #c08b3f 100%) !important;
+}
+.bg-gradient-overlay-hero {
+    background: linear-gradient(90deg, rgba(5, 2, 3, 0.95) 0%, rgba(37, 5, 10, 0.75) 50%, rgba(5, 2, 3, 0.40) 100%) !important;
+}
+.bg-gradient-bottom-fade {
+    background: linear-gradient(0deg, rgba(5, 2, 3, 0.70) 0%, transparent 100%) !important;
+}
+
+/* 5. Typography & Letter Spacing */
+.font-serif { font-family: var(--font-serif) !important; }
+.font-sans { font-family: var(--font-sans) !important; }
+
+.tracking-wide { letter-spacing: 0.05em !important; }
+.tracking-wider { letter-spacing: 0.1em !important; }
+.tracking-widest { letter-spacing: 0.18em !important; }
+.tracking-luxury { letter-spacing: 0.25em !important; }
+.tracking-ultra { letter-spacing: 0.32em !important; }
+
+/* 6. Backdrop Blur Utilities */
+.backdrop-blur-xs { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+.backdrop-blur-sm { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.backdrop-blur-md { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.backdrop-blur-lg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.backdrop-blur-xl { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+
+/* 7. Aspect Ratio Helpers */
+.aspect-square, .aspect-1x1 {
+    aspect-ratio: 1 / 1;
+}
+.aspect-4x5 {
+    aspect-ratio: 4 / 5;
+}
+.aspect-3x4 {
+    aspect-ratio: 3 / 4;
+}
+
+/* 8. Forms & Inputs */
+.form-control-luxury, .form-select-luxury {
+    background-color: #120b0c !important;
+    border: 1px solid rgba(214, 170, 98, 0.3) !important;
+    color: #f5efe7 !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+    transition: var(--transition-smooth) !important;
+}
+.form-control-luxury:focus, .form-select-luxury:focus {
+    background-color: #160409 !important;
+    border-color: #d6aa62 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(214, 170, 98, 0.25) !important;
+    outline: none !important;
+}
+.form-control-luxury::placeholder {
+    color: #8e7c75 !important;
+}
+
+/* 9. Card Structure & Hover Effects */
+.luxury-hover-card {
+    transition: var(--transition-smooth);
+}
+.luxury-hover-card:hover {
+    border-color: rgba(214, 170, 98, 0.8) !important;
+    box-shadow: 0 12px 35px rgba(214, 170, 98, 0.18) !important;
+    transform: translateY(-2px);
+}
+
+.quick-actions-toolbar {
+    transform: translateX(8px);
+    transition: var(--transition-smooth);
+}
+.product-card:hover .quick-actions-toolbar {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* 10. Layout Spacing Bridges */
+.space-y-1 > * + * { margin-top: 0.25rem; }
+.space-y-1_5 > * + * { margin-top: 0.375rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-5 > * + * { margin-top: 1.25rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.space-y-8 > * + * { margin-top: 2rem; }
+
+.space-x-1 > * + * { margin-left: 0.25rem; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-x-3 > * + * { margin-left: 0.75rem; }
+.space-x-4 > * + * { margin-left: 1rem; }
+.space-x-6 > * + * { margin-left: 1.5rem; }
+.space-x-8 > * + * { margin-left: 2rem; }
+
+/* Flex & Grid Bridge Helpers */
+.gap-1 { gap: 0.25rem !important; }
+.gap-1_5 { gap: 0.375rem !important; }
+.gap-2 { gap: 0.5rem !important; }
+.gap-2_5 { gap: 0.625rem !important; }
+.gap-3 { gap: 0.75rem !important; }
+.gap-4 { gap: 1rem !important; }
+.gap-5 { gap: 1.25rem !important; }
+.gap-6 { gap: 1.5rem !important; }
+.gap-8 { gap: 2rem !important; }
+
+/* Grid system */
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+@media (min-width: 576px) {
+    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .md\:col-span-2 { grid-column: span 2 / span 2; }
+}
+@media (min-width: 992px) {
+    .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .lg\:col-span-2 { grid-column: span 2 / span 2; }
+    .lg\:col-span-3 { grid-column: span 3 / span 3; }
+}
+@media (min-width: 1200px) {
+    .xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .xl\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* Color Aliases & Safety Bridges */
+.text-brand-ivory { color: var(--ivory) !important; }
+.text-brand-gold { color: var(--gold) !important; }
+.bg-brand-gold { background-color: var(--gold) !important; }
+.bg-brand-maroon { background-color: var(--wine) !important; }
+.border-brand-gold { border-color: var(--gold) !important; }
+.accent-gold { accent-color: var(--gold) !important; }
+.hover-gold:hover { color: var(--gold) !important; }
+.hover-danger:hover { color: #f87171 !important; border-color: #ef4444 !important; }
+
+

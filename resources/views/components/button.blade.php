@@ -9,10 +9,10 @@
 
 @php
 $sizeClasses = [
-    'sm' => 'px-3 py-1.5 text-xs',
-    'md' => 'px-6 py-3 text-xs tracking-widest',
-    'lg' => 'px-8 py-4 text-sm tracking-widest'
-][$size] ?? 'px-6 py-3 text-xs tracking-widest';
+    'sm' => 'px-3 py-1 text-xs',
+    'md' => 'px-4 py-2 text-xs tracking-widest',
+    'lg' => 'px-5 py-3 text-sm tracking-widest'
+][$size] ?? 'px-4 py-2 text-xs tracking-widest';
 
 $variantClasses = [
     'gold' => 'btn-gold',
@@ -24,13 +24,13 @@ $variantClasses = [
 @endphp
 
 @if($href)
-    <a href="{{ $href }}" {{ $attributes->merge(['class' => "$variantClasses $class"]) }}>
-        @if($icon) <i class="{{ $icon }} mr-2"></i> @endif
+    <a href="{{ $href }}" {{ $attributes->merge(['class' => "$variantClasses $sizeClasses $class text-decoration-none"]) }}>
+        @if($icon) <i class="{{ $icon }} me-2"></i> @endif
         {{ $slot }}
     </a>
 @else
-    <button type="{{ $type }}" {{ $attributes->merge(['class' => "$variantClasses $class"]) }}>
-        @if($icon) <i class="{{ $icon }} mr-2"></i> @endif
+    <button type="{{ $type }}" {{ $attributes->merge(['class' => "$variantClasses $sizeClasses $class"]) }}>
+        @if($icon) <i class="{{ $icon }} me-2"></i> @endif
         {{ $slot }}
     </button>
 @endif

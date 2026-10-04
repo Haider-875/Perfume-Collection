@@ -3,34 +3,34 @@
 @section('title', 'Track Order Consignment — Perfumes Collection')
 
 @section('content')
-<div class="py-12 md:py-20 bg-[#050203] text-[#f5efe7] min-h-screen border-b border-[#d6aa62]/20">
-    <div class="container mx-auto px-4 max-w-4xl">
+<div class="py-5 text-light-parchment min-vh-100 border-bottom border-gold-20" style="background-color: #050203;">
+    <div class="container px-3 px-lg-4" style="max-width: 900px;">
         <!-- Header -->
-        <div class="text-center mb-10">
-            <span class="inline-block text-xs uppercase tracking-[0.28em] text-[#d6aa62] font-semibold px-4 py-1.5 bg-[#1f060d] border border-[#d6aa62]/30 rounded-full mb-3">
+        <div class="text-center mb-5">
+            <span class="d-inline-block text-gold fw-semibold px-3 py-1 bg-wine-dark border border-gold-30 rounded-pill mb-2" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">
                 Nationwide Tracking
             </span>
-            <h1 class="font-serif text-3xl md:text-5xl text-[#f5efe7] font-normal mb-3">Order Status & Tracking</h1>
-            <p class="text-[#b8a9a2] text-sm max-w-xl mx-auto leading-relaxed">
+            <h1 class="font-serif display-5 text-light-parchment fw-normal mb-2">Order Status & Tracking</h1>
+            <p class="text-muted-parchment mx-auto mb-0" style="font-size: 0.95rem; max-width: 560px;">
                 Track your artisan fragrance parcel from our laboratory vault to your doorstep across Pakistan.
             </p>
         </div>
 
         <!-- Search Form -->
-        <div class="bg-[#140408] border border-[#d6aa62]/25 p-6 md:p-8 rounded-2xl shadow-xl mb-10">
-            <form action="{{ route('order.tracking') }}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-                <div class="md:col-span-5">
-                    <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-2 font-semibold">Order Number</label>
+        <div class="bg-wine-card border border-gold-25 p-4 p-md-5 rounded-4 shadow-xl mb-5">
+            <form action="{{ route('order.tracking') }}" method="GET" class="row g-3 align-items-end">
+                <div class="col-12 col-md-5">
+                    <label class="d-block text-gold mb-1 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Order Number</label>
                     <input type="text" name="order_number" value="{{ $orderNumber }}" placeholder="e.g. PC-100245" 
-                           class="w-full bg-[#080204] border border-[#d6aa62]/30 px-4 py-3 text-sm text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:border-[#d6aa62] focus:outline-none rounded-lg font-mono">
+                           class="form-control form-control-luxury text-sm py-2 px-3 font-mono">
                 </div>
-                <div class="md:col-span-5">
-                    <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-2 font-semibold">Mobile Phone Number</label>
+                <div class="col-12 col-md-5">
+                    <label class="d-block text-gold mb-1 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Mobile Phone Number</label>
                     <input type="text" name="phone" value="{{ $phone }}" placeholder="e.g. 03001234567" 
-                           class="w-full bg-[#080204] border border-[#d6aa62]/30 px-4 py-3 text-sm text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:border-[#d6aa62] focus:outline-none rounded-lg">
+                           class="form-control form-control-luxury text-sm py-2 px-3">
                 </div>
-                <div class="md:col-span-2">
-                    <button type="submit" class="w-full btn-gold py-3.5 text-xs uppercase tracking-wider font-semibold rounded-lg shadow-md">
+                <div class="col-12 col-md-2">
+                    <button type="submit" class="w-100 btn-gold py-2 text-xs text-uppercase tracking-wider fw-semibold rounded-3 shadow-sm">
                         Track
                     </button>
                 </div>
@@ -40,22 +40,22 @@
         @if($searched)
             @if($order)
                 <!-- Tracking Results -->
-                <div class="bg-[#140408] border border-[#d6aa62]/25 p-6 md:p-10 rounded-2xl shadow-xl mb-10 space-y-8 animate-fadeIn">
+                <div class="bg-wine-card border border-gold-25 p-4 p-md-5 rounded-4 shadow-xl mb-5 d-flex flex-column gap-4">
                     <!-- Order Meta Bar -->
-                    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#d6aa62]/20">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pb-4 border-bottom border-gold-20">
                         <div>
-                            <span class="text-xs uppercase tracking-wider text-[#b8a9a2] block mb-0.5">Order Reference</span>
-                            <span class="font-serif text-2xl md:text-3xl text-[#f0d59d] font-bold">{{ $order->order_number }}</span>
+                            <span class="text-muted-parchment d-block mb-1 text-uppercase" style="font-size: 11px; letter-spacing: 0.05em;">Order Reference</span>
+                            <span class="font-serif fs-3 text-gold-soft fw-bold">{{ $order->order_number }}</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-xs uppercase tracking-wider text-[#b8a9a2] block mb-0.5">Placed On</span>
-                            <span class="text-sm font-mono text-[#f5efe7] font-semibold">{{ $order->created_at->format('d M Y, h:i A') }}</span>
+                        <div class="text-end">
+                            <span class="text-muted-parchment d-block mb-1 text-uppercase" style="font-size: 11px; letter-spacing: 0.05em;">Placed On</span>
+                            <span class="text-sm font-mono text-light-parchment fw-semibold">{{ $order->created_at->format('d M Y, h:i A') }}</span>
                         </div>
                     </div>
 
                     <!-- Visual Luxury Status Timeline -->
                     <div>
-                        <h3 class="text-xs uppercase tracking-wider text-[#d6aa62] font-semibold mb-6 text-center md:text-left">Consignment Progress</h3>
+                        <h3 class="text-gold fw-semibold mb-4 text-center text-md-start" style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Consignment Progress</h3>
                         
                         @php
                             $statuses = [
@@ -73,36 +73,36 @@
                             if ($currentIndex === false) $currentIndex = 0;
                         @endphp
 
-                        <div class="relative">
+                        <div class="position-relative">
                             <!-- Progress Bar Line -->
-                            <div class="hidden md:block absolute top-5 left-8 right-8 h-1 bg-[#25050a] -z-0">
-                                <div class="h-full bg-gradient-to-r from-[#d6aa62] to-[#f0d59d] transition-all duration-700" 
-                                     style="width: {{ count($statusKeys) > 1 ? ($currentIndex / (count($statusKeys) - 1)) * 100 : 0 }}%;"></div>
+                            <div class="d-none d-md-block position-absolute start-0 end-0 mx-5 bg-wine-accent" style="top: 20px; height: 4px; z-index: 1;">
+                                <div class="h-100 transition" 
+                                     style="background: linear-gradient(to right, #d6aa62, #f0d59d); width: {{ count($statusKeys) > 1 ? ($currentIndex / (count($statusKeys) - 1)) * 100 : 0 }}%;"></div>
                             </div>
 
                             <!-- Steps Grid -->
-                            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
+                            <div class="row row-cols-1 row-cols-md-5 g-3 position-relative" style="z-index: 2;">
                                 @foreach($statuses as $key => $step)
                                     @php
                                         $index = array_search($key, $statusKeys);
                                         $isPassed = $index <= $currentIndex;
                                         $isCurrent = $index === $currentIndex;
                                     @endphp
-                                    <div class="flex md:flex-col items-center md:text-center gap-4 md:gap-2">
-                                        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 {{ $isPassed ? 'bg-gradient-to-r from-[#d6aa62] to-[#c08b3f] text-[#050203] font-bold shadow-md' : 'bg-[#080204] border border-[#d6aa62]/30 text-[#b8a9a2]' }}">
-                                            @if($isPassed)
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                                                </svg>
-                                            @else
-                                                <span class="text-xs font-mono">{{ $loop->iteration }}</span>
-                                            @endif
-                                        </div>
-                                        <div>
-                                            <h4 class="text-xs uppercase tracking-wider font-bold {{ $isPassed ? 'text-[#f5efe7]' : 'text-[#b8a9a2]' }} {{ $isCurrent ? 'text-[#f0d59d]' : '' }}">
-                                                {{ $step['label'] }}
-                                            </h4>
-                                            <p class="text-[11px] text-[#b8a9a2]/80 mt-0.5 hidden md:block">{{ $step['desc'] }}</p>
+                                    <div class="col">
+                                        <div class="d-flex d-md-flex flex-row flex-md-column align-items-center text-md-center gap-3 gap-md-2">
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 transition {{ $isPassed ? 'text-dark fw-bold shadow' : 'bg-wine-dark border border-gold-30 text-muted-parchment' }}" style="width: 40px; height: 40px; {{ $isPassed ? 'background: linear-gradient(to right, #d6aa62, #c08b3f);' : '' }}">
+                                                @if($isPassed)
+                                                    <i class="fas fa-check"></i>
+                                                @else
+                                                    <span class="text-xs font-mono">{{ $loop->iteration }}</span>
+                                                @endif
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xs text-uppercase tracking-wider fw-bold mb-0 {{ $isPassed ? 'text-light-parchment' : 'text-muted-parchment' }} {{ $isCurrent ? 'text-gold-soft' : '' }}">
+                                                    {{ $step['label'] }}
+                                                </h4>
+                                                <p class="text-muted-parchment mt-1 mb-0 d-none d-md-block" style="font-size: 11px;">{{ $step['desc'] }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -112,20 +112,20 @@
 
                     <!-- Courier Details Card (if shipped) -->
                     @if($order->courier_name || $order->tracking_number)
-                        <div class="bg-[#25050a] border border-[#d6aa62]/30 p-6 rounded-xl">
-                            <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div class="bg-wine-accent border border-gold-30 p-4 rounded-3">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                                 <div>
-                                    <span class="text-[11px] uppercase tracking-wider text-[#d6aa62] font-bold block mb-1">Courier Partner</span>
-                                    <div class="text-lg font-serif text-[#f5efe7] font-bold">{{ $order->courier_name ?? 'TCS Express Courier' }}</div>
-                                    <div class="text-xs font-mono text-[#b8a9a2] mt-1">
-                                        Tracking CN: <span class="font-bold text-[#f0d59d]">{{ $order->tracking_number ?? 'In Transit' }}</span>
+                                    <span class="text-gold fw-bold d-block mb-1 text-uppercase" style="font-size: 11px; letter-spacing: 0.05em;">Courier Partner</span>
+                                    <div class="fs-5 font-serif text-light-parchment fw-bold">{{ $order->courier_name ?? 'TCS Express Courier' }}</div>
+                                    <div class="text-xs font-mono text-muted-parchment mt-1">
+                                        Tracking CN: <span class="fw-bold text-gold-soft">{{ $order->tracking_number ?? 'In Transit' }}</span>
                                     </div>
                                 </div>
                                 @if($order->tracking_link)
                                     <a href="{{ $order->tracking_link }}" target="_blank" rel="noopener noreferrer" 
-                                       class="btn-gold px-5 py-2.5 text-xs uppercase tracking-wider rounded-lg font-semibold inline-flex items-center gap-2">
+                                       class="btn-gold px-4 py-2 text-xs text-uppercase tracking-wider rounded-3 fw-semibold d-inline-flex align-items-center gap-2 text-decoration-none">
                                         <span>Live Tracking Portal</span>
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                        <i class="fas fa-external-link-alt" style="font-size: 11px;"></i>
                                     </a>
                                 @endif
                             </div>
@@ -133,54 +133,58 @@
                     @endif
 
                     <!-- Details Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#d6aa62]/20">
+                    <div class="row g-3 pt-3 border-top border-gold-20">
                         <!-- Recipient & Delivery -->
-                        <div class="bg-[#080204] p-5 rounded-xl border border-[#d6aa62]/20 space-y-1.5 text-xs">
-                            <h4 class="text-[11px] uppercase tracking-wider text-[#d6aa62] mb-2 font-semibold">Delivery Address</h4>
-                            <p class="text-sm font-bold text-[#f5efe7]">{{ $order->customer_name }}</p>
-                            <p class="text-[#b8a9a2]">{{ $order->shipping_address }}</p>
-                            @if($order->area)<p class="text-[#b8a9a2]">Area: {{ $order->area }}</p>@endif
-                            <p class="text-[#b8a9a2]">{{ $order->city }}, {{ $order->province }}</p>
-                            <p class="text-[#d6aa62] font-mono">Phone: {{ $order->customer_phone }}</p>
+                        <div class="col-12 col-md-6">
+                            <div class="bg-wine-dark p-3 rounded-3 border border-gold-20 d-flex flex-column gap-1 text-xs">
+                                <h4 class="text-gold mb-1 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Delivery Address</h4>
+                                <p class="text-sm fw-bold text-light-parchment mb-0">{{ $order->customer_name }}</p>
+                                <p class="text-muted-parchment mb-0">{{ $order->shipping_address }}</p>
+                                @if($order->area)<p class="text-muted-parchment mb-0">Area: {{ $order->area }}</p>@endif
+                                <p class="text-muted-parchment mb-0">{{ $order->city }}, {{ $order->province }}</p>
+                                <p class="text-gold font-mono mb-0">Phone: {{ $order->customer_phone }}</p>
+                            </div>
                         </div>
 
                         <!-- Payment & Order Info -->
-                        <div class="bg-[#080204] p-5 rounded-xl border border-[#d6aa62]/20 space-y-1.5 text-xs">
-                            <h4 class="text-[11px] uppercase tracking-wider text-[#d6aa62] mb-2 font-semibold">Payment & Status</h4>
-                            <div class="flex justify-between py-1 border-b border-[#d6aa62]/15">
-                                <span class="text-[#b8a9a2]">Method:</span>
-                                <span class="font-semibold text-[#f5efe7] uppercase">{{ str_replace('_', ' ', $order->payment_method) }}</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b border-[#d6aa62]/15">
-                                <span class="text-[#b8a9a2]">Payment Status:</span>
-                                <span class="font-semibold uppercase {{ $order->payment_status === 'paid' ? 'text-emerald-400' : 'text-[#f0d59d]' }}">
-                                    {{ str_replace('_', ' ', $order->payment_status) }}
-                                </span>
-                            </div>
-                            <div class="flex justify-between py-1">
-                                <span class="text-[#b8a9a2]">Total:</span>
-                                <span class="font-bold text-[#f0d59d] font-serif text-sm">Rs. {{ number_format($order->total_amount, 0) }}</span>
-                            </div>
-                            @if($order->bank_transaction_id)
-                                <div class="flex justify-between py-1 border-t border-[#d6aa62]/15">
-                                    <span class="text-[#b8a9a2]">Transaction ID:</span>
-                                    <span class="font-mono text-[#f5efe7] font-semibold">{{ $order->bank_transaction_id }}</span>
+                        <div class="col-12 col-md-6">
+                            <div class="bg-wine-dark p-3 rounded-3 border border-gold-20 d-flex flex-column gap-1 text-xs">
+                                <h4 class="text-gold mb-1 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Payment & Status</h4>
+                                <div class="d-flex justify-content-between py-1 border-bottom border-gold-20">
+                                    <span class="text-muted-parchment">Method:</span>
+                                    <span class="fw-semibold text-light-parchment text-uppercase">{{ str_replace('_', ' ', $order->payment_method) }}</span>
                                 </div>
-                            @endif
+                                <div class="d-flex justify-content-between py-1 border-bottom border-gold-20">
+                                    <span class="text-muted-parchment">Payment Status:</span>
+                                    <span class="fw-semibold text-uppercase {{ $order->payment_status === 'paid' ? 'text-success' : 'text-gold-soft' }}">
+                                        {{ str_replace('_', ' ', $order->payment_status) }}
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between py-1">
+                                    <span class="text-muted-parchment">Total:</span>
+                                    <span class="fw-bold text-gold-soft font-serif fs-6">Rs. {{ number_format($order->total_amount, 0) }}</span>
+                                </div>
+                                @if($order->bank_transaction_id)
+                                    <div class="d-flex justify-content-between py-1 border-top border-gold-20">
+                                        <span class="text-muted-parchment">Transaction ID:</span>
+                                        <span class="font-mono text-light-parchment fw-semibold">{{ $order->bank_transaction_id }}</span>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
                     <!-- Items Table -->
                     <div>
-                        <h4 class="text-xs uppercase tracking-wider text-[#d6aa62] mb-3 font-semibold">Items in this Parcel</h4>
-                        <div class="divide-y divide-[#d6aa62]/15 bg-[#080204] rounded-xl border border-[#d6aa62]/20 overflow-hidden">
+                        <h4 class="text-gold mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Items in this Parcel</h4>
+                        <div class="bg-wine-dark rounded-3 border border-gold-20 overflow-hidden">
                             @foreach($order->items as $item)
-                                <div class="p-4 flex items-center justify-between gap-4 text-xs">
+                                <div class="p-3 d-flex align-items-center justify-content-between gap-3 text-xs {{ !$loop->last ? 'border-bottom border-gold-20' : '' }}">
                                     <div>
-                                        <div class="font-bold text-sm text-[#f5efe7]">{{ $item->product_name }}</div>
-                                        <div class="text-[#b8a9a2] text-[11px]">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</div>
+                                        <div class="fw-bold fs-6 text-light-parchment">{{ $item->product_name }}</div>
+                                        <div class="text-muted-parchment" style="font-size: 11px;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</div>
                                     </div>
-                                    <div class="text-right font-mono text-[#f0d59d] font-bold">
+                                    <div class="text-end font-mono text-gold-soft fw-bold">
                                         Rs. {{ number_format($item->total, 0) }}
                                     </div>
                                 </div>
@@ -190,23 +194,19 @@
                 </div>
             @else
                 <!-- Not Found State -->
-                <div class="bg-[#140408] border border-[#d6aa62]/25 p-10 rounded-2xl text-center shadow-xl mb-10 space-y-4">
-                    <div class="w-16 h-16 rounded-full bg-[#25050a] border border-rose-500/40 mx-auto mb-2 flex items-center justify-center text-rose-400">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                        </svg>
+                <div class="bg-wine-card border border-gold-25 p-5 rounded-4 text-center shadow-xl mb-4 d-flex flex-column align-items-center gap-2">
+                    <div class="rounded-circle bg-wine-accent border border-danger-subtle d-flex align-items-center justify-content-center text-danger mb-2" style="width: 64px; height: 64px;">
+                        <i class="fas fa-exclamation-triangle fs-3"></i>
                     </div>
-                    <h3 class="font-serif text-2xl text-[#f5efe7] mb-2 font-bold">No Matching Order Found</h3>
-                    <p class="text-sm text-[#b8a9a2] max-w-md mx-auto">
+                    <h3 class="font-serif fs-4 text-light-parchment mb-1 fw-bold">No Matching Order Found</h3>
+                    <p class="text-muted-parchment mx-auto mb-3" style="max-width: 440px; font-size: 0.9rem;">
                         We could not find an order matching the details provided. Please verify the order number (e.g. PC-100245) or the phone number used during checkout.
                     </p>
-                    <div class="pt-2">
-                        <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" 
-                           class="inline-flex items-center gap-2 px-6 py-3 btn-whatsapp font-semibold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>Contact WhatsApp Support</span>
-                        </a>
-                    </div>
+                    <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" 
+                       class="btn-whatsapp px-4 py-2 fw-semibold text-xs text-uppercase tracking-wider rounded-3 d-inline-flex align-items-center gap-2 shadow-sm text-decoration-none">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Contact WhatsApp Support</span>
+                    </a>
                 </div>
             @endif
         @endif
@@ -215,17 +215,17 @@
         @php
             $storePhone = settings('site_phone', '+92 300 8765432');
         @endphp
-        <div class="text-center p-8 bg-[#140408] border border-[#d6aa62]/25 rounded-2xl shadow-xl">
-            <h4 class="font-serif text-lg text-[#f5efe7] font-bold mb-1">Need Assistance With Your Delivery?</h4>
-            <p class="text-xs text-[#b8a9a2] max-w-md mx-auto mb-4">
+        <div class="text-center p-4 bg-wine-card border border-gold-25 rounded-4 shadow-xl">
+            <h4 class="font-serif fs-5 text-light-parchment fw-bold mb-1">Need Assistance With Your Delivery?</h4>
+            <p class="text-muted-parchment mx-auto mb-3" style="max-width: 440px; font-size: 0.85rem;">
                 Our support team is available Mon–Sat from 10:00 AM to 10:00 PM PKT for order status inquiries, address corrections, or dispatch updates.
             </p>
-            <div class="flex items-center justify-center gap-4">
-                <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" class="text-xs uppercase tracking-wider text-[#d6aa62] font-bold hover:text-[#f0d59d] hover:underline">
+            <div class="d-flex align-items-center justify-content-center gap-3">
+                <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" class="text-xs text-uppercase tracking-wider text-gold fw-bold text-decoration-none text-gold-hover">
                     WhatsApp Support &rarr;
                 </a>
-                <span class="text-[#d6aa62]/40">&bull;</span>
-                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $storePhone) }}" class="text-xs uppercase tracking-wider text-[#f5efe7] hover:text-[#f0d59d] font-semibold">
+                <span class="text-gold opacity-50">&bull;</span>
+                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $storePhone) }}" class="text-xs text-uppercase tracking-wider text-light-parchment text-decoration-none text-gold-hover fw-semibold">
                     {{ $storePhone }}
                 </a>
             </div>

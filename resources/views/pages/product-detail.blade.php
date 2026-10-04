@@ -33,8 +33,8 @@
 }">
 
 <!-- PDP Breadcrumbs Header -->
-<section class="py-4 bg-[#050203] border-b border-[#d6aa62]/20">
-    <div class="container mx-auto px-4 lg:px-8">
+<section class="py-3 border-bottom border-gold-20" style="background-color: #050203;">
+    <div class="container px-3 px-lg-4">
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'All Impressions', 'url' => route('collections.show', 'all')],
@@ -45,136 +45,138 @@
 </section>
 
 <!-- PDP Master Showcase -->
-<section class="py-10 md:py-14 bg-[#080204] border-b border-[#d6aa62]/20 text-[#f5efe7]">
-    <div class="container mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+<section class="py-5 border-bottom border-gold-20 text-light-parchment" style="background-color: #080204;">
+    <div class="container px-3 px-lg-4">
+        <div class="row g-4 g-lg-5 align-items-start">
             
-            <!-- Left Column: Large Interactive Gallery (lg:col-span-6) -->
-            <div class="lg:col-span-6 space-y-4">
+            <!-- Left Column: Large Interactive Gallery (lg:col-6) -->
+            <div class="col-12 col-lg-6 d-flex flex-column gap-3">
                 <!-- Main Flacon Display with Hover Zoom -->
-                <div class="relative bg-[#0c0305] border border-[#d6aa62]/30 rounded-2xl p-8 sm:p-10 text-center shadow-2xl overflow-hidden group">
+                <div class="position-relative bg-wine-dark border border-gold-30 rounded-4 p-4 p-sm-5 text-center shadow-2xl overflow-hidden">
                     @if($product->is_bestseller)
-                        <span class="absolute top-4 left-4 bg-gradient-to-r from-[#851a31] to-[#4a0915] text-[#f0d59d] border border-[#d6aa62]/40 px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded shadow z-10">
+                        <span class="position-absolute top-0 start-0 m-3 bg-wine-accent text-gold-soft border border-gold-40 px-3 py-1 rounded shadow z-1 text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.1em;">
                             BESTSELLER
                         </span>
                     @elseif($product->is_new_arrival)
-                        <span class="absolute top-4 left-4 bg-gradient-to-r from-[#1b3d22] to-[#0d2212] text-emerald-200 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded shadow z-10">
+                        <span class="position-absolute top-0 start-0 m-3 text-success-emphasis border border-success-subtle px-3 py-1 rounded shadow z-1 text-uppercase fw-bold" style="background: linear-gradient(to right, #1b3d22, #0d2212); font-size: 10px; letter-spacing: 0.1em;">
                             NEW ARRIVAL
                         </span>
                     @endif
 
-                    <div class="relative h-[360px] sm:h-[440px] flex items-center justify-center">
+                    <div class="position-relative d-flex align-items-center justify-content-center" style="height: 380px;">
                         <img 
                             id="pdpMasterImage" 
                             src="{{ $product->primary_image_url }}" 
                             alt="{{ $product->name }}" 
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" 
-                            class="max-h-full max-w-full object-contain filter drop-shadow-xl transform group-hover:scale-105 transition-transform duration-500"
+                            class="img-fluid mh-100 object-contain drop-shadow transition"
+                            style="max-height: 360px;"
                         >
                     </div>
 
-                    <div class="text-[11px] text-gray-500 uppercase tracking-wider mt-4">
-                        <i class="fas fa-certificate text-amber-700 mr-1.5"></i> 35%–40% Extrait Concentration &bull; High Luxury Glass Flacon
+                    <div class="text-muted-parchment text-uppercase mt-3" style="font-size: 11px; letter-spacing: 0.05em;">
+                        <i class="fas fa-certificate text-gold me-1"></i> 35%–40% Extrait Concentration &bull; High Luxury Glass Flacon
                     </div>
                 </div>
 
                 <!-- Thumbnail Selector Row -->
                 @if($product->images->count() > 1)
-                    <div class="flex items-center justify-center space-x-3 overflow-x-auto py-2">
+                    <div class="d-flex align-items-center justify-content-center gap-2 overflow-x-auto py-2">
                         @foreach($product->images as $img)
                             <button 
                                 type="button" 
-                                onclick="document.getElementById('pdpMasterImage').src='{{ asset($img->image_path) }}'; document.querySelectorAll('.pdp-thumb-btn').forEach(b => b.classList.remove('border-amber-700', 'ring-2', 'ring-amber-500/30')); this.classList.add('border-amber-700', 'ring-2', 'ring-amber-500/30');"
-                                class="pdp-thumb-btn w-16 h-16 rounded-lg border {{ $loop->first ? 'border-amber-700 ring-2 ring-amber-500/30' : 'border-gray-200 bg-gray-50' }} p-1.5 transition flex items-center justify-center"
+                                onclick="document.getElementById('pdpMasterImage').src='{{ asset($img->image_path) }}'; document.querySelectorAll('.pdp-thumb-btn').forEach(b => { b.classList.remove('border-gold'); b.classList.add('border-gold-20'); }); this.classList.remove('border-gold-20'); this.classList.add('border-gold');"
+                                class="pdp-thumb-btn rounded-3 border {{ $loop->first ? 'border-gold' : 'border-gold-20' }} bg-wine-card p-1 transition d-flex align-items-center justify-content-center"
+                                style="width: 64px; height: 64px;"
                             >
-                                <img src="{{ asset($img->image_path) }}" alt="{{ $img->alt_text }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="max-h-full max-w-full object-contain">
+                                <img src="{{ asset($img->image_path) }}" alt="{{ $img->alt_text }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid mh-100 object-contain">
                             </button>
                         @endforeach
                     </div>
                 @endif
             </div>
 
-            <!-- Right Column: Sticky Purchase Engine & Olfactory Spec (lg:col-span-6) -->
-            <div class="lg:col-span-6 space-y-6 lg:sticky lg:top-28">
-                               <!-- Impression Badge (Key Rawaha Feature) -->
+            <!-- Right Column: Sticky Purchase Engine & Olfactory Spec (lg:col-6) -->
+            <div class="col-12 col-lg-6 d-flex flex-column gap-4 sticky-lg-top" style="top: 112px;">
+                <!-- Impression Badge (Key Rawaha Feature) -->
                 @if($product->impression_of)
-                    <div class="inline-flex items-center space-x-2 bg-[#3b0711]/60 border border-[#d6aa62]/40 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#f0d59d] shadow-sm">
-                        <i class="fas fa-crown text-[#d6aa62] text-xs"></i>
-                        <span>Our Impression of: <strong class="underline decoration-[#d6aa62] text-white">{{ $product->impression_of }}</strong></span>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1-5 rounded-pill text-xs fw-semibold text-gold-soft border border-gold-40 shadow-sm align-self-start" style="background-color: rgba(59, 7, 17, 0.7);">
+                        <i class="fas fa-crown text-gold text-xs"></i>
+                        <span>Our Impression of: <strong class="text-white text-decoration-underline" style="text-decoration-color: #d6aa62 !important;">{{ $product->impression_of }}</strong></span>
                     </div>
                 @endif
 
                 <!-- Concentration & Family Badges -->
-                <div class="flex items-center space-x-3 text-xs">
-                    <span class="uppercase tracking-widest text-[#d6aa62] font-semibold bg-[#25050a] border border-[#d6aa62]/30 px-2.5 py-0.5 rounded">
+                <div class="d-flex align-items-center gap-3 text-xs">
+                    <span class="text-uppercase tracking-widest text-gold fw-semibold bg-wine-accent border border-gold-30 px-2 py-1 rounded" style="font-size: 11px;">
                         {{ $product->concentration ?? 'EXTRAIT DE PARFUM' }}
                     </span>
-                    <span class="text-[#b8a9a2]">
+                    <span class="text-muted-parchment">
                         {{ $product->fragranceFamily->name ?? 'Royal Oriental' }} &bull; {{ ucfirst($product->gender) }}
                     </span>
                 </div>
 
                 <!-- Product Title & Tagline -->
                 <div>
-                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#f5efe7] leading-tight font-normal tracking-tight">
+                    <h1 class="font-serif text-light-parchment display-5 fw-normal mb-1 lh-sm">
                         {{ $product->name }}
                     </h1>
                     @if($product->tagline)
-                        <p class="font-serif text-base sm:text-lg text-[#f0d59d] italic mt-1 font-light">
+                        <p class="font-serif text-gold-soft fst-italic mt-1 fw-light" style="font-size: 1.05rem;">
                             "{{ $product->tagline }}"
                         </p>
                     @endif
                 </div>
 
                 <!-- Rating & Reviews Summary -->
-                <div class="flex items-center space-x-3 text-xs border-y border-[#d6aa62]/20 py-3">
-                    <div class="flex text-[#d6aa62]">
+                <div class="d-flex align-items-center gap-3 text-xs border-top border-bottom border-gold-20 py-3">
+                    <div class="d-flex text-gold">
                         @for($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star {{ $i <= round($product->rating_avg) ? '' : 'text-[#3b0711]' }}"></i>
+                            <i class="fas fa-star {{ $i <= round($product->rating_avg) ? '' : 'opacity-25' }}"></i>
                         @endfor
                     </div>
-                    <span class="text-[#f5efe7] font-bold">{{ number_format($product->rating_avg, 1) }} / 5.0</span>
-                    <span class="text-[#b8a9a2]">({{ $product->reviews_count }} Verified Patron Reviews)</span>
+                    <span class="text-light-parchment fw-bold">{{ number_format($product->rating_avg, 1) }} / 5.0</span>
+                    <span class="text-muted-parchment">({{ $product->reviews_count }} Verified Patron Reviews)</span>
                 </div>
 
                 <!-- Dynamic Pricing & Savings in PKR -->
-                <div class="space-y-1">
-                    <div class="flex items-baseline space-x-3">
-                        <span class="font-serif text-4xl sm:text-5xl text-[#f0d59d] font-bold" x-text="formattedPrice">
+                <div class="d-flex flex-column gap-1">
+                    <div class="d-flex align-items-baseline gap-3">
+                        <span class="font-serif display-6 text-gold-soft fw-bold" x-text="formattedPrice">
                             {{ $product->formatted_effective_price }}
                         </span>
-                        <span class="text-sm text-[#8e7c75] line-through" x-text="formattedComparePrice"></span>
+                        <span class="text-sm text-decoration-line-through text-muted-parchment" x-text="formattedComparePrice"></span>
                         <template x-if="savingsPercent > 0">
-                            <span class="bg-[#3b0711] text-[#ffd987] text-[11px] uppercase tracking-wider px-2 py-0.5 rounded font-bold border border-[#d6aa62]/40">
+                            <span class="bg-wine-accent text-gold-soft text-xs text-uppercase tracking-wider px-2 py-0-5 rounded fw-bold border border-gold-40">
                                 SAVE <span x-text="savingsPercent"></span>%
                             </span>
                         </template>
                     </div>
-                    <div class="text-[11px] text-[#b8a9a2] flex items-center space-x-1.5 pt-1">
-                        <i class="fas fa-truck-fast text-[#d6aa62]"></i>
+                    <div class="text-muted-parchment d-flex align-items-center gap-2 pt-1" style="font-size: 11px;">
+                        <i class="fas fa-truck-fast text-gold"></i>
                         <span>Includes Free TCS Express Air shipping across Pakistan (Orders over Rs. 3,500)</span>
                     </div>
                 </div>
 
                 <!-- Flacon Size (ml) Selector (Reactive Alpine) -->
-                <div class="space-y-2 pt-2">
-                    <label class="block text-xs uppercase tracking-widest text-[#d6aa62] font-semibold">
-                        Select Flacon Volume: <span class="text-[#f0d59d]" x-text="selectedLabel"></span>
+                <div class="d-flex flex-column gap-2 pt-1">
+                    <label class="d-block text-xs text-uppercase tracking-widest text-gold fw-semibold">
+                        Select Flacon Volume: <span class="text-gold-soft" x-text="selectedLabel"></span>
                     </label>
-                    <div class="flex flex-wrap gap-2.5">
+                    <div class="d-flex flex-wrap gap-2">
                         @forelse($product->variants as $variant)
                             <button 
                                 type="button" 
                                 @click="selectedVariantId = {{ $variant->id }}; selectedPrice = {{ $variant->price }}; selectedComparePrice = {{ $variant->compare_at_price ?? 0 }}; selectedLabel = '{{ $variant->size_label }}';"
-                                :class="selectedVariantId === {{ $variant->id }} ? 'border-[#d6aa62] bg-[#25050a] text-[#f0d59d] shadow-lg' : 'border-[#d6aa62]/20 bg-[#0c0305] text-[#b8a9a2] hover:border-[#d6aa62]/60'"
-                                class="px-4 py-2.5 rounded-lg border text-xs uppercase tracking-wider font-semibold transition flex items-center space-x-2"
+                                :class="selectedVariantId === {{ $variant->id }} ? 'border-gold bg-wine-accent text-gold-soft shadow' : 'border-gold-20 bg-wine-dark text-muted-parchment'"
+                                class="px-3 py-2 rounded-3 border text-xs text-uppercase tracking-wider fw-semibold transition d-flex align-items-center gap-2"
                             >
                                 <span>{{ $variant->size_label }}</span>
-                                <span class="text-[11px] text-[#8e7c75]">&bull;</span>
-                                <span class="font-bold text-[#f5efe7]">Rs. {{ number_format($variant->price) }}</span>
+                                <span class="text-muted-parchment">&bull;</span>
+                                <span class="fw-bold text-light-parchment">Rs. {{ number_format($variant->price) }}</span>
                             </button>
                         @empty
-                            <button type="button" class="px-5 py-2.5 rounded-lg border border-[#d6aa62] bg-[#25050a] text-[#f0d59d] text-xs uppercase tracking-wider font-semibold">
+                            <button type="button" class="px-4 py-2 rounded-3 border border-gold bg-wine-accent text-gold-soft text-xs text-uppercase tracking-wider fw-semibold">
                                 {{ $product->volume_ml }}ml Extrait Flacon
                             </button>
                         @endforelse
@@ -182,20 +184,20 @@
                 </div>
 
                 <!-- Quantity & Add to Cart Engine -->
-                <div class="space-y-3 pt-2">
-                    <div class="flex items-center space-x-4">
+                <div class="d-flex flex-column gap-3 pt-2">
+                    <div class="d-flex align-items-center gap-3">
                         <!-- Quantity Counter -->
-                        <div class="flex items-center border border-[#d6aa62]/30 bg-[#0c0305] rounded-lg">
-                            <button type="button" @click="if(quantity > 1) quantity--" class="px-3.5 py-2 text-[#b8a9a2] hover:text-[#f0d59d] text-sm font-bold">&minus;</button>
-                            <input type="number" x-model="quantity" min="1" max="10" class="w-12 text-center bg-transparent text-xs text-[#f5efe7] font-bold focus:outline-none" readonly>
-                            <button type="button" @click="if(quantity < 10) quantity++" class="px-3.5 py-2 text-[#b8a9a2] hover:text-[#f0d59d] text-sm font-bold">&plus;</button>
+                        <div class="d-flex align-items-center border border-gold-30 bg-wine-dark rounded-3">
+                            <button type="button" @click="if(quantity > 1) quantity--" class="btn text-muted-parchment text-gold-hover px-3 py-2 fw-bold text-sm">&minus;</button>
+                            <input type="number" x-model="quantity" min="1" max="10" class="border-0 bg-transparent text-center text-light-parchment fw-bold text-xs" style="width: 48px;" readonly>
+                            <button type="button" @click="if(quantity < 10) quantity++" class="btn text-muted-parchment text-gold-hover px-3 py-2 fw-bold text-sm">&plus;</button>
                         </div>
 
                         <!-- Add to Cart CTA -->
                         <button 
                             type="button" 
                             @click="addToCart()"
-                            class="flex-1 btn-gold py-3.5 text-xs tracking-widest uppercase flex items-center justify-center space-x-2 rounded-lg shadow-lg"
+                            class="flex-grow-1 btn-gold py-3 text-xs tracking-widest text-uppercase d-flex align-items-center justify-content-center gap-2 rounded-3 shadow"
                         >
                             <i class="fas fa-shopping-bag"></i>
                             <span>ADD TO FRAGRANCE BAG</span>
@@ -206,23 +208,23 @@
                     <a 
                         :href="whatsappUrl" 
                         target="_blank" 
-                        class="w-full btn-whatsapp py-3 text-xs tracking-widest uppercase flex items-center justify-center space-x-2 block text-center rounded-lg"
+                        class="w-100 btn-whatsapp py-3 text-xs tracking-widest text-uppercase d-flex align-items-center justify-content-center gap-2 text-decoration-none rounded-3"
                     >
-                        <i class="fab fa-whatsapp text-sm"></i>
+                        <i class="fab fa-whatsapp fs-6"></i>
                         <span>1-CLICK ORDER ON WHATSAPP (COD)</span>
                     </a>
                 </div>
 
                 <!-- Pakistan Express Delivery & Logistics Estimator -->
-                <div class="p-4 bg-[#140408] border border-[#d6aa62]/25 rounded-xl space-y-2 text-xs">
-                    <div class="flex items-center justify-between text-[#f5efe7] font-bold">
-                        <span class="flex items-center space-x-1.5">
-                            <i class="fas fa-location-dot text-[#d6aa62]"></i>
+                <div class="p-3 bg-wine-card border border-gold-25 rounded-3 d-flex flex-column gap-2 text-xs">
+                    <div class="d-flex align-items-center justify-content-between text-light-parchment fw-bold">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fas fa-location-dot text-gold"></i>
                             <span>Pakistan Dispatch Time:</span>
                         </span>
-                        <span class="text-emerald-400"><i class="fas fa-circle-check"></i> In Stock &bull; Lahore Atelier</span>
+                        <span class="text-success"><i class="fas fa-circle-check"></i> In Stock &bull; Lahore Atelier</span>
                     </div>
-                    <p class="text-[#b8a9a2] leading-relaxed">
+                    <p class="text-muted-parchment lh-base mb-0">
                         Orders placed today arrive in <strong>Lahore, Karachi, Islamabad & Rawalpindi</strong> in 24–48 hours via TCS Express Air. Cash on Delivery accepted nationwide.
                     </p>
                 </div>
@@ -234,110 +236,110 @@
 </section>
 
 <!-- PDP Olfactory Pyramid & Performance Benchmark Meters -->
-<section class="py-16 bg-[#080204] border-b border-[#d6aa62]/20">
-    <div class="container mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+<section class="py-5 border-bottom border-gold-20" style="background-color: #080204;">
+    <div class="container px-3 px-lg-4">
+        <div class="row g-4 g-lg-5 align-items-center">
             
-            <!-- Left: Animated Olfactory Pyramid (lg:col-span-6) -->
-            <div class="lg:col-span-6 space-y-6">
-                <div class="text-left">
-                    <span class="text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] font-semibold">HARMONIC ARCHITECTURE</span>
-                    <h2 class="font-serif text-2xl md:text-3xl text-[#f5efe7] mt-1 font-normal">The Fragrance Notes Pyramid</h2>
-                    <p class="text-xs text-[#b8a9a2] mt-1">Evolution of accords on skin over 16+ hours</p>
+            <!-- Left: Olfactory Pyramid (lg:col-6) -->
+            <div class="col-12 col-lg-6 d-flex flex-column gap-3">
+                <div class="text-start mb-2">
+                    <span class="text-gold fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">HARMONIC ARCHITECTURE</span>
+                    <h2 class="font-serif fs-3 text-light-parchment mt-1 fw-normal">The Fragrance Notes Pyramid</h2>
+                    <p class="text-xs text-muted-parchment mt-1 mb-0">Evolution of accords on skin over 16+ hours</p>
                 </div>
 
                 <!-- Pyramid Tier 1: Top Notes -->
-                <div class="p-5 bg-[#140408] border border-[#d6aa62]/25 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs uppercase tracking-widest text-[#d6aa62] font-bold flex items-center space-x-2">
-                            <i class="fas fa-sparkles text-[#d6aa62]"></i>
+                <div class="p-4 bg-wine-card border border-gold-25 rounded-3 d-flex flex-column gap-2 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-xs text-uppercase tracking-widest text-gold fw-bold d-flex align-items-center gap-2">
+                            <i class="fas fa-sparkles text-gold"></i>
                             <span>Top Notes (First 15 - 45 Minutes)</span>
                         </span>
-                        <span class="text-[10px] text-[#b8a9a2] uppercase font-semibold">Opening Spark</span>
+                        <span class="text-muted-parchment text-uppercase fw-semibold" style="font-size: 10px;">Opening Spark</span>
                     </div>
-                    <p class="text-sm text-[#f5efe7] font-serif">
+                    <p class="text-light-parchment font-serif mb-0" style="font-size: 0.95rem;">
                         {{ $product->fragrance_notes_pyramid['top'] ?? ($product->top_notes_summary ?? 'Fresh Bergamot, Kashmiri Saffron, Pink Pepper') }}
                     </p>
                 </div>
 
                 <!-- Pyramid Tier 2: Heart Notes -->
-                <div class="p-5 bg-[#140408] border border-[#d6aa62]/25 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs uppercase tracking-widest text-[#d6aa62] font-bold flex items-center space-x-2">
-                            <i class="fas fa-heart text-[#d6aa62]"></i>
+                <div class="p-4 bg-wine-card border border-gold-25 rounded-3 d-flex flex-column gap-2 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-xs text-uppercase tracking-widest text-gold fw-bold d-flex align-items-center gap-2">
+                            <i class="fas fa-heart text-gold"></i>
                             <span>Heart Notes (2 - 6 Hours)</span>
                         </span>
-                        <span class="text-[10px] text-[#b8a9a2] uppercase font-semibold">Sensual Heart</span>
+                        <span class="text-muted-parchment text-uppercase fw-semibold" style="font-size: 10px;">Sensual Heart</span>
                     </div>
-                    <p class="text-sm text-[#f5efe7] font-serif">
+                    <p class="text-light-parchment font-serif mb-0" style="font-size: 0.95rem;">
                         {{ $product->fragrance_notes_pyramid['heart'] ?? ($product->heart_notes_summary ?? 'Imperial Taif Rose, Smokey Frankincense, Leather Accords') }}
                     </p>
                 </div>
 
                 <!-- Pyramid Tier 3: Base Notes -->
-                <div class="p-5 bg-[#140408] border border-[#d6aa62]/25 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs uppercase tracking-widest text-[#d6aa62] font-bold flex items-center space-x-2">
-                            <i class="fas fa-tree text-[#d6aa62]"></i>
+                <div class="p-4 bg-wine-card border border-gold-25 rounded-3 d-flex flex-column gap-2 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-xs text-uppercase tracking-widest text-gold fw-bold d-flex align-items-center gap-2">
+                            <i class="fas fa-tree text-gold"></i>
                             <span>Base Notes (6 - 18+ Hours)</span>
                         </span>
-                        <span class="text-[10px] text-[#d6aa62] uppercase font-bold">14+ Hours Longevity</span>
+                        <span class="text-gold text-uppercase fw-bold" style="font-size: 10px;">14+ Hours Longevity</span>
                     </div>
-                    <p class="text-sm text-[#f5efe7] font-serif">
+                    <p class="text-light-parchment font-serif mb-0" style="font-size: 0.95rem;">
                         {{ $product->fragrance_notes_pyramid['base'] ?? ($product->base_notes_summary ?? 'Aged Cambodian Dehn al Oud, Warm Ambergris, Royal Sandalwood') }}
                     </p>
                 </div>
             </div>
 
-            <!-- Right: Performance Benchmark Meters (lg:col-span-6) -->
-            <div class="lg:col-span-6 bg-[#140408] border border-[#d6aa62]/25 rounded-2xl p-8 space-y-6 shadow-sm">
+            <!-- Right: Performance Benchmark Meters (lg:col-6) -->
+            <div class="col-12 col-lg-6 bg-wine-card border border-gold-25 rounded-4 p-4 p-lg-5 d-flex flex-column gap-4 shadow-sm">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] font-semibold">LABORATORY BENCHMARKS</span>
-                    <h3 class="font-serif text-2xl text-[#f5efe7] mt-1 font-normal">Extrait Performance Metrics</h3>
+                    <span class="text-gold fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">LABORATORY BENCHMARKS</span>
+                    <h3 class="font-serif fs-4 text-light-parchment mt-1 fw-normal mb-0">Extrait Performance Metrics</h3>
                 </div>
 
                 <!-- Longevity Meter -->
-                <div class="space-y-2">
-                    <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-[#f5efe7] uppercase tracking-wider">Longevity on Skin & Fabric:</span>
-                        <span class="text-[#d6aa62] font-bold">{{ $product->longevity_rating ?? 9 }}/10 (16-18 Hours)</span>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex justify-content-between text-xs fw-semibold">
+                        <span class="text-light-parchment text-uppercase tracking-wider">Longevity on Skin & Fabric:</span>
+                        <span class="text-gold fw-bold">{{ $product->longevity_rating ?? 9 }}/10 (16-18 Hours)</span>
                     </div>
-                    <div class="w-full bg-[#25050a] h-2.5 rounded-full overflow-hidden border border-[#d6aa62]/20">
-                        <div class="bg-gradient-to-r from-[#d6aa62] to-[#f0d59d] h-full rounded-full" style="width: {{ ($product->longevity_rating ?? 9) * 10 }}%;"></div>
+                    <div class="w-100 bg-wine-dark rounded-pill overflow-hidden border border-gold-20" style="height: 10px;">
+                        <div class="h-100 rounded-pill" style="background: linear-gradient(to right, #d6aa62, #f0d59d); width: {{ ($product->longevity_rating ?? 9) * 10 }}%;"></div>
                     </div>
                 </div>
 
                 <!-- Sillage Meter -->
-                <div class="space-y-2">
-                    <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-[#f5efe7] uppercase tracking-wider">Sillage & Aura Projection:</span>
-                        <span class="text-[#d6aa62] font-bold">{{ $product->sillage_rating ?? 9 }}/10 (Room-Filling)</span>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex justify-content-between text-xs fw-semibold">
+                        <span class="text-light-parchment text-uppercase tracking-wider">Sillage & Aura Projection:</span>
+                        <span class="text-gold fw-bold">{{ $product->sillage_rating ?? 9 }}/10 (Room-Filling)</span>
                     </div>
-                    <div class="w-full bg-[#25050a] h-2.5 rounded-full overflow-hidden border border-[#d6aa62]/20">
-                        <div class="bg-gradient-to-r from-[#d6aa62] to-[#f0d59d] h-full rounded-full" style="width: {{ ($product->sillage_rating ?? 9) * 10 }}%;"></div>
+                    <div class="w-100 bg-wine-dark rounded-pill overflow-hidden border border-gold-20" style="height: 10px;">
+                        <div class="h-100 rounded-pill" style="background: linear-gradient(to right, #d6aa62, #f0d59d); width: {{ ($product->sillage_rating ?? 9) * 10 }}%;"></div>
                     </div>
                 </div>
 
                 <!-- Maceration Time -->
-                <div class="space-y-2">
-                    <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-[#f5efe7] uppercase tracking-wider">Cold-Maceration Period:</span>
-                        <span class="text-[#d6aa62] font-bold">{{ $product->maceration_weeks ?? 12 }} Weeks Artisanal</span>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex justify-content-between text-xs fw-semibold">
+                        <span class="text-light-parchment text-uppercase tracking-wider">Cold-Maceration Period:</span>
+                        <span class="text-gold fw-bold">{{ $product->maceration_weeks ?? 12 }} Weeks Artisanal</span>
                     </div>
-                    <div class="w-full bg-[#25050a] h-2.5 rounded-full overflow-hidden border border-[#d6aa62]/20">
-                        <div class="bg-gradient-to-r from-[#d6aa62] to-[#f0d59d] h-full rounded-full" style="width: 95%;"></div>
+                    <div class="w-100 bg-wine-dark rounded-pill overflow-hidden border border-gold-20" style="height: 10px;">
+                        <div class="h-100 rounded-pill" style="background: linear-gradient(to right, #d6aa62, #f0d59d); width: 95%;"></div>
                     </div>
                 </div>
 
                 <!-- Oil Concentration Badge -->
-                <div class="pt-4 border-t border-[#d6aa62]/20 flex items-center justify-between text-xs text-[#b8a9a2]">
+                <div class="pt-3 border-top border-gold-20 d-flex align-items-center justify-content-between text-xs text-muted-parchment">
                     <div>
-                        <span class="text-[10px] uppercase tracking-wider text-[#d6aa62] block font-bold">Fragrance Concentration</span>
-                        <span class="font-serif text-lg text-[#f5efe7] font-bold">{{ $product->oil_concentration_percent ?? 38 }}% Pure Compounds</span>
+                        <span class="d-block text-gold fw-bold text-uppercase tracking-wider" style="font-size: 10px;">Fragrance Concentration</span>
+                        <span class="font-serif fs-5 text-light-parchment fw-bold">{{ $product->oil_concentration_percent ?? 38 }}% Pure Compounds</span>
                     </div>
-                    <div class="text-right">
-                        <span class="text-[10px] uppercase tracking-wider text-[#d6aa62] block font-bold">Climate Optimization</span>
-                        <span class="text-xs text-[#f5efe7] font-medium">Pakistani Summers & Winters</span>
+                    <div class="text-end">
+                        <span class="d-block text-gold fw-bold text-uppercase tracking-wider" style="font-size: 10px;">Climate Optimization</span>
+                        <span class="text-xs text-light-parchment fw-medium">Pakistani Summers & Winters</span>
                     </div>
                 </div>
             </div>
@@ -347,16 +349,17 @@
 </section>
 
 <!-- PDP Tabs: Description, Ritual, Shipping, and Customer Reviews -->
-<section class="py-16 bg-[#050203] border-b border-[#d6aa62]/20">
-    <div class="container mx-auto px-4 lg:px-8 max-w-5xl" x-data="{ currentTab: 'desc' }">
+<section class="py-5 border-bottom border-gold-20" style="background-color: #050203;">
+    <div class="container px-3 px-lg-4" style="max-width: 960px;" x-data="{ currentTab: 'desc' }">
         
         <!-- Tab Headers -->
-        <div class="flex border-b border-[#d6aa62]/25 mb-8 overflow-x-auto no-scrollbar">
+        <div class="d-flex border-bottom border-gold-25 mb-4 overflow-x-auto no-scrollbar">
             <button 
                 type="button" 
                 @click="currentTab = 'desc'" 
-                :class="currentTab === 'desc' ? 'border-[#d6aa62] text-[#d6aa62] font-bold bg-[#25050a]/40' : 'border-transparent text-[#b8a9a2] hover:text-[#f5efe7]'"
-                class="px-6 py-3 text-xs uppercase tracking-[0.18em] border-b-2 transition-all duration-200 whitespace-nowrap"
+                :class="currentTab === 'desc' ? 'border-gold text-gold fw-bold' : 'border-transparent text-muted-parchment text-light-parchment-hover'"
+                class="btn text-xs text-uppercase tracking-luxury border-bottom border-2 rounded-0 px-4 py-3 text-nowrap"
+                style="background: none;"
             >
                 The Impression Story
             </button>
@@ -364,8 +367,9 @@
             <button 
                 type="button" 
                 @click="currentTab = 'usage'" 
-                :class="currentTab === 'usage' ? 'border-[#d6aa62] text-[#d6aa62] font-bold bg-[#25050a]/40' : 'border-transparent text-[#b8a9a2] hover:text-[#f5efe7]'"
-                class="px-6 py-3 text-xs uppercase tracking-[0.18em] border-b-2 transition-all duration-200 whitespace-nowrap"
+                :class="currentTab === 'usage' ? 'border-gold text-gold fw-bold' : 'border-transparent text-muted-parchment text-light-parchment-hover'"
+                class="btn text-xs text-uppercase tracking-luxury border-bottom border-2 rounded-0 px-4 py-3 text-nowrap"
+                style="background: none;"
             >
                 Application Ritual
             </button>
@@ -373,8 +377,9 @@
             <button 
                 type="button" 
                 @click="currentTab = 'shipping'" 
-                :class="currentTab === 'shipping' ? 'border-[#d6aa62] text-[#d6aa62] font-bold bg-[#25050a]/40' : 'border-transparent text-[#b8a9a2] hover:text-[#f5efe7]'"
-                class="px-6 py-3 text-xs uppercase tracking-[0.18em] border-b-2 transition-all duration-200 whitespace-nowrap"
+                :class="currentTab === 'shipping' ? 'border-gold text-gold fw-bold' : 'border-transparent text-muted-parchment text-light-parchment-hover'"
+                class="btn text-xs text-uppercase tracking-luxury border-bottom border-2 rounded-0 px-4 py-3 text-nowrap"
+                style="background: none;"
             >
                 Shipping & Exchange Policy
             </button>
@@ -382,110 +387,111 @@
             <button 
                 type="button" 
                 @click="currentTab = 'reviews'" 
-                :class="currentTab === 'reviews' ? 'border-[#d6aa62] text-[#d6aa62] font-bold bg-[#25050a]/40' : 'border-transparent text-[#b8a9a2] hover:text-[#f5efe7]'"
-                class="px-6 py-3 text-xs uppercase tracking-[0.18em] border-b-2 transition-all duration-200 whitespace-nowrap"
+                :class="currentTab === 'reviews' ? 'border-gold text-gold fw-bold' : 'border-transparent text-muted-parchment text-light-parchment-hover'"
+                class="btn text-xs text-uppercase tracking-luxury border-bottom border-2 rounded-0 px-4 py-3 text-nowrap"
+                style="background: none;"
             >
                 Patron Reviews ({{ $product->reviews_count }})
             </button>
         </div>
 
         <!-- Tab 1: Description -->
-        <div x-show="currentTab === 'desc'" class="space-y-4 text-sm md:text-base text-[#f5efe7] leading-relaxed font-light">
-            <p>{{ $product->description }}</p>
-            <p class="text-[#b8a9a2]">Formulated with French grade aroma compounds and macerated for 90 days. Every bottle is hand-poured in Lahore, Pakistan to ensure maximum sillage and longevity.</p>
+        <div x-show="currentTab === 'desc'" class="d-flex flex-column gap-3 text-light-parchment lh-base fw-light" style="font-size: 1rem;">
+            <p class="mb-0">{{ $product->description }}</p>
+            <p class="text-muted-parchment mb-0">Formulated with French grade aroma compounds and macerated for 90 days. Every bottle is hand-poured in Lahore, Pakistan to ensure maximum sillage and longevity.</p>
         </div>
 
         <!-- Tab 2: Application Ritual -->
-        <div x-show="currentTab === 'usage'" class="space-y-4 text-sm md:text-base text-[#f5efe7] leading-relaxed font-light" style="display: none;">
-            <h4 class="font-serif text-lg text-[#d6aa62] font-semibold">Mastering the Sillage of Extrait de Parfum</h4>
-            <ul class="list-disc pl-5 space-y-2 text-sm text-[#b8a9a2]">
-                <li><strong class="text-[#f5efe7]">Pulse Points:</strong> Apply 2 to 3 sprays directly on pulse points — the sides of your neck, behind the ears, and inside wrists.</li>
-                <li><strong class="text-[#f5efe7]">Fabric Longevity:</strong> Spray lightly on linen, wool, or cotton garments. Extrait compounds hold onto natural fibers for up to 48 hours.</li>
-                <li><strong class="text-[#f5efe7]">Never Rub:</strong> Allow the formulation to naturally settle on skin without friction, ensuring top notes blossom gracefully.</li>
+        <div x-show="currentTab === 'usage'" class="d-flex flex-column gap-3 text-light-parchment lh-base fw-light" style="display: none; font-size: 1rem;">
+            <h4 class="font-serif fs-5 text-gold fw-semibold mb-1">Mastering the Sillage of Extrait de Parfum</h4>
+            <ul class="d-flex flex-column gap-2 text-muted-parchment ps-3 mb-0" style="font-size: 0.95rem;">
+                <li><strong class="text-light-parchment">Pulse Points:</strong> Apply 2 to 3 sprays directly on pulse points — the sides of your neck, behind the ears, and inside wrists.</li>
+                <li><strong class="text-light-parchment">Fabric Longevity:</strong> Spray lightly on linen, wool, or cotton garments. Extrait compounds hold onto natural fibers for up to 48 hours.</li>
+                <li><strong class="text-light-parchment">Never Rub:</strong> Allow the formulation to naturally settle on skin without friction, ensuring top notes blossom gracefully.</li>
             </ul>
         </div>
 
         <!-- Tab 3: Shipping & Exchange -->
-        <div x-show="currentTab === 'shipping'" class="space-y-4 text-sm md:text-base text-[#f5efe7] leading-relaxed font-light" style="display: none;">
-            <h4 class="font-serif text-lg text-[#d6aa62] font-semibold">Nationwide Pakistan Delivery Guarantee</h4>
-            <p class="text-[#b8a9a2]">All flacons are encased in impact-resistant cushioned packaging and dispatched through premium courier services (TCS, Leopards, PostEx).</p>
-            <ul class="list-disc pl-5 space-y-2 text-sm text-[#b8a9a2]">
-                <li><strong class="text-[#f5efe7]">Major Hubs:</strong> Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad — 24 to 48 hours.</li>
-                <li><strong class="text-[#f5efe7]">Other Cities:</strong> 2 to 4 business days.</li>
-                <li><strong class="text-[#f5efe7]">Hassle-Free Exchange:</strong> If you feel the scent does not suit your aura, contact our WhatsApp Concierge within 7 days for an exchange.</li>
+        <div x-show="currentTab === 'shipping'" class="d-flex flex-column gap-3 text-light-parchment lh-base fw-light" style="display: none; font-size: 1rem;">
+            <h4 class="font-serif fs-5 text-gold fw-semibold mb-1">Nationwide Pakistan Delivery Guarantee</h4>
+            <p class="text-muted-parchment mb-0">All flacons are encased in impact-resistant cushioned packaging and dispatched through premium courier services (TCS, Leopards, PostEx).</p>
+            <ul class="d-flex flex-column gap-2 text-muted-parchment ps-3 mb-0" style="font-size: 0.95rem;">
+                <li><strong class="text-light-parchment">Major Hubs:</strong> Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad — 24 to 48 hours.</li>
+                <li><strong class="text-light-parchment">Other Cities:</strong> 2 to 4 business days.</li>
+                <li><strong class="text-light-parchment">Hassle-Free Exchange:</strong> If you feel the scent does not suit your aura, contact our WhatsApp Concierge within 7 days for an exchange.</li>
             </ul>
         </div>
 
         <!-- Tab 4: Reviews -->
-        <div x-show="currentTab === 'reviews'" class="space-y-8" style="display: none;">
+        <div x-show="currentTab === 'reviews'" class="d-flex flex-column gap-4" style="display: none;">
             <!-- Submit Review Form -->
-            <div class="p-6 bg-[#140408] border border-[#d6aa62]/25 rounded-xl space-y-4">
-                <h4 class="font-serif text-lg text-[#f5efe7] font-semibold">Share Your Olfactory Impression</h4>
-                <form action="{{ route('reviews.store', $product->id) }}" method="POST" class="space-y-4">
+            <div class="p-4 bg-wine-card border border-gold-25 rounded-4 d-flex flex-column gap-3">
+                <h4 class="font-serif fs-5 text-light-parchment fw-semibold mb-0">Share Your Olfactory Impression</h4>
+                <form action="{{ route('reviews.store', $product->id) }}" method="POST" class="d-flex flex-column gap-3">
                     @csrf
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-1 font-bold">Your Name *</label>
-                            <input type="text" name="customer_name" required placeholder="e.g. Tariq Mehmood" class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded px-3 py-2 text-xs text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62]">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-4">
+                            <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-bold">Your Name *</label>
+                            <input type="text" name="customer_name" required placeholder="e.g. Tariq Mehmood" class="form-control form-control-luxury text-xs py-2 px-3">
                         </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-1 font-bold">Your City in Pakistan *</label>
-                            <input type="text" name="customer_city" required placeholder="e.g. Lahore / Karachi" class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded px-3 py-2 text-xs text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62]">
+                        <div class="col-12 col-md-4">
+                            <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-bold">Your City in Pakistan *</label>
+                            <input type="text" name="customer_city" required placeholder="e.g. Lahore / Karachi" class="form-control form-control-luxury text-xs py-2 px-3">
                         </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-1 font-bold">Rating *</label>
-                            <select name="rating" required class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded px-3 py-2 text-xs text-[#f5efe7] focus:outline-none focus:border-[#d6aa62]">
-                                <option value="5" class="bg-[#140408]">5 Stars - Imperial Masterpiece</option>
-                                <option value="4" class="bg-[#140408]">4 Stars - Highly Refined</option>
-                                <option value="3" class="bg-[#140408]">3 Stars - Pleasant Formulation</option>
-                                <option value="2" class="bg-[#140408]">2 Stars - Average</option>
-                                <option value="1" class="bg-[#140408]">1 Star - Disappointed</option>
+                        <div class="col-12 col-md-4">
+                            <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-bold">Rating *</label>
+                            <select name="rating" required class="form-select form-control-luxury text-xs py-2 px-3">
+                                <option value="5" class="bg-wine-dark text-light-parchment">5 Stars - Imperial Masterpiece</option>
+                                <option value="4" class="bg-wine-dark text-light-parchment">4 Stars - Highly Refined</option>
+                                <option value="3" class="bg-wine-dark text-light-parchment">3 Stars - Pleasant Formulation</option>
+                                <option value="2" class="bg-wine-dark text-light-parchment">2 Stars - Average</option>
+                                <option value="1" class="bg-wine-dark text-light-parchment">1 Star - Disappointed</option>
                             </select>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-1 font-bold">Review Title</label>
-                        <input type="text" name="title" placeholder="e.g. Monumental sillage at an evening wedding" class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded px-3 py-2 text-xs text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62]">
+                        <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-bold">Review Title</label>
+                        <input type="text" name="title" placeholder="e.g. Monumental sillage at an evening wedding" class="form-control form-control-luxury text-xs py-2 px-3">
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-[#d6aa62] mb-1 font-bold">Your Review *</label>
-                        <textarea name="comment" required rows="3" placeholder="Share your experience regarding projection, longevity, and compliments received..." class="w-full bg-[#080204] border border-[#d6aa62]/30 rounded px-3 py-2 text-xs text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62]"></textarea>
+                        <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-bold">Your Review *</label>
+                        <textarea name="comment" required rows="3" placeholder="Share your experience regarding projection, longevity, and compliments received..." class="form-control form-control-luxury text-xs py-2 px-3"></textarea>
                     </div>
-                    <button type="submit" class="btn-gold py-2.5 px-6 text-xs uppercase tracking-widest">
+                    <button type="submit" class="btn-gold py-2 px-4 text-xs text-uppercase tracking-widest align-self-start">
                         Submit Verified Review
                     </button>
                 </form>
             </div>
 
             <!-- Existing Reviews List -->
-            <div class="space-y-4">
+            <div class="d-flex flex-column gap-3">
                 @forelse($product->reviews as $review)
-                    <div class="p-5 bg-[#140408] border border-[#d6aa62]/20 rounded-xl space-y-2 shadow-sm">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-full bg-[#25050a] border border-[#d6aa62]/40 flex items-center justify-center text-[#d6aa62] text-xs font-bold">
+                    <div class="p-4 bg-wine-card border border-gold-20 rounded-3 d-flex flex-column gap-2 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold text-xs fw-bold" style="width: 32px; height: 32px;">
                                     {{ substr($review->user_name ?? 'P', 0, 1) }}
                                 </div>
                                 <div>
-                                    <span class="font-serif text-sm text-[#f5efe7] font-semibold">{{ $review->user_name }}</span>
-                                    <span class="text-[10px] text-emerald-400 ml-2"><i class="fas fa-check-circle"></i> Verified &bull; {{ $review->user_city ?? 'Pakistan' }}</span>
+                                    <span class="font-serif text-light-parchment fw-semibold" style="font-size: 0.95rem;">{{ $review->user_name }}</span>
+                                    <span class="text-success ms-2" style="font-size: 10px;"><i class="fas fa-check-circle"></i> Verified &bull; {{ $review->user_city ?? 'Pakistan' }}</span>
                                 </div>
                             </div>
-                            <div class="flex text-[#d6aa62] text-xs">
+                            <div class="d-flex text-gold text-xs">
                                 @for($i = 1; $i <= 5; $i++)
-                                    <i class="fas fa-star {{ $i <= $review->rating ? '' : 'text-[#25050a]' }}"></i>
+                                    <i class="fas fa-star {{ $i <= $review->rating ? '' : 'opacity-25' }}"></i>
                                 @endfor
                             </div>
                         </div>
                         @if($review->review_title)
-                            <h5 class="text-xs font-semibold text-[#f5efe7]">{{ $review->review_title }}</h5>
+                            <h5 class="text-xs fw-semibold text-light-parchment mb-0">{{ $review->review_title }}</h5>
                         @endif
-                        <p class="text-xs text-[#b8a9a2] leading-relaxed font-light">
+                        <p class="text-xs text-muted-parchment lh-base font-light mb-0">
                             "{{ $review->comment }}"
                         </p>
                     </div>
                 @empty
-                    <p class="text-xs text-[#b8a9a2] italic text-center py-6">Be the first connoisseur to review this masterpiece.</p>
+                    <p class="text-xs text-muted-parchment fst-italic text-center py-4 mb-0">Be the first connoisseur to review this masterpiece.</p>
                 @endforelse
             </div>
         </div>
@@ -495,16 +501,18 @@
 
 <!-- Related Pairings Carousel / You May Also Like -->
 @if($relatedProducts->count() > 0)
-    <section class="py-16 bg-[#080204] border-b border-[#d6aa62]/20">
-        <div class="container mx-auto px-4 lg:px-8">
-            <div class="text-center max-w-xl mx-auto mb-10">
-                <span class="text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] font-semibold">OLFACTORY HARMONY</span>
-                <h3 class="font-serif text-2xl md:text-3xl text-[#f5efe7] mt-1 font-normal">You May Also Covet</h3>
+    <section class="py-5 border-bottom border-gold-20" style="background-color: #080204;">
+        <div class="container px-3 px-lg-4">
+            <div class="text-center mx-auto mb-4" style="max-width: 560px;">
+                <span class="text-gold fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">OLFACTORY HARMONY</span>
+                <h3 class="font-serif fs-3 text-light-parchment mt-1 fw-normal mb-0">You May Also Covet</h3>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="row row-cols-2 row-cols-md-4 g-3 g-md-4">
                 @foreach($relatedProducts as $rel)
-                    <x-product-card :product="$rel" />
+                    <div class="col">
+                        <x-product-card :product="$rel" />
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -512,19 +520,20 @@
 @endif
 
 <!-- Mobile Sticky Add-to-Cart Bottom Bar -->
-<div class="fixed bottom-0 inset-x-0 z-40 bg-[#080204]/95 backdrop-blur-md border-t border-[#d6aa62]/30 p-3 lg:hidden flex items-center justify-between shadow-2xl">
+<div class="position-fixed bottom-0 start-0 end-0 p-3 d-lg-none d-flex align-items-center justify-content-between shadow-2xl border-top border-gold-30" style="z-index: 1040; background-color: rgba(8, 2, 4, 0.95); backdrop-filter: blur(12px);">
     <div>
-        <div class="text-xs font-serif text-[#f5efe7] truncate max-w-[150px] font-semibold">{{ $product->name }}</div>
-        <div class="text-xs font-bold text-[#d6aa62]" x-text="formattedPrice"></div>
+        <div class="text-xs font-serif text-light-parchment text-truncate fw-semibold" style="max-width: 150px;">{{ $product->name }}</div>
+        <div class="text-xs fw-bold text-gold" x-text="formattedPrice"></div>
     </div>
-    <div class="flex items-center space-x-2">
-        <a :href="whatsappUrl" target="_blank" class="btn-whatsapp py-2 px-3 text-[11px]">
+    <div class="d-flex align-items-center gap-2">
+        <a :href="whatsappUrl" target="_blank" class="btn-whatsapp py-2 px-3 text-decoration-none" style="font-size: 11px;">
             <i class="fab fa-whatsapp"></i>
         </a>
         <button 
             type="button" 
             @click="addToCart()"
-            class="btn-gold py-2 px-4 text-[11px] tracking-wider uppercase font-bold"
+            class="btn-gold py-2 px-3 text-uppercase tracking-wider fw-bold"
+            style="font-size: 11px;"
         >
             ADD TO BAG
         </button>

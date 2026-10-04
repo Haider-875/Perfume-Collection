@@ -6,8 +6,8 @@
 @section('content')
 
 <!-- Blog Detail Header -->
-<article class="py-16 md:py-24 bg-[#080304]">
-    <div class="container max-w-4xl mx-auto">
+<article class="py-5" style="background-color: #080304;">
+    <div class="container px-3 px-lg-4" style="max-width: 896px;">
         
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
@@ -17,15 +17,17 @@
         ]" />
 
         <!-- Meta Header -->
-        <div class="text-center space-y-4 mb-8">
-            <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] font-semibold border border-[#C9A24B]/30 px-3 py-1 rounded">
-                {{ $blog->category_name ?? 'HAUTE OLFACTION' }}
-            </span>
-            <h1 class="font-serif text-3xl md:text-5xl text-[#F5EFE6] leading-tight font-normal">
+        <div class="text-center d-flex flex-column gap-3 mb-4">
+            <div>
+                <span class="d-inline-block text-gold fw-semibold border border-gold-30 px-3 py-1 rounded text-uppercase" style="font-size: 11px; letter-spacing: 0.3em;">
+                    {{ $blog->category_name ?? 'HAUTE OLFACTION' }}
+                </span>
+            </div>
+            <h1 class="font-serif display-5 text-light-parchment lh-sm fw-normal mb-0">
                 {{ $blog->title }}
             </h1>
-            <div class="flex items-center justify-center space-x-4 text-xs text-[#F5EFE6]/60">
-                <span>By <strong class="text-[#C9A24B]">{{ $blog->author_name ?? 'Master Parfumeur' }}</strong></span>
+            <div class="d-flex align-items-center justify-content-center gap-3 text-xs text-muted-parchment">
+                <span>By <strong class="text-gold">{{ $blog->author_name ?? 'Master Parfumeur' }}</strong></span>
                 <span>&bull;</span>
                 <span>{{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('F d, Y') : 'Recent' }}</span>
                 <span>&bull;</span>
@@ -34,43 +36,44 @@
         </div>
 
         <!-- Featured Image -->
-        <div class="mb-12 rounded-lg overflow-hidden border border-[#C9A24B]/30 shadow-2xl bg-[#120709]">
+        <div class="mb-5 rounded-3 overflow-hidden border border-gold-30 shadow-2xl bg-wine-dark text-center">
             <img 
                 src="{{ asset($blog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
                 alt="{{ $blog->title }}" 
-                class="w-full max-h-[500px] object-cover"
+                class="img-fluid w-100 object-cover"
+                style="max-height: 500px;"
             >
         </div>
 
         <!-- Article Rich Content -->
-        <div class="prose prose-invert max-w-none text-[#F5EFE6]/85 text-base md:text-lg leading-relaxed space-y-6 font-light">
+        <div class="text-light-parchment lh-lg fw-light d-flex flex-column gap-4" style="font-size: 1.05rem;">
             {!! $blog->content !!}
         </div>
 
         <!-- Author Bio Box -->
-        <div class="mt-16 p-8 bg-[#0E0507] border border-[#C9A24B]/30 rounded-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <div class="w-16 h-16 rounded-full bg-[#C9A24B]/15 border border-[#C9A24B]/50 flex items-center justify-center text-[#C9A24B] text-2xl flex-shrink-0">
+        <div class="mt-5 p-4 bg-wine-card border border-gold-30 rounded-3 d-flex flex-column flex-sm-row align-items-center gap-4">
+            <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold fs-3 flex-shrink-0" style="width: 64px; height: 64px;">
                 <i class="fas fa-gem"></i>
             </div>
-            <div class="text-center sm:text-left">
-                <h4 class="font-serif text-lg text-[#F5EFE6]">{{ $blog->author_name ?? 'Maison d\'Orient Master Parfumeur' }}</h4>
-                <p class="text-xs text-[#F5EFE6]/65 mt-1 leading-relaxed">
+            <div class="text-center text-sm-start">
+                <h4 class="font-serif fs-5 text-light-parchment mb-1">{{ $blog->author_name ?? 'Maison d\'Orient Master Parfumeur' }}</h4>
+                <p class="text-xs text-muted-parchment lh-base mb-0">
                     Trained in Grasse, France with extensive mastery of Eastern distillation, curating bespoke Extrait de Parfum formulas designed to withstand Pakistan’s tropical summer heat and dry winters.
                 </p>
             </div>
         </div>
 
         <!-- Share Actions -->
-        <div class="mt-8 pt-6 border-t border-[#C9A24B]/20 flex flex-wrap items-center justify-between gap-4">
-            <span class="text-xs uppercase tracking-widest text-[#C9A24B]">Share this Chronicle:</span>
-            <div class="flex items-center space-x-3">
-                <a href="https://wa.me/?text={{ urlencode($blog->title . ' ' . url()->current()) }}" target="_blank" class="w-9 h-9 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition">
+        <div class="mt-4 pt-4 border-top border-gold-20 d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <span class="text-xs text-uppercase tracking-widest text-gold fw-semibold">Share this Chronicle:</span>
+            <div class="d-flex align-items-center gap-2">
+                <a href="https://wa.me/?text={{ urlencode($blog->title . ' ' . url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition" style="width: 36px; height: 36px; background-color: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.4); color: #25D366;">
                     <i class="fab fa-whatsapp"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" class="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-600/40 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition text-primary" style="width: 36px; height: 36px; background-color: rgba(13, 110, 253, 0.15); border-color: rgba(13, 110, 253, 0.4);">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://twitter.com/intent/tweet?text={{ urlencode($blog->title) }}&url={{ urlencode(url()->current()) }}" target="_blank" class="w-9 h-9 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400 hover:bg-sky-500 hover:text-white transition">
+                <a href="https://twitter.com/intent/tweet?text={{ urlencode($blog->title) }}&url={{ urlencode(url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition text-info" style="width: 36px; height: 36px; background-color: rgba(13, 202, 240, 0.15); border-color: rgba(13, 202, 240, 0.4);">
                     <i class="fab fa-twitter"></i>
                 </a>
             </div>
@@ -81,23 +84,25 @@
 
 <!-- Related Articles & Featured Flacons -->
 @if($relatedBlogs->count() > 0)
-    <section class="py-16 bg-[#0B0406] border-t border-[#C9A24B]/20">
-        <div class="container">
-            <div class="text-center mb-12">
-                <span class="text-[10px] uppercase tracking-[0.3em] text-[#C9A24B] font-semibold">FURTHER READING</span>
-                <h3 class="font-serif text-2xl md:text-3xl text-[#F5EFE6] mt-1">Related Fragrance Essays</h3>
+    <section class="py-5 border-top border-gold-20" style="background-color: #0B0406;">
+        <div class="container px-3 px-lg-4">
+            <div class="text-center mb-4">
+                <span class="d-block text-gold fw-semibold" style="font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">FURTHER READING</span>
+                <h3 class="font-serif fs-3 text-light-parchment mt-1 mb-0">Related Fragrance Essays</h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="row row-cols-1 row-cols-md-3 g-3">
                 @foreach($relatedBlogs as $rBlog)
-                    <div class="bg-[#080304] border border-[#C9A24B]/20 rounded-lg p-5 group hover:border-[#C9A24B]/50 transition">
-                        <span class="text-[10px] text-[#C9A24B] uppercase tracking-wider block mb-2">{{ $rBlog->category_name ?? 'Fragrance' }}</span>
-                        <h4 class="font-serif text-base text-[#F5EFE6] group-hover:text-[#C9A24B] transition-colors mb-2">
-                            <a href="{{ route('blogs.show', $rBlog->slug) }}">{{ $rBlog->title }}</a>
-                        </h4>
-                        <p class="text-xs text-[#F5EFE6]/60 line-clamp-2">
-                            {{ $rBlog->summary ?? \Illuminate\Support\Str::limit(strip_tags($rBlog->content), 80) }}
-                        </p>
+                    <div class="col">
+                        <div class="bg-wine-card border border-gold-20 rounded-3 p-4 h-100 transition shadow-sm">
+                            <span class="d-block text-gold text-uppercase tracking-wider mb-2" style="font-size: 10px;">{{ $rBlog->category_name ?? 'Fragrance' }}</span>
+                            <h4 class="font-serif fs-6 mb-2">
+                                <a href="{{ route('blogs.show', $rBlog->slug) }}" class="text-light-parchment text-gold-hover text-decoration-none transition">{{ $rBlog->title }}</a>
+                            </h4>
+                            <p class="text-xs text-muted-parchment mb-0">
+                                {{ $rBlog->summary ?? \Illuminate\Support\Str::limit(strip_tags($rBlog->content), 80) }}
+                            </p>
+                        </div>
                     </div>
                 @endforeach
             </div>

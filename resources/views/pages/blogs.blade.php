@@ -6,72 +6,71 @@
 @section('content')
 
 <!-- Blog Hero Banner -->
-<section class="relative py-16 md:py-24 bg-[#0A0405] border-b border-[#C9A24B]/20 overflow-hidden">
-    <div class="absolute inset-0 bg-radial-gradient opacity-25 pointer-events-none"></div>
-    <div class="container relative z-10 text-center">
+<section class="py-5 border-bottom border-gold-20 text-center position-relative overflow-hidden" style="background-color: #0A0405;">
+    <div class="container px-3 px-lg-4 position-relative z-1">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Fragrance Chronicles']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] mb-2 font-medium">THE ARTISANAL JOURNAL</span>
-        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-[#F5EFE6] mb-4 font-normal tracking-wide">
+        <span class="d-inline-block text-gold mb-2 fw-medium" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;">THE ARTISANAL JOURNAL</span>
+        <h1 class="font-serif text-light-parchment mb-3 fw-normal display-5 tracking-wide">
             Olfactory Chronicles
         </h1>
-        <p class="max-w-2xl mx-auto text-[#F5EFE6]/70 text-sm md:text-base font-light leading-relaxed">
+        <p class="mx-auto text-muted-parchment lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem;">
             Essays on rare Cambodian agarwood distillations, maceration techniques, seasonal wear in Pakistan, and the art of Extrait layering.
         </p>
     </div>
 </section>
 
 <!-- Blog List & Featured Article -->
-<section class="py-16 bg-[#080304]">
-    <div class="container">
+<section class="py-5" style="background-color: #080304;">
+    <div class="container px-3 px-lg-4">
         
         <!-- Featured Article Spotlight -->
         @if($featuredBlog)
-            <div class="mb-16 bg-[#0D0507] border border-[#C9A24B]/35 rounded-lg overflow-hidden shadow-2xl group hover:border-[#C9A24B]/70 transition-all duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                    <div class="lg:col-span-7 relative h-72 lg:h-auto overflow-hidden bg-[#14080B]">
+            <div class="mb-5 bg-wine-card border border-gold-30 rounded-3 overflow-hidden shadow-2xl transition">
+                <div class="row g-0">
+                    <div class="col-12 col-lg-7 position-relative overflow-hidden bg-wine-dark" style="min-height: 288px;">
                         <img 
                             src="{{ asset($featuredBlog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
                             alt="{{ $featuredBlog->title }}" 
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                            class="w-100 h-100 object-cover"
                         >
-                        <div class="absolute top-4 left-4 bg-[#4A0E17] text-[#F5EFE6] border border-[#C9A24B]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest rounded">
+                        <div class="position-absolute top-0 start-0 m-3 bg-wine-accent text-light-parchment border border-gold-40 px-3 py-1 rounded text-uppercase fw-semibold" style="font-size: 10px; letter-spacing: 0.1em;">
                             FEATURED CHRONICLE
                         </div>
                     </div>
 
-                    <div class="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-3 text-xs text-[#C9A24B]">
-                                <span><i class="far fa-calendar-alt mr-1"></i> {{ $featuredBlog->published_at ? \Carbon\Carbon::parse($featuredBlog->published_at)->format('F d, Y') : 'Featured' }}</span>
+                    <div class="col-12 col-lg-5 p-4 p-lg-5 d-flex flex-column justify-content-between">
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-center gap-2 text-xs text-gold">
+                                <span><i class="far fa-calendar-alt me-1"></i> {{ $featuredBlog->published_at ? \Carbon\Carbon::parse($featuredBlog->published_at)->format('F d, Y') : 'Featured' }}</span>
                                 <span>&bull;</span>
-                                <span><i class="far fa-clock mr-1"></i> {{ $featuredBlog->reading_time_min ?? 5 }} MIN READ</span>
+                                <span><i class="far fa-clock me-1"></i> {{ $featuredBlog->reading_time_min ?? 5 }} MIN READ</span>
                             </div>
 
-                            <h2 class="font-serif text-2xl lg:text-3xl text-[#F5EFE6] leading-snug group-hover:text-[#C9A24B] transition-colors">
-                                <a href="{{ route('blogs.show', $featuredBlog->slug) }}">
+                            <h2 class="font-serif fs-3 text-light-parchment lh-sm mb-0">
+                                <a href="{{ route('blogs.show', $featuredBlog->slug) }}" class="text-light-parchment text-gold-hover text-decoration-none transition">
                                     {{ $featuredBlog->title }}
                                 </a>
                             </h2>
 
-                            <p class="text-sm text-[#F5EFE6]/70 line-clamp-3 leading-relaxed">
+                            <p class="text-muted-parchment lh-base mb-0" style="font-size: 0.9rem;">
                                 {{ $featuredBlog->summary ?? \Illuminate\Support\Str::limit(strip_tags($featuredBlog->content), 160) }}
                             </p>
                         </div>
 
-                        <div class="pt-6 mt-6 border-t border-[#C9A24B]/15 flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-full bg-[#C9A24B]/20 border border-[#C9A24B]/40 flex items-center justify-center text-[#C9A24B] text-xs">
+                        <div class="pt-4 mt-4 border-top border-gold-15 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold text-xs" style="width: 32px; height: 32px;">
                                     <i class="fas fa-feather-alt"></i>
                                 </div>
-                                <span class="text-xs text-[#F5EFE6]/80">{{ $featuredBlog->author_name ?? 'Master Parfumeur' }}</span>
+                                <span class="text-xs text-muted-parchment">{{ $featuredBlog->author_name ?? 'Master Parfumeur' }}</span>
                             </div>
 
-                            <a href="{{ route('blogs.show', $featuredBlog->slug) }}" class="text-xs uppercase tracking-widest text-[#C9A24B] font-semibold flex items-center space-x-2 group-hover:translate-x-1 transition-transform">
+                            <a href="{{ route('blogs.show', $featuredBlog->slug) }}" class="text-xs text-uppercase tracking-widest text-gold fw-semibold d-flex align-items-center gap-2 text-decoration-none">
                                 <span>Read Chronicle</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
@@ -82,52 +81,54 @@
         @endif
 
         <!-- Articles Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($blogs as $blog)
-                <article class="bg-[#0C0507] border border-[#C9A24B]/20 rounded-lg overflow-hidden flex flex-col group hover:border-[#C9A24B]/50 transition-all duration-300">
-                    <div class="relative h-56 overflow-hidden bg-[#120709]">
-                        <img 
-                            src="{{ asset($blog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
-                            alt="{{ $blog->title }}" 
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                        >
-                        <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2.5 py-1 text-[10px] text-[#C9A24B] border border-[#C9A24B]/30 rounded">
-                            {{ $blog->category_name ?? 'Olfactory Art' }}
+                <div class="col">
+                    <article class="bg-wine-card border border-gold-20 rounded-3 overflow-hidden d-flex flex-column h-100 transition shadow-sm">
+                        <div class="position-relative overflow-hidden bg-wine-dark" style="height: 224px;">
+                            <img 
+                                src="{{ asset($blog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
+                                alt="{{ $blog->title }}" 
+                                class="w-100 h-100 object-cover"
+                            >
+                            <div class="position-absolute top-0 end-0 m-3 px-2 py-1 rounded text-gold border border-gold-30" style="background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); font-size: 10px;">
+                                {{ $blog->category_name ?? 'Olfactory Art' }}
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-2 text-[11px] text-[#F5EFE6]/50">
-                                <span>{{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('M d, Y') : 'Recent' }}</span>
-                                <span>&bull;</span>
-                                <span>{{ $blog->reading_time_min ?? 4 }} min read</span>
+                        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex align-items-center gap-2 text-muted-parchment" style="font-size: 11px;">
+                                    <span>{{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('M d, Y') : 'Recent' }}</span>
+                                    <span>&bull;</span>
+                                    <span>{{ $blog->reading_time_min ?? 4 }} min read</span>
+                                </div>
+
+                                <h3 class="font-serif fs-5 text-light-parchment lh-sm mb-0">
+                                    <a href="{{ route('blogs.show', $blog->slug) }}" class="text-light-parchment text-gold-hover text-decoration-none transition">
+                                        {{ $blog->title }}
+                                    </a>
+                                </h3>
+
+                                <p class="text-xs text-muted-parchment lh-base mb-0">
+                                    {{ $blog->summary ?? \Illuminate\Support\Str::limit(strip_tags($blog->content), 120) }}
+                                </p>
                             </div>
 
-                            <h3 class="font-serif text-lg text-[#F5EFE6] leading-snug group-hover:text-[#C9A24B] transition-colors">
-                                <a href="{{ route('blogs.show', $blog->slug) }}">
-                                    {{ $blog->title }}
+                            <div class="pt-3 mt-3 border-top border-gold-15 d-flex align-items-center justify-content-between text-xs">
+                                <span class="text-muted-parchment">{{ $blog->author_name ?? 'Maison d\'Orient' }}</span>
+                                <a href="{{ route('blogs.show', $blog->slug) }}" class="text-gold text-decoration-none fw-medium text-gold-hover">
+                                    Read Full Article &rarr;
                                 </a>
-                            </h3>
-
-                            <p class="text-xs text-[#F5EFE6]/60 line-clamp-3 leading-relaxed">
-                                {{ $blog->summary ?? \Illuminate\Support\Str::limit(strip_tags($blog->content), 120) }}
-                            </p>
+                            </div>
                         </div>
-
-                        <div class="pt-4 mt-4 border-t border-[#C9A24B]/10 flex items-center justify-between text-xs">
-                            <span class="text-[#F5EFE6]/50">{{ $blog->author_name ?? 'Maison d\'Orient' }}</span>
-                            <a href="{{ route('blogs.show', $blog->slug) }}" class="text-[#C9A24B] hover:underline font-medium">
-                                Read Full Article &rarr;
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </div>
             @endforeach
         </div>
 
         <!-- Pagination -->
-        <div class="mt-12 flex justify-center">
+        <div class="mt-5 d-flex justify-content-center">
             {{ $blogs->links() }}
         </div>
 

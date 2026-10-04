@@ -4,21 +4,21 @@
     'width' => 'max-w-md'
 ])
 
-<div id="{{ $id }}" class="cart-drawer fixed inset-y-0 right-0 z-50 w-full {{ $width }} bg-[#0B0406] border-l border-[#C9A24B]/30 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
-    <div class="drawer-header p-5 border-b border-[#C9A24B]/20 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-            <i class="fas fa-shopping-bag text-[#C9A24B]"></i>
-            <h3 class="font-serif text-lg tracking-wider text-[#F5EFE6]">{{ $title }}</h3>
+<div id="{{ $id }}" class="cart-drawer position-fixed top-0 end-0 h-100 bg-theme-dark border-start border-gold-30 shadow-lg d-flex flex-column" style="z-index: 1060; width: 100%; max-width: 440px;">
+    <div class="drawer-header p-4 border-bottom border-gold-20 bg-theme-secondary d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+            <i class="fas fa-shopping-bag text-gold"></i>
+            <h3 class="font-serif fs-5 tracking-wider text-ivory mb-0">{{ $title }}</h3>
         </div>
-        <button type="button" class="drawer-close text-[#F5EFE6]/60 hover:text-[#C9A24B] text-xl transition" onclick="document.getElementById('{{ $id }}').classList.remove('open')">&times;</button>
+        <button type="button" class="drawer-close border-0 bg-transparent text-muted-luxury fs-3 p-0" onclick="document.getElementById('{{ $id }}').classList.remove('open', 'active')">&times;</button>
     </div>
 
-    <div class="drawer-body flex-1 overflow-y-auto p-5 space-y-4">
+    <div class="drawer-body flex-grow-1 overflow-y-auto p-4 vstack gap-3">
         {{ $slot }}
     </div>
 
     @if(isset($footer))
-        <div class="drawer-footer p-5 border-t border-[#C9A24B]/20 bg-[#080304]">
+        <div class="drawer-footer p-4 border-top border-gold-20 bg-wine-dark">
             {{ $footer }}
         </div>
     @endif

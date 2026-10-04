@@ -5,29 +5,29 @@
 @section('content')
 
 <!-- Search Results Banner -->
-<section class="relative py-16 md:py-20 bg-gradient-to-b from-[#18050b] via-[#0d0305] to-[#050203] border-b border-[#d6aa62]/20">
-    <div class="container max-w-3xl mx-auto text-center px-4">
+<section class="py-5 border-bottom border-gold-20 text-center" style="background: linear-gradient(to bottom, #18050b, #0d0305, #050203);">
+    <div class="container px-3 px-lg-4" style="max-width: 768px;">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Vault Search']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] mb-2 font-semibold">OLFACTORY DISCOVERY</span>
-        <h1 class="font-serif text-3xl md:text-5xl text-[#f5efe7] mb-6 font-normal">
+        <span class="d-inline-block text-gold mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">OLFACTORY DISCOVERY</span>
+        <h1 class="font-serif display-5 text-light-parchment mb-4 fw-normal">
             Search Results for "{{ $q }}"
         </h1>
 
         <!-- Search Bar -->
-        <form action="{{ route('pages.search') }}" method="GET" class="relative max-w-xl mx-auto">
+        <form action="{{ route('pages.search') }}" method="GET" class="position-relative mx-auto" style="max-width: 576px;">
             <input 
                 type="text" 
                 name="q" 
                 value="{{ $q }}" 
                 placeholder="Search notes (Oud, Amber, Taif Rose), designer names..." 
-                class="w-full bg-[#080204] border border-[#d6aa62]/35 rounded-xl px-5 py-3 text-sm text-[#f5efe7] placeholder-[#b8a9a2]/50 focus:outline-none focus:border-[#d6aa62] shadow-inner"
+                class="form-control form-control-luxury text-sm py-2-5 px-3 rounded-pill pe-5"
             >
-            <button type="submit" class="absolute right-2 top-2 btn-gold px-5 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider">
+            <button type="submit" class="position-absolute end-0 top-50 translate-middle-y me-1 btn-gold px-3 py-1 rounded-pill text-xs fw-semibold text-uppercase tracking-wider">
                 Search
             </button>
         </form>
@@ -35,36 +35,38 @@
 </section>
 
 <!-- Search Results Grid -->
-<section class="py-16 bg-[#050203]">
-    <div class="container mx-auto px-4 lg:px-8">
+<section class="py-5" style="background-color: #050203;">
+    <div class="container px-3 px-lg-4">
         @if($products->count() > 0)
-            <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#d6aa62]/20">
-                <p class="text-xs text-[#b8a9a2] tracking-wider">
-                    Found <span class="text-[#d6aa62] font-semibold">{{ $products->total() }}</span> matching compositions
+            <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom border-gold-20">
+                <p class="text-xs text-muted-parchment tracking-wider mb-0">
+                    Found <span class="text-gold fw-semibold">{{ $products->total() }}</span> matching compositions
                 </p>
-                <a href="{{ route('collections.show', 'all') }}" class="text-xs text-[#d6aa62] hover:text-[#f0d59d] hover:underline uppercase tracking-wider">
+                <a href="{{ route('collections.show', 'all') }}" class="text-xs text-gold text-gold-hover text-decoration-none text-uppercase tracking-wider">
                     Browse All Masterpieces &rarr;
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4">
                 @foreach($products as $product)
-                    <x-product-card :product="$product" />
+                    <div class="col">
+                        <x-product-card :product="$product" />
+                    </div>
                 @endforeach
             </div>
 
-            <div class="mt-12 flex justify-center">
+            <div class="mt-5 d-flex justify-content-center">
                 {{ $products->links() }}
             </div>
         @else
-            <div class="text-center py-20 bg-[#140408] border border-[#d6aa62]/25 rounded-2xl max-w-2xl mx-auto p-8 space-y-4">
-                <i class="fas fa-search text-4xl text-[#d6aa62]/50 mb-2"></i>
-                <h3 class="font-serif text-2xl text-[#f5efe7]">No Matching Compositions</h3>
-                <p class="text-xs text-[#b8a9a2] max-w-md mx-auto">
+            <div class="text-center py-5 bg-wine-card border border-gold-25 rounded-4 mx-auto p-4 p-md-5 d-flex flex-column align-items-center gap-3" style="max-width: 672px;">
+                <i class="fas fa-search text-gold opacity-50 fs-1 mb-1"></i>
+                <h3 class="font-serif fs-4 text-light-parchment mb-0">No Matching Compositions</h3>
+                <p class="text-xs text-muted-parchment mx-auto mb-2" style="max-width: 440px;">
                     We could not find any perfumes matching "{{ $q }}". Try searching for fragrance notes like "Oud", "Saffron", "Taif Rose", or "Amber".
                 </p>
-                <div class="pt-2">
-                    <a href="{{ route('collections.show', 'all') }}" class="btn-gold py-3 px-8 text-xs uppercase tracking-widest inline-block">
+                <div>
+                    <a href="{{ route('collections.show', 'all') }}" class="btn-gold py-3 px-4 text-xs text-uppercase tracking-widest d-inline-block text-decoration-none">
                         EXPLORE ALL PERFUMES
                     </a>
                 </div>

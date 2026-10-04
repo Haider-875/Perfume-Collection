@@ -3,80 +3,80 @@
 @section('title', 'Create Account — Perfumes Collection')
 
 @section('content')
-<div class="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-[#050203] luxury-wine-bg">
-    <div class="max-w-md w-full bg-gradient-to-b from-[#18050b] via-[#100306] to-[#070103] border border-[#d6aa62]/35 p-8 md:p-10 rounded-2xl shadow-2xl relative">
-        <div class="text-center mb-8">
-            <span class="text-[11px] uppercase tracking-[0.25em] text-[#f0d59d] font-semibold px-3 py-1 bg-[#3b0711]/70 border border-[#d6aa62]/40 rounded-full inline-block mb-3">
+<div class="d-flex align-items-center justify-content-center px-3 py-5 bg-wine-ticker" style="min-height: 75vh; background-color: #050203;">
+    <div class="w-100 bg-gradient-wine-ticker border border-gold-35 p-4 p-md-5 rounded-4 shadow-2xl position-relative" style="max-width: 448px;">
+        <div class="text-center mb-4">
+            <span class="text-gold fw-semibold px-3 py-1 bg-wine-accent border border-gold-40 rounded-pill d-inline-block mb-2 text-uppercase" style="font-size: 11px; letter-spacing: 0.25em;">
                 New Patron
             </span>
-            <h1 class="font-serif text-3xl md:text-4xl text-[#f5efe7] font-normal tracking-tight">Create An Account</h1>
-            <p class="text-sm text-[#b8a9a2] mt-2 font-light">Join Perfumes Collection to track your orders and enjoy swift checkout.</p>
+            <h1 class="font-serif fs-2 text-light-parchment fw-normal tracking-tight mb-1">Create An Account</h1>
+            <p class="text-sm text-muted-parchment fw-light mb-0">Join Perfumes Collection to track your orders and enjoy swift checkout.</p>
         </div>
 
         @if($errors->any())
-            <div class="mb-6 p-4 bg-red-950/60 border border-red-500/40 text-red-300 text-sm rounded-lg space-y-1">
+            <div class="alert alert-danger bg-wine-accent border border-danger-subtle text-danger-emphasis rounded-3 p-3 mb-4 d-flex flex-column gap-1">
                 @foreach($errors->all() as $error)
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-circle-exclamation text-red-400 text-xs"></i>
+                    <div class="d-flex align-items-center gap-2 text-xs">
+                        <i class="fas fa-circle-exclamation text-danger"></i>
                         <span>{{ $error }}</span>
                     </div>
                 @endforeach
             </div>
         @endif
 
-        <form action="{{ route('register') }}" method="POST" class="space-y-4 text-sm">
+        <form action="{{ route('register') }}" method="POST" class="d-flex flex-column gap-3 text-sm">
             @csrf
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">Full Name *</label>
+                <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">Full Name *</label>
                 <input type="text" name="name" value="{{ old('name') }}" required
                        placeholder="e.g. Daniyal Khan"
-                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                       class="form-control form-control-luxury text-sm py-2 px-3">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">Email Address *</label>
+                <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">Email Address *</label>
                 <input type="email" name="email" value="{{ old('email') }}" required
                        placeholder="name@domain.com"
-                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                       class="form-control form-control-luxury text-sm py-2 px-3">
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">Phone Number</label>
+            <div class="row g-2">
+                <div class="col-12 col-sm-6">
+                    <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">Phone Number</label>
                     <input type="tel" name="phone" value="{{ old('phone') }}" 
                            placeholder="0300 1234567"
-                           class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                           class="form-control form-control-luxury text-sm py-2 px-3">
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">City</label>
+                <div class="col-12 col-sm-6">
+                    <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">City</label>
                     <input type="text" name="city" value="{{ old('city', 'Lahore') }}" 
                            placeholder="Lahore / Karachi"
-                           class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                           class="form-control form-control-luxury text-sm py-2 px-3">
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">Password *</label>
+                <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">Password *</label>
                 <input type="password" name="password" required
                        placeholder="Minimum 8 characters"
-                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                       class="form-control form-control-luxury text-sm py-2 px-3">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#d6aa62] mb-1.5">Confirm Password *</label>
+                <label class="d-block text-xs fw-semibold text-uppercase tracking-wider text-gold mb-1">Confirm Password *</label>
                 <input type="password" name="password_confirmation" required
                        placeholder="Re-enter password"
-                       class="w-full bg-[#0c0305] border border-[#d6aa62]/30 px-4 py-2.5 text-sm text-[#f5efe7] placeholder-[#8e7c75] focus:border-[#d6aa62] focus:ring-1 focus:ring-[#d6aa62]/40 focus:outline-none rounded-lg transition">
+                       class="form-control form-control-luxury text-sm py-2 px-3">
             </div>
 
-            <button type="submit" class="w-full btn-gold py-3.5 text-xs font-bold uppercase tracking-widest rounded-lg shadow-xl mt-2">
+            <button type="submit" class="w-100 btn-gold py-3 text-xs font-bold text-uppercase tracking-widest rounded-3 shadow mt-2">
                 Create Account
             </button>
         </form>
 
-        <div class="text-center pt-6 mt-6 border-t border-[#d6aa62]/20 text-sm text-[#b8a9a2]">
+        <div class="text-center pt-4 mt-4 border-top border-gold-20 text-sm text-muted-parchment">
             <span>Already have an account?</span>
-            <a href="{{ route('login') }}" class="text-[#f0d59d] font-semibold hover:text-[#ffd987] ml-1 uppercase tracking-wider text-xs">
+            <a href="{{ route('login') }}" class="text-gold-soft fw-semibold text-gold-hover ms-1 text-uppercase text-decoration-none" style="font-size: 12px; letter-spacing: 0.05em;">
                 Sign In
             </a>
         </div>

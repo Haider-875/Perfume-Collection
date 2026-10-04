@@ -1,43 +1,45 @@
 @props(['product'])
 
-<div class="product-card group relative bg-gradient-to-b from-[#18050b] via-[#100306] to-[#070103] border border-[#d6aa62]/25 hover:border-[#d6aa62]/80 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_12px_35px_rgba(214,170,98,0.18)] transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-4 h-full">
+<div class="product-card position-relative bg-gradient-wine-card border border-gold-25 luxury-hover-card rounded-4 overflow-hidden shadow-lg d-flex flex-column justify-content-between p-3 p-sm-3 h-100">
     
     <!-- Badges Row -->
-    <div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 pointer-events-none">
+    <div class="position-absolute top-0 start-0 m-3 z-2 d-flex flex-column gap-1 pointer-events-none">
         @if($product->is_bestseller)
-            <span class="bg-gradient-to-r from-[#4a0915] to-[#25050a] text-[#f0d59d] text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md border border-[#d6aa62]/50 backdrop-blur-xs">
+            <span class="bg-gradient-wine-badge text-gold-soft fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm border border-gold-50 backdrop-blur-xs" style="font-size: 10px; letter-spacing: 0.15em;">
                 ★ BESTSELLER
             </span>
         @elseif($product->is_new_arrival)
-            <span class="bg-gradient-to-r from-[#1b3d22] to-[#0d2212] text-emerald-200 text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md border border-emerald-500/40 backdrop-blur-xs">
+            <span class="bg-success text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm border border-success backdrop-blur-xs" style="font-size: 10px; letter-spacing: 0.15em;">
                 NEW ARRIVAL
             </span>
         @elseif($product->is_featured)
-            <span class="bg-gradient-to-r from-[#4a0915] to-[#25050a] text-[#ffd987] text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full shadow-md border border-[#d6aa62]/40 backdrop-blur-xs">
+            <span class="bg-gradient-wine-badge text-gold-bright fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm border border-gold-40 backdrop-blur-xs" style="font-size: 10px; letter-spacing: 0.15em;">
                 EXCLUSIVE
             </span>
         @endif
 
         @if($product->has_discount)
-            <span class="bg-gradient-to-r from-[#851a31] to-[#4a0915] text-[#fff7ed] text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm w-fit border border-[#d6aa62]/30">
+            <span class="bg-gradient-discount-badge text-white fw-bold px-2 py-0-5 rounded-pill shadow-sm border border-gold-30" style="font-size: 10px; width: fit-content;">
                 -{{ $product->discount_percentage }}%
             </span>
         @endif
     </div>
 
     <!-- Quick Actions Floating Toolbars -->
-    <div class="absolute top-3 right-3 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+    <div class="position-absolute top-0 end-0 m-3 z-2 d-flex flex-column gap-2 opacity-0 quick-actions-toolbar">
         <!-- WhatsApp Direct Inquiry -->
         <a href="{{ $product->whats_app_order_url }}" 
            target="_blank" 
-           class="w-9 h-9 bg-[#050203]/90 text-emerald-400 hover:bg-emerald-500 hover:text-white rounded-full shadow-lg flex items-center justify-center text-sm border border-[#d6aa62]/40 transition-colors" 
+           class="rounded-circle bg-theme-main text-success shadow-sm d-flex align-items-center justify-center text-sm border border-gold-40 text-decoration-none" 
+           style="width: 2.25rem; height: 2.25rem;"
            title="Order 1-Click via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
 
         <!-- Live Quick View Button -->
         <button type="button"
-                class="quick-action-btn quick-view-btn w-9 h-9 bg-[#050203]/90 text-[#f5efe7] hover:bg-[#d6aa62] hover:text-[#050203] rounded-full shadow-lg flex items-center justify-center text-xs border border-[#d6aa62]/40 transition-colors"
+                class="quick-action-btn quick-view-btn rounded-circle bg-theme-main text-ivory shadow-sm d-flex align-items-center justify-center border border-gold-40"
+                style="width: 2.25rem; height: 2.25rem; font-size: 11px;"
                 title="Quick Preview"
                 data-id="{{ $product->id }}"
                 data-name="{{ $product->name }}"
@@ -53,69 +55,69 @@
     </div>
 
     <!-- Flacon Image Wrap (Full Coverage with Hover Zoom) -->
-    <a href="{{ route('shop.show', $product->slug) }}" class="relative w-full aspect-square rounded-xl overflow-hidden bg-[#0c0305] border border-[#d6aa62]/20 flex items-center justify-center mb-3 group/img">
+    <a href="{{ route('shop.show', $product->slug) }}" class="position-relative w-100 aspect-1x1 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 d-flex align-items-center justify-center mb-3 text-decoration-none">
         <img src="{{ $product->primary_image_url }}" 
              alt="{{ $product->name }}" 
              onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108" 
+             class="w-100 h-100 object-fit-cover transition-smooth" 
              loading="lazy">
         @if($product->hover_image && $product->hover_image !== $product->thumbnail_image)
             <img src="{{ $product->hover_image_url }}" 
                  alt="{{ $product->name }} Presentation" 
                  onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100" 
+                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-0 transition-smooth" 
                  loading="lazy">
         @endif
-        <div class="absolute inset-0 bg-gradient-to-t from-[#050203]/60 via-transparent to-transparent pointer-events-none"></div>
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade pointer-events-none"></div>
     </a>
 
     <!-- Product Metadata & Content -->
-    <div class="flex flex-col flex-grow text-center px-1">
+    <div class="d-flex flex-column flex-grow-1 text-center px-1">
         <!-- Impression Tag -->
         <div class="mb-1 text-center">
             @if($product->impression_of)
-                <span class="text-[11px] text-[#b8a9a2] font-medium block truncate" title="Impression of {{ $product->impression_of }}">
-                    Impression of <span class="text-[#f0d59d] font-semibold">{{ $product->impression_of }}</span>
+                <span class="text-muted-luxury fw-medium d-block text-truncate" style="font-size: 11px;" title="Impression of {{ $product->impression_of }}">
+                    Impression of <span class="text-gold-soft fw-semibold">{{ $product->impression_of }}</span>
                 </span>
             @else
-                <span class="text-[11px] text-[#d6aa62] font-medium block uppercase tracking-wider">
+                <span class="text-gold fw-medium d-block text-uppercase tracking-wider" style="font-size: 11px;">
                     Signature Luxury Extrait
                 </span>
             @endif
         </div>
 
         <!-- Product Title (Cormorant Garamond Elegance) -->
-        <h3 class="font-serif text-lg sm:text-xl font-medium text-[#f5efe7] group-hover:text-[#f0d59d] transition-colors leading-snug line-clamp-1 mb-1.5">
-            <a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a>
+        <h3 class="font-serif fs-5 fw-medium text-ivory text-truncate mb-1">
+            <a href="{{ route('shop.show', $product->slug) }}" class="text-ivory text-decoration-none">{{ $product->name }}</a>
         </h3>
 
         <!-- Dual Pricing / Range in Shimmering Gold -->
-        <div class="my-1.5 flex items-baseline justify-center gap-1.5">
-            <span class="text-xs sm:text-sm font-medium text-[#b8a9a2]">
+        <div class="my-1 d-flex align-items-baseline justify-content-center gap-1">
+            <span class="text-xs text-muted-luxury fw-medium">
                 Rs. {{ number_format(max(450, round($product->effective_price * 0.22, -1))) }}
             </span>
-            <span class="text-[10px] text-[#8e7c75] font-medium uppercase">/10ml</span>
-            <span class="text-xs text-[#d6aa62]/50 font-light">&ndash;</span>
-            <span class="text-sm sm:text-base font-bold text-[#f0d59d]">
+            <span class="text-light-luxury fw-medium text-uppercase" style="font-size: 10px;">/10ml</span>
+            <span class="text-gold opacity-50 fw-light" style="font-size: 11px;">&ndash;</span>
+            <span class="text-sm fw-bold text-gold-soft">
                 {{ $product->formatted_effective_price }}
             </span>
-            <span class="text-[10px] text-[#8e7c75] font-medium uppercase">/{{ $product->volume_ml }}ml</span>
+            <span class="text-light-luxury fw-medium text-uppercase" style="font-size: 10px;">/{{ $product->volume_ml }}ml</span>
         </div>
 
         <!-- Star Rating -->
-        <div class="flex items-center justify-center gap-1 text-[11px] text-[#d6aa62] mb-1">
-            <i class="fas fa-star text-[10px]"></i>
-            <span class="font-bold text-[#f5efe7]">{{ number_format($product->rating_avg ?: 4.9, 1) }}</span>
-            <span class="text-[#8e7c75] text-[10px]">({{ $product->reviews_count ?: 48 }})</span>
+        <div class="d-flex align-items-center justify-content-center gap-1 text-gold mb-1" style="font-size: 11px;">
+            <i class="fas fa-star" style="font-size: 10px;"></i>
+            <span class="fw-bold text-ivory">{{ number_format($product->rating_avg ?: 4.9, 1) }}</span>
+            <span class="text-light-luxury" style="font-size: 10px;">({{ $product->reviews_count ?: 48 }})</span>
         </div>
     </div>
 
     <!-- Prominent Full-Width Luxury Gold Button -->
-    <div class="mt-3 pt-2 border-t border-[#d6aa62]/20">
+    <div class="mt-3 pt-2 border-top border-gold-20">
         <button onclick="addToCartAjax({{ $product->id }}, 1)" 
-                class="w-full py-2.5 px-4 btn-gold active:scale-[0.98] text-[#050203] font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-[0_4px_20px_rgba(214,170,98,0.45)]"
+                class="w-100 py-2 px-3 btn-gold text-theme-main fw-bold text-xs text-uppercase tracking-wider rounded-3 d-flex align-items-center justify-center gap-2"
                 title="Add to Cart">
-            <i class="fas fa-cart-shopping text-xs"></i>
+            <i class="fas fa-cart-shopping" style="font-size: 11px;"></i>
             <span>Add to Cart</span>
         </button>
     </div>

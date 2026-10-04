@@ -9,16 +9,16 @@
     'error' => null
 ])
 
-<div class="luxury-form-group mb-4">
+<div class="luxury-form-group mb-3">
     @if($label)
-        <label for="{{ $name }}" class="block text-xs uppercase tracking-widest text-gold mb-2 font-medium">
-            {{ $label }} @if($required)<span class="text-maroon">*</span>@endif
+        <label for="{{ $name }}" class="d-block text-xs text-uppercase tracking-widest text-gold mb-2 fw-medium">
+            {{ $label }} @if($required)<span class="text-danger">*</span>@endif
         </label>
     @endif
     
-    <div class="relative">
+    <div class="position-relative">
         @if($icon)
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gold/60">
+            <div class="position-absolute top-50 start-0 translate-middle-y ps-3 d-flex align-items-center pointer-events-none text-gold opacity-50">
                 <i class="{{ $icon }}"></i>
             </div>
         @endif
@@ -31,12 +31,12 @@
             placeholder="{{ $placeholder }}"
             @if($required) required @endif
             {{ $attributes->merge([
-                'class' => 'w-full bg-[#120B0C] border border-[#C9A24B]/30 rounded px-4 py-3 text-sm text-[#F5EFE6] placeholder-stone-500 focus:outline-none focus:border-[#C9A24B] focus:ring-1 focus:ring-[#C9A24B] transition-all duration-300 ' . ($icon ? 'pl-10' : '')
+                'class' => 'form-control form-control-luxury ' . ($icon ? 'ps-5' : '')
             ]) }}
         >
     </div>
 
     @error($name)
-        <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+        <p class="text-danger text-xs mt-1 mb-0">{{ $message }}</p>
     @enderror
 </div>

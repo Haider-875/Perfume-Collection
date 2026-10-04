@@ -6,73 +6,77 @@
 @section('content')
 
 <!-- Collaborations Hero Banner -->
-<section class="relative py-16 md:py-24 bg-[#0A0405] border-b border-[#C9A24B]/20 overflow-hidden">
-    <div class="absolute inset-0 bg-radial-gradient opacity-25 pointer-events-none"></div>
-    <div class="container relative z-10 text-center">
+<section class="py-5 border-bottom border-gold-20 text-center position-relative overflow-hidden" style="background-color: #0A0405;">
+    <div class="container px-3 px-lg-4 position-relative z-1">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Collaborations & Private Compositions']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.3em] text-[#C9A24B] mb-2 font-medium">BESPOKE PARTNERSHIPS</span>
-        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-[#F5EFE6] mb-4 font-normal tracking-wide">
+        <span class="d-inline-block text-gold mb-2 fw-medium" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;">BESPOKE PARTNERSHIPS</span>
+        <h1 class="font-serif text-light-parchment mb-3 fw-normal display-5 tracking-wide">
             Haute Collaborations
         </h1>
-        <p class="max-w-2xl mx-auto text-[#F5EFE6]/70 text-sm md:text-base font-light leading-relaxed">
+        <p class="mx-auto text-muted-parchment lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem;">
             Where master perfumery meets traditional Pakistani craftsmanship, Islamic calligraphy, and rare vintage agarwood distillations.
         </p>
     </div>
 </section>
 
 <!-- Collaborations Showcase Grid -->
-<section class="py-16 bg-[#080304]">
-    <div class="container">
+<section class="py-5" style="background-color: #080304;">
+    <div class="container px-3 px-lg-4">
         
         <!-- Spotlight Collab Banner -->
-        <div class="mb-16 bg-[#0E0507] border border-[#C9A24B]/35 rounded-lg p-8 lg:p-12 relative overflow-hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div class="space-y-6">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-[#C9A24B] font-semibold border border-[#C9A24B]/30 px-3 py-1 rounded inline-block">
-                        LIMITED VINTAGE RUN &bull; 500 FLACONS WORLDWIDE
-                    </span>
-                    <h2 class="font-serif text-3xl lg:text-4xl text-[#F5EFE6]">
+        <div class="mb-5 bg-wine-card border border-gold-30 rounded-3 p-4 p-lg-5 position-relative overflow-hidden">
+            <div class="row g-4 align-items-center">
+                <div class="col-12 col-lg-6 d-flex flex-column gap-3">
+                    <div>
+                        <span class="text-gold fw-semibold border border-gold-30 px-3 py-1 rounded d-inline-block text-uppercase" style="font-size: 10px; letter-spacing: 0.25em;">
+                            LIMITED VINTAGE RUN &bull; 500 FLACONS WORLDWIDE
+                        </span>
+                    </div>
+                    <h2 class="font-serif fs-2 text-light-parchment lh-sm mb-0">
                         Perfumes Collection &times; Royal Mughal Calligraphy Atelier
                     </h2>
-                    <p class="text-sm text-[#F5EFE6]/75 leading-relaxed">
+                    <p class="text-muted-parchment lh-base mb-0" style="font-size: 0.95rem;">
                         An ode to the imperial gardens of Shalimar and the ancient amber trade. Featuring hand-engraved 24K gold calligraphic inscriptions on crystal flacons, housing a 40-year aged Cambodian Dehn al Oud.
                     </p>
-                    <div class="pt-4 flex flex-wrap gap-4">
-                        <a href="{{ route('shop.show', 'oud-royale-1947') }}" class="btn-gold">
+                    <div class="pt-2 d-flex flex-wrap gap-3">
+                        <a href="{{ route('shop.show', 'oud-royale-1947') }}" class="btn-gold text-decoration-none">
                             DISCOVER COVETED FLACON
                         </a>
-                        <a href="{{ route('pages.contact') }}" class="btn-outline-gold">
+                        <a href="{{ route('pages.contact') }}" class="btn-outline-gold text-decoration-none">
                             REQUEST BESPOKE COMMISSION
                         </a>
                     </div>
                 </div>
 
-                <div class="relative text-center">
+                <div class="col-12 col-lg-6 text-center">
                     <img 
                         src="{{ asset('assets/images/perfumes/oud_royale.svg') }}" 
                         alt="Royal Collaboration" 
-                        class="w-72 h-72 mx-auto object-contain filter drop-shadow-2xl animate-float"
+                        class="img-fluid drop-shadow"
+                        style="max-height: 288px;"
                     >
                 </div>
             </div>
         </div>
 
         <!-- Collaboration Creations -->
-        <div class="text-center mb-10">
-            <h3 class="font-serif text-2xl md:text-3xl text-[#F5EFE6]">Collaborative Masterpieces</h3>
-            <p class="text-xs text-[#C9A24B] tracking-widest uppercase mt-1">Limited Batches & Bespoke Reserves</p>
+        <div class="text-center mb-4">
+            <h3 class="font-serif fs-3 text-light-parchment mb-1">Collaborative Masterpieces</h3>
+            <p class="text-xs text-gold text-uppercase tracking-widest mb-0">Limited Batches & Bespoke Reserves</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4">
             @forelse($collabProducts as $product)
-                <x-product-card :product="$product" />
+                <div class="col">
+                    <x-product-card :product="$product" />
+                </div>
             @empty
-                <div class="col-span-full text-center py-12 text-[#F5EFE6]/60">
+                <div class="col-12 text-center py-5 text-muted-parchment">
                     Collaborative releases are announced seasonally to our Private Circle members.
                 </div>
             @endforelse

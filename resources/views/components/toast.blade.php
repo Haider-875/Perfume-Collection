@@ -3,15 +3,15 @@
     'message' => ''
 ])
 
-<div class="luxury-toast flex items-center space-x-3 bg-[#0E0507] border border-[#C9A24B]/60 text-[#F5EFE6] px-4 py-3 rounded shadow-2xl transition-all duration-300 transform translate-y-2 opacity-0 animate-fade-in">
+<div class="luxury-toast d-flex align-items-center gap-2 bg-theme-card border border-gold-60 text-ivory px-3 py-2 rounded shadow-lg">
     @if($type === 'success')
-        <i class="fas fa-check-circle text-emerald-400"></i>
+        <i class="fas fa-check-circle text-success"></i>
     @elseif($type === 'error')
-        <i class="fas fa-exclamation-circle text-red-400"></i>
+        <i class="fas fa-exclamation-circle text-danger"></i>
     @elseif($type === 'warning')
-        <i class="fas fa-exclamation-triangle text-amber-400"></i>
+        <i class="fas fa-exclamation-triangle text-warning"></i>
     @else
-        <i class="fas fa-info-circle text-[#C9A24B]"></i>
+        <i class="fas fa-info-circle text-gold"></i>
     @endif
     <span class="text-xs tracking-wider">{{ $message ?: $slot }}</span>
 </div>

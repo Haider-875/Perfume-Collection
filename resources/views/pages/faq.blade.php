@@ -6,27 +6,27 @@
 @section('content')
 
 <!-- FAQ Hero Banner -->
-<section class="relative py-16 md:py-24 bg-gradient-to-b from-[#18050b] via-[#0d0305] to-[#050203] border-b border-[#d6aa62]/20 overflow-hidden">
-    <div class="container mx-auto px-4 relative z-10 text-center">
+<section class="py-5 text-center border-bottom border-gold-20 position-relative overflow-hidden" style="background: linear-gradient(to bottom, #18050b, #0d0305, #050203);">
+    <div class="container px-3 px-lg-4 position-relative z-1">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Client Care & FAQ']
         ]" />
 
-        <span class="inline-block text-[11px] uppercase tracking-[0.28em] text-[#d6aa62] mb-2 font-semibold">CONCIERGE INQUIRIES</span>
-        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-[#f5efe7] mb-4 font-normal tracking-wide">
+        <span class="d-inline-block text-gold mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">CONCIERGE INQUIRIES</span>
+        <h1 class="font-serif text-light-parchment mb-3 fw-normal display-5 tracking-wide">
             Frequently Asked Questions
         </h1>
-        <p class="max-w-2xl mx-auto text-[#b8a9a2] text-sm md:text-base font-light leading-relaxed">
+        <p class="mx-auto text-muted-parchment lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem;">
             Essential knowledge concerning our Extrait de Parfum formulations, artisanal agarwood oils, dispatch across Pakistan, and royal customer care.
         </p>
     </div>
 </section>
 
 <!-- FAQ Accordion Section -->
-<section class="py-16 bg-[#050203]">
-    <div class="container max-w-4xl mx-auto px-4 space-y-6">
+<section class="py-5" style="background-color: #050203;">
+    <div class="container px-3 px-lg-4 d-flex flex-column gap-3" style="max-width: 896px;">
         
         <!-- Accordion 1 -->
         <x-accordion title="What makes Extrait de Parfum superior to standard Eau de Parfum (EDP)?" :open="true">
@@ -59,16 +59,16 @@
         </x-accordion>
 
         <!-- Still have questions banner -->
-        <div class="mt-16 p-8 bg-[#140408] border border-[#d6aa62]/30 rounded-2xl text-center space-y-4 shadow-xl">
-            <h3 class="font-serif text-2xl text-[#f5efe7]">Require Bespoke Fragrance Advice?</h3>
-            <p class="text-xs md:text-sm text-[#b8a9a2] max-w-lg mx-auto">
+        <div class="mt-5 p-4 p-md-5 bg-wine-card border border-gold-30 rounded-4 text-center d-flex flex-column align-items-center gap-3 shadow-xl">
+            <h3 class="font-serif fs-3 text-light-parchment mb-0">Require Bespoke Fragrance Advice?</h3>
+            <p class="text-xs text-muted-parchment mx-auto mb-0" style="max-width: 512px;">
                 Our Private Concierge advisors are available 7 days a week on WhatsApp to assist with bridal gifting, corporate orders, and personal scent consultations.
             </p>
-            <div class="flex flex-wrap justify-center gap-4 pt-2">
-                <a href="https://wa.me/923008765432?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-6 text-xs uppercase tracking-wider">
-                    <i class="fab fa-whatsapp mr-2"></i> CHAT WITH CONCIERGE
+            <div class="d-flex flex-wrap justify-content-center gap-3 pt-2">
+                <a href="https://wa.me/923008765432?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
+                    <i class="fab fa-whatsapp me-2"></i> CHAT WITH CONCIERGE
                 </a>
-                <a href="{{ route('pages.contact') }}" class="btn-outline-gold py-3 px-6 text-xs uppercase tracking-wider">
+                <a href="{{ route('pages.contact') }}" class="btn-outline-gold py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
                     CONTACT FORM
                 </a>
             </div>
