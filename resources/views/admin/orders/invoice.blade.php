@@ -10,7 +10,7 @@
             margin: 0;
             padding: 30px;
             background: #fff;
-            font-size: 12px;
+            font-size: 13.5px;
             line-height: 1.5;
         }
         .invoice-container {
@@ -35,8 +35,8 @@
             text-transform: uppercase;
         }
         .brand-sub {
-            font-size: 10px;
-            color: #888;
+            font-size: 13px;
+            color: #777;
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
@@ -47,6 +47,8 @@
         .meta-table td {
             vertical-align: top;
             width: 50%;
+            font-size: 13.5px;
+            line-height: 1.6;
         }
         .table {
             width: 100%;
@@ -58,18 +60,20 @@
             color: #444;
             text-align: left;
             padding: 10px;
-            font-size: 11px;
+            font-size: 13px;
             text-transform: uppercase;
             border-bottom: 1px solid #ddd;
         }
         .table td {
             padding: 10px;
             border-bottom: 1px solid #eee;
+            font-size: 13.5px;
         }
         .totals {
-            width: 300px;
+            width: 320px;
             margin-left: auto;
             margin-bottom: 30px;
+            font-size: 13.5px;
         }
         .totals-row {
             display: flex;
@@ -77,7 +81,7 @@
             padding: 5px 0;
         }
         .totals-row.grand {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             border-top: 2px solid #C9A24B;
             padding-top: 10px;
@@ -85,8 +89,8 @@
         }
         .footer {
             text-align: center;
-            font-size: 10px;
-            color: #888;
+            font-size: 13px;
+            color: #777;
             border-top: 1px solid #eee;
             padding-top: 15px;
         }
@@ -99,7 +103,7 @@
 </head>
 <body>
     <div class="no-print" style="max-width: 800px; margin: 0 auto 20px; text-align: right;">
-        <button onclick="window.print()" style="background: #C9A24B; color: #000; font-weight: bold; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px;">
+        <button onclick="window.print()" style="background: #C9A24B; color: #000; font-weight: bold; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 14px;">
             Print / Save as PDF
         </button>
     </div>
@@ -111,16 +115,16 @@
                 <div class="brand-sub">Haute Parfumerie &bull; Pakistan</div>
             </div>
             <div style="text-align: right;">
-                <div style="font-size: 16px; font-weight: bold; color: #C9A24B;">INVOICE</div>
-                <div style="font-family: monospace; font-size: 13px;">#{{ $order->order_number }}</div>
-                <div style="color: #666; font-size: 11px;">Date: {{ $order->created_at->format('d M Y') }}</div>
+                <div style="font-size: 18px; font-weight: bold; color: #C9A24B;">INVOICE</div>
+                <div style="font-family: monospace; font-size: 14px;">#{{ $order->order_number }}</div>
+                <div style="color: #666; font-size: 13px;">Date: {{ $order->created_at->format('d M Y') }}</div>
             </div>
         </div>
 
         <table class="meta-table">
             <tr>
                 <td>
-                    <strong style="text-transform: uppercase; font-size: 10px; color: #888;">Billed & Shipped To:</strong><br>
+                    <strong style="text-transform: uppercase; font-size: 13px; color: #888;">Billed & Shipped To:</strong><br>
                     <strong>{{ $order->customer_name }}</strong><br>
                     {{ $order->shipping_address }}<br>
                     @if($order->area) Area: {{ $order->area }}<br> @endif
@@ -129,7 +133,7 @@
                     Email: {{ $order->customer_email }}
                 </td>
                 <td style="text-align: right;">
-                    <strong style="text-transform: uppercase; font-size: 10px; color: #888;">Payment Summary:</strong><br>
+                    <strong style="text-transform: uppercase; font-size: 13px; color: #888;">Payment Summary:</strong><br>
                     Payment Method: <strong style="text-transform: uppercase;">{{ $order->payment_method }}</strong><br>
                     Payment Status: <strong style="text-transform: uppercase; color: {{ $order->payment_status === 'paid' ? 'green' : 'orange' }};">{{ $order->payment_status }}</strong><br>
                     @if($order->courier_name)

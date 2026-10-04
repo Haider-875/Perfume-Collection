@@ -79,19 +79,19 @@
         
         <!-- Bulk Action Header Bar -->
         <div class="px-4 py-2.5 bg-slate-50 border-bottom border-slate-200 d-flex flex-wrap align-items-center justify-content-between gap-3">
-            <div class="text-xs text-muted">
+            <div class="small text-muted">
                 Total in Vault: <strong class="text-dark">{{ $products->total() }}</strong> formulations
             </div>
             
             <div class="d-flex align-items-center gap-2">
-                <select name="action" required style="height: 32px; width: 170px; font-size: 0.75rem;" class="py-1">
+                <select name="action" required style="height: 36px; width: 170px; font-size: 13.5px;" class="py-1">
                     <option value="">Bulk Actions...</option>
                     <option value="activate">Set Active</option>
                     <option value="deactivate">Set Draft / Inactive</option>
                     <option value="delete">Delete Selected</option>
                 </select>
                 <button type="submit" onclick="return confirm('Apply bulk action to selected items?')" 
-                        class="admin-btn-secondary" style="height: 32px; font-size: 0.75rem; padding: 0 0.75rem;">
+                        class="admin-btn-secondary" style="height: 36px; font-size: 13.5px; padding: 0 0.85rem;">
                     Apply
                 </button>
             </div>
@@ -133,14 +133,14 @@
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="text-dark fw-semibold text-decoration-none d-block text-truncate" style="max-width: 240px;">
                                             {{ $product->name }}
                                         </a>
-                                        <small class="text-muted d-block text-truncate" style="font-size: 0.72rem;">
+                                        <small class="text-muted d-block text-truncate" style="font-size: 13px;">
                                             {{ $product->scent_family ?? 'Eau de Parfum' }} &bull; {{ $product->variants->count() }} sizes
                                         </small>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <span class="badge bg-light text-dark border fw-normal" style="font-size: 0.75rem;">
+                                <span class="badge bg-light text-dark border fw-normal" style="font-size: 13px;">
                                     {{ $product->category->name ?? 'Unassigned' }}
                                 </span>
                             </td>
@@ -148,7 +148,7 @@
                             <td class="text-end">
                                 <div class="fw-bold text-dark font-monospace">{{ $product->formatted_price }}</div>
                                 @if($product->compare_at_price > $product->price)
-                                    <small class="text-muted text-decoration-line-through d-block" style="font-size: 0.7rem;">
+                                    <small class="text-muted text-decoration-line-through d-block" style="font-size: 13px;">
                                         Rs. {{ number_format($product->compare_at_price, 0) }}
                                     </small>
                                 @endif
@@ -157,7 +157,7 @@
                                 <span class="fw-semibold {{ $product->stock <= 5 ? ($product->stock == 0 ? 'text-danger' : 'text-warning') : 'text-success' }}">
                                     {{ $product->stock }}
                                 </span>
-                                <small class="text-muted" style="font-size: 0.7rem;">pcs</small>
+                                <small class="text-muted" style="font-size: 13px;">pcs</small>
                             </td>
                             <td class="text-center">
                                 @if($product->is_active)

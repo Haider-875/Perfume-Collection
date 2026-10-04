@@ -47,7 +47,7 @@
             <i class="fa-solid fa-crown"></i>
             <span>Super Administrator</span>
         </div>
-        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Total authority over all systems, revenue, settings, staff roles, and audit trail.</p>
+        <p class="small text-muted mb-0" style="font-size: 13px;">Total authority over all systems, revenue, settings, staff roles, and audit trail.</p>
     </div>
 
     <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #0d6efd !important;">
@@ -55,7 +55,7 @@
             <i class="fa-solid fa-user-shield"></i>
             <span>Store Administrator</span>
         </div>
-        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Full catalog, orders, patrons, marketing, and operational management.</p>
+        <p class="small text-muted mb-0" style="font-size: 13px;">Full catalog, orders, patrons, marketing, and operational management.</p>
     </div>
 
     <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #10b981 !important;">
@@ -63,7 +63,7 @@
             <i class="fa-solid fa-dolly"></i>
             <span>Order Specialist</span>
         </div>
-        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Order processing, bank slip verification, courier tracking (TCS, Trax, Leopards).</p>
+        <p class="small text-muted mb-0" style="font-size: 13px;">Order processing, bank slip verification, courier tracking (TCS, Trax, Leopards).</p>
     </div>
 
     <div class="bg-white border rounded-3 p-3 shadow-xs" style="border-left: 4px solid #8b5cf6 !important;">
@@ -71,7 +71,7 @@
             <i class="fa-solid fa-spray-can"></i>
             <span>Catalog Manager</span>
         </div>
-        <p class="small text-muted mb-0" style="font-size: 0.72rem;">Formulations, olfactory notes, pricing tiers, discounts, and inventory control.</p>
+        <p class="small text-muted mb-0" style="font-size: 13px;">Formulations, olfactory notes, pricing tiers, discounts, and inventory control.</p>
     </div>
 </div>
 
@@ -95,12 +95,12 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle bg-light border text-primary d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px; min-width: 38px; font-size: 0.85rem;">
+                                <div class="rounded-circle bg-light border text-primary d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px; min-width: 38px; font-size: 14px;">
                                     {{ strtoupper(substr($staff->name, 0, 1)) }}
                                 </div>
                                 <div class="overflow-hidden">
                                     <div class="fw-semibold text-dark text-truncate" style="max-width: 200px;">{{ $staff->name }}</div>
-                                    <small class="text-muted font-monospace d-block text-truncate" style="font-size: 0.72rem;">{{ $staff->email }}</small>
+                                    <small class="text-muted font-monospace d-block text-truncate" style="font-size: 13px;">{{ $staff->email }}</small>
                                 </div>
                             </div>
                         </td>
@@ -133,24 +133,24 @@
                                     @endphp
                                     @if(count($perms) > 0)
                                         @foreach(array_slice($perms, 0, 3) as $p)
-                                            <span class="badge bg-light text-dark border fw-normal" style="font-size: 0.68rem;">
+                                            <span class="badge bg-light text-dark border fw-normal" style="font-size: 13px;">
                                                 {{ $availablePermissions[$p]['label'] ?? $p }}
                                             </span>
                                         @endforeach
                                         @if(count($perms) > 3)
-                                            <span class="badge bg-light text-muted border fw-normal" style="font-size: 0.68rem;">
+                                            <span class="badge bg-light text-muted border fw-normal" style="font-size: 13px;">
                                                 +{{ count($perms) - 3 }} more
                                             </span>
                                         @endif
                                     @else
-                                        <span class="small text-muted fst-italic" style="font-size: 0.75rem;">Default role permissions</span>
+                                        <span class="small text-muted fst-italic" style="font-size: 13px;">Default role permissions</span>
                                     @endif
                                 </div>
                             @endif
                         </td>
                         <td>
                             <div class="text-dark small">{{ $staff->phone ?: '—' }}</div>
-                            <small class="text-muted" style="font-size: 0.72rem;">{{ $staff->city ?: 'Pakistan' }}</small>
+                            <small class="text-muted" style="font-size: 13px;">{{ $staff->city ?: 'Pakistan' }}</small>
                         </td>
                         <td class="text-center">
                             @if($staff->is_active !== false)
@@ -159,7 +159,7 @@
                                 <span class="admin-badge admin-badge-danger">Suspended</span>
                             @endif
                         </td>
-                        <td class="small text-muted font-monospace" style="font-size: 0.75rem;">
+                        <td class="small text-muted font-monospace" style="font-size: 13px;">
                             {{ $staff->created_at ? $staff->created_at->format('M d, Y') : '—' }}
                         </td>
                         <td class="text-end">

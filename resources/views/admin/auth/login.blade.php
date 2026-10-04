@@ -52,8 +52,8 @@
         }
 
         .brand-subtitle {
-            font-size: 0.72rem;
-            letter-spacing: 0.18em;
+            font-size: 13px;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             color: #64748b;
             font-weight: 600;
@@ -68,7 +68,7 @@
         .form-control {
             border-color: #cbd5e1;
             padding: 0.65rem 0.85rem;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .form-control:focus {
@@ -80,9 +80,9 @@
             background-color: #0f172a;
             border-color: #0f172a;
             color: #ffffff;
-            padding: 0.7rem 1.25rem;
+            padding: 0.75rem 1.25rem;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 14.5px;
             letter-spacing: 0.05em;
             border-radius: 0.5rem;
             transition: all 0.2s ease;
@@ -101,8 +101,12 @@
             border: 1px dashed #cbd5e1;
             border-radius: 0.5rem;
             padding: 0.75rem 1rem;
-            font-size: 0.78rem;
+            font-size: 13px;
             color: #475569;
+        }
+
+        small, .small, .form-text, .form-label, label, .badge {
+            font-size: 13px !important;
         }
     </style>
 </head>
@@ -224,7 +228,7 @@
         <div class="credential-helper mb-3">
             <div class="d-flex align-items-center justify-content-between mb-1.5">
                 <strong class="text-dark small"><i class="fa-solid fa-key text-primary me-1"></i> Admin Credentials:</strong>
-                <button type="button" class="btn btn-xs btn-outline-primary py-0 px-2" style="font-size: 0.72rem;" onclick="fillCredentials('admin@perfumecollection.pk', 'admin123456')">
+                <button type="button" class="btn btn-xs btn-outline-primary py-0 px-2" style="font-size: 13px;" onclick="fillCredentials('admin@perfumecollection.pk', 'admin123456')">
                     Auto-Fill
                 </button>
             </div>

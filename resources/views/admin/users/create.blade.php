@@ -29,34 +29,34 @@
                 <div class="p-4">
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Full Name *</label>
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 13px; letter-spacing: 0.04em;">Full Name *</label>
                             <input type="text" name="name" value="{{ old('name') }}" required placeholder="e.g. Asad Qureshi">
-                            @error('name') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
+                            @error('name') <div class="text-danger small mt-1" style="font-size: 13px;">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Email Address (Login) *</label>
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 13px; letter-spacing: 0.04em;">Email Address (Login) *</label>
                             <input type="email" name="email" value="{{ old('email') }}" required placeholder="e.g. asad@perfumes.pk" class="font-monospace">
-                            @error('email') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
+                            @error('email') <div class="text-danger small mt-1" style="font-size: 13px;">{{ $message }}</div> @enderror
                         </div>
                     </div>
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Initial Password *</label>
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 13px; letter-spacing: 0.04em;">Initial Password *</label>
                             <input type="password" name="password" required placeholder="Minimum 6 characters">
-                            @error('password') <div class="text-danger small mt-1" style="font-size: 0.75rem;">{{ $message }}</div> @enderror
+                            @error('password') <div class="text-danger small mt-1" style="font-size: 13px;">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Direct Phone / WhatsApp</label>
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 13px; letter-spacing: 0.04em;">Direct Phone / WhatsApp</label>
                             <input type="text" name="phone" value="{{ old('phone') }}" placeholder="e.g. 0300-1234567">
                         </div>
                     </div>
 
                     <div class="row g-3 align-items-center">
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">City / Office Branch</label>
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 13px; letter-spacing: 0.04em;">City / Office Branch</label>
                             <input type="text" name="city" value="{{ old('city', 'Lahore') }}" placeholder="e.g. Lahore / Karachi">
                         </div>
 
@@ -65,7 +65,7 @@
                                 <input class="form-check-input ms-0 me-3" type="checkbox" name="is_active" id="isActiveCheck" value="1" {{ old('is_active', true) ? 'checked' : '' }}>
                                 <label class="form-check-label cursor-pointer" for="isActiveCheck">
                                     <span class="small fw-semibold text-dark d-block">Account Enabled & Active</span>
-                                    <small class="text-muted d-block" style="font-size: 0.72rem;">Allow this user to sign into the administrative portal</small>
+                                    <small class="text-muted d-block" style="font-size: 13px;">Allow this user to sign into the administrative portal</small>
                                 </label>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                                class="form-check-input mt-1 flex-shrink-0">
                                         <div>
                                             <div class="fw-bold small text-dark">{{ $r['label'] }}</div>
-                                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem; line-height: 1.35;">{{ $r['description'] }}</small>
+                                            <small class="text-muted d-block mt-1" style="font-size: 13px; line-height: 1.35;">{{ $r['description'] }}</small>
                                         </div>
                                     </div>
                                 </label>
@@ -109,7 +109,7 @@
                             <i class="fa-solid fa-key text-primary small"></i>
                             <span>Explicit Granular Permissions</span>
                         </h6>
-                        <small class="text-muted" style="font-size: 0.72rem;">Customize individual capabilities (Super Admins inherently possess all permissions).</small>
+                        <small class="text-muted" style="font-size: 13px;">Customize individual capabilities (Super Admins inherently possess all permissions).</small>
                     </div>
                 </div>
                 <div class="p-4">
@@ -121,7 +121,7 @@
                                            class="form-check-input mt-1 flex-shrink-0">
                                     <div>
                                         <div class="fw-semibold small text-dark">{{ $pMeta['label'] }}</div>
-                                        <small class="text-muted d-block mt-0.5" style="font-size: 0.72rem; line-height: 1.35;">{{ $pMeta['description'] }}</small>
+                                        <small class="text-muted d-block mt-0.5" style="font-size: 13px; line-height: 1.35;">{{ $pMeta['description'] }}</small>
                                     </div>
                                 </label>
                             </div>

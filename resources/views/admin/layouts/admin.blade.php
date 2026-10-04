@@ -37,9 +37,12 @@
 
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14.5px;
             background-color: var(--body-bg);
             color: var(--text-dark);
             min-height: 100vh;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Sidebar Styling */
@@ -76,7 +79,7 @@
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             color: #ffffff;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             letter-spacing: 0.06em;
             line-height: 1.2;
         }
@@ -88,10 +91,10 @@
         }
 
         .sidebar-heading {
-            font-size: 0.68rem;
+            font-size: 13px !important;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.08em;
             color: #94a3b8;
             padding: 0.75rem 0.75rem 0.35rem;
         }
@@ -100,11 +103,11 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.6rem 0.75rem;
+            padding: 0.65rem 0.75rem;
             color: #cbd5e1;
             text-decoration: none;
             border-radius: 0.375rem;
-            font-size: 0.875rem;
+            font-size: 14.5px !important;
             font-weight: 500;
             transition: all 0.2s ease;
             margin-bottom: 0.15rem;
@@ -113,7 +116,7 @@
         .sidebar-link i {
             width: 1.25rem;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 1rem !important;
             color: #94a3b8;
         }
 
@@ -143,6 +146,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            font-size: 13.5px !important;
         }
 
         /* Main Content Wrapper */
@@ -219,9 +223,9 @@
             color: #ffffff !important;
             font-weight: 600 !important;
             border-radius: 0.375rem !important;
-            height: 38px !important;
-            padding: 0 1rem !important;
-            font-size: 0.85rem !important;
+            height: 40px !important;
+            padding: 0 1.15rem !important;
+            font-size: 14px !important;
             text-decoration: none !important;
             display: inline-flex !important;
             align-items: center !important;
@@ -243,9 +247,9 @@
             color: #475569 !important;
             font-weight: 500 !important;
             border-radius: 0.375rem !important;
-            height: 38px !important;
-            padding: 0 0.875rem !important;
-            font-size: 0.85rem !important;
+            height: 40px !important;
+            padding: 0 1rem !important;
+            font-size: 14px !important;
             text-decoration: none !important;
             display: inline-flex !important;
             align-items: center !important;
@@ -265,12 +269,12 @@
             border: 1px solid #cbd5e1 !important;
             color: #64748b !important;
             border-radius: 0.375rem !important;
-            width: 38px !important;
-            height: 38px !important;
+            width: 40px !important;
+            height: 40px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            font-size: 0.85rem !important;
+            font-size: 14px !important;
             text-decoration: none !important;
             transition: all 0.15s ease;
             flex-shrink: 0 !important;
@@ -301,23 +305,24 @@
         }
 
         /* Clean Forms & Inputs */
-        input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], input[type="date"], select, textarea {
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], 
+        input[type="url"], input[type="date"], select, textarea, .form-control, .form-select {
             background-color: #ffffff !important;
             color: #1e293b !important;
             border: 1px solid #cbd5e1 !important;
             border-radius: 0.375rem !important;
-            height: 38px;
-            padding: 0.45rem 0.75rem !important;
-            font-size: 0.85rem !important;
+            height: 40px;
+            padding: 0.5rem 0.85rem !important;
+            font-size: 14px !important;
             width: 100%;
             transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-        textarea {
+        textarea, textarea.form-control {
             height: auto !important;
-            min-height: 80px;
+            min-height: 85px;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus, select:focus, textarea:focus, .form-control:focus, .form-select:focus {
             border-color: #0d6efd !important;
             box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
             outline: none !important;
@@ -325,16 +330,16 @@
 
         /* Standard Action Buttons */
         .admin-action-btn {
-            width: 32px !important;
-            height: 32px !important;
-            min-width: 32px !important;
+            width: 34px !important;
+            height: 34px !important;
+            min-width: 34px !important;
             border-radius: 0.375rem !important;
             border: 1px solid #e2e8f0 !important;
             background-color: #f8fafc !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            font-size: 0.75rem !important;
+            font-size: 13.5px !important;
             transition: all 0.15s ease !important;
             text-decoration: none !important;
             padding: 0 !important;
@@ -376,18 +381,18 @@
             background-color: #f8fafc !important;
             color: #475569 !important;
             font-weight: 600 !important;
-            font-size: 0.75rem !important;
+            font-size: 13px !important;
             text-transform: uppercase !important;
             letter-spacing: 0.05em !important;
             border-bottom: 1px solid #e2e8f0 !important;
-            padding: 0.75rem 1rem !important;
+            padding: 0.85rem 1rem !important;
             white-space: nowrap !important;
         }
 
         td {
-            padding: 0.75rem 1rem !important;
+            padding: 0.85rem 1rem !important;
             border-bottom: 1px solid #f1f5f9 !important;
-            font-size: 0.85rem !important;
+            font-size: 14px !important;
             vertical-align: middle !important;
         }
 
@@ -403,18 +408,18 @@
             text-align: center !important;
         }
 
-        /* Standard Status Badges */
-        .admin-badge {
+        /* Standard Status Badges (Minimum 13px) */
+        .admin-badge, .badge {
             display: inline-flex !important;
             align-items: center !important;
             gap: 0.35rem !important;
-            padding: 0.25rem 0.65rem !important;
-            font-size: 0.68rem !important;
-            font-weight: 700 !important;
+            padding: 0.32rem 0.65rem !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
             text-transform: uppercase !important;
-            letter-spacing: 0.06em !important;
+            letter-spacing: 0.04em !important;
             border-radius: 0.375rem !important;
-            line-height: 1.2 !important;
+            line-height: 1.25 !important;
             white-space: nowrap !important;
         }
         .admin-badge-success {
@@ -493,6 +498,10 @@
             align-items: center !important;
             justify-content: center !important;
         }
+        .pagination .page-link {
+            font-size: 13.5px !important;
+            padding: 0.45rem 0.85rem !important;
+        }
 
         /* Grid Utilities Bridge */
         .grid { display: grid; }
@@ -526,13 +535,13 @@
         .space-y-6 > * + * { margin-top: 1.5rem; }
 
         [x-cloak] { display: none !important; }
-        .form-label {
-            margin-bottom: 0.35rem;
-            font-size: 0.72rem;
-            font-weight: 600;
+        .form-label, label {
+            margin-bottom: 0.4rem;
+            font-size: 13px !important;
+            font-weight: 600 !important;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #64748b;
+            letter-spacing: 0.04em;
+            color: #475569;
         }
         .form-check-input {
             cursor: pointer;
@@ -540,6 +549,46 @@
         .form-check-input:checked {
             background-color: #0d6efd;
             border-color: #0d6efd;
+        }
+
+        /* ==========================================================================
+           GLOBAL MINIMUM FONT SIZE ENFORCEMENT (STRICT MINIMUM 13px ACROSS PORTAL)
+           ========================================================================== */
+        small, .small, .form-text, .admin-help-text, 
+        .text-danger.small, .invalid-feedback,
+        .font-monospace.small, code.small,
+        .form-label, label, .form-check-label,
+        .sidebar-heading, th,
+        .admin-badge, .badge,
+        .text-xs,
+        [style*="font-size: 0.5"], [style*="font-size:0.5"],
+        [style*="font-size: 0.6"], [style*="font-size:0.6"],
+        [style*="font-size: 0.7"], [style*="font-size:0.7"],
+        [style*="font-size: 0.72"], [style*="font-size:0.72"],
+        [style*="font-size: 0.75"], [style*="font-size:0.75"],
+        [style*="font-size: 0.78"], [style*="font-size:0.78"],
+        [style*="font-size: 0.8rem"], [style*="font-size:0.8rem"],
+        [style*="font-size: 8px"], [style*="font-size:8px"],
+        [style*="font-size: 9px"], [style*="font-size:9px"],
+        [style*="font-size: 10px"], [style*="font-size:10px"],
+        [style*="font-size: 11px"], [style*="font-size:11px"],
+        [style*="font-size: 12px"], [style*="font-size:12px"] {
+            font-size: 13px !important;
+        }
+
+        /* Maintain comfortable reading & input sizes */
+        td {
+            font-size: 14px !important;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], 
+        input[type="url"], input[type="date"], select, textarea, .form-control, .form-select {
+            font-size: 14px !important;
+        }
+        .admin-action-btn {
+            font-size: 13.5px !important;
+        }
+        .sidebar-link {
+            font-size: 14.5px !important;
         }
     </style>
     @stack('styles')
@@ -558,7 +607,7 @@
             <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" class="me-2">
             <div>
                 <div class="sidebar-brand-text">PERFUMES COLLECTION</div>
-                <small class="text-secondary text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.15em;">Admin Center</small>
+                <small class="text-secondary text-uppercase" style="font-size: 13px; letter-spacing: 0.12em;">Admin Center</small>
             </div>
         </a>
 
@@ -633,12 +682,12 @@
         <!-- Sidebar Footer -->
         <div class="sidebar-footer">
             <div class="d-flex align-items-center text-white text-decoration-none">
-                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 34px; height: 34px; font-size: 0.85rem;">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 14px;">
                     {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                 </div>
                 <div class="overflow-hidden" style="max-width: 130px;">
                     <div class="small fw-semibold text-truncate text-white">{{ Auth::user()->name ?? 'Admin' }}</div>
-                    <small class="text-secondary d-block text-truncate" style="font-size: 0.7rem;">{{ Auth::user()->role ?? 'Administrator' }}</small>
+                    <small class="text-secondary d-block text-truncate" style="font-size: 13px;">{{ Auth::user()->role ?? 'Administrator' }}</small>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
