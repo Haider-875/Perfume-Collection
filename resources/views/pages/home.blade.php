@@ -189,7 +189,7 @@
 <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
     <div class="container px-3 px-lg-4">
         
-        <!-- Section Header -->
+        <!-- Section Header (Centered) -->
         <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
             <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury" style="font-size: 11px;">CURATED FORMULATIONS</span>
             <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
@@ -197,19 +197,19 @@
             </h2>
         </div>
 
-        <!-- Filter Pills Bar -->
-        <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-5">
-            <button type="button" class="btn bg-gradient-gold-pill text-theme-main px-4 py-2 rounded-3 text-xs fw-bold tracking-wider text-uppercase shadow-sm border-0">
-                Featured Products
+        <!-- Filter Pills Bar (Left Aligned) -->
+        <div class="d-flex flex-wrap align-items-center justify-content-start gap-2 mb-4">
+            <button type="button" class="featured-filter-btn active">
+                <span>Featured Products</span>
             </button>
-            <a href="{{ route('collections.show', 'all') }}?sort=popular" class="btn border border-gold-30 bg-theme-card text-muted-luxury hover:text-gold px-4 py-2 rounded-3 text-xs fw-medium tracking-wider text-uppercase transition-smooth">
-                Restocked
+            <a href="{{ route('collections.show', 'all') }}?sort=popular" class="featured-filter-btn">
+                <span>Restocked</span>
             </a>
-            <a href="{{ route('collections.show', 'all') }}?sort=new" class="btn border border-gold-30 bg-theme-card text-muted-luxury hover:text-gold px-4 py-2 rounded-3 text-xs fw-medium tracking-wider text-uppercase transition-smooth">
-                New Arrivals
+            <a href="{{ route('collections.show', 'all') }}?sort=new" class="featured-filter-btn">
+                <span>New Arrivals</span>
             </a>
-            <a href="{{ route('collections.show', 'all') }}?sort=bestseller" class="btn border border-gold-30 bg-theme-card text-muted-luxury hover:text-gold px-4 py-2 rounded-3 text-xs fw-medium tracking-wider text-uppercase transition-smooth">
-                Best Sellers
+            <a href="{{ route('collections.show', 'all') }}?sort=bestseller" class="featured-filter-btn">
+                <span>Best Sellers</span>
             </a>
         </div>
 
@@ -227,9 +227,9 @@
 
         <!-- View Full Collection CTA -->
         <div class="text-center mt-5">
-            <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-2_5 rounded-3 text-xs text-uppercase tracking-widest d-inline-flex align-items-center gap-2">
-                <span>View All Featured Fragrances</span>
-                <i class="fas fa-arrow-right text-xs"></i>
+            <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3">
+                <span>View Featured Fragrances</span>
+                <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
             </a>
         </div>
 
@@ -368,9 +368,10 @@
             </div>
 
             <div class="text-center mt-5">
-                <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-2_5 rounded-3 text-xs text-uppercase tracking-widest d-inline-flex align-items-center gap-2">
-                    <i class="fas fa-gift text-gold"></i>
+                <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3">
+                    <!-- <i class="fas fa-gift text-gold"></i> -->
                     <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
+                    <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
                 </a>
             </div>
         </div>
