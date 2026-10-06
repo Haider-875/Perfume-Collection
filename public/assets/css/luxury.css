@@ -453,74 +453,327 @@ p.font-serif, p.font-sans,
     border: 1px solid rgba(214, 170, 98, 0.4);
 }
 
-/* Buttons */
-.btn-gold {
-    background: linear-gradient(135deg, #d6aa62 0%, #f0d59d 50%, #c08b3f 100%);
-    color: #050203 !important;
-    font-family: var(--font-sans);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    border: none;
-    padding: 12px 24px;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 18px rgba(214, 170, 98, 0.35);
-    transition: var(--transition-smooth);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-}
+/* ==========================================================================
+   ULTRA-PREMIUM HAUTE PARFUMERIE BUTTON SYSTEM & MICRO-INTERACTIONS
+   ========================================================================== */
 
-.btn-gold:hover {
-    background: linear-gradient(135deg, #f0d59d 0%, #ffffff 50%, #d6aa62 100%);
-    box-shadow: 0 6px 24px rgba(214, 170, 98, 0.55);
-    transform: translateY(-1px);
-    color: #050203 !important;
-}
-
-.btn-outline-gold {
-    background: transparent;
-    color: var(--gold-soft);
-    border: 1px solid rgba(214, 170, 98, 0.45);
-    font-family: var(--font-sans);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 11px 22px;
-    border-radius: var(--radius-md);
-    transition: var(--transition-smooth);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn-outline-gold:hover {
-    background: rgba(214, 170, 98, 0.15);
-    border-color: var(--gold);
-    color: #ffffff;
-    box-shadow: 0 0 16px rgba(214, 170, 98, 0.25);
-}
-
-.btn-whatsapp {
-    background: #25D366;
-    color: #ffffff !important;
-    font-weight: 700;
+/* 1. Base Button Standards */
+.btn {
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 500;
     letter-spacing: 0.08em;
+    transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.btn:focus,
+.btn:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(214, 170, 98, 0.4) !important;
+}
+
+/* 2. Primary Royal Gold Button (.btn-gold, .btn-primary) */
+.btn-gold,
+.btn-primary,
+.btn-brand-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #c5974c 0%, #ecd399 28%, #dfb770 55%, #fce9b8 78%, #b88536 100%) !important;
+    background-size: 200% 100%;
+    color: #060204 !important;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.14em !important;
+    border: 1px solid rgba(255, 235, 185, 0.55) !important;
+    padding: 12px 26px;
     border-radius: var(--radius-md);
-    transition: var(--transition-smooth);
+    box-shadow: 0 6px 20px -2px rgba(197, 151, 76, 0.38), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
+    gap: 8px;
+    text-decoration: none !important;
+    cursor: pointer;
+    min-height: 44px;
+    z-index: 1;
+}
+
+/* Shimmer Glint Beam Sweep */
+.btn-gold::before,
+.btn-primary::before,
+.btn-brand-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-gold:hover::before,
+.btn-primary:hover::before,
+.btn-brand-primary:hover::before {
+    left: 150%;
+}
+
+.btn-gold:hover,
+.btn-primary:hover,
+.btn-brand-primary:hover {
+    background: linear-gradient(135deg, #faeac2 0%, #ffffff 32%, #f2d494 65%, #c89746 100%) !important;
+    color: #040102 !important;
+    box-shadow: 0 10px 30px rgba(214, 170, 98, 0.58), 0 0 20px rgba(255, 222, 149, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(-2.5px);
+    border-color: #ffffff !important;
+}
+
+.btn-gold:active,
+.btn-primary:active,
+.btn-brand-primary:active {
+    transform: translateY(1px) scale(0.985) !important;
+    box-shadow: 0 3px 12px rgba(214, 170, 98, 0.35) !important;
+}
+
+/* 3. Secondary Luxury Outline Gold Button (.btn-outline-gold, .btn-outline-primary) */
+.btn-outline-gold,
+.btn-outline-primary {
+    position: relative;
+    overflow: hidden;
+    background: rgba(214, 170, 98, 0.05) !important;
+    color: var(--gold-soft) !important;
+    border: 1px solid rgba(214, 170, 98, 0.5) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.14em !important;
+    padding: 11px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(214, 170, 98, 0.06);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none !important;
+    cursor: pointer;
+    min-height: 44px;
+    z-index: 1;
+}
+
+.btn-outline-gold::before,
+.btn-outline-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 235, 185, 0.35), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-outline-gold:hover::before,
+.btn-outline-primary:hover::before {
+    left: 150%;
+}
+
+.btn-outline-gold:hover,
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, rgba(214, 170, 98, 0.28) 0%, rgba(74, 9, 21, 0.65) 100%) !important;
+    border-color: #ffd987 !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 28px rgba(214, 170, 98, 0.38), 0 0 16px rgba(214, 170, 98, 0.25), inset 0 0 14px rgba(214, 170, 98, 0.2) !important;
+    transform: translateY(-2.5px);
+}
+
+.btn-outline-gold:active,
+.btn-outline-primary:active {
+    transform: translateY(1px) scale(0.985) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 4. Luxury WhatsApp Buttons (.btn-whatsapp) */
+.btn-whatsapp {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #187d3e 0%, #25D366 50%, #128C7E 100%) !important;
+    color: #ffffff !important;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: var(--radius-md);
+    padding: 12px 24px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none !important;
+    cursor: pointer;
+    min-height: 44px;
+    z-index: 1;
+}
+
+.btn-whatsapp::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-whatsapp:hover::before {
+    left: 150%;
 }
 
 .btn-whatsapp:hover {
-    background: #20ba5a;
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    background: linear-gradient(135deg, #25D366 0%, #34e77a 50%, #17a78a 100%) !important;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.52), 0 0 18px rgba(37, 211, 102, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.75) !important;
+    transform: translateY(-2.5px);
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+.btn-whatsapp:active {
+    transform: translateY(1px) scale(0.985) !important;
+    box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3) !important;
+}
+
+/* 5. Icon Micro-Interactions inside Buttons */
+.btn-gold i,
+.btn-gold svg,
+.btn-primary i,
+.btn-primary svg,
+.btn-bundle-bag i,
+.btn-bundle-bag svg {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold:hover i,
+.btn-gold:hover svg,
+.btn-primary:hover i,
+.btn-primary:hover svg,
+.btn-bundle-bag:hover i,
+.btn-bundle-bag:hover svg {
+    transform: scale(1.18) translateY(-1px);
+}
+
+.btn-outline-gold i,
+.btn-outline-gold svg,
+.btn-outline-primary i,
+.btn-outline-primary svg {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline-gold:hover i,
+.btn-outline-gold:hover svg,
+.btn-outline-primary:hover i,
+.btn-outline-primary:hover svg {
+    transform: scale(1.18) translateX(3px);
+}
+
+.btn-whatsapp i,
+.btn-whatsapp svg,
+.btn-bundle-whatsapp i,
+.btn-bundle-whatsapp svg {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-whatsapp:hover i,
+.btn-whatsapp:hover svg,
+.btn-bundle-whatsapp:hover i,
+.btn-bundle-whatsapp:hover svg {
+    transform: scale(1.22) rotate(-8deg);
+}
+
+/* 6. Filter & Scent Selection Pills */
+.bg-gradient-gold-pill,
+.filter-pill-active {
+    background: linear-gradient(135deg, #d6aa62 0%, #f0d59d 50%, #c08b3f 100%) !important;
+    color: #050203 !important;
+    border: 1px solid rgba(255, 235, 185, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(214, 170, 98, 0.35) !important;
+    transform: translateY(-1px);
+}
+
+.filter-pill {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-pill:hover {
+    border-color: var(--gold) !important;
+    color: var(--gold-bright) !important;
+    box-shadow: 0 4px 15px rgba(214, 170, 98, 0.25) !important;
+    transform: translateY(-2px);
+}
+
+/* 7. Modal Close & Quick Action Buttons */
+.modal-close-btn {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.modal-close-btn:hover {
+    color: #ffd987 !important;
+    transform: rotate(90deg) scale(1.18);
+    opacity: 1 !important;
+}
+
+/* 8. Floating Action Buttons (Back to Top & Floating WhatsApp) */
+#backToTopBtn {
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px);
+}
+
+#backToTopBtn:hover {
+    background: #25050a !important;
+    border-color: #ffd987 !important;
+    color: #ffd987 !important;
+    box-shadow: 0 8px 25px rgba(214, 170, 98, 0.5) !important;
+    transform: translateY(-4px) scale(1.08) !important;
+}
+
+#backToTopBtn:active {
+    transform: translateY(0) scale(0.95) !important;
+}
+
+/* 9. Responsive Button Adaptations */
+@media (max-width: 576px) {
+    .btn-gold,
+    .btn-outline-gold,
+    .btn-whatsapp,
+    .btn-primary,
+    .btn-bundle-bag,
+    .btn-bundle-whatsapp {
+        padding: 10px 18px !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.1em !important;
+        min-height: 44px !important;
+    }
 }
 
 /* Modals & Cart Drawer */
@@ -1248,63 +1501,118 @@ p.font-sans,
     margin: 0 0.5rem;
 }
 
-/* Bundle Dedicated Buttons (Zero Weirdness, Crisp Luxury Proportions) */
+/* Bundle Dedicated Buttons (Haute Parfumerie Grand Presentation) */
 .btn-bundle-bag {
     width: 100%;
-    height: 48px;
-    background: linear-gradient(135deg, #d6aa62 0%, #f0d59d 50%, #c08b3f 100%);
-    color: #080204 !important;
+    min-height: 48px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #c5974c 0%, #ecd399 28%, #dfb770 55%, #fce9b8 78%, #b88536 100%) !important;
+    background-size: 200% 100%;
+    color: #060204 !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 18px rgba(214, 170, 98, 0.35);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 235, 185, 0.55) !important;
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px -2px rgba(197, 151, 76, 0.38), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.85);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: none !important;
+    z-index: 1;
+}
+
+.btn-bundle-bag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-bundle-bag:hover::before {
+    left: 150%;
 }
 
 .btn-bundle-bag:hover {
-    background: linear-gradient(135deg, #f0d59d 0%, #ffffff 50%, #d6aa62 100%);
-    box-shadow: 0 6px 24px rgba(214, 170, 98, 0.55);
-    transform: translateY(-2px);
-    color: #080204 !important;
+    background: linear-gradient(135deg, #faeac2 0%, #ffffff 32%, #f2d494 65%, #c89746 100%) !important;
+    box-shadow: 0 10px 30px rgba(214, 170, 98, 0.58), 0 0 20px rgba(255, 222, 149, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(-2.5px);
+    color: #040102 !important;
+    border-color: #ffffff !important;
+}
+
+.btn-bundle-bag:active {
+    transform: translateY(1px) scale(0.985) !important;
+    box-shadow: 0 3px 12px rgba(214, 170, 98, 0.35) !important;
 }
 
 .btn-bundle-whatsapp {
     width: 100%;
-    height: 44px;
-    background: #1b8743;
+    min-height: 46px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #187d3e 0%, #25D366 50%, #128C7E 100%) !important;
     color: #ffffff !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.8rem !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: none !important;
+    z-index: 1;
+}
+
+.btn-bundle-whatsapp::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.btn-bundle-whatsapp:hover::before {
+    left: 150%;
 }
 
 .btn-bundle-whatsapp:hover {
-    background: #25D366;
+    background: linear-gradient(135deg, #25D366 0%, #34e77a 50%, #17a78a 100%) !important;
     color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.52), 0 0 18px rgba(37, 211, 102, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.75) !important;
+    transform: translateY(-2.5px);
+    border-color: #ffffff !important;
+}
+
+.btn-bundle-whatsapp:active {
+    transform: translateY(1px) scale(0.985) !important;
+    box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3) !important;
 }
 
 
