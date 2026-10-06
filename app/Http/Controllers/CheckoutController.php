@@ -171,7 +171,11 @@ class CheckoutController extends Controller
         $walletDetails = $walletGateway->getWalletDetails();
 
         // Build WhatsApp share link
-        $storePhone = Setting::get('whatsapp', '923001234567');
+        $storePhone = Setting::get('whatsapp', Setting::get('site_whatsapp', '923363685732'));
+        $storePhone = preg_replace('/[^0-9]/', '', (string)$storePhone) ?: '923363685732';
+        if (str_starts_with($storePhone, '03')) {
+            $storePhone = '92' . substr($storePhone, 1);
+        }
         $whatsappMsg = urlencode("Salam Perfumes Collection! I just placed order #{$order->order_number} for Rs. " . number_format($order->total_amount, 0) . ". Looking forward to delivery.");
         $whatsappUrl = "https://wa.me/{$storePhone}?text={$whatsappMsg}";
 

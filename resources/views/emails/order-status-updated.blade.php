@@ -62,7 +62,7 @@
 
             <div class="footer">
                 <div>Perfumes Collection • MM Alam Road, Gulberg III, Lahore • Clifton, Karachi • F-7, Islamabad</div>
-                <div style="margin-top: 8px;">Concierge WhatsApp: +92 300 1234567 • Email: concierge@perfumescollection.pk</div>
+                <div style="margin-top: 8px;">Concierge WhatsApp: <a href="https://wa.me/923363685732" style="color: #c5a880; text-decoration: none;">+92 336 3685732</a> • Email: concierge@perfumescollection.pk</div>
             </div>
         </div>
     </div>

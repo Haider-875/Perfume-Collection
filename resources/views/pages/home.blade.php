@@ -70,8 +70,8 @@
                                         <i class="fas fa-users"></i>
                                     </div>
                                     <div>
-                                        <div class="text-xs fw-bold text-uppercase tracking-wider text-ivory">50,000+</div>
-                                        <div class="text-muted-luxury text-uppercase tracking-widest fw-medium" style="font-size: 9px;">PATRONS ACROSS PAKISTAN</div>
+                                        <div class="text-xs fw-bold text-uppercase tracking-wider text-ivory">18+</div>
+                                        <div class="text-muted-luxury text-uppercase tracking-widest fw-medium" style="font-size: 9px;">HAPPY PATRONS</div>
                                     </div>
                                 </div>
 
@@ -86,14 +86,6 @@
                                 </div>
                             </div>
 
-                            <!-- CTAs -->
-                            <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
-                                <a href="{{ $slide->cta_url ?? route('collections.show', 'all') }}" 
-                                   class="d-inline-flex align-items-center justify-content-center px-4 py-3 rounded-pill btn-gold text-xs text-uppercase tracking-wider shadow-lg text-decoration-none">
-                                    <span>{{ $slide->cta_text ?? 'SHOP OUR TOP SELLERS' }}</span>
-                                </a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -104,7 +96,6 @@
                     <div class="position-relative z-2 text-center text-ivory vstack gap-3">
                         <h1 class="font-hero hero-title fs-1 fw-medium text-uppercase gold-gradient-text">Perfumes Collection</h1>
                         <p class="font-sans fs-5 text-gold-soft mb-0">Luxury Extrait de Parfum Impressions</p>
-                        <a href="{{ route('collections.show', 'all') }}" class="d-inline-block px-4 py-2 btn-gold rounded-pill text-xs text-decoration-none">Explore Catalog</a>
                     </div>
                 </div>
             @endforelse
@@ -462,31 +453,51 @@
             <div class="text-center mx-auto mb-5" style="max-width: 36rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury" style="font-size: 11px;">VERIFIED PATRON REVIEWS</span>
                 <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
-                    50,000+ Satisfied Customers
+                    18+ Happy Customers
                 </h2>
+                <p class="text-xs text-muted-luxury mt-2 fw-light">
+                    Authentic impressions from discerning fragrance patrons across Pakistan.
+                </p>
             </div>
 
             <div class="row g-4">
-                @foreach($recentReviews as $rev)
-                    <div class="col-12 col-md-6 col-lg-3">
+                @foreach($recentReviews->take(3) as $rev)
+                    <div class="col-12 col-md-4">
                         <div class="bg-gradient-wine-card border border-gold-25 rounded-4 p-4 d-flex flex-column justify-content-between shadow-sm h-100 luxury-hover-card">
-                            <div class="vstack gap-2">
+                            <div class="vstack gap-3">
+                                <!-- Customer Avatar & Info Header -->
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="{{ asset('assets/images/avatars/avatar_' . (($loop->index % 3) + 1) . '.svg') }}" 
+                                         alt="{{ $rev->user_name }}" 
+                                         class="rounded-circle object-fit-cover shadow-sm flex-shrink-0" 
+                                         style="width: 46px; height: 46px; border: 1.5px solid var(--gold);">
+                                    <div class="overflow-hidden">
+                                        <span class="fw-semibold text-ivory d-block text-truncate" style="font-size: 0.9rem;">{{ $rev->user_name }}</span>
+                                        <span class="text-success d-flex align-items-center gap-1" style="font-size: 10px;">
+                                            <i class="fas fa-check-circle"></i> Verified &bull; {{ $rev->user_city ?? 'Pakistan' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Rating Stars -->
                                 <div class="d-flex text-gold text-xs">
                                     @for($i = 1; $i <= 5; $i++)
                                         <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'text-muted-luxury opacity-25' }}"></i>
                                     @endfor
                                 </div>
-                                <h4 class="font-serif fs-5 text-gold-soft fw-medium mb-0">{{ $rev->review_title ?? 'Majestic Longevity' }}</h4>
-                                <p class="text-xs text-sub lh-base fst-italic fw-light mb-0">
-                                    "{{ $rev->comment }}"
-                                </p>
-                            </div>
-                            <div class="mt-4 pt-3 border-top border-gold-15 d-flex align-items-center justify-content-between" style="font-size: 11px;">
+
+                                <!-- Review Title & Comment -->
                                 <div>
-                                    <span class="fw-semibold text-ivory d-block">{{ $rev->user_name }}</span>
-                                    <span class="text-success" style="font-size: 10px;"><i class="fas fa-check-circle"></i> Verified &bull; {{ $rev->user_city ?? 'Pakistan' }}</span>
+                                    <h4 class="font-serif fs-5 text-gold-soft fw-medium mb-1">{{ $rev->title ?? 'Remarkable Longevity' }}</h4>
+                                    <p class="text-xs text-sub lh-base fst-italic fw-light mb-0">
+                                        "{{ $rev->comment }}"
+                                    </p>
                                 </div>
-                                <span class="text-light-luxury" style="font-size: 10px;">{{ $rev->product->name ?? 'Extrait' }}</span>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-top border-gold-15 d-flex align-items-center justify-content-between" style="font-size: 11px;">
+                                <span class="text-gold fw-medium">Verified Purchase</span>
+                                <span class="text-light-luxury" style="font-size: 10px;">{{ $rev->product->name ?? 'Extrait de Parfum' }}</span>
                             </div>
                         </div>
                     </div>
@@ -498,6 +509,13 @@
 
 <!-- 9. Fragrance Journal Preview -->
 @if($recentBlogs->count() > 0)
+    @php
+        $blogDistinctImages = [
+            'assets/images/perfumes/prod_oud_royale.jpg',
+            'assets/images/perfumes/prod_rose_oud.jpg',
+            'assets/images/perfumes/prod_discovery_coffret.jpg'
+        ];
+    @endphp
     <section class="py-5 bg-theme-main luxury-wine-bg">
         <div class="container px-3 px-lg-4">
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 pb-3 border-bottom border-gold-20">
@@ -516,9 +534,9 @@
                     <div class="col-12 col-md-4">
                         <article class="bg-gradient-wine-card border border-gold-25 rounded-4 overflow-hidden d-flex flex-column justify-content-between luxury-hover-card h-100">
                             <div class="overflow-hidden bg-theme-secondary" style="height: 12rem;">
-                                <img src="{{ asset($hBlog->cover_image ?? 'assets/images/perfumes/prod_oud_royale.jpg') }}" 
+                                <img src="{{ !empty($hBlog->image) && file_exists(public_path($hBlog->image)) ? asset($hBlog->image) : asset($blogDistinctImages[$loop->index % 3]) }}" 
                                      alt="{{ $hBlog->title }}" 
-                                     onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
+                                     onerror="this.onerror=null; this.src='{{ asset($blogDistinctImages[$loop->index % 3]) }}';"
                                      class="w-100 h-100 object-fit-cover transition-smooth">
                             </div>
                             <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between vstack gap-3">

@@ -198,7 +198,11 @@ class Product extends Model
     // WhatsApp Direct Order Message Generator
     public function getWhatsAppOrderUrlAttribute()
     {
-        $phone = config('app.whatsapp_number', '923001234567');
+        $phone = function_exists('settings') ? settings('site_whatsapp', '923363685732') : config('app.whatsapp_number', '923363685732');
+        $phone = preg_replace('/[^0-9]/', '', (string)$phone) ?: '923363685732';
+        if (str_starts_with($phone, '03')) {
+            $phone = '92' . substr($phone, 1);
+        }
         $msg = "Salam! I would like to order *{$this->name}* ({$this->concentration}, {$this->volume_ml}ml) for {$this->formatted_effective_price}. Please confirm stock and 24h courier delivery.";
         return "https://wa.me/{$phone}?text=" . urlencode($msg);
     }

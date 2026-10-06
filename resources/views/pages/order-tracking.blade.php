@@ -213,7 +213,7 @@
 
         <!-- Help Card -->
         @php
-            $storePhone = settings('site_phone', '+92 300 8765432');
+            $storePhone = settings('site_phone', '+92 336 3685732');
         @endphp
         <div class="text-center p-4 bg-wine-card border border-gold-25 rounded-4 shadow-xl">
             <h4 class="font-serif fs-5 text-light-parchment fw-bold mb-1">Need Assistance With Your Delivery?</h4>

@@ -55,7 +55,7 @@
 
         <!-- Accordion 6 -->
         <x-accordion title="What payment methods do you accept online?">
-            In addition to Cash on Delivery (COD), we accept direct bank transfers via 1Link / Raast (Bank Alfalah, Meezan Bank), JazzCash, EasyPaisa, and Debit / Credit cards for instantaneous digital settlement.
+            We accept Cash on Delivery (COD) across Pakistan, mobile digital wallets (JazzCash, EasyPaisa), and debit/credit cards for secure, instantaneous settlement.
         </x-accordion>
 
         <!-- Still have questions banner -->

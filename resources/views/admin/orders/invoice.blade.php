@@ -190,7 +190,7 @@
 
         <div class="footer">
             <p>Thank you for choosing <strong>Perfumes Collection Haute Parfumerie</strong>.</p>
-            <p>For concierge inquiries, contact concierge@perfumecollectionpk.com or WhatsApp +92 300 1234567</p>
+            <p>For concierge inquiries, contact concierge@perfumecollectionpk.com or WhatsApp +92 336 3685732</p>
         </div>
     </div>
 </body>

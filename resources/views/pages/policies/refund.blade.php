@@ -23,7 +23,7 @@
             <p class="text-muted-parchment mb-0">Every 100ml flacon is accompanied by a complimentary 2ml sample vial of the same fragrance. We encourage you to test the sample vial first on your skin. If the fragrance does not resonate with your chemistry, you may return the unopened 100ml presentation box for an immediate full exchange or store credit.</p>
 
             <h3 class="fs-5 text-gold font-serif mb-0">3. Transit Damage & Guarantee</h3>
-            <p class="text-muted-parchment mb-0">In the unlikely event of transit damage or leak during courier handling, please notify us within 24 hours on WhatsApp (+92 300 1234567) with a photograph. A pristine replacement will be dispatched via Express Air with no additional charges.</p>
+            <p class="text-muted-parchment mb-0">In the unlikely event of transit damage or leak during courier handling, please notify us within 24 hours on WhatsApp (<a href="{{ ravaha_whatsapp_url('Transit damage notification') }}" class="text-gold text-decoration-none" target="_blank">+92 336 3685732</a>) with a photograph. A pristine replacement will be dispatched via Express Air with no additional charges.</p>
         </div>
     </div>
 </section>

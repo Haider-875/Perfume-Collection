@@ -154,7 +154,7 @@
                                 Have questions regarding a custom extrait flacon, delivery rerouting, or scent curation?
                             </p>
                             <div class="pt-2">
-                                <a href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" 
+                                <a href="https://wa.me/{{ $whatsappNum ?? '923363685732' }}" target="_blank" rel="noopener noreferrer" 
                                    class="btn-whatsapp py-2 px-3 text-uppercase tracking-wider fw-semibold d-inline-flex align-items-center gap-2 text-decoration-none rounded-3" style="font-size: 11px;">
                                     <i class="fab fa-whatsapp"></i>
                                     <span>Connect via WhatsApp</span>

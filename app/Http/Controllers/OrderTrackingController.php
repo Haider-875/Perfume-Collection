@@ -36,7 +36,11 @@ class OrderTrackingController extends Controller
         }
 
         // WhatsApp concierge support link
-        $storePhone = Setting::get('whatsapp', '923001234567');
+        $storePhone = Setting::get('whatsapp', Setting::get('site_whatsapp', '923363685732'));
+        $storePhone = preg_replace('/[^0-9]/', '', (string)$storePhone) ?: '923363685732';
+        if (str_starts_with($storePhone, '03')) {
+            $storePhone = '92' . substr($storePhone, 1);
+        }
         $whatsappUrl = "https://wa.me/{$storePhone}?text=" . urlencode("Salam Perfumes Collection Concierge! I need assistance tracking my order dossier.");
 
         return view('pages.order-tracking', compact('order', 'searched', 'orderNumber', 'phone', 'whatsappUrl'));

@@ -72,9 +72,9 @@
     </a>
 
     <!-- Product Metadata & Content -->
-    <div class="d-flex flex-column flex-grow-1 text-center px-1">
+    <div class="product-card-body d-flex flex-column flex-grow-1 text-center px-1">
         <!-- Impression Tag -->
-        <div class="mb-1 text-center">
+        <div class="product-card-impression mb-1 text-center">
             @if($product->impression_of)
                 <span class="text-muted-luxury fw-medium d-block text-truncate" style="font-size: 11px;" title="Impression of {{ $product->impression_of }}">
                     Impression of <span class="text-gold-soft fw-semibold">{{ $product->impression_of }}</span>
@@ -87,12 +87,12 @@
         </div>
 
         <!-- Product Title (Cormorant Garamond Elegance) -->
-        <h3 class="font-serif fs-5 fw-medium text-ivory text-truncate mb-1">
+        <h3 class="product-card-title font-serif fs-5 fw-medium text-ivory mb-1">
             <a href="{{ route('shop.show', $product->slug) }}" class="text-ivory text-decoration-none">{{ $product->name }}</a>
         </h3>
 
         <!-- Dual Pricing / Range in Shimmering Gold -->
-        <div class="my-1 d-flex align-items-baseline justify-content-center gap-1">
+        <div class="product-card-pricing my-1 d-flex align-items-baseline justify-content-center gap-1">
             <span class="text-xs text-muted-luxury fw-medium">
                 Rs. {{ number_format(max(450, round($product->effective_price * 0.22, -1))) }}
             </span>
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Star Rating -->
-        <div class="d-flex align-items-center justify-content-center gap-1 text-gold mb-1" style="font-size: 11px;">
+        <div class="product-card-rating d-flex align-items-center justify-content-center gap-1 text-gold mb-1" style="font-size: 11px;">
             <i class="fas fa-star" style="font-size: 10px;"></i>
             <span class="fw-bold text-ivory">{{ number_format($product->rating_avg ?: 4.9, 1) }}</span>
             <span class="text-light-luxury" style="font-size: 10px;">({{ $product->reviews_count ?: 48 }})</span>
@@ -115,7 +115,7 @@
     <!-- Prominent Full-Width Luxury Gold Button (Stadium Pill with Arrow) -->
     <div class="mt-3 pt-2 border-top border-gold-20">
         <button onclick="addToCartAjax({{ $product->id }}, 1)" 
-                class="w-100 btn-pill-gold py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2"
+                class="w-100 btn-gold py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2"
                 style="min-height: 42px;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping" style="font-size: 11px;"></i>

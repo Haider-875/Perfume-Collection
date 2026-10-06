@@ -36,4 +36,14 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getUserNameAttribute()
+    {
+        return $this->attributes['customer_name'] ?? ($this->user->name ?? 'Verified Patron');
+    }
+
+    public function getUserCityAttribute()
+    {
+        return $this->attributes['customer_city'] ?? 'Pakistan';
+    }
 }

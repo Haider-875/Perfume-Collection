@@ -87,7 +87,7 @@
     </div>
 
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
-    <header class="sticky-top site-header">
+    <header class="sticky-top site-header" x-data="{ mobileMenuOpen: false, accountOpen: false }">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
             <div class="d-flex align-items-center justify-content-between w-100" style="height: 5rem;">
 
@@ -181,26 +181,14 @@
                 <!-- Right: Action Icons (Search, User Account / Sign In, Cart) -->
                 <div class="d-flex align-items-center gap-3 gap-md-4">
                     <!-- Search Modal Trigger -->
-                    <button type="button" id="searchModalTrigger"
+                    {{-- <button type="button" id="searchModalTrigger"
                         class="border-0 bg-transparent text-ivory opacity-75 p-1 fs-6"
                         title="Search Fragrances">
                         <i class="fas fa-search"></i>
-                    </button>
+                    </button> --}}
 
-                    <!-- User Account / Staff / Guest Sign In -->
-                    @auth
-                        <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('account.dashboard') }}"
-                            class="text-ivory opacity-75 p-1 fs-6"
-                            title="{{ auth()->user()->isAdmin() ? 'Admin Portal' : 'My Account' }}">
-                            <i class="fas {{ auth()->user()->isAdmin() ? 'fa-shield-halved text-gold' : 'fa-user' }}"></i>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="text-ivory opacity-75 p-1 fs-6"
-                            title="Sign In to Your Account">
-                            <i class="far fa-user"></i>
-                        </a>
-                    @endauth
+                    <!-- User Account / Profile / Admin Dropdown -->
+                
 
                     <!-- Slide-in Cart Trigger -->
                     <button type="button" id="cartDrawerTrigger"
@@ -351,10 +339,6 @@
                                 class="text-muted-luxury hover-gold transition-all">Exclusive Reserve Extrait</a></li>
                         <li><a href="{{ route('collections.show', 'men') }}"
                                 class="text-muted-luxury hover-gold transition-all">Men's Designer Impressions</a></li>
-                        <li><a href="{{ route('collections.show', 'women') }}"
-                                class="text-muted-luxury hover-gold transition-all">Women's Floral & Amber Impressions</a></li>
-                        <li><a href="{{ route('collections.show', 'unisex') }}"
-                                class="text-muted-luxury hover-gold transition-all">Unisex & Pure Oud Oils</a></li>
                     </ul>
                 </div>
 
@@ -378,24 +362,18 @@
                     </ul>
                 </div>
 
-                <!-- Col 4: Newsletter -->
+                <!-- Col 4: The Privileged Circle -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="vstack gap-3">
                         <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-1 fw-semibold border-bottom border-gold-20 pb-2">
                             The Privileged Circle</h4>
                         <p class="text-muted-luxury fw-light mb-0" style="font-size: 0.76rem;">
-                            Receive exclusive release drops and a complimentary Rs. 500 welcome voucher on your inaugural order.
+                            An exclusive patronage for discerning fragrance connoisseurs across Pakistan. Enjoy handcrafted private reserve formulations, bespoke scent consultations, and complimentary nationwide express courier delivery.
                         </p>
-                        <form action="{{ route('newsletter.subscribe') }}" method="POST">
-                            @csrf
-                            <div class="footer-newsletter-wrap">
-                                <input type="email" name="email" required placeholder="Enter your email..."
-                                    class="footer-newsletter-input">
-                                <button type="submit" class="footer-newsletter-btn">
-                                    Join
-                                </button>
-                            </div>
-                        </form>
+                        <div class="d-flex align-items-center gap-2 pt-1 text-gold-soft" style="font-size: 0.75rem;">
+                            <i class="fas fa-gem text-gold"></i>
+                            <span class="text-uppercase tracking-wider">Handcrafted in Pakistan</span>
+                        </div>
                     </div>
                 </div>
 

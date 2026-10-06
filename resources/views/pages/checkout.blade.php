@@ -264,7 +264,8 @@
                                 </div>
                             </div>
 
-                            <!-- 2. Direct Bank Transfer / Raast -->
+                            @if(config('app.show_bank_payment_frontend', false))
+                            <!-- 2. Direct Bank Transfer / Raast (Temporarily hidden from UI via config toggle) -->
                             <div class="border rounded-3 transition overflow-hidden cursor-pointer"
                                  :class="paymentMethod === 'bank_transfer' ? 'border-gold bg-wine-accent' : 'border-gold-20 bg-wine-dark'">
                                 <div class="p-3 d-flex align-items-center justify-content-between" @click="paymentMethod = 'bank_transfer'">
@@ -330,6 +331,7 @@
                                     </p>
                                 </div>
                             </div>
+                            @endif
 
                             <!-- 3. Mobile Wallets (EasyPaisa / JazzCash / SadaPay / NayaPay) -->
                             <div class="border rounded-3 transition overflow-hidden cursor-pointer"
