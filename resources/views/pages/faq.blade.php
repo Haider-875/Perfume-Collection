@@ -65,8 +65,8 @@
                 Our Private Concierge advisors are available 7 days a week on WhatsApp to assist with bridal gifting, corporate orders, and personal scent consultations.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3 pt-2">
-                <a href="https://wa.me/923008765432?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
-                    <i class="fab fa-whatsapp me-2"></i> CHAT WITH CONCIERGE
+                <a href="https://wa.me/923363685732?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
+                    <i class="fab fa-whatsapp me-2"></i> CHAT WITH CONCIERGE (+92 336 3685732)
                 </a>
                 <a href="{{ route('pages.contact') }}" class="btn-outline-gold py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
                     CONTACT FORM

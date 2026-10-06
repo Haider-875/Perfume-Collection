@@ -43,13 +43,13 @@
                                 </span>
                             </div>
 
-                            <!-- Main Title (Cormorant Garamond Elegance) -->
-                            <h1 class="font-serif text-ivory text-uppercase lh-1 fw-normal mb-0 drop-shadow-lg" style="font-size: clamp(2.5rem, 5.5vw, 4.5rem);">
+                            <!-- Main Title (Wasted Vindey Luxury Serif) -->
+                            <h1 class="font-hero hero-title text-ivory text-uppercase lh-1 fw-normal mb-0 drop-shadow-lg" style="font-size: clamp(2.5rem, 5.5vw, 4.5rem);">
                                 {!! $slide->title !!}
                             </h1>
 
-                            <!-- Subtitle / Tagline -->
-                            <p class="font-serif fst-italic fs-5 text-gold-soft opacity-90 fw-light lh-base mb-0" style="max-width: 38rem;">
+                            <!-- Subtitle / Tagline (Poppins Regular) -->
+                            <p class="font-sans fs-5 text-gold-soft opacity-90 fw-normal lh-base mb-0" style="max-width: 38rem;">
                                 {{ $slide->subtitle ?? 'Experience it before everyone else does.' }}
                             </p>
 
@@ -89,18 +89,8 @@
                             <!-- CTAs -->
                             <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
                                 <a href="{{ $slide->cta_url ?? route('collections.show', 'all') }}" 
-                                   class="d-inline-flex align-items-center gap-3 px-4 py-3 rounded-pill btn-gold text-xs text-uppercase tracking-wider shadow-lg text-decoration-none">
-                                    <span class="rounded-circle bg-theme-main text-gold d-flex align-items-center justify-center text-xs" style="width: 1.75rem; height: 1.75rem;">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
+                                   class="d-inline-flex align-items-center justify-content-center px-4 py-3 rounded-pill btn-gold text-xs text-uppercase tracking-wider shadow-lg text-decoration-none">
                                     <span>{{ $slide->cta_text ?? 'SHOP OUR TOP SELLERS' }}</span>
-                                </a>
-
-                                <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am interested in ordering your flagship Extrait collection.') }}" 
-                                   target="_blank" 
-                                   class="d-inline-flex align-items-center gap-2 px-4 py-3 rounded-pill btn-whatsapp text-white fw-bold text-xs text-uppercase tracking-wider shadow-lg text-decoration-none">
-                                    <i class="fab fa-whatsapp fs-5"></i>
-                                    <span>1-CLICK ORDER (COD)</span>
                                 </a>
                             </div>
 
@@ -112,8 +102,8 @@
                     <img src="{{ asset('assets/images/slides/hero_1.jpg') }}" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                     <div class="position-absolute top-0 start-0 w-100 h-100 bg-theme-main opacity-75"></div>
                     <div class="position-relative z-2 text-center text-ivory vstack gap-3">
-                        <h1 class="font-serif fs-1 fw-medium text-uppercase gold-gradient-text">Perfumes Collection</h1>
-                        <p class="fs-5 text-gold-soft">Luxury Extrait de Parfum Impressions</p>
+                        <h1 class="font-hero hero-title fs-1 fw-medium text-uppercase gold-gradient-text">Perfumes Collection</h1>
+                        <p class="font-sans fs-5 text-gold-soft mb-0">Luxury Extrait de Parfum Impressions</p>
                         <a href="{{ route('collections.show', 'all') }}" class="d-inline-block px-4 py-2 btn-gold rounded-pill text-xs text-decoration-none">Explore Catalog</a>
                     </div>
                 </div>
@@ -127,35 +117,71 @@
     </div>
 </section>
 
-<!-- 2. Value Proposition Ticker Bar (Royal Wine & Gold Ticker) -->
-<section class="bg-gradient-wine-ticker text-ivory py-3 border-bottom border-gold-30 overflow-hidden shadow-sm">
-    <div class="container px-3 px-lg-4">
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 text-xs fw-semibold text-uppercase tracking-wider text-center text-md-start">
-            <div class="d-flex align-items-center gap-2 mx-auto mx-md-0">
-                <span class="text-gold">💎</span>
+<!-- 2. Value Proposition Ticker Bar (Substantial Royal Wine & Gold Marquee Ticker) -->
+<section class="luxury-marquee-section">
+    <div class="w-100 overflow-hidden">
+        <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+            <span class="luxury-marquee-item">
+                <i class="fas fa-crown"></i>
                 <span>Premium Extrait de Parfum</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 mx-auto mx-md-0">
-                <span class="text-gold">🕯️</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-fire-flame-curved"></i>
                 <span>Hand Crafted Candles</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 mx-auto mx-md-0">
-                <span class="text-gold">⌛</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-hourglass-half"></i>
                 <span>Long Lasting for 14+ Hours</span>
-            </div>
-            <div class="d-flex align-items-center gap-2 mx-auto mx-md-0">
-                <span class="text-gold">🚚</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-truck-fast"></i>
                 <span>Fast Nationwide Delivery Across Pakistan</span>
-            </div>
-            <div class="d-none d-lg-flex align-items-center gap-2">
-                <span class="text-gold">🌿</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-leaf"></i>
                 <span>100% Vegan & Cruelty Free</span>
-            </div>
-            <div class="d-none d-xl-flex align-items-center gap-2">
-                <span class="text-gold">🛡️</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-shield-halved"></i>
                 <span>Free of Harmful Chemicals</span>
-            </div>
-        </div>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <!-- Seamless loop repeat -->
+            <span class="luxury-marquee-item">
+                <i class="fas fa-crown"></i>
+                <span>Premium Extrait de Parfum</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-fire-flame-curved"></i>
+                <span>Hand Crafted Candles</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-hourglass-half"></i>
+                <span>Long Lasting for 14+ Hours</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-truck-fast"></i>
+                <span>Fast Nationwide Delivery Across Pakistan</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-leaf"></i>
+                <span>100% Vegan & Cruelty Free</span>
+            </span>
+            <span class="luxury-marquee-sep">✦</span>
+            <span class="luxury-marquee-item">
+                <i class="fas fa-shield-halved"></i>
+                <span>Free of Harmful Chemicals</span>
+            </span>
+        </marquee>
     </div>
 </section>
 

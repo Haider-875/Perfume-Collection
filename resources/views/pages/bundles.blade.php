@@ -5,59 +5,64 @@
 
 @section('content')
 
-<!-- Bundles Hero Banner -->
-<section class="py-5 bg-wine-ticker border-bottom border-gold-30 text-center">
-    <div class="container px-3 px-lg-4">
+<!-- 1. Bundles Hero Banner -->
+<section class="py-5 luxury-wine-bg border-bottom border-gold-30 text-center position-relative overflow-hidden">
+    <div class="container px-3 px-lg-4 position-relative z-2">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Collections', 'url' => route('collections.show', 'all')],
-            ['label' => 'Curated Bundles & Sets']
+            ['label' => 'Curated Bundles & Discovery Sets']
         ]" />
 
-        <span class="d-inline-block text-gold mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;">CURATED PAIRINGS & SIGNATURE SETS</span>
-        <h1 class="font-serif text-light-parchment mb-2 fw-normal display-5 tracking-tight">
-            Curated Fragrance Bundles
-        </h1>
-        <p class="mx-auto text-muted-parchment lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem;">
-            Curated pairings presented in luxury packaging. Enjoy complimentary presentation boxes and savings of up to 30% across Pakistan.
-        </p>
+        <div class="mt-2">
+            <span class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-wine-accent border border-gold-60 text-gold-soft text-xs fw-medium tracking-luxury text-uppercase mb-3 shadow-sm">
+                <i class="fas fa-crown text-gold"></i>
+                <span>HAUTE PARFUMERIE DISCOVERY COFFRETS</span>
+            </span>
+            <h1 class="font-hero hero-title text-ivory text-uppercase mb-2 fw-normal display-5 tracking-tight gold-gradient-text">
+                Curated Fragrance Bundles
+            </h1>
+            <p class="mx-auto text-gold-soft opacity-90 lh-base fw-light mb-0 font-sans" style="max-width: 680px; font-size: 0.95rem;">
+                Master impressions paired into bespoke presentation coffrets. Enjoy complimentary luxury gift boxes, guaranteed multi-bottle savings of up to 30%, and insured free air delivery across Pakistan.
+            </p>
+        </div>
     </div>
 </section>
 
-<!-- Bundles Showcase Grid -->
-<section class="py-5 border-bottom border-gold-20" style="background-color: #080204;">
+<!-- 2. Bundles Showcase Section -->
+<section class="py-5 border-bottom border-gold-20 bg-theme-main">
     <div class="container px-3 px-lg-4">
         
-        <!-- Value Proposition Bar -->
-        <div class="row g-4 mb-5 p-4 bg-gradient-wine-ticker border border-gold-25 rounded-4 shadow-xl">
+        <!-- Value Proposition Highlights Bar -->
+        <div class="row g-4 mb-5 p-3 p-md-4 luxury-card-bg border border-gold-30 rounded-4 shadow-xl">
             <div class="col-12 col-md-4 d-flex align-items-center gap-3">
-                <div class="rounded-circle bg-wine-dark border border-gold-40 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
+                <div class="rounded-circle bg-wine-dark border border-gold-50 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
                     <i class="fas fa-gift"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif fs-6 text-light-parchment fw-medium mb-1">Velvet Presentation Box</h4>
-                    <p class="text-xs text-muted-parchment mb-0">Complimentary luxury unboxing experience</p>
+                    <h4 class="font-serif fs-6 text-ivory fw-medium mb-1">Handcrafted Velvet Box</h4>
+                    <p class="text-xs text-muted-luxury mb-0">Complimentary royal coffret unboxing experience</p>
                 </div>
             </div>
 
             <div class="col-12 col-md-4 d-flex align-items-center gap-3">
-                <div class="rounded-circle bg-wine-dark border border-gold-40 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
+                <div class="rounded-circle bg-wine-dark border border-gold-50 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
                     <i class="fas fa-percent"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif fs-6 text-light-parchment fw-medium mb-1">Guaranteed Savings</h4>
-                    <p class="text-xs text-muted-parchment mb-0">Save up to 30% compared to individual bottles</p>
+                    <h4 class="font-serif fs-6 text-ivory fw-medium mb-1">Guaranteed Savings</h4>
+                    <p class="text-xs text-muted-luxury mb-0">Save up to 30% versus purchasing individual flacons</p>
                 </div>
             </div>
 
             <div class="col-12 col-md-4 d-flex align-items-center gap-3">
-                <div class="rounded-circle bg-wine-dark border border-gold-40 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
+                <div class="rounded-circle bg-wine-dark border border-gold-50 d-flex align-items-center justify-content-center text-gold fs-5 flex-shrink-0 shadow-sm" style="width: 48px; height: 48px;">
                     <i class="fas fa-truck-fast"></i>
                 </div>
                 <div>
-                    <h4 class="font-serif fs-6 text-light-parchment fw-medium mb-1">Complimentary Express Air</h4>
-                    <p class="text-xs text-muted-parchment mb-0">24-48 Hour insured TCS delivery to all cities</p>
+                    <h4 class="font-serif fs-6 text-ivory fw-medium mb-1">Express Air Delivery</h4>
+                    <p class="text-xs text-muted-luxury mb-0">24-48h insured TCS express courier with nationwide COD</p>
                 </div>
             </div>
         </div>
@@ -65,53 +70,64 @@
         <!-- Master Bundles List -->
         <div class="d-flex flex-column gap-5">
             @forelse($bundles as $bundle)
-                <div class="bg-gradient-wine-ticker border border-gold-30 rounded-4 p-4 p-lg-5 shadow-2xl transition">
+                <div class="bundle-card-master p-4 p-lg-5">
                     <div class="row g-4 align-items-center">
                         
                         <!-- Left: Bundle Image Showcase -->
                         <div class="col-12 col-lg-4 position-relative">
-                            <div class="position-relative overflow-hidden rounded-3 border border-gold-20 bg-wine-dark p-3 text-center">
+                            <div class="bundle-image-pedestal">
                                 <img 
                                     src="{{ $bundle->image_url }}" 
                                     alt="{{ $bundle->name }}" 
                                     onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_discovery_coffret.jpg') }}';" 
-                                    class="img-fluid object-contain mx-auto transition"
-                                    style="height: 256px;"
+                                    class="img-fluid object-fit-contain mx-auto"
+                                    style="height: 270px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));"
                                 >
                                 @if($bundle->savings_amount > 0)
-                                    <div class="position-absolute top-0 start-0 m-3 bg-wine-accent text-light-parchment px-3 py-1 text-uppercase fw-bold rounded shadow-sm border border-gold-30" style="font-size: 11px; letter-spacing: 0.05em;">
-                                        SAVE RS. {{ number_format($bundle->savings_amount) }}
+                                    <div class="position-absolute top-0 start-0 m-3">
+                                        <span class="badge-savings-luxury shadow-md">
+                                            SAVE RS. {{ number_format($bundle->savings_amount) }}
+                                        </span>
                                     </div>
                                 @endif
+                                <div class="position-absolute bottom-0 end-0 m-3">
+                                    <span class="badge-extrait shadow-sm">
+                                        EXTRAIT SET
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Center: Bundle Details & Included Flacons -->
                         <div class="col-12 col-lg-5 d-flex flex-column gap-3">
                             <div>
-                                <span class="d-block text-gold fw-semibold" style="font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">EXCLUSIVE COFFRET SET</span>
-                                <h3 class="font-serif fs-2 text-light-parchment mt-1 fw-normal mb-0">{{ $bundle->name }}</h3>
-                                <p class="text-muted-parchment mt-2 lh-base fw-light mb-0" style="font-size: 0.9rem;">
-                                    {{ $bundle->description }}
+                                <span class="d-inline-flex align-items-center gap-1 text-gold fw-medium" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;">
+                                    <i class="fas fa-gem" style="font-size: 9px;"></i>
+                                    <span>EXCLUSIVE SIGNATURE COFFRET</span>
+                                </span>
+                                <h3 class="font-hero hero-title text-ivory fs-2 mt-1 fw-normal mb-0">{{ $bundle->name }}</h3>
+                                <p class="text-muted-luxury font-sans mt-2 lh-base fw-light mb-0" style="font-size: 0.88rem;">
+                                    {{ $bundle->tagline ?? $bundle->description }}
                                 </p>
                             </div>
 
                             <!-- Included Items Preview -->
-                            <div class="border-top border-bottom border-gold-20 py-3 my-2">
-                                <h5 class="text-gold fw-semibold mb-3" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                                    Fragrances Included in Set:
+                            <div class="border-top border-bottom border-gold-20 py-3 my-1">
+                                <h5 class="text-gold fw-semibold mb-2.5 d-flex align-items-center gap-2" style="font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;">
+                                    <i class="fas fa-layer-group text-gold"></i>
+                                    <span>Fragrances Included in this Coffret:</span>
                                 </h5>
                                 <div class="row g-2">
                                     @if(isset($bundle->items) && $bundle->items->count() > 0)
                                         @foreach($bundle->items as $bItem)
                                             @php $bProd = $bItem->product; @endphp
                                             @if($bProd)
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center gap-2 p-2 bg-wine-dark border border-gold-20 rounded-3">
-                                                        <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-contain flex-shrink-0" style="width: 40px; height: 40px;">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="bundle-flacon-card d-flex align-items-center gap-2">
+                                                        <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0" style="width: 38px; height: 38px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));">
                                                         <div class="text-truncate">
-                                                            <div class="text-xs fw-semibold text-light-parchment text-truncate">{{ $bProd->name }}</div>
-                                                            <div class="text-muted-parchment" style="font-size: 10px;">{{ $bProd->volume_ml ?? 50 }}ml Extrait</div>
+                                                            <div class="text-xs fw-medium text-ivory text-truncate">{{ $bProd->name }}</div>
+                                                            <div class="text-gold" style="font-size: 10px; font-weight: 300;">{{ $bProd->volume_ml ?? 50 }}ml &bull; Extrait de Parfum</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -119,12 +135,12 @@
                                         @endforeach
                                     @elseif(isset($bundle->products) && $bundle->products->count() > 0)
                                         @foreach($bundle->products as $bProd)
-                                            <div class="col-6">
-                                                <div class="d-flex align-items-center gap-2 p-2 bg-wine-dark border border-gold-20 rounded-3">
-                                                    <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-contain flex-shrink-0" style="width: 40px; height: 40px;">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="bundle-flacon-card d-flex align-items-center gap-2">
+                                                    <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0" style="width: 38px; height: 38px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));">
                                                     <div class="text-truncate">
-                                                        <div class="text-xs fw-semibold text-light-parchment text-truncate">{{ $bProd->name }}</div>
-                                                        <div class="text-muted-parchment" style="font-size: 10px;">{{ $bProd->volume_ml }}ml Extrait</div>
+                                                        <div class="text-xs fw-medium text-ivory text-truncate">{{ $bProd->name }}</div>
+                                                        <div class="text-gold" style="font-size: 10px; font-weight: 300;">{{ $bProd->volume_ml ?? 50 }}ml &bull; Extrait de Parfum</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,50 +151,61 @@
                         </div>
 
                         <!-- Right: Pricing & Call to Action -->
-                        <div class="col-12 col-lg-3 bg-wine-dark border border-gold-30 rounded-3 p-4 text-center d-flex flex-column gap-3 shadow-xl">
-                            <div>
-                                <span class="d-block text-muted-parchment mb-1 text-uppercase" style="font-size: 10px; letter-spacing: 0.1em;">Bundle Set Price</span>
-                                <div class="font-serif fs-3 text-gold-soft fw-bold">
-                                    Rs. {{ number_format($bundle->price) }}
+                        <div class="col-12 col-lg-3">
+                            <div class="bundle-pricing-card text-center d-flex flex-column gap-3 shadow-xl">
+                                <div>
+                                    <span class="d-block text-muted-luxury mb-1 text-uppercase fw-medium" style="font-size: 10px; letter-spacing: 0.14em;">Special Set Price</span>
+                                    <div class="font-hero hero-title fs-2 text-gold-bright fw-normal gold-gradient-text">
+                                        Rs. {{ number_format($bundle->price) }}
+                                    </div>
+                                    @if($bundle->original_price > $bundle->price)
+                                        <div class="text-xs text-muted-luxury text-decoration-line-through mt-0.5">
+                                            Rs. {{ number_format($bundle->original_price) }}
+                                        </div>
+                                        <div class="mt-1.5">
+                                            <span class="badge-savings-luxury" style="font-size: 9px; padding: 2px 8px;">
+                                                YOU SAVE RS. {{ number_format($bundle->savings_amount) }} ({{ round((($bundle->original_price - $bundle->price)/$bundle->original_price)*100) }}% OFF)
+                                            </span>
+                                        </div>
+                                    @endif
                                 </div>
-                                @if($bundle->original_price > $bundle->price)
-                                    <div class="text-xs text-muted-parchment text-decoration-line-through mt-1">
-                                        Rs. {{ number_format($bundle->original_price) }}
-                                    </div>
-                                    <div class="text-gold-soft fw-semibold mt-1" style="font-size: 11px;">
-                                        You Save: Rs. {{ number_format($bundle->savings_amount) }} ({{ round((($bundle->original_price - $bundle->price)/$bundle->original_price)*100) }}%)
-                                    </div>
-                                @endif
-                            </div>
 
-                            <button 
-                                type="button"
-                                onclick="addBundleToCart({{ $bundle->id }})"
-                                class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase d-flex align-items-center justify-content-center gap-2 rounded-3"
-                            >
-                                <i class="fas fa-shopping-bag"></i>
-                                <span>ADD BUNDLE TO BAG</span>
-                            </button>
+                                <div class="vstack gap-2 pt-1">
+                                    <button 
+                                        type="button"
+                                        onclick="addBundleToCart({{ $bundle->id }})"
+                                        class="btn-bundle-bag"
+                                    >
+                                        <i class="fas fa-shopping-bag"></i>
+                                        <span>ADD BUNDLE TO BAG</span>
+                                    </button>
 
-                            <a 
-                                href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I would like to order the ' . $bundle->name . ' for Rs. ' . number_format($bundle->price) . ' with Cash on Delivery.') }}" 
-                                target="_blank" 
-                                class="w-100 btn-whatsapp py-2 text-xs tracking-wider d-flex align-items-center justify-content-center gap-2 text-decoration-none rounded-3"
-                            >
-                                <i class="fab fa-whatsapp"></i>
-                                <span>ORDER ON WHATSAPP</span>
-                            </a>
+                                    <a 
+                                        href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I would like to order the ' . $bundle->name . ' for Rs. ' . number_format($bundle->price) . ' with Cash on Delivery.') }}" 
+                                        target="_blank" 
+                                        class="btn-bundle-whatsapp"
+                                    >
+                                        <i class="fab fa-whatsapp fs-5"></i>
+                                        <span>1-CLICK ORDER (COD)</span>
+                                    </a>
+                                </div>
 
-                            <div class="text-muted-parchment" style="font-size: 10px;">
-                                <i class="fas fa-shield-alt text-gold me-1"></i> 100% Guaranteed Authentic Extrait
+                                <div class="text-muted-luxury pt-1 border-top border-gold-20" style="font-size: 9.5px; line-height: 1.4;">
+                                    <i class="fas fa-shield-halved text-gold me-1"></i> 100% Genuine French Oil &bull; Free Nationwide Shipping
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
             @empty
-                <div class="text-center py-5 bg-wine-dark border border-gold-20 rounded-3 p-4">
-                    <p class="text-muted-parchment mb-0">No bundles currently active. Check back shortly for seasonal discovery coffrets.</p>
+                <div class="text-center py-5 luxury-card-bg border border-gold-20 rounded-4 p-5">
+                    <i class="fas fa-gem fs-1 text-gold opacity-50 mb-3 animate-pulse"></i>
+                    <h4 class="font-serif fs-4 text-ivory mb-2">No Active Bundles at this Moment</h4>
+                    <p class="text-muted-luxury mb-4 text-xs font-sans">Our private master discovery coffrets are curated seasonally. Browse our full fragrance library in the meantime.</p>
+                    <a href="{{ route('collections.show', 'all') }}" class="btn-gold px-4 py-2 text-xs text-uppercase rounded-pill text-decoration-none">
+                        EXPLORE ALL PERFUMES
+                    </a>
                 </div>
             @endforelse
         </div>

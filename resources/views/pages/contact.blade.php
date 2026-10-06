@@ -88,8 +88,8 @@
                     <p class="text-xs text-muted-parchment lh-base mb-0">
                         Need instant advice on sillage, longevity, or choosing a wedding gift? Our master perfumer is available directly:
                     </p>
-                    <a href="https://wa.me/923008765432?text={{ urlencode('Salam! I would like a luxury perfume consultation with Perfumes Collection.') }}" target="_blank" class="w-100 btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-center d-block text-decoration-none rounded-3">
-                        <i class="fab fa-whatsapp me-1"></i> MESSAGE ON WHATSAPP
+                    <a href="https://wa.me/923363685732?text={{ urlencode('Salam! I would like a luxury perfume consultation with Perfumes Collection.') }}" target="_blank" class="w-100 btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-center d-block text-decoration-none rounded-3">
+                        <i class="fab fa-whatsapp me-1"></i> MESSAGE ON WHATSAPP (+92 336 3685732)
                     </a>
                 </div>
 
@@ -107,7 +107,7 @@
                         <p class="text-xs text-muted-parchment lh-base mb-0">
                             MM Alam Road, Gulberg III, Lahore<br>
                             Hours: Mon - Sun (12:00 PM - 11:00 PM)<br>
-                            Tel: +92 300 8765432
+                            WhatsApp: +92 336 3685732
                         </p>
                     </div>
 
@@ -118,7 +118,8 @@
                         </h4>
                         <p class="text-xs text-muted-parchment lh-base mb-0">
                             Clifton Block 4 Gallery, Karachi<br>
-                            Hours: Mon - Sun (12:00 PM - 11:00 PM)
+                            Hours: Mon - Sun (1:00 PM - 11:30 PM)<br>
+                            WhatsApp: +92 336 3685732
                         </p>
                     </div>
 
@@ -129,7 +130,8 @@
                         </h4>
                         <p class="text-xs text-muted-parchment lh-base mb-0">
                             F-7 Markaz, Jinnah Super, Islamabad<br>
-                            Hours: By Prior Private Appointment
+                            Hours: Mon - Sun (12:00 PM - 11:00 PM)<br>
+                            WhatsApp: +92 336 3685732
                         </p>
                     </div>
                 </div>

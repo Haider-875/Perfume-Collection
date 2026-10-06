@@ -32,7 +32,11 @@ class LuxuryPerfumeSeeder extends Seeder
     public function run()
     {
         // 0. Clean slate reset
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() === 'sqlite') {
+            DB::statement('PRAGMA foreign_keys = OFF;');
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         User::truncate();
         Setting::truncate();
         HeroSlide::truncate();
@@ -55,7 +59,11 @@ class LuxuryPerfumeSeeder extends Seeder
         ActivityLog::truncate();
         DB::table('product_collection')->truncate();
         DB::table('product_scent_notes')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() === 'sqlite') {
+            DB::statement('PRAGMA foreign_keys = ON;');
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         // 1. Staff & Patron Users with Granular Permissions
         $superAdmin = User::create([
@@ -124,8 +132,8 @@ class LuxuryPerfumeSeeder extends Seeder
             'site_tagline' => "Artisanal Luxury Impressions • Extrait de Parfum",
             'currency' => 'PKR',
             'currency_symbol' => 'Rs. ',
-            'phone' => '+92 300 8765432',
-            'whatsapp' => '923008765432',
+            'phone' => '+92 336 3685732',
+            'whatsapp' => '923363685732',
             'email' => 'concierge@ravaha.pk',
             'address_lahore' => 'Plaza 18, Commercial Zone, Phase 5 DHA, Lahore, Pakistan',
             'address_karachi' => 'Bukhari Commercial Area, Phase 6 DHA, Karachi, Pakistan',
@@ -133,24 +141,24 @@ class LuxuryPerfumeSeeder extends Seeder
             'free_shipping_threshold' => '3000',
             'default_shipping_cost' => '200',
             'announcement_bar_enabled' => '1',
-            'announcement_text' => '✨ EID SPECIAL: 15% OFF On All Luxury Impressions Over Rs. 4,000 + Free Nationwide Shipping | Code: RAVAHA15',
+            'announcement_text' => '✨ SPECIAL LAUNCH: 15% OFF On All Luxury Impressions Over Rs. 4,000 + Free Nationwide Shipping | Code: PERFUME15',
             'payment_cod_enabled' => '1',
             'payment_bank_enabled' => '1',
             'payment_easypaisa_enabled' => '1',
             'payment_jazzcash_enabled' => '1',
             'payment_safepay_enabled' => '1',
             'bank_name' => 'Bank Alfalah Limited / Raast',
-            'bank_account_title' => 'Ravaha Parfums (Pvt) Ltd',
+            'bank_account_title' => 'Perfumes Collection (Pvt) Ltd',
             'bank_account_number' => '0142-1007894561',
             'bank_iban' => 'PK36ALFH01421007894561',
-            'bank_raast_id' => '03008765432',
+            'bank_raast_id' => '03363685732',
             'bank_branch' => 'Phase 5 DHA, Lahore',
-            'easypaisa_number' => '03008765432',
-            'easypaisa_account_title' => 'Ravaha Parfums',
-            'jazzcash_number' => '03008765432',
-            'jazzcash_account_title' => 'Ravaha Parfums',
-            'instagram_url' => 'https://instagram.com/ravahaparfums',
-            'facebook_url' => 'https://facebook.com/ravahaparfums',
+            'easypaisa_number' => '03363685732',
+            'easypaisa_account_title' => 'Perfumes Collection',
+            'jazzcash_number' => '03363685732',
+            'jazzcash_account_title' => 'Perfumes Collection',
+            'instagram_url' => 'https://instagram.com/perfumescollection',
+            'facebook_url' => 'https://facebook.com/perfumescollection',
         ];
         foreach ($settings as $k => $v) {
             Setting::create(['key' => $k, 'value' => $v, 'group' => str_starts_with($k, 'payment_') || str_contains($k, 'bank_') || str_contains($k, 'easypaisa') || str_contains($k, 'jazzcash') ? 'payments' : 'store']);
@@ -178,7 +186,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'cta_text' => "EXPLORE COUTURE",
             'cta_url' => "/collections/men",
             'secondary_cta_text' => "WHATSAPP ADVISOR",
-            'secondary_cta_url' => "https://wa.me/923008765432",
+            'secondary_cta_url' => "https://wa.me/923363685732",
             'sort_order' => 2,
             'is_active' => true,
         ]);

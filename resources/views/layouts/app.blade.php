@@ -23,11 +23,11 @@
     <meta property="og:image" content="{{ asset('assets/images/brand/logo.png') }}">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Google Fonts: Cormorant Garamond & Montserrat (Official Brand Typography) -->
+    <!-- Google Fonts: Poppins (Subheadings & Body Regular), Cormorant Garamond & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
 
     <!-- Swiper CSS -->
@@ -38,6 +38,9 @@
 
     <!-- Bootstrap 5.3 CSS ONLY -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Luxury Font: Wasted Vindey Preload -->
+    <link rel="preload" href="{{ asset('assets/fonts/Wasted-Vindey.ttf') }}" as="font" type="font/ttf" crossorigin>
 
     <!-- Master Luxury Theme Stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}">
@@ -52,31 +55,31 @@
     x-data="{ mobileMenuOpen: false, searchOpen: false }">
 
     @php
-        $whatsappNum = \App\Models\Setting::get('whatsapp', '923008765432');
-        $phoneNum = \App\Models\Setting::get('phone', '+92 300 8765432');
+        $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
+        $phoneNum = \App\Models\Setting::get('phone', '+92 336 3685732');
         $announcementText = \App\Models\Setting::get('announcement_text', '✨ SPECIAL LAUNCH: 15% OFF On All Luxury Impressions Over Rs. 4,000 + Free Nationwide Shipping | Code: PERFUME15');
         $freeShippingThreshold = \App\Models\Setting::get('free_shipping_threshold', '3000');
     @endphp
-    <!-- 1. Top Rotating Announcement Bar (Royal Imperial Wine & Gold) -->
-    <div class="top-ticker bg-gradient-wine-ticker text-gold-soft border-bottom border-gold-30 py-2 text-xs text-uppercase tracking-wider overflow-hidden shadow-sm">
-        <div class="container px-3 px-md-4">
+    <!-- 1. Top Rotating Announcement Bar (Royal Imperial Wine & Gold Haute Parfumerie) -->
+    <div class="top-ticker overflow-hidden">
+        <div class="container-fluid px-3 px-md-4 px-lg-5">
             <div class="swiper announcement-swiper">
                 <div class="swiper-wrapper text-center">
-                    <div class="swiper-slide d-flex align-items-center justify-center gap-2 fw-semibold">
+                    <div class="swiper-slide">
                         <i class="fas fa-truck-fast text-gold"></i>
-                        <span>Free Delivery on Orders Above Rs. 5,000 Across Pakistan</span>
+                        <span>Complimentary Nationwide Delivery on Orders Above Rs. 5,000</span>
                     </div>
-                    <div class="swiper-slide d-flex align-items-center justify-center gap-2 fw-semibold">
+                    <div class="swiper-slide">
                         <i class="fas fa-crown text-gold"></i>
-                        <span>35% - 40% Extrait Concentration &bull; 14+ Hours Beast Mode Longevity</span>
+                        <span>35% - 40% Pure Extrait Strength &bull; 14+ Hours Beast Mode Longevity</span>
                     </div>
-                    <div class="swiper-slide d-flex align-items-center justify-center gap-2 fw-semibold">
+                    <div class="swiper-slide">
                         <i class="fas fa-hand-holding-dollar text-gold"></i>
-                        <span>Cash on Delivery (COD) Available Nationwide Across Pakistan</span>
+                        <span>Cash on Delivery (COD) Available Across All Cities in Pakistan</span>
                     </div>
-                    <div class="swiper-slide d-flex align-items-center justify-center gap-2 fw-semibold">
+                    <div class="swiper-slide">
                         <i class="fab fa-whatsapp text-success"></i>
-                        <span>VIP Scent Advisor & WhatsApp Ordering: {{ $phoneNum }}</span>
+                        <span>VIP Scent Concierge & WhatsApp Ordering: <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="text-gold text-decoration-none fw-medium ms-1">+92 336 3685732</a></span>
                     </div>
                 </div>
             </div>
@@ -85,8 +88,8 @@
 
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
     <header class="sticky-top site-header">
-        <div class="container px-3 px-lg-4">
-            <div class="d-flex align-items-center justify-content-between" style="height: 5rem;">
+        <div class="container-fluid px-3 px-md-4 px-lg-5">
+            <div class="d-flex align-items-center justify-content-between w-100" style="height: 5rem;">
 
                 <!-- Left: Brand Logo & Company Name (Logo on LEFT, name: "Perfumes Collection") -->
                 <div class="d-flex align-items-center gap-3 flex-shrink-0">
@@ -102,58 +105,51 @@
                         <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
                             class="img-fluid" style="height: 3rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(214,170,98,0.25));">
                         <div class="d-none d-sm-flex flex-column">
-                            <span class="font-serif fw-bold text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em;">PERFUMES
+                            <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400;">PERFUMES
                                 <br> COLLECTION</span>
-                            <span class="text-gold fw-semibold" style="font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase;">LUXURY
+                            <span class="text-gold" style="font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 300;">LUXURY
                                 EXTRAIT DE PARFUM</span>
                         </div>
                     </a>
                 </div>
 
-                <!-- Center: Primary Navigation Links -->
-                <nav class="d-none d-lg-flex align-items-center gap-4 gap-xl-5">
+                <!-- Center: Primary Navigation Links (Spacious Luxury Gap & Hover Dropdown) -->
+                <nav class="d-none d-lg-flex align-items-center header-nav">
                     <a href="{{ route('home') }}"
-                        class="text-uppercase tracking-wide text-xs fw-medium {{ request()->routeIs('home') ? 'text-gold-soft fw-bold border-bottom border-2 border-gold pb-1' : 'text-ivory opacity-75' }}">
+                        class="nav-link-luxury {{ request()->routeIs('home') ? 'active' : '' }}">
                         Home
                     </a>
 
-                    <!-- Shop Dropdown -->
-                    <div class="position-relative" x-data="{ open: false }" @mouseenter="open = true"
-                        @mouseleave="open = false">
+                    <!-- Shop Dropdown (Pure Hover, Zero Layout Shift) -->
+                    <div class="nav-dropdown-wrapper">
                         <a href="{{ route('collections.show', 'all') }}"
-                            class="d-flex align-items-center gap-1 text-uppercase tracking-wide text-xs fw-medium {{ request()->is('collections*') && !request()->is('collections/bundles*') ? 'text-gold-soft fw-bold border-bottom border-2 border-gold pb-1' : 'text-ivory opacity-75' }} py-4">
+                            class="nav-link-luxury {{ request()->is('collections*') && !request()->is('collections/bundles*') ? 'active' : '' }}">
                             <span>Shop</span>
-                            <i class="fas fa-chevron-down text-gold ms-1" style="font-size: 9px;"></i>
+                            <i class="fas fa-chevron-down nav-chevron ms-1" style="font-size: 8px;"></i>
                         </a>
 
-                        <!-- Dropdown Menu -->
-                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                            x-transition:enter-start="opacity-0 translate-y-2"
-                            x-transition:enter-end="opacity-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-100"
-                            x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 translate-y-2"
-                            class="position-absolute top-100 start-0 bg-theme-secondary backdrop-blur-xl border border-gold-40 shadow-lg rounded-bottom py-2"
-                            style="width: 16rem; z-index: 1050; display: none;">
+                        <!-- Dropdown Menu (Opens on Hover smoothly) -->
+                        <div class="nav-dropdown-menu">
                             <a href="{{ route('collections.show', 'all') }}"
-                                class="d-flex align-items-center justify-content-between px-3 py-2 text-xs text-ivory fw-medium">
+                                class="dropdown-item-luxury d-flex align-items-center justify-content-between">
                                 <span>All Fragrances</span>
+                                <i class="fas fa-arrow-right opacity-50" style="font-size: 9px;"></i>
                             </a>
                             <a href="{{ route('collections.show', 'exclusive') }}"
-                                class="d-flex align-items-center justify-content-between px-3 py-2 text-xs text-ivory">
+                                class="dropdown-item-luxury d-flex align-items-center justify-content-between">
                                 <span>Private Reserve (Extrait)</span>
-                                <span class="bg-gradient-gold-pill text-theme-main px-1 rounded fw-bold" style="font-size: 9px;">40% OIL</span>
+                                <span class="badge-extrait">40% OIL</span>
                             </a>
                             <a href="{{ route('collections.show', 'men') }}"
-                                class="d-flex align-items-center px-3 py-2 text-xs text-ivory">
+                                class="dropdown-item-luxury">
                                 <span>Men's Impressions</span>
                             </a>
                             <a href="{{ route('collections.show', 'women') }}"
-                                class="d-flex align-items-center px-3 py-2 text-xs text-ivory">
+                                class="dropdown-item-luxury">
                                 <span>Women's Impressions</span>
                             </a>
                             <a href="{{ route('collections.show', 'unisex') }}"
-                                class="d-flex align-items-center px-3 py-2 text-xs text-ivory">
+                                class="dropdown-item-luxury">
                                 <span>Unisex & Niche Extraits</span>
                             </a>
                         </div>
@@ -161,23 +157,23 @@
 
                     <!-- Bundles Link -->
                     <a href="{{ route('bundles.index') }}"
-                        class="position-relative text-uppercase tracking-wide text-xs fw-medium {{ request()->is('collections/bundles*') ? 'text-gold-soft fw-bold border-bottom border-2 border-gold pb-1' : 'text-ivory opacity-75' }}">
+                        class="nav-link-luxury {{ request()->is('collections/bundles*') ? 'active' : '' }}">
                         <span>Bundles</span>
-                        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill" style="font-size: 9px; padding: 2px 5px;">SALE</span>
+                        <span class="nav-badge-sale">SALE</span>
                     </a>
 
                     <a href="{{ route('collections.show', 'all') }}?sort=bestseller"
-                        class="text-uppercase tracking-wide text-xs fw-medium text-ivory opacity-75">
+                        class="nav-link-luxury">
                         Bestsellers
                     </a>
 
                     <a href="{{ route('collections.show', 'all') }}"
-                        class="text-uppercase tracking-wide text-xs fw-medium text-ivory opacity-75">
+                        class="nav-link-luxury">
                         Candles
                     </a>
 
                     <a href="{{ route('collections.show', 'all') }}"
-                        class="text-uppercase tracking-wide text-xs fw-medium text-ivory opacity-75">
+                        class="nav-link-luxury">
                         Attar Collection
                     </a>
                 </nav>
@@ -211,7 +207,7 @@
                         class="position-relative border-0 bg-transparent text-ivory opacity-75 p-1 fs-5"
                         title="Your Cart">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count-badge position-absolute bg-gradient-gold-pill text-theme-main rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px;">
+                        <span class="cart-count-badge position-absolute bg-gradient-gold-pill text-theme-main rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px; font-weight: 400;">
                             0
                         </span>
                     </button>
@@ -346,10 +342,8 @@
                         <div class="text-xs text-gold vstack gap-2 pt-2">
                             <div><i class="fas fa-location-dot me-2 text-gold"></i> <strong class="text-ivory">Atelier:</strong>
                                 {{ $settings['store_address'] ?? 'MM Alam Road, Gulberg III, Lahore, Pakistan' }}</div>
-                            <div><i class="fas fa-phone me-2 text-gold"></i> <strong class="text-ivory">Helpline:</strong>
-                                {{ $settings['site_phone'] ?? '+92 300 8765432' }}</div>
-                            <div><i class="fab fa-whatsapp me-2 text-success"></i> <strong class="text-ivory">WhatsApp:</strong>
-                                +{{ $whatsappNum }}</div>
+                            <div><i class="fab fa-whatsapp me-2 text-success"></i> <strong class="text-ivory">WhatsApp Concierge:</strong>
+                                <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="text-gold text-decoration-none">+92 336 3685732</a></div>
                         </div>
                     </div>
                 </div>

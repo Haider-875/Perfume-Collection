@@ -62,22 +62,22 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Brand / Store Name</label>
-                            <input type="text" name="site_name" value="{{ $settings['site_name'] ?? ($settings['store_name'] ?? 'RAVAHA Parfums') }}">
+                            <input type="text" name="site_name" value="{{ $settings['site_name'] ?? ($settings['store_name'] ?? 'Perfumes Collection') }}" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Concierge Support Email</label>
-                            <input type="email" name="site_email" value="{{ $settings['site_email'] ?? ($settings['store_email'] ?? 'support@perfumes.pk') }}">
+                            <input type="email" name="site_email" value="{{ $settings['site_email'] ?? ($settings['store_email'] ?? 'concierge@perfumes.pk') }}" class="form-control">
                         </div>
                     </div>
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Official Contact Phone (+92)</label>
-                            <input type="text" name="site_phone" value="{{ $settings['site_phone'] ?? ($settings['store_phone'] ?? '+92 300 8765432') }}">
+                            <input type="text" name="site_phone" value="{{ $settings['site_phone'] ?? ($settings['store_phone'] ?? '+92 336 3685732') }}" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">WhatsApp Direct Number (e.g. 923008765432)</label>
-                            <input type="text" name="site_whatsapp" value="{{ $settings['site_whatsapp'] ?? ($settings['store_whatsapp'] ?? '923008765432') }}">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">WhatsApp Direct Number (e.g. 923363685732)</label>
+                            <input type="text" name="site_whatsapp" value="{{ $settings['site_whatsapp'] ?? ($settings['store_whatsapp'] ?? '923363685732') }}" class="form-control">
                         </div>
                     </div>
 

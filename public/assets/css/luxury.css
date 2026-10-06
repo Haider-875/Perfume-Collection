@@ -12,7 +12,17 @@
    Typography: Cormorant Garamond & Montserrat
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Custom Luxury Typeface: Wasted Vindey */
+@font-face {
+    font-family: 'Wasted Vindey';
+    src: url('../fonts/Wasted-Vindey.ttf') format('truetype'),
+         url('../fonts/wasted-vindey/Wasted-Vindey.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
     --bg: #050203;
@@ -52,9 +62,12 @@
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.6);
     --shadow-hover: 0 16px 40px rgba(74, 9, 21, 0.35);
     
-    --font-heading: 'Cormorant Garamond', serif;
-    --font-serif: 'Cormorant Garamond', serif;
-    --font-sans: 'Montserrat', sans-serif;
+    --font-hero: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif;
+    --font-heading: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif;
+    --font-subheading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-serif: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Poppins', sans-serif;
     
     --radius-sm: 4px;
     --radius-md: 8px;
@@ -78,10 +91,11 @@ html {
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-body), 'Poppins', sans-serif;
+    font-weight: 400;
     background: var(--bg);
     color: var(--ivory);
-    line-height: 1.55;
+    line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
@@ -114,12 +128,37 @@ body {
     48%, 100% { transform: translateX(140%); opacity: 0; }
 }
 
-/* Typography Utilities */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+/* Typography Hierarchy */
+/* 1. Main Luxury Headings (Wasted Vindey) */
+h1, h2, .h1, .h2,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.hero-title, .hero-slider-section h1, .hero-master-swiper h1,
+.font-hero, .font-wasted-vindey, .brand-title {
+    font-family: var(--font-heading) !important;
+    letter-spacing: 0.03em;
+    color: var(--ivory);
+    font-weight: 400;
+}
+
+/* 2. Subheadings (Poppins Regular / 400-500) */
+h3, h4, h5, h6,
+.h3, .h4, .h5, .h6,
+.subtitle, .hero-subtitle, .subheading, .section-subtitle,
+.card-subtitle, .lead,
+h3.font-serif, h4.font-serif, h5.font-serif, h6.font-serif {
+    font-family: var(--font-subheading), 'Poppins', sans-serif !important;
+    font-weight: 400;
     letter-spacing: 0.02em;
     color: var(--ivory);
-    font-weight: 600;
+}
+
+/* 3. Paragraphs & Body Text (Poppins Regular) */
+p, .paragraph, .text-body,
+p.font-serif, p.font-sans,
+.hero-slider-section p, .hero-slider-section .fst-italic,
+.font-poppins {
+    font-family: var(--font-body), 'Poppins', sans-serif !important;
+    font-weight: 400;
 }
 
 .text-gold { color: var(--gold) !important; }
@@ -193,18 +232,37 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 14px 40px rgba(214, 170, 98, 0.15), 0 0 25px rgba(74, 9, 21, 0.45);
 }
 
-/* Announcement Bar */
-.announcement-bar {
-    background: linear-gradient(90deg, #160409 0%, #3b0711 50%, #160409 100%);
-    border-bottom: 1px solid rgba(214, 170, 98, 0.35);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    padding: 8px 0;
+/* Announcement Bar (Royal Imperial Wine & Gold Haute Parfumerie) */
+.announcement-bar,
+.top-ticker {
+    background: linear-gradient(90deg, #080204 0%, #1c0509 25%, #380812 50%, #1c0509 75%, #080204 100%);
+    border-bottom: 1px solid rgba(214, 170, 98, 0.28);
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    padding: 9px 0;
     color: var(--gold-soft);
     text-transform: uppercase;
     position: relative;
     z-index: 1001;
-    font-weight: 600;
+    font-weight: 400;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.top-ticker .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.13em;
+    font-weight: 400;
+    color: #f5eedf;
+}
+
+.top-ticker i {
+    font-size: 0.78rem;
+    filter: drop-shadow(0 0 4px rgba(214, 170, 98, 0.5));
 }
 
 /* Sticky Luxury Navbar */
@@ -223,6 +281,176 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(4, 1, 2, 0.98);
     border-bottom-color: rgba(214, 170, 98, 0.4);
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================================
+   PRIMARY NAVIGATION (Spacious Gap, Thin Poppins, Animated Light Underline, Hover Dropdown)
+   ========================================================================== */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    height: 5rem;
+}
+
+@media (min-width: 1200px) {
+    .header-nav {
+        gap: 2.25rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .header-nav {
+        gap: 2.75rem;
+    }
+}
+
+.nav-link-luxury {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 5rem;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.85rem;
+    font-weight: 300 !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ivory);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+.nav-link-luxury:hover,
+.nav-link-luxury.active,
+.nav-dropdown-wrapper:hover > .nav-link-luxury {
+    color: #ffffff;
+}
+
+/* Animated Underline (Slightly lighter than font color with champagne glow) */
+.nav-link-luxury::after {
+    content: '';
+    position: absolute;
+    bottom: 1.35rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 250, 235, 0.95) 50%, rgba(255, 255, 255, 0.25) 100%);
+    box-shadow: 0 0 10px rgba(255, 250, 240, 0.8), 0 0 3px rgba(214, 170, 98, 0.6);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-link-luxury:hover::after,
+.nav-link-luxury.active::after,
+.nav-dropdown-wrapper:hover > .nav-link-luxury::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* Chevron indicator */
+.nav-chevron {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    color: rgba(214, 170, 98, 0.7);
+}
+
+.nav-dropdown-wrapper:hover .nav-chevron {
+    transform: rotate(180deg);
+    color: #ffffff;
+}
+
+/* Dropdown Wrapper & Menu (Pure Hover, Zero Layout Jump) */
+.nav-dropdown-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 5rem;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% - 0.75rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 250px;
+    background: rgba(14, 3, 6, 0.98);
+    border: 1px solid rgba(214, 170, 98, 0.35);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(74, 9, 21, 0.45);
+    border-radius: 8px;
+    padding: 0.65rem 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+    z-index: 1050;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu,
+.nav-dropdown-wrapper:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item-luxury {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.82rem;
+    font-weight: 300 !important;
+    letter-spacing: 0.08em;
+    color: #ded6cc;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.22s ease;
+    border-left: 2px solid transparent;
+}
+
+.dropdown-item-luxury:hover {
+    background: rgba(74, 9, 21, 0.65);
+    color: #ffffff;
+    padding-left: 1.15rem;
+    border-left-color: var(--gold);
+}
+
+/* Nav Badges */
+.nav-badge-sale {
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #7a0c1f 0%, #b81432 100%);
+    color: #ffffff;
+    margin-left: 6px;
+    display: inline-block;
+    line-height: 1.2;
+    border: 1px solid rgba(255, 100, 120, 0.35);
+    box-shadow: 0 0 8px rgba(184, 20, 50, 0.4);
+}
+
+.badge-extrait {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: rgba(214, 170, 98, 0.2);
+    color: var(--gold-bright);
+    border: 1px solid rgba(214, 170, 98, 0.4);
 }
 
 /* Buttons */
@@ -435,14 +663,116 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 /* 5. Typography & Letter Spacing */
-.font-serif { font-family: var(--font-serif) !important; }
-.font-sans { font-family: var(--font-sans) !important; }
+.font-hero,
+.font-wasted-vindey,
+.font-heading { 
+    font-family: var(--font-heading) !important; 
+}
+.font-serif { 
+    font-family: var(--font-heading), Georgia, serif !important; 
+}
+.font-sans,
+.font-poppins,
+.font-body { 
+    font-family: 'Poppins', sans-serif !important; 
+    font-weight: 400;
+}
+
+/* Hierarchy: Headings (Wasted Vindey) vs Subheadings & Paragraphs (Poppins Regular) */
+h1, h2, .h1, .h2,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.hero-slider-section h1,
+.hero-slider-section .hero-title,
+.hero-master-swiper h1 {
+    font-family: var(--font-heading) !important;
+    letter-spacing: 0.03em;
+}
+
+h3, h4, h5, h6,
+.h3, .h4, .h5, .h6,
+.subtitle,
+.lead,
+h3.font-serif,
+h4.font-serif,
+h5.font-serif,
+h6.font-serif {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+p,
+p.font-serif,
+p.font-sans,
+.paragraph,
+.text-body,
+.hero-slider-section p {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+}
 
 .tracking-wide { letter-spacing: 0.05em !important; }
 .tracking-wider { letter-spacing: 0.1em !important; }
 .tracking-widest { letter-spacing: 0.18em !important; }
 .tracking-luxury { letter-spacing: 0.25em !important; }
 .tracking-ultra { letter-spacing: 0.32em !important; }
+
+/* 5b. Navbar Space-Between & Thin Typography (< 500) */
+.site-header {
+    background: rgba(5, 2, 3, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(214, 170, 98, 0.25);
+    width: 100%;
+    z-index: 1030;
+}
+
+.site-header .container-fluid,
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    width: 100%;
+}
+
+.site-header nav a,
+.site-header .nav-link,
+.site-header a,
+.site-header button,
+.site-header span {
+    font-weight: 300 !important;
+}
+
+.site-header nav a {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    transition: var(--transition-smooth);
+}
+
+.site-header nav a:hover,
+.site-header nav a.text-gold-soft {
+    font-weight: 400 !important;
+    color: var(--gold-soft) !important;
+    opacity: 1 !important;
+}
+
+.site-header .brand-title {
+    font-family: var(--font-heading) !important;
+    font-weight: 400 !important;
+}
+
+.top-ticker {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 300 !important;
+}
+
+.top-ticker span,
+.top-ticker div {
+    font-weight: 300 !important;
+}
 
 /* 6. Backdrop Blur Utilities */
 .backdrop-blur-xs { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
@@ -785,6 +1115,196 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     height: 14px !important;
     fill: currentColor !important;
     line-height: 1 !important;
+}
+
+/* ==========================================================================
+   MASTER BUNDLES & DISCOVERY COFFRETS STYLING
+   ========================================================================== */
+.bundle-card-master {
+    background: linear-gradient(135deg, rgba(28, 6, 13, 0.85) 0%, rgba(12, 3, 6, 0.95) 100%);
+    border: 1px solid rgba(214, 170, 98, 0.32);
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(74, 9, 21, 0.3);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: hidden;
+    position: relative;
+}
+
+.bundle-card-master:hover {
+    border-color: rgba(214, 170, 98, 0.65);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(214, 170, 98, 0.22);
+    transform: translateY(-3px);
+}
+
+.bundle-image-pedestal {
+    background: radial-gradient(circle at 50% 50%, rgba(95, 7, 29, 0.35) 0%, rgba(8, 2, 4, 0.95) 100%);
+    border: 1px solid rgba(214, 170, 98, 0.25);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bundle-image-pedestal img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bundle-card-master:hover .bundle-image-pedestal img {
+    transform: scale(1.05);
+}
+
+.bundle-pricing-card {
+    background: rgba(8, 2, 4, 0.94);
+    border: 1px solid rgba(214, 170, 98, 0.35);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.bundle-flacon-card {
+    background: rgba(25, 5, 11, 0.65);
+    border: 1px solid rgba(214, 170, 98, 0.2);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    transition: all 0.25s ease;
+}
+
+.bundle-flacon-card:hover {
+    border-color: rgba(214, 170, 98, 0.5);
+    background: rgba(45, 9, 18, 0.8);
+}
+
+.badge-savings-luxury {
+    background: linear-gradient(135deg, #7a0c1f 0%, #b81432 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 120, 140, 0.4);
+    box-shadow: 0 4px 12px rgba(184, 20, 50, 0.4);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    display: inline-block;
+}
+
+/* Value Proposition Luxury Marquee Ticker (Substantial, Opulent Height & Typography) */
+.luxury-marquee-section {
+    background: linear-gradient(90deg, #090204 0%, #1e050a 25%, #380812 50%, #1e050a 75%, #090204 100%);
+    border-top: 1px solid rgba(214, 170, 98, 0.22);
+    border-bottom: 1px solid rgba(214, 170, 98, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    padding: 16px 0;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.luxury-marquee-section marquee {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.88rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase;
+    color: #f7efe2;
+    line-height: 1.4;
+}
+
+.luxury-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 2rem;
+    white-space: nowrap;
+    color: #f7efe2;
+}
+
+.luxury-marquee-item i {
+    color: var(--gold);
+    font-size: 1.05rem;
+    filter: drop-shadow(0 0 6px rgba(214, 170, 98, 0.6));
+}
+
+.luxury-marquee-item span {
+    font-weight: 400;
+    letter-spacing: 0.14em;
+}
+
+.luxury-marquee-sep {
+    color: var(--gold);
+    font-size: 1rem;
+    opacity: 0.75;
+    margin: 0 0.5rem;
+}
+
+/* Bundle Dedicated Buttons (Zero Weirdness, Crisp Luxury Proportions) */
+.btn-bundle-bag {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(135deg, #d6aa62 0%, #f0d59d 50%, #c08b3f 100%);
+    color: #080204 !important;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(214, 170, 98, 0.35);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-bundle-bag:hover {
+    background: linear-gradient(135deg, #f0d59d 0%, #ffffff 50%, #d6aa62 100%);
+    box-shadow: 0 6px 24px rgba(214, 170, 98, 0.55);
+    transform: translateY(-2px);
+    color: #080204 !important;
+}
+
+.btn-bundle-whatsapp {
+    width: 100%;
+    height: 44px;
+    background: #1b8743;
+    color: #ffffff !important;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-bundle-whatsapp:hover {
+    background: #25D366;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
 }
 
 
