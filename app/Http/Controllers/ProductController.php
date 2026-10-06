@@ -109,8 +109,9 @@ class ProductController extends Controller
         ));
     }
 
-    public function show($slug)
+    public function show($param1, $param2 = null)
     {
+        $slug = $param2 ?? $param1;
         $product = Product::with([
             'category',
             'brand',

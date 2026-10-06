@@ -43,6 +43,8 @@ Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('
 // Vault & Product Detail Page (PDP)
 Route::get('/vault', [ProductController::class, 'index'])->name('shop.index');
 Route::get('/perfume/{slug}', [ProductController::class, 'show'])->name('shop.show');
+Route::get('/products/{slug}', [ProductController::class, 'show'])->name('shop.products.show');
+Route::get('/collections/{collection}/products/{slug}', [ProductController::class, 'show'])->name('shop.collection.product.show');
 Route::post('/perfume/{id}/review', [ProductController::class, 'storeReview'])->name('reviews.store');
 
 // Fragrance Chronicles (Blogs)

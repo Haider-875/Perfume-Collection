@@ -112,13 +112,15 @@
         </div>
     </div>
 
-    <!-- Prominent Full-Width Luxury Gold Button -->
+    <!-- Prominent Full-Width Luxury Gold Button (Stadium Pill with Arrow) -->
     <div class="mt-3 pt-2 border-top border-gold-20">
         <button onclick="addToCartAjax({{ $product->id }}, 1)" 
-                class="w-100 py-2 px-3 btn-gold text-theme-main fw-bold text-xs text-uppercase tracking-wider rounded-3 d-flex align-items-center justify-center gap-2"
+                class="w-100 btn-pill-gold py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2"
+                style="min-height: 42px;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping" style="font-size: 11px;"></i>
             <span>Add to Cart</span>
+            <i class="fas fa-arrow-right-long btn-arrow" style="font-size: 11px;"></i>
         </button>
     </div>
 </div>

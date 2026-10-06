@@ -334,17 +334,11 @@
                                 style="height: 3rem; width: auto; object-fit: contain;">
                             <span class="font-serif fw-bold fs-5 gold-gradient-text text-uppercase tracking-wider">Perfumes Collection</span>
                         </div>
-                        <p class="text-xs text-muted-luxury lh-base fw-light">
+                        <p class="text-muted-luxury lh-base fw-light mb-0" style="font-size: 0.76rem;">
                             {{ $settings['site_name'] ?? 'Perfumes Collection' }} crafts high-fidelity Extrait de Parfum
                             impressions inspired by iconic global niche perfumeries. Formulated at 35%–40% pure oil
                             concentration for monumental 14+ hours longevity.
                         </p>
-                        <div class="text-xs text-gold vstack gap-2 pt-2">
-                            <div><i class="fas fa-location-dot me-2 text-gold"></i> <strong class="text-ivory">Atelier:</strong>
-                                {{ $settings['store_address'] ?? 'MM Alam Road, Gulberg III, Lahore, Pakistan' }}</div>
-                            <div><i class="fab fa-whatsapp me-2 text-success"></i> <strong class="text-ivory">WhatsApp Concierge:</strong>
-                                <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="text-gold text-decoration-none">+92 336 3685732</a></div>
-                        </div>
                     </div>
                 </div>
 
@@ -352,25 +346,15 @@
                 <div class="col-12 col-md-6 col-lg-3">
                     <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-3 fw-semibold border-bottom border-gold-20 pb-2">
                         Top Collections</h4>
-                    <ul class="list-unstyled vstack gap-2 text-xs text-muted-luxury">
+                    <ul class="list-unstyled vstack gap-2 text-muted-luxury mb-0" style="font-size: 0.76rem;">
                         <li><a href="{{ route('collections.show', 'exclusive') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Exclusive Reserve Extrait</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Exclusive Reserve Extrait</a></li>
                         <li><a href="{{ route('collections.show', 'men') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Men's Designer Impressions</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Men's Designer Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'women') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Women's Floral & Amber Impressions</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Women's Floral & Amber Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'unisex') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Unisex & Pure Oud Oils</span></a></li>
-                        <li><a href="{{ route('collections.show', 'bundles') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Curated Discovery Bundles (Save 25%)</span></a></li>
-                        <li><a href="{{ route('blogs.index') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Fragrance Notes & Guides</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Unisex & Pure Oud Oils</a></li>
                     </ul>
                 </div>
 
@@ -378,65 +362,47 @@
                 <div class="col-12 col-md-6 col-lg-3">
                     <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-3 fw-semibold border-bottom border-gold-20 pb-2">
                         Customer Care</h4>
-                    <ul class="list-unstyled vstack gap-2 text-xs text-muted-luxury">
+                    <ul class="list-unstyled vstack gap-2 text-muted-luxury mb-0" style="font-size: 0.76rem;">
                         <li><a href="{{ route('pages.about') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Our Artisanal Craft</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Our Artisanal Craft</a></li>
                         <li><a href="{{ route('pages.contact') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Contact Scent Concierge</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Contact Scent Concierge</a></li>
                         <li><a href="{{ route('pages.faq') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Frequently Asked Questions</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Frequently Asked Questions</a></li>
                         <li><a href="{{ route('policies.shipping') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Shipping & Courier Delivery</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Shipping & Courier Delivery</a></li>
                         <li><a href="{{ route('policies.refund') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Hassle-Free Return Guarantee</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Hassle-Free Return Guarantee</a></li>
                         <li><a href="{{ route('policies.privacy') }}"
-                                class="text-muted-luxury d-flex align-items-center gap-2"><i
-                                    class="fas fa-angle-right text-gold" style="font-size: 10px;"></i><span>Privacy Policy & Security</span></a></li>
+                                class="text-muted-luxury hover-gold transition-all">Privacy Policy & Security</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 4: Newsletter & Pakistan Gateways -->
+                <!-- Col 4: Newsletter -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="vstack gap-3">
                         <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-1 fw-semibold border-bottom border-gold-20 pb-2">
                             The Privileged Circle</h4>
-                        <p class="text-xs text-muted-luxury fw-light mb-0">
+                        <p class="text-muted-luxury fw-light mb-0" style="font-size: 0.76rem;">
                             Receive exclusive release drops and a complimentary Rs. 500 welcome voucher on your inaugural order.
                         </p>
                         <form action="{{ route('newsletter.subscribe') }}" method="POST">
                             @csrf
-                            <div class="input-group">
+                            <div class="footer-newsletter-wrap">
                                 <input type="email" name="email" required placeholder="Enter your email..."
-                                    class="form-control form-control-luxury text-xs">
-                                <button type="submit" class="btn-gold px-3 py-2 text-xs fw-semibold text-uppercase tracking-wider">
+                                    class="footer-newsletter-input">
+                                <button type="submit" class="footer-newsletter-btn">
                                     Join
                                 </button>
                             </div>
                         </form>
-
-                        <!-- Pakistan Payment & Logistics Badges -->
-                        <div class="pt-2">
-                            <span class="d-block text-gold mb-2 fw-medium text-uppercase tracking-wider" style="font-size: 10px;">Domestic Logistics & Payments:</span>
-                            <div class="d-flex flex-wrap gap-1" style="font-size: 10px;">
-                                <span class="bg-theme-card border border-gold-20 px-2 py-1 rounded d-flex align-items-center gap-1 text-ivory"><i class="fas fa-money-bill-wave text-gold"></i><span>COD</span></span>
-                                <span class="bg-theme-card border border-gold-20 px-2 py-1 rounded d-flex align-items-center gap-1 text-ivory"><i class="fas fa-mobile-screen text-gold"></i><span>JazzCash</span></span>
-                                <span class="bg-theme-card border border-gold-20 px-2 py-1 rounded d-flex align-items-center gap-1 text-ivory"><i class="fas fa-wallet text-gold"></i><span>EasyPaisa</span></span>
-                                <span class="bg-theme-card border border-gold-20 px-2 py-1 rounded d-flex align-items-center gap-1 text-ivory"><i class="fas fa-building-columns text-gold"></i><span>Bank</span></span>
-                                <span class="bg-theme-card border border-gold-20 px-2 py-1 rounded d-flex align-items-center gap-1 text-ivory"><i class="fas fa-plane text-gold"></i><span>Courier</span></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
             </div>
 
             <!-- Bottom Copyright & Social Icons -->
-            <div class="border-top border-gold-15 pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between text-xs text-muted-luxury gap-3">
+            <div class="border-top border-gold-15 pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between text-muted-luxury gap-3" style="font-size: 0.76rem;">
                 <div>
                     &copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Perfumes Collection' }}. All rights reserved. Registered Haute Parfumerie in Pakistan.
                 </div>

@@ -455,214 +455,206 @@ p.font-serif, p.font-sans,
 
 /* ==========================================================================
    HAUTE PARFUMERIE TIMELESS LUXURY BUTTON SYSTEM
-   Understated, refined, and elegant (Creed / Kilian / Tom Ford Inspired)
+   Stadium Pill Silhouette, Light Warm Gold & Arrow Micro-Interactions
    ========================================================================== */
 
 /* 1. Base Button Standards */
 .btn {
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    border-radius: 9999px !important;
 }
 
 .btn:focus,
 .btn:focus-visible {
     outline: none !important;
-    box-shadow: 0 0 0 2px rgba(214, 170, 98, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(223, 183, 112, 0.4) !important;
 }
 
-/* 2. Primary Haute Parfumerie Gold Button (.btn-gold, .btn-primary) */
+/* 2. Primary Haute Parfumerie Light Gold Button (.btn-gold, .btn-primary) */
 .btn-gold,
 .btn-primary,
-.btn-brand-primary {
+.btn-brand-primary,
+.btn-pill-gold {
     position: relative;
-    background: #cfa358 !important;
+    background: #dfb770 !important;
     color: #070204 !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
-    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    font-size: clamp(0.75rem, 1.8vw, 0.86rem) !important;
     text-transform: uppercase;
-    letter-spacing: 0.14em !important;
-    border: 1px solid #cfa358 !important;
-    padding: 12px 26px;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(207, 163, 88, 0.2);
+    letter-spacing: 0.12em !important;
+    border: 1px solid #dfb770 !important;
+    padding: 13px 28px;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(223, 183, 112, 0.3);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none !important;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 48px;
     z-index: 1;
 }
 
 .btn-gold:hover,
 .btn-primary:hover,
-.btn-brand-primary:hover {
-    background: #140408 !important;
-    color: #f0d59d !important;
-    border-color: #d6aa62 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 16px rgba(214, 170, 98, 0.25) !important;
+.btn-brand-primary:hover,
+.btn-pill-gold:hover {
+    background: #e8c988 !important;
+    color: #050103 !important;
+    border-color: #f0d59d !important;
+    box-shadow: 0 8px 26px rgba(223, 183, 112, 0.45), 0 0 16px rgba(240, 213, 157, 0.3) !important;
     transform: translateY(-2px);
 }
 
 .btn-gold:active,
 .btn-primary:active,
-.btn-brand-primary:active {
+.btn-brand-primary:active,
+.btn-pill-gold:active {
     transform: translateY(0px) scale(0.985) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* 3. Secondary Luxury Outline Gold Button (.btn-outline-gold, .btn-outline-primary) */
 .btn-outline-gold,
-.btn-outline-primary {
+.btn-outline-primary,
+.btn-pill-outline {
     position: relative;
     background: rgba(18, 4, 8, 0.65) !important;
     color: var(--gold-soft) !important;
-    border: 1px solid rgba(214, 170, 98, 0.45) !important;
+    border: 1.5px solid rgba(223, 183, 112, 0.55) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 500 !important;
-    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    font-size: clamp(0.75rem, 1.8vw, 0.84rem) !important;
     text-transform: uppercase;
-    letter-spacing: 0.14em !important;
-    padding: 11px 24px;
-    border-radius: var(--radius-md);
+    letter-spacing: 0.12em !important;
+    padding: 12px 26px;
+    border-radius: 9999px !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none !important;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 48px;
     z-index: 1;
 }
 
 .btn-outline-gold:hover,
-.btn-outline-primary:hover {
-    background: #cfa358 !important;
-    border-color: #cfa358 !important;
+.btn-outline-primary:hover,
+.btn-pill-outline:hover {
+    background: #dfb770 !important;
+    border-color: #dfb770 !important;
     color: #070204 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(214, 170, 98, 0.25) !important;
+    box-shadow: 0 8px 24px rgba(223, 183, 112, 0.4), 0 0 14px rgba(223, 183, 112, 0.25) !important;
     transform: translateY(-2px);
 }
 
 .btn-outline-gold:active,
-.btn-outline-primary:active {
+.btn-outline-primary:active,
+.btn-pill-outline:active {
     transform: translateY(0px) scale(0.985) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* 4. Luxury WhatsApp Buttons (.btn-whatsapp) */
-.btn-whatsapp {
+/* 4. Luxury WhatsApp Buttons (.btn-whatsapp, .btn-pill-whatsapp) */
+.btn-whatsapp,
+.btn-pill-whatsapp {
     position: relative;
-    background: #145e34 !important;
+    background: #15693a !important;
     color: #ffffff !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
-    font-size: clamp(0.72rem, 1.8vw, 0.82rem) !important;
+    font-size: clamp(0.75rem, 1.8vw, 0.84rem) !important;
     letter-spacing: 0.1em !important;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    border-radius: var(--radius-md);
-    padding: 12px 24px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(20, 94, 52, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 9999px !important;
+    padding: 13px 28px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(21, 105, 58, 0.3);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none !important;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 48px;
     z-index: 1;
 }
 
-.btn-whatsapp:hover {
-    background: #197843 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(25, 120, 67, 0.35) !important;
+.btn-whatsapp:hover,
+.btn-pill-whatsapp:hover {
+    background: #1b854a !important;
+    box-shadow: 0 8px 26px rgba(27, 133, 74, 0.5), 0 0 16px rgba(37, 211, 102, 0.3) !important;
     transform: translateY(-2px);
     color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-.btn-whatsapp:active {
+.btn-whatsapp:active,
+.btn-pill-whatsapp:active {
     transform: translateY(0px) scale(0.985) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* 5. Icon Transitions inside Buttons */
-.btn-gold i,
-.btn-gold svg,
-.btn-primary i,
-.btn-primary svg,
-.btn-bundle-bag i,
-.btn-bundle-bag svg {
+/* 5. Arrow & Icon Glide Transitions (User Reference Image Match) */
+.btn i.fa-arrow-right,
+.btn i.fa-arrow-right-long,
+.btn svg.arrow-icon,
+.btn .btn-arrow {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn:hover i.fa-arrow-right,
+.btn:hover i.fa-arrow-right-long,
+.btn:hover svg.arrow-icon,
+.btn:hover .btn-arrow {
+    transform: translateX(4px) !important;
+}
+
+.btn-gold i:not(.fa-arrow-right):not(.fa-arrow-right-long),
+.btn-whatsapp i:not(.fa-arrow-right):not(.fa-arrow-right-long),
+.btn-bundle-bag i:not(.fa-arrow-right):not(.fa-arrow-right-long) {
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-gold:hover i,
-.btn-gold:hover svg,
-.btn-primary:hover i,
-.btn-primary:hover svg,
-.btn-bundle-bag:hover i,
-.btn-bundle-bag:hover svg {
-    transform: scale(1.12);
-}
-
-.btn-outline-gold i,
-.btn-outline-gold svg,
-.btn-outline-primary i,
-.btn-outline-primary svg {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-outline-gold:hover i,
-.btn-outline-gold:hover svg,
-.btn-outline-primary:hover i,
-.btn-outline-primary:hover svg {
-    transform: translateX(3px);
-}
-
-.btn-whatsapp i,
-.btn-whatsapp svg,
-.btn-bundle-whatsapp i,
-.btn-bundle-whatsapp svg {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-whatsapp:hover i,
-.btn-whatsapp:hover svg,
-.btn-bundle-whatsapp:hover i,
-.btn-bundle-whatsapp:hover svg {
+.btn-gold:hover i:not(.fa-arrow-right):not(.fa-arrow-right-long),
+.btn-whatsapp:hover i:not(.fa-arrow-right):not(.fa-arrow-right-long),
+.btn-bundle-bag:hover i:not(.fa-arrow-right):not(.fa-arrow-right-long) {
     transform: scale(1.12);
 }
 
 /* 6. Filter & Scent Selection Pills */
 .bg-gradient-gold-pill,
 .filter-pill-active {
-    background: #cfa358 !important;
+    background: #dfb770 !important;
     color: #070204 !important;
-    border: 1px solid #cfa358 !important;
+    border: 1px solid #dfb770 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
     font-weight: 600 !important;
+    border-radius: 9999px !important;
 }
 
 .filter-pill {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 9999px !important;
 }
 
 .filter-pill:hover {
     border-color: var(--gold) !important;
     color: var(--gold-bright) !important;
-    box-shadow: 0 4px 12px rgba(214, 170, 98, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(223, 183, 112, 0.25) !important;
     transform: translateY(-1px);
 }
 
@@ -687,9 +679,9 @@ p.font-serif, p.font-sans,
 
 #backToTopBtn:hover {
     background: #140408 !important;
-    border-color: #d6aa62 !important;
+    border-color: #dfb770 !important;
     color: #f0d59d !important;
-    box-shadow: 0 8px 24px rgba(214, 170, 98, 0.3) !important;
+    box-shadow: 0 8px 24px rgba(223, 183, 112, 0.3) !important;
     transform: translateY(-3px);
 }
 
@@ -704,9 +696,12 @@ p.font-serif, p.font-sans,
     .btn-whatsapp,
     .btn-primary,
     .btn-bundle-bag,
-    .btn-bundle-whatsapp {
-        padding: 10px 18px !important;
-        font-size: 0.75rem !important;
+    .btn-bundle-whatsapp,
+    .btn-pill-gold,
+    .btn-pill-whatsapp,
+    .btn-pill-outline {
+        padding: 11px 20px !important;
+        font-size: 0.76rem !important;
         letter-spacing: 0.1em !important;
         min-height: 44px !important;
     }
@@ -1442,32 +1437,32 @@ p.font-sans,
     width: 100%;
     min-height: 48px;
     position: relative;
-    background: #cfa358 !important;
+    background: #dfb770 !important;
     color: #070204 !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.82rem !important;
-    letter-spacing: 0.14em !important;
+    letter-spacing: 0.12em !important;
     text-transform: uppercase;
-    border: 1px solid #cfa358 !important;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(207, 163, 88, 0.2);
+    border: 1px solid #dfb770 !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(223, 183, 112, 0.25);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
     text-decoration: none !important;
     z-index: 1;
 }
 
 .btn-bundle-bag:hover {
-    background: #140408 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 16px rgba(214, 170, 98, 0.25) !important;
+    background: #e8c988 !important;
+    box-shadow: 0 8px 24px rgba(223, 183, 112, 0.45) !important;
     transform: translateY(-2px);
-    color: #f0d59d !important;
-    border-color: #d6aa62 !important;
+    color: #050103 !important;
+    border-color: #f0d59d !important;
 }
 
 .btn-bundle-bag:active {
@@ -1477,34 +1472,34 @@ p.font-sans,
 
 .btn-bundle-whatsapp {
     width: 100%;
-    min-height: 46px;
+    min-height: 48px;
     position: relative;
-    background: #145e34 !important;
+    background: #15693a !important;
     color: #ffffff !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 0.8rem !important;
+    font-size: 0.82rem !important;
     letter-spacing: 0.1em !important;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(20, 94, 52, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(21, 105, 58, 0.3);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
     text-decoration: none !important;
     z-index: 1;
 }
 
 .btn-bundle-whatsapp:hover {
-    background: #197843 !important;
+    background: #1b854a !important;
     color: #ffffff !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(25, 120, 67, 0.35) !important;
+    box-shadow: 0 8px 24px rgba(27, 133, 74, 0.5) !important;
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .btn-bundle-whatsapp:active {
@@ -1512,5 +1507,325 @@ p.font-sans,
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
+/* ==========================================================================
+   PRODUCT DETAIL PAGE (PDP) LUXURY SUITE
+   De-congested, Wasted Vindey Headings, Poppins Regular Body, Refined Stage
+   ========================================================================== */
 
+.pdp-flacon-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    margin: 0 auto;
+    background: radial-gradient(circle at 50% 45%, rgba(65, 9, 20, 0.45) 0%, rgba(12, 3, 6, 0.98) 100%);
+    border: 1px solid rgba(214, 170, 98, 0.25);
+    border-radius: 20px;
+    padding: 2.25rem 1.5rem;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), inset 0 0 35px rgba(74, 9, 21, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.35s ease;
+}
 
+.pdp-flacon-stage:hover {
+    border-color: rgba(214, 170, 98, 0.45);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 25px rgba(214, 170, 98, 0.15);
+}
+
+.pdp-flacon-img {
+    max-height: 360px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.85));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pdp-flacon-stage:hover .pdp-flacon-img {
+    transform: scale(1.03);
+}
+
+.pdp-thumb-item {
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+    background: rgba(18, 4, 8, 0.9);
+    border: 1.5px solid rgba(214, 170, 98, 0.2);
+    padding: 4px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdp-thumb-item:hover,
+.pdp-thumb-item.active {
+    border-color: #dfb770;
+    box-shadow: 0 0 12px rgba(223, 183, 112, 0.35);
+    transform: translateY(-2px);
+}
+
+.pdp-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pdp-trust-card {
+    background: rgba(18, 4, 8, 0.75);
+    border: 1px solid rgba(214, 170, 98, 0.18);
+    border-radius: 12px;
+    padding: 0.7rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    transition: all 0.25s ease;
+}
+
+.pdp-trust-card:hover {
+    border-color: rgba(214, 170, 98, 0.4);
+    background: rgba(28, 6, 13, 0.85);
+}
+
+.pdp-title {
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', serif !important;
+    font-size: clamp(2rem, 3.4vw, 2.75rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.18;
+    color: #f5efe7;
+    margin-bottom: 0.35rem;
+}
+
+.pdp-price-amount {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(1.75rem, 2.5vw, 2.15rem) !important;
+    font-weight: 600 !important;
+    color: #dfb770;
+}
+
+.pdp-size-btn {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em;
+    padding: 9px 20px;
+    border-radius: 8px !important;
+    border: 1px solid rgba(214, 170, 98, 0.28);
+    background: rgba(18, 4, 8, 0.85);
+    color: #ded6cb;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 65px;
+}
+
+.pdp-size-btn:hover {
+    border-color: #dfb770;
+    color: #ffffff;
+    background: rgba(45, 7, 16, 0.95);
+    transform: translateY(-1px);
+}
+
+.pdp-size-btn.active {
+    border-color: #dfb770;
+    background: #dfb770;
+    color: #070204 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 16px rgba(223, 183, 112, 0.35);
+}
+
+/* Luxury Standalone Quantity Stepper */
+.pdp-qty-stepper-box {
+    height: 50px;
+    min-width: 116px;
+    width: 116px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(18, 4, 8, 0.95);
+    border: 1.5px solid rgba(214, 170, 98, 0.35);
+    border-radius: 9999px;
+    padding: 0 8px;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.pdp-qty-btn-luxury {
+    background: transparent !important;
+    border: none !important;
+    color: #dfd5cb !important;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+    outline: none !important;
+    padding: 0 !important;
+}
+
+.pdp-qty-btn-luxury:hover {
+    color: #070204 !important;
+    background: #dfb770 !important;
+}
+
+.pdp-qty-display-luxury {
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #f5efe7;
+    text-align: center;
+    min-width: 24px;
+}
+
+.pdp-accord-card {
+    background: linear-gradient(180deg, rgba(25, 5, 11, 0.75) 0%, rgba(10, 2, 4, 0.95) 100%);
+    border: 1px solid rgba(214, 170, 98, 0.22);
+    border-radius: 16px;
+    padding: 1.6rem 1.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.pdp-accord-card:hover {
+    border-color: rgba(214, 170, 98, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(74, 9, 21, 0.3);
+}
+
+.pdp-accord-title {
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', serif !important;
+    font-size: 1.35rem !important;
+    color: #f5efe7;
+    font-weight: 400 !important;
+}
+
+.pdp-pyramid-tier {
+    background: linear-gradient(180deg, rgba(22, 4, 9, 0.75) 0%, rgba(8, 2, 4, 0.95) 100%);
+    border: 1px solid rgba(214, 170, 98, 0.2);
+    border-radius: 14px;
+    padding: 1.25rem 1.35rem;
+    transition: all 0.3s ease;
+}
+
+.pdp-tab-btn {
+    background: rgba(18, 4, 8, 0.75);
+    border: 1px solid rgba(214, 170, 98, 0.22);
+    border-radius: 9999px;
+    padding: 10px 22px;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #dfd5cb;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdp-tab-btn:hover {
+    border-color: #dfb770;
+    color: #ffffff;
+    background: rgba(45, 7, 16, 0.9);
+    transform: translateY(-1px);
+}
+
+.pdp-tab-btn.pdp-tab-active {
+    background: #dfb770 !important;
+    color: #070204 !important;
+    border-color: #dfb770 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 16px rgba(223, 183, 112, 0.35);
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Footer Newsletter Form Styling */
+.footer-newsletter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px !important;
+    width: 100%;
+}
+
+.footer-newsletter-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 38px;
+    background: rgba(22, 6, 12, 0.85) !important;
+    border: 1px solid rgba(214, 170, 98, 0.25) !important;
+    border-radius: 8px !important;
+    color: #f5efe7 !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.76rem !important;
+    padding: 0 12px !important;
+    outline: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-newsletter-input:focus {
+    border-color: #dfb770 !important;
+    box-shadow: 0 0 0 2px rgba(223, 183, 112, 0.2) !important;
+    background: rgba(30, 8, 16, 0.95) !important;
+}
+
+.footer-newsletter-btn {
+    flex: 0 0 auto;
+    height: 38px;
+    padding: 0 16px !important;
+    background: #dfb770 !important;
+    color: #0c0306 !important;
+    border: 1px solid #dfb770 !important;
+    border-radius: 8px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.footer-newsletter-btn:hover {
+    background: #eed090 !important;
+    border-color: #eed090 !important;
+    color: #070204 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(223, 183, 112, 0.35);
+}
