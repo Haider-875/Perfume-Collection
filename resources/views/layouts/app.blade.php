@@ -48,11 +48,69 @@
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
+    <style>
+        [x-cloak] { display: none !important; }
+
+        /* Transition utilities for Alpine.js x-transition */
+        .transition { transition-property: transform, opacity; }
+        .ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        .ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+        .duration-300 { transition-duration: 300ms; }
+        .duration-200 { transition-duration: 200ms; }
+        .opacity-0 { opacity: 0; }
+        .opacity-100 { opacity: 1; }
+        .-translate-x-full { transform: translateX(-100%); }
+        .translate-x-0 { transform: translateX(0); }
+
+        /* Prevent Bootstrap .d-flex !important from keeping overlay open when x-show is false */
+        [x-show="mobileMenuOpen"][style*="display: none"] {
+            display: none !important;
+        }
+
+        /* Mobile Menu Drawer scroll containment */
+        [x-show="mobileMenuOpen"] {
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100dvh;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            touch-action: pan-y;
+        }
+
+        /* Mobile Centered Logo & Balanced Navigation */
+        @media (max-width: 991.98px) {
+            .site-navbar-inner {
+                position: relative;
+                height: 4.5rem !important;
+            }
+            .site-brand-wrapper {
+                position: absolute !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                z-index: 1;
+            }
+            .site-logo-img {
+                height: 3.15rem !important;
+                max-height: 52px !important;
+                width: auto !important;
+                object-fit: contain;
+                filter: drop-shadow(0 2px 14px rgba(214,170,98,0.35)) !important;
+            }
+        }
+    </style>
+
     @stack('styles')
 </head>
 
 <body class="bg-theme-main text-ivory font-sans antialiased"
-    x-data="{ mobileMenuOpen: false, searchOpen: false }">
+    x-data="{ mobileMenuOpen: false, searchOpen: false }"
+    :class="{ 'overflow-hidden': mobileMenuOpen }">
 
     @php
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
@@ -87,24 +145,27 @@
     </div>
 
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
-    <header class="sticky-top site-header" x-data="{ mobileMenuOpen: false, accountOpen: false }">
+    <header class="sticky-top site-header" x-data="{ accountOpen: false }">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
-            <div class="d-flex align-items-center justify-content-between w-100" style="height: 5rem;">
+            <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner" style="height: 5rem;">
 
-                <!-- Left: Brand Logo & Company Name (Logo on LEFT, name: "Perfumes Collection") -->
-                <div class="d-flex align-items-center gap-3 flex-shrink-0">
-                    <!-- Mobile Hamburger -->
+                <!-- Mobile Left: Hamburger Button (d-lg-none) -->
+                <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="d-lg-none text-ivory border-0 bg-transparent p-0 me-2 fs-4"
-                        aria-label="Toggle Menu">
+                        class="text-ivory border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn"
+                        aria-label="Toggle Menu"
+                        style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                         <i class="fas fa-bars" x-show="!mobileMenuOpen"></i>
                         <i class="fas fa-times" x-show="mobileMenuOpen"></i>
                     </button>
+                </div>
 
-                    <a href="{{ route('home') }}" class="d-flex align-items-center gap-3 text-decoration-none">
+                <!-- Left: Brand Logo & Company Name (Left on Desktop, Centered on Mobile) -->
+                <div class="d-flex align-items-center gap-3 flex-shrink-0 site-brand-wrapper">
+                    <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 gap-sm-3 text-decoration-none site-brand-link">
                         <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
-                            class="img-fluid" style="height: 3rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(214,170,98,0.25));">
-                        <div class="d-none d-sm-flex flex-column">
+                            class="img-fluid site-logo-img" style="height: 2.75rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(214,170,98,0.25));">
+                        <div class="d-none d-lg-flex flex-column site-brand-text">
                             <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400;">PERFUMES
                                 <br> COLLECTION</span>
                             <span class="text-gold" style="font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 300;">LUXURY
@@ -113,7 +174,7 @@
                     </a>
                 </div>
 
-                <!-- Center: Primary Navigation Links (Spacious Luxury Gap & Hover Dropdown) -->
+                <!-- Center: Primary Navigation Links (Desktop Only) -->
                 <nav class="d-none d-lg-flex align-items-center header-nav">
                     <a href="{{ route('home') }}"
                         class="nav-link-luxury {{ request()->routeIs('home') ? 'active' : '' }}">
@@ -179,17 +240,7 @@
                 </nav>
 
                 <!-- Right: Action Icons (Search, User Account / Sign In, Cart) -->
-                <div class="d-flex align-items-center gap-3 gap-md-4">
-                    <!-- Search Modal Trigger -->
-                    {{-- <button type="button" id="searchModalTrigger"
-                        class="border-0 bg-transparent text-ivory opacity-75 p-1 fs-6"
-                        title="Search Fragrances">
-                        <i class="fas fa-search"></i>
-                    </button> --}}
-
-                    <!-- User Account / Profile / Admin Dropdown -->
-                
-
+                <div class="d-flex align-items-center gap-3 gap-md-4 flex-shrink-0" style="z-index: 2;">
                     <!-- Slide-in Cart Trigger -->
                     <button type="button" id="cartDrawerTrigger"
                         class="position-relative border-0 bg-transparent text-ivory opacity-75 p-1 fs-5"
@@ -205,12 +256,15 @@
     </header>
 
     <!-- 3. Full-Screen Animated Mobile Menu -->
-    <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+    <div x-show="mobileMenuOpen"
+        x-cloak
+        @keydown.escape.window="mobileMenuOpen = false"
+        x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-0 -translate-x-full"
         class="position-fixed top-0 start-0 w-100 h-100 bg-theme-dark backdrop-blur-xl d-flex flex-column justify-content-between p-4 overflow-y-auto d-lg-none shadow-lg border-end border-gold-30"
-        style="z-index: 1060; display: none;">
+        style="z-index: 1060;">
         <!-- Mobile Menu Header -->
         <div class="d-flex align-items-center justify-content-between border-bottom border-gold-20 pb-3">
             <div class="d-flex align-items-center gap-2">

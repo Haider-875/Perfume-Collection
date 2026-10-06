@@ -31,33 +31,32 @@
                         </div>
                     </div>
 
-                    <!-- Slide Content Overlay -->
-                    <div class="container px-3 px-md-4 px-lg-5 position-relative z-2 h-100 d-flex align-items-center">
-                        <div class="py-5 text-start vstack gap-4" style="max-width: 48rem;">
+                    <!-- Slide Content Overlay (Clean Left-Aligned on Desktop with Refined Spacing) -->
+                    <div class="container px-3 px-md-4 px-lg-5 position-relative z-2 h-100 d-flex align-items-center justify-content-start">
+                        <div class="py-5 text-start vstack" style="max-width: 38rem;">
                             
-                            <!-- Winner / Category Badge -->
-                            <div>
-                                <span class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-wine-accent border border-gold-60 backdrop-blur-md text-gold-soft text-xs fw-semibold tracking-luxury text-uppercase shadow-sm">
-                                    <i class="fas fa-award text-gold"></i>
-                                    <span>{{ $slide->badge_text ?? 'WINNER FRAGRANCE OF THE YEAR 2026' }}</span>
+                            <!-- Pure Text Badge (No Border, Poppins Thin, Delicate Gold Tracking) -->
+                            <div class="mb-2">
+                                <span class="font-sans text-gold-soft text-uppercase" style="font-size: 11px; font-weight: 300; letter-spacing: 0.28em; opacity: 0.95;">
+                                    ✦ &nbsp;{{ $slide->badge_text ?? 'WINNER FRAGRANCE OF THE YEAR 2026' }}
                                 </span>
                             </div>
 
                             <!-- Main Title (Wasted Vindey Luxury Serif) -->
-                            <h1 class="font-hero hero-title text-ivory text-uppercase lh-1 fw-normal mb-0 drop-shadow-lg" style="font-size: clamp(2.5rem, 5.5vw, 4.5rem);">
+                            <h1 class="font-hero hero-title text-ivory text-uppercase lh-1 fw-normal mb-3 drop-shadow-lg text-start" style="font-size: clamp(2.3rem, 5vw, 4.2rem);">
                                 {!! $slide->title !!}
                             </h1>
 
-                            <!-- Subtitle / Tagline (Poppins Regular) -->
-                            <p class="font-sans fs-5 text-gold-soft opacity-90 fw-normal lh-base mb-0" style="max-width: 38rem;">
-                                {{ $slide->subtitle ?? 'Experience it before everyone else does.' }}
+                            <!-- Subtitle / Tagline (Distinct gap between heading & paragraph) -->
+                            <p class="font-sans text-gold-soft opacity-90 fw-normal mb-4 text-start" style="font-size: clamp(0.88rem, 1.15vw, 1rem); line-height: 1.7; max-width: 35rem;">
+                                {{ $slide->subtitle ?? 'Hand-crafted with 40% Extrait de Parfum concentration for beast-mode longevity across Pakistan.' }}
                             </p>
 
-                            <!-- Trust Indicators Row -->
-                            <div class="d-flex flex-wrap align-items-center gap-4 pt-2 text-ivory">
+                            <!-- Trust Indicators Row (Left Aligned with generous top spacing) -->
+                            <div class="d-flex flex-wrap align-items-center gap-3 gap-md-4 pt-2 text-ivory justify-content-start">
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.5rem; height: 2.5rem;">
-                                        <i class="fas fa-clock"></i>
+                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.35rem; height: 2.35rem;">
+                                        <i class="fas fa-clock" style="font-size: 11px;"></i>
                                     </div>
                                     <div>
                                         <div class="text-xs fw-bold text-uppercase tracking-wider text-ivory">14+ HOURS</div>
@@ -66,18 +65,18 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.5rem; height: 2.5rem;">
-                                        <i class="fas fa-users"></i>
+                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.35rem; height: 2.35rem;">
+                                        <i class="fas fa-users" style="font-size: 11px;"></i>
                                     </div>
                                     <div>
-                                        <div class="text-xs fw-bold text-uppercase tracking-wider text-ivory">18+</div>
+                                        <div class="text-xs fw-bold text-uppercase tracking-wider text-ivory">1800+</div>
                                         <div class="text-muted-luxury text-uppercase tracking-widest fw-medium" style="font-size: 9px;">HAPPY PATRONS</div>
                                     </div>
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.5rem; height: 2.5rem;">
-                                        <i class="fas fa-star"></i>
+                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold shadow-sm backdrop-blur-xs" style="width: 2.35rem; height: 2.35rem;">
+                                        <i class="fas fa-star" style="font-size: 11px;"></i>
                                     </div>
                                     <div>
                                         <div class="text-xs fw-bold text-uppercase tracking-wider text-gold-bright">★ 4.9 / 5.0</div>
@@ -205,19 +204,24 @@
         </div>
 
         <!-- Featured Products Carousel (Swiper) -->
-        <div class="swiper bestsellers-swiper">
-            <div class="swiper-wrapper pb-4">
-                @foreach($bestsellers as $bProduct)
-                    <div class="swiper-slide h-auto">
-                        <x-product-card :product="$bProduct" />
-                    </div>
-                @endforeach
+        <div class="position-relative">
+            <div class="swiper bestsellers-swiper">
+                <div class="swiper-wrapper pb-4">
+                    @foreach($bestsellers as $bProduct)
+                        <div class="swiper-slide h-auto">
+                            <x-product-card :product="$bProduct" />
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination bestsellers-swiper-pagination position-relative mt-3"></div>
             </div>
-            <div class="swiper-pagination position-relative mt-3"></div>
+            <!-- Desktop Luxury Navigation Controls -->
+            <div class="swiper-button-prev bestseller-prev luxury-swiper-prev d-none d-lg-flex"></div>
+            <div class="swiper-button-next bestseller-next luxury-swiper-next d-none d-lg-flex"></div>
         </div>
 
         <!-- View Full Collection CTA -->
-        <div class="text-center mt-5">
+        <div class="text-center mt-4 mt-lg-5">
             <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3">
                 <span>View Featured Fragrances</span>
                 <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
@@ -453,7 +457,7 @@
             <div class="text-center mx-auto mb-5" style="max-width: 36rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury" style="font-size: 11px;">VERIFIED PATRON REVIEWS</span>
                 <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
-                    18+ Happy Customers
+                    1800+ Happy Customers
                 </h2>
                 <p class="text-xs text-muted-luxury mt-2 fw-light">
                     Authentic impressions from discerning fragrance patrons across Pakistan.
@@ -576,26 +580,32 @@
             effect: 'fade',
             fadeEffect: { crossFade: true },
             pagination: {
-                el: '.swiper-pagination',
+                el: '.hero-master-swiper .swiper-pagination',
                 clickable: true,
             },
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.hero-master-swiper .swiper-button-next',
+                prevEl: '.hero-master-swiper .swiper-button-prev',
             },
         });
 
-        // Bestsellers Carousel Swiper
+        // Featured Collection Carousel Swiper
         new Swiper('.bestsellers-swiper', {
-            slidesPerView: 2,
-            spaceBetween: 14,
+            slidesPerView: 1.35,
+            spaceBetween: 12,
             loop: false,
+            grabCursor: true,
             pagination: {
-                el: '.swiper-pagination',
+                el: '.bestsellers-swiper-pagination',
                 clickable: true,
             },
+            navigation: {
+                nextEl: '.bestseller-next',
+                prevEl: '.bestseller-prev',
+            },
             breakpoints: {
-                640: { slidesPerView: 2, spaceBetween: 16 },
+                480: { slidesPerView: 1.8, spaceBetween: 14 },
+                576: { slidesPerView: 2.2, spaceBetween: 16 },
                 768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 24 }
             }

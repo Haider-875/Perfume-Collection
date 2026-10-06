@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div x-data="{
+<div class="pb-5 pb-lg-0" x-data="{
     selectedVariantId: {{ $product->variants->first()?->id ?? 'null' }},
     selectedPrice: {{ $product->variants->first()?->price ?? $product->price }},
     selectedComparePrice: {{ $product->variants->first()?->compare_at_price ?? ($product->compare_at_price ?? round($product->price * 1.35, -1)) }},
@@ -184,7 +184,7 @@
                         <label class="d-block text-xs text-uppercase tracking-wider text-gold fw-medium mb-1">
                             SELECT BOTTLE SIZE
                         </label>
-                        <div class="d-flex flex-wrap gap-3">
+                        <div class="d-flex flex-wrap gap-2 gap-sm-3">
                             @forelse($product->variants as $variant)
                                 @php
                                     $shortSize = preg_match('/^\d+\s*ml/i', $variant->size_label, $m) ? $m[0] : (explode(' ', $variant->size_label)[0] ?? $variant->size_label);
@@ -209,7 +209,7 @@
                     <div class="d-flex flex-column gap-3 my-1">
                         
                         <!-- Row 1: Quantity Stepper + Add To Bag Stadium Pill Button -->
-                        <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2 gap-sm-3">
                             
                             <!-- Custom Luxury Quantity Stepper -->
                             <div class="pdp-qty-stepper-box">
@@ -227,9 +227,9 @@
                                 type="button" 
                                 @click="addToCart()"
                                 class="flex-grow-1 btn-pill-gold"
-                                style="height: 50px;"
+                                style="min-height: 48px;"
                             >
-                                <span>ADD TO FRAGRANCE BAG</span>
+                                <span class="text-nowrap">ADD TO BAG</span>
                                 <i class="fas fa-arrow-right-long btn-arrow"></i>
                             </button>
                         </div>
@@ -239,7 +239,7 @@
                             :href="whatsappUrl" 
                             target="_blank" 
                             class="w-100 btn-pill-whatsapp"
-                            style="height: 50px;"
+                            style="min-height: 48px;"
                         >
                             <i class="fab fa-whatsapp fs-5"></i>
                             <span>1-CLICK ORDER ON WHATSAPP (COD)</span>
@@ -328,7 +328,7 @@
             <div class="row g-4 g-lg-5 align-items-center">
                 
                 <!-- Left Column: The 3-Tier Olfactory Notes Pyramid (col-12 col-lg-6) -->
-                <div class="col-12 col-lg-6 d-flex flex-column gap-3.5">
+                <div class="col-12 col-lg-6 d-flex flex-column gap-3 gap-md-4">
                     <div class="text-start mb-1">
                         <span class="text-gold font-sans fw-medium" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;">HARMONIC ACCORD ARCHITECTURE</span>
                         <h3 class="font-hero text-ivory mt-1 fw-normal gold-gradient-text" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem);">The Fragrance Notes Pyramid</h3>
@@ -336,8 +336,8 @@
                     </div>
 
                     <!-- Top Notes Tier -->
-                    <div class="pdp-pyramid-tier d-flex flex-column gap-1.5 shadow-sm">
-                        <div class="d-flex align-items-center justify-content-between font-sans">
+                    <div class="pdp-pyramid-tier d-flex flex-column gap-2 shadow-sm">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 font-sans">
                             <span class="text-xs text-uppercase tracking-widest text-gold fw-semibold d-flex align-items-center gap-2">
                                 <i class="fas fa-sparkles text-gold"></i>
                                 <span>Top Notes (First 15 - 45 Mins)</span>
@@ -350,8 +350,8 @@
                     </div>
 
                     <!-- Middle / Heart Notes Tier -->
-                    <div class="pdp-pyramid-tier d-flex flex-column gap-1.5 shadow-sm">
-                        <div class="d-flex align-items-center justify-content-between font-sans">
+                    <div class="pdp-pyramid-tier d-flex flex-column gap-2 shadow-sm">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 font-sans">
                             <span class="text-xs text-uppercase tracking-widest text-gold fw-semibold d-flex align-items-center gap-2">
                                 <i class="fas fa-heart text-gold"></i>
                                 <span>Middle Notes (2 - 6 Hours)</span>
@@ -364,8 +364,8 @@
                     </div>
 
                     <!-- Base Notes Tier -->
-                    <div class="pdp-pyramid-tier d-flex flex-column gap-1.5 shadow-sm">
-                        <div class="d-flex align-items-center justify-content-between font-sans">
+                    <div class="pdp-pyramid-tier d-flex flex-column gap-2 shadow-sm">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 font-sans">
                             <span class="text-xs text-uppercase tracking-widest text-gold fw-semibold d-flex align-items-center gap-2">
                                 <i class="fas fa-tree text-gold"></i>
                                 <span>Base Notes (6 - 18+ Hours)</span>
@@ -379,7 +379,7 @@
                 </div>
 
                 <!-- Right Column: Performance Benchmark Meters (col-12 col-lg-6) -->
-                <div class="col-12 col-lg-6 bg-wine-card border border-gold-25 rounded-4 p-4 p-lg-5 d-flex flex-column gap-4 shadow-sm">
+                <div class="col-12 col-lg-6 bg-wine-card border border-gold-25 rounded-4 p-3.5 p-sm-4 p-lg-5 d-flex flex-column gap-3.5 gap-md-4 shadow-sm">
                     <div>
                         <span class="text-gold font-sans fw-medium" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;">LABORATORY BENCHMARKS</span>
                         <h3 class="font-hero text-ivory mt-1 fw-normal mb-0 gold-gradient-text" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Extrait Performance Metrics</h3>
@@ -419,12 +419,12 @@
                     </div>
 
                     <!-- Oil Concentration Badge -->
-                    <div class="pt-3 border-top border-gold-20 d-flex align-items-center justify-content-between text-xs text-muted-luxury font-sans">
+                    <div class="pt-3 border-top border-gold-20 d-flex flex-wrap align-items-center justify-content-between gap-2 text-xs text-muted-luxury font-sans">
                         <div>
                             <span class="d-block text-gold fw-medium text-uppercase tracking-wider" style="font-size: 10px;">Fragrance Concentration</span>
                             <span class="font-hero fs-5 text-ivory fw-normal">38% Pure French Oils</span>
                         </div>
-                        <div class="text-end">
+                        <div class="text-start text-sm-end">
                             <span class="d-block text-gold fw-medium text-uppercase tracking-wider" style="font-size: 10px;">Climate Optimization</span>
                             <span class="text-xs text-ivory fw-medium">Engineered for Pakistan Climate</span>
                         </div>
@@ -439,8 +439,8 @@
     <section class="py-5 py-lg-6 border-bottom border-gold-20" style="background-color: #050203;">
         <div class="container px-3 px-lg-4" style="max-width: 960px;" x-data="{ currentTab: 'desc' }">
             
-            <!-- Tab Headers (Poppins Regular / Clean Flex-Wrap Pill Tabs / Zero Scrollbar) -->
-            <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 gap-md-3 mb-5 font-sans">
+            <!-- Tab Headers (Responsive Horizontal Touch Slider on Mobile, Centered on Desktop) -->
+            <div class="pdp-tabs-container mb-4 mb-lg-5 font-sans no-scrollbar">
                 <button 
                     type="button" 
                     @click="currentTab = 'desc'" 
@@ -595,15 +595,24 @@
             <div class="container px-3 px-lg-4">
                 <div class="text-center mx-auto mb-5" style="max-width: 560px;">
                     <span class="text-gold font-sans fw-medium" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">OLFACTORY HARMONY</span>
-                    <h3 class="font-hero text-ivory mt-1 fw-normal mb-0 gold-gradient-text" style="font-size: clamp(1.8rem, 2.6vw, 2.3rem);">You May Also Covet</h3>
+                    <h3 class="font-hero text-ivory mt-1 fw-normal mb-0 gold-gradient-text" style="font-size: clamp(1.8rem, 2.6vw, 2.3rem);">You May Also Like</h3>
                 </div>
 
-                <div class="row row-cols-2 row-cols-md-4 g-3 g-md-4">
-                    @foreach($relatedProducts as $rel)
-                        <div class="col">
-                            <x-product-card :product="$rel" />
+                <div class="position-relative">
+                    <div class="swiper related-products-swiper">
+                        <div class="swiper-wrapper pb-4">
+                            @foreach($relatedProducts as $rel)
+                                <div class="swiper-slide h-auto">
+                                    <x-product-card :product="$rel" />
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                        <div class="swiper-pagination related-swiper-pagination position-relative mt-3"></div>
+                    </div>
+
+                    <!-- Luxury Desktop Navigation Controls -->
+                    <div class="swiper-button-prev related-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                    <div class="swiper-button-next related-next luxury-swiper-next d-none d-lg-flex"></div>
                 </div>
             </div>
         </section>
@@ -632,5 +641,34 @@
     </div>
 
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.querySelector('.related-products-swiper') && typeof Swiper !== 'undefined') {
+            new Swiper('.related-products-swiper', {
+                slidesPerView: 1.35,
+                spaceBetween: 12,
+                loop: false,
+                grabCursor: true,
+                pagination: {
+                    el: '.related-swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.related-next',
+                    prevEl: '.related-prev',
+                },
+                breakpoints: {
+                    480: { slidesPerView: 1.8, spaceBetween: 14 },
+                    576: { slidesPerView: 2.2, spaceBetween: 16 },
+                    768: { slidesPerView: 3, spaceBetween: 20 },
+                    1024: { slidesPerView: 4, spaceBetween: 24 }
+                }
+            });
+        }
+    });
+</script>
+@endpush
 
 @endsection

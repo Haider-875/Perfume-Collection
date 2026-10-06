@@ -1843,6 +1843,41 @@ p.font-sans,
     box-shadow: 0 4px 16px rgba(223, 183, 112, 0.35);
 }
 
+.pdp-tabs-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    .pdp-tabs-container {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+        gap: 0.5rem !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    .pdp-tabs-container::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    .pdp-tab-btn {
+        flex: 0 0 auto !important;
+        font-size: 0.72rem !important;
+        padding: 8px 16px !important;
+        letter-spacing: 0.05em !important;
+    }
+}
+
 .no-scrollbar {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
@@ -1911,3 +1946,287 @@ p.font-sans,
     transform: translateY(-1px);
     box-shadow: 0 3px 10px rgba(223, 183, 112, 0.35);
 }
+
+/* ==========================================================================
+   CROSS-DEVICE MOBILE RESPONSIVENESS & COMPATIBILITY SUITE
+   Fully responsive across iPhone SE, iPhone 12-15, Android, Tablets & Desktops
+   ========================================================================== */
+
+/* 1. Global Viewport & Overflow Shields */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 2. Mobile Header & Touch Targets (Tablets & Mobile < 992px) */
+@media (max-width: 991.98px) {
+    .site-header {
+        height: auto;
+    }
+
+    .site-header .d-flex.align-items-center.justify-content-between {
+        height: 4.25rem !important;
+    }
+
+    .mobile-hamburger-btn {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+        cursor: pointer;
+    }
+
+    #cartDrawerTrigger {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+    }
+
+    /* Full-Screen Mobile Menu Drawer */
+    [x-show="mobileMenuOpen"] {
+        height: 100vh !important;
+        height: 100dvh !important;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+}
+
+/* 3. Hero Section Mobile Optimization (< 768px) */
+@media (max-width: 767.98px) {
+    .hero-slider-section {
+        height: auto !important;
+        min-height: 540px !important;
+        max-height: none !important;
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .hero-slider-section .swiper-slide {
+        min-height: 540px !important;
+    }
+
+    .hero-slider-section .hero-title {
+        font-size: clamp(1.85rem, 7.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+    }
+
+    .hero-slider-section p {
+        font-size: 0.88rem !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+    }
+
+    /* Hide Desktop Swiper Arrows on Mobile to prevent content collision */
+    .hero-slider-section .luxury-swiper-prev,
+    .hero-slider-section .luxury-swiper-next {
+        display: none !important;
+    }
+
+    .hero-slider-section .luxury-swiper-pagination {
+        bottom: 12px !important;
+    }
+
+    /* Category Filter Tab Pills on Mobile - Smooth Horizontal Scroll */
+    .featured-filter-btn {
+        font-size: 0.72rem !important;
+        padding: 8px 16px !important;
+        flex-shrink: 0;
+    }
+
+    .d-flex.flex-wrap.align-items-center.justify-content-start.gap-2.mb-4 {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        margin-bottom: 1rem !important;
+    }
+
+    .d-flex.flex-wrap.align-items-center.justify-content-start.gap-2.mb-4::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* 4. Product Cards Mobile Tuning (< 768px & < 480px) */
+@media (max-width: 767.98px) {
+    .product-card {
+        padding: 0.75rem !important;
+        border-radius: 14px !important;
+    }
+
+    .product-card-title {
+        font-size: 0.95rem !important;
+        line-height: 1.25 !important;
+    }
+
+    .product-card-impression {
+        font-size: 10px !important;
+    }
+
+    .product-card-pricing {
+        font-size: 11px !important;
+        flex-wrap: wrap !important;
+        gap: 2px !important;
+    }
+
+    .product-card .btn-gold {
+        font-size: 0.72rem !important;
+        padding: 8px 12px !important;
+        min-height: 38px !important;
+        letter-spacing: 0.06em !important;
+    }
+
+    /* Make Quick Action Floating Toolbar touch accessible on mobile */
+    .product-card .quick-actions-toolbar {
+        opacity: 1 !important;
+        transform: scale(0.9);
+        top: 6px !important;
+        right: 6px !important;
+    }
+}
+
+/* 5. Product Detail Page (PDP) Mobile Layout (< 992px & < 576px) */
+@media (max-width: 991.98px) {
+    .pdp-flacon-stage {
+        min-height: 340px !important;
+        padding: 1.5rem 1rem !important;
+    }
+
+    .pdp-flacon-img {
+        max-height: 260px !important;
+    }
+
+    .pdp-title {
+        font-size: clamp(1.75rem, 5.5vw, 2.3rem) !important;
+    }
+
+    .pdp-price-amount {
+        font-size: 1.65rem !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .pdp-trust-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.5rem !important;
+    }
+
+    .pdp-trust-card {
+        padding: 0.55rem 0.65rem !important;
+    }
+
+    .pdp-size-btn {
+        padding: 7px 14px !important;
+        font-size: 0.76rem !important;
+        min-width: 55px !important;
+    }
+
+    .pdp-qty-stepper-box {
+        height: 44px !important;
+        min-width: 100px !important;
+        width: 100px !important;
+    }
+
+    .btn-pill-gold,
+    .btn-pill-whatsapp,
+    .btn-bundle-bag,
+    .btn-bundle-whatsapp {
+        min-height: 44px !important;
+        font-size: 0.76rem !important;
+        padding: 10px 16px !important;
+        letter-spacing: 0.06em !important;
+    }
+}
+
+/* 6. Checkout & Cart Mobile Tuning (< 768px) */
+@media (max-width: 767.98px) {
+    .bg-wine-card {
+        padding: 1.25rem 1rem !important;
+        border-radius: 14px !important;
+    }
+
+    /* iOS Input Zoom Prevention (Inputs >= 16px on mobile focus) */
+    input.form-control,
+    select.form-select,
+    textarea.form-control,
+    .form-control-luxury {
+        font-size: 16px !important;
+    }
+
+    /* Cart Drawer Full-Width on Mobile */
+    .cart-drawer-panel,
+    .cart-drawer {
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    /* Modal dialogs on mobile */
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+
+    /* Floating Action Buttons Responsive Positioning */
+    .position-fixed.bottom-0.end-0.m-4 {
+        margin: 1rem !important;
+        gap: 0.5rem !important;
+    }
+
+    .btn-whatsapp.rounded-circle {
+        width: 2.85rem !important;
+        height: 2.85rem !important;
+    }
+
+    .btn-whatsapp.rounded-circle i {
+        font-size: 1.35rem !important;
+    }
+
+    #backToTopBtn {
+        width: 2.35rem !important;
+        height: 2.35rem !important;
+    }
+}
+
+/* 7. Ultra-Small Devices (iPhone SE, 320px - 375px viewport) */
+@media (max-width: 375px) {
+    .container, .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .hero-slider-section .hero-title {
+        font-size: 1.65rem !important;
+    }
+
+    .product-card {
+        padding: 0.6rem 0.5rem !important;
+    }
+
+    .product-card-title {
+        font-size: 0.88rem !important;
+    }
+
+    .product-card-pricing {
+        font-size: 10.5px !important;
+    }
+
+    .btn-pill-gold,
+    .btn-pill-whatsapp,
+    .btn-gold {
+        font-size: 0.68rem !important;
+        padding: 8px 10px !important;
+    }
+}
+

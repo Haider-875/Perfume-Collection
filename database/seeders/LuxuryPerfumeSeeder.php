@@ -166,12 +166,12 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // 3. Hero Slides (Swiper Slider for Homepage)
         HeroSlide::create([
-            'title' => "Artisanal Luxury Impressions & Extraits",
-            'subtitle' => "35-40% Extrait Concentration • French Imported Oils • 14+ Hours Beast Mode Longevity",
-            'badge_text' => "HAND-CRAFTED LUXURY IMPRESSIONS",
-            'image' => 'assets/images/perfumes/hero_slide_1.svg',
+            'title' => "REVIVAL 50",
+            'subtitle' => "Hand-crafted with 40% Extrait de Parfum concentration, blending aged Cambodian agarwood and smoky birch. Engineered for 16+ hours of beast-mode projection across Pakistan.",
+            'badge_text' => "WINNER FRAGRANCE OF THE YEAR 2026",
+            'image' => 'assets/images/slides/hero_1.jpg',
             'cta_text' => "SHOP IMPRESSIONS",
-            'cta_url' => "/collections/exclusive",
+            'cta_url' => "/collections/all",
             'secondary_cta_text' => "FIND YOUR SCENT",
             'secondary_cta_url' => "#scent-advisor",
             'sort_order' => 1,
@@ -179,10 +179,10 @@ class LuxuryPerfumeSeeder extends Seeder
         ]);
 
         HeroSlide::create([
-            'title' => "Master Impressions of Niche Legends",
-            'subtitle' => "Tuscan Leather, Baccarat Rouge 540, Aventus & Tuxedo in Hand-Cut Glass Flacons",
-            'badge_text' => "RESERVE COUTURE COLLECTION",
-            'image' => 'assets/images/perfumes/hero_slide_2.svg',
+            'title' => "BLEU IMPERIAL",
+            'subtitle' => "A magnetic fusion of sun-drenched Italian bergamot, fresh sea salt, and rich cedarwood. Formulated with Grasse French oils for an all-day commanding masculine trail.",
+            'badge_text' => "TOP SELLER 2026",
+            'image' => 'assets/images/slides/hero_2.jpg',
             'cta_text' => "EXPLORE COUTURE",
             'cta_url' => "/collections/men",
             'secondary_cta_text' => "WHATSAPP ADVISOR",
@@ -192,10 +192,10 @@ class LuxuryPerfumeSeeder extends Seeder
         ]);
 
         HeroSlide::create([
-            'title' => "Curated Discovery Sets & Gifting Coffrets",
-            'subtitle' => "Experience 5 iconic impressions in 10ml pressurized atomizers • Save Rs. 3,500",
-            'badge_text' => "BESPOKE GIFTING",
-            'image' => 'assets/images/perfumes/hero_slide_3.svg',
+            'title' => "ROYAL OUD & AMBER",
+            'subtitle' => "An aristocratic private reserve macerated for 90 days with rare Kashmiri saffron and golden ambergris. Experience timeless luxury crafted specifically for evening galas.",
+            'badge_text' => "PRIVATE RESERVE COLLECTION",
+            'image' => 'assets/images/slides/hero_3.jpg',
             'cta_text' => "EXPLORE SETS",
             'cta_url' => "/collections/bundles",
             'secondary_cta_text' => "VIEW DISCOVERY SET",
@@ -267,11 +267,11 @@ class LuxuryPerfumeSeeder extends Seeder
         $ffGourmand = FragranceFamily::create(['name' => 'Gourmand Velvet & Bourbon Vanilla', 'slug' => 'gourmand-bourbon-vanilla', 'accent_color' => '#A0522D', 'description' => 'Dark cocoa, Madagascar bourbon vanilla, and roasted tonka bean.']);
 
         // 6. Categories
-        $catOud = Category::create(['name' => 'Royal Oud & Extraits', 'slug' => 'royal-oud-extrait', 'badge_text' => 'Signature', 'sort_order' => 1, 'image' => 'assets/images/categories/cat_oud.svg']);
-        $catFrench = Category::create(['name' => 'French Niche Collection', 'slug' => 'french-niche-collection', 'badge_text' => 'Haute Couture', 'sort_order' => 2, 'image' => 'assets/images/categories/cat_french.svg']);
-        $catAttar = Category::create(['name' => 'Pure Concentrated Attars', 'slug' => 'pure-attar-oils', 'badge_text' => 'Alcohol-Free', 'sort_order' => 3, 'image' => 'assets/images/categories/cat_attar.svg']);
-        $catFloral = Category::create(['name' => 'Imperial Floral & Saffron', 'slug' => 'imperial-floral-saffron', 'badge_text' => 'Radiant', 'sort_order' => 4, 'image' => 'assets/images/categories/cat_floral.svg']);
-        $catDiscovery = Category::create(['name' => 'Discovery Sets & Gifting', 'slug' => 'discovery-sets-gifting', 'badge_text' => 'Bespoke', 'sort_order' => 5, 'image' => 'assets/images/categories/cat_discovery.svg']);
+        $catOud = Category::create(['name' => 'Royal Oud & Extraits', 'slug' => 'royal-oud-extrait', 'badge_text' => 'Signature', 'sort_order' => 1, 'image' => 'assets/images/categories/collection_signature.jpg']);
+        $catFrench = Category::create(['name' => 'French Niche Collection', 'slug' => 'french-niche-collection', 'badge_text' => 'Haute Couture', 'sort_order' => 2, 'image' => 'assets/images/categories/collection_candles.jpg']);
+        $catAttar = Category::create(['name' => 'Pure Concentrated Attars', 'slug' => 'pure-attar-oils', 'badge_text' => 'Alcohol-Free', 'sort_order' => 3, 'image' => 'assets/images/categories/collection_attar.jpg']);
+        $catFloral = Category::create(['name' => 'Imperial Floral & Saffron', 'slug' => 'imperial-floral-saffron', 'badge_text' => 'Radiant', 'sort_order' => 4, 'image' => 'assets/images/categories/collection_signature.jpg']);
+        $catDiscovery = Category::create(['name' => 'Discovery Sets & Gifting', 'slug' => 'discovery-sets-gifting', 'badge_text' => 'Bespoke', 'sort_order' => 5, 'image' => 'assets/images/categories/collection_signature.jpg']);
 
         // 7. Brands
         $brandRoyal = Brand::create(['name' => "RAVAHA Signature Ateliers", 'slug' => 'ravaha-signature-ateliers', 'origin_country' => 'Paris / Lahore Atelier', 'is_featured' => true]);
