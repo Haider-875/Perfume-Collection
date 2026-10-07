@@ -19,7 +19,7 @@ class AdminProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $categoryId = $request->input('category_id');
+        $categoryId = $request->input('category_id') ?? $request->input('category');
         $gender = $request->input('gender');
         $stockStatus = $request->input('stock_status');
 
@@ -42,16 +42,16 @@ class AdminProductController extends Controller
             $query->where('gender', $gender);
         }
 
-        if ($stockStatus === 'low') {
+        if ($stockStatus === 'low' || $stockStatus === 'low_stock') {
             $query->where('stock', '<=', 10)->where('stock', '>', 0);
-        } elseif ($stockStatus === 'out') {
+        } elseif ($stockStatus === 'out' || $stockStatus === 'out_of_stock') {
             $query->where('stock', '<=', 0);
-        } elseif ($stockStatus === 'in') {
+        } elseif ($stockStatus === 'in' || $stockStatus === 'in_stock') {
             $query->where('stock', '>', 10);
         }
 
         $products = $query->paginate(15)->withQueryString();
-        $categories = Category::all();
+        $categories = Category::orderBy('sort_order')->orderBy('name')->get();
 
         return view('admin.products.index', compact('products', 'categories', 'search', 'categoryId', 'gender', 'stockStatus'));
     }
@@ -145,9 +145,17 @@ class AdminProductController extends Controller
             'is_new_arrival' => $request->has('is_new_arrival'),
         ]);
 
-        // Attach collections if provided
+        // Attach collections if provided, or auto-sync matching collection from category
         if ($request->has('collections') && is_array($request->collections)) {
             $product->collections()->sync($request->collections);
+        } else {
+            $selectedCat = Category::find($product->category_id);
+            if ($selectedCat) {
+                $matchingCol = Collection::where('slug', $selectedCat->slug)->first();
+                if ($matchingCol) {
+                    $product->collections()->syncWithoutDetaching([$matchingCol->id]);
+                }
+            }
         }
 
         // Handle dynamic variant rows if provided
@@ -288,6 +296,14 @@ class AdminProductController extends Controller
 
         if ($request->has('collections') && is_array($request->collections)) {
             $product->collections()->sync($request->collections);
+        } else {
+            $selectedCat = Category::find($product->category_id);
+            if ($selectedCat) {
+                $matchingCol = Collection::where('slug', $selectedCat->slug)->first();
+                if ($matchingCol) {
+                    $product->collections()->syncWithoutDetaching([$matchingCol->id]);
+                }
+            }
         }
 
         // Update variants if provided

@@ -228,13 +228,13 @@
                         Bestsellers
                     </a>
 
-                    <a href="{{ route('collections.show', 'all') }}"
-                        class="nav-link-luxury">
+                    <a href="{{ route('collections.show', 'candles') }}"
+                        class="nav-link-luxury {{ request()->is('collections/candles*') ? 'active' : '' }}">
                         Candles
                     </a>
 
-                    <a href="{{ route('collections.show', 'all') }}"
-                        class="nav-link-luxury">
+                    <a href="{{ route('collections.show', 'attar') }}"
+                        class="nav-link-luxury {{ request()->is('collections/attar*') ? 'active' : '' }}">
                         Attar Collection
                     </a>
                 </nav>
@@ -304,10 +304,23 @@
                         class="d-block py-1 text-muted-luxury">Unisex & Pure Oud</a>
                     <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 text-gold-soft fw-semibold">Bundles & Discovery Sets (Save 25%)</a>
+                    <a href="{{ route('collections.show', 'candles') }}" @click="mobileMenuOpen = false"
+                        class="d-block py-1 text-muted-luxury">Artisanal Candles</a>
+                    <a href="{{ route('collections.show', 'attar') }}" @click="mobileMenuOpen = false"
+                        class="d-block py-1 text-muted-luxury">Pure Attar Collection</a>
                     <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 text-muted-luxury">Fragrance Chronicles</a>
                 </div>
             </div>
+
+            <a href="{{ route('collections.show', 'candles') }}" @click="mobileMenuOpen = false"
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                Candles
+            </a>
+            <a href="{{ route('collections.show', 'attar') }}" @click="mobileMenuOpen = false"
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                Attar Collection
+            </a>
 
             <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
                 class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
@@ -393,6 +406,10 @@
                                 class="text-muted-luxury hover-gold transition-all">Exclusive Reserve Extrait</a></li>
                         <li><a href="{{ route('collections.show', 'men') }}"
                                 class="text-muted-luxury hover-gold transition-all">Men's Designer Impressions</a></li>
+                        <li><a href="{{ route('collections.show', 'candles') }}"
+                                class="text-muted-luxury hover-gold transition-all">Artisanal Scented Candles</a></li>
+                        <li><a href="{{ route('collections.show', 'attar') }}"
+                                class="text-muted-luxury hover-gold transition-all">Pure Attar Collection</a></li>
                     </ul>
                 </div>
 

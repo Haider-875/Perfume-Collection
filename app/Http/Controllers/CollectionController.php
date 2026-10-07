@@ -23,13 +23,60 @@ class CollectionController extends Controller
 
         $collection = null;
         if ($slug !== 'all') {
+            // Find collection by slug or alias
             $collection = Collection::where('slug', $slug)
                 ->orWhere(function($q) use ($slug) {
                     if ($slug === 'exclusive') {
                         $q->where('slug', 'exclusive-reserve');
                     }
-                })->firstOrFail();
-            $query = $collection->products()->active();
+                    if (in_array($slug, ['attar', 'attars', 'pure-attar-oils'])) {
+                        $q->whereIn('slug', ['attar', 'attars', 'pure-attar-oils']);
+                    }
+                    if (in_array($slug, ['candles', 'candle'])) {
+                        $q->whereIn('slug', ['candles', 'candle']);
+                    }
+                })->first();
+
+            // Find category by slug or alias (managed via Admin Categories)
+            $category = Category::where('slug', $slug)
+                ->orWhere(function($q) use ($slug) {
+                    if (in_array($slug, ['attar', 'attars', 'pure-attar-oils'])) {
+                        $q->whereIn('slug', ['attar', 'attars', 'pure-attar-oils']);
+                    }
+                    if (in_array($slug, ['candles', 'candle'])) {
+                        $q->whereIn('slug', ['candles', 'candle']);
+                    }
+                })->first();
+
+            if (!$collection && !$category) {
+                abort(404);
+            }
+
+            // Fallback for view presentation (both models share name, description, image, badge_text, slug)
+            if (!$collection) {
+                $collection = $category;
+            }
+
+            $query = Product::active()->where(function($q) use ($collection, $category) {
+                $q->where(function($sub) use ($collection, $category) {
+                    $hasClause = false;
+                    if ($category) {
+                        $sub->where('category_id', $category->id);
+                        $hasClause = true;
+                    }
+                    if ($collection instanceof Collection) {
+                        if ($hasClause) {
+                            $sub->orWhereHas('collections', function($cq) use ($collection) {
+                                $cq->where('collections.id', $collection->id);
+                            });
+                        } else {
+                            $sub->whereHas('collections', function($cq) use ($collection) {
+                                $cq->where('collections.id', $collection->id);
+                            });
+                        }
+                    }
+                });
+            });
         } else {
             $query = Product::active();
         }

@@ -328,6 +328,7 @@
                             <option value="Extrait de Parfum" {{ old('concentration', $product->concentration) === 'Extrait de Parfum' ? 'selected' : '' }}>Extrait de Parfum</option>
                             <option value="Eau de Parfum" {{ old('concentration', $product->concentration) === 'Eau de Parfum' ? 'selected' : '' }}>Eau de Parfum</option>
                             <option value="Attar / Concentrated Perfume Oil" {{ old('concentration', $product->concentration) === 'Attar / Concentrated Perfume Oil' ? 'selected' : '' }}>Pure Attar Oil</option>
+                            <option value="Artisanal Scented Candle (Soy Wax)" {{ old('concentration', $product->concentration) === 'Artisanal Scented Candle (Soy Wax)' ? 'selected' : '' }}>Artisanal Scented Candle (Soy Wax)</option>
                         </select>
                     </div>
 

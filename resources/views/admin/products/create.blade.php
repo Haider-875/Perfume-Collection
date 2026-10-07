@@ -269,6 +269,7 @@
                             <option value="Extrait de Parfum">Extrait de Parfum (35% Oil)</option>
                             <option value="Eau de Parfum">Eau de Parfum (20% Oil)</option>
                             <option value="Attar / Concentrated Perfume Oil">Pure Attar Oil</option>
+                            <option value="Artisanal Scented Candle (Soy Wax)">Artisanal Scented Candle (Soy Wax)</option>
                         </select>
                     </div>
 
