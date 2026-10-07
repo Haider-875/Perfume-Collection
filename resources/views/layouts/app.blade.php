@@ -110,6 +110,7 @@
 
 <body class="bg-theme-main text-ivory font-sans antialiased"
     x-data="{ mobileMenuOpen: false, searchOpen: false }"
+    x-init="$watch('mobileMenuOpen', val => document.body.classList.toggle('overflow-hidden', val))"
     :class="{ 'overflow-hidden': mobileMenuOpen }">
 
     @php
@@ -181,35 +182,50 @@
                         Home
                     </a>
 
-                    <!-- Shop Dropdown (Pure Hover, Zero Layout Shift) -->
-                    <div class="nav-dropdown-wrapper">
-                        <a href="{{ route('collections.show', 'all') }}"
-                            class="nav-link-luxury {{ request()->is('collections*') && !request()->is('collections/bundles*') ? 'active' : '' }}">
+                    <!-- Shop Dropdown (Hover + Click Toggle Support) -->
+                    <div class="nav-dropdown-wrapper"
+                         x-data="{ shopDropdownOpen: false }"
+                         @click.outside="shopDropdownOpen = false"
+                         @keydown.escape.window="shopDropdownOpen = false">
+                        <button type="button"
+                            @click="shopDropdownOpen = !shopDropdownOpen"
+                            class="nav-link-luxury border-0 bg-transparent p-0 d-inline-flex align-items-center {{ request()->is('collections*') && !request()->is('collections/bundles*') ? 'active' : '' }}"
+                            :class="{ 'active': shopDropdownOpen }"
+                            aria-haspopup="true"
+                            :aria-expanded="shopDropdownOpen.toString()"
+                            style="cursor: pointer; height: 100%;">
                             <span>Shop</span>
-                            <i class="fas fa-chevron-down nav-chevron ms-1" style="font-size: 8px;"></i>
-                        </a>
+                            <i class="fas fa-chevron-down nav-chevron ms-1"
+                               :class="{ 'chevron-rotated': shopDropdownOpen }"
+                               style="font-size: 8px;"></i>
+                        </button>
 
-                        <!-- Dropdown Menu (Opens on Hover smoothly) -->
-                        <div class="nav-dropdown-menu">
+                        <!-- Dropdown Menu (Opens on Hover or Click smoothly) -->
+                        <div class="nav-dropdown-menu" :class="{ 'dropdown-active': shopDropdownOpen }">
                             <a href="{{ route('collections.show', 'all') }}"
+                                @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury d-flex align-items-center justify-content-between">
                                 <span>All Fragrances</span>
                                 <i class="fas fa-arrow-right opacity-50" style="font-size: 9px;"></i>
                             </a>
                             <a href="{{ route('collections.show', 'exclusive') }}"
+                                @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury d-flex align-items-center justify-content-between">
                                 <span>Private Reserve (Extrait)</span>
                                 <span class="badge-extrait">40% OIL</span>
                             </a>
                             <a href="{{ route('collections.show', 'men') }}"
+                                @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury">
                                 <span>Men's Impressions</span>
                             </a>
                             <a href="{{ route('collections.show', 'women') }}"
+                                @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury">
                                 <span>Women's Impressions</span>
                             </a>
                             <a href="{{ route('collections.show', 'unisex') }}"
+                                @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury">
                                 <span>Unisex & Niche Extraits</span>
                             </a>
@@ -255,103 +271,121 @@
         </div>
     </header>
 
-    <!-- 3. Full-Screen Animated Mobile Menu -->
+    <!-- 3. Off-Canvas Animated Mobile Menu & Backdrop -->
+    <div x-show="mobileMenuOpen"
+        x-cloak
+        @click="mobileMenuOpen = false"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="mobile-offcanvas-backdrop d-lg-none"
+        style="z-index: 1055;"></div>
+
     <div x-show="mobileMenuOpen"
         x-cloak
         @keydown.escape.window="mobileMenuOpen = false"
         x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
-        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-x-0"
+        x-transition:enter-start="opacity-0 -translate-x-full" 
+        x-transition:enter-end="opacity-100 translate-x-0"
+        x-transition:leave="transition ease-in duration-200" 
+        x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-0 -translate-x-full"
-        class="position-fixed top-0 start-0 w-100 h-100 bg-theme-dark backdrop-blur-xl d-flex flex-column justify-content-between p-4 overflow-y-auto d-lg-none shadow-lg border-end border-gold-30"
+        class="mobile-offcanvas-drawer p-3 p-sm-4 d-lg-none"
         style="z-index: 1060;">
         <!-- Mobile Menu Header -->
-        <div class="d-flex align-items-center justify-content-between border-bottom border-gold-20 pb-3">
+        <div class="d-flex align-items-center justify-content-between border-bottom border-gold-20 pb-3 flex-shrink-0">
             <div class="d-flex align-items-center gap-2">
                 <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
-                    style="height: 2.5rem; width: auto; object-fit: contain;">
-                <span class="font-serif fw-bold text-uppercase tracking-wider gold-gradient-text">Perfumes Collection</span>
+                    style="height: 2.25rem; width: auto; object-fit: contain;">
+                <span class="font-hero text-uppercase tracking-wider gold-gradient-text" style="font-size: 1rem;">Perfumes Collection</span>
             </div>
-            <button @click="mobileMenuOpen = false"
-                class="border-0 bg-transparent text-ivory fs-2">&times;</button>
+            <button type="button" @click="mobileMenuOpen = false"
+                class="border-0 bg-transparent text-ivory fs-2 p-1 d-flex align-items-center justify-content-center"
+                style="width: 44px; height: 44px; touch-action: manipulation;"
+                aria-label="Close navigation">&times;</button>
         </div>
 
         <!-- Mobile Menu Navigation Links -->
-        <div class="py-4 vstack gap-3">
+        <div class="py-3 vstack gap-2 flex-grow-1 overflow-y-auto">
             <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Home
             </a>
 
             <!-- Mobile Collections Accordion -->
-            <div x-data="{ colOpen: true }" class="border-bottom border-gold-15 pb-2">
-                <button @click="colOpen = !colOpen"
+            <div x-data="{ colOpen: true }" class="border-bottom border-gold-15 py-2">
+                <button type="button" @click="colOpen = !colOpen"
                     class="w-100 border-0 bg-transparent text-start d-flex align-items-center justify-content-between font-serif fs-5 text-ivory p-0">
-                    <span>Collections & Impressions</span>
+                    <span>Shop & Collections</span>
                     <i class="fas fa-chevron-down text-gold" style="font-size: 11px;"
                         :class="colOpen ? 'rotate-180' : ''"></i>
                 </button>
                 <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm text-muted-luxury">
                     <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">All Impressions Catalog</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">All Impressions Catalog</a>
                     <a href="{{ route('collections.show', 'exclusive') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Exclusive Reserve (35% Extrait)</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Exclusive Reserve (35% Extrait)</a>
                     <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Men's Impressions</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Men's Impressions</a>
                     <a href="{{ route('collections.show', 'women') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Women's Impressions</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Women's Impressions</a>
                     <a href="{{ route('collections.show', 'unisex') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Unisex & Pure Oud</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Unisex & Pure Oud</a>
                     <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-gold-soft fw-semibold">Bundles & Discovery Sets (Save 25%)</a>
+                        class="d-block py-1 text-gold-soft fw-semibold text-decoration-none">Bundles & Discovery Sets (Save 25%)</a>
                     <a href="{{ route('collections.show', 'candles') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Artisanal Candles</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Artisanal Candles</a>
                     <a href="{{ route('collections.show', 'attar') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Pure Attar Collection</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Pure Attar Collection</a>
                     <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury">Fragrance Chronicles</a>
+                        class="d-block py-1 text-muted-luxury text-decoration-none">Fragrance Chronicles</a>
                 </div>
             </div>
 
             <a href="{{ route('collections.show', 'candles') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Candles
             </a>
             <a href="{{ route('collections.show', 'attar') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Attar Collection
             </a>
 
-            <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+            <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false"
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Bundles & Discovery Sets
             </a>
             <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Olfactory Journal
             </a>
             <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Our Artisanal Craft
             </a>
             <a href="{{ route('pages.contact') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 pb-2">
+                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
                 Contact & VIP Concierge
             </a>
         </div>
 
         <!-- Mobile Menu Footer Actions -->
-        <div class="border-top border-gold-20 pt-4 vstack gap-2">
+        <div class="border-top border-gold-20 pt-3 vstack gap-2 flex-shrink-0">
             <button type="button"
                 onclick="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
-                class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase d-flex align-items-center justify-center gap-2">
+                class="w-100 btn-gold py-2.5 text-xs tracking-widest text-uppercase d-flex align-items-center justify-center gap-2"
+                style="min-height: 44px;">
                 <i class="fas fa-wand-magic-sparkles"></i>
                 <span>LAUNCH SCENT FINDER QUIZ</span>
             </button>
 
             <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out for perfume recommendations.') }}"
                 target="_blank"
-                class="w-100 btn-whatsapp py-3 text-xs tracking-wider text-uppercase d-flex align-items-center justify-center gap-2">
+                class="w-100 btn-whatsapp py-2.5 text-xs tracking-wider text-uppercase d-flex align-items-center justify-center gap-2 text-decoration-none"
+                style="min-height: 44px;">
                 <i class="fab fa-whatsapp"></i>
                 <span>WHATSAPP CONCIERGE ORDER</span>
             </a>

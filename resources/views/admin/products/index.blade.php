@@ -8,15 +8,15 @@
 <div class="d-flex align-items-center gap-2 flex-wrap">
     <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download sample CSV template">
         <i class="fa-solid fa-file-csv text-muted"></i>
-        <span>Sample CSV</span>
+        <span class="d-none d-sm-inline">Sample CSV</span>
     </a>
     <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary" title="Bulk import formulations">
         <i class="fa-solid fa-file-import text-muted"></i>
-        <span>Import CSV</span>
+        <span class="d-none d-sm-inline">Import CSV</span>
     </a>
     <a href="{{ route('admin.products.export-csv') }}" class="admin-btn-secondary" title="Export catalog to CSV">
         <i class="fa-solid fa-file-export text-muted"></i>
-        <span>Export CSV</span>
+        <span class="d-none d-sm-inline">Export CSV</span>
     </a>
     <a href="{{ route('admin.products.create') }}" class="admin-btn-primary">
         <i class="fa-solid fa-plus"></i>

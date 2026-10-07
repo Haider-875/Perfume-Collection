@@ -298,11 +298,11 @@
                                                 <button type="button" @click="copyText('{{ $bankDetails['account_number'] }}')" class="btn btn-link p-0 text-gold text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px;">Copy</button>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center py-1 border-bottom border-gold-20">
+                                        <div class="d-flex flex-wrap justify-content-between align-items-center py-1 border-bottom border-gold-20 gap-1">
                                             <span class="text-muted-parchment">IBAN:</span>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span class="font-mono text-light-parchment fw-bold">{{ $bankDetails['iban'] }}</span>
-                                                <button type="button" @click="copyText('{{ $bankDetails['iban'] }}')" class="btn btn-link p-0 text-gold text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px;">Copy</button>
+                                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                                <span class="font-mono text-light-parchment fw-bold break-words-all">{{ $bankDetails['iban'] }}</span>
+                                                <button type="button" @click="copyText('{{ $bankDetails['iban'] }}')" class="btn btn-link p-0 text-gold text-decoration-underline text-uppercase fw-semibold flex-shrink-0" style="font-size: 11px;">Copy</button>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center py-1">
@@ -416,11 +416,11 @@
                                                     <span class="text-muted-parchment">Account Title:</span>
                                                     <span class="fw-semibold text-light-parchment">{{ $walletDetails['sadapay']['account_title'] }}</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between py-1">
+                                                <div class="d-flex flex-wrap justify-content-between py-1 gap-1">
                                                     <span class="text-muted-parchment">Account / IBAN:</span>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <span class="font-mono text-light-parchment fw-bold">{{ $walletDetails['sadapay']['account_number'] }}</span>
-                                                        <button type="button" @click="copyText('{{ $walletDetails['sadapay']['account_number'] }}')" class="btn btn-link p-0 text-gold text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px;">Copy</button>
+                                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                                        <span class="font-mono text-light-parchment fw-bold break-words-all">{{ $walletDetails['sadapay']['account_number'] }}</span>
+                                                        <button type="button" @click="copyText('{{ $walletDetails['sadapay']['account_number'] }}')" class="btn btn-link p-0 text-gold text-decoration-underline text-uppercase fw-semibold flex-shrink-0" style="font-size: 11px;">Copy</button>
                                                     </div>
                                                 </div>
                                             </div>

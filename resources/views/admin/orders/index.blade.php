@@ -8,7 +8,8 @@
 <div class="d-flex align-items-center gap-2">
     <a href="{{ route('admin.orders.export-csv', request()->query()) }}" class="admin-btn-secondary">
         <i class="fa-solid fa-file-export text-muted"></i>
-        <span>Export Orders CSV</span>
+        <span class="d-none d-sm-inline">Export Orders CSV</span>
+        <span class="d-sm-none">Export</span>
     </a>
 </div>
 @endsection

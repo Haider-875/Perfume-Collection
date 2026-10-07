@@ -203,6 +203,46 @@
             }
         }
 
+        @media (max-width: 767.98px) {
+            .admin-topbar {
+                height: auto !important;
+                min-height: 58px;
+                padding: 0.6rem 1rem !important;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .admin-content {
+                padding: 1rem 0.75rem !important;
+            }
+            .admin-filter-bar {
+                padding: 0.85rem !important;
+            }
+            .admin-card {
+                margin-bottom: 1rem;
+            }
+            .table-responsive {
+                max-width: 100%;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-x: contain;
+            }
+            input[type="text"], input[type="email"], input[type="password"], input[type="number"], 
+            input[type="url"], input[type="date"], select, textarea, .form-control, .form-select {
+                font-size: 16px !important;
+                min-height: 44px;
+            }
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
+        body.overflow-hidden {
+            overflow: hidden !important;
+            touch-action: none;
+        }
+
         /* Clean Bootstrap Bridge for Existing Admin Views */
         .bg-brand-surface, .bg-brand-card {
             background-color: #ffffff !important;
@@ -510,6 +550,10 @@
         .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         
+        @media (max-width: 479.98px) {
+            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        }
+        
         @media (min-width: 768px) {
             .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -594,6 +638,8 @@
     @stack('styles')
 </head>
 <body x-data="{ mobileNav: false, previewModal: false, previewImgUrl: '', previewImgTitle: '' }" 
+      x-init="$watch('mobileNav', val => document.body.classList.toggle('overflow-hidden', val))"
+      :class="{ 'overflow-hidden': mobileNav }"
       @open-preview.window="previewModal = true; previewImgUrl = $event.detail.url; previewImgTitle = $event.detail.title || 'Image Preview'" 
       @keydown.escape.window="previewModal = false">
 
@@ -602,14 +648,19 @@
 
     <!-- Simple Modern Bootstrap Sidebar -->
     <aside id="adminSidebar" :class="{ 'show': mobileNav }">
-        <!-- Brand Header (Left Logo + Perfumes Collection) -->
-        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" class="me-2">
-            <div>
-                <div class="sidebar-brand-text">PERFUMES COLLECTION</div>
-                <small class="text-secondary text-uppercase" style="font-size: 13px; letter-spacing: 0.12em;">Admin Center</small>
-            </div>
-        </a>
+        <!-- Brand Header (Left Logo + Perfumes Collection + Mobile Close Button) -->
+        <div class="sidebar-brand justify-content-between">
+            <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none">
+                <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" class="me-2">
+                <div>
+                    <div class="sidebar-brand-text">PERFUMES COLLECTION</div>
+                    <small class="text-secondary text-uppercase" style="font-size: 13px; letter-spacing: 0.12em;">Admin Center</small>
+                </div>
+            </a>
+            <button type="button" @click="mobileNav = false" class="btn text-white-50 border-0 p-1 d-lg-none" style="font-size: 1.25rem;" aria-label="Close Sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
 
         <!-- Navigation Links -->
         <nav class="sidebar-nav">

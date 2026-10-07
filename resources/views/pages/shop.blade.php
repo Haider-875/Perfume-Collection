@@ -40,115 +40,68 @@
 </section>
 
 <!-- Main Catalog Body -->
-<section class="py-5" style="background-color: #050203;">
+<section class="py-5" style="background-color: #050203;" 
+         x-data="{ mobileFiltersOpen: false }"
+         x-init="$watch('mobileFiltersOpen', val => document.body.classList.toggle('overflow-hidden', val))">
     <div class="container px-3 px-lg-4">
+
+        <!-- Mobile Filter Backdrop (d-lg-none) -->
+        <div x-show="mobileFiltersOpen"
+             x-cloak
+             @click="mobileFiltersOpen = false"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="mobile-offcanvas-backdrop d-lg-none"
+             style="z-index: 1055;"></div>
+
+        <!-- Mobile Filter Offcanvas Drawer (d-lg-none) -->
+        <div x-show="mobileFiltersOpen"
+             x-cloak
+             @keydown.escape.window="mobileFiltersOpen = false"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-x-full" 
+             x-transition:enter-end="opacity-100 translate-x-0"
+             x-transition:leave="transition ease-in duration-200" 
+             x-transition:leave-start="opacity-100 translate-x-0"
+             x-transition:leave-end="opacity-0 -translate-x-full"
+             class="mobile-filter-drawer p-3 p-sm-4 d-lg-none"
+             style="z-index: 1060;">
+            <div class="flex-grow-1 overflow-y-auto pe-1">
+                @include('partials.shop-filters', ['formId' => 'mobileCatalogFilterForm', 'isMobileDrawer' => true])
+            </div>
+        </div>
+
         <div class="row g-4 align-items-start">
-            
-            <!-- Left: Luxury Olfactory Filter Sidebar (lg:col-3) -->
-            <aside class="col-12 col-lg-3">
-                <div class="bg-wine-card border border-gold-25 rounded-4 p-4 sticky-top shadow-xl d-flex flex-column gap-4" style="top: 112px;">
-                    <div class="d-flex justify-content-between align-items-center pb-3 border-bottom border-gold-20">
-                        <h3 class="text-light-parchment fw-bold d-flex align-items-center gap-2 mb-0" style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;">
-                            <i class="fas fa-sliders-h text-gold"></i> FILTER SCENTS
-                        </h3>
-                        <a href="{{ route('shop.index') }}" class="text-muted-parchment text-gold-hover transition text-decoration-none" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Reset All</a>
-                    </div>
-
-                    <form action="{{ route('shop.index') }}" method="GET" id="catalogFilterForm" class="d-flex flex-column gap-4">
-                        <!-- Search Input -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-2" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Keywords / Impressions</label>
-                            <input type="text" name="q" value="{{ request('q') }}" placeholder="Search notes, designer names..." class="form-control form-control-luxury py-2 px-3 text-xs">
-                        </div>
-
-                        <!-- Collections / Categories -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-3" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Categories</label>
-                            <div class="d-flex flex-column gap-2">
-                                <label class="d-flex align-items-center justify-content-between cursor-pointer mb-0 {{ !request('category') ? 'text-gold fw-bold' : 'text-light-parchment text-gold-hover' }}" style="font-size: 12px;">
-                                    <span class="d-flex align-items-center gap-2">
-                                        <input type="radio" name="category" value="" {{ !request('category') ? 'checked' : '' }} onchange="this.form.submit()" class="form-check-input bg-transparent border-gold-40 m-0"> 
-                                        All Categories
-                                    </span>
-                                </label>
-                                @foreach($categories as $cat)
-                                    <label class="d-flex align-items-center justify-content-between cursor-pointer mb-0 {{ request('category') == $cat->slug ? 'text-gold fw-bold' : 'text-light-parchment text-gold-hover' }}" style="font-size: 12px;">
-                                        <span class="d-flex align-items-center gap-2">
-                                            <input type="radio" name="category" value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'checked' : '' }} onchange="this.form.submit()" class="form-check-input bg-transparent border-gold-40 m-0"> 
-                                            {{ $cat->name }}
-                                        </span>
-                                        <span class="text-muted-parchment" style="font-size: 10px;">({{ $cat->active_products_count }})</span>
-                                    </label>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Olfactory Families -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-2" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Fragrance Family</label>
-                            <select name="family" onchange="this.form.submit()" class="form-select form-control-luxury text-xs py-2 px-3">
-                                <option value="" class="bg-wine-dark text-light-parchment">All Fragrance Families</option>
-                                @foreach($fragranceFamilies as $fam)
-                                    <option value="{{ $fam->slug }}" {{ request('family') == $fam->slug ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">
-                                        {{ $fam->name }} ({{ $fam->products_count }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <!-- Gender / Aura -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-2" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Gender Persona</label>
-                            <div class="row g-1">
-                                @foreach(['Unisex', 'Men', 'Women'] as $g)
-                                    <div class="col-4">
-                                        <label class="p-2 border rounded-3 text-center cursor-pointer transition d-block w-100 mb-0 {{ request('gender') == $g ? 'bg-wine-accent border-gold text-gold-soft fw-bold' : 'bg-wine-dark border-gold-25 text-light-parchment' }}" style="font-size: 12px;">
-                                            <input type="radio" name="gender" value="{{ $g }}" {{ request('gender') == $g ? 'checked' : '' }} class="d-none" onchange="this.form.submit()">
-                                            {{ $g }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Price Range (PKR) -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-2" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Price Range (PKR)</label>
-                            <div class="d-flex gap-2 align-items-center mb-3">
-                                <input type="number" name="min_price" value="{{ request('min_price', 1500) }}" placeholder="Min" class="form-control form-control-luxury text-xs py-2 px-2 text-center" style="width: calc(50% - 10px);">
-                                <span class="text-muted-parchment">-</span>
-                                <input type="number" name="max_price" value="{{ request('max_price', 15000) }}" placeholder="Max" class="form-control form-control-luxury text-xs py-2 px-2 text-center" style="width: calc(50% - 10px);">
-                            </div>
-                            <button type="submit" class="w-100 btn-gold py-2 text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 0.05em;">Apply Price Filter</button>
-                        </div>
-
-                        <!-- Key Scent Notes -->
-                        <div>
-                            <label class="d-block text-gold fw-semibold mb-2" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Signature Note Accord</label>
-                            <div class="d-flex flex-wrap gap-1 overflow-y-auto no-scrollbar" style="max-height: 160px;">
-                                @foreach($scentNotes as $note)
-                                    <a href="{{ request()->fullUrlWithQuery(['note' => $note->slug]) }}" 
-                                       class="px-2 py-1 rounded border transition text-decoration-none {{ request('note') == $note->slug ? 'bg-wine-accent border-gold text-gold-soft fw-bold' : 'bg-wine-dark border-gold-20 text-muted-parchment text-gold-hover' }}"
-                                       style="font-size: 11px;">
-                                        {{ $note->name }}
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    </form>
+            <!-- Left: Luxury Olfactory Filter Sidebar (lg:col-3, Desktop only) -->
+            <aside class="col-12 col-lg-3 d-none d-lg-block">
+                <div class="bg-wine-card border border-gold-25 rounded-4 p-4 sticky-top shadow-xl d-flex flex-column gap-4" style="top: 112px; max-height: calc(100vh - 140px); overflow-y: auto;">
+                    @include('partials.shop-filters', ['formId' => 'catalogFilterForm', 'isMobileDrawer' => false])
                 </div>
             </aside>
 
             <!-- Right: Products Grid & Top Sort Bar (lg:col-9) -->
             <div class="col-12 col-lg-9 d-flex flex-column gap-4">
-                <!-- Top Sorting Bar -->
+                <!-- Top Sorting Bar with Mobile Filter Toggle -->
                 <div class="bg-wine-card border border-gold-25 rounded-3 p-3 d-flex flex-wrap justify-content-between align-items-center gap-3 shadow-sm">
-                    <div class="text-muted-parchment" style="font-size: 12px;">
-                        Showing <strong class="text-light-parchment">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                    <div class="d-flex align-items-center gap-3">
+                        <button type="button" 
+                                @click="mobileFiltersOpen = true"
+                                class="d-lg-none d-flex align-items-center gap-2 px-3 py-2 border border-gold-30 text-light-parchment text-xs text-uppercase tracking-widest rounded-3 bg-wine-dark transition"
+                                style="min-height: 38px;">
+                            <i class="fas fa-sliders-h text-gold"></i>
+                            <span>Filters & Notes</span>
+                        </button>
+                        <div class="text-muted-parchment" style="font-size: 12px;">
+                            Showing <strong class="text-light-parchment">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                        </div>
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <label class="text-gold fw-semibold mb-0" style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Sort By:</label>
+                        <label class="text-gold fw-semibold mb-0 d-none d-sm-inline" style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Sort By:</label>
                         <select onchange="location = this.value;" class="form-select form-control-luxury text-xs py-1 px-3" style="width: auto;">
                             <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Curated / Featured</option>
                             <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Bestsellers</option>

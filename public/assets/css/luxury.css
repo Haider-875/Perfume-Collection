@@ -206,7 +206,7 @@ p.font-sans,
 }
 
 .text-gold {
-    color: #c4294b !important;
+    color: #f0e8ea !important;
 }
 
 .text-gold-soft {
@@ -455,11 +455,17 @@ p.font-sans,
 }
 
 .nav-dropdown-wrapper:hover .nav-dropdown-menu,
-.nav-dropdown-wrapper:focus-within .nav-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+.nav-dropdown-wrapper:focus-within .nav-dropdown-menu,
+.nav-dropdown-menu.dropdown-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+
+.nav-chevron.chevron-rotated {
+    transform: rotate(180deg) !important;
+    color: #ffffff !important;
 }
 
 .dropdown-item-luxury {
@@ -710,7 +716,7 @@ p.font-sans,
 .bg-gradient-gold-pill,
 .filter-pill-active {
     background: #780d24 !important;
-    color: #070204 !important;
+    color: #f0e8ea !important;
     border: 1px solid #780d24 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
     font-weight: 600 !important;
@@ -956,7 +962,7 @@ h6,
 }
 
 .text-gold {
-    color: #c4294b !important;
+    color: #f0e8ea !important;
 }
 
 .text-gold-soft {
@@ -3062,4 +3068,211 @@ svg {
 .bg-wine-accent,
 .bg-maroon-dark {
     color: white !important;
+}
+
+/* ==========================================================================
+   MASTER MOBILE RESPONSIVE & MOBILE UX OVERHAUL (320px - 991px)
+   ========================================================================== */
+
+/* 1. Global Viewport & Horizontal Overflow Prevention */
+html {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body.overflow-hidden {
+    overflow: hidden !important;
+    touch-action: none;
+    -webkit-overflow-scrolling: auto;
+}
+
+/* 2. Responsive Table Containment */
+.table-responsive {
+    max-width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: rgba(133, 16, 41, 0.4);
+    border-radius: 4px;
+}
+
+/* 3. Touch Target Standards & iOS Input Zoom Fix (Inputs >= 16px on mobile) */
+@media (max-width: 767.98px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    select,
+    textarea,
+    .form-control,
+    .form-select,
+    .form-control-luxury {
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+
+    button,
+    .btn,
+    .pdp-qty-btn-luxury,
+    .form-check-input {
+        touch-action: manipulation;
+    }
+
+    /* Long Numbers & Hash Safety */
+    .break-words-all {
+        word-break: break-all !important;
+        overflow-wrap: anywhere !important;
+    }
+}
+
+/* 4. Product Card Mobile Touch UX */
+@media (max-width: 991.98px) {
+    .product-card .quick-actions-toolbar {
+        opacity: 0.92 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+
+    .product-card .quick-actions-toolbar a,
+    .product-card .quick-actions-toolbar button {
+        width: 2rem !important;
+        height: 2rem !important;
+        font-size: 11px !important;
+        background: rgba(15, 6, 9, 0.85) !important;
+        backdrop-filter: blur(4px);
+    }
+}
+
+/* 5. Mobile Drawer Backdrops & Scroll Containment */
+.mobile-offcanvas-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 2, 3, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1055;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-offcanvas-drawer,
+.mobile-filter-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 86vw;
+    max-width: 360px;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    background: #0d0306 !important;
+    border-right: 1px solid rgba(133, 16, 41, 0.4);
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    box-shadow: 10px 0 45px rgba(0, 0, 0, 0.9);
+}
+
+/* 6. Account Navigation Swipeable Bar on Mobile */
+@media (max-width: 991.98px) {
+    .account-sidebar-nav,
+    .col-lg-3 > nav.bg-wine-card {
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        padding: 0.5rem !important;
+        gap: 0.5rem !important;
+        scrollbar-width: none;
+    }
+
+    .account-sidebar-nav::-webkit-scrollbar,
+    .col-lg-3 > nav.bg-wine-card::-webkit-scrollbar {
+        display: none;
+    }
+
+    .account-sidebar-nav a,
+    .col-lg-3 > nav.bg-wine-card a {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        border-start-width: 0 !important;
+        border-bottom-width: 2px !important;
+        padding: 0.5rem 0.85rem !important;
+    }
+}
+
+/* 7. Cart Drawer Mobile Tuning */
+@media (max-width: 575.98px) {
+    .cart-drawer {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+    }
+
+    .cart-drawer .p-4 {
+        padding: 1rem !important;
+    }
+}
+
+/* 8. Sticky Mobile Bottom PDP Buy Bar */
+.pdp-mobile-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(13, 3, 6, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(133, 16, 41, 0.4);
+    z-index: 1030;
+    padding: 0.65rem 1rem;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* 9. Ultra-Mobile (320px - 360px Viewports) Safe Padding & Sizing */
+@media (max-width: 360px) {
+    .container,
+    .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .pdp-flacon-img {
+        max-height: 220px !important;
+    }
+
+    .btn-pill-gold,
+    .btn-pill-whatsapp,
+    .btn-cart-gradient {
+        font-size: 0.7rem !important;
+        padding: 8px 10px !important;
+        letter-spacing: 0.04em !important;
+    }
+
+    .fs-5 {
+        font-size: 1.05rem !important;
+    }
+
+    .display-6, .display-5 {
+        font-size: 1.65rem !important;
+    }
 }
