@@ -100,7 +100,7 @@
                 max-height: 52px !important;
                 width: auto !important;
                 object-fit: contain;
-                filter: drop-shadow(0 2px 14px rgba(214,170,98,0.35)) !important;
+                filter: drop-shadow(0 2px 14px rgba(133,16,41,0.4)) !important;
             }
         }
     </style>
@@ -164,7 +164,7 @@
                 <div class="d-flex align-items-center gap-3 flex-shrink-0 site-brand-wrapper">
                     <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 gap-sm-3 text-decoration-none site-brand-link">
                         <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
-                            class="img-fluid site-logo-img" style="height: 2.75rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(214,170,98,0.25));">
+                            class="img-fluid site-logo-img" style="height: 2.75rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(133,16,41,0.35));">
                         <div class="d-none d-lg-flex flex-column site-brand-text">
                             <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400;">PERFUMES
                                 <br> COLLECTION</span>
