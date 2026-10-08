@@ -314,6 +314,24 @@ window.addBundleToCart = function(bundleId) {
     .catch(err => console.error(err));
 };
 
+window.buyBundleNow = function(bundleId) {
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCsrfToken()
+        },
+        body: JSON.stringify({ bundle_id: bundleId, quantity: 1 })
+    })
+    .then(res => res.json())
+    .then(() => {
+        window.location.href = '/checkout';
+    })
+    .catch(() => {
+        window.location.href = '/checkout';
+    });
+};
+
 window.updateCartItemQty = function(itemId, qty) {
     fetch('/cart/update', {
         method: 'POST',

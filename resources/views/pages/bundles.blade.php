@@ -180,14 +180,14 @@
                                         <span>ADD BUNDLE TO BAG</span>
                                     </button>
 
-                                    <a 
-                                        href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I would like to order the ' . $bundle->name . ' for Rs. ' . number_format($bundle->price) . ' with Cash on Delivery.') }}" 
-                                        target="_blank" 
-                                        class="btn-bundle-whatsapp"
+                                    <button 
+                                        type="button"
+                                        onclick="buyBundleNow({{ $bundle->id }})"
+                                        class="btn-bundle-buynow"
                                     >
-                                        <i class="fab fa-whatsapp fs-5"></i>
-                                        <span>1-CLICK ORDER (COD)</span>
-                                    </a>
+                                        <span>BUY NOW</span>
+                                        <i class="fas fa-arrow-right-long btn-arrow"></i>
+                                    </button>
                                 </div>
 
                                 <div class="text-muted-luxury pt-1 border-top border-gold-20" style="font-size: 9.5px; line-height: 1.4;">
