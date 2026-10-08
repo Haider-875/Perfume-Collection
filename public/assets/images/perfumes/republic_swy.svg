@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_swy" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#C47D3B" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#080402" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="swyLiquid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B1E0A"/>
+      <stop offset="35%" stop-color="#783F16"/>
+      <stop offset="70%" stop-color="#A85C24"/>
+      <stop offset="100%" stop-color="#3B1E0A"/>
+    </linearGradient>
+    <linearGradient id="swyBronze" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE4CC"/>
+      <stop offset="50%" stop-color="#C47D3B"/>
+      <stop offset="100%" stop-color="#6B3C12"/>
+    </linearGradient>
+    <filter id="shadow_swy" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080402"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_swy)"/>
+  <ellipse cx="300" cy="720" rx="170" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_swy)"/>
+
+  <g filter="url(#shadow_swy)">
+    <!-- Spherical Dome Bronze Cap -->
+    <ellipse cx="300" cy="150" rx="45" ry="40" fill="url(#swyBronze)" stroke="#FFF" stroke-opacity="0.4" stroke-width="1.5"/>
+
+    <!-- Interlocking Double Metal Ring Around Collar -->
+    <ellipse cx="300" cy="195" rx="55" ry="12" fill="none" stroke="url(#swyBronze)" stroke-width="6"/>
+    <ellipse cx="300" cy="215" rx="60" ry="14" fill="none" stroke="url(#swyBronze)" stroke-width="6"/>
+
+    <!-- Curved Rounded Heavy Glass Shoulder Flask -->
+    <path d="M190,260 C190,230 410,230 410,260 L415,630 C415,675 185,675 185,630 Z" fill="url(#swyLiquid)" stroke="url(#swyBronze)" stroke-width="2.5"/>
+
+    <!-- Clean Modern Bold Plaque -->
+    <rect x="220" y="360" width="160" height="170" rx="8" fill="#140A04" stroke="url(#swyBronze)" stroke-width="2"/>
+
+    <text x="300" y="405" font-family="'Cinzel', serif" font-size="10" fill="#E5A86D" text-anchor="middle" letter-spacing="3">EMPORIO</text>
+    <text x="300" y="445" font-family="'Cinzel', serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">REPUBLIC</text>
+    <text x="300" y="475" font-family="'Montserrat', sans-serif" font-size="8" fill="#E5A86D" text-anchor="middle" letter-spacing="1.5">STRONGER WITH YOU</text>
+    <line x1="250" y1="492" x2="350" y2="492" stroke="url(#swyBronze)" stroke-width="1"/>
+    <text x="300" y="515" font-family="'Montserrat', sans-serif" font-size="7.5" fill="#888" text-anchor="middle" letter-spacing="1">CARDAMOM &amp; CHESTNUT</text>
+  </g>
+</svg>

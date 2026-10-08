@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_opium" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#E56A9D" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#080206" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="roseBronze" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0EC"/>
+      <stop offset="50%" stop-color="#E58BB1"/>
+      <stop offset="100%" stop-color="#8C3B5E"/>
+    </linearGradient>
+    <filter id="shadow_opium" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080206"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_opium)"/>
+  <ellipse cx="300" cy="720" rx="170" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_opium)"/>
+
+  <g filter="url(#shadow_opium)">
+    <!-- Cylindrical Black Cap with Rose-Gold Ring -->
+    <rect x="255" y="130" width="90" height="70" rx="5" fill="#140D14" stroke="url(#roseBronze)" stroke-width="1.5"/>
+    <rect x="255" y="180" width="90" height="15" fill="url(#roseBronze)"/>
+
+    <!-- Square Shimmering Body with Soft Shoulders -->
+    <rect x="180" y="220" width="240" height="460" rx="30" fill="#120A12" stroke="url(#roseBronze)" stroke-width="2"/>
+
+    <!-- Glitter Pattern Sprinkles -->
+    <g fill="#FFAEC9" opacity="0.4">
+      <circle cx="210" cy="260" r="2"/><circle cx="230" cy="290" r="1.5"/><circle cx="380" cy="270" r="2"/><circle cx="360" cy="300" r="1.5"/>
+      <circle cx="200" cy="620" r="2"/><circle cx="230" cy="640" r="1.5"/><circle cx="390" cy="630" r="2"/><circle cx="370" cy="650" r="1.5"/>
+    </g>
+
+    <!-- Iconic Central Porthole Glass Window with Amber Scent Glow -->
+    <circle cx="300" cy="450" r="75" fill="#E58BB1" fill-opacity="0.25" stroke="url(#roseBronze)" stroke-width="4"/>
+    <circle cx="300" cy="450" r="65" fill="#240718" stroke="#FFAEC9" stroke-width="1"/>
+
+    <text x="300" y="425" font-family="'Cinzel', serif" font-size="12" fill="#E58BB1" text-anchor="middle" letter-spacing="3">BLACK</text>
+    <text x="300" y="455" font-family="'Cinzel', serif" font-size="15" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">OPIUM</text>
+    <text x="300" y="480" font-family="'Montserrat', sans-serif" font-size="8.5" fill="#FFAEC9" text-anchor="middle" letter-spacing="2">CHARM</text>
+  </g>
+</svg>

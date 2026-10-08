@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_degree" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#D44A26" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#080201" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="magmaRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#260D07"/>
+      <stop offset="35%" stop-color="#591E10"/>
+      <stop offset="70%" stop-color="#8F301A"/>
+      <stop offset="100%" stop-color="#260D07"/>
+    </linearGradient>
+    <linearGradient id="emberFlame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA885"/>
+      <stop offset="50%" stop-color="#E54E22"/>
+      <stop offset="100%" stop-color="#731903"/>
+    </linearGradient>
+    <filter id="shadow_degree" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080201"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_degree)"/>
+  <ellipse cx="300" cy="720" rx="160" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_degree)"/>
+
+  <g filter="url(#shadow_degree)">
+    <!-- Asymmetric Angled Fiery Bronze Cap -->
+    <polygon points="240,140 360,110 360,180 240,180" fill="#1C0904" stroke="url(#emberFlame)" stroke-width="2"/>
+
+    <!-- Angled Volcanic Crystal Flacon -->
+    <polygon points="210,210 390,210 420,680 180,680" fill="url(#magmaRed)" stroke="url(#emberFlame)" stroke-width="2.5"/>
+
+    <!-- Magma Glow Vein Lines -->
+    <line x1="210" y1="210" x2="300" y2="680" stroke="#FF7547" stroke-width="2.5"/>
+    <line x1="390" y1="210" x2="300" y2="680" stroke="#FF7547" stroke-width="2.5"/>
+
+    <!-- High Octane Core Plaque -->
+    <rect x="225" y="370" width="150" height="170" rx="6" fill="#140603" stroke="url(#emberFlame)" stroke-width="2"/>
+
+    <text x="300" y="425" font-family="'Montserrat', sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">91°</text>
+    <text x="300" y="460" font-family="'Cinzel', serif" font-size="14" font-weight="bold" fill="#FF7547" text-anchor="middle" letter-spacing="3">DEGREE</text>
+    <line x1="255" y1="480" x2="345" y2="480" stroke="#FF7547" stroke-width="1.5"/>
+    <text x="300" y="505" font-family="'Montserrat', sans-serif" font-size="8" fill="#FAC2B4" text-anchor="middle" letter-spacing="1.5">HIGH OCTANE EXTRAIT</text>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_myway" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#D66D9B" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#080407" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pinkLiquid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA8CB"/>
+      <stop offset="40%" stop-color="#E56A9D"/>
+      <stop offset="80%" stop-color="#A83266"/>
+      <stop offset="100%" stop-color="#591434"/>
+    </linearGradient>
+    <linearGradient id="lapisStone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2B4C7E"/>
+      <stop offset="40%" stop-color="#192A4A"/>
+      <stop offset="80%" stop-color="#0F1B30"/>
+      <stop offset="100%" stop-color="#080E1A"/>
+    </linearGradient>
+    <linearGradient id="roseGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFE4D6"/>
+      <stop offset="50%" stop-color="#E5A88A"/>
+      <stop offset="100%" stop-color="#A8583B"/>
+    </linearGradient>
+    <filter id="shadow_myway" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080407"/>
+  <circle cx="300" cy="470" r="280" fill="url(#bgGlow_myway)"/>
+  <ellipse cx="300" cy="710" rx="190" ry="24" fill="#000000" opacity="0.95" filter="url(#shadow_myway)"/>
+
+  <g filter="url(#shadow_myway)">
+    <!-- Iconic Smooth Organic Lapis Blue Pebble / Talisman Stone Cap -->
+    <path d="M230,160 C220,110 380,100 370,160 C360,200 240,200 230,160 Z" fill="url(#lapisStone)" stroke="#3E6DB0" stroke-width="2"/>
+    <ellipse cx="270" cy="130" rx="25" ry="12" fill="#FFFFFF" fill-opacity="0.25" transform="rotate(-20 270 130)"/>
+
+    <!-- Polished Rose-Gold Collar Ring -->
+    <rect x="235" y="180" width="130" height="25" rx="3" fill="url(#roseGold)" stroke="#FFF" stroke-opacity="0.4" stroke-width="1"/>
+    <!-- Blue Ribbon Accent around Collar -->
+    <rect x="250" y="205" width="100" height="15" fill="#14223B"/>
+
+    <!-- Wide Heavy Clear Glass Square Shoulder Bottle -->
+    <rect x="175" y="240" width="250" height="430" rx="25" fill="url(#pinkLiquid)" stroke="url(#roseGold)" stroke-width="2.5"/>
+
+    <!-- Heavy Glass Base -->
+    <path d="M175,610 L425,610 L425,645 C425,658 415,670 400,670 L200,670 C185,670 175,658 175,645 Z" fill="#FFFFFF" fill-opacity="0.2"/>
+
+    <!-- Vertical Glass Highlights -->
+    <line x1="190" y1="260" x2="190" y2="620" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="4"/>
+    <line x1="410" y1="260" x2="410" y2="620" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="3"/>
+
+    <!-- Modern Framed Clear Label -->
+    <rect x="215" y="380" width="170" height="150" rx="8" fill="#1A0A12" stroke="url(#roseGold)" stroke-width="1.5"/>
+    <text x="300" y="420" font-family="'Cinzel', serif" font-size="10" fill="#E5A88A" text-anchor="middle" letter-spacing="4">PARIS ATELIER</text>
+    <text x="300" y="455" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">MY WAY</text>
+    <text x="300" y="480" font-family="'Montserrat', sans-serif" font-size="8.5" fill="#FFA8CB" text-anchor="middle" letter-spacing="2">PARIS LADIES</text>
+    <text x="300" y="505" font-family="'Montserrat', sans-serif" font-size="7" fill="#CCCCCC" text-anchor="middle" letter-spacing="1">TUBEROSE &amp; MADAGASCAR VANILLA</text>
+  </g>
+</svg>

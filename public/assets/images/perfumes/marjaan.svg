@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_marjaan" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#C53044" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#080203" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rubyLiquid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3D0B13"/>
+      <stop offset="35%" stop-color="#781324"/>
+      <stop offset="70%" stop-color="#A81D33"/>
+      <stop offset="100%" stop-color="#3D0B13"/>
+    </linearGradient>
+    <linearGradient id="arabianGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="40%" stop-color="#D4AF37"/>
+      <stop offset="80%" stop-color="#8C6819"/>
+      <stop offset="100%" stop-color="#FFEAA7"/>
+    </linearGradient>
+    <filter id="shadow_marjaan" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080203"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_marjaan)"/>
+  <ellipse cx="300" cy="735" rx="160" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_marjaan)"/>
+
+  <g filter="url(#shadow_marjaan)">
+    <!-- Pointed Minaret Dome Cap -->
+    <path d="M300,70 Q305,100 325,120 L325,160 Q325,170 300,170 Q275,170 275,160 L275,120 Q295,100 300,70 Z" fill="url(#arabianGold)" stroke="#FFF1D0" stroke-width="1.5"/>
+    <circle cx="300" cy="65" r="5" fill="#FFEAA7"/>
+    
+    <!-- Ornate Arabesque Tier Rings -->
+    <rect x="250" y="170" width="100" height="20" rx="3" fill="url(#arabianGold)"/>
+    <rect x="260" y="190" width="80" height="35" fill="#24070B" stroke="url(#arabianGold)" stroke-width="1.5"/>
+    <rect x="245" y="225" width="110" height="15" rx="2" fill="url(#arabianGold)"/>
+
+    <!-- Octagonal Faceted Tower Body -->
+    <polygon points="210,240 390,240 420,680 390,700 210,700 180,680" fill="url(#rubyLiquid)" stroke="url(#arabianGold)" stroke-width="2.5"/>
+
+    <!-- Facet Glass Reflection Panes -->
+    <polygon points="210,240 270,240 260,690 210,700 180,680" fill="#FFFFFF" fill-opacity="0.08"/>
+    <polygon points="330,240 390,240 420,680 390,700 340,690" fill="#000000" fill-opacity="0.35"/>
+    <line x1="270" y1="240" x2="260" y2="690" stroke="url(#arabianGold)" stroke-opacity="0.5" stroke-width="1.5"/>
+    <line x1="330" y1="240" x2="340" y2="690" stroke="url(#arabianGold)" stroke-opacity="0.5" stroke-width="1.5"/>
+
+    <!-- Tall Golden Islamic Arch Cartouche -->
+    <path d="M240,360 Q300,310 360,360 L360,560 L240,560 Z" fill="#140306" stroke="url(#arabianGold)" stroke-width="2"/>
+    <path d="M246,365 Q300,320 354,365 L354,554 L246,554 Z" fill="none" stroke="url(#arabianGold)" stroke-opacity="0.4" stroke-width="1"/>
+
+    <!-- Saffron Flower Emblem -->
+    <circle cx="300" cy="385" r="14" fill="none" stroke="url(#arabianGold)" stroke-width="1.2"/>
+    <path d="M300,375 L300,395 M290,385 L310,385 M293,378 L307,392 M293,392 L307,378" stroke="#E5C158" stroke-width="1.2"/>
+
+    <text x="300" y="425" font-family="'Cinzel', serif" font-size="9" fill="#E5C158" text-anchor="middle" letter-spacing="3">ATTAR ROYALE</text>
+    <text x="300" y="460" font-family="'Cinzel', serif" font-size="16" font-weight="bold" fill="#FFF1D0" text-anchor="middle" letter-spacing="3">MARJAAN</text>
+    <text x="300" y="485" font-family="'Montserrat', sans-serif" font-size="8" fill="#D4AF37" text-anchor="middle" letter-spacing="2">UNISEX EXTRAIT</text>
+    
+    <line x1="265" y1="505" x2="335" y2="505" stroke="url(#arabianGold)" stroke-width="0.8"/>
+    <text x="300" y="530" font-family="'Cinzel', serif" font-size="8" fill="#CCCCCC" text-anchor="middle" letter-spacing="1.5">RED AMBER &amp; SAFFRON</text>
+  </g>
+</svg>

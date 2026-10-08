@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_bomb" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#E54D8C" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#080204" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bombPink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6B1238"/>
+      <stop offset="35%" stop-color="#BA2D6B"/>
+      <stop offset="70%" stop-color="#E54D8C"/>
+      <stop offset="100%" stop-color="#6B1238"/>
+    </linearGradient>
+    <filter id="shadow_bomb" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080204"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_bomb)"/>
+  <ellipse cx="300" cy="720" rx="170" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_bomb)"/>
+
+  <g filter="url(#shadow_bomb)">
+    <!-- Emerald-Cut Faceted Crystal Stopper -->
+    <polygon points="250,110 350,110 370,160 230,160" fill="#FFAEC9" fill-opacity="0.6" stroke="#FFF" stroke-width="2"/>
+    <rect x="270" y="160" width="60" height="20" fill="#14050D"/>
+
+    <!-- Iconic Silk Ribbon Bow on Neck -->
+    <path d="M300,185 L260,175 L265,195 Z" fill="#111111"/>
+    <path d="M300,185 L340,175 L335,195 Z" fill="#111111"/>
+    <circle cx="300" cy="185" r="7" fill="#E54D8C"/>
+
+    <!-- Emerald-Cut Chamfered Crystal Flacon Body -->
+    <polygon points="210,210 390,210 430,270 430,640 390,680 210,680 170,640 170,270" fill="url(#bombPink)" stroke="#FFAEC9" stroke-width="2.5"/>
+
+    <!-- Vertical Candy Stripes -->
+    <g stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="6">
+      <line x1="230" y1="220" x2="230" y2="670"/>
+      <line x1="270" y1="220" x2="270" y2="670"/>
+      <line x1="330" y1="220" x2="330" y2="670"/>
+      <line x1="370" y1="220" x2="370" y2="670"/>
+    </g>
+
+    <!-- Center Glamour Ribbon Badge -->
+    <rect x="215" y="370" width="170" height="150" rx="6" fill="#12030A" stroke="#FFAEC9" stroke-width="2"/>
+
+    <text x="300" y="415" font-family="'Cinzel', serif" font-size="9" fill="#FFAEC9" text-anchor="middle" letter-spacing="3">VICTORIA ATELIER</text>
+    <text x="300" y="450" font-family="'Cinzel', serif" font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">BOMBSHELL</text>
+    <text x="300" y="475" font-family="'Montserrat', sans-serif" font-size="8" fill="#FFAEC9" text-anchor="middle" letter-spacing="2">FLORA EXTRAIT</text>
+    <text x="300" y="500" font-family="'Montserrat', sans-serif" font-size="7" fill="#DDD" text-anchor="middle" letter-spacing="1">PASSIONFRUIT &amp; PEONY</text>
+  </g>
+</svg>

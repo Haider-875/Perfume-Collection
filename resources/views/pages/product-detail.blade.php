@@ -29,6 +29,23 @@
     },
     addToCart() {
         addToCartAjax({{ $product->id }}, this.quantity, this.selectedVariantId);
+    },
+    buyNow() {
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ product_id: {{ $product->id }}, quantity: this.quantity, variant_id: this.selectedVariantId })
+        })
+        .then(res => res.json())
+        .then(() => {
+            window.location.href = '{{ route('checkout.index') }}';
+        })
+        .catch(() => {
+            window.location.href = '{{ route('checkout.index') }}';
+        });
     }
 }">
 
@@ -163,7 +180,7 @@
                     <!-- Pricing & Savings (Completely Unboxed, Clean & Elegant) -->
                     <div class="d-flex flex-column gap-1.5 font-sans text-start my-1">
                         <div class="d-flex align-items-center gap-3">
-                            <span class="pdp-price-amount" x-text="formattedPrice">
+                            <span class="pdp-price-amount" style="color: #ffffff !important;" x-text="formattedPrice">
                                 {{ $product->formatted_effective_price }}
                             </span>
                             <span class="text-sm text-decoration-line-through text-muted-luxury" x-text="formattedComparePrice"></span>
@@ -181,7 +198,7 @@
 
                     <!-- Flacon Size Variant Selector (Clean 10ml, 50ml, 100ml with Soft Rounded Corners & Spacious Gap) -->
                     <div class="d-flex flex-column gap-2.5 font-sans text-start my-1">
-                        <label class="d-block text-xs text-uppercase tracking-wider text-gold fw-medium mb-1">
+                        <label class="d-block text-xs text-uppercase tracking-wider text-white fw-medium mb-1" style="color: #ffffff !important;">
                             SELECT BOTTLE SIZE
                         </label>
                         <div class="d-flex flex-wrap gap-2 gap-sm-3">
@@ -234,17 +251,18 @@
                             </button>
                         </div>
 
-                        <!-- Row 2: WhatsApp 1-Click Order (Stadium Pill with Sliding Arrow) -->
-                        <a 
-                            :href="whatsappUrl" 
-                            target="_blank" 
-                            class="w-100 btn-pill-whatsapp"
-                            style="min-height: 48px;"
+                        <!-- Row 2: BUY NOW (Direct Checkout Button with Black Background & Maroon Hover) -->
+                        <button 
+                            type="button" 
+                            @click="buyNow()" 
+                            class="w-100 btn-pill-buynow"
+                            style="min-height: 48px; background-color: #000000; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 9999px; font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none;"
+                            onmouseover="this.style.backgroundColor='#5A121C'; this.style.borderColor='#8C1D2D';"
+                            onmouseout="this.style.backgroundColor='#000000'; this.style.borderColor='rgba(255, 255, 255, 0.25)';"
                         >
-                            <i class="fab fa-whatsapp fs-5"></i>
-                            <span>1-CLICK ORDER ON WHATSAPP (COD)</span>
+                            <span>BUY NOW</span>
                             <i class="fas fa-arrow-right-long btn-arrow"></i>
-                        </a>
+                        </button>
                     </div>
 
                     <!-- Packaging Guarantee & Dispatch Note (Unboxed, Clean & Elegant) -->
@@ -622,12 +640,19 @@
     <div class="position-fixed bottom-0 start-0 end-0 p-3 d-lg-none d-flex align-items-center justify-content-between shadow-2xl border-top border-gold-30 font-sans" style="z-index: 1040; background-color: rgba(8, 2, 4, 0.95); backdrop-filter: blur(12px);">
         <div>
             <div class="text-xs text-ivory text-truncate fw-semibold" style="max-width: 140px;">{{ $product->name }}</div>
-            <div class="text-xs fw-bold text-gold-bright" x-text="formattedPrice"></div>
+            <div class="text-xs fw-bold text-white" style="color: #ffffff !important;" x-text="formattedPrice"></div>
         </div>
         <div class="d-flex align-items-center gap-2">
-            <a :href="whatsappUrl" target="_blank" class="btn-pill-whatsapp py-2 px-3 text-decoration-none" style="font-size: 11px; min-height: 38px;">
-                <i class="fab fa-whatsapp"></i>
-            </a>
+            <button 
+                type="button" 
+                @click="buyNow()" 
+                class="py-2 px-3 text-uppercase tracking-wider fw-bold text-white" 
+                style="font-size: 11px; min-height: 38px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 9999px; cursor: pointer; transition: all 0.3s ease;"
+                onmouseover="this.style.backgroundColor='#5A121C'; this.style.borderColor='#8C1D2D';"
+                onmouseout="this.style.backgroundColor='#000000'; this.style.borderColor='rgba(255, 255, 255, 0.25)';"
+            >
+                <span>BUY NOW</span>
+            </button>
             <button 
                 type="button" 
                 @click="addToCart()"

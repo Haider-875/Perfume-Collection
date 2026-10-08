@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_hawas" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#45B6D4" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#020608" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glacialCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A2230"/>
+      <stop offset="35%" stop-color="#164A69"/>
+      <stop offset="70%" stop-color="#2D7B9C"/>
+      <stop offset="100%" stop-color="#0A2230"/>
+    </linearGradient>
+    <linearGradient id="silverPython" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#A8D6E8"/>
+      <stop offset="100%" stop-color="#557D94"/>
+    </linearGradient>
+    <filter id="shadow_hawas" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#020608"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_hawas)"/>
+  <ellipse cx="300" cy="720" rx="170" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_hawas)"/>
+
+  <g filter="url(#shadow_hawas)">
+    <!-- Chrome Textured Heavy Python Cap -->
+    <rect x="250" y="130" width="100" height="70" rx="6" fill="url(#silverPython)" stroke="#FFF" stroke-width="1.5"/>
+    <path d="M260,150 Q300,165 340,150" fill="none" stroke="#2D7B9C" stroke-width="3"/>
+
+    <!-- Frosted Curved Ice Wave Flacon -->
+    <path d="M190,260 Q300,230 410,260 L415,640 Q300,680 185,640 Z" fill="url(#glacialCyan)" stroke="url(#silverPython)" stroke-width="2.5"/>
+
+    <!-- Sub-Zero Frost Wave Ripples -->
+    <g stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2" fill="none">
+      <path d="M195,350 Q300,320 405,350"/>
+      <path d="M190,450 Q300,420 410,450"/>
+      <path d="M195,550 Q300,520 405,550"/>
+    </g>
+
+    <!-- Frozen Crystal Plate -->
+    <rect x="220" y="380" width="160" height="170" rx="8" fill="#071721" stroke="url(#silverPython)" stroke-width="2"/>
+
+    <text x="300" y="425" font-family="'Cinzel', serif" font-size="12" fill="#A8D6E8" text-anchor="middle" letter-spacing="3">RASASI</text>
+    <text x="300" y="465" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">HAWAS ICE</text>
+    <text x="300" y="495" font-family="'Montserrat', sans-serif" font-size="8.5" fill="#65D3ED" text-anchor="middle" letter-spacing="2">ICE HEAVEN</text>
+    <text x="300" y="525" font-family="'Montserrat', sans-serif" font-size="7.5" fill="#CCC" text-anchor="middle" letter-spacing="1">FROZEN APPLE &amp; AMBERGRIS</text>
+  </g>
+</svg>

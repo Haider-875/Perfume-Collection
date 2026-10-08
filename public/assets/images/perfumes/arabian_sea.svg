@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow_arabian" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#3E7AB8" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#020408" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cobaltGlass" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#061224"/>
+      <stop offset="35%" stop-color="#0E284D"/>
+      <stop offset="70%" stop-color="#19488A"/>
+      <stop offset="100%" stop-color="#061224"/>
+    </linearGradient>
+    <filter id="shadow_arabian" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#020408"/>
+  <circle cx="300" cy="460" r="280" fill="url(#bgGlow_arabian)"/>
+  <ellipse cx="300" cy="720" rx="170" ry="22" fill="#000000" opacity="0.95" filter="url(#shadow_arabian)"/>
+
+  <g filter="url(#shadow_arabian)">
+    <!-- Sleek Magnetic Circular Cap -->
+    <rect x="250" y="140" width="100" height="60" rx="6" fill="#0A182E" stroke="#5B9AE0" stroke-width="1.5"/>
+    <circle cx="300" cy="170" r="16" fill="none" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+
+    <!-- Sharp Monolithic Square Cobalt Crystal Flacon -->
+    <rect x="180" y="215" width="240" height="465" rx="8" fill="url(#cobaltGlass)" stroke="#5B9AE0" stroke-width="2"/>
+
+    <!-- Polished Silver Typography Direct on Glass -->
+    <text x="300" y="380" font-family="'Cinzel', serif" font-size="11" fill="#8ABEE8" text-anchor="middle" letter-spacing="5">BLEU DE CHANEL</text>
+    <line x1="240" y1="400" x2="360" y2="400" stroke="#5B9AE0" stroke-width="1"/>
+    <text x="300" y="445" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">ARABIAN</text>
+    <text x="300" y="480" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">SEA</text>
+    <text x="300" y="520" font-family="'Montserrat', sans-serif" font-size="8.5" fill="#A8D4FF" text-anchor="middle" letter-spacing="2">MARINE CITRUS &amp; INCENSE</text>
+    <text x="300" y="555" font-family="'Cinzel', serif" font-size="8" fill="#888" text-anchor="middle" letter-spacing="2">EXTRAIT DE PARFUM • 50 ML</text>
+  </g>
+</svg>
