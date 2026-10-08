@@ -404,10 +404,10 @@
         </section>
     @endif
 
-    <!-- 6. New Release Impressions Grid -->
+    <!-- 6. New Release Impressions Carousel (Swiper) -->
     <section class="py-5 bg-theme-dark border-bottom border-gold-20">
         <div class="container px-3 px-lg-4">
-            <div class="text-center mx-auto mb-5" style="max-width: 42rem;">
+            <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">FRESHLY MACERATED</span>
                 <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
@@ -416,12 +416,28 @@
                 <div class="bg-gradient-gold-pill mx-auto mt-2" style="width: 4rem; height: 2px;"></div>
             </div>
 
-            <div class="row row-cols-2 row-cols-lg-4 g-3 g-md-4">
-                @foreach($newArrivals as $nProduct)
-                    <div class="col">
-                        <x-product-card :product="$nProduct" />
+            <!-- New Releases Carousel (Swiper) -->
+            <div class="position-relative">
+                <div class="swiper newarrivals-swiper">
+                    <div class="swiper-wrapper pb-4">
+                        @foreach($newArrivals as $nProduct)
+                            <div class="swiper-slide h-auto">
+                                <x-product-card :product="$nProduct" />
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                    <div class="swiper-pagination newarrivals-swiper-pagination position-relative mt-3"></div>
+                </div>
+                <!-- Desktop Luxury Navigation Controls -->
+                <div class="swiper-button-prev newarrivals-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next newarrivals-next luxury-swiper-next d-none d-lg-flex"></div>
+            </div>
+
+            <!-- View All New Releases CTA -->
+            <div class="text-center mt-4 mt-lg-5">
+                <a href="{{ route('collections.show', 'all') }}?sort=new" class="btn-outline-gold px-4 py-3">
+                    <span>Explore All New Arrivals</span>
+                </a>
             </div>
         </div>
     </section>
@@ -694,6 +710,39 @@
                     navigation: {
                         nextEl: '.bestseller-next',
                         prevEl: '.bestseller-prev',
+                    },
+                    breakpoints: {
+                        480: { slidesPerView: 1.8, spaceBetween: 16 },
+                        576: { slidesPerView: 2.2, spaceBetween: 18 },
+                        768: { slidesPerView: 3, spaceBetween: 20 },
+                        1024: { slidesPerView: 4, spaceBetween: 24 }
+                    }
+                });
+            }
+
+            // New Release Impressions Carousel Swiper
+            if (document.querySelector('.newarrivals-swiper') && !document.querySelector('.newarrivals-swiper').swiper) {
+                new Swiper('.newarrivals-swiper', {
+                    slidesPerView: 1.35,
+                    spaceBetween: 14,
+                    speed: 800,
+                    loop: false,
+                    grabCursor: true,
+                    resistance: true,
+                    resistanceRatio: 0.75,
+                    touchRatio: 1.15,
+                    touchAngle: 45,
+                    threshold: 4,
+                    watchSlidesProgress: true,
+                    lazyPreloadPrevNext: 2,
+                    pagination: {
+                        el: '.newarrivals-swiper-pagination',
+                        clickable: true,
+                        dynamicBullets: true,
+                    },
+                    navigation: {
+                        nextEl: '.newarrivals-next',
+                        prevEl: '.newarrivals-prev',
                     },
                     breakpoints: {
                         480: { slidesPerView: 1.8, spaceBetween: 16 },

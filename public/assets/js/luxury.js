@@ -86,6 +86,38 @@ function initSwiperSliders() {
         });
     }
 
+    // New Release Impressions Carousel
+    if (document.querySelector('.newarrivals-swiper') && !document.querySelector('.newarrivals-swiper').swiper && typeof Swiper !== 'undefined') {
+        new Swiper('.newarrivals-swiper', {
+            slidesPerView: 1.35,
+            spaceBetween: 14,
+            speed: 800,
+            grabCursor: true,
+            resistance: true,
+            resistanceRatio: 0.75,
+            touchRatio: 1.15,
+            touchAngle: 45,
+            threshold: 4,
+            watchSlidesProgress: true,
+            lazyPreloadPrevNext: 2,
+            pagination: {
+                el: '.newarrivals-swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.newarrivals-next',
+                prevEl: '.newarrivals-prev',
+            },
+            breakpoints: {
+                480: { slidesPerView: 1.8, spaceBetween: 16 },
+                576: { slidesPerView: 2.2, spaceBetween: 18 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 24 }
+            }
+        });
+    }
+
     // Related Products / You May Also Like Carousel
     if (document.querySelector('.related-products-swiper') && !document.querySelector('.related-products-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.related-products-swiper', {
