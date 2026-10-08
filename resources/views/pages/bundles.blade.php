@@ -155,7 +155,7 @@
                             <div class="bundle-pricing-card text-center d-flex flex-column gap-3 shadow-xl">
                                 <div>
                                     <span class="d-block text-muted-luxury mb-1 text-uppercase fw-medium" style="font-size: 10px; letter-spacing: 0.14em;">Special Set Price</span>
-                                    <div class="font-hero hero-title fs-2 text-gold-bright fw-normal gold-gradient-text">
+                                    <div class="font-hero hero-title fs-2 text-white fw-bold" style="color: #ffffff !important;">
                                         Rs. {{ number_format($bundle->price) }}
                                     </div>
                                     @if($bundle->original_price > $bundle->price)

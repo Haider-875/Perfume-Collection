@@ -527,7 +527,7 @@
         <div id="cartDrawerFooter" class="p-3.5 p-sm-4 border-top border-gold-25 bg-wine-dark d-flex flex-column gap-3">
             <div class="d-flex align-items-center justify-content-between">
                 <span class="text-muted-luxury text-uppercase tracking-wider text-xs fw-medium">Subtotal:</span>
-                <span id="cartDrawerSubtotal" class="font-serif fs-4 text-gold-soft fw-bold">Rs. 0</span>
+                <span id="cartDrawerSubtotal" class="font-serif fs-4 text-white fw-bold" style="color: #ffffff !important;">Rs. 0</span>
             </div>
 
             <!-- Customer Trust & Authenticity Assurance Strip -->

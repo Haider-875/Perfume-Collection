@@ -2221,7 +2221,7 @@ p.font-sans,
     font-family: 'Poppins', sans-serif !important;
     font-size: clamp(1.75rem, 2.5vw, 2.15rem) !important;
     font-weight: 600 !important;
-    color: #780d24;
+    color: #FFFFFF !important;
 }
 
 .pdp-size-btn {
@@ -4134,4 +4134,21 @@ body.overflow-hidden {
         padding: 0 0.5rem;
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/* 14. Master Global White Price Typography Suite                             */
+/* -------------------------------------------------------------------------- */
+.product-card-pricing,
+.product-card-pricing span,
+.pdp-price-amount,
+.pdp-sticky-price,
+.cart-item-price,
+#cartDrawerSubtotal,
+.bundle-pricing-card .hero-title,
+.current-price,
+.price-display,
+.price-text {
+    color: #FFFFFF !important;
+}
+
 

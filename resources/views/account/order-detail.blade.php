@@ -158,7 +158,7 @@
                                     <p class="text-muted-parchment mb-0" style="font-size: 11px;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
                                 </div>
                             </div>
-                            <div class="text-end font-mono text-gold-soft fw-semibold">
+                            <div class="text-end font-mono text-white fw-semibold" style="color: #ffffff !important;">
                                 Rs. {{ number_format($item->total, 0) }}
                             </div>
                         </div>
@@ -170,7 +170,7 @@
             <div class="border-top border-gold-20 pt-3 d-flex flex-column gap-2 text-xs">
                 <div class="d-flex justify-content-between text-muted-parchment">
                     <span>Subtotal:</span>
-                    <span class="font-mono text-light-parchment">Rs. {{ number_format($order->subtotal, 0) }}</span>
+                    <span class="font-mono text-white" style="color: #ffffff !important;">Rs. {{ number_format($order->subtotal, 0) }}</span>
                 </div>
                 @if($order->discount_amount > 0)
                     <div class="d-flex justify-content-between text-gold-soft">
@@ -183,8 +183,8 @@
                     <span class="font-mono text-light-parchment">{{ $order->shipping_cost == 0 ? 'COMPLIMENTARY' : 'Rs. ' . number_format($order->shipping_cost, 0) }}</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-baseline pt-2 border-top border-gold-20">
-                    <span class="font-serif fs-5 text-gold-soft">Total Amount:</span>
-                    <span class="font-serif fs-3 text-gold-soft font-mono fw-bold">Rs. {{ number_format($order->total_amount, 0) }}</span>
+                    <span class="font-serif fs-5 text-light-parchment">Total Amount:</span>
+                    <span class="font-serif fs-3 text-white font-mono fw-bold" style="color: #ffffff !important;">Rs. {{ number_format($order->total_amount, 0) }}</span>
                 </div>
             </div>
 

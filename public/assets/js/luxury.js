@@ -280,7 +280,7 @@ function renderCartUI(data) {
                         <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" class="cart-qty-btn" aria-label="Increase quantity">&plus;</button>
                     </div>
                     <!-- Total Price -->
-                    <div class="cart-item-price font-sans text-ivory fw-bold">
+                    <div class="cart-item-price font-sans text-white fw-bold" style="color: #ffffff !important;">
                         ${item.total}
                     </div>
                 </div>
@@ -530,7 +530,7 @@ function initSearchModal() {
                             <div style="font-family: var(--font-heading); color: var(--text-ivory); font-weight: 600; font-size: 0.95rem;">${item.title}</div>
                             <div style="font-family: var(--font-serif); color: var(--text-muted); font-size: 0.82rem;">${item.notes}</div>
                         </div>
-                        <div style="font-family: var(--font-heading); color: var(--gold-champagne); font-weight: 700;">${item.price}</div>
+                        <div style="font-family: var(--font-heading); color: #ffffff !important; font-weight: 700;">${item.price}</div>
                     </a>
                 `).join('');
             }
@@ -572,7 +572,7 @@ function initQuickView() {
                         <div>
                             <span class="badge-luxury" style="margin-bottom: 8px; display: inline-block;">${concentration}</span>
                             <h3 style="font-size: 1.6rem; margin-bottom: 8px; color: var(--text-ivory); font-family: var(--font-heading);">${name}</h3>
-                            <div style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--gold-champagne); font-weight: 700; margin-bottom: 14px;">${price}</div>
+                            <div style="font-family: var(--font-heading); font-size: 1.4rem; color: #ffffff !important; font-weight: 700; margin-bottom: 14px;">${price}</div>
                             <p style="font-family: var(--font-serif); color: var(--text-sub); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">${desc}</p>
                             <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
                                 <strong>Olfactory Notes:</strong> <em>${notes}</em>

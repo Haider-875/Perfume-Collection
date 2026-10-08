@@ -113,7 +113,7 @@
                                         </div>
 
                                         <div class="pt-3 mt-3 border-top border-white-10 d-flex align-items-center justify-content-between gap-2">
-                                            <div class="font-mono fs-7 fw-semibold text-gold">
+                                            <div class="font-mono fs-7 fw-semibold text-white" style="color: #ffffff !important;">
                                                 Rs. {{ number_format($prod->effective_price, 0) }}
                                             </div>
                                             <button @click="addToBag({{ $prod->id }})" 

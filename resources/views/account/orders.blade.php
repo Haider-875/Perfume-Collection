@@ -92,7 +92,7 @@
 
                                     <div class="d-flex align-items-center gap-4 text-md-end">
                                         <div>
-                                            <div class="font-mono fs-6 text-gold-soft fw-bold">Rs. {{ number_format($order->total_amount, 0) }}</div>
+                                            <div class="font-mono fs-6 text-white fw-bold" style="color: #ffffff !important;">Rs. {{ number_format($order->total_amount, 0) }}</div>
                                             <div class="text-muted-parchment" style="font-size: 11px;">{{ $order->items->sum('quantity') }} Flacon(s)</div>
                                         </div>
                                         <a href="{{ route('account.order.show', $order->order_number) }}" 

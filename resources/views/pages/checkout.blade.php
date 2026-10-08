@@ -544,9 +544,9 @@
                                     <div class="flex-grow-1">
                                         <h4 class="font-serif fs-6 text-light-parchment fw-semibold mb-0 lh-sm">{{ $item->bundle ? $item->bundle->name : $item->product->name }}</h4>
                                         <p class="text-gold mb-0" style="font-size: 11px;">{{ $item->variant ? $item->variant->size_label : ($item->bundle ? 'Artisan Bundle' : $item->product->volume_ml . 'ml Flacon') }}</p>
-                                        <div class="text-muted-parchment font-mono" style="font-size: 11px;">Qty: {{ $item->quantity }} &times; Rs. {{ number_format($item->price, 0) }}</div>
+                                        <div class="text-muted-parchment font-mono" style="font-size: 11px;">Qty: {{ $item->quantity }} &times; <span class="text-white" style="color: #ffffff !important;">Rs. {{ number_format($item->price, 0) }}</span></div>
                                     </div>
-                                    <div class="text-end font-mono text-sm text-gold-soft fw-bold">
+                                    <div class="text-end font-mono text-sm text-white fw-bold" style="color: #ffffff !important;">
                                         Rs. {{ number_format($item->price * $item->quantity, 0) }}
                                     </div>
                                 </div>
@@ -584,7 +584,7 @@
                         <div class="pt-3 border-top border-gold-20 d-flex flex-column gap-2 text-xs">
                             <div class="d-flex justify-content-between text-muted-parchment">
                                 <span>Subtotal:</span>
-                                <span class="font-mono text-light-parchment fw-semibold">Rs. {{ number_format($cart->subtotal, 0) }}</span>
+                                <span class="font-mono text-white fw-semibold" style="color: #ffffff !important;">Rs. {{ number_format($cart->subtotal, 0) }}</span>
                             </div>
 
                             @if($cart->discount_amount > 0)
@@ -603,7 +603,7 @@
 
                             <div class="d-flex justify-content-between align-items-baseline pt-3 border-top border-gold-20">
                                 <span class="font-serif fs-5 text-light-parchment fw-bold">Total:</span>
-                                <span class="font-serif fs-3 fw-bold text-gold-soft font-mono">
+                                <span class="font-serif fs-3 fw-bold text-white font-mono" style="color: #ffffff !important;">
                                     Rs. {{ number_format($grandTotal, 0) }}
                                 </span>
                             </div>

@@ -100,7 +100,7 @@
                                         <div>
                                             <h3 class="font-serif fs-6 text-light-parchment fw-semibold mb-1">{{ $item->bundle ? $item->bundle->name : $item->product->name }}</h3>
                                             <p class="text-gold fw-semibold mb-1" style="font-size: 11px;">{{ $item->variant ? $item->variant->size_label : ($item->bundle ? 'Curated Bundle' : $item->product->volume_ml . 'ml Flacon') }}</p>
-                                            <div class="text-gold-soft fw-bold">Rs. {{ number_format($item->price, 0) }}</div>
+                                            <div class="text-white fw-bold" style="color: #ffffff !important;">Rs. {{ number_format($item->price, 0) }}</div>
                                         </div>
                                     </div>
 
@@ -116,7 +116,7 @@
 
                                         <!-- Total -->
                                         <div class="text-end">
-                                            <div class="fs-6 fw-bold text-light-parchment font-mono">
+                                            <div class="fs-6 fw-bold text-white font-mono" style="color: #ffffff !important;">
                                                 Rs. {{ number_format($item->price * $item->quantity, 0) }}
                                             </div>
                                             <button type="button" @click="removeItem({{ $item->id }})" class="btn btn-link p-0 text-danger text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 0.05em;">
@@ -165,7 +165,7 @@
                         <div class="d-flex flex-column gap-2 text-xs">
                             <div class="d-flex justify-content-between text-muted-parchment">
                                 <span>Subtotal:</span>
-                                <span class="text-light-parchment fw-bold font-mono">Rs. {{ number_format($cart->subtotal, 0) }}</span>
+                                <span class="text-white fw-bold font-mono" style="color: #ffffff !important;">Rs. {{ number_format($cart->subtotal, 0) }}</span>
                             </div>
                             @if($cart->discount_amount > 0)
                                 <div class="d-flex justify-content-between text-gold-soft fw-semibold">
@@ -179,7 +179,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-baseline pt-3 border-top border-gold-20">
                                 <span class="font-serif fs-5 text-light-parchment">Total:</span>
-                                <span class="font-serif fs-3 text-gold-soft fw-bold font-mono">
+                                <span class="font-serif fs-3 text-white fw-bold font-mono" style="color: #ffffff !important;">
                                     Rs. {{ number_format(max(0, $cart->subtotal - $cart->discount_amount), 0) }}
                                 </span>
                             </div>

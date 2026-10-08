@@ -68,7 +68,7 @@
                     <div class="col-12 col-sm-4">
                         <div class="bg-wine-card border border-gold-20 p-4 rounded-3 h-100">
                             <span class="d-block text-muted-parchment text-uppercase mb-1" style="font-size: 10px; letter-spacing: 0.2em;">Total Valuation</span>
-                            <div class="font-serif fs-2 text-gold-soft font-mono">Rs. {{ number_format($totalSpent, 0) }}</div>
+                            <div class="font-serif fs-2 text-white font-mono" style="color: #ffffff !important;">Rs. {{ number_format($totalSpent, 0) }}</div>
                             <span class="d-block text-muted-parchment mt-1" style="font-size: 11px;">Extrait Acquisitions</span>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="d-flex align-items-center gap-4 text-sm-end">
                                         <div>
-                                            <div class="font-mono fs-6 text-gold fw-bold">Rs. {{ number_format($order->total_amount, 0) }}</div>
+                                            <div class="font-mono fs-6 text-white fw-bold" style="color: #ffffff !important;">Rs. {{ number_format($order->total_amount, 0) }}</div>
                                             <div class="text-muted-parchment text-uppercase" style="font-size: 10px;">{{ $order->payment_status }}</div>
                                         </div>
                                         <a href="{{ route('account.order.show', $order->order_number) }}" class="btn btn-outline-light py-1 px-3 text-gold border-gold-30 text-gold-hover text-decoration-none text-uppercase" style="font-size: 11px; letter-spacing: 0.05em;">

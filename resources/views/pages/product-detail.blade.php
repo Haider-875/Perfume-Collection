@@ -676,7 +676,7 @@
             <!-- Left Info: Title & Price -->
             <div class="pdp-sticky-info">
                 <div class="pdp-sticky-name">{{ $product->name }}</div>
-                <div class="pdp-sticky-price" x-text="formattedPrice">{{ $product->formatted_effective_price }}</div>
+                <div class="pdp-sticky-price text-white" style="color: #ffffff !important;" x-text="formattedPrice">{{ $product->formatted_effective_price }}</div>
             </div>
 
             <!-- Right Buttons: BUY NOW + ADD TO BAG -->

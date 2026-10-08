@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between py-1">
                                     <span class="text-muted-parchment">Total:</span>
-                                    <span class="fw-bold text-gold-soft font-serif fs-6">Rs. {{ number_format($order->total_amount, 0) }}</span>
+                                    <span class="fw-bold text-white font-serif fs-6" style="color: #ffffff !important;">Rs. {{ number_format($order->total_amount, 0) }}</span>
                                 </div>
                                 @if($order->bank_transaction_id)
                                     <div class="d-flex justify-content-between py-1 border-top border-gold-20">
@@ -184,7 +184,7 @@
                                         <div class="fw-bold fs-6 text-light-parchment">{{ $item->product_name }}</div>
                                         <div class="text-muted-parchment" style="font-size: 11px;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</div>
                                     </div>
-                                    <div class="text-end font-mono text-gold-soft fw-bold">
+                                    <div class="text-end font-mono text-white fw-bold" style="color: #ffffff !important;">
                                         Rs. {{ number_format($item->total, 0) }}
                                     </div>
                                 </div>

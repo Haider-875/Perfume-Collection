@@ -91,14 +91,14 @@
             <a href="{{ route('shop.show', $product->slug) }}" class="text-ivory text-decoration-none">{{ $product->name }}</a>
         </h3>
 
-        <!-- Dual Pricing / Range in Shimmering Gold -->
+        <!-- Dual Pricing / Range in Pure White -->
         <div class="product-card-pricing my-1 d-flex align-items-baseline justify-content-center gap-1">
-            <span class="text-xs text-muted-luxury fw-medium">
+            <span class="text-xs text-white fw-medium" style="color: #ffffff !important;">
                 Rs. {{ number_format(max(450, round($product->effective_price * 0.22, -1))) }}
             </span>
             <span class="text-light-luxury fw-medium text-uppercase" style="font-size: 10px;">/10ml</span>
-            <span class="text-gold opacity-50 fw-light" style="font-size: 11px;">&ndash;</span>
-            <span class="text-sm fw-bold text-gold-soft">
+            <span class="text-white opacity-50 fw-light" style="font-size: 11px; color: #ffffff !important;">&ndash;</span>
+            <span class="text-sm fw-bold text-white" style="color: #ffffff !important;">
                 {{ $product->formatted_effective_price }}
             </span>
             <span class="text-light-luxury fw-medium text-uppercase" style="font-size: 10px;">/{{ $product->volume_ml }}ml</span>
