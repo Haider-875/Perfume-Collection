@@ -167,14 +167,14 @@
                     </div>
 
                     <!-- Star Rating & Review Count (Poppins Regular / Clean Unboxed Row) -->
-                    <div class="d-flex align-items-center gap-3 text-xs border-top border-bottom border-gold-20 py-3 my-1 font-sans">
-                        <div class="d-flex text-gold" style="font-size: 11px;">
+                    <div class="d-flex flex-wrap align-items-center gap-2 gap-sm-3 text-xs border-top border-bottom border-gold-20 py-2.5 py-sm-3 my-1 font-sans">
+                        <div class="d-inline-flex align-items-center text-gold text-nowrap" style="font-size: 11px; gap: 2px;">
                             @for($i = 1; $i <= 5; $i++)
                                 <i class="fas fa-star {{ $i <= round($product->rating_avg ?: 5) ? '' : 'opacity-25' }}"></i>
                             @endfor
                         </div>
-                        <span class="text-ivory fw-semibold">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
-                        <span class="text-muted-luxury">({{ $product->reviews_count ?: 48 }} Verified Patron Reviews)</span>
+                        <span class="text-ivory fw-semibold text-nowrap" style="white-space: nowrap;">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
+                        <span class="text-muted-luxury text-nowrap" style="white-space: nowrap;">({{ $product->reviews_count ?: 48 }} Verified Patron Reviews)</span>
                     </div>
 
                     <!-- Pricing & Savings (Completely Unboxed, Clean & Elegant) -->
