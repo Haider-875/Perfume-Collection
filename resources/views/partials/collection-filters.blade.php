@@ -140,6 +140,27 @@
         </button>
     </div>
 
+    <!-- Sort by in mobile drawer -->
+    @if(isset($isMobileDrawer) && $isMobileDrawer)
+    <div class="border-top border-gold-20 pt-4 mb-4">
+        <h4 class="text-xs text-uppercase tracking-widest text-gold fw-semibold mb-3">
+            Sort Masterpieces
+        </h4>
+        <select 
+            name="sort" 
+            onchange="this.form.submit()" 
+            class="form-select select-luxury-sort w-100"
+        >
+            <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
+            <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
+            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+            <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rated</option>
+            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
+        </select>
+    </div>
+    @endif
+
     <!-- Reset Filters -->
     @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
         <a href="{{ url()->current() }}" class="d-block text-center text-xs text-danger py-2 border border-danger-subtle rounded text-uppercase tracking-wider fw-semibold text-decoration-none">

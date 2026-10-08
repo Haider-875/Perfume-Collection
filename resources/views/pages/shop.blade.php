@@ -86,32 +86,56 @@
             <!-- Right: Products Grid & Top Sort Bar (lg:col-9) -->
             <div class="col-12 col-lg-9 d-flex flex-column gap-4">
                 <!-- Top Sorting Bar with Mobile Filter Toggle -->
-                <div class="bg-wine-card border border-gold-25 rounded-3 p-3 d-flex flex-wrap justify-content-between align-items-center gap-3 shadow-sm">
-                    <div class="d-flex align-items-center gap-3">
-                        <button type="button" 
-                                @click="mobileFiltersOpen = true"
-                                class="d-lg-none d-flex align-items-center gap-2 px-3 py-2 border border-gold-30 text-light-parchment text-xs text-uppercase tracking-widest rounded-3 bg-wine-dark transition"
-                                style="min-height: 38px;">
-                            <i class="fas fa-sliders-h text-gold"></i>
-                            <span>Filters & Notes</span>
-                        </button>
-                        <div class="text-muted-parchment" style="font-size: 12px;">
-                            Showing <strong class="text-light-parchment">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                <div class="collection-controls-bar mb-3">
+                    <div class="d-flex align-items-center justify-content-between gap-2">
+                        <!-- Left: Mobile Filter Button & Desktop Counter -->
+                        <div class="d-flex align-items-center gap-2">
+                            <button type="button" 
+                                    @click="mobileFiltersOpen = true"
+                                    class="btn-luxury-filter d-lg-none"
+                                    aria-label="Open filter and scent notes drawer">
+                                <i class="fas fa-filter text-gold"></i>
+                                <span>Filters & Notes</span>
+                                @php
+                                    $activeFilterCountShop = (request('q') ? 1 : 0) 
+                                        + (request('family') ? 1 : 0) 
+                                        + (request('gender') ? 1 : 0) 
+                                        + (request('season') ? 1 : 0) 
+                                        + (request('min_price') || request('max_price') ? 1 : 0);
+                                @endphp
+                                @if($activeFilterCountShop > 0)
+                                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0.5" style="font-size: 9px; min-width: 16px;">{{ $activeFilterCountShop }}</span>
+                                @endif
+                            </button>
+                            <div class="text-muted-parchment d-none d-lg-block collection-results-count" style="font-size: 0.85rem; letter-spacing: 0.03em;">
+                                Showing <strong class="text-light-parchment">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                            </div>
+                        </div>
+
+                        <!-- Right: Mobile Counter & Desktop Sort -->
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- Mobile Right Text -->
+                            <div class="text-muted-parchment text-end d-lg-none collection-results-count" style="font-size: 0.76rem; letter-spacing: 0.02em; white-space: nowrap;">
+                                <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                            </div>
+
+                            <!-- Desktop Sort -->
+                            <div class="d-none d-lg-flex align-items-center gap-2">
+                                <label class="text-gold fw-semibold mb-0" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Sort By:</label>
+                                <select onchange="location = this.value;" class="form-select select-luxury-sort">
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Featured</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Bestsellers</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Newest Releases</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: Low to High</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: High to Low</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Top Rated</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="text-gold fw-semibold mb-0 d-none d-sm-inline" style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Sort By:</label>
-                        <select onchange="location = this.value;" class="form-select form-control-luxury text-xs py-1 px-3" style="width: auto;">
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Curated / Featured</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Bestsellers</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Newest Releases</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: Low to High</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: High to Low</option>
-                            <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Top Rated</option>
-                        </select>
-                    </div>
                 </div>
+
+
 
                 <!-- Products Grid -->
                 @if($products->count() > 0)

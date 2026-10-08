@@ -76,53 +76,80 @@
         </div>
 
         <!-- Filter Bar & Sort Controls Header -->
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pb-3 mb-4 border-bottom border-gold-20">
-            <!-- Mobile Filter Toggle -->
-            <button 
-                type="button" 
-                @click="mobileFiltersOpen = !mobileFiltersOpen"
-                class="d-lg-none d-flex align-items-center gap-2 px-3 py-2 border border-gold-30 text-light-parchment text-xs text-uppercase tracking-widest rounded-3 bg-wine-card transition"
-            >
-                <i class="fas fa-sliders-h text-gold"></i>
-                <span>Filters & Notes</span>
-            </button>
-
-            <!-- Results Counter -->
-            <div class="text-xs text-muted-parchment tracking-wider">
-                Showing <span class="text-gold fw-bold">{{ $products->total() }}</span> Extrait Masterpieces
-            </div>
-
-            <!-- Sort Form -->
-            <form action="{{ url()->current() }}" method="GET" class="d-flex align-items-center gap-2">
-                @foreach(request()->except('sort', 'page') as $key => $val)
-                    @if(is_array($val))
-                        @foreach($val as $v)
-                            <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
-                        @endforeach
-                    @else
-                        <input type="hidden" name="{{ $key }}" value="{{ $val }}">
-                    @endif
-                @endforeach
-                
-                <label for="sortSelect" class="text-xs text-uppercase tracking-widest text-gold d-none d-sm-inline fw-semibold mb-0">Sort By:</label>
-                <div class="position-relative">
-                    <select 
-                        name="sort" 
-                        id="sortSelect" 
-                        onchange="this.form.submit()" 
-                        class="form-select form-control-luxury text-xs py-2 px-3 rounded-3"
-                        style="width: auto;"
+        <div class="collection-controls-bar mb-4">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <!-- Left: Mobile Filter Button (Mobile) or Results Counter (Desktop) -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Mobile Filter Toggle Button -->
+                    <button 
+                        type="button" 
+                        @click="mobileFiltersOpen = !mobileFiltersOpen"
+                        class="btn-luxury-filter d-lg-none"
+                        aria-label="Toggle Filters & Fragrance Notes"
                     >
-                        <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Featured Creations</option>
-                        <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Most Coveted (Bestsellers)</option>
-                        <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: Low to High</option>
-                        <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: High to Low</option>
-                        <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Highest Rated</option>
-                        <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Newest Releases</option>
-                    </select>
+                        <i class="fas fa-filter text-gold"></i>
+                        <span>Filters & Notes</span>
+                        @php
+                            $activeFilterCount = (request('search') ? 1 : 0) 
+                                + (request('q') ? 1 : 0) 
+                                + (request('family') ? 1 : 0) 
+                                + (request('gender') ? 1 : 0) 
+                                + (request('season') ? 1 : 0) 
+                                + (request('intensity') ? 1 : 0) 
+                                + (request('min_price') || request('max_price') ? 1 : 0);
+                        @endphp
+                        @if($activeFilterCount > 0)
+                            <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0.5" style="font-size: 9px; min-width: 16px;">{{ $activeFilterCount }}</span>
+                        @endif
+                    </button>
+
+                    <!-- Desktop Results Counter -->
+                    <div class="text-muted-parchment d-none d-lg-block collection-results-count" style="font-size: 0.85rem; letter-spacing: 0.03em;">
+                        Showing <span class="text-gold fw-bold">{{ $products->total() }}</span> Extrait Masterpieces
+                    </div>
                 </div>
-            </form>
+
+                <!-- Right: Mobile Results Text & Desktop Sort Controls -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Mobile Right Text -->
+                    <div class="text-muted-parchment text-end d-lg-none collection-results-count" style="font-size: 0.76rem; letter-spacing: 0.02em; white-space: nowrap;">
+                        Showing <span class="text-gold fw-bold">{{ $products->total() }}</span> Compositions
+                    </div>
+
+                    <!-- Desktop Sort Form Controls -->
+                    <form action="{{ url()->current() }}" method="GET" class="d-none d-lg-flex align-items-center gap-2">
+                        @foreach(request()->except('sort', 'page') as $key => $val)
+                            @if(is_array($val))
+                                @foreach($val as $v)
+                                    <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                                @endforeach
+                            @else
+                                <input type="hidden" name="{{ $key }}" value="{{ $val }}">
+                            @endif
+                        @endforeach
+                        
+                        <label for="sortSelect" class="text-xs text-uppercase tracking-widest text-gold fw-semibold mb-0">Sort By:</label>
+                        <div class="position-relative">
+                            <select 
+                                name="sort" 
+                                id="sortSelect" 
+                                onchange="this.form.submit()" 
+                                class="form-select select-luxury-sort"
+                            >
+                                <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Featured Creations</option>
+                                <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Most Coveted (Bestsellers)</option>
+                                <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: Low to High</option>
+                                <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: High to Low</option>
+                                <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Highest Rated</option>
+                                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Newest Releases</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+
+
 
         <div class="row g-4">
             

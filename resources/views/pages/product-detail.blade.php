@@ -117,8 +117,8 @@
                         </div>
                     @endif
 
-                    <!-- 4-Pillar Trust Highlights (Minimalist, Balanced) -->
-                    <div class="pdp-trust-grid font-sans">
+                    <!-- 4-Pillar Trust Highlights (Desktop only under gallery) -->
+                    <div class="pdp-trust-grid font-sans d-none d-md-grid">
                         <div class="pdp-trust-card">
                             <i class="fas fa-droplet text-gold fs-5"></i>
                             <div>
@@ -136,7 +136,7 @@
                         <div class="pdp-trust-card">
                             <i class="fas fa-truck-fast text-gold fs-5"></i>
                             <div>
-                                <div class="fw-semibold text-ivory" style="font-size: 11px;">Fast TCS Air Courier</div>
+                                <div class="fw-semibold text-ivory" style="font-size: 11px;">Fast Courier Service</div>
                                 <div class="text-muted-luxury" style="font-size: 9.5px;">24–48h delivery Pakistan</div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             <span class="text-sm text-decoration-line-through text-muted-luxury" x-text="formattedComparePrice"></span>
                             <template x-if="savingsPercent > 0">
                                 <span class="badge-savings-luxury" style="font-size: 10px;">
-                                    SAVE <span x-text="savingsPercent"></span>%
+                                     SAVE <span x-text="savingsPercent"></span>%
                                 </span>
                             </template>
                         </div>
@@ -279,6 +279,39 @@
                         </p>
                     </div>
 
+                    <!-- 4-Pillar Trust Highlights (Mobile only: positioned under Packaging & Dispatch Note) -->
+                    <div class="pdp-trust-grid font-sans d-grid d-md-none mt-2">
+                        <div class="pdp-trust-card">
+                            <i class="fas fa-droplet text-gold fs-5"></i>
+                            <div>
+                                <div class="fw-semibold text-ivory" style="font-size: 11px;">38% Extrait de Parfum</div>
+                                <div class="text-muted-luxury" style="font-size: 9.5px;">Double French oil strength</div>
+                            </div>
+                        </div>
+                        <div class="pdp-trust-card">
+                            <i class="fas fa-hourglass-half text-gold fs-5"></i>
+                            <div>
+                                <div class="fw-semibold text-ivory" style="font-size: 11px;">14+ Hours Beast Mode</div>
+                                <div class="text-muted-luxury" style="font-size: 9.5px;">Artisanal macerated sillage</div>
+                            </div>
+                        </div>
+                        <div class="pdp-trust-card">
+                            <i class="fas fa-truck-fast text-gold fs-5"></i>
+                            <div>
+                                <div class="fw-semibold text-ivory" style="font-size: 11px;">Fast Courier Service</div>
+                                <div class="text-muted-luxury" style="font-size: 9.5px;">24–48h delivery Pakistan</div>
+                            </div>
+                        </div>
+                        <div class="pdp-trust-card">
+                            <i class="fas fa-rotate text-gold fs-5"></i>
+                            <div>
+                                <div class="fw-semibold text-ivory" style="font-size: 11px;">7-Day Scent Exchange</div>
+                                <div class="text-muted-luxury" style="font-size: 9.5px;">100% satisfaction guarantee</div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
@@ -289,18 +322,18 @@
     <section class="py-5 py-lg-6 border-bottom border-gold-20" style="background-color: #050203;">
         <div class="container px-3 px-lg-4">
             
-            <div class="text-center mx-auto mb-5" style="max-width: 42rem;">
+            <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-1 font-sans fw-medium text-uppercase" style="font-size: 11px; letter-spacing: 0.2em;">OLFACTORY CLASSIFICATION</span>
                 <h2 class="font-hero text-ivory fw-normal text-uppercase gold-gradient-text" style="font-size: clamp(1.8rem, 2.6vw, 2.3rem);">
                     Fragrance Profile & Accords
                 </h2>
             </div>
 
-            <!-- 4-Card Classification Grid -->
+            <!-- 4-Card Classification Grid (Full-width rows on mobile, 4-columns on desktop) -->
             <div class="row g-3 g-md-4">
                 
                 <!-- Gender -->
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-md-3">
                     <div class="pdp-accord-card h-100">
                         <span class="text-gold font-sans fw-medium text-uppercase" style="font-size: 10px; letter-spacing: 0.14em;">Gender Persona</span>
                         <div class="pdp-accord-title">{{ ucfirst($product->gender ?? 'Men / Unisex') }}</div>
@@ -309,7 +342,7 @@
                 </div>
 
                 <!-- Season -->
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-md-3">
                     <div class="pdp-accord-card h-100">
                         <span class="text-gold font-sans fw-medium text-uppercase" style="font-size: 10px; letter-spacing: 0.14em;">Optimal Season</span>
                         <div class="pdp-accord-title">All Seasons</div>
@@ -318,7 +351,7 @@
                 </div>
 
                 <!-- Occasion -->
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-md-3">
                     <div class="pdp-accord-card h-100">
                         <span class="text-gold font-sans fw-medium text-uppercase" style="font-size: 10px; letter-spacing: 0.14em;">Occasion of Wear</span>
                         <div class="pdp-accord-title">Casual &amp; Formal</div>
@@ -327,7 +360,7 @@
                 </div>
 
                 <!-- Fragrance Profile -->
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-md-3">
                     <div class="pdp-accord-card h-100">
                         <span class="text-gold font-sans fw-medium text-uppercase" style="font-size: 10px; letter-spacing: 0.14em;">Fragrance Family</span>
                         <div class="pdp-accord-title text-gold-soft text-truncate">{{ $product->fragranceFamily->name ?? 'Fresh & Woody' }}</div>
@@ -336,6 +369,7 @@
                 </div>
 
             </div>
+
 
         </div>
     </section>
@@ -396,8 +430,8 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Performance Benchmark Meters (col-12 col-lg-6) -->
-                <div class="col-12 col-lg-6 bg-wine-card border border-gold-25 rounded-4 p-3.5 p-sm-4 p-lg-5 d-flex flex-column gap-3.5 gap-md-4 shadow-sm">
+                <!-- Right Column: Performance Benchmark Meters (Desktop only, hidden on mobile) -->
+                <div class="col-12 col-lg-6 d-none d-lg-flex flex-column bg-wine-card border border-gold-25 rounded-4 p-3.5 p-sm-4 p-lg-5 gap-3.5 gap-md-4 shadow-sm">
                     <div>
                         <span class="text-gold font-sans fw-medium" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;">LABORATORY BENCHMARKS</span>
                         <h3 class="font-hero text-ivory mt-1 fw-normal mb-0 gold-gradient-text" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Extrait Performance Metrics</h3>
@@ -637,33 +671,37 @@
     @endif
 
     <!-- 7. Mobile Sticky Add-to-Cart Bottom Bar -->
-    <div class="position-fixed bottom-0 start-0 end-0 p-3 d-lg-none d-flex align-items-center justify-content-between shadow-2xl border-top border-gold-30 font-sans" style="z-index: 1040; background-color: rgba(8, 2, 4, 0.95); backdrop-filter: blur(12px);">
-        <div>
-            <div class="text-xs text-ivory text-truncate fw-semibold" style="max-width: 140px;">{{ $product->name }}</div>
-            <div class="text-xs fw-bold text-white" style="color: #ffffff !important;" x-text="formattedPrice"></div>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-            <button 
-                type="button" 
-                @click="buyNow()" 
-                class="py-2 px-3 text-uppercase tracking-wider fw-bold text-white" 
-                style="font-size: 11px; min-height: 38px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 9999px; cursor: pointer; transition: all 0.3s ease;"
-                onmouseover="this.style.backgroundColor='#5A121C'; this.style.borderColor='#8C1D2D';"
-                onmouseout="this.style.backgroundColor='#000000'; this.style.borderColor='rgba(255, 255, 255, 0.25)';"
-            >
-                <span>BUY NOW</span>
-            </button>
-            <button 
-                type="button" 
-                @click="addToCart()"
-                class="btn-pill-gold py-2 px-3 text-uppercase tracking-wider fw-bold"
-                style="font-size: 11px; min-height: 38px;"
-            >
-                <span>ADD TO BAG</span>
-                <i class="fas fa-arrow-right-long btn-arrow"></i>
-            </button>
+    <div class="pdp-sticky-bottom-bar d-lg-none">
+        <div class="pdp-sticky-inner">
+            <!-- Left Info: Title & Price -->
+            <div class="pdp-sticky-info">
+                <div class="pdp-sticky-name">{{ $product->name }}</div>
+                <div class="pdp-sticky-price" x-text="formattedPrice">{{ $product->formatted_effective_price }}</div>
+            </div>
+
+            <!-- Right Buttons: BUY NOW + ADD TO BAG -->
+            <div class="pdp-sticky-actions">
+                <button 
+                    type="button" 
+                    @click="buyNow()" 
+                    class="pdp-sticky-btn-buy"
+                    aria-label="Buy Now Instantly"
+                >
+                    <span>BUY NOW</span>
+                </button>
+                <button 
+                    type="button" 
+                    @click="addToCart()"
+                    class="pdp-sticky-btn-bag"
+                    aria-label="Add to Bag"
+                >
+                    <span>ADD TO BAG</span>
+                </button>
+            </div>
         </div>
     </div>
+
+
 
 </div>
 

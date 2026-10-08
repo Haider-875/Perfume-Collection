@@ -648,23 +648,25 @@
         </div>
     </div>
 
-    <!-- 10. Floating WhatsApp & Back to Top Buttons -->
-    <div class="position-fixed bottom-0 end-0 m-4 d-flex flex-column align-items-center gap-3" style="z-index: 1040;">
-        <!-- Back to top button -->
+    <!-- 10. Floating Luxury Actions Dock (WhatsApp & Back to Top) -->
+    <div id="floatingActionsDock" class="luxury-floating-dock d-flex flex-column align-items-center gap-2" style="z-index: 1040;">
+        <!-- Back to top button (Micro gold arrow, revealed only on deep scroll) -->
         <button type="button" id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-            class="rounded-circle bg-theme-dark border border-gold-50 text-gold shadow-lg d-flex align-items-center justify-content-center opacity-0 pe-none transition-smooth"
-            style="width: 2.75rem; height: 2.75rem;"
-            title="Back to Top">
+            class="luxury-dock-btn dock-btn-top opacity-0 pe-none transition-smooth"
+            title="Back to Top"
+            aria-label="Back to Top">
             <i class="fas fa-arrow-up text-xs"></i>
         </button>
 
         <!-- Floating WhatsApp Concierge Button -->
         <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out from your website for fragrance assistance.') }}"
             target="_blank"
-            class="rounded-circle btn-whatsapp shadow-lg d-flex align-items-center justify-content-center text-white text-decoration-none"
-            style="width: 3.25rem; height: 3.25rem;"
-            title="WhatsApp Concierge">
-            <i class="fab fa-whatsapp fs-3"></i>
+            rel="noopener noreferrer"
+            class="luxury-dock-btn dock-btn-whatsapp text-white text-decoration-none shadow-lg position-relative"
+            title="WhatsApp Concierge"
+            aria-label="Contact Concierge on WhatsApp">
+            <i class="fab fa-whatsapp fs-5"></i>
+            <span class="dock-pulse-dot" title="Online Concierge"></span>
         </a>
     </div>
 
@@ -689,10 +691,14 @@
                 fadeEffect: { crossFade: true }
             });
 
-            // Back to top scroll listener
+            // Smart Floating Dock & Back to Top scroll listener
+            const floatingDock = document.getElementById('floatingActionsDock');
             const backToTopBtn = document.getElementById('backToTopBtn');
-            if (backToTopBtn) {
+            let scrollTimeout;
+
+            if (floatingDock && backToTopBtn) {
                 window.addEventListener('scroll', () => {
+                    // Show / hide back to top button
                     if (window.scrollY > 400) {
                         backToTopBtn.classList.remove('opacity-0', 'pe-none');
                         backToTopBtn.classList.add('opacity-100', 'pe-auto');
@@ -700,10 +706,20 @@
                         backToTopBtn.classList.add('opacity-0', 'pe-none');
                         backToTopBtn.classList.remove('opacity-100', 'pe-auto');
                     }
-                });
+
+                    // Mobile non-intrusive scroll fade: dim while scrolling, restore when stopped
+                    if (window.innerWidth <= 768) {
+                        floatingDock.classList.add('scrolling');
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(() => {
+                            floatingDock.classList.remove('scrolling');
+                        }, 800);
+                    }
+                }, { passive: true });
             }
         });
     </script>
+
 
     <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
