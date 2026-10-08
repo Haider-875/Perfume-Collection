@@ -238,35 +238,57 @@ function renderCartUI(data) {
     if (data.items.length === 0) {
         if (footerEl) footerEl.style.display = 'none';
         body.innerHTML = `
-            <div style="text-align: center; padding: 60px 20px; color: #6b7280;">
-                <i class="fas fa-shopping-bag" style="font-size: 2.5rem; margin-bottom: 16px; display: block; color: #d97706;"></i>
-                <h4 style="font-size: 1.15rem; margin-bottom: 8px; color: #111827; font-weight: 600;">Your Fragrance Bag is Empty</h4>
-                <p style="font-size: 0.85rem; margin-bottom: 20px;">Explore our handcrafted impressions with 14+ hours longevity.</p>
-                <a href="/collections/all" class="btn-gold" style="padding: 10px 24px; font-size: 0.8rem; text-decoration: none;">EXPLORE IMPRESSIONS</a>
+            <div class="cart-empty-state text-center py-5 px-3">
+                <div class="cart-empty-icon-wrap mx-auto mb-3">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h4 class="font-hero text-ivory fs-4 mb-2 gold-gradient-text">Your Fragrance Bag is Empty</h4>
+                <p class="text-xs text-muted-luxury font-sans mb-4 mx-auto" style="max-width: 270px; line-height: 1.6;">
+                    Explore our handcrafted Extrait de Parfum impressions with 14+ hours longevity.
+                </p>
+                <a href="/collections/all" onclick="document.getElementById('closeCartDrawer').click()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-pill text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
+                    <span>EXPLORE IMPRESSIONS</span>
+                    <i class="fas fa-arrow-right-long"></i>
+                </a>
             </div>
         `;
         return;
     }
 
-    if (footerEl) footerEl.style.display = 'block';
+    if (footerEl) footerEl.style.display = 'flex';
 
     body.innerHTML = data.items.map(item => `
-        <div style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #E5E7EB; align-items: center;">
-            <img src="${item.image}" alt="${item.name}" style="width: 64px; height: 64px; object-fit: contain; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 4px;">
-            <div style="flex-grow: 1;">
-                <a href="${item.url}" style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; color: #111827; text-decoration: none; display: block; line-height: 1.3;">${item.name}</a>
-                <span style="font-size: 0.75rem; color: #B8860B; font-weight: 600;">${item.variant}</span>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-                    <div style="display: flex; align-items: center; border: 1px solid #D1D5DB; border-radius: 4px; background: #F9FAFB;">
-                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" style="background: transparent; border: none; color: #374151; padding: 2px 8px; cursor: pointer; font-weight: bold;">-</button>
-                        <span style="font-size: 0.8rem; padding: 0 6px; font-weight: 700; color: #111827;">${item.quantity}</span>
-                        <button onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" style="background: transparent; border: none; color: #374151; padding: 2px 8px; cursor: pointer; font-weight: bold;">+</button>
+        <div class="cart-item-luxury d-flex align-items-center gap-3 p-3 rounded-4 shadow-sm position-relative">
+            <!-- Left: Flacon Image Stage Pedestal -->
+            <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none">
+                <img src="${item.image}" alt="${item.name}" class="img-fluid object-fit-contain">
+            </a>
+
+            <!-- Center: Product Info & Quantity Stepper -->
+            <div class="flex-grow-1 min-w-0">
+                <a href="${item.url}" class="cart-item-name font-serif d-block text-truncate text-ivory text-decoration-none" title="${item.name}">
+                    ${item.name}
+                </a>
+                <div class="cart-item-variant text-gold-soft text-uppercase mt-0.5">
+                    ${item.variant}
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-2.5">
+                    <!-- Luxury Qty Stepper Pill -->
+                    <div class="cart-qty-pill d-inline-flex align-items-center">
+                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" class="cart-qty-btn" aria-label="Decrease quantity">&minus;</button>
+                        <span class="cart-qty-val font-sans">${item.quantity}</span>
+                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" class="cart-qty-btn" aria-label="Increase quantity">&plus;</button>
                     </div>
-                    <span style="font-family: var(--font-heading); font-weight: 700; color: #111827; font-size: 1rem;">${item.total}</span>
+                    <!-- Total Price -->
+                    <div class="cart-item-price font-sans text-ivory fw-bold">
+                        ${item.total}
+                    </div>
                 </div>
             </div>
-            <button onclick="removeCartItem(${item.id})" style="background: transparent; border: none; color: #9CA3AF; cursor: pointer; padding: 6px;" title="Remove" onmouseover="this.style.color='#DC2626'" onmouseout="this.style.color='#9CA3AF'">
-                <i class="fas fa-trash-alt" style="font-size: 0.85rem;"></i>
+
+            <!-- Right: Trash Remove Button -->
+            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0" title="Remove Flacon" aria-label="Remove item">
+                <i class="fas fa-trash-can"></i>
             </button>
         </div>
     `).join('');

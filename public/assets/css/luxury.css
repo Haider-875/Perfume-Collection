@@ -3830,4 +3830,308 @@ body.overflow-hidden {
         font-size: 0.76rem !important;
         line-height: 1.35 !important;
     }
-}
+}
+
+/* ==========================================================================
+   13. MASTER LUXURY CART DRAWER & BAG SUITE
+   ========================================================================== */
+.cart-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 1, 2, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1060;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 92vw;
+    max-width: 440px;
+    height: 100vh;
+    height: 100dvh;
+    background: linear-gradient(180deg, rgba(14, 3, 7, 0.98) 0%, rgba(8, 2, 4, 1) 100%) !important;
+    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
+    z-index: 1065;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.cart-drawer.active {
+    transform: translateX(0);
+}
+
+/* Cart Item Luxury Card */
+.cart-item-luxury {
+    background: linear-gradient(135deg, rgba(28, 6, 13, 0.85) 0%, rgba(12, 3, 6, 0.95) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-item-luxury:hover {
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(133, 16, 41, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Image Pedestal inside Cart Drawer */
+.cart-item-img-stage {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px;
+    background: radial-gradient(circle at 50% 50%, rgba(95, 7, 29, 0.4) 0%, rgba(8, 2, 4, 0.95) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cart-item-img-stage img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.cart-item-luxury:hover .cart-item-img-stage img {
+    transform: scale(1.08);
+}
+
+/* Typography inside Cart Item */
+.cart-item-name {
+    font-size: 0.96rem;
+    font-weight: 500;
+    line-height: 1.25;
+    transition: color 0.2s ease;
+}
+
+.cart-item-name:hover {
+    color: #D4AF37 !important;
+}
+
+.cart-item-variant {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+}
+
+/* Luxury Compact Quantity Stepper Pill */
+.cart-qty-pill {
+    background: rgba(8, 2, 4, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 9999px;
+    height: 30px;
+    padding: 0 4px;
+    gap: 4px;
+    user-select: none;
+}
+
+.cart-qty-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #ded6cb !important;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+    transition: all 0.2s ease;
+    padding: 0 !important;
+}
+
+.cart-qty-btn:hover {
+    background: #5A121C !important;
+    color: #FFFFFF !important;
+}
+
+.cart-qty-val {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFFFFF;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Remove Trash Button */
+.cart-item-remove-btn {
+    background: transparent;
+    border: none;
+    color: rgba(253, 251, 247, 0.45);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.cart-item-remove-btn:hover {
+    color: #FF4D6D !important;
+    background: rgba(133, 16, 41, 0.35);
+    transform: scale(1.1);
+}
+
+/* Empty Bag State */
+.cart-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-empty-icon-wrap {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(133, 16, 41, 0.45) 0%, rgba(18, 4, 8, 0.9) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D4AF37;
+    font-size: 1.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* WhatsApp Button in Drawer (Default Vibrant WhatsApp Green) */
+.cart-btn-whatsapp-buynow {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 50%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 9999px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    touch-action: manipulation;
+}
+
+.cart-btn-whatsapp-buynow * {
+    color: #FFFFFF !important;
+}
+
+.cart-btn-whatsapp-buynow:hover {
+    background: linear-gradient(135deg, #28e06f 0%, #17a393 100%) !important;
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5), 0 0 12px rgba(37, 211, 102, 0.3) !important;
+}
+
+.cart-btn-whatsapp-buynow:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Proceed to Secure Checkout Button in Drawer */
+.cart-btn-checkout {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 50%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 9999px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 16px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    touch-action: manipulation;
+}
+
+.cart-btn-checkout * {
+    color: #FFFFFF !important;
+}
+
+.cart-btn-checkout:hover {
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(163, 24, 56, 0.55), 0 0 14px rgba(196, 36, 75, 0.35) !important;
+}
+
+.cart-btn-checkout:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+@media (max-width: 575.98px) {
+    .cart-drawer {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .cart-item-img-stage {
+        width: 58px;
+        height: 58px;
+    }
+
+    .cart-item-name {
+        font-size: 0.9rem;
+    }
+
+    .cart-btn-whatsapp-buynow,
+    .cart-btn-checkout {
+        height: 38px;
+        min-height: 38px;
+        font-size: 10.5px !important;
+        padding: 0 0.5rem;
+    }
+}
+

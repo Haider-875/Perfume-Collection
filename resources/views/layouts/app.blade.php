@@ -523,25 +523,39 @@
             </div>
         </div>
 
-        <!-- Drawer Footer with Subtotal & Checkout -->
-        <div id="cartDrawerFooter" class="p-4 border-top border-gold-25 bg-wine-dark vstack gap-3">
+        <!-- Drawer Footer with Subtotal, Trust Assurance & Checkout -->
+        <div id="cartDrawerFooter" class="p-3.5 p-sm-4 border-top border-gold-25 bg-wine-dark d-flex flex-column gap-3">
             <div class="d-flex align-items-center justify-content-between">
                 <span class="text-muted-luxury text-uppercase tracking-wider text-xs fw-medium">Subtotal:</span>
                 <span id="cartDrawerSubtotal" class="font-serif fs-4 text-gold-soft fw-bold">Rs. 0</span>
             </div>
-            <p class="text-muted-luxury text-center mb-0" style="font-size: 11px;">
-                <i class="fas fa-shield-alt text-gold me-1"></i> Free Express Shipping & COD across Pakistan
-            </p>
-            <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I want to complete my perfume order with Cash on Delivery.') }}"
-                target="_blank"
-                class="w-100 btn-whatsapp py-3 text-xs tracking-widest text-uppercase d-flex align-items-center justify-center gap-2 text-center text-decoration-none">
-                <i class="fab fa-whatsapp"></i>
-                <span>ORDER VIA WHATSAPP (1-CLICK)</span>
-            </a>
-            <a href="{{ route('checkout.index') }}"
-                class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase d-block text-center text-decoration-none">
-                PROCEED TO SECURE CHECKOUT
-            </a>
+
+            <!-- Customer Trust & Authenticity Assurance Strip -->
+            <div class="cart-trust-badges d-flex flex-column gap-1.5 p-2.5 rounded-3 bg-wine-card border border-gold-20 text-center font-sans">
+                <div class="d-flex align-items-center justify-content-center gap-2 text-gold-soft" style="font-size: 11px; font-weight: 500;">
+                    <i class="fas fa-shield-halved text-gold"></i>
+                    <span>100% French Fragrance Oils &bull; 38% Extrait</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-center gap-2 text-muted-luxury" style="font-size: 10px;">
+                    <i class="fas fa-rotate text-gold-soft"></i>
+                    <span>7-Day Hassle-Free Scent Exchange Guaranteed</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons: Side-by-side in Same Line with 5px Gap -->
+            <div class="d-flex align-items-center pt-1" style="gap: 5px;">
+                <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I want to complete my perfume order with Cash on Delivery.') }}"
+                    target="_blank"
+                    class="cart-btn-whatsapp-buynow text-decoration-none">
+                    <i class="fab fa-whatsapp fs-6"></i>
+                    <span>WHATSAPP</span>
+                </a>
+                <a href="{{ route('checkout.index') }}"
+                    class="cart-btn-checkout text-decoration-none">
+                    <span>CHECKOUT</span>
+                    <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
+                </a>
+            </div>
         </div>
     </aside>
 
