@@ -58,19 +58,28 @@ function initSwiperSliders() {
     if (document.querySelector('.bestsellers-swiper') && !document.querySelector('.bestsellers-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.bestsellers-swiper', {
             slidesPerView: 1.35,
-            spaceBetween: 12,
+            spaceBetween: 14,
+            speed: 800,
             grabCursor: true,
+            resistance: true,
+            resistanceRatio: 0.75,
+            touchRatio: 1.15,
+            touchAngle: 45,
+            threshold: 4,
+            watchSlidesProgress: true,
+            lazyPreloadPrevNext: 2,
             pagination: {
                 el: '.bestsellers-swiper-pagination',
                 clickable: true,
+                dynamicBullets: true,
             },
             navigation: {
                 nextEl: '.bestseller-next',
                 prevEl: '.bestseller-prev',
             },
             breakpoints: {
-                480: { slidesPerView: 1.8, spaceBetween: 14 },
-                576: { slidesPerView: 2.2, spaceBetween: 16 },
+                480: { slidesPerView: 1.8, spaceBetween: 16 },
+                576: { slidesPerView: 2.2, spaceBetween: 18 },
                 768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 24 }
             }
@@ -81,19 +90,28 @@ function initSwiperSliders() {
     if (document.querySelector('.related-products-swiper') && !document.querySelector('.related-products-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.related-products-swiper', {
             slidesPerView: 1.35,
-            spaceBetween: 12,
+            spaceBetween: 14,
+            speed: 800,
             grabCursor: true,
+            resistance: true,
+            resistanceRatio: 0.75,
+            touchRatio: 1.15,
+            touchAngle: 45,
+            threshold: 4,
+            watchSlidesProgress: true,
+            lazyPreloadPrevNext: 2,
             pagination: {
                 el: '.related-swiper-pagination',
                 clickable: true,
+                dynamicBullets: true,
             },
             navigation: {
                 nextEl: '.related-next',
                 prevEl: '.related-prev',
             },
             breakpoints: {
-                480: { slidesPerView: 1.8, spaceBetween: 14 },
-                576: { slidesPerView: 2.2, spaceBetween: 16 },
+                480: { slidesPerView: 1.8, spaceBetween: 16 },
+                576: { slidesPerView: 2.2, spaceBetween: 18 },
                 768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 24 }
             }
@@ -105,7 +123,12 @@ function initSwiperSliders() {
         new Swiper('.testimonials-swiper', {
             slidesPerView: 1,
             spaceBetween: 30,
-            autoplay: { delay: 5000 },
+            speed: 850,
+            grabCursor: true,
+            resistance: true,
+            resistanceRatio: 0.75,
+            watchSlidesProgress: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
             pagination: { el: '.testimonials-pagination', clickable: true },
             breakpoints: {
                 768: { slidesPerView: 2, spaceBetween: 30 },

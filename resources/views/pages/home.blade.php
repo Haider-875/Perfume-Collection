@@ -672,26 +672,37 @@
             }
 
             // Featured Collection Carousel Swiper
-            new Swiper('.bestsellers-swiper', {
-                slidesPerView: 1.35,
-                spaceBetween: 12,
-                loop: false,
-                grabCursor: true,
-                pagination: {
-                    el: '.bestsellers-swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.bestseller-next',
-                    prevEl: '.bestseller-prev',
-                },
-                breakpoints: {
-                    480: { slidesPerView: 1.8, spaceBetween: 14 },
-                    576: { slidesPerView: 2.2, spaceBetween: 16 },
-                    768: { slidesPerView: 3, spaceBetween: 20 },
-                    1024: { slidesPerView: 4, spaceBetween: 24 }
-                }
-            });
+            if (document.querySelector('.bestsellers-swiper') && !document.querySelector('.bestsellers-swiper').swiper) {
+                new Swiper('.bestsellers-swiper', {
+                    slidesPerView: 1.35,
+                    spaceBetween: 14,
+                    speed: 800,
+                    loop: false,
+                    grabCursor: true,
+                    resistance: true,
+                    resistanceRatio: 0.75,
+                    touchRatio: 1.15,
+                    touchAngle: 45,
+                    threshold: 4,
+                    watchSlidesProgress: true,
+                    lazyPreloadPrevNext: 2,
+                    pagination: {
+                        el: '.bestsellers-swiper-pagination',
+                        clickable: true,
+                        dynamicBullets: true,
+                    },
+                    navigation: {
+                        nextEl: '.bestseller-next',
+                        prevEl: '.bestseller-prev',
+                    },
+                    breakpoints: {
+                        480: { slidesPerView: 1.8, spaceBetween: 16 },
+                        576: { slidesPerView: 2.2, spaceBetween: 18 },
+                        768: { slidesPerView: 3, spaceBetween: 20 },
+                        1024: { slidesPerView: 4, spaceBetween: 24 }
+                    }
+                });
+            }
         });
     </script>
 @endpush
