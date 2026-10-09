@@ -4151,4 +4151,115 @@ body.overflow-hidden {
     color: #FFFFFF !important;
 }
 
+/* -------------------------------------------------------------------------- */
+/* 15. Featured Collection Responsive Filter Buttons & Tabs (340px+ Ready)     */
+/* -------------------------------------------------------------------------- */
+.featured-filter-bar-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.featured-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 2px 8px 2px;
+    scroll-snap-type: x proximity;
+}
+
+.featured-filter-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.featured-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.15rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid rgba(229, 193, 88, 0.28);
+    background: rgba(26, 11, 16, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-light-luxury, #E2D7C5);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: manipulation;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    user-select: none;
+}
+
+.featured-filter-btn:hover {
+    color: #FFFFFF;
+    border-color: rgba(229, 193, 88, 0.65);
+    background: rgba(133, 16, 41, 0.45);
+    transform: translateY(-1px);
+}
+
+.featured-filter-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.featured-filter-btn.active {
+    color: #FFFFFF !important;
+    background: linear-gradient(135deg, #851029 0%, #4a0916 100%) !important;
+    border-color: #E5C158 !important;
+    box-shadow: 0 4px 16px rgba(133, 16, 41, 0.5), 0 0 10px rgba(229, 193, 88, 0.3) !important;
+}
+
+.tab-pane-fade {
+    animation: tabFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 340px Mobile Screen Size Optimization (e.g. 340x866) */
+@media (max-width: 480px) {
+    .featured-filter-bar {
+        gap: 0.4rem;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    
+    .featured-filter-btn {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+    }
+}
+
+@media (max-width: 360px) {
+    .featured-filter-bar {
+        gap: 0.35rem;
+    }
+    
+    .featured-filter-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.02em;
+    }
+}
+
+
 

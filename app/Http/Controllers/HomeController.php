@@ -20,6 +20,14 @@ class HomeController extends Controller
         $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
         $collections = Collection::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
+        $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+            ->active()
+            ->where(function($q) {
+                $q->where('is_featured', true)->orWhere('is_bestseller', true);
+            })
+            ->take(8)
+            ->get();
+
         $bestsellers = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
             ->bestsellers()
@@ -29,7 +37,13 @@ class HomeController extends Controller
         $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
             ->newArrivals()
-            ->take(4)
+            ->take(8)
+            ->get();
+
+        $restockedProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+            ->active()
+            ->latest()
+            ->take(8)
             ->get();
 
         $bundles = Bundle::where('is_active', true)->with('items.product')->take(3)->get();
@@ -51,8 +65,10 @@ class HomeController extends Controller
             'heroSlides',
             'featuredCategories',
             'collections',
+            'featuredProducts',
             'bestsellers',
             'newArrivals',
+            'restockedProducts',
             'bundles',
             'collaborationProduct',
             'recentReviews',

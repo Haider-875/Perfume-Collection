@@ -21,6 +21,11 @@ class CollectionController extends Controller
             return view('pages.bundles', compact('bundles', 'bundleProducts'));
         }
 
+        // Explicitly disallow candles & attar pages
+        if (in_array($slug, ['candles', 'candle', 'attar', 'attars'])) {
+            abort(404);
+        }
+
         $collection = null;
         if ($slug !== 'all') {
             // Find collection by slug or alias
@@ -29,24 +34,10 @@ class CollectionController extends Controller
                     if ($slug === 'exclusive') {
                         $q->where('slug', 'exclusive-reserve');
                     }
-                    if (in_array($slug, ['attar', 'attars', 'pure-attar-oils'])) {
-                        $q->whereIn('slug', ['attar', 'attars', 'pure-attar-oils']);
-                    }
-                    if (in_array($slug, ['candles', 'candle'])) {
-                        $q->whereIn('slug', ['candles', 'candle']);
-                    }
                 })->first();
 
             // Find category by slug or alias (managed via Admin Categories)
-            $category = Category::where('slug', $slug)
-                ->orWhere(function($q) use ($slug) {
-                    if (in_array($slug, ['attar', 'attars', 'pure-attar-oils'])) {
-                        $q->whereIn('slug', ['attar', 'attars', 'pure-attar-oils']);
-                    }
-                    if (in_array($slug, ['candles', 'candle'])) {
-                        $q->whereIn('slug', ['candles', 'candle']);
-                    }
-                })->first();
+            $category = Category::where('slug', $slug)->first();
 
             if (!$collection && !$category) {
                 abort(404);

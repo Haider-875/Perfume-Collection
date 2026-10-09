@@ -134,8 +134,8 @@
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
-                    <i class="fas fa-fire-flame-curved"></i>
-                    <span>Hand Crafted Candles</span>
+                    <i class="fas fa-gem"></i>
+                    <span>Private Reserve Formulations</span>
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
@@ -165,8 +165,8 @@
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
-                    <i class="fas fa-fire-flame-curved"></i>
-                    <span>Hand Crafted Candles</span>
+                    <i class="fas fa-gem"></i>
+                    <span>Private Reserve Formulations</span>
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
@@ -192,8 +192,8 @@
         </div>
     </section>
 
-    <!-- 3. Featured Collection with Category Filter Pills -->
-    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
+    <!-- 3. Featured Collection with Responsive Filter Buttons & Dynamic Tabs -->
+    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20" x-data="{ activeTab: 'featured' }">
         <div class="container px-3 px-lg-4">
 
             <!-- Section Header (Centered) -->
@@ -205,26 +205,90 @@
                 </h2>
             </div>
 
-            <!-- Filter Pills Bar (Left Aligned) -->
-            <div class="d-flex flex-wrap align-items-center justify-content-start gap-2 mb-4">
-                <button type="button" class=" btn-gold btn-cart-gradient text-white active">
-                    <span>Featured Products</span>
-                </button>
-                <a href="{{ route('collections.show', 'all') }}?sort=popular"
-                    class=" btn-gold btn-cart-gradient text-white">
-                    <span>Restocked</span>
-                </a>
-                <a href="{{ route('collections.show', 'all') }}?sort=new" class=" btn-gold btn-cart-gradient text-white">
-                    <span>New Arrivals</span>
-                </a>
-                <a href="{{ route('collections.show', 'all') }}?sort=bestseller"
-                    class=" btn-gold btn-cart-gradient  text-white">
-                    <span>Best Sellers</span>
-                </a>
+            <!-- Filter Pills Bar (Mobile Responsive & 340px Screen Ready) -->
+            <div class="featured-filter-bar-wrapper mb-4">
+                <div class="featured-filter-bar d-flex align-items-center gap-2 overflow-x-auto pb-2 no-scrollbar flex-nowrap flex-md-wrap justify-content-start justify-content-md-center">
+                    <button type="button" 
+                            @click="activeTab = 'featured'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
+                            class="featured-filter-btn"
+                            :class="{ 'active': activeTab === 'featured' }">
+                        <i class="fas fa-sparkles text-gold" style="font-size: 10px;" x-show="activeTab === 'featured'"></i>
+                        <span>Featured Products</span>
+                    </button>
+                    <button type="button" 
+                            @click="activeTab = 'restocked'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
+                            class="featured-filter-btn"
+                            :class="{ 'active': activeTab === 'restocked' }">
+                        <i class="fas fa-rotate-left text-gold" style="font-size: 10px;" x-show="activeTab === 'restocked'"></i>
+                        <span>Restocked</span>
+                    </button>
+                    <button type="button" 
+                            @click="activeTab = 'new'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
+                            class="featured-filter-btn"
+                            :class="{ 'active': activeTab === 'new' }">
+                        <i class="fas fa-star text-gold" style="font-size: 10px;" x-show="activeTab === 'new'"></i>
+                        <span>New Arrivals</span>
+                    </button>
+                    <button type="button" 
+                            @click="activeTab = 'bestsellers'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
+                            class="featured-filter-btn"
+                            :class="{ 'active': activeTab === 'bestsellers' }">
+                        <i class="fas fa-crown text-gold" style="font-size: 10px;" x-show="activeTab === 'bestsellers'"></i>
+                        <span>Best Sellers</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Featured Products Carousel (Swiper) -->
-            <div class="position-relative">
+            <!-- Tab 1: Featured Products Carousel -->
+            <div x-show="activeTab === 'featured'" x-cloak class="position-relative tab-pane-fade">
+                <div class="swiper featured-swiper">
+                    <div class="swiper-wrapper pb-4">
+                        @foreach($featuredProducts as $fProduct)
+                            <div class="swiper-slide h-auto">
+                                <x-product-card :product="$fProduct" />
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination featured-pagination position-relative mt-3"></div>
+                </div>
+                <div class="swiper-button-prev featured-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next featured-next luxury-swiper-next d-none d-lg-flex"></div>
+            </div>
+
+            <!-- Tab 2: Restocked Carousel -->
+            <div x-show="activeTab === 'restocked'" x-cloak class="position-relative tab-pane-fade">
+                <div class="swiper restocked-swiper">
+                    <div class="swiper-wrapper pb-4">
+                        @foreach($restockedProducts as $rProduct)
+                            <div class="swiper-slide h-auto">
+                                <x-product-card :product="$rProduct" />
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination restocked-pagination position-relative mt-3"></div>
+                </div>
+                <div class="swiper-button-prev restocked-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next restocked-next luxury-swiper-next d-none d-lg-flex"></div>
+            </div>
+
+            <!-- Tab 3: New Arrivals Carousel -->
+            <div x-show="activeTab === 'new'" x-cloak class="position-relative tab-pane-fade">
+                <div class="swiper newarrivals-tab-swiper">
+                    <div class="swiper-wrapper pb-4">
+                        @foreach($newArrivals as $nProduct)
+                            <div class="swiper-slide h-auto">
+                                <x-product-card :product="$nProduct" />
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination newarrivals-tab-pagination position-relative mt-3"></div>
+                </div>
+                <div class="swiper-button-prev newarrivals-tab-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next newarrivals-tab-next luxury-swiper-next d-none d-lg-flex"></div>
+            </div>
+
+            <!-- Tab 4: Best Sellers Carousel -->
+            <div x-show="activeTab === 'bestsellers'" x-cloak class="position-relative tab-pane-fade">
                 <div class="swiper bestsellers-swiper">
                     <div class="swiper-wrapper pb-4">
                         @foreach($bestsellers as $bProduct)
@@ -233,18 +297,16 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination bestsellers-swiper-pagination position-relative mt-3"></div>
+                    <div class="swiper-pagination bestsellers-pagination position-relative mt-3"></div>
                 </div>
-                <!-- Desktop Luxury Navigation Controls -->
-                <div class="swiper-button-prev bestseller-prev luxury-swiper-prev d-none d-lg-flex"></div>
-                <div class="swiper-button-next bestseller-next luxury-swiper-next d-none d-lg-flex"></div>
+                <div class="swiper-button-prev bestsellers-prev luxury-swiper-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next bestsellers-next luxury-swiper-next d-none d-lg-flex"></div>
             </div>
 
             <!-- View Full Collection CTA -->
             <div class="text-center mt-4 mt-lg-5">
                 <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3">
                     <span>View Featured Fragrances</span>
-                    <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
                 </a>
             </div>
 
@@ -264,8 +326,7 @@
                 </h2>
                 <p class="text-xs text-md-sm text-muted-luxury mt-2 lh-base fw-light mx-auto" style="max-width: 40rem;">
                     Explore our curated Collections — From Special Blends to Privé Collection to Exclusif Collection to
-                    Signature Collection to Hand Poured Candles & High Quality Attar Oils. We offer unique handcrafted
-                    blends to rare bold scents, timeless classics and luxury attars at unbeatable prices.
+                    Signature Collection. We offer unique handcrafted blends to rare bold scents and timeless classics at unbeatable prices.
                 </p>
             </div>
 
@@ -304,23 +365,23 @@
                     </a>
                 </div>
 
-                <!-- Card 2: Candle Collection -->
+                <!-- Card 2: Men's Collection -->
                 <div class="col-12 col-md-4">
-                    <a href="{{ route('collections.show', 'all') }}"
+                    <a href="{{ route('collections.show', 'men') }}"
                         class="position-relative rounded-4 overflow-hidden shadow-lg border border-gold-30 d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
                         style="min-height: 420px;">
-                        <img src="{{ asset('assets/images/categories/collection_candles.jpg') }}" alt="Candle Collection"
-                            onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_spice_bomb.jpg') }}';"
+                        <img src="{{ asset('assets/images/perfumes/prod_spice_bomb.jpg') }}" alt="Men's Collection"
+                            onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_leather_smoke.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
                         <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
                             <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 gold-gradient-text">
-                                Candle<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
+                                Men's<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
                             </h3>
                             <p class="text-xs text-sub fw-light pt-2 lh-base" style="max-width: 20rem;">
-                                Hand-poured artisanal soy wax to bring warmth and ambiance to your home.
+                                Bold, magnetic, and commanding masculine fragrance profiles with extraordinary sillage.
                             </p>
                         </div>
 
@@ -335,23 +396,23 @@
                     </a>
                 </div>
 
-                <!-- Card 3: Attar Collection -->
+                <!-- Card 3: Women's Collection -->
                 <div class="col-12 col-md-4">
-                    <a href="{{ route('collections.show', 'all') }}"
+                    <a href="{{ route('collections.show', 'women') }}"
                         class="position-relative rounded-4 overflow-hidden shadow-lg border border-gold-30 d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
                         style="min-height: 420px;">
-                        <img src="{{ asset('assets/images/categories/collection_attar.jpg') }}" alt="Attar Collection"
-                            onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_attar.jpg') }}';"
+                        <img src="{{ asset('assets/images/perfumes/prod_rose_oud.jpg') }}" alt="Women's Collection"
+                            onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_eclair_caramel.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
                         <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
                             <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 gold-gradient-text">
-                                Attar<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
+                                Women's<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
                             </h3>
                             <p class="text-xs text-sub fw-light pt-2 lh-base" style="max-width: 20rem;">
-                                Where royal oriental tradition meets unadulterated luxury oils.
+                                Graceful florals, seductive gourmands, and luminous feminine scents.
                             </p>
                         </div>
 
@@ -687,71 +748,55 @@
                 fillEl.style.transform = `scaleX(${activeIndex / totalCount})`;
             }
 
-            // Featured Collection Carousel Swiper
-            if (document.querySelector('.bestsellers-swiper') && !document.querySelector('.bestsellers-swiper').swiper) {
-                new Swiper('.bestsellers-swiper', {
-                    slidesPerView: 1.35,
-                    spaceBetween: 14,
-                    speed: 800,
-                    loop: false,
-                    grabCursor: true,
-                    resistance: true,
-                    resistanceRatio: 0.75,
-                    touchRatio: 1.15,
-                    touchAngle: 45,
-                    threshold: 4,
-                    watchSlidesProgress: true,
-                    lazyPreloadPrevNext: 2,
-                    pagination: {
-                        el: '.bestsellers-swiper-pagination',
-                        clickable: true,
-                        dynamicBullets: true,
-                    },
-                    navigation: {
-                        nextEl: '.bestseller-next',
-                        prevEl: '.bestseller-prev',
-                    },
-                    breakpoints: {
-                        480: { slidesPerView: 1.8, spaceBetween: 16 },
-                        576: { slidesPerView: 2.2, spaceBetween: 18 },
-                        768: { slidesPerView: 3, spaceBetween: 20 },
-                        1024: { slidesPerView: 4, spaceBetween: 24 }
-                    }
-                });
-            }
+            // Swiper Configuration Factory (340px+ Responsive)
+            const createCarouselSwiper = (selector, paginationEl, nextEl, prevEl) => {
+                const el = document.querySelector(selector);
+                if (el && !el.swiper) {
+                    return new Swiper(selector, {
+                        slidesPerView: 1.15,
+                        spaceBetween: 12,
+                        speed: 700,
+                        loop: false,
+                        grabCursor: true,
+                        resistance: true,
+                        resistanceRatio: 0.75,
+                        touchRatio: 1.15,
+                        touchAngle: 45,
+                        threshold: 4,
+                        watchSlidesProgress: true,
+                        observer: true,
+                        observeParents: true,
+                        observeSlideChildren: true,
+                        lazyPreloadPrevNext: 2,
+                        pagination: {
+                            el: paginationEl,
+                            clickable: true,
+                            dynamicBullets: true,
+                        },
+                        navigation: {
+                            nextEl: nextEl,
+                            prevEl: prevEl,
+                        },
+                        breakpoints: {
+                            340: { slidesPerView: 1.15, spaceBetween: 12 },
+                            400: { slidesPerView: 1.35, spaceBetween: 14 },
+                            480: { slidesPerView: 1.8, spaceBetween: 16 },
+                            576: { slidesPerView: 2.2, spaceBetween: 18 },
+                            768: { slidesPerView: 3, spaceBetween: 20 },
+                            1024: { slidesPerView: 4, spaceBetween: 24 }
+                        }
+                    });
+                }
+            };
 
-            // New Release Impressions Carousel Swiper
-            if (document.querySelector('.newarrivals-swiper') && !document.querySelector('.newarrivals-swiper').swiper) {
-                new Swiper('.newarrivals-swiper', {
-                    slidesPerView: 1.35,
-                    spaceBetween: 14,
-                    speed: 800,
-                    loop: false,
-                    grabCursor: true,
-                    resistance: true,
-                    resistanceRatio: 0.75,
-                    touchRatio: 1.15,
-                    touchAngle: 45,
-                    threshold: 4,
-                    watchSlidesProgress: true,
-                    lazyPreloadPrevNext: 2,
-                    pagination: {
-                        el: '.newarrivals-swiper-pagination',
-                        clickable: true,
-                        dynamicBullets: true,
-                    },
-                    navigation: {
-                        nextEl: '.newarrivals-next',
-                        prevEl: '.newarrivals-prev',
-                    },
-                    breakpoints: {
-                        480: { slidesPerView: 1.8, spaceBetween: 16 },
-                        576: { slidesPerView: 2.2, spaceBetween: 18 },
-                        768: { slidesPerView: 3, spaceBetween: 20 },
-                        1024: { slidesPerView: 4, spaceBetween: 24 }
-                    }
-                });
-            }
+            // Initialize all Featured Collection Tab Swipers
+            createCarouselSwiper('.featured-swiper', '.featured-pagination', '.featured-next', '.featured-prev');
+            createCarouselSwiper('.restocked-swiper', '.restocked-pagination', '.restocked-next', '.restocked-prev');
+            createCarouselSwiper('.newarrivals-tab-swiper', '.newarrivals-tab-pagination', '.newarrivals-tab-next', '.newarrivals-tab-prev');
+            createCarouselSwiper('.bestsellers-swiper', '.bestsellers-pagination', '.bestsellers-next', '.bestsellers-prev');
+
+            // New Release Impressions Swiper (Section 6)
+            createCarouselSwiper('.newarrivals-swiper', '.newarrivals-swiper-pagination', '.newarrivals-next', '.newarrivals-prev');
         });
     </script>
 @endpush

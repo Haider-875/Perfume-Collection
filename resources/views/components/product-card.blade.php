@@ -25,35 +25,6 @@
         @endif
     </div>
 
-    <!-- Quick Actions Floating Toolbars -->
-    <div class="position-absolute top-0 end-0 m-3 z-2 d-flex flex-column gap-2 opacity-0 quick-actions-toolbar">
-        <!-- WhatsApp Direct Inquiry -->
-        <a href="{{ $product->whats_app_order_url }}" 
-           target="_blank" 
-           class="rounded-circle bg-theme-main text-success shadow-sm d-flex align-items-center justify-center text-sm border border-gold-40 text-decoration-none" 
-           style="width: 2.25rem; height: 2.25rem;"
-           title="Order 1-Click via WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <!-- Live Quick View Button -->
-        <button type="button"
-                class="quick-action-btn quick-view-btn rounded-circle bg-theme-main text-ivory shadow-sm d-flex align-items-center justify-center border border-gold-40"
-                style="width: 2.25rem; height: 2.25rem; font-size: 11px;"
-                title="Quick Preview"
-                data-id="{{ $product->id }}"
-                data-name="{{ $product->name }}"
-                data-impression="{{ $product->impression_of ?? 'Signature Composition' }}"
-                data-concentration="{{ $product->concentration }}"
-                data-price="{{ $product->formatted_effective_price }}"
-                data-img="{{ $product->primary_image_url }}"
-                data-notes="{{ $product->top_notes_summary }} / {{ $product->heart_notes_summary }} / {{ $product->base_notes_summary }}"
-                data-desc="{{ Str::limit($product->story ?? $product->description, 180) }}"
-                data-url="{{ route('shop.show', $product->slug) }}">
-            <i class="fas fa-eye"></i>
-        </button>
-    </div>
-
     <!-- Flacon Image Wrap (Full Coverage with Hover Zoom) -->
     <a href="{{ route('shop.show', $product->slug) }}" class="position-relative w-100 aspect-1x1 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 d-flex align-items-center justify-center mb-3 text-decoration-none">
         <img src="{{ $product->primary_image_url }}" 
