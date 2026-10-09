@@ -26,17 +26,21 @@
     </div>
 
     <!-- Flacon Image Wrap (Full Coverage with Hover Zoom) -->
-    <a href="{{ route('shop.show', $product->slug) }}" class="position-relative w-100 aspect-1x1 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 d-flex align-items-center justify-center mb-3 text-decoration-none">
+    <a href="{{ route('shop.show', $product->slug) }}" 
+       class="position-relative w-100 aspect-1x1 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 d-flex align-items-center justify-content-center mb-3 text-decoration-none"
+       style="aspect-ratio: 1 / 1; min-height: 180px;">
         <img src="{{ $product->primary_image_url }}" 
              alt="{{ $product->name }}" 
              onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
              class="w-100 h-100 object-fit-cover transition-smooth" 
+             style="aspect-ratio: 1 / 1;"
              loading="lazy">
         @if($product->hover_image && $product->hover_image !== $product->thumbnail_image)
             <img src="{{ $product->hover_image_url }}" 
                  alt="{{ $product->name }} Presentation" 
                  onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-0 transition-smooth" 
+                 style="aspect-ratio: 1 / 1;"
                  loading="lazy">
         @endif
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade pointer-events-none"></div>

@@ -192,8 +192,8 @@
         </div>
     </section>
 
-    <!-- 3. Featured Collection with Responsive Filter Buttons & Dynamic Tabs -->
-    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20" x-data="{ activeTab: 'featured' }">
+    <!-- 3. Featured Collection -->
+    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
         <div class="container px-3 px-lg-4">
 
             <!-- Section Header (Centered) -->
@@ -205,42 +205,8 @@
                 </h2>
             </div>
 
-            <!-- Filter Pills Bar (Mobile Responsive & 340px Screen Ready) -->
-            <div class="featured-filter-bar-wrapper mb-4">
-                <div class="featured-filter-bar d-flex align-items-center gap-2 overflow-x-auto pb-2 no-scrollbar flex-nowrap flex-md-wrap justify-content-start justify-content-md-center">
-                    <button type="button" 
-                            @click="activeTab = 'featured'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
-                            class="featured-filter-btn"
-                            :class="{ 'active': activeTab === 'featured' }">
-                        <i class="fas fa-sparkles text-gold" style="font-size: 10px;" x-show="activeTab === 'featured'"></i>
-                        <span>Featured Products</span>
-                    </button>
-                    <button type="button" 
-                            @click="activeTab = 'restocked'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
-                            class="featured-filter-btn"
-                            :class="{ 'active': activeTab === 'restocked' }">
-                        <i class="fas fa-rotate-left text-gold" style="font-size: 10px;" x-show="activeTab === 'restocked'"></i>
-                        <span>Restocked</span>
-                    </button>
-                    <button type="button" 
-                            @click="activeTab = 'new'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
-                            class="featured-filter-btn"
-                            :class="{ 'active': activeTab === 'new' }">
-                        <i class="fas fa-star text-gold" style="font-size: 10px;" x-show="activeTab === 'new'"></i>
-                        <span>New Arrivals</span>
-                    </button>
-                    <button type="button" 
-                            @click="activeTab = 'bestsellers'; $nextTick(() => { window.dispatchEvent(new Event('resize')); })"
-                            class="featured-filter-btn"
-                            :class="{ 'active': activeTab === 'bestsellers' }">
-                        <i class="fas fa-crown text-gold" style="font-size: 10px;" x-show="activeTab === 'bestsellers'"></i>
-                        <span>Best Sellers</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tab 1: Featured Products Carousel -->
-            <div x-show="activeTab === 'featured'" x-cloak class="position-relative tab-pane-fade">
+            <!-- Featured Products Carousel (Swiper) -->
+            <div class="position-relative">
                 <div class="swiper featured-swiper">
                     <div class="swiper-wrapper pb-4">
                         @foreach($featuredProducts as $fProduct)
@@ -251,56 +217,9 @@
                     </div>
                     <div class="swiper-pagination featured-pagination position-relative mt-3"></div>
                 </div>
+                <!-- Desktop Luxury Navigation Controls -->
                 <div class="swiper-button-prev featured-prev luxury-swiper-prev d-none d-lg-flex"></div>
                 <div class="swiper-button-next featured-next luxury-swiper-next d-none d-lg-flex"></div>
-            </div>
-
-            <!-- Tab 2: Restocked Carousel -->
-            <div x-show="activeTab === 'restocked'" x-cloak class="position-relative tab-pane-fade">
-                <div class="swiper restocked-swiper">
-                    <div class="swiper-wrapper pb-4">
-                        @foreach($restockedProducts as $rProduct)
-                            <div class="swiper-slide h-auto">
-                                <x-product-card :product="$rProduct" />
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="swiper-pagination restocked-pagination position-relative mt-3"></div>
-                </div>
-                <div class="swiper-button-prev restocked-prev luxury-swiper-prev d-none d-lg-flex"></div>
-                <div class="swiper-button-next restocked-next luxury-swiper-next d-none d-lg-flex"></div>
-            </div>
-
-            <!-- Tab 3: New Arrivals Carousel -->
-            <div x-show="activeTab === 'new'" x-cloak class="position-relative tab-pane-fade">
-                <div class="swiper newarrivals-tab-swiper">
-                    <div class="swiper-wrapper pb-4">
-                        @foreach($newArrivals as $nProduct)
-                            <div class="swiper-slide h-auto">
-                                <x-product-card :product="$nProduct" />
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="swiper-pagination newarrivals-tab-pagination position-relative mt-3"></div>
-                </div>
-                <div class="swiper-button-prev newarrivals-tab-prev luxury-swiper-prev d-none d-lg-flex"></div>
-                <div class="swiper-button-next newarrivals-tab-next luxury-swiper-next d-none d-lg-flex"></div>
-            </div>
-
-            <!-- Tab 4: Best Sellers Carousel -->
-            <div x-show="activeTab === 'bestsellers'" x-cloak class="position-relative tab-pane-fade">
-                <div class="swiper bestsellers-swiper">
-                    <div class="swiper-wrapper pb-4">
-                        @foreach($bestsellers as $bProduct)
-                            <div class="swiper-slide h-auto">
-                                <x-product-card :product="$bProduct" />
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="swiper-pagination bestsellers-pagination position-relative mt-3"></div>
-                </div>
-                <div class="swiper-button-prev bestsellers-prev luxury-swiper-prev d-none d-lg-flex"></div>
-                <div class="swiper-button-next bestsellers-next luxury-swiper-next d-none d-lg-flex"></div>
             </div>
 
             <!-- View Full Collection CTA -->
@@ -573,69 +492,111 @@
         </div>
     </section>
 
-    <!-- 8. Testimonials Section -->
+    <!-- 8. Testimonials Section (Haute Parfumerie Patron Reviews) -->
     @if($recentReviews->count() > 0)
-        <section class="py-5 bg-theme-dark border-bottom border-gold-20">
-            <div class="container px-3 px-lg-4">
-                <div class="text-center mx-auto mb-5" style="max-width: 36rem;">
-                    <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
-                        style="font-size: 11px;">VERIFIED PATRON REVIEWS</span>
-                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
-                        1800+ Happy Customers
+        <section class="py-5 bg-theme-dark border-bottom border-gold-20 position-relative overflow-hidden">
+            <!-- Subtle Luxury Background Ambient Light -->
+            <div class="position-absolute top-50 start-50 translate-middle pointer-events-none" 
+                 style="width: 700px; height: 350px; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0,0,0,0) 70%); filter: blur(50px); z-index: 0;"></div>
+
+            <div class="container px-3 px-lg-4 position-relative" style="z-index: 1;">
+                <!-- Centered Header with Trust Signals -->
+                <div class="text-center mx-auto mb-4 pb-2" style="max-width: 44rem;">
+                    <div class="d-inline-flex align-items-center justify-content-center gap-2 text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
+                         style="font-size: 11px; letter-spacing: 2px;">
+                        <!-- <i class="fas fa-gem" style="font-size: 10px;"></i> -->
+                        <span>VERIFIED PATRON IMPRESSIONS</span>
+                    </div>
+                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight mb-2">
+                        Voices of Our Connoisseurs
                     </h2>
-                    <p class="text-xs text-muted-luxury mt-2 fw-light">
-                        Authentic impressions from discerning fragrance patrons across Pakistan.
-                    </p>
+                    <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 text-xs text-muted-luxury">
+                        <span class="d-inline-flex align-items-center text-gold">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-ivory fw-semibold ms-1.5" style="font-size: 12px;">4.98 / 5.0</span>
+                        </span>
+                        <span class="text-gold-20">&bull;</span>
+                        <span class="text-sub">Based on 1,850+ Verified Deliveries Across Pakistan</span>
+                    </div>
                 </div>
 
-                <div class="row g-4">
-                    @foreach($recentReviews->take(3) as $rev)
-                        <div class="col-12 col-md-4">
-                            <div
-                                class="bg-gradient-wine-card border border-gold-25 rounded-4 p-4 d-flex flex-column justify-content-between shadow-sm h-100 luxury-hover-card">
-                                <div class="vstack gap-3">
-                                    <!-- Customer Avatar & Info Header -->
-                                    <div class="d-flex align-items-center gap-3">
-                                        <img src="{{ asset('assets/images/avatars/avatar_' . (($loop->index % 3) + 1) . '.svg') }}"
-                                            alt="{{ $rev->user_name }}"
-                                            class="rounded-circle object-fit-cover shadow-sm flex-shrink-0"
-                                            style="width: 46px; height: 46px; border: 1.5px solid var(--gold);">
-                                        <div class="overflow-hidden">
-                                            <span class="fw-semibold text-ivory d-block text-truncate"
-                                                style="font-size: 0.9rem;">{{ $rev->user_name }}</span>
-                                            <span class="text-success d-flex align-items-center gap-1" style="font-size: 10px;">
-                                                <i class="fas fa-check-circle"></i> Verified &bull;
-                                                {{ $rev->user_city ?? 'Pakistan' }}
-                                            </span>
+                <!-- Testimonials Swiper Carousel with Start & Last Card Navigation -->
+                <div class="position-relative px-3 px-sm-4 px-md-4 px-lg-5">
+                    <div class="swiper testimonials-swiper pt-3 pb-4" style="padding-top: 16px !important; margin-top: -12px;">
+                        <div class="swiper-wrapper">
+                            @foreach($recentReviews as $rev)
+                                <div class="swiper-slide h-auto">
+                                    <div class="bg-gradient-wine-card border border-gold-25 rounded-4 p-3 p-sm-4 d-flex flex-column justify-content-between shadow-sm h-100 luxury-hover-card"
+                                         style="background: linear-gradient(160deg, rgba(38, 14, 25, 0.95) 0%, rgba(18, 6, 12, 0.98) 100%); backdrop-filter: blur(10px);">
+                                        
+                                        <div class="vstack gap-2">
+                                            <!-- Reviewer Header (Name, City & Rating Stars) -->
+                                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                                <div>
+                                                    <span class="fw-semibold text-ivory d-block" style="font-size: 0.95rem; letter-spacing: 0.2px;">
+                                                        {{ $rev->user_name }}
+                                                    </span>
+                                                    <span class="text-light-luxury d-block" style="font-size: 11px;">
+                                                        {{ $rev->user_city ?? 'Pakistan' }}
+                                                    </span>
+                                                </div>
+                                                <div class="d-flex text-gold flex-shrink-0" style="font-size: 11px;">
+                                                    @for($i = 1; $i <= 5; $i++)
+                                                        <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'text-muted-luxury opacity-25' }}"></i>
+                                                    @endfor
+                                                </div>
+                                            </div>
+
+                                            <!-- Review Title & Comment (No Quotes, 1.5 lines clamp) -->
+                                            <div class="pt-1">
+                                                <h4 class="font-serif text-gold-soft fw-medium mb-1 text-truncate" style="font-size: 0.92rem; line-height: 1.35;">
+                                                    {{ $rev->title ?? 'Remarkable Longevity' }}
+                                                </h4>
+                                                <p class="text-xs text-sub fw-light mb-0" 
+                                                   style="color: rgba(255, 255, 255, 0.82); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45;">
+                                                    {{ $rev->comment }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bottom Product Tag (No Arrow Icon) -->
+                                        <div class="mt-3 pt-2.5 border-top border-gold-15 d-flex align-items-center justify-content-between gap-2"
+                                             style="font-size: 11px;">
+                                            @if($rev->product)
+                                                <a href="{{ route('shop.products.show', $rev->product->slug) }}" 
+                                                   class="d-flex align-items-center gap-2 text-decoration-none text-light-luxury hover-text-gold transition-smooth overflow-hidden"
+                                                   title="View {{ $rev->product->name }}">
+                                                    <img src="{{ $rev->product->primary_image_url }}" 
+                                                         alt="{{ $rev->product->name }}" 
+                                                         class="rounded-2 object-fit-cover border border-gold-25 flex-shrink-0"
+                                                         style="width: 26px; height: 26px;"
+                                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
+                                                    <span class="text-truncate fw-medium text-ivory" style="font-size: 11px;">
+                                                        {{ $rev->product->name }}
+                                                    </span>
+                                                </a>
+                                            @else
+                                                <span class="text-light-luxury" style="font-size: 11px;">Extrait de Parfum</span>
+                                            @endif
                                         </div>
                                     </div>
-
-                                    <!-- Rating Stars -->
-                                    <div class="d-flex text-gold text-xs">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'text-muted-luxury opacity-25' }}"></i>
-                                        @endfor
-                                    </div>
-
-                                    <!-- Review Title & Comment -->
-                                    <div>
-                                        <h4 class="font-serif fs-5 text-gold-soft fw-medium mb-1">
-                                            {{ $rev->title ?? 'Remarkable Longevity' }}</h4>
-                                        <p class="text-xs text-sub lh-base fst-italic fw-light mb-0">
-                                            "{{ $rev->comment }}"
-                                        </p>
-                                    </div>
                                 </div>
-
-                                <div class="mt-4 pt-3 border-top border-gold-15 d-flex align-items-center justify-content-between"
-                                    style="font-size: 11px;">
-                                    <span class="text-gold fw-medium">Verified Purchase</span>
-                                    <span class="text-light-luxury"
-                                        style="font-size: 10px;">{{ $rev->product->name ?? 'Extrait de Parfum' }}</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    <!-- Luxury Navigation Controls on Start (Left) & Last (Right) - Visible on All Screens including 340px -->
+                    <div class="swiper-button-prev testimonials-prev luxury-swiper-prev d-flex" 
+                         aria-label="Previous review"></div>
+                    <div class="swiper-button-next testimonials-next luxury-swiper-next d-flex" 
+                         aria-label="Next review"></div>
+
+                    <!-- Pagination Dots -->
+                    <div class="swiper-pagination testimonials-pagination position-relative mt-2 text-center"></div>
                 </div>
             </div>
         </section>
@@ -643,59 +604,93 @@
 
     <!-- 9. Fragrance Journal Preview -->
     @if($recentBlogs->count() > 0)
-        @php
-            $blogDistinctImages = [
-                'assets/images/perfumes/prod_oud_royale.jpg',
-                'assets/images/perfumes/prod_rose_oud.jpg',
-                'assets/images/perfumes/prod_discovery_coffret.jpg'
-            ];
-        @endphp
-        <section class="py-5 bg-theme-main luxury-wine-bg">
+        <section class="py-5 royal-journal-section">
             <div class="container px-3 px-lg-4">
-                <div
-                    class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 pb-3 border-bottom border-gold-20">
-                    <div>
-                        <span class="d-block text-gold mb-1 fw-semibold text-uppercase tracking-luxury"
-                            style="font-size: 11px;">FRAGRANCE JOURNAL</span>
-                        <h2 class="font-serif fs-3 fs-md-2 text-ivory fw-normal text-uppercase mb-0">Olfactory Chronicles &
-                            Guides</h2>
+                <!-- Centered Section Header -->
+                <div class="text-center mx-auto mb-5 pb-1" style="max-width: 680px;">
+                   <div class="d-inline-flex align-items-center justify-content-center gap-2 mb-2">
+                        <!-- <span class="d-inline-block" style="width: 32px; height: 1px; background: linear-gradient(90deg, transparent, #d4af37);"></span> -->
+                        <span class="text-gold fw-semibold text-uppercase tracking-luxury" style="font-size: 11px; letter-spacing: 0.22em;">FRAGRANCE JOURNAL</span>
+                        <!-- <span class="d-inline-block" style="width: 32px; height: 1px; background: linear-gradient(90deg, #d4af37, transparent);"></span> -->
                     </div>
-                    <a href="{{ route('blogs.index') }}"
-                        class="mt-3 mt-md-0 text-xs text-uppercase tracking-widest text-gold hover:text-gold-soft fw-bold d-flex align-items-center gap-2 text-decoration-none transition-smooth">
-                        <span>Read All Articles</span>
-                        <i class="fas fa-arrow-right" style="font-size: 11px;"></i>
-                    </a>
+                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase mb-2" style="letter-spacing: 0.04em;">
+                        Olfactory Chronicles & Guides
+                    </h2>
+                    <p class="text-muted-luxury mb-0 font-sans" style="font-size: 0.92rem; line-height: 1.6; color: #b8a9a2;">
+                        Master perfumery secrets, royal attar heritage of Lahore, and artisanal wear guides curated by our master noses.
+                    </p>
                 </div>
 
-                <div class="row g-4">
+                <!-- 3 Royal Blog Cards -->
+                <div class="row g-4 justify-content-center">
                     @foreach($recentBlogs as $hBlog)
-                        <div class="col-12 col-md-4">
-                            <article
-                                class="bg-gradient-wine-card border border-gold-25 rounded-4 overflow-hidden d-flex flex-column justify-content-between luxury-hover-card h-100">
-                                <div class="overflow-hidden bg-theme-secondary" style="height: 12rem;">
-                                    <img src="{{ !empty($hBlog->image) && file_exists(public_path($hBlog->image)) ? asset($hBlog->image) : asset($blogDistinctImages[$loop->index % 3]) }}"
-                                        alt="{{ $hBlog->title }}"
-                                        onerror="this.onerror=null; this.src='{{ asset($blogDistinctImages[$loop->index % 3]) }}';"
-                                        class="w-100 h-100 object-fit-cover transition-smooth">
-                                </div>
-                                <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between vstack gap-3">
-                                    <div>
-                                        <span class="d-block text-gold mb-1 fw-semibold text-uppercase tracking-wider"
-                                            style="font-size: 10px;">{{ $hBlog->category_name ?? 'Haute Parfumerie' }}</span>
-                                        <h3 class="font-serif fs-5 text-ivory fw-medium lh-sm mb-0">
-                                            <a href="{{ route('blogs.show', $hBlog->slug) }}"
-                                                class="text-ivory text-decoration-none">{{ $hBlog->title }}</a>
-                                        </h3>
+                        @php
+                            $categoryName = $hBlog->category ?? $hBlog->category_name ?? 'Haute Parfumerie';
+                            $readTime = $hBlog->read_time ?? '5 Min Read';
+                            $formattedDate = $hBlog->published_at ? \Carbon\Carbon::parse($hBlog->published_at)->format('M d, Y') : 'Recent Edition';
+                            $author = $hBlog->author_name ?? 'Master Nose';
+                        @endphp
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <article class="product-card position-relative bg-gradient-wine-card border border-gold-25 luxury-hover-card rounded-4 overflow-hidden shadow-lg d-flex flex-column justify-content-between p-3 p-sm-3 h-100">
+                                <!-- Image Pedestal Wrap (Matching Product Card) -->
+                                <div class="position-relative w-100 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 mb-3" style="aspect-ratio: 16 / 10; min-height: 200px;">
+                                    <!-- Badges Row -->
+                                    <div class="position-absolute top-0 start-0 m-2.5 z-2">
+                                        <span class="bg-gradient-wine-badge text-gold-soft fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm border border-gold-50" style="font-size: 9.5px; letter-spacing: 0.12em;">
+                                            {{ $categoryName }}
+                                        </span>
                                     </div>
-                                    <div class="text-muted-luxury pt-3 border-top border-gold-15 d-flex justify-content-between align-items-center"
-                                        style="font-size: 11px;">
-                                        <span>{{ $hBlog->published_at ? \Carbon\Carbon::parse($hBlog->published_at)->format('M d, Y') : 'Recent' }}</span>
-                                        <span class="text-gold fw-semibold">Read Guide &rarr;</span>
+                                    <div class="position-absolute top-0 end-0 m-2.5 z-2">
+                                        <span class="px-2 py-0-5 rounded-pill border border-gold-30" style="background-color: rgba(0,0,0,0.65); backdrop-filter: blur(4px); font-size: 9.5px; color: #ded6cc !important;">
+                                            {{ $readTime }}
+                                        </span>
+                                    </div>
+                                    <img src="{{ asset($hBlog->image) }}"
+                                         alt="{{ $hBlog->title }}"
+                                         loading="lazy"
+                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
+                                         class="w-100 h-100 object-fit-cover transition-smooth"
+                                         style="object-fit: cover; object-position: center;">
+                                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade pointer-events-none"></div>
+                                </div>
+
+                                <!-- Content (Matching Product Card Body Layout) -->
+                                <div class="d-flex flex-column flex-grow-1 justify-content-between px-1">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2 mb-2 text-muted-luxury" style="font-size: 11px;">
+                                            <span>{{ $formattedDate }}</span>
+                                            <span>&bull;</span>
+                                            <span>By {{ Str::limit($author, 22) }}</span>
+                                        </div>
+                                        <h3 class="font-serif fs-5 text-ivory fw-medium lh-sm mb-2" style="min-height: 2.8rem;">
+                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-ivory text-decoration-none hover-text-gold transition-smooth">
+                                                {{ $hBlog->title }}
+                                            </a>
+                                        </h3>
+                                        <p class="text-xs text-muted-luxury lh-base mb-3" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4rem;">
+                                            {{ $hBlog->excerpt ?? Str::limit(strip_tags($hBlog->content), 120) }}
+                                        </p>
+                                    </div>
+
+                                    <!-- Exact Add To Bag Style Button (Zero Arrow Icon) -->
+                                    <div class="mt-auto pt-2.5 border-top border-gold-20">
+                                        <a href="{{ route('blogs.show', $hBlog->slug) }}" 
+                                           class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center text-white text-decoration-none"
+                                           style="min-height: 42px;">
+                                            <span class="text-white">Read Guide</span>
+                                        </a>
                                     </div>
                                 </div>
                             </article>
                         </div>
                     @endforeach
+                </div>
+
+                <!-- Centered Bottom Action (Zero Arrow Icon) -->
+                <div class="text-center mt-5 pt-2">
+                    <a href="{{ route('blogs.index') }}" class="btn-royal-all-articles">
+                        Explore All Journal Guides
+                    </a>
                 </div>
             </div>
         </section>
@@ -797,6 +792,53 @@
 
             // New Release Impressions Swiper (Section 6)
             createCarouselSwiper('.newarrivals-swiper', '.newarrivals-swiper-pagination', '.newarrivals-next', '.newarrivals-prev');
+
+            // Testimonials Swiper (Section 8 - Haute Parfumerie Patron Reviews)
+            const testimonialsEl = document.querySelector('.testimonials-swiper');
+            if (testimonialsEl && typeof Swiper !== 'undefined') {
+                if (testimonialsEl.swiper) {
+                    testimonialsEl.swiper.destroy(true, true);
+                }
+                new Swiper('.testimonials-swiper', {
+                    slidesPerView: 1.05,
+                    spaceBetween: 16,
+                    speed: 400,
+                    loop: true,
+                    grabCursor: true,
+                    preventInteractionOnTransition: false,
+                    touchMoveStopPropagation: false,
+                    resistance: true,
+                    resistanceRatio: 0.85,
+                    touchRatio: 1.25,
+                    touchAngle: 45,
+                    threshold: 4,
+                    watchSlidesProgress: true,
+                    observer: true,
+                    observeParents: true,
+                    autoplay: {
+                        delay: 4200,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    },
+                    pagination: {
+                        el: '.testimonials-pagination',
+                        clickable: true,
+                        dynamicBullets: true,
+                    },
+                    navigation: {
+                        nextEl: '.testimonials-next',
+                        prevEl: '.testimonials-prev',
+                    },
+                    breakpoints: {
+                        340: { slidesPerView: 1.05, spaceBetween: 14 },
+                        480: { slidesPerView: 1.25, spaceBetween: 16 },
+                        640: { slidesPerView: 1.8, spaceBetween: 18 },
+                        768: { slidesPerView: 2.2, spaceBetween: 20 },
+                        1024: { slidesPerView: 3, spaceBetween: 24 },
+                        1280: { slidesPerView: 3.2, spaceBetween: 24 }
+                    }
+                });
+            }
         });
     </script>
 @endpush

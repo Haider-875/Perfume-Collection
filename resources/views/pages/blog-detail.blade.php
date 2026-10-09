@@ -35,13 +35,13 @@
             </div>
         </div>
 
-        <!-- Featured Image -->
-        <div class="mb-5 rounded-3 overflow-hidden border border-gold-30 shadow-2xl bg-wine-dark text-center">
+        <!-- Featured Image (Direct from Database, Zero-Stretch Guarantee) -->
+        <div class="blog-detail-featured-media mb-5">
             <img 
-                src="{{ asset($blog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
+                src="{{ asset($blog->image) }}" 
                 alt="{{ $blog->title }}" 
-                class="img-fluid w-100 object-cover"
-                style="max-height: 500px;"
+                class="blog-detail-featured-img"
+                onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
             >
         </div>
 

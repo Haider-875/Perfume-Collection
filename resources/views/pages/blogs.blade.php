@@ -34,9 +34,11 @@
                 <div class="row g-0">
                     <div class="col-12 col-lg-7 position-relative overflow-hidden bg-wine-dark" style="min-height: 288px;">
                         <img 
-                            src="{{ asset($featuredBlog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
+                            src="{{ asset($featuredBlog->image) }}" 
                             alt="{{ $featuredBlog->title }}" 
-                            class="w-100 h-100 object-cover"
+                            class="w-100 h-100 object-fit-cover"
+                            style="object-fit: cover; object-position: center;"
+                            onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
                         >
                         <div class="position-absolute top-0 start-0 m-3 bg-wine-accent text-light-parchment border border-gold-40 px-3 py-1 rounded text-uppercase fw-semibold" style="font-size: 10px; letter-spacing: 0.1em;">
                             FEATURED CHRONICLE
@@ -87,9 +89,11 @@
                     <article class="bg-wine-card border border-gold-20 rounded-3 overflow-hidden d-flex flex-column h-100 transition shadow-sm">
                         <div class="position-relative overflow-hidden bg-wine-dark" style="height: 224px;">
                             <img 
-                                src="{{ asset($blog->cover_image ?? 'assets/images/perfumes/blog_oud_guide.svg') }}" 
+                                src="{{ asset($blog->image) }}" 
                                 alt="{{ $blog->title }}" 
-                                class="w-100 h-100 object-cover"
+                                class="w-100 h-100 object-fit-cover"
+                                style="object-fit: cover; object-position: center;"
+                                onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
                             >
                             <div class="position-absolute top-0 end-0 m-3 px-2 py-1 rounded text-gold border border-gold-30" style="background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); font-size: 10px;">
                                 {{ $blog->category_name ?? 'Olfactory Art' }}

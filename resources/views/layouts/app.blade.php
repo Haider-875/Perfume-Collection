@@ -103,6 +103,15 @@
                 filter: drop-shadow(0 2px 14px rgba(133,16,41,0.4)) !important;
             }
         }
+        @media (max-width: 360px) {
+            .site-navbar-inner {
+                height: 4rem !important;
+            }
+            .site-logo-img {
+                height: 2.65rem !important;
+                max-height: 44px !important;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -121,7 +130,7 @@
     @endphp
     <!-- 1. Top Rotating Announcement Bar (Royal Imperial Wine & Gold Haute Parfumerie) -->
     <div class="top-ticker overflow-hidden">
-        <div class="container-fluid px-3 px-md-4 px-lg-5">
+        <div class="container-fluid px-2 px-md-4 px-lg-5">
             <div class="swiper announcement-swiper">
                 <div class="swiper-wrapper text-center">
                     <div class="swiper-slide">
@@ -208,12 +217,6 @@
                                 <span>All Fragrances</span>
                                 <i class="fas fa-arrow-right opacity-50" style="font-size: 9px;"></i>
                             </a>
-                            <a href="{{ route('collections.show', 'exclusive') }}"
-                                @click="shopDropdownOpen = false"
-                                class="dropdown-item-luxury d-flex align-items-center justify-content-between">
-                                <span>Private Reserve (Extrait)</span>
-                                <span class="badge-extrait">40% OIL</span>
-                            </a>
                             <a href="{{ route('collections.show', 'men') }}"
                                 @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury">
@@ -242,11 +245,6 @@
                     <a href="{{ route('collections.show', 'all') }}?sort=bestseller"
                         class="nav-link-luxury">
                         Bestsellers
-                    </a>
-
-                    <a href="{{ route('collections.show', 'exclusive') }}"
-                        class="nav-link-luxury {{ request()->is('collections/exclusive*') ? 'active' : '' }}">
-                        Private Reserve
                     </a>
                 </nav>
 
@@ -321,8 +319,6 @@
                 <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm text-muted-luxury">
                     <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 text-muted-luxury text-decoration-none">All Impressions Catalog</a>
-                    <a href="{{ route('collections.show', 'exclusive') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">Exclusive Reserve (35% Extrait)</a>
                     <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 text-muted-luxury text-decoration-none">Men's Impressions</a>
                     <a href="{{ route('collections.show', 'women') }}" @click="mobileMenuOpen = false"
@@ -335,11 +331,6 @@
                         class="d-block py-1 text-muted-luxury text-decoration-none">Fragrance Chronicles</a>
                 </div>
             </div>
-
-            <a href="{{ route('collections.show', 'exclusive') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
-                Private Reserve
-            </a>
 
             <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false"
                 class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
@@ -423,8 +414,6 @@
                     <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-3 fw-semibold border-bottom border-gold-20 pb-2">
                         Top Collections</h4>
                     <ul class="list-unstyled vstack gap-2 text-muted-luxury mb-0" style="font-size: 0.76rem;">
-                        <li><a href="{{ route('collections.show', 'exclusive') }}"
-                                class="text-muted-luxury hover-gold transition-all">Exclusive Reserve Extrait</a></li>
                         <li><a href="{{ route('collections.show', 'men') }}"
                                 class="text-muted-luxury hover-gold transition-all">Men's Designer Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'women') }}"

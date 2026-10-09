@@ -181,7 +181,7 @@ class Product extends Model
 
     public function getPrimaryImageUrlAttribute()
     {
-        if ($this->thumbnail_image) {
+        if ($this->thumbnail_image && file_exists(public_path($this->thumbnail_image))) {
             return asset($this->thumbnail_image);
         }
         return asset('assets/images/perfumes/prod_signature.jpg');
@@ -189,7 +189,7 @@ class Product extends Model
 
     public function getHoverImageUrlAttribute()
     {
-        if ($this->hover_image) {
+        if ($this->hover_image && file_exists(public_path($this->hover_image))) {
             return asset($this->hover_image);
         }
         return $this->primary_image_url;

@@ -347,8 +347,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 4.96,
                 'reviews_count' => 142,
-                'thumbnail_image' => 'assets/images/perfumes/oud_royale.svg',
-                'hover_image' => 'assets/images/perfumes/oud_royale_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_oud_royale.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_oud_royale.jpg',
             ],
 
             // 2. Dehn al Oud Cambodi
@@ -381,8 +381,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 5.00,
                 'reviews_count' => 76,
-                'thumbnail_image' => 'assets/images/perfumes/dehn_oud_attar.svg',
-                'hover_image' => 'assets/images/perfumes/dehn_oud_attar_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_attar.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_attar.jpg',
             ],
 
             // 3. Noor-e-Gulab
@@ -415,8 +415,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 4.92,
                 'reviews_count' => 98,
-                'thumbnail_image' => 'assets/images/perfumes/noor_gulab.svg',
-                'hover_image' => 'assets/images/perfumes/noor_gulab_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
             ],
 
             // 4. Lahore Nights Smoked Amber
@@ -449,8 +449,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 4.88,
                 'reviews_count' => 64,
-                'thumbnail_image' => 'assets/images/perfumes/lahore_nights.svg',
-                'hover_image' => 'assets/images/perfumes/lahore_nights_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
             ],
 
             // 5. Murree Mist & Silver Bergamot
@@ -483,8 +483,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.90,
                 'reviews_count' => 52,
-                'thumbnail_image' => 'assets/images/perfumes/murree_mist.svg',
-                'hover_image' => 'assets/images/perfumes/murree_mist_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
             ],
 
             // 6. Sultan's Cuir & Tuscan Tobacco
@@ -517,8 +517,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 4.95,
                 'reviews_count' => 110,
-                'thumbnail_image' => 'assets/images/perfumes/sultan_cuir.svg',
-                'hover_image' => 'assets/images/perfumes/sultan_cuir_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_leather_smoke.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_leather_smoke.jpg',
             ],
 
             // 7. Imperial Motia & Saffron Nectar
@@ -551,8 +551,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => true,
                 'rating_avg' => 4.97,
                 'reviews_count' => 84,
-                'thumbnail_image' => 'assets/images/perfumes/imperial_motia.svg',
-                'hover_image' => 'assets/images/perfumes/imperial_motia_box.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_signature.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_signature.jpg',
             ],
 
             // 8. Kashmir Saffron Crimson Extrait
@@ -585,7 +585,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.98,
                 'reviews_count' => 45,
-                'thumbnail_image' => 'assets/images/perfumes/kashmir_saffron.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
             ],
 
             // 9. Ambergris Imperiale Private Reserve
@@ -618,7 +619,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 5.00,
                 'reviews_count' => 38,
-                'thumbnail_image' => 'assets/images/perfumes/ambergris_niche.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_citrus_marine.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_citrus_marine.jpg',
             ],
 
             // 10. Taif Rose 1888 Vintage Absolute
@@ -651,7 +653,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.94,
                 'reviews_count' => 41,
-                'thumbnail_image' => 'assets/images/perfumes/taif_rose_1888.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
             ],
 
             // 11. Mysore Supreme Sacred Sandalwood
@@ -684,7 +687,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.96,
                 'reviews_count' => 50,
-                'thumbnail_image' => 'assets/images/perfumes/sandalwood_supreme.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_oud_royale.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_oud_royale.jpg',
             ],
 
             // 12. Vetiver Imperiale Smoked Roots
@@ -717,7 +721,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.91,
                 'reviews_count' => 36,
-                'thumbnail_image' => 'assets/images/perfumes/vetiver_imperiale.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
             ],
 
             // 13. Cardamom Noir Ceylon Spice
@@ -750,7 +755,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.89,
                 'reviews_count' => 32,
-                'thumbnail_image' => 'assets/images/perfumes/cardamom_noir.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
             ],
 
             // 14. Atlas Cedarwood Moroccan Peaks
@@ -783,7 +789,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.88,
                 'reviews_count' => 29,
-                'thumbnail_image' => 'assets/images/perfumes/atlas_cedarwood.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
             ],
 
             // 15. Smoked Birch Elite
@@ -816,7 +823,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.93,
                 'reviews_count' => 37,
-                'thumbnail_image' => 'assets/images/perfumes/smoked_birch.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_leather_smoke.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_leather_smoke.jpg',
             ],
 
             // 16. Velvet Orchid & Black Saffron
@@ -849,7 +857,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.95,
                 'reviews_count' => 48,
-                'thumbnail_image' => 'assets/images/perfumes/velvet_orchid.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_marjaan.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_marjaan.jpg',
             ],
 
             // 17. Jasmine Royale Golden Nectar
@@ -882,7 +891,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.90,
                 'reviews_count' => 42,
-                'thumbnail_image' => 'assets/images/perfumes/jasmine_royale.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_marjaan.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_marjaan.jpg',
             ],
 
             // 18. Midnight Peony Royal Flora
@@ -915,7 +925,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.87,
                 'reviews_count' => 39,
-                'thumbnail_image' => 'assets/images/perfumes/midnight_peony.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_rose_oud.jpg',
             ],
 
             // 19. Silk & Bourbon Vanille Absolue
@@ -948,7 +959,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.96,
                 'reviews_count' => 54,
-                'thumbnail_image' => 'assets/images/perfumes/silk_bourbon.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_lattafa_khumrah.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_lattafa_khumrah.jpg',
             ],
 
             // 20. Aqua Ambergris Oceanic Extrait
@@ -981,7 +993,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.92,
                 'reviews_count' => 44,
-                'thumbnail_image' => 'assets/images/perfumes/marine_amber.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_citrus_marine.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_citrus_marine.jpg',
             ],
 
             // 21. Gourmand Tonka & Dark Cocoa
@@ -1014,7 +1027,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.94,
                 'reviews_count' => 47,
-                'thumbnail_image' => 'assets/images/perfumes/gourmand_tonka.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_eclair_caramel.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_eclair_caramel.jpg',
             ],
 
             // 22. Bakhoor & Cashmere Wood
@@ -1047,7 +1061,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.97,
                 'reviews_count' => 58,
-                'thumbnail_image' => 'assets/images/perfumes/bakhoor_cashmere.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_rain_lightning.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_rain_lightning.jpg',
             ],
 
             // 23. Spiced Cardamom Mountain Chai
@@ -1080,7 +1095,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.91,
                 'reviews_count' => 40,
-                'thumbnail_image' => 'assets/images/perfumes/spiced_tea.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_spice_bomb.jpg',
             ],
 
             // 24. White Royal Musk Transcendent Skin
@@ -1113,7 +1129,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bestseller' => false,
                 'rating_avg' => 4.95,
                 'reviews_count' => 62,
-                'thumbnail_image' => 'assets/images/perfumes/white_royal_musk.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_fresh_green.jpg',
             ],
 
             // 25. Paris x Lahore Atelier Special Edition (Collaboration)
@@ -1147,7 +1164,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_collaboration' => true,
                 'rating_avg' => 5.00,
                 'reviews_count' => 30,
-                'thumbnail_image' => 'assets/images/perfumes/grasse_collab.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_signature.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_signature.jpg',
             ],
 
             // 26. The Imperial Discovery Coffret (Bundle / Set of 5)
@@ -1181,8 +1199,8 @@ class LuxuryPerfumeSeeder extends Seeder
                 'is_bundle' => true,
                 'rating_avg' => 4.98,
                 'reviews_count' => 195,
-                'thumbnail_image' => 'assets/images/perfumes/discovery_set.svg',
-                'hover_image' => 'assets/images/perfumes/discovery_set_open.svg',
+                'thumbnail_image' => 'assets/images/perfumes/prod_discovery_coffret.jpg',
+                'hover_image' => 'assets/images/perfumes/prod_discovery_coffret.jpg',
             ],
         ];
 
@@ -1385,7 +1403,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'slug' => 'why-commercial-perfumes-disappear-in-pakistan',
             'excerpt' => 'An insider look into perfume concentration physics, alcohol volatility in 40°C heat, and the power of aged natural fixatives.',
             'content' => "In Pakistan's climate, conventional designer fragrances bottled at 12-15% concentration evaporate within 3 to 4 hours. The high atmospheric temperature accelerates alcohol vaporization, leaving little trail behind.\n\nAt Perfumes Collection, all spray compositions are formulated at 35% to 40% Extrait de Parfum strength. By using dense, natural base notes such as 15-year aged Cambodian agarwood and natural ambergris, we anchor volatile floral and citrus notes to skin lipids and cloth fibers for over 18 hours.",
-            'image' => 'assets/images/perfumes/oud_royale_box.svg',
+            'image' => 'assets/images/blogs/blog_extrait_science.jpg',
             'author_name' => 'Master Parfumeur M. Al-Farabi',
             'category' => 'Olfactory Science',
             'read_time' => '5 min read',
@@ -1398,7 +1416,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'slug' => 'sovereign-history-royal-mughal-attar-lahore',
             'excerpt' => 'Exploring four centuries of imperial distillation in the courtyards of the Shalimar Gardens.',
             'content' => "During the Mughal dynasty in 17th century Lahore, Empress Nur Jahan is credited with discovering the essence of distilled rose petals (Itr-e-Gulab). The imperial ateliers perfected copper hydro-distillation over slow wood fire.\n\nToday, Perfumes Collection preserves these exact time-honored artisanal methods, sourcing rare botanicals from Kashmir, Taif, and Southeast Asia.",
-            'image' => 'assets/images/perfumes/noor_gulab_box.svg',
+            'image' => 'assets/images/blogs/blog_mughal_attar.jpg',
             'author_name' => 'Tariq Al-Hashmi, Perfume Historian',
             'category' => 'Heritage',
             'read_time' => '7 min read',
@@ -1411,7 +1429,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'slug' => 'bridal-groom-scent-wardrobe-guide',
             'excerpt' => 'How to curate an intoxicating, regal scent cloud that lingers throughout Mehndi, Barat, and Walima ceremonies.',
             'content' => "A Pakistani wedding is a multi-day olfactory festival. For Mehndi, choose sparkling fresh or floral accords like Imperial Motia. For Barat, command the royal stage with Oud Royale 1947 or Sultan's Cuir.\n\nLayering an Extrait de Parfum over pure Dehn al Oud ensures you are enveloped in a magnetic scent trail that will be captured in your wedding memories forever.",
-            'image' => 'assets/images/perfumes/discovery_set.svg',
+            'image' => 'assets/images/blogs/blog_wedding_wardrobe.jpg',
             'author_name' => 'Zahra Karim, Fragrance Stylist',
             'category' => 'Wedding Guide',
             'read_time' => '6 min read',

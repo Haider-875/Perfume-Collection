@@ -28,17 +28,32 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
+        if ($featuredProducts->isEmpty()) {
+            $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                ->active()
+                ->take(8)
+                ->get();
+        }
+
         $bestsellers = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
             ->bestsellers()
             ->take(8)
             ->get();
 
+        if ($bestsellers->isEmpty()) {
+            $bestsellers = $featuredProducts;
+        }
+
         $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
             ->newArrivals()
             ->take(8)
             ->get();
+
+        if ($newArrivals->isEmpty()) {
+            $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])->active()->latest()->take(8)->get();
+        }
 
         $restockedProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
@@ -53,7 +68,7 @@ class HomeController extends Controller
         $recentReviews = Review::with('product')
             ->where('is_approved', true)
             ->latest()
-            ->take(4)
+            ->take(20)
             ->get();
 
         $recentBlogs = Blog::where('is_published', true)
