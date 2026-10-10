@@ -122,29 +122,29 @@
                         <div class="pdp-trust-card">
                             <i class="fas fa-droplet fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">38% Extrait de Parfum</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">Double French oil strength</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">38% Extrait de Parfum</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">Double French oil strength</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-hourglass-half fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">14+ Hours Beast Mode</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">Artisanal macerated sillage</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours Beast Mode</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">Artisanal macerated sillage</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-truck-fast fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">Fast Courier Service</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">24–48h delivery Pakistan</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">Fast Courier Service</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">24–48h delivery Pakistan</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-rotate fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">7-Day Scent Exchange</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">100% satisfaction guarantee</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">7-Day Scent Exchange</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">100% satisfaction guarantee</div>
                             </div>
                         </div>
                     </div>
@@ -284,29 +284,29 @@
                         <div class="pdp-trust-card">
                             <i class="fas fa-droplet fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">38% Extrait de Parfum</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">Double French oil strength</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">38% Extrait de Parfum</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">Double French oil strength</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-hourglass-half fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">14+ Hours Beast Mode</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">Artisanal macerated sillage</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours Beast Mode</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">Artisanal macerated sillage</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-truck-fast fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">Fast Courier Service</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">24–48h delivery Pakistan</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">Fast Courier Service</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">24–48h delivery Pakistan</div>
                             </div>
                         </div>
                         <div class="pdp-trust-card">
                             <i class="fas fa-rotate fs-5" style="color: #541B29;"></i>
                             <div>
-                                <div class="fw-semibold" style="font-size: 11px; color: #211D1E !important;">7-Day Scent Exchange</div>
-                                <div style="font-size: 9.5px; color: #6B605B;">100% satisfaction guarantee</div>
+                                <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">7-Day Scent Exchange</div>
+                                <div style="font-size: 9.5px; color: #4A4240;">100% satisfaction guarantee</div>
                             </div>
                         </div>
                     </div>
