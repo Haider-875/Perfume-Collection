@@ -266,14 +266,14 @@
 
                     <!-- Packaging Guarantee & Dispatch Note (Unboxed, Clean & Elegant) -->
                     <div class="d-flex flex-column gap-2 pt-3 mt-1 text-xs font-sans text-start" style="border-top: 1px solid #E8E0DA;">
-                        <div class="d-flex align-items-center justify-content-between" style="color: #211D1E;">
+                        <div class="d-flex align-items-center justify-content-between" style="color: #110D0E;">
                             <span class="d-flex align-items-center gap-2">
                                 <i class="fas fa-box-open" style="color: #541B29;"></i>
                                 <span>Carefully packaged to preserve fragrance oils</span>
                             </span>
                             <span class="text-success fw-medium" style="font-size: 11px;"><i class="fas fa-circle-check"></i> In Stock &bull; Lahore Atelier</span>
                         </div>
-                        <p class="lh-base mb-0" style="font-size: 11.5px; color: #6B605B;">
+                        <p class="lh-base mb-0" style="font-size: 11.5px; color: #4A4240;">
                             Orders placed before 4:00 PM are dispatched same-day via <strong>TCS Express Air</strong>. Delivery in 24–48 hours nationwide.
                         </p>
                     </div>
@@ -322,7 +322,7 @@
             
             <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 42rem;">
                 <span class="d-block mb-1 font-sans fw-semibold text-uppercase" style="font-size: 11px; letter-spacing: 0.2em; color: #541B29;">OLFACTORY CLASSIFICATION</span>
-                <h2 class="font-hero fw-normal text-uppercase" style="font-size: clamp(1.8rem, 2.6vw, 2.3rem); color: #211D1E !important;">
+                <h2 class="font-hero fw-normal text-uppercase" style="font-size: clamp(1.8rem, 2.6vw, 2.3rem); color: #110D0E !important;">
                     Fragrance Profile & Accords
                 </h2>
             </div>
@@ -335,7 +335,7 @@
                     <div class="pdp-accord-card h-100 shadow-xs">
                         <span class="font-sans fw-semibold text-uppercase" style="font-size: 10px; letter-spacing: 0.14em; color: #541B29;">Gender Persona</span>
                         <div class="pdp-accord-title">{{ ucfirst($product->gender ?? 'Men / Unisex') }}</div>
-                        <span class="font-sans" style="font-size: 11px; color: #6B605B;">Tailored Formulation</span>
+                        <span class="font-sans" style="font-size: 11px; color: #4A4240;">Tailored Formulation</span>
                     </div>
                 </div>
 
@@ -344,7 +344,7 @@
                     <div class="pdp-accord-card h-100 shadow-xs">
                         <span class="font-sans fw-semibold text-uppercase" style="font-size: 10px; letter-spacing: 0.14em; color: #541B29;">Optimal Season</span>
                         <div class="pdp-accord-title">All Seasons</div>
-                        <span class="font-sans" style="font-size: 11px; color: #6B605B;">Spring, Summer & Winter</span>
+                        <span class="font-sans" style="font-size: 11px; color: #4A4240;">Spring, Summer & Winter</span>
                     </div>
                 </div>
 
@@ -353,7 +353,7 @@
                     <div class="pdp-accord-card h-100 shadow-xs">
                         <span class="font-sans fw-semibold text-uppercase" style="font-size: 10px; letter-spacing: 0.14em; color: #541B29;">Occasion of Wear</span>
                         <div class="pdp-accord-title">Casual &amp; Formal</div>
-                        <span class="font-sans" style="font-size: 11px; color: #6B605B;">Day to Imperial Evening</span>
+                        <span class="font-sans" style="font-size: 11px; color: #4A4240;">Day to Imperial Evening</span>
                     </div>
                 </div>
 
@@ -362,7 +362,7 @@
                     <div class="pdp-accord-card h-100 shadow-xs">
                         <span class="font-sans fw-semibold text-uppercase" style="font-size: 10px; letter-spacing: 0.14em; color: #541B29;">Fragrance Family</span>
                         <div class="pdp-accord-title text-truncate" style="color: #541B29 !important;">{{ $product->fragranceFamily->name ?? 'Fresh & Woody' }}</div>
-                        <span class="font-sans text-truncate" style="font-size: 11px; color: #6B605B;">Citrus, Fresh Spicy, Amber</span>
+                        <span class="font-sans text-truncate" style="font-size: 11px; color: #4A4240;">Citrus, Fresh Spicy, Amber</span>
                     </div>
                 </div>
 
@@ -380,8 +380,8 @@
                 <div class="col-12 col-lg-6 d-flex flex-column gap-3 gap-md-4">
                     <div class="text-start mb-1">
                         <span class="font-sans fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">HARMONIC ACCORD ARCHITECTURE</span>
-                        <h3 class="font-hero mt-1 fw-normal mb-0" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: #211D1E !important;">The Fragrance Notes Pyramid</h3>
-                        <p class="text-xs mt-1 mb-0 font-sans" style="color: #6B605B;">Evolution of accords on skin over 16+ hours</p>
+                        <h3 class="font-hero mt-1 fw-normal mb-0" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: #110D0E !important;">The Fragrance Notes Pyramid</h3>
+                        <p class="text-xs mt-1 mb-0 font-sans" style="color: #4A4240;">Evolution of accords on skin over 16+ hours</p>
                     </div>
 
                     <!-- Top Notes Tier -->
@@ -391,9 +391,9 @@
                                 <i class="fas fa-sparkles" style="color: #9E7D3B;"></i>
                                 <span>Top Notes (First 15 - 45 Mins)</span>
                             </span>
-                            <span class="text-uppercase fw-medium" style="font-size: 10px; color: #6B605B;">Opening Spark</span>
+                            <span class="text-uppercase fw-medium" style="font-size: 10px; color: #4A4240;">Opening Spark</span>
                         </div>
-                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #4A403A;">
+                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #241D1B;">
                             {{ $product->fragrance_notes_pyramid['top'] ?? ($product->top_notes_summary ?? 'Bergamot, Fresh Citrus, Lemon, Green Mandarin') }}
                         </p>
                     </div>
@@ -405,9 +405,9 @@
                                 <i class="fas fa-heart" style="color: #9E7D3B;"></i>
                                 <span>Middle Notes (2 - 6 Hours)</span>
                             </span>
-                            <span class="text-uppercase fw-medium" style="font-size: 10px; color: #6B605B;">Sensual Heart</span>
+                            <span class="text-uppercase fw-medium" style="font-size: 10px; color: #4A4240;">Sensual Heart</span>
                         </div>
-                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #4A403A;">
+                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #241D1B;">
                             {{ $product->fragrance_notes_pyramid['heart'] ?? ($product->heart_notes_summary ?? 'Jasmine, Geranium, Fresh Ginger, Rose Accords') }}
                         </p>
                     </div>
@@ -421,7 +421,7 @@
                             </span>
                             <span class="text-uppercase fw-semibold" style="font-size: 10px; color: #541B29;">14+ Hours Longevity</span>
                         </div>
-                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #4A403A;">
+                        <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #241D1B;">
                             {{ $product->fragrance_notes_pyramid['base'] ?? ($product->base_notes_summary ?? 'Musk, Oakmoss, Warm Amber, Sandalwood') }}
                         </p>
                     </div>
@@ -431,13 +431,13 @@
                 <div class="col-12 col-lg-6 d-none d-lg-flex flex-column rounded-4 p-3.5 p-sm-4 p-lg-5 gap-3.5 gap-md-4 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                     <div>
                         <span class="font-sans fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">LABORATORY BENCHMARKS</span>
-                        <h3 class="font-hero mt-1 fw-normal mb-0" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: #211D1E !important;">Extrait Performance Metrics</h3>
+                        <h3 class="font-hero mt-1 fw-normal mb-0" style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: #110D0E !important;">Extrait Performance Metrics</h3>
                     </div>
 
                     <!-- Longevity Meter -->
                     <div class="d-flex flex-column gap-2 font-sans">
                         <div class="d-flex justify-content-between text-xs fw-medium">
-                            <span class="text-uppercase tracking-wider" style="color: #211D1E;">Longevity on Skin & Fabric:</span>
+                            <span class="text-uppercase tracking-wider" style="color: #110D0E;">Longevity on Skin & Fabric:</span>
                             <span class="fw-semibold" style="color: #541B29;">{{ $product->longevity_rating ?? 9.5 }}/10 (16-18 Hours)</span>
                         </div>
                         <div class="w-100 rounded-pill overflow-hidden" style="height: 8px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
@@ -724,6 +724,3 @@
         }
     });
 </script>
-@endpush
-
-@endsection
