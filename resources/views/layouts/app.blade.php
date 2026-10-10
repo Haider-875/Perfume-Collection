@@ -53,7 +53,7 @@
     @stack('styles')
 </head>
 
-<body class="bg-theme-main text-ivory font-sans ">
+<body class="bg-theme-main text-ivory font-sans" x-data="{ mobileMenuOpen: false }">
 
     @php
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
@@ -88,7 +88,7 @@
     </div>
 
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
-    <header class="sticky-top site-header" x-data="{ accountOpen: false }">
+    <header class="sticky-top site-header">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
             <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner" style="height: 5rem;">
                 <!-- Mobile Left: Hamburger Button (d-lg-none) -->
