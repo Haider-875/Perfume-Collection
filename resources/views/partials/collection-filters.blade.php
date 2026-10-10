@@ -16,14 +16,15 @@
     {{-- Sort By (Only for Mobile Drawer where desktop top bar sort is hidden) --}}
     @if(isset($isMobileDrawer) && $isMobileDrawer)
     <div class="mb-1">
-        <label for="mobileSortSelect" class="d-block text-xs text-uppercase tracking-wider text-gold fw-semibold mb-1.5 font-sans">
+        <label for="mobileSortSelect" class="d-block text-xs text-uppercase tracking-wider fw-semibold mb-1.5 font-sans" style="color: #211D1E;">
             Sort By
         </label>
         <select 
             name="sort" 
             id="mobileSortSelect"
             onchange="this.form.submit()" 
-            class="form-select select-luxury-sort w-100"
+            class="form-select w-100 text-xs py-2 pe-4 ps-2.5 rounded-3 shadow-sm"
+            style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;"
         >
             <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
             <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
@@ -38,12 +39,12 @@
     {{-- 1. Top Section: Search & Clear All --}}
     <div>
         <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
-                <i class="fas fa-sliders-h text-gold" style="font-size: 11px;"></i>
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #541B29;">
+                <i class="fas fa-sliders-h" style="font-size: 11px; color: #541B29;"></i>
                 <span>Filter Fragrances</span>
             </span>
             @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
-                <a href="{{ url()->current() }}" class="text-muted-parchment text-gold-hover text-decoration-none font-sans" style="font-size: 11px; letter-spacing: 0.04em;" title="Reset all filters">
+                <a href="{{ url()->current() }}" class="text-decoration-none font-sans" style="font-size: 11px; letter-spacing: 0.04em; color: #541B29;" title="Reset all filters">
                     <i class="fas fa-rotate-left me-1" style="font-size: 9px;"></i> Reset All
                 </a>
             @endif
@@ -56,20 +57,21 @@
                 name="q" 
                 value="{{ request('q') }}" 
                 placeholder="Search note or impression..." 
-                class="form-control form-control-luxury text-xs py-2 ps-3 pe-4"
+                class="form-control text-xs py-2 ps-3 pe-4 rounded-3 shadow-xs"
+                style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;"
             >
             @if(request('q'))
-                <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="position-absolute end-0 top-50 translate-middle-y me-2 text-muted-parchment text-light-parchment-hover fs-5 text-decoration-none lh-1" title="Clear search">&times;</a>
+                <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="position-absolute end-0 top-50 translate-middle-y me-2 fs-5 text-decoration-none lh-1" style="color: #6B605B;" title="Clear search">&times;</a>
             @endif
         </div>
     </div>
 
     {{-- Active Filter Chips --}}
     @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
-        <div class="pb-2.5 border-bottom border-gold-20">
+        <div class="pb-2.5" style="border-bottom: 1px solid #E8E0DA;">
             <div class="d-flex flex-wrap gap-1">
                 @if(request('q'))
-                    <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="badge rounded-pill bg-wine-accent border border-gold-30 text-gold-soft text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-light-parchment-hover" style="font-size: 10px;">
+                    <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-white shadow-xs" style="font-size: 10px; background-color: #541B29;">
                         <span>"{{ Str::limit(request('q'), 15) }}"</span>
                         <i class="fas fa-times ms-1" style="font-size: 8px;"></i>
                     </a>
@@ -77,28 +79,28 @@
 
                 @if(request('family'))
                     @php $activeFam = $fragranceFamilies->firstWhere('slug', request('family')); @endphp
-                    <a href="{{ request()->fullUrlWithQuery(['family' => null]) }}" class="badge rounded-pill bg-wine-accent border border-gold-30 text-gold-soft text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-light-parchment-hover" style="font-size: 10px;">
+                    <a href="{{ request()->fullUrlWithQuery(['family' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-white shadow-xs" style="font-size: 10px; background-color: #541B29;">
                         <span>{{ $activeFam ? $activeFam->name : ucfirst(request('family')) }}</span>
                         <i class="fas fa-times ms-1" style="font-size: 8px;"></i>
                     </a>
                 @endif
 
                 @if(request('note'))
-                    <a href="{{ request()->fullUrlWithQuery(['note' => null]) }}" class="badge rounded-pill bg-wine-accent border border-gold-30 text-gold-soft text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-light-parchment-hover" style="font-size: 10px;">
+                    <a href="{{ request()->fullUrlWithQuery(['note' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-white shadow-xs" style="font-size: 10px; background-color: #541B29;">
                         <span>Note: {{ ucfirst(request('note')) }}</span>
                         <i class="fas fa-times ms-1" style="font-size: 8px;"></i>
                     </a>
                 @endif
 
                 @if(request('volume_ml'))
-                    <a href="{{ request()->fullUrlWithQuery(['volume_ml' => null]) }}" class="badge rounded-pill bg-wine-accent border border-gold-30 text-gold-soft text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-light-parchment-hover" style="font-size: 10px;">
+                    <a href="{{ request()->fullUrlWithQuery(['volume_ml' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-white shadow-xs" style="font-size: 10px; background-color: #541B29;">
                         <span>{{ request('volume_ml') }} ml</span>
                         <i class="fas fa-times ms-1" style="font-size: 8px;"></i>
                     </a>
                 @endif
 
                 @if(request('min_price') || request('max_price'))
-                    <a href="{{ request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) }}" class="badge rounded-pill bg-wine-accent border border-gold-30 text-gold-soft text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-light-parchment-hover" style="font-size: 10px;">
+                    <a href="{{ request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1 px-2.5 py-1 text-white shadow-xs" style="font-size: 10px; background-color: #541B29;">
                         <span>Rs. {{ request('min_price') ? number_format(request('min_price')) : '0' }} - {{ request('max_price') ? number_format(request('max_price')) : 'Max' }}</span>
                         <i class="fas fa-times ms-1" style="font-size: 8px;"></i>
                     </a>
@@ -108,59 +110,61 @@
     @endif
 
     {{-- Group 1: Fragrance Family (Primary Filter - Open by default) --}}
-    <div class="border-top border-gold-20 pt-3" x-data="{ openFamily: true }">
+    <div class="pt-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openFamily: true }">
         <button 
             type="button" 
             @click="openFamily = !openFamily"
             class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
             aria-label="Toggle Fragrance Family"
         >
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #211D1E;">
                 <span>Fragrance Family</span>
                 @if(request('family'))
-                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0" style="font-size: 9px;">1</span>
+                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0" style="font-size: 9px; background-color: #541B29;">1</span>
                 @endif
             </span>
-            <i class="fas fa-chevron-down text-muted-parchment" :style="openFamily ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px;"></i>
+            <i class="fas fa-chevron-down" :style="openFamily ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
         </button>
 
         <div x-show="openFamily" x-cloak class="d-flex flex-column gap-1 pt-1">
             <a 
                 href="{{ request()->fullUrlWithQuery(['family' => null]) }}" 
-                class="d-flex align-items-center justify-content-between text-xs py-1.5 px-2.5 rounded-2 text-decoration-none transition {{ !request('family') ? 'bg-wine-accent text-gold-soft fw-semibold border border-gold-30' : 'text-muted-parchment text-light-parchment-hover' }}"
+                class="d-flex align-items-center justify-content-between text-xs py-1.5 px-2.5 rounded-2 text-decoration-none transition"
+                style="{{ !request('family') ? 'background-color: #FAF7F2; border: 1px solid #541B29; color: #541B29; font-weight: 600;' : 'color: #6B605B;' }}"
             >
                 <span>All Families</span>
             </a>
             @foreach($fragranceFamilies as $family)
                 <a 
                     href="{{ request()->fullUrlWithQuery(['family' => request('family') == $family->slug ? null : $family->slug]) }}" 
-                    class="d-flex align-items-center justify-content-between text-xs py-1.5 px-2.5 rounded-2 text-decoration-none transition {{ request('family') == $family->slug ? 'bg-wine-accent text-gold-soft fw-semibold border border-gold-30' : 'text-muted-parchment text-light-parchment-hover' }}"
+                    class="d-flex align-items-center justify-content-between text-xs py-1.5 px-2.5 rounded-2 text-decoration-none transition"
+                    style="{{ request('family') == $family->slug ? 'background-color: #FAF7F2; border: 1px solid #541B29; color: #541B29; font-weight: 600;' : 'color: #6B605B;' }}"
                 >
                     <span class="d-flex align-items-center gap-2">
-                        <i class="fas fa-check text-gold" style="font-size: 8px; {{ request('family') == $family->slug ? '' : 'visibility: hidden;' }}"></i>
+                        <i class="fas fa-check" style="font-size: 8px; color: #541B29; {{ request('family') == $family->slug ? '' : 'visibility: hidden;' }}"></i>
                         <span>{{ $family->name }}</span>
                     </span>
-                    <span class="{{ request('family') == $family->slug ? 'text-gold-soft' : 'text-muted-parchment' }}" style="font-size: 10px;">({{ $family->products_count }})</span>
+                    <span style="font-size: 10px; color: #786C67;">({{ $family->products_count }})</span>
                 </a>
             @endforeach
         </div>
     </div>
 
     {{-- Group 2: Price (Clean presets + compact custom range) --}}
-    <div class="border-top border-gold-20 pt-3" x-data="{ openPrice: true }">
+    <div class="pt-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openPrice: true }">
         <button 
             type="button" 
             @click="openPrice = !openPrice"
             class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
             aria-label="Toggle Price"
         >
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #211D1E;">
                 <span>Price</span>
                 @if(request('min_price') || request('max_price'))
-                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0" style="font-size: 9px;">1</span>
+                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0" style="font-size: 9px; background-color: #541B29;">1</span>
                 @endif
             </span>
-            <i class="fas fa-chevron-down text-muted-parchment" :style="openPrice ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px;"></i>
+            <i class="fas fa-chevron-down" :style="openPrice ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
         </button>
 
         <div x-show="openPrice" x-cloak class="d-flex flex-column gap-2 pt-1">
@@ -172,48 +176,51 @@
             <div class="d-flex flex-column gap-1 text-xs font-sans">
                 <a 
                     href="{{ $isUnder15k ? request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) : request()->fullUrlWithQuery(['min_price' => null, 'max_price' => 15000]) }}"
-                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between {{ $isUnder15k ? 'bg-wine-accent text-gold-soft border border-gold-30 fw-semibold' : 'text-muted-parchment text-light-parchment-hover' }}"
+                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between"
+                    style="{{ $isUnder15k ? 'background-color: #FAF7F2; border: 1px solid #541B29; color: #541B29; font-weight: 600;' : 'color: #6B605B;' }}"
                 >
                     <span>Under Rs. 15,000</span>
-                    <i class="fas fa-check text-gold" style="font-size: 8px; {{ $isUnder15k ? '' : 'visibility: hidden;' }}"></i>
+                    <i class="fas fa-check" style="font-size: 8px; color: #541B29; {{ $isUnder15k ? '' : 'visibility: hidden;' }}"></i>
                 </a>
                 <a 
                     href="{{ $is15kTo18k ? request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) : request()->fullUrlWithQuery(['min_price' => 15000, 'max_price' => 18000]) }}"
-                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between {{ $is15kTo18k ? 'bg-wine-accent text-gold-soft border border-gold-30 fw-semibold' : 'text-muted-parchment text-light-parchment-hover' }}"
+                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between"
+                    style="{{ $is15kTo18k ? 'background-color: #FAF7F2; border: 1px solid #541B29; color: #541B29; font-weight: 600;' : 'color: #6B605B;' }}"
                 >
                     <span>Rs. 15,000 – Rs. 18,000</span>
-                    <i class="fas fa-check text-gold" style="font-size: 8px; {{ $is15kTo18k ? '' : 'visibility: hidden;' }}"></i>
+                    <i class="fas fa-check" style="font-size: 8px; color: #541B29; {{ $is15kTo18k ? '' : 'visibility: hidden;' }}"></i>
                 </a>
                 <a 
                     href="{{ $isAbove18k ? request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) : request()->fullUrlWithQuery(['min_price' => 18000, 'max_price' => null]) }}"
-                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between {{ $isAbove18k ? 'bg-wine-accent text-gold-soft border border-gold-30 fw-semibold' : 'text-muted-parchment text-light-parchment-hover' }}"
+                    class="py-1.5 px-2.5 rounded-2 text-decoration-none transition d-flex align-items-center justify-content-between"
+                    style="{{ $isAbove18k ? 'background-color: #FAF7F2; border: 1px solid #541B29; color: #541B29; font-weight: 600;' : 'color: #6B605B;' }}"
                 >
                     <span>Above Rs. 18,000</span>
-                    <i class="fas fa-check text-gold" style="font-size: 8px; {{ $isAbove18k ? '' : 'visibility: hidden;' }}"></i>
+                    <i class="fas fa-check" style="font-size: 8px; color: #541B29; {{ $isAbove18k ? '' : 'visibility: hidden;' }}"></i>
                 </a>
             </div>
 
             {{-- Compact Custom Price Range Inputs --}}
-            <div class="pt-2 border-top border-gold-15">
+            <div class="pt-2" style="border-top: 1px solid #E8E0DA;">
                 <div class="d-flex align-items-center gap-1.5">
                     <input 
                         type="number" 
                         name="min_price" 
                         value="{{ request('min_price') }}" 
                         placeholder="Min" 
-                        class="form-control form-control-luxury text-xs py-1.5 px-2 text-center"
-                        style="width: calc(50% - 18px);"
+                        class="form-control text-xs py-1.5 px-2 text-center rounded-2"
+                        style="width: calc(50% - 18px); background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;"
                     >
-                    <span class="text-muted-parchment" style="font-size: 10px;">–</span>
+                    <span style="font-size: 10px; color: #A89F99;">–</span>
                     <input 
                         type="number" 
                         name="max_price" 
                         value="{{ request('max_price') }}" 
                         placeholder="Max" 
-                        class="form-control form-control-luxury text-xs py-1.5 px-2 text-center"
-                        style="width: calc(50% - 18px);"
+                        class="form-control text-xs py-1.5 px-2 text-center rounded-2"
+                        style="width: calc(50% - 18px); background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;"
                     >
-                    <button type="submit" class="btn-gold py-1.5 px-2 rounded-2 text-uppercase fw-semibold" style="font-size: 9px; letter-spacing: 0.05em;" title="Apply price range">
+                    <button type="submit" class="btn text-white py-1.5 px-2 rounded-2 text-uppercase fw-semibold shadow-xs" style="font-size: 9px; letter-spacing: 0.05em; background-color: #541B29; border: 1px solid #541B29;" title="Apply price range">
                         Go
                     </button>
                 </div>
@@ -222,20 +229,20 @@
     </div>
 
     {{-- Group 3: Bottle Size (Simple customer-friendly label) --}}
-    <div class="border-top border-gold-20 pt-3" x-data="{ openVolume: true }">
+    <div class="pt-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openVolume: true }">
         <button 
             type="button" 
             @click="openVolume = !openVolume"
             class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
             aria-label="Toggle Bottle Size"
         >
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #211D1E;">
                 <span>Bottle Size</span>
                 @if(request('volume_ml'))
-                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0" style="font-size: 9px;">1</span>
+                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0" style="font-size: 9px; background-color: #541B29;">1</span>
                 @endif
             </span>
-            <i class="fas fa-chevron-down text-muted-parchment" :style="openVolume ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px;"></i>
+            <i class="fas fa-chevron-down" :style="openVolume ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
         </button>
 
         <div x-show="openVolume" x-cloak class="pt-1">
@@ -244,7 +251,8 @@
                     <div class="col-4">
                         <a 
                             href="{{ request()->fullUrlWithQuery(['volume_ml' => request('volume_ml') == $vol ? null : $vol]) }}"
-                            class="d-block w-100 py-1.5 text-center rounded-3 border transition text-decoration-none {{ request('volume_ml') == $vol ? 'bg-wine-accent text-gold-soft border-gold fw-semibold' : 'border-gold-25 bg-wine-dark text-muted-parchment text-light-parchment-hover' }}"
+                            class="d-block w-100 py-1.5 text-center rounded-3 transition text-decoration-none shadow-xs"
+                            style="{{ request('volume_ml') == $vol ? 'background-color: #541B29; color: #FFFFFF; border: 1px solid #541B29; font-weight: 600;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA;' }}"
                         >
                             {{ $vol }} ml
                         </a>
@@ -255,22 +263,22 @@
     </div>
 
     {{-- Group 4: Scent Notes (Collapsed by default so sidebar remains compact & tidy) --}}
-    <div class="border-top border-gold-20 pt-3" x-data="{ openNotes: {{ request('note') ? 'true' : 'false' }} }">
+    <div class="pt-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openNotes: {{ request('note') ? 'true' : 'false' }} }">
         <button 
             type="button" 
             @click="openNotes = !openNotes"
             class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
             aria-label="Toggle Scent Notes"
         >
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #211D1E;">
                 <span>Scent Notes</span>
                 @if(request('note'))
-                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0" style="font-size: 9px;">1</span>
+                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0" style="font-size: 9px; background-color: #541B29;">1</span>
                 @else
-                    <span class="text-muted-parchment" style="font-size: 10px;">({{ count($scentNotes) }})</span>
+                    <span style="font-size: 10px; color: #786C67;">({{ count($scentNotes) }})</span>
                 @endif
             </span>
-            <i class="fas fa-chevron-down text-muted-parchment" :style="openNotes ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px;"></i>
+            <i class="fas fa-chevron-down" :style="openNotes ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #786C67;"></i>
         </button>
 
         <div x-show="openNotes" x-cloak class="pt-1">
@@ -278,8 +286,8 @@
                 @foreach($scentNotes as $note)
                     <a 
                         href="{{ request()->fullUrlWithQuery(['note' => request('note') == $note->slug ? null : $note->slug]) }}" 
-                        class="px-2 py-1 rounded-2 border transition text-decoration-none font-sans {{ request('note') == $note->slug ? 'bg-wine-accent text-gold-soft border-gold fw-semibold' : 'border-gold-20 bg-wine-dark text-muted-parchment text-gold-hover' }}"
-                        style="font-size: 11px;"
+                        class="px-2 py-1 rounded-2 transition text-decoration-none font-sans"
+                        style="font-size: 11px; {{ request('note') == $note->slug ? 'background-color: #541B29; color: #FFFFFF; border: 1px solid #541B29; font-weight: 600;' : 'background-color: #FAF7F2; color: #4A403A; border: 1px solid #E8E0DA;' }}"
                     >
                         {{ $note->name }}
                     </a>
@@ -289,40 +297,40 @@
     </div>
 
     {{-- Group 5: Collections (Collapsed by default on 'all' page) --}}
-    <div class="border-top border-gold-20 pt-3" x-data="{ openCollections: {{ $slug !== 'all' ? 'true' : 'false' }} }">
+    <div class="pt-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openCollections: {{ $slug !== 'all' ? 'true' : 'false' }} }">
         <button 
             type="button" 
             @click="openCollections = !openCollections"
             class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
             aria-label="Toggle Collections"
         >
-            <span class="text-xs text-uppercase tracking-wider text-gold fw-semibold d-flex align-items-center gap-1.5 font-sans">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold d-flex align-items-center gap-1.5 font-sans" style="color: #211D1E;">
                 <span>Collections</span>
                 @if($slug !== 'all')
-                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0" style="font-size: 9px;">Active</span>
+                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0" style="font-size: 9px; background-color: #541B29;">Active</span>
                 @endif
             </span>
-            <i class="fas fa-chevron-down text-muted-parchment" :style="openCollections ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px;"></i>
+            <i class="fas fa-chevron-down" :style="openCollections ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
         </button>
 
         <div x-show="openCollections" x-cloak class="pt-1">
             <ul class="list-unstyled mb-0 d-flex flex-column gap-1 text-xs font-sans">
                 <li>
-                    <a href="{{ route('collections.show', 'all') }}" class="d-block py-1.5 px-2.5 rounded-2 text-decoration-none {{ $slug === 'all' ? 'text-gold fw-bold bg-wine-accent' : 'text-muted-parchment text-light-parchment-hover' }}">
+                    <a href="{{ route('collections.show', 'all') }}" class="d-block py-1.5 px-2.5 rounded-2 text-decoration-none" style="{{ $slug === 'all' ? 'color: #541B29; font-weight: 600; background-color: #FAF7F2;' : 'color: #6B605B;' }}">
                         All Impressions
                     </a>
                 </li>
                 @foreach($allCollections as $col)
                     <li>
-                        <a href="{{ route('collections.show', $col->slug) }}" class="d-block py-1.5 px-2.5 rounded-2 text-decoration-none {{ $slug === $col->slug ? 'text-gold fw-bold bg-wine-accent' : 'text-muted-parchment text-light-parchment-hover' }}">
+                        <a href="{{ route('collections.show', $col->slug) }}" class="d-block py-1.5 px-2.5 rounded-2 text-decoration-none" style="{{ $slug === $col->slug ? 'color: #541B29; font-weight: 600; background-color: #FAF7F2;' : 'color: #6B605B;' }}">
                             {{ $col->name }}
                         </a>
                     </li>
                 @endforeach
                 <li class="pt-1">
-                    <a href="{{ route('collections.show', 'bundles') }}" class="d-flex align-items-center justify-content-between py-1.5 px-2.5 rounded-2 text-gold-soft fw-semibold text-decoration-none">
+                    <a href="{{ route('collections.show', 'bundles') }}" class="d-flex align-items-center justify-content-between py-1.5 px-2.5 rounded-2 text-decoration-none" style="color: #541B29; font-weight: 600;">
                         <span>Curated Bundles</span>
-                        <span class="bg-wine-accent text-gold-soft border border-gold-30 px-1.5 py-0.5 rounded fw-bold" style="font-size: 9px;">SAVE 25%</span>
+                        <span class="text-white px-1.5 py-0.5 rounded fw-bold" style="font-size: 9px; background-color: #541B29;">SAVE 25%</span>
                     </a>
                 </li>
             </ul>

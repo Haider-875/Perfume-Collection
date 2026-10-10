@@ -11,22 +11,22 @@
     }
 @endphp
 
-<nav aria-label="Breadcrumb" class="py-2 px-3 bg-theme-dark border-bottom border-gold-20 mb-4 d-inline-block rounded-2">
-    <ol class="breadcrumb m-0 d-flex flex-wrap align-items-center gap-2 text-xs text-muted-luxury">
+<nav aria-label="Breadcrumb" class="py-1.5 px-3 mb-4 d-inline-block rounded-pill shadow-xs" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+    <ol class="breadcrumb m-0 d-flex flex-wrap align-items-center gap-2 text-xs" style="color: #6B605B;">
         <li class="breadcrumb-item">
-            <a href="{{ route('home') }}" class="text-muted-luxury hover:text-gold transition d-flex align-items-center gap-1 text-decoration-none">
-                <i class="fas fa-home text-gold" style="font-size: 11px;"></i> <span>Home</span>
+            <a href="{{ route('home') }}" class="transition d-flex align-items-center gap-1 text-decoration-none" style="color: #6B605B;">
+                <i class="fas fa-home" style="font-size: 11px; color: #541B29;"></i> <span>Home</span>
             </a>
         </li>
 
         @foreach($breadcrumbList as $title => $url)
             @if($title && $title !== 'Home')
-                <li class="text-gold opacity-50" style="font-size: 10px;"><i class="fas fa-chevron-right"></i></li>
+                <li style="font-size: 9px; color: #A89F99;"><i class="fas fa-chevron-right"></i></li>
                 <li class="breadcrumb-item">
                     @if($url)
-                        <a href="{{ $url }}" class="text-gold-soft hover:text-gold transition text-decoration-none">{{ $title }}</a>
+                        <a href="{{ $url }}" class="transition text-decoration-none" style="color: #6B605B;">{{ $title }}</a>
                     @else
-                        <span class="text-ivory fw-semibold">{{ $title }}</span>
+                        <span class="fw-semibold" style="color: #211D1E;">{{ $title }}</span>
                     @endif
                 </li>
             @endif

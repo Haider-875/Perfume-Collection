@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Curate boutique fragrance classifications (Extrait, Men, Women, Unisex, Discovery Sets)')
 
 @section('header_actions')
-<button type="button" class="admin-btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+<button type="button" class="admin-btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal" onclick="openCreateCategoryModal()">
     <i class="fa-solid fa-plus"></i>
     <span>Add New Category</span>
 </button>
@@ -23,7 +23,7 @@
                 </h5>
                 <small class="text-muted">Total {{ $categories->count() }} categories configured in your boutique</small>
             </div>
-            <button type="button" class="admin-btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+            <button type="button" class="admin-btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal" onclick="openCreateCategoryModal()">
                 <i class="fa-solid fa-plus"></i>
                 <span>Add New Category</span>
             </button>
@@ -252,6 +252,13 @@
 </div>
 
 <script>
+    function openCreateCategoryModal() {
+        const modalEl = document.getElementById('createCategoryModal');
+        if (window.bootstrap && bootstrap.Modal) {
+            bootstrap.Modal.getOrCreateInstance(modalEl).show();
+        }
+    }
+
     function openEditCategoryModal(category) {
         document.getElementById('editCategoryForm').action = '/admin/categories/' + category.id;
         document.getElementById('editCategoryName').value = category.name || '';
@@ -261,8 +268,9 @@
         document.getElementById('editCategoryActive').checked = !!category.is_active;
 
         const modalEl = document.getElementById('editCategoryModal');
-        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-        modal.show();
+        if (window.bootstrap && bootstrap.Modal) {
+            bootstrap.Modal.getOrCreateInstance(modalEl).show();
+        }
     }
 </script>
 @endsection

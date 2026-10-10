@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- 1. Hero Full-Screen Swiper Slider (Collidez Cuisine Haute Parfumerie Style) -->
-    <section class="hero-slider-section position-relative w-100 bg-theme-main overflow-hidden border-bottom border-gold-30">
+    <section class="hero-slider-section position-relative w-100 overflow-hidden" style="border-bottom: 1px solid #E8E0DA;">
         <div class="swiper hero-master-swiper w-100 h-100">
             <div class="swiper-wrapper">
                 @forelse($heroSlides as $slideIndex => $slide)
@@ -27,7 +27,8 @@
                         <div class="hero__content">
                             <!-- Delicate Eyebrow / Kicker -->
                             <p class="hero__kicker">
-                                ✦ &nbsp;{{ $slide->badge_text ?? 'HAUTE PARFUMERIE • EXTRAIT DE PARFUM' }}
+                                <span>✦</span>
+                                <span>{{ $slide->badge_text ?? 'HAUTE PARFUMERIE • EXTRAIT DE PARFUM' }}</span>
                             </p>
 
                             <!-- Monumental Typography Title -->
@@ -57,6 +58,13 @@
                                                 class="collidez-roll__a">{{ $slide->secondary_cta_text ?? 'EXPLORE VAULT' }}</span>
                                             <span class="collidez-roll__b"
                                                 aria-hidden="true">{{ $slide->secondary_cta_text ?? 'EXPLORE VAULT' }}</span>
+                                        </span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('collections.show', 'all') }}" class="collidez-pill collidez-pill--outline">
+                                        <span class="collidez-roll">
+                                            <span class="collidez-roll__a">EXPLORE VAULT</span>
+                                            <span class="collidez-roll__b" aria-hidden="true">EXPLORE VAULT</span>
                                         </span>
                                     </a>
                                 @endif
@@ -193,14 +201,14 @@
     </section>
 
     <!-- 3. Featured Collection -->
-    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
+    <section class="py-5 border-bottom" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
         <div class="container px-3 px-lg-4">
 
             <!-- Section Header (Centered) -->
             <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">CURATED FORMULATIONS</span>
-                <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
+                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
                     Featured Collection
                 </h2>
             </div>
@@ -224,7 +232,7 @@
 
             <!-- View Full Collection CTA -->
             <div class="text-center mt-4 mt-lg-5">
-                <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3">
+                <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
                     <span>View Featured Fragrances</span>
                 </a>
             </div>
@@ -233,17 +241,17 @@
     </section>
 
     <!-- 4. "Find Your Perfect Match" Section (3-Card Signature Layout) -->
-    <section class="py-5 bg-theme-dark border-bottom border-gold-20">
+    <section class="py-5 border-bottom" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
         <div class="container px-3 px-lg-4">
 
             <!-- Section Header -->
             <div class="text-center mx-auto mb-5" style="max-width: 48rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">EXPLORE CATEGORIES</span>
-                <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
+                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
                     Find Your Perfect Match
                 </h2>
-                <p class="text-xs text-md-sm text-muted-luxury mt-2 lh-base fw-light mx-auto" style="max-width: 40rem;">
+                <p class="text-xs text-md-sm mt-2 lh-base fw-light mx-auto" style="max-width: 40rem; color: #6B605B;">
                     Explore our curated Collections — From Special Blends to Privé Collection to Exclusif Collection to
                     Signature Collection. We offer unique handcrafted blends to rare bold scents and timeless classics at unbeatable prices.
                 </p>
@@ -255,20 +263,20 @@
                 <!-- Card 1: Signature Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'all') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-lg border border-gold-30 d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px;">
+                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="min-height: 420px; border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/categories/collection_signature.jpg') }}"
                             alt="Signature Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 gold-gradient-text">
-                                Signature<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
+                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
+                                Signature<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-sub fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
                                 Most loved and iconic designer scents with 14+ hours projection.
                             </p>
                         </div>
@@ -276,7 +284,8 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-wine-dark text-gold-soft border border-gold-40 backdrop-blur-md text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
+                                style="background-color: #541B29 !important;">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -287,19 +296,19 @@
                 <!-- Card 2: Men's Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'men') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-lg border border-gold-30 d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px;">
+                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="min-height: 420px; border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/perfumes/prod_spice_bomb.jpg') }}" alt="Men's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_leather_smoke.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 gold-gradient-text">
-                                Men's<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
+                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
+                                Men's<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-sub fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
                                 Bold, magnetic, and commanding masculine fragrance profiles with extraordinary sillage.
                             </p>
                         </div>
@@ -307,7 +316,8 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-wine-dark text-gold-soft border border-gold-40 backdrop-blur-md text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
+                                style="background-color: #541B29 !important;">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -318,19 +328,19 @@
                 <!-- Card 3: Women's Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'women') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-lg border border-gold-30 d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px;">
+                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="min-height: 420px; border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/perfumes/prod_rose_oud.jpg') }}" alt="Women's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_eclair_caramel.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 gold-gradient-text">
-                                Women's<br><span class="fs-6 tracking-widest fw-normal text-gold-soft">COLLECTION</span>
+                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
+                                Women's<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-sub fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
                                 Graceful florals, seductive gourmands, and luminous feminine scents.
                             </p>
                         </div>
@@ -338,7 +348,8 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-wine-dark text-gold-soft border border-gold-40 backdrop-blur-md text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
+                                style="background-color: #541B29 !important;">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -352,15 +363,15 @@
 
     <!-- 5. Bundles & Discovery Coffrets -->
     @if($bundles->count() > 0)
-        <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
+        <section class="py-5 border-bottom" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
             <div class="container px-3 px-lg-4">
                 <div class="text-center mx-auto mb-5" style="max-width: 42rem;">
                     <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                         style="font-size: 11px;">CURATED COFFRETS & SIGNATURE PAIRINGS</span>
-                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
                         Luxury Fragrance Bundles
                     </h2>
-                    <p class="text-xs text-md-sm text-muted-luxury mt-2 fw-light">
+                    <p class="text-xs text-md-sm mt-2 fw-light" style="color: #6B605B;">
                         Presented in custom gold-stamped coffrets. Enjoy up to 30% privileged savings across Pakistan.
                     </p>
                 </div>
@@ -374,10 +385,8 @@
                 </div>
 
                 <div class="text-center mt-5">
-                    <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3">
-                        <!-- <i class="fas fa-gift text-gold"></i> -->
+                    <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
                         <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
-                        <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
                     </a>
                 </div>
             </div>
@@ -385,15 +394,15 @@
     @endif
 
     <!-- 6. New Release Impressions Carousel (Swiper) -->
-    <section class="py-5 bg-theme-dark border-bottom border-gold-20">
+    <section class="py-5 border-bottom" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
         <div class="container px-3 px-lg-4">
             <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">FRESHLY MACERATED</span>
-                <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
+                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
                     New Release Impressions
                 </h2>
-                <div class="bg-gradient-gold-pill mx-auto mt-2" style="width: 4rem; height: 2px;"></div>
+                <div class="mx-auto mt-2" style="width: 4rem; height: 2px; background-color: #9E7D3B;"></div>
             </div>
 
             <!-- New Releases Carousel (Swiper) -->
@@ -415,7 +424,7 @@
 
             <!-- View All New Releases CTA -->
             <div class="text-center mt-4 mt-lg-5">
-                <a href="{{ route('collections.show', 'all') }}?sort=new" class="btn-outline-gold px-4 py-3">
+                <a href="{{ route('collections.show', 'all') }}?sort=new" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
                     <span>Explore All New Arrivals</span>
                 </a>
             </div>
@@ -423,15 +432,15 @@
     </section>
 
     <!-- 7. Why Choose Perfumes Collection? (Brand Heritage & Quality Guarantee) -->
-    <section class="py-5 bg-theme-main luxury-wine-bg border-bottom border-gold-20">
+    <section class="py-5 border-bottom" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
         <div class="container px-3 px-lg-4">
             <div class="text-center mx-auto mb-5" style="max-width: 48rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury" style="font-size: 11px;">THE
                     PERFUMES COLLECTION PROMISE</span>
-                <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight">
+                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
                     Why Discerning Fragrance Lovers Choose Us
                 </h2>
-                <p class="text-sm text-muted-luxury mt-2 lh-base fw-light">
+                <p class="text-sm mt-2 lh-base fw-light" style="color: #6B605B;">
                     Standard commercial perfumes dilute formulations down to 10%–15% alcohol solutions. Perfumes Collection
                     crafts pure Extrait de Parfum hand-macerated for 90 days specifically designed for Pakistan's climate.
                 </p>
@@ -441,14 +450,14 @@
                 <!-- Feature 1 -->
                 <div class="col-12 col-md-4">
                     <div
-                        class="p-4 p-md-5 rounded-4 bg-gradient-wine-card border border-gold-25 text-center vstack gap-3 luxury-hover-card h-100">
-                        <div class="rounded-3 bg-wine-accent text-gold border border-gold-40 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem;">
+                        class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
+                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                             <i class="fas fa-droplet"></i>
                         </div>
-                        <h3 class="font-serif fs-4 text-ivory fw-medium text-uppercase mb-0">35% - 40% Extrait Concentration
+                        <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">35% - 40% Extrait Concentration
                         </h3>
-                        <p class="text-xs text-sm text-muted-luxury lh-base fw-light mb-0">
+                        <p class="text-xs text-sm lh-base fw-light mb-0" style="color: #6B605B;">
                             Nearly double the oil density of department store Eau de Parfum. Delivers monumental 14 to 18
                             hours longevity on skin and fabric without synthetic alcohol harshness.
                         </p>
@@ -458,14 +467,14 @@
                 <!-- Feature 2 -->
                 <div class="col-12 col-md-4">
                     <div
-                        class="p-4 p-md-5 rounded-4 bg-gradient-wine-card border border-gold-25 text-center vstack gap-3 luxury-hover-card h-100">
-                        <div class="rounded-3 bg-wine-accent text-gold border border-gold-40 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem;">
+                        class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
+                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                             <i class="fas fa-flask"></i>
                         </div>
-                        <h3 class="font-serif fs-4 text-ivory fw-medium text-uppercase mb-0">Grasse French Fragrance Oils
+                        <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">Grasse French Fragrance Oils
                         </h3>
-                        <p class="text-xs text-sm text-muted-luxury lh-base fw-light mb-0">
+                        <p class="text-xs text-sm lh-base fw-light mb-0" style="color: #6B605B;">
                             We formulate exclusively with premium French grade oils and natural agarwood distillations,
                             resulting in a 95%+ olfactory fidelity to the world's most coveted niche fragrances.
                         </p>
@@ -475,14 +484,13 @@
                 <!-- Feature 3 -->
                 <div class="col-12 col-md-4">
                     <div
-                        class="p-4 p-md-5 rounded-4 bg-gradient-wine-card border border-gold-25 text-center vstack gap-3 luxury-hover-card h-100">
-                        <div class="rounded-3 bg-wine-accent text-gold border border-gold-40 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem;">
+                        class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
+                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                             <i class="fas fa-shield-halved"></i>
                         </div>
-                        <h3 class="font-serif fs-4 text-ivory fw-medium text-uppercase mb-0">Hassle-Free Pakistani
-                            Experience</h3>
-                        <p class="text-xs text-sm text-muted-luxury lh-base fw-light mb-0">
+                        <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">Hassle-Free Pakistani Experience</h3>
+                        <p class="text-xs text-sm lh-base fw-light mb-0" style="color: #6B605B;">
                             Zero hassle Cash on Delivery nationwide, complimentary 24-48 hour TCS Express Air dispatch, and
                             an unconditional 7-day scent exchange guarantee.
                         </p>
@@ -494,33 +502,28 @@
 
     <!-- 8. Testimonials Section (Haute Parfumerie Patron Reviews) -->
     @if($recentReviews->count() > 0)
-        <section class="py-5 bg-theme-dark border-bottom border-gold-20 position-relative overflow-hidden">
-            <!-- Subtle Luxury Background Ambient Light -->
-            <div class="position-absolute top-50 start-50 translate-middle pointer-events-none" 
-                 style="width: 700px; height: 350px; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0,0,0,0) 70%); filter: blur(50px); z-index: 0;"></div>
-
+        <section class="py-5 position-relative overflow-hidden" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;">
             <div class="container px-3 px-lg-4 position-relative" style="z-index: 1;">
                 <!-- Centered Header with Trust Signals -->
                 <div class="text-center mx-auto mb-4 pb-2" style="max-width: 44rem;">
-                    <div class="d-inline-flex align-items-center justify-content-center gap-2 text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
-                         style="font-size: 11px; letter-spacing: 2px;">
-                        <!-- <i class="fas fa-gem" style="font-size: 10px;"></i> -->
+                    <div class="d-inline-flex align-items-center justify-content-center gap-2 mb-2 fw-semibold text-uppercase tracking-luxury"
+                         style="font-size: 11px; letter-spacing: 2px; color: #541B29;">
                         <span>VERIFIED PATRON IMPRESSIONS</span>
                     </div>
-                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase tracking-tight mb-2">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight mb-2" style="color: #211D1E !important;">
                         Voices of Our Connoisseurs
                     </h2>
-                    <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 text-xs text-muted-luxury">
-                        <span class="d-inline-flex align-items-center text-gold">
+                    <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 text-xs" style="color: #6B605B;">
+                        <span class="d-inline-flex align-items-center" style="color: #9E7D3B;">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
-                            <span class="text-ivory fw-semibold ms-1.5" style="font-size: 12px;">4.98 / 5.0</span>
+                            <span class="fw-semibold ms-1.5" style="font-size: 12px; color: #211D1E;">4.98 / 5.0</span>
                         </span>
-                        <span class="text-gold-20">&bull;</span>
-                        <span class="text-sub">Based on 1,850+ Verified Deliveries Across Pakistan</span>
+                        <span style="color: #E8E0DA;">&bull;</span>
+                        <span style="color: #6B605B;">Based on 1,850+ Verified Deliveries Across Pakistan</span>
                     </div>
                 </div>
 
@@ -530,57 +533,58 @@
                         <div class="swiper-wrapper">
                             @foreach($recentReviews as $rev)
                                 <div class="swiper-slide h-auto">
-                                    <div class="bg-gradient-wine-card border border-gold-25 rounded-4 p-3 p-sm-4 d-flex flex-column justify-content-between shadow-sm h-100 luxury-hover-card"
-                                         style="background: linear-gradient(160deg, rgba(38, 14, 25, 0.95) 0%, rgba(18, 6, 12, 0.98) 100%); backdrop-filter: blur(10px);">
+                                    <div class="rounded-4 p-3 p-sm-4 d-flex flex-column justify-content-between shadow-sm h-100 luxury-hover-card"
+                                         style="background: #FFFFFF; border: 1px solid #E8E0DA;">
                                         
                                         <div class="vstack gap-2">
                                             <!-- Reviewer Header (Name, City & Rating Stars) -->
                                             <div class="d-flex align-items-center justify-content-between gap-2">
                                                 <div>
-                                                    <span class="fw-semibold text-ivory d-block" style="font-size: 0.95rem; letter-spacing: 0.2px;">
+                                                    <span class="fw-semibold d-block" style="font-size: 0.95rem; letter-spacing: 0.2px; color: #211D1E !important;">
                                                         {{ $rev->user_name }}
                                                     </span>
-                                                    <span class="text-light-luxury d-block" style="font-size: 11px;">
+                                                    <span class="d-block" style="font-size: 11px; color: #6B605B;">
                                                         {{ $rev->user_city ?? 'Pakistan' }}
                                                     </span>
                                                 </div>
-                                                <div class="d-flex text-gold flex-shrink-0" style="font-size: 11px;">
+                                                <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #9E7D3B;">
                                                     @for($i = 1; $i <= 5; $i++)
-                                                        <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'text-muted-luxury opacity-25' }}"></i>
+                                                        <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'opacity-25' }}"></i>
                                                     @endfor
                                                 </div>
                                             </div>
 
                                             <!-- Review Title & Comment (No Quotes, 1.5 lines clamp) -->
                                             <div class="pt-1">
-                                                <h4 class="font-serif text-gold-soft fw-medium mb-1 text-truncate" style="font-size: 0.92rem; line-height: 1.35;">
+                                                <h4 class="font-serif fw-medium mb-1 text-truncate" style="font-size: 0.92rem; line-height: 1.35; color: #541B29 !important;">
                                                     {{ $rev->title ?? 'Remarkable Longevity' }}
                                                 </h4>
-                                                <p class="text-xs text-sub fw-light mb-0" 
-                                                   style="color: rgba(255, 255, 255, 0.82); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45;">
+                                                <p class="text-xs fw-light mb-0" 
+                                                   style="color: #4A403A; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45;">
                                                     {{ $rev->comment }}
                                                 </p>
                                             </div>
                                         </div>
 
                                         <!-- Bottom Product Tag (No Arrow Icon) -->
-                                        <div class="mt-3 pt-2.5 border-top border-gold-15 d-flex align-items-center justify-content-between gap-2"
-                                             style="font-size: 11px;">
+                                        <div class="mt-3 pt-2.5 d-flex align-items-center justify-content-between gap-2"
+                                             style="font-size: 11px; border-top: 1px solid #E8E0DA;">
                                             @if($rev->product)
                                                 <a href="{{ route('shop.products.show', $rev->product->slug) }}" 
-                                                   class="d-flex align-items-center gap-2 text-decoration-none text-light-luxury hover-text-gold transition-smooth overflow-hidden"
-                                                   title="View {{ $rev->product->name }}">
+                                                   class="d-flex align-items-center gap-2 text-decoration-none hover-text-gold transition-smooth overflow-hidden"
+                                                   title="View {{ $rev->product->name }}"
+                                                   style="color: #6B605B;">
                                                     <img src="{{ $rev->product->primary_image_url }}" 
                                                          alt="{{ $rev->product->name }}" 
-                                                         class="rounded-2 object-fit-cover border border-gold-25 flex-shrink-0"
-                                                         style="width: 26px; height: 26px;"
+                                                         class="rounded-2 object-fit-cover flex-shrink-0"
+                                                         style="width: 26px; height: 26px; border: 1px solid #E8E0DA;"
                                                          onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
-                                                    <span class="text-truncate fw-medium text-ivory" style="font-size: 11px;">
+                                                    <span class="text-truncate fw-medium" style="font-size: 11px; color: #211D1E !important;">
                                                         {{ $rev->product->name }}
                                                     </span>
                                                 </a>
                                             @else
-                                                <span class="text-light-luxury" style="font-size: 11px;">Extrait de Parfum</span>
+                                                <span style="font-size: 11px; color: #6B605B;">Extrait de Parfum</span>
                                             @endif
                                         </div>
                                     </div>
@@ -589,7 +593,7 @@
                         </div>
                     </div>
 
-                    <!-- Luxury Navigation Controls on Start (Left) & Last (Right) - Visible on All Screens including 340px -->
+                    <!-- Luxury Navigation Controls on Start (Left) & Last (Right) -->
                     <div class="swiper-button-prev testimonials-prev luxury-swiper-prev d-flex" 
                          aria-label="Previous review"></div>
                     <div class="swiper-button-next testimonials-next luxury-swiper-next d-flex" 
@@ -604,19 +608,17 @@
 
     <!-- 9. Fragrance Journal Preview -->
     @if($recentBlogs->count() > 0)
-        <section class="py-5 royal-journal-section">
+        <section class="py-5" style="background-color: #F7F3EE;">
             <div class="container px-3 px-lg-4">
                 <!-- Centered Section Header -->
                 <div class="text-center mx-auto mb-5 pb-1" style="max-width: 680px;">
                    <div class="d-inline-flex align-items-center justify-content-center gap-2 mb-2">
-                        <!-- <span class="d-inline-block" style="width: 32px; height: 1px; background: linear-gradient(90deg, transparent, #d4af37);"></span> -->
-                        <span class="text-gold fw-semibold text-uppercase tracking-luxury" style="font-size: 11px; letter-spacing: 0.22em;">FRAGRANCE JOURNAL</span>
-                        <!-- <span class="d-inline-block" style="width: 32px; height: 1px; background: linear-gradient(90deg, #d4af37, transparent);"></span> -->
+                        <span class="fw-semibold text-uppercase tracking-luxury" style="font-size: 11px; letter-spacing: 0.22em; color: #541B29;">FRAGRANCE JOURNAL</span>
                     </div>
-                    <h2 class="font-serif fs-2 fs-md-1 text-ivory fw-normal text-uppercase mb-2" style="letter-spacing: 0.04em;">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase mb-2" style="letter-spacing: 0.04em; color: #211D1E !important;">
                         Olfactory Chronicles & Guides
                     </h2>
-                    <p class="text-muted-luxury mb-0 font-sans" style="font-size: 0.92rem; line-height: 1.6; color: #b8a9a2;">
+                    <p class="mb-0 font-sans" style="font-size: 0.92rem; line-height: 1.6; color: #6B605B;">
                         Master perfumery secrets, royal attar heritage of Lahore, and artisanal wear guides curated by our master noses.
                     </p>
                 </div>
@@ -631,17 +633,17 @@
                             $author = $hBlog->author_name ?? 'Master Nose';
                         @endphp
                         <div class="col-12 col-md-6 col-lg-4">
-                            <article class="product-card position-relative bg-gradient-wine-card border border-gold-25 luxury-hover-card rounded-4 overflow-hidden shadow-lg d-flex flex-column justify-content-between p-3 p-sm-3 h-100">
-                                <!-- Image Pedestal Wrap (Matching Product Card) -->
-                                <div class="position-relative w-100 rounded-3 overflow-hidden bg-theme-secondary border border-gold-20 mb-3" style="aspect-ratio: 16 / 10; min-height: 200px;">
+                            <article class="position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-3 p-sm-3 h-100" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
+                                <!-- Image Pedestal Wrap -->
+                                <div class="position-relative w-100 rounded-3 overflow-hidden mb-3" style="aspect-ratio: 16 / 10; min-height: 200px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                     <!-- Badges Row -->
                                     <div class="position-absolute top-0 start-0 m-2.5 z-2">
-                                        <span class="bg-gradient-wine-badge text-gold-soft fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm border border-gold-50" style="font-size: 9.5px; letter-spacing: 0.12em;">
+                                        <span class="fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29; color: #FFFFFF;">
                                             {{ $categoryName }}
                                         </span>
                                     </div>
                                     <div class="position-absolute top-0 end-0 m-2.5 z-2">
-                                        <span class="px-2 py-0-5 rounded-pill border border-gold-30" style="background-color: rgba(0,0,0,0.65); backdrop-filter: blur(4px); font-size: 9.5px; color: #ded6cc !important;">
+                                        <span class="px-2 py-0-5 rounded-pill" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important;">
                                             {{ $readTime }}
                                         </span>
                                     </div>
@@ -651,32 +653,31 @@
                                          onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
                                          class="w-100 h-100 object-fit-cover transition-smooth"
                                          style="object-fit: cover; object-position: center;">
-                                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-bottom-fade pointer-events-none"></div>
                                 </div>
 
                                 <!-- Content (Matching Product Card Body Layout) -->
                                 <div class="d-flex flex-column flex-grow-1 justify-content-between px-1">
                                     <div>
-                                        <div class="d-flex align-items-center gap-2 mb-2 text-muted-luxury" style="font-size: 11px;">
+                                        <div class="d-flex align-items-center gap-2 mb-2" style="font-size: 11px; color: #786C67;">
                                             <span>{{ $formattedDate }}</span>
                                             <span>&bull;</span>
                                             <span>By {{ Str::limit($author, 22) }}</span>
                                         </div>
-                                        <h3 class="font-serif fs-5 text-ivory fw-medium lh-sm mb-2" style="min-height: 2.8rem;">
-                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-ivory text-decoration-none hover-text-gold transition-smooth">
+                                        <h3 class="font-serif fs-5 fw-medium lh-sm mb-2" style="min-height: 2.8rem; color: #211D1E !important;">
+                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-decoration-none hover-text-gold transition-smooth" style="color: #211D1E !important;">
                                                 {{ $hBlog->title }}
                                             </a>
                                         </h3>
-                                        <p class="text-xs text-muted-luxury lh-base mb-3" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4rem;">
+                                        <p class="text-xs lh-base mb-3" style="color: #514744; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4rem;">
                                             {{ $hBlog->excerpt ?? Str::limit(strip_tags($hBlog->content), 120) }}
                                         </p>
                                     </div>
 
-                                    <!-- Exact Add To Bag Style Button (Zero Arrow Icon) -->
-                                    <div class="mt-auto pt-2.5 border-top border-gold-20">
+                                    <!-- Read Guide Button -->
+                                    <div class="mt-auto pt-2.5" style="border-top: 1px solid #E8E0DA;">
                                         <a href="{{ route('blogs.show', $hBlog->slug) }}" 
-                                           class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center text-white text-decoration-none"
-                                           style="min-height: 42px;">
+                                           class="w-100 py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center text-white text-decoration-none shadow-sm"
+                                           style="min-height: 42px; background-color: #541B29; border: 1px solid #541B29; border-radius: 8px;">
                                             <span class="text-white">Read Guide</span>
                                         </a>
                                     </div>
@@ -686,9 +687,9 @@
                     @endforeach
                 </div>
 
-                <!-- Centered Bottom Action (Zero Arrow Icon) -->
+                <!-- Centered Bottom Action -->
                 <div class="text-center mt-5 pt-2">
-                    <a href="{{ route('blogs.index') }}" class="btn-royal-all-articles">
+                    <a href="{{ route('blogs.index') }}" class="btn py-2.5 px-4 text-xs tracking-wider fw-semibold text-decoration-none shadow-sm" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; border-radius: 8px;">
                         Explore All Journal Guides
                     </a>
                 </div>
@@ -765,6 +766,8 @@
                         touchAngle: 45,
                         threshold: 4,
                         watchSlidesProgress: true,
+                        watchOverflow: true,
+                        centerInsufficientSlides: true,
                         observer: true,
                         observeParents: true,
                         observeSlideChildren: true,

@@ -271,14 +271,14 @@ function renderCartUI(data) {
         if (footerEl) footerEl.style.display = 'none';
         body.innerHTML = `
             <div class="cart-empty-state text-center py-5 px-3">
-                <div class="cart-empty-icon-wrap mx-auto mb-3">
+                <div class="cart-empty-icon-wrap mx-auto mb-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                     <i class="fas fa-shopping-bag"></i>
                 </div>
-                <h4 class="font-hero text-ivory fs-4 mb-2 gold-gradient-text">Your Fragrance Bag is Empty</h4>
-                <p class="text-xs text-muted-luxury font-sans mb-4 mx-auto" style="max-width: 270px; line-height: 1.6;">
+                <h4 class="font-hero fs-4 mb-2" style="color: #211D1E;">Your Fragrance Bag is Empty</h4>
+                <p class="text-xs font-sans mb-4 mx-auto" style="max-width: 270px; line-height: 1.6; color: #6B605B;">
                     Explore our handcrafted Extrait de Parfum impressions with 14+ hours longevity.
                 </p>
-                <a href="/collections/all" onclick="document.getElementById('closeCartDrawer').click()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-pill text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
+                <a href="/collections/all" onclick="document.getElementById('closeCartDrawer').click()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-3 text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
                     <span>EXPLORE IMPRESSIONS</span>
                     <i class="fas fa-arrow-right-long"></i>
                 </a>
@@ -290,36 +290,36 @@ function renderCartUI(data) {
     if (footerEl) footerEl.style.display = 'flex';
 
     body.innerHTML = data.items.map(item => `
-        <div class="cart-item-luxury d-flex align-items-center gap-3 p-3 rounded-4 shadow-sm position-relative">
+        <div class="cart-item-luxury d-flex align-items-center gap-3 p-3 rounded-4 shadow-sm position-relative" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
             <!-- Left: Flacon Image Stage Pedestal -->
-            <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none">
+            <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                 <img src="${item.image}" alt="${item.name}" class="img-fluid object-fit-contain">
             </a>
 
             <!-- Center: Product Info & Quantity Stepper -->
             <div class="flex-grow-1 min-w-0">
-                <a href="${item.url}" class="cart-item-name font-serif d-block text-truncate text-ivory text-decoration-none" title="${item.name}">
+                <a href="${item.url}" class="cart-item-name font-serif d-block text-truncate text-decoration-none" style="color: #211D1E;" title="${item.name}">
                     ${item.name}
                 </a>
-                <div class="cart-item-variant text-gold-soft text-uppercase mt-0.5">
+                <div class="cart-item-variant text-uppercase mt-0.5" style="color: #6B605B; font-size: 11px;">
                     ${item.variant}
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-2.5">
                     <!-- Luxury Qty Stepper Pill -->
-                    <div class="cart-qty-pill d-inline-flex align-items-center">
-                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" class="cart-qty-btn" aria-label="Decrease quantity">&minus;</button>
-                        <span class="cart-qty-val font-sans">${item.quantity}</span>
-                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" class="cart-qty-btn" aria-label="Increase quantity">&plus;</button>
+                    <div class="cart-qty-pill d-inline-flex align-items-center" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" class="cart-qty-btn" style="color: #541B29;" aria-label="Decrease quantity">&minus;</button>
+                        <span class="cart-qty-val font-sans" style="color: #211D1E;">${item.quantity}</span>
+                        <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" class="cart-qty-btn" style="color: #541B29;" aria-label="Increase quantity">&plus;</button>
                     </div>
                     <!-- Total Price -->
-                    <div class="cart-item-price font-sans text-white fw-bold" style="color: #ffffff !important;">
+                    <div class="cart-item-price font-sans fw-bold" style="color: #541B29 !important;">
                         ${item.total}
                     </div>
                 </div>
             </div>
 
             <!-- Right: Trash Remove Button -->
-            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0" title="Remove Flacon" aria-label="Remove item">
+            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0" title="Remove Flacon" aria-label="Remove item" style="color: #C81E1E;">
                 <i class="fas fa-trash-can"></i>
             </button>
         </div>
@@ -530,6 +530,16 @@ function initSearchModal() {
     });
 
     if (input && results) {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const q = input.value.trim();
+                if (q.length > 0) {
+                    window.location.href = `/collections/all?q=${encodeURIComponent(q)}`;
+                }
+            }
+        });
+
         input.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             if (query.length < 2) {
@@ -540,31 +550,44 @@ function initSearchModal() {
             const cards = document.querySelectorAll('.product-card');
             let found = [];
             cards.forEach(card => {
-                const title = card.querySelector('.product-title')?.innerText || '';
-                const notes = card.querySelector('.product-notes-preview')?.innerText || '';
-                const conc = card.querySelector('.product-concentration')?.innerText || '';
-                const link = card.querySelector('.product-title a')?.getAttribute('href') || '#';
-                const img = card.querySelector('.product-primary-img')?.getAttribute('src') || '';
-                const price = card.querySelector('.current-price')?.innerText || '';
+                const titleEl = card.querySelector('.product-card-title a') || card.querySelector('.product-title a') || card.querySelector('.product-card-title');
+                const title = titleEl ? titleEl.innerText.trim() : '';
+                const link = titleEl ? (titleEl.getAttribute('href') || '#') : '#';
+                const notes = card.querySelector('.product-card-impression')?.innerText || card.querySelector('.product-notes-preview')?.innerText || '';
+                const imgEl = card.querySelector('.product-card-media img') || card.querySelector('.product-primary-img') || card.querySelector('img');
+                const img = imgEl ? (imgEl.getAttribute('src') || '') : '';
+                const priceEl = card.querySelector('.product-price-main') || card.querySelector('.current-price') || card.querySelector('.product-card-pricing');
+                const price = priceEl ? priceEl.innerText.trim() : '';
 
-                if (title.toLowerCase().includes(query) || notes.toLowerCase().includes(query) || conc.toLowerCase().includes(query)) {
+                if (title.toLowerCase().includes(query) || notes.toLowerCase().includes(query)) {
                     found.push({ title, notes, link, img, price });
                 }
             });
 
             if (found.length === 0) {
-                results.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">No flacon matching "<em>${query}</em>" found in current page view. Press Enter for full database search.</div>`;
+                results.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                    <p class="mb-2">No matching composition currently visible on this page.</p>
+                    <a href="/collections/all?q=${encodeURIComponent(query)}" class="btn-gold py-1.5 px-3 text-xs text-uppercase rounded-3 text-decoration-none d-inline-block">
+                        Search Entire Catalog For "${query}" &rarr;
+                    </a>
+                </div>`;
             } else {
                 results.innerHTML = found.map(item => `
-                    <a href="${item.link}" style="display: flex; align-items: center; gap: 16px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 6px; text-decoration: none; margin-bottom: 10px; transition: var(--transition-smooth);">
-                        <img src="${item.img}" style="width: 50px; height: 50px; object-fit: contain;">
+                    <a href="${item.link}" style="display: flex; align-items: center; gap: 16px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; text-decoration: none; margin-bottom: 10px; transition: var(--transition-smooth);">
+                        <img src="${item.img}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 6px;">
                         <div style="flex-grow: 1;">
                             <div style="font-family: var(--font-heading); color: var(--text-ivory); font-weight: 600; font-size: 0.95rem;">${item.title}</div>
                             <div style="font-family: var(--font-serif); color: var(--text-muted); font-size: 0.82rem;">${item.notes}</div>
                         </div>
                         <div style="font-family: var(--font-heading); color: #ffffff !important; font-weight: 700;">${item.price}</div>
                     </a>
-                `).join('');
+                `).join('') + `
+                    <div class="text-center pt-2">
+                        <a href="/collections/all?q=${encodeURIComponent(query)}" class="text-gold-soft text-decoration-underline text-xs">
+                            View All Results in Catalog &rarr;
+                        </a>
+                    </div>
+                `;
             }
         });
     }

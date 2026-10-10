@@ -45,82 +45,15 @@
     <!-- Master Luxury Theme Stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}">
 
-    <!-- Alpine.js -->
+    <!-- Alpine.js & Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.13.5/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
-    <style>
-        [x-cloak] { display: none !important; }
-
-        /* Transition utilities for Alpine.js x-transition */
-        .transition { transition-property: transform, opacity; }
-        .ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1); }
-        .ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
-        .duration-300 { transition-duration: 300ms; }
-        .duration-200 { transition-duration: 200ms; }
-        .opacity-0 { opacity: 0; }
-        .opacity-100 { opacity: 1; }
-        .-translate-x-full { transform: translateX(-100%); }
-        .translate-x-0 { transform: translateX(0); }
-
-        /* Prevent Bootstrap .d-flex !important from keeping overlay open when x-show is false */
-        [x-show="mobileMenuOpen"][style*="display: none"] {
-            display: none !important;
-        }
-
-        /* Mobile Menu Drawer scroll containment */
-        [x-show="mobileMenuOpen"] {
-            height: 100vh;
-            height: 100dvh;
-            max-height: 100dvh;
-            overflow-y: auto !important;
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior: contain;
-            touch-action: pan-y;
-        }
-
-        /* Mobile Centered Logo & Balanced Navigation */
-        @media (max-width: 991.98px) {
-            .site-navbar-inner {
-                position: relative;
-                height: 4.5rem !important;
-            }
-            .site-brand-wrapper {
-                position: absolute !important;
-                left: 50% !important;
-                top: 50% !important;
-                transform: translate(-50%, -50%) !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                margin: 0 !important;
-                z-index: 1;
-            }
-            .site-logo-img {
-                height: 3.15rem !important;
-                max-height: 52px !important;
-                width: auto !important;
-                object-fit: contain;
-                filter: drop-shadow(0 2px 14px rgba(133,16,41,0.4)) !important;
-            }
-        }
-        @media (max-width: 360px) {
-            .site-navbar-inner {
-                height: 4rem !important;
-            }
-            .site-logo-img {
-                height: 2.65rem !important;
-                max-height: 44px !important;
-            }
-        }
-    </style>
 
     @stack('styles')
 </head>
 
-<body class="bg-theme-main text-ivory font-sans antialiased"
-    x-data="{ mobileMenuOpen: false, searchOpen: false }"
-    x-init="$watch('mobileMenuOpen', val => document.body.classList.toggle('overflow-hidden', val))"
-    :class="{ 'overflow-hidden': mobileMenuOpen }">
+<body class="bg-theme-main text-ivory font-sans ">
 
     @php
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
@@ -158,13 +91,12 @@
     <header class="sticky-top site-header" x-data="{ accountOpen: false }">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
             <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner" style="height: 5rem;">
-
                 <!-- Mobile Left: Hamburger Button (d-lg-none) -->
                 <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="text-ivory border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn"
+                        class="border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn"
                         aria-label="Toggle Menu"
-                        style="touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+                        style="color: #211D1E !important; touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                         <i class="fas fa-bars" x-show="!mobileMenuOpen"></i>
                         <i class="fas fa-times" x-show="mobileMenuOpen"></i>
                     </button>
@@ -176,9 +108,9 @@
                         <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
                             class="img-fluid site-logo-img" style="height: 2.75rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(133,16,41,0.35));">
                         <div class="d-none d-lg-flex flex-column site-brand-text">
-                            <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400;">PERFUMES
+                            <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400; color: #211D1E !important;">PERFUMES
                                 <br> COLLECTION</span>
-                            <span class="text-gold" style="font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 300;">LUXURY
+                            <span class="text-gold" style="font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 500 !important;">LUXURY
                                 EXTRAIT DE PARFUM</span>
                         </div>
                     </a>
@@ -205,8 +137,8 @@
                             style="cursor: pointer; height: 100%;">
                             <span>Shop</span>
                             <i class="fas fa-chevron-down nav-chevron ms-1"
-                               :class="{ 'chevron-rotated': shopDropdownOpen }"
-                               style="font-size: 8px;"></i>
+                                :class="{ 'chevron-rotated': shopDropdownOpen }"
+                                style="font-size: 8px;"></i>
                         </button>
 
                         <!-- Dropdown Menu (Opens on Hover or Click smoothly) -->
@@ -248,14 +180,25 @@
                     </a>
                 </nav>
 
-                <!-- Right: Action Icons (Search, User Account / Sign In, Cart) -->
+                <!-- Right: Action Icons (Search, Cart) -->
                 <div class="d-flex align-items-center gap-3 gap-md-4 flex-shrink-0" style="z-index: 2;">
+                    <!-- Search Modal Trigger -->
+                    <button type="button" id="searchModalTrigger"
+                        class="border-0 bg-transparent p-1 fs-5"
+                        title="Search Fragrances"
+                        aria-label="Search Fragrances"
+                        style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease;">
+                        <i class="fas fa-search"></i>
+                    </button>
+
                     <!-- Slide-in Cart Trigger -->
                     <button type="button" id="cartDrawerTrigger"
-                        class="position-relative border-0 bg-transparent text-ivory opacity-75 p-1 fs-5"
-                        title="Your Cart">
+                        class="position-relative border-0 bg-transparent p-1 fs-5"
+                        title="Your Cart"
+                        aria-label="View Shopping Cart"
+                        style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease;">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count-badge position-absolute bg-gradient-gold-pill text-theme-main rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px; font-weight: 400;">
+                        <span class="cart-count-badge position-absolute rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px; font-weight: 600; background-color: #541B29 !important; color: #FFFFFF !important;">
                             0
                         </span>
                     </button>
@@ -287,65 +230,71 @@
         x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-0 -translate-x-full"
         class="mobile-offcanvas-drawer p-3 p-sm-4 d-lg-none"
-        style="z-index: 1060;">
+        style="z-index: 1060; background-color: #FFFFFF !important; color: #211D1E !important; border-right: 1px solid #E8E0DA;">
         <!-- Mobile Menu Header -->
-        <div class="d-flex align-items-center justify-content-between border-bottom border-gold-20 pb-3 flex-shrink-0">
+        <div class="d-flex align-items-center justify-content-between pb-3 flex-shrink-0" style="border-bottom: 1px solid #E8E0DA;">
             <div class="d-flex align-items-center gap-2">
                 <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
                     style="height: 2.25rem; width: auto; object-fit: contain;">
-                <span class="font-hero text-uppercase tracking-wider gold-gradient-text" style="font-size: 1rem;">Perfumes Collection</span>
+                <span class="font-hero text-uppercase tracking-wider" style="font-size: 1rem; color: #211D1E !important;">Perfumes Collection</span>
             </div>
             <button type="button" @click="mobileMenuOpen = false"
-                class="border-0 bg-transparent text-ivory fs-2 p-1 d-flex align-items-center justify-content-center"
-                style="width: 44px; height: 44px; touch-action: manipulation;"
+                class="border-0 bg-transparent fs-2 p-1 d-flex align-items-center justify-content-center"
+                style="width: 44px; height: 44px; touch-action: manipulation; color: #211D1E !important;"
                 aria-label="Close navigation">&times;</button>
         </div>
 
         <!-- Mobile Menu Navigation Links -->
         <div class="py-3 vstack gap-2 flex-grow-1 overflow-y-auto">
             <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
+                class="font-serif fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
                 Home
             </a>
 
             <!-- Mobile Collections Accordion -->
-            <div x-data="{ colOpen: true }" class="border-bottom border-gold-15 py-2">
+            <div x-data="{ colOpen: true }" class="py-2" style="border-bottom: 1px solid #E8E0DA;">
                 <button type="button" @click="colOpen = !colOpen"
-                    class="w-100 border-0 bg-transparent text-start d-flex align-items-center justify-content-between font-serif fs-5 text-ivory p-0">
+                    class="w-100 border-0 bg-transparent text-start d-flex align-items-center justify-content-between font-serif fs-5 p-0"
+                    style="color: #211D1E !important;">
                     <span>Shop & Collections</span>
-                    <i class="fas fa-chevron-down text-gold" style="font-size: 11px;"
+                    <i class="fas fa-chevron-down" style="font-size: 11px; color: #541B29;"
                         :class="colOpen ? 'rotate-180' : ''"></i>
                 </button>
-                <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm text-muted-luxury">
+                <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm" style="color: #6B605B;">
                     <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">All Impressions Catalog</a>
+                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">All Impressions Catalog</a>
                     <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">Men's Impressions</a>
+                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">Men's Impressions</a>
                     <a href="{{ route('collections.show', 'women') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">Women's Impressions</a>
+                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">Women's Impressions</a>
                     <a href="{{ route('collections.show', 'unisex') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">Unisex & Pure Oud</a>
+                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">Unisex & Pure Oud</a>
                     <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-gold-soft fw-semibold text-decoration-none">Bundles & Discovery Sets (Save 25%)</a>
+                        class="d-block py-1 fw-semibold text-decoration-none" style="color: #541B29;">Bundles & Discovery Sets (Save 25%)</a>
                     <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-muted-luxury text-decoration-none">Fragrance Chronicles</a>
+                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">Fragrance Chronicles</a>
                 </div>
             </div>
 
             <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
+                class="font-serif fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
                 Bundles & Discovery Sets
             </a>
             <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
+                class="font-serif fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
                 Olfactory Journal
             </a>
             <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
+                class="font-serif fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
                 Our Artisanal Craft
             </a>
             <a href="{{ route('pages.contact') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 text-ivory border-bottom border-gold-15 py-2 text-decoration-none">
+                class="font-serif fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
                 Contact & VIP Concierge
             </a>
         </div>
@@ -389,7 +338,7 @@
     </main>
 
     <!-- 6. Master Luxury Footer (Perfumes Collection Theme) -->
-    <footer class="site-footer bg-theme-dark text-muted-luxury border-top border-gold-20 py-5">
+    <footer class="site-footer border-top py-5" style="background-color: #FAF7F2 !important; border-top: 1px solid #E8E0DA !important; color: #6B605B;">
         <div class="container px-3 px-lg-4">
             <div class="row g-4 g-lg-5 mb-5">
 
@@ -399,9 +348,9 @@
                         <div class="d-flex align-items-center gap-2">
                             <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
                                 style="height: 3rem; width: auto; object-fit: contain;">
-                            <span class="font-serif fw-bold fs-5 gold-gradient-text text-uppercase tracking-wider">Perfumes Collection</span>
+                            <span class="font-serif fw-bold fs-5 text-uppercase tracking-wider" style="color: #211D1E !important;">Perfumes Collection</span>
                         </div>
-                        <p class="text-muted-luxury lh-base fw-light mb-0" style="font-size: 0.76rem;">
+                        <p class="lh-base fw-light mb-0" style="font-size: 0.76rem; color: #6B605B;">
                             {{ $settings['site_name'] ?? 'Perfumes Collection' }} crafts high-fidelity Extrait de Parfum
                             impressions inspired by iconic global niche perfumeries. Formulated at 35%–40% pure oil
                             concentration for monumental 14+ hours longevity.
@@ -411,49 +360,49 @@
 
                 <!-- Col 2: The Olfactory Houses -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-3 fw-semibold border-bottom border-gold-20 pb-2">
+                    <h4 class="font-serif text-xs text-uppercase tracking-widest mb-3 fw-semibold pb-2" style="color: #541B29 !important; border-bottom: 1px solid #E8E0DA !important;">
                         Top Collections</h4>
-                    <ul class="list-unstyled vstack gap-2 text-muted-luxury mb-0" style="font-size: 0.76rem;">
+                    <ul class="list-unstyled vstack gap-2 mb-0" style="font-size: 0.76rem;">
                         <li><a href="{{ route('collections.show', 'men') }}"
-                                class="text-muted-luxury hover-gold transition-all">Men's Designer Impressions</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Men's Designer Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'women') }}"
-                                class="text-muted-luxury hover-gold transition-all">Women's Impressions</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Women's Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'unisex') }}"
-                                class="text-muted-luxury hover-gold transition-all">Unisex & Niche Extraits</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Unisex & Niche Extraits</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 3: Client Privilege & Care -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-3 fw-semibold border-bottom border-gold-20 pb-2">
+                    <h4 class="font-serif text-xs text-uppercase tracking-widest mb-3 fw-semibold pb-2" style="color: #541B29 !important; border-bottom: 1px solid #E8E0DA !important;">
                         Customer Care</h4>
-                    <ul class="list-unstyled vstack gap-2 text-muted-luxury mb-0" style="font-size: 0.76rem;">
+                    <ul class="list-unstyled vstack gap-2 mb-0" style="font-size: 0.76rem;">
                         <li><a href="{{ route('pages.about') }}"
-                                class="text-muted-luxury hover-gold transition-all">Our Artisanal Craft</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Our Artisanal Craft</a></li>
                         <li><a href="{{ route('pages.contact') }}"
-                                class="text-muted-luxury hover-gold transition-all">Contact Scent Concierge</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Contact Scent Concierge</a></li>
                         <li><a href="{{ route('pages.faq') }}"
-                                class="text-muted-luxury hover-gold transition-all">Frequently Asked Questions</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Frequently Asked Questions</a></li>
                         <li><a href="{{ route('policies.shipping') }}"
-                                class="text-muted-luxury hover-gold transition-all">Shipping & Courier Delivery</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Shipping & Courier Delivery</a></li>
                         <li><a href="{{ route('policies.refund') }}"
-                                class="text-muted-luxury hover-gold transition-all">Hassle-Free Return Guarantee</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Hassle-Free Return Guarantee</a></li>
                         <li><a href="{{ route('policies.privacy') }}"
-                                class="text-muted-luxury hover-gold transition-all">Privacy Policy & Security</a></li>
+                                class="text-decoration-none transition-all" style="color: #6B605B;">Privacy Policy & Security</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 4: The Privileged Circle -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="vstack gap-3">
-                        <h4 class="font-serif text-xs text-ivory text-uppercase tracking-widest mb-1 fw-semibold border-bottom border-gold-20 pb-2">
+                        <h4 class="font-serif text-xs text-uppercase tracking-widest mb-1 fw-semibold pb-2" style="color: #541B29 !important; border-bottom: 1px solid #E8E0DA !important;">
                             The Privileged Circle</h4>
-                        <p class="text-muted-luxury fw-light mb-0" style="font-size: 0.76rem;">
+                        <p class="fw-light mb-0" style="font-size: 0.76rem; color: #6B605B;">
                             An exclusive patronage for discerning fragrance connoisseurs across Pakistan. Enjoy handcrafted private reserve formulations, bespoke scent consultations, and complimentary nationwide express courier delivery.
                         </p>
-                        <div class="d-flex align-items-center gap-2 pt-1 text-gold-soft" style="font-size: 0.75rem;">
-                            <i class="fas fa-gem text-gold"></i>
-                            <span class="text-uppercase tracking-wider">Handcrafted in Pakistan</span>
+                        <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 0.75rem; color: #541B29;">
+                            <i class="fas fa-gem" style="color: #9E7D3B;"></i>
+                            <span class="text-uppercase tracking-wider fw-medium">Handcrafted in Pakistan</span>
                         </div>
                     </div>
                 </div>
@@ -461,15 +410,15 @@
             </div>
 
             <!-- Bottom Copyright & Social Icons -->
-            <div class="border-top border-gold-15 pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between text-muted-luxury gap-3" style="font-size: 0.76rem;">
+            <div class="pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3" style="font-size: 0.76rem; border-top: 1px solid #E8E0DA !important; color: #786C67;">
                 <div>
                     &copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Perfumes Collection' }}. All rights reserved. Registered Haute Parfumerie in Pakistan.
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <a href="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" target="_blank" class="text-muted-luxury fs-6"><i class="fab fa-instagram"></i></a>
-                    <a href="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" target="_blank" class="text-muted-luxury fs-6"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="text-muted-luxury fs-6"><i class="fab fa-whatsapp text-success"></i></a>
-                    <a href="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" target="_blank" class="text-muted-luxury fs-6"><i class="fab fa-youtube"></i></a>
+                    <a href="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="fs-6 text-success"><i class="fab fa-whatsapp"></i></a>
+                    <a href="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -477,43 +426,43 @@
 
     <!-- 7. Slide-In Cart Drawer -->
     <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
-    <aside id="luxuryCartDrawer" class="cart-drawer">
+    <aside id="luxuryCartDrawer" class="cart-drawer" style="background-color: #FFFFFF !important; border-left: 1px solid #E8E0DA;">
         <!-- Drawer Header -->
-        <div class="p-4 border-bottom border-gold-25 bg-theme-secondary d-flex align-items-center justify-content-between">
+        <div class="p-4 d-flex align-items-center justify-content-between" style="background-color: #FFFFFF !important; border-bottom: 1px solid #E8E0DA !important;">
             <div class="d-flex align-items-center gap-3">
-                <i class="fas fa-shopping-bag text-gold fs-5"></i>
+                <i class="fas fa-shopping-bag fs-5" style="color: #541B29;"></i>
                 <div>
-                    <h3 class="font-serif fs-5 tracking-wider text-ivory fw-semibold mb-0">Your Fragrance Bag</h3>
-                    <span id="cartDrawerHeaderCount" class="text-muted-luxury" style="font-size: 11px;">0 items</span>
+                    <h3 class="font-serif fs-5 tracking-wider fw-semibold mb-0" style="color: #211D1E !important;">Your Fragrance Bag</h3>
+                    <span id="cartDrawerHeaderCount" style="color: #786C67; font-size: 11px;">0 items</span>
                 </div>
             </div>
             <button type="button" id="closeCartDrawer"
-                class="border-0 bg-transparent text-muted-luxury fs-3 p-0">&times;</button>
+                class="border-0 bg-transparent fs-3 p-0" style="color: #211D1E !important;">&times;</button>
         </div>
 
         <!-- Dynamic Drawer Cart Items Body (Loaded via AJAX) -->
-        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto p-4 vstack gap-3 bg-theme-dark text-ivory">
-            <div class="text-center py-5 text-muted-luxury">
-                <i class="fas fa-gem fs-2 text-gold opacity-50 mb-3 animate-pulse"></i>
+        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto p-4 vstack gap-3" style="background-color: #FAF7F2 !important; color: #211D1E !important;">
+            <div class="text-center py-5" style="color: #6B605B;">
+                <i class="fas fa-gem fs-2 opacity-50 mb-3 animate-pulse" style="color: #9E7D3B;"></i>
                 <p class="mb-0">Retrieving your selected impressions...</p>
             </div>
         </div>
 
         <!-- Drawer Footer with Subtotal, Trust Assurance & Checkout -->
-        <div id="cartDrawerFooter" class="p-3.5 p-sm-4 border-top border-gold-25 bg-wine-dark d-flex flex-column gap-3">
+        <div id="cartDrawerFooter" class="p-3.5 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF !important; border-top: 1px solid #E8E0DA !important;">
             <div class="d-flex align-items-center justify-content-between">
-                <span class="text-muted-luxury text-uppercase tracking-wider text-xs fw-medium">Subtotal:</span>
-                <span id="cartDrawerSubtotal" class="font-serif fs-4 text-white fw-bold" style="color: #ffffff !important;">Rs. 0</span>
+                <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Subtotal:</span>
+                <span id="cartDrawerSubtotal" class="font-serif fs-4 fw-bold" style="color: #541B29 !important;">Rs. 0</span>
             </div>
 
             <!-- Customer Trust & Authenticity Assurance Strip -->
-            <div class="cart-trust-badges d-flex flex-column gap-1.5 p-2.5 rounded-3 bg-wine-card border border-gold-20 text-center font-sans">
-                <div class="d-flex align-items-center justify-content-center gap-2 text-gold-soft" style="font-size: 11px; font-weight: 500;">
-                    <i class="fas fa-shield-halved text-gold"></i>
+            <div class="cart-trust-badges d-flex flex-column gap-1.5 p-2.5 rounded-3 text-center font-sans" style="background-color: #FAF7F2 !important; border: 1px solid #E8E0DA !important;">
+                <div class="d-flex align-items-center justify-content-center gap-2" style="font-size: 11px; font-weight: 500; color: #541B29;">
+                    <i class="fas fa-shield-halved" style="color: #9E7D3B;"></i>
                     <span>100% French Fragrance Oils &bull; 38% Extrait</span>
                 </div>
-                <div class="d-flex align-items-center justify-content-center gap-2 text-muted-luxury" style="font-size: 10px;">
-                    <i class="fas fa-rotate text-gold-soft"></i>
+                <div class="d-flex align-items-center justify-content-center gap-2" style="font-size: 10px; color: #6B605B;">
+                    <i class="fas fa-rotate" style="color: #541B29;"></i>
                     <span>7-Day Hassle-Free Scent Exchange Guaranteed</span>
                 </div>
             </div>
@@ -527,7 +476,8 @@
                     <span>WHATSAPP</span>
                 </a>
                 <a href="{{ route('checkout.index') }}"
-                    class="cart-btn-checkout text-decoration-none">
+                    class="cart-btn-checkout text-decoration-none"
+                    style="background-color: #541B29 !important; color: #FFFFFF !important;">
                     <span>CHECKOUT</span>
                     <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
                 </a>
@@ -538,23 +488,24 @@
     <!-- 8. Interactive Search Modal -->
     <div id="searchModal"
         class="luxury-modal-overlay position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-3 opacity-0"
-        style="z-index: 1050; pointer-events: none; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
-        <div class="luxury-modal-content position-relative w-100 bg-theme-dark border border-gold-40 rounded p-4 p-sm-5 shadow-lg"
-            style="max-width: 42rem;">
+        style="z-index: 1050; pointer-events: none; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);">
+        <div class="luxury-modal-content position-relative w-100 rounded-4 p-4 p-sm-5 shadow-lg"
+            style="max-width: 42rem; background-color: #FFFFFF !important; border: 1px solid #E8E0DA; color: #211D1E !important;">
             <button id="closeSearchModal"
-                class="modal-close-btn position-absolute top-0 end-0 m-3 border-0 bg-transparent text-ivory opacity-75 fs-3">&times;</button>
-            <span class="d-block text-gold mb-1 fw-semibold text-uppercase tracking-luxury" style="font-size: 10px;">THE PRIVATE VAULT SEARCH</span>
-            <h3 class="font-serif fs-4 text-ivory mb-3">Explore Our Olfactory Compositions</h3>
+                class="modal-close-btn position-absolute top-0 end-0 m-3 border-0 bg-transparent fs-3"
+                style="color: #211D1E !important; opacity: 0.8;">&times;</button>
+            <span class="d-block mb-1 fw-semibold text-uppercase tracking-luxury" style="font-size: 10px; color: #9E7D3B;">THE PRIVATE VAULT SEARCH</span>
+            <h3 class="font-serif fs-4 mb-3" style="color: #211D1E !important;">Explore Our Olfactory Compositions</h3>
 
             <div class="position-relative mb-4">
                 <input type="text" id="luxurySearchInput"
                     placeholder="Search by note (Oud, Saffron, Rose), concentration, or title..."
                     class="form-control form-control-luxury py-3 pe-5 text-sm">
-                <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3 text-gold"></i>
+                <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3" style="color: #541B29;"></i>
             </div>
 
             <div id="liveSearchResults" class="overflow-y-auto vstack gap-2 pe-1" style="max-height: 18rem;">
-                <div class="text-center text-muted-luxury py-4 text-xs">
+                <div class="text-center py-4 text-xs" style="color: #6B605B;">
                     Type at least 2 characters to search live compositions...
                 </div>
             </div>
@@ -564,44 +515,45 @@
     <!-- 9. Scent Finder Quiz Modal -->
     <div id="scentQuizModal"
         class="luxury-modal-overlay position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-3 opacity-0"
-        style="z-index: 1050; pointer-events: none; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
-        <div class="luxury-modal-content position-relative w-100 bg-theme-dark border border-gold-40 rounded p-4 p-sm-5 shadow-lg"
-            style="max-width: 36rem;">
+        style="z-index: 1050; pointer-events: none; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);">
+        <div class="luxury-modal-content position-relative w-100 rounded-4 p-4 p-sm-5 shadow-lg"
+            style="max-width: 36rem; background-color: #FFFFFF !important; border: 1px solid #E8E0DA; color: #211D1E !important;">
             <button id="closeScentQuizBtn"
-                class="modal-close-btn position-absolute top-0 end-0 m-3 border-0 bg-transparent text-ivory opacity-75 fs-3"
+                class="modal-close-btn position-absolute top-0 end-0 m-3 border-0 bg-transparent fs-3"
+                style="color: #211D1E !important; opacity: 0.8;"
                 onclick="document.getElementById('scentQuizModal').classList.remove('active')">&times;</button>
-            <span class="d-block text-gold mb-1 fw-semibold text-uppercase tracking-luxury" style="font-size: 10px;">PERSONALIZED OLFACTORY ADVISOR</span>
-            <h3 class="font-serif fs-4 text-ivory mb-2">Find Your Signature Formulation</h3>
-            <p class="text-xs text-muted-luxury mb-4">
+            <span class="d-block mb-1 fw-semibold text-uppercase tracking-luxury" style="font-size: 10px; color: #9E7D3B;">PERSONALIZED OLFACTORY ADVISOR</span>
+            <h3 class="font-serif fs-4 mb-2" style="color: #211D1E !important;">Find Your Signature Formulation</h3>
+            <p class="text-xs mb-4" style="color: #6B605B;">
                 Answer 2 brief questions to match your presence with our master perfumer's private reserve.
             </p>
 
             <form id="scentQuizForm" class="vstack gap-3">
                 <div>
-                    <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-2 fw-medium">
+                    <label class="d-block text-xs text-uppercase tracking-wider mb-2 fw-medium" style="color: #541B29;">
                         1. Primary occasion of wear:
                     </label>
                     <div class="row g-2 text-xs">
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_occasion" value="royal" checked class="form-check-input mt-0">
                                 <span>Imperial Evening & Royal</span>
                             </label>
                         </div>
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_occasion" value="wedding" class="form-check-input mt-0">
                                 <span>Grand Weddings & Gala</span>
                             </label>
                         </div>
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_occasion" value="summer" class="form-check-input mt-0">
                                 <span>Daytime Executive & Fresh</span>
                             </label>
                         </div>
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_occasion" value="spiritual" class="form-check-input mt-0">
                                 <span>Spiritual Dehn al Oud / Jumuah</span>
                             </label>
@@ -610,18 +562,18 @@
                 </div>
 
                 <div>
-                    <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-2 fw-medium">
+                    <label class="d-block text-xs text-uppercase tracking-wider mb-2 fw-medium" style="color: #541B29;">
                         2. Sillage & Longevity Benchmark:
                     </label>
                     <div class="row g-2 text-xs">
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_intensity" value="beast" checked class="form-check-input mt-0">
                                 <span>Beast Mode (16+ Hours)</span>
                             </label>
                         </div>
                         <div class="col-6">
-                            <label class="w-100 bg-theme-card border border-gold-20 p-3 rounded cursor-pointer d-flex align-items-center gap-2 text-ivory">
+                            <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_intensity" value="intimate" class="form-check-input mt-0">
                                 <span>Sophisticated Aura</span>
                             </label>
@@ -629,7 +581,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase mt-2">
+                <button type="submit" class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase mt-2" style="background-color: #541B29 !important; color: #FFFFFF !important; border: none; border-radius: 8px;">
                     REVEAL MY SIGNATURE MASTERPIECE
                 </button>
             </form>

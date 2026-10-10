@@ -5,12 +5,12 @@
 @section('content')
 
 <!-- Header Breadcrumb & Title -->
-<section class="py-5 border-bottom border-gold-20" style="background: linear-gradient(to bottom, #18050b, #0d0305, #050203);">
+<section class="py-5" style="background: #FAF7F2; border-bottom: 1px solid #E8E0DA;">
     <div class="container px-3 px-lg-4">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
             <div>
-                <span class="text-gold fw-semibold d-block mb-2" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">ARTISANAL CREATIONS</span>
-                <h1 class="font-serif text-light-parchment mb-2 fw-normal display-6">
+                <span class="fw-semibold d-block mb-2" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #541B29;">ARTISANAL CREATIONS</span>
+                <h1 class="font-serif mb-2 fw-normal display-6" style="color: #211D1E !important;">
                     @if($currentCategory)
                         {{ $currentCategory->name }}
                     @elseif($currentFamily)
@@ -21,7 +21,7 @@
                         All Fragrance Impressions
                     @endif
                 </h1>
-                <p class="font-serif text-muted-parchment mb-0 lh-base" style="max-width: 672px; font-size: 1.05rem;">
+                <p class="font-serif mb-0 lh-base" style="max-width: 672px; font-size: 1.05rem; color: #6B605B;">
                     @if($currentCategory)
                         {{ $currentCategory->description }}
                     @else
@@ -31,8 +31,8 @@
             </div>
 
             <div class="d-flex align-items-center gap-2">
-                <span class="text-muted-parchment" style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;">
-                    Showing <strong class="text-gold">{{ $products->total() }}</strong> Artisan Flacons
+                <span style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: #6B605B;">
+                    Showing <strong style="color: #541B29;">{{ $products->total() }}</strong> Artisan Flacons
                 </span>
             </div>
         </div>
@@ -40,7 +40,7 @@
 </section>
 
 <!-- Main Catalog Body -->
-<section class="py-5" style="background-color: #050203;" 
+<section class="py-5" style="background-color: #F7F3EE;" 
          x-data="{ mobileFiltersOpen: false }"
          x-init="$watch('mobileFiltersOpen', val => document.body.classList.toggle('overflow-hidden', val))">
     <div class="container px-3 px-lg-4">
@@ -68,8 +68,8 @@
              x-transition:leave="transition ease-in duration-200" 
              x-transition:leave-start="opacity-100 translate-x-0"
              x-transition:leave-end="opacity-0 -translate-x-full"
-             class="mobile-filter-drawer p-3 p-sm-4 d-lg-none"
-             style="z-index: 1060;">
+             class="mobile-filter-drawer p-3 p-sm-4 d-lg-none shadow-lg"
+             style="z-index: 1060; background-color: #FFFFFF; color: #211D1E; border-right: 1px solid #E8E0DA;">
             <div class="flex-grow-1 overflow-y-auto pe-1">
                 @include('partials.shop-filters', ['formId' => 'mobileCatalogFilterForm', 'isMobileDrawer' => true])
             </div>
@@ -78,7 +78,7 @@
         <div class="row g-4 align-items-start">
             <!-- Left: Luxury Olfactory Filter Sidebar (lg:col-3, Desktop only) -->
             <aside class="col-12 col-lg-3 d-none d-lg-block">
-                <div class="bg-wine-card border border-gold-25 rounded-4 p-4 sticky-top shadow-xl d-flex flex-column gap-4" style="top: 112px; max-height: calc(100vh - 140px); overflow-y: auto;">
+                <div class="rounded-4 p-4 sticky-top shadow-sm d-flex flex-column gap-4" style="top: 112px; max-height: calc(100vh - 140px); overflow-y: auto; background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                     @include('partials.shop-filters', ['formId' => 'catalogFilterForm', 'isMobileDrawer' => false])
                 </div>
             </aside>
@@ -92,9 +92,10 @@
                         <div class="d-flex align-items-center gap-2">
                             <button type="button" 
                                     @click="mobileFiltersOpen = true"
-                                    class="btn-luxury-filter d-lg-none"
+                                    class="d-lg-none d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-xs fw-semibold border shadow-sm"
+                                    style="background-color: #FFFFFF; border-color: #E8E0DA !important; color: #211D1E;"
                                     aria-label="Open filter and scent notes drawer">
-                                <i class="fas fa-filter text-gold"></i>
+                                <i class="fas fa-filter" style="color: #541B29;"></i>
                                 <span>Filters & Notes</span>
                                 @php
                                     $activeFilterCountShop = (request('q') ? 1 : 0) 
@@ -104,38 +105,36 @@
                                         + (request('min_price') || request('max_price') ? 1 : 0);
                                 @endphp
                                 @if($activeFilterCountShop > 0)
-                                    <span class="badge rounded-pill bg-gold text-wine-dark fw-bold px-1.5 py-0.5" style="font-size: 9px; min-width: 16px;">{{ $activeFilterCountShop }}</span>
+                                    <span class="badge rounded-pill fw-bold px-1.5 py-0.5 text-white" style="font-size: 9px; min-width: 16px; background-color: #541B29;">{{ $activeFilterCountShop }}</span>
                                 @endif
                             </button>
-                            <div class="text-muted-parchment d-none d-lg-block collection-results-count" style="font-size: 0.85rem; letter-spacing: 0.03em;">
-                                Showing <strong class="text-light-parchment">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                            <div class="d-none d-lg-block collection-results-count" style="font-size: 0.85rem; letter-spacing: 0.03em; color: #6B605B;">
+                                Showing <strong style="color: #211D1E;">{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong style="color: #541B29;">{{ $products->total() }}</strong> Flacons
                             </div>
                         </div>
 
                         <!-- Right: Mobile Counter & Desktop Sort -->
                         <div class="d-flex align-items-center gap-2">
                             <!-- Mobile Right Text -->
-                            <div class="text-muted-parchment text-end d-lg-none collection-results-count" style="font-size: 0.76rem; letter-spacing: 0.02em; white-space: nowrap;">
-                                <strong class="text-gold">{{ $products->total() }}</strong> Flacons
+                            <div class="text-end d-lg-none collection-results-count" style="font-size: 0.76rem; letter-spacing: 0.02em; white-space: nowrap; color: #6B605B;">
+                                <strong style="color: #541B29;">{{ $products->total() }}</strong> Flacons
                             </div>
 
                             <!-- Desktop Sort -->
                             <div class="d-none d-lg-flex align-items-center gap-2">
-                                <label class="text-gold fw-semibold mb-0" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Sort By:</label>
-                                <select onchange="location = this.value;" class="form-select select-luxury-sort">
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Featured</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Bestsellers</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Newest Releases</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: Low to High</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Price: High to Low</option>
-                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }} class="bg-wine-dark text-light-parchment">Top Rated</option>
+                                <label class="fw-semibold mb-0" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #211D1E;">Sort By:</label>
+                                <select onchange="location = this.value;" class="form-select shadow-sm text-xs py-1.5 pe-4 ps-2.5 rounded-3" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;">
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'featured']) }}" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'bestseller']) }}" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Bestsellers</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_asc']) }}" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'price_desc']) }}" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+                                    <option value="{{ request()->fullUrlWithQuery(['sort' => 'rating']) }}" {{ request('sort') == 'rating' ? 'selected' : '' }}>Top Rated</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
 
                 <!-- Products Grid -->
                 @if($products->count() > 0)
@@ -152,13 +151,13 @@
                         {{ $products->links() }}
                     </div>
                 @else
-                    <div class="bg-wine-card border border-gold-25 p-5 text-center rounded-4 d-flex flex-column align-items-center gap-3">
-                        <i class="fas fa-search text-gold" style="font-size: 2rem;"></i>
-                        <h3 class="font-serif text-light-parchment fs-4 mb-0">No Fragrances Matching Your Criteria</h3>
-                        <p class="font-serif text-muted-parchment mb-0" style="max-width: 440px;">
+                    <div class="p-5 text-center rounded-4 d-flex flex-column align-items-center gap-3 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                        <i class="fas fa-search" style="font-size: 2rem; color: #541B29;"></i>
+                        <h3 class="font-serif fs-4 mb-0" style="color: #211D1E !important;">No Fragrances Matching Your Criteria</h3>
+                        <p class="font-serif mb-0" style="max-width: 440px; color: #6B605B;">
                             We could not find perfumes fitting your specific filter combinations. Try resetting filters or search by impression name.
                         </p>
-                        <a href="{{ route('shop.index') }}" class="btn-gold d-inline-block py-3 px-4 text-xs text-uppercase tracking-widest text-decoration-none">RESET ALL FILTERS</a>
+                        <a href="{{ route('shop.index') }}" class="d-inline-block py-3 px-4 text-xs text-uppercase tracking-widest text-white text-decoration-none shadow-sm rounded-3" style="background-color: #541B29;">RESET ALL FILTERS</a>
                     </div>
                 @endif
             </div>

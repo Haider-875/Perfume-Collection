@@ -6,6 +6,10 @@
 
 @section('header_actions')
 <div class="d-flex align-items-center gap-2 flex-wrap">
+    <a href="{{ route('admin.categories.index') }}" class="admin-btn-secondary" title="Manage Fragrance Categories">
+        <i class="fa-solid fa-layer-group text-primary"></i>
+        <span>Categories</span>
+    </a>
     <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download sample CSV template">
         <i class="fa-solid fa-file-csv text-muted"></i>
         <span class="d-none d-sm-inline">Sample CSV</span>

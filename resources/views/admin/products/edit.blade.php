@@ -305,7 +305,12 @@
                 </div>
                 <div class="p-4">
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Collection Category *</label>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-0" style="font-size: 0.72rem; letter-spacing: 0.05em;">Collection Category *</label>
+                            <a href="{{ route('admin.categories.index') }}" target="_blank" class="small text-primary text-decoration-none fw-semibold" style="font-size: 0.72rem;">
+                                <i class="fa-solid fa-plus-circle me-1"></i>Add New Category
+                            </a>
+                        </div>
                         <select name="category_id" required>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}" {{ old('category_id', $product->category_id) == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>

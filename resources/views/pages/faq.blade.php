@@ -6,7 +6,7 @@
 @section('content')
 
 <!-- FAQ Hero Banner -->
-<section class="py-5 text-center border-bottom border-gold-20 position-relative overflow-hidden" style="background: linear-gradient(to bottom, #18050b, #0d0305, #050203);">
+<section class="py-5 text-center position-relative overflow-hidden" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;">
     <div class="container px-3 px-lg-4 position-relative z-1">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
@@ -14,18 +14,18 @@
             ['label' => 'Client Care & FAQ']
         ]" />
 
-        <span class="d-inline-block text-gold mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;">CONCIERGE INQUIRIES</span>
-        <h1 class="font-serif text-light-parchment mb-3 fw-normal display-5 tracking-wide">
+        <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #541B29;">CONCIERGE INQUIRIES</span>
+        <h1 class="font-serif mb-3 fw-normal display-5 tracking-wide" style="color: #211D1E;">
             Frequently Asked Questions
         </h1>
-        <p class="mx-auto text-muted-parchment lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem;">
+        <p class="mx-auto lh-base fw-light mb-0" style="max-width: 672px; font-size: 0.95rem; color: #6B605B;">
             Essential knowledge concerning our Extrait de Parfum formulations, artisanal agarwood oils, dispatch across Pakistan, and royal customer care.
         </p>
     </div>
 </section>
 
 <!-- FAQ Accordion Section -->
-<section class="py-5" style="background-color: #050203;">
+<section class="py-5" style="background-color: #F7F3EE;">
     <div class="container px-3 px-lg-4 d-flex flex-column gap-3" style="max-width: 896px;">
         
         <!-- Accordion 1 -->
@@ -59,16 +59,16 @@
         </x-accordion>
 
         <!-- Still have questions banner -->
-        <div class="mt-5 p-4 p-md-5 bg-wine-card border border-gold-30 rounded-4 text-center d-flex flex-column align-items-center gap-3 shadow-xl">
-            <h3 class="font-serif fs-3 text-light-parchment mb-0">Require Bespoke Fragrance Advice?</h3>
-            <p class="text-xs text-muted-parchment mx-auto mb-0" style="max-width: 512px;">
+        <div class="mt-5 p-4 p-md-5 rounded-4 text-center d-flex flex-column align-items-center gap-3 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+            <h3 class="font-serif fs-3 mb-0" style="color: #211D1E;">Require Bespoke Fragrance Advice?</h3>
+            <p class="text-xs mx-auto mb-0" style="max-width: 512px; color: #6B605B;">
                 Our Private Concierge advisors are available 7 days a week on WhatsApp to assist with bridal gifting, corporate orders, and personal scent consultations.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3 pt-2">
                 <a href="https://wa.me/923363685732?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
                     <i class="fab fa-whatsapp me-2"></i> CHAT WITH CONCIERGE (+92 336 3685732)
                 </a>
-                <a href="{{ route('pages.contact') }}" class="btn-outline-gold py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
+                <a href="{{ route('pages.contact') }}" class="py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3 fw-semibold" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                     CONTACT FORM
                 </a>
             </div>
