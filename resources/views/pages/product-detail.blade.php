@@ -172,9 +172,8 @@
                             @for($i = 1; $i <= 5; $i++)
                                 <i class="fas fa-star {{ $i <= round($product->rating_avg ?: 5) ? '' : 'opacity-25' }}"></i>
                             @endfor
-                        </div>
-                        <span class="fw-semibold text-nowrap" style="white-space: nowrap; color: #211D1E !important;">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
-                        <span class="text-nowrap" style="white-space: nowrap; color: #6B605B;">({{ $product->reviews_count ?: 48 }} Verified Patron Reviews)</span>
+                        </di                        <span class="fw-semibold text-nowrap" style="white-space: nowrap; color: #110D0E !important;">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
+                        <span class="text-nowrap" style="white-space: nowrap; color: #4A4240;">({{ $product->reviews_count ?: 48 }} Verified Patron Reviews)</span>
                     </div>
 
                     <!-- Pricing & Savings (Completely Unboxed, Clean & Elegant) -->
@@ -183,14 +182,14 @@
                             <span class="pdp-price-amount" style="color: #541B29 !important;" x-text="formattedPrice">
                                 {{ $product->formatted_effective_price }}
                             </span>
-                            <span class="text-sm text-decoration-line-through" style="color: #786C67;" x-text="formattedComparePrice"></span>
+                            <span class="text-sm text-decoration-line-through" style="color: #615652;" x-text="formattedComparePrice"></span>
                             <template x-if="savingsPercent > 0">
                                 <span class="badge-savings-luxury" style="font-size: 10px;">
                                      SAVE <span x-text="savingsPercent"></span>%
-                                </span>
+                                 </span>
                             </template>
                         </div>
-                        <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 11.5px; color: #6B605B;">
+                        <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 11.5px; color: #4A4240;">
                             <i class="fas fa-truck-fast" style="color: #541B29;"></i>
                             <span>Complimentary TCS Express Air Delivery on Orders Above Rs. 3,500</span>
                         </div>
@@ -198,9 +197,9 @@
 
                     <!-- Flacon Size Variant Selector -->
                     <div class="d-flex flex-column gap-2.5 font-sans text-start my-1">
-                        <label class="d-block text-xs text-uppercase tracking-wider fw-medium mb-1" style="color: #211D1E !important;">
+                        <label class="d-block text-xs text-uppercase tracking-wider fw-medium mb-1" style="color: #110D0E !important;">
                             SELECT BOTTLE SIZE
-                        </label>
+                        </label>bel>
                         <div class="d-flex flex-wrap gap-2 gap-sm-3">
                             @forelse($product->variants as $variant)
                                 @php
