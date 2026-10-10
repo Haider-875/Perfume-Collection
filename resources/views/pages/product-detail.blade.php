@@ -171,8 +171,8 @@
                         <div class="d-inline-flex align-items-center text-nowrap" style="font-size: 11px; gap: 2px; color: #9E7D3B;">
                             @for($i = 1; $i <= 5; $i++)
                                 <i class="fas fa-star {{ $i <= round($product->rating_avg ?: 5) ? '' : 'opacity-25' }}"></i>
-                            @endfor
-                        </di                        <span class="fw-semibold text-nowrap" style="white-space: nowrap; color: #110D0E !important;">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
+                        </div>
+                        <span class="fw-semibold text-nowrap" style="white-space: nowrap; color: #110D0E !important;">{{ number_format($product->rating_avg ?: 4.9, 1) }} / 5.0</span>
                         <span class="text-nowrap" style="white-space: nowrap; color: #4A4240;">({{ $product->reviews_count ?: 48 }} Verified Patron Reviews)</span>
                     </div>
 
@@ -199,7 +199,7 @@
                     <div class="d-flex flex-column gap-2.5 font-sans text-start my-1">
                         <label class="d-block text-xs text-uppercase tracking-wider fw-medium mb-1" style="color: #110D0E !important;">
                             SELECT BOTTLE SIZE
-                        </label>bel>
+                        </label>
                         <div class="d-flex flex-wrap gap-2 gap-sm-3">
                             @forelse($product->variants as $variant)
                                 @php
