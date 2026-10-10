@@ -752,6 +752,12 @@
                         spaceBetween: 12,
                         speed: 700,
                         loop: false,
+                        rewind: true,
+                        autoplay: {
+                            delay: 3500,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        },
                         grabCursor: true,
                         resistance: true,
                         resistanceRatio: 0.75,

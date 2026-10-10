@@ -130,15 +130,25 @@ class ProductController extends Controller
         $heartNotes = $product->heartNotes()->get();
         $baseNotes = $product->baseNotes()->get();
 
-        // Related Olfactory Pairings
+        // Related Olfactory Pairings (retrieve up to 8 so carousel can auto-slide across all viewports)
         $relatedProducts = Product::where('id', '!=', $product->id)
             ->where(function($q) use ($product) {
                 $q->where('category_id', $product->category_id)
                   ->orWhere('fragrance_family_id', $product->fragrance_family_id);
             })
             ->active()
-            ->take(4)
+            ->take(8)
             ->get();
+
+        // If fewer than 8 related by category/family, backfill with active creations so showcase slider auto-slides
+        if ($relatedProducts->count() < 8) {
+            $excludeIds = $relatedProducts->pluck('id')->push($product->id)->toArray();
+            $fillProducts = Product::whereNotIn('id', $excludeIds)
+                ->active()
+                ->take(8 - $relatedProducts->count())
+                ->get();
+            $relatedProducts = $relatedProducts->concat($fillProducts);
+        }
 
         return view('pages.product-detail', compact(
             'product',

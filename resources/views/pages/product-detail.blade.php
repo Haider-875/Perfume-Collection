@@ -677,11 +677,17 @@
             if (relatedEl.swiper) {
                 relatedEl.swiper.destroy(true, true);
             }
-            new Swiper('.related-products-swiper', {
+            const relatedSwiper = new Swiper('.related-products-swiper', {
                 slidesPerView: 1.15,
                 spaceBetween: 12,
                 speed: 700,
                 loop: false,
+                rewind: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
                 grabCursor: true,
                 resistance: true,
                 resistanceRatio: 0.75,
@@ -711,6 +717,11 @@
                     1024: { slidesPerView: 4, spaceBetween: 24 }
                 }
             });
+
+            // Guarantee autoplay is actively running
+            if (relatedSwiper && relatedSwiper.autoplay) {
+                relatedSwiper.autoplay.start();
+            }
         }
     });
 </script>
