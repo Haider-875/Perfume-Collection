@@ -73,6 +73,18 @@
             <div class="flex-grow-1 overflow-y-auto pe-1">
                 @include('partials.collection-filters', ['formId' => 'mobileCollectionFilterForm', 'isMobileDrawer' => true])
             </div>
+
+            <!-- Mobile Drawer Sticky Action Footer -->
+            <div class="pt-3 border-top border-gold-20 mt-2 flex-shrink-0 d-flex align-items-center gap-2">
+                <button type="button" @click="mobileFiltersOpen = false" class="btn-gold flex-grow-1 py-2.5 text-center text-xs text-uppercase tracking-wider fw-semibold rounded-pill">
+                    View {{ $products->total() }} Compositions
+                </button>
+                @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
+                    <a href="{{ url()->current() }}" class="btn-outline-gold py-2 px-3 text-center text-xs text-uppercase tracking-wider rounded-pill text-decoration-none">
+                        Reset
+                    </a>
+                @endif
+            </div>
         </div>
 
         <!-- Filter Bar & Sort Controls Header -->
@@ -85,17 +97,15 @@
                         type="button" 
                         @click="mobileFiltersOpen = !mobileFiltersOpen"
                         class="btn-luxury-filter d-lg-none"
-                        aria-label="Toggle Filters & Fragrance Notes"
+                        aria-label="Toggle Filters"
                     >
-                        <i class="fas fa-filter text-gold"></i>
-                        <span>Filters & Notes</span>
+                        <i class="fas fa-sliders-h text-gold"></i>
+                        <span>Filters</span>
                         @php
-                            $activeFilterCount = (request('search') ? 1 : 0) 
-                                + (request('q') ? 1 : 0) 
+                            $activeFilterCount = (request('q') ? 1 : 0) 
                                 + (request('family') ? 1 : 0) 
-                                + (request('gender') ? 1 : 0) 
-                                + (request('season') ? 1 : 0) 
-                                + (request('intensity') ? 1 : 0) 
+                                + (request('note') ? 1 : 0) 
+                                + (request('volume_ml') ? 1 : 0) 
                                 + (request('min_price') || request('max_price') ? 1 : 0);
                         @endphp
                         @if($activeFilterCount > 0)

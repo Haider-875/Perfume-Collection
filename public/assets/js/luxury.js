@@ -118,12 +118,13 @@ function initSwiperSliders() {
         });
     }
 
-    // Related Products / You May Also Like Carousel
+    // Related Products / You May Also Like Carousel (Harmonized with Smooth Featured Carousel)
     if (document.querySelector('.related-products-swiper') && !document.querySelector('.related-products-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.related-products-swiper', {
-            slidesPerView: 1.35,
-            spaceBetween: 14,
-            speed: 800,
+            slidesPerView: 1.15,
+            spaceBetween: 12,
+            speed: 700,
+            loop: false,
             grabCursor: true,
             resistance: true,
             resistanceRatio: 0.75,
@@ -131,6 +132,9 @@ function initSwiperSliders() {
             touchAngle: 45,
             threshold: 4,
             watchSlidesProgress: true,
+            observer: true,
+            observeParents: true,
+            observeSlideChildren: true,
             lazyPreloadPrevNext: 2,
             pagination: {
                 el: '.related-swiper-pagination',
@@ -142,6 +146,8 @@ function initSwiperSliders() {
                 prevEl: '.related-prev',
             },
             breakpoints: {
+                340: { slidesPerView: 1.15, spaceBetween: 12 },
+                400: { slidesPerView: 1.35, spaceBetween: 14 },
                 480: { slidesPerView: 1.8, spaceBetween: 16 },
                 576: { slidesPerView: 2.2, spaceBetween: 18 },
                 768: { slidesPerView: 3, spaceBetween: 20 },

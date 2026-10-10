@@ -2453,11 +2453,11 @@ p.font-sans,
 }
 
 .pdp-tab-btn.pdp-tab-active {
-    background: #780d24 !important;
-    color: #070204 !important;
-    border-color: #780d24 !important;
+    background: linear-gradient(135deg, #780d24 0%, #9a1332 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(223, 183, 112, 0.4) !important;
     font-weight: 600 !important;
-    box-shadow: 0 4px 16px rgba(223, 183, 112, 0.35);
+    box-shadow: 0 4px 16px rgba(120, 13, 36, 0.5);
 }
 
 .pdp-tabs-container {
@@ -4743,6 +4743,332 @@ body.overflow-hidden {
         font-size: 0.75rem !important;
     }
 }
+
+/* ==========================================================================
+   6. SIMPLIFIED COLLECTION SIDEBAR & MOBILE FILTER DRAWER
+   ========================================================================== */
+.collection-filter-form .form-control-luxury {
+    background: rgba(18, 4, 8, 0.85);
+    border: 1px solid rgba(133, 16, 41, 0.35);
+    color: #f5efe7;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.collection-filter-form .form-control-luxury:focus {
+    border-color: #dfb770;
+    box-shadow: 0 0 0 2px rgba(223, 183, 112, 0.2);
+    outline: none;
+}
+
+.mobile-filter-drawer {
+    background: #090204 !important;
+    border-right: 1px solid rgba(133, 16, 41, 0.45) !important;
+    box-shadow: 12px 0 45px rgba(0, 0, 0, 0.85);
+}
+
+.mobile-filter-drawer .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(133, 16, 41, 0.4) transparent;
+}
+
+/* ==========================================================================
+   7. LUXURY PAGINATION UI (DESKTOP & MOBILE OPTIMIZED)
+   ========================================================================== */
+.luxury-pagination-nav {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.luxury-pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(18, 4, 8, 0.85);
+    border: 1px solid rgba(133, 16, 41, 0.4);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+}
+
+.luxury-page-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.luxury-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 9999px;
+    font-family: var(--font-sans), 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #dfd5cb;
+    background: transparent;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    user-select: none;
+}
+
+.luxury-page-link:hover {
+    color: #dfb770;
+    border-color: rgba(223, 183, 112, 0.4);
+    background: rgba(120, 13, 36, 0.35);
+    transform: translateY(-1px);
+}
+
+.luxury-page-link.active,
+.luxury-page-item.active .luxury-page-link {
+    background: linear-gradient(135deg, #780d24 0%, #9a1332 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(223, 183, 112, 0.6) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.6), 0 0 0 1px rgba(223, 183, 112, 0.3);
+}
+
+.luxury-page-arrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0 12px;
+    color: #dfb770;
+}
+
+.luxury-page-arrow.disabled,
+.luxury-page-item.disabled .luxury-page-link {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    border-color: transparent !important;
+    background: transparent !important;
+    color: #8c827a !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.luxury-page-dots {
+    color: #8c827a;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    min-width: 24px;
+    cursor: default;
+}
+
+/* Fallback styling for standard Bootstrap .pagination elements */
+.pagination {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 6px 10px !important;
+    background: rgba(18, 4, 8, 0.85) !important;
+    border: 1px solid rgba(133, 16, 41, 0.4) !important;
+    border-radius: 9999px !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55) !important;
+    margin-bottom: 0 !important;
+}
+
+.pagination .page-item .page-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    padding: 0 10px !important;
+    border-radius: 9999px !important;
+    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #dfd5cb !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #dfb770 !important;
+    border-color: rgba(223, 183, 112, 0.4) !important;
+    background: rgba(120, 13, 36, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #780d24 0%, #9a1332 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(223, 183, 112, 0.6) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.6), 0 0 0 1px rgba(223, 183, 112, 0.3) !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    opacity: 0.3 !important;
+    color: #8c827a !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    transform: none !important;
+}
+
+@media (max-width: 575.98px) {
+    .luxury-pagination,
+    .pagination {
+        gap: 3px !important;
+        padding: 4px 6px !important;
+        border-radius: 14px !important;
+    }
+
+    .luxury-page-link,
+    .pagination .page-item .page-link {
+        min-width: 32px !important;
+        height: 32px !important;
+        padding: 0 6px !important;
+        font-size: 0.78rem !important;
+    }
+
+    .luxury-page-arrow {
+        padding: 0 8px !important;
+    }
+}
+
+/* ==========================================================================
+   8. YOU MAY ALSO LIKE SLIDER STABILITY & EQUAL CARD SIZING
+   ========================================================================== */
+.related-products-swiper .swiper-slide {
+    height: auto !important;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.related-products-swiper .product-card {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* ==========================================================================
+   9. MOBILE PRODUCT CARD REDESIGN (Scoped to <= 767.98px)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+    /* D. Remove card background, border outline, shadow, and box container on mobile */
+    .product-card {
+        background: transparent !important;
+        background-image: none !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    /* Outer hover transform disabled on mobile to prevent jerking */
+    .product-card.luxury-hover-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 1. Product Image: clean stage directly on page without surrounding box */
+    .product-card .product-card-media {
+        border-radius: 12px !important;
+        border: none !important;
+        background: transparent !important;
+        margin-bottom: 8px !important;
+        min-height: unset !important;
+        aspect-ratio: 1 / 1 !important;
+        overflow: hidden !important;
+        box-shadow: none !important;
+    }
+
+    /* Hide Impression Tag & Star Rating on mobile for clean Visual Order: Image -> Title -> Price -> Button */
+    .product-card .product-card-impression,
+    .product-card .product-card-rating {
+        display: none !important;
+    }
+
+    /* 2. Product Title: Standardized text sizing (~14px) and 2-line clean alignment */
+    .product-card .product-card-title {
+        font-size: 0.88rem !important; /* ~14px */
+        line-height: 1.35 !important;
+        font-weight: 500 !important;
+        margin-bottom: 4px !important;
+        min-height: 2.7em !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        text-align: center !important;
+    }
+
+    .product-card .product-card-title a {
+        color: #f5efe7 !important;
+        font-size: inherit !important;
+    }
+
+    /* 3. Product Price: Strictly ~2-3px smaller than main title text (11.5px / 12px) */
+    .product-card .product-card-pricing {
+        font-size: 11.5px !important; /* 2.5px smaller than 14px title */
+        line-height: 1.35 !important;
+        margin-top: 2px !important;
+        margin-bottom: 6px !important;
+        display: flex !important;
+        align-items: baseline !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        column-gap: 3px !important;
+        row-gap: 1px !important;
+        text-align: center !important;
+    }
+
+    .product-card .product-card-pricing * {
+        font-size: 11.5px !important;
+        line-height: 1.35 !important;
+    }
+
+    .product-card .product-price-unit {
+        font-size: 10px !important;
+        opacity: 0.8 !important;
+    }
+
+    /* 4. Product Button: Rounded-rectangle (not pill), comfortable touch size, arrow removed */
+    .product-card .product-card-action {
+        border-top: none !important;
+        padding-top: 0 !important;
+        margin-top: 8px !important;
+    }
+
+    .product-card .product-card-action button,
+    .product-card .btn-cart-gradient {
+        border-radius: 8px !important; /* Rounded-rectangle button */
+        min-height: 40px !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+    }
+
+    /* A. Remove arrow icon from card button on mobile */
+    .product-card .btn-arrow,
+    .product-card .fa-arrow-right-long {
+        display: none !important;
+    }
+}
+
 
 
 

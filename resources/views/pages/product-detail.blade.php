@@ -487,155 +487,121 @@
         </div>
     </section>
 
-    <!-- 5. PDP Detailed Tabs (Description, Ritual, Shipping, Customer Reviews) -->
-    <section class="py-5 py-lg-6 border-bottom border-gold-20" style="background-color: #050203;">
-        <div class="container px-3 px-lg-4" style="max-width: 960px;" x-data="{ currentTab: 'desc' }">
+    <!-- 5. PDP The Impression Story (Single Clean Button, Uncluttered Layout) -->
+    <section class="py-5 py-lg-6 border-bottom border-gold-20" style="background-color: #050203;" x-data="{ reviewsOpen: false }">
+        <div class="container px-3 px-lg-4" style="max-width: 960px;">
             
-            <!-- Tab Headers (Responsive Horizontal Touch Slider on Mobile, Centered on Desktop) -->
-            <div class="pdp-tabs-container mb-4 mb-lg-5 font-sans no-scrollbar">
+            <!-- Retained Single Button: The Impression Story -->
+            <div class="text-center mb-4 mb-lg-5 font-sans">
                 <button 
                     type="button" 
-                    @click="currentTab = 'desc'" 
-                    :class="currentTab === 'desc' ? 'pdp-tab-active' : ''"
-                    class="pdp-tab-btn"
+                    class="pdp-tab-btn pdp-tab-active"
+                    style="cursor: default;"
                 >
                     The Impression Story
                 </button>
-
-                <button 
-                    type="button" 
-                    @click="currentTab = 'usage'" 
-                    :class="currentTab === 'usage' ? 'pdp-tab-active' : ''"
-                    class="pdp-tab-btn"
-                >
-                    Application Ritual
-                </button>
-
-                <button 
-                    type="button" 
-                    @click="currentTab = 'shipping'" 
-                    :class="currentTab === 'shipping' ? 'pdp-tab-active' : ''"
-                    class="pdp-tab-btn"
-                >
-                    Shipping & Exchange Policy
-                </button>
-
-                <button 
-                    type="button" 
-                    @click="currentTab = 'reviews'" 
-                    :class="currentTab === 'reviews' ? 'pdp-tab-active' : ''"
-                    class="pdp-tab-btn"
-                >
-                    Patron Reviews ({{ $product->reviews_count ?: 48 }})
-                </button>
             </div>
 
-            <!-- Tab 1: Description -->
-            <div x-show="currentTab === 'desc'" class="d-flex flex-column gap-3 text-ivory lh-lg font-sans" style="font-size: 0.95rem; font-weight: 400;">
+            <!-- The Impression Story Narrative -->
+            <div class="d-flex flex-column gap-3 text-ivory lh-lg font-sans text-center mx-auto" style="max-width: 820px; font-size: 0.95rem; font-weight: 400;">
                 <p class="mb-0">
                     {{ $product->story ?? $product->description }}
                 </p>
-                <p class="text-muted-luxury mb-0">
+                <p class="text-muted-luxury mb-0" style="font-size: 0.9rem;">
                     Handcrafted in small batches with imported French fragrance oils and natural botanical distillations. Macerated for 90 days in temperature-controlled dark cellars to reach peak projection and richness.
                 </p>
             </div>
 
-            <!-- Tab 2: Application Ritual -->
-            <div x-show="currentTab === 'usage'" class="d-flex flex-column gap-3 text-ivory lh-lg font-sans" style="display: none; font-size: 0.95rem; font-weight: 400;">
-                <h4 class="font-hero fs-5 text-gold-soft fw-normal mb-1">Mastering the Sillage of Extrait de Parfum</h4>
-                <ul class="d-flex flex-column gap-2 text-muted-luxury ps-3 mb-0">
-                    <li><strong class="text-ivory">Pulse Points:</strong> Apply 2 to 3 sprays directly on pulse points — the sides of your neck, behind the ears, and inside wrists.</li>
-                    <li><strong class="text-ivory">Fabric Longevity:</strong> Spray lightly on linen, wool, or cotton garments. Extrait compounds hold onto natural fibers for up to 48 hours.</li>
-                    <li><strong class="text-ivory">Never Rub:</strong> Allow the formulation to naturally settle on skin without friction, ensuring top notes blossom gracefully.</li>
-                </ul>
+            <!-- Subtle Patron Reviews Access (Preserves 100% review viewing & submission functionality) -->
+            <div class="text-center mt-4 pt-2">
+                <button 
+                    type="button" 
+                    @click="reviewsOpen = !reviewsOpen" 
+                    class="bg-transparent border-0 text-gold-soft text-gold-hover font-sans d-inline-flex align-items-center gap-2 p-0"
+                    style="font-size: 12px; letter-spacing: 0.05em; text-decoration: underline; text-underline-offset: 4px; cursor: pointer;"
+                    aria-label="Toggle Patron Reviews"
+                >
+                    <i class="fas fa-star text-gold" style="font-size: 10px;"></i>
+                    <span x-text="reviewsOpen ? 'Close Patron Reviews' : 'Read & Write Patron Reviews ({{ $product->reviews_count ?: 48 }})'">Read & Write Patron Reviews ({{ $product->reviews_count ?: 48 }})</span>
+                    <i class="fas fa-chevron-down transition" :style="reviewsOpen ? 'transform: rotate(180deg);' : ''" style="font-size: 9px;"></i>
+                </button>
             </div>
 
-            <!-- Tab 3: Shipping & Exchange -->
-            <div x-show="currentTab === 'shipping'" class="d-flex flex-column gap-3 text-ivory lh-lg font-sans" style="display: none; font-size: 0.95rem; font-weight: 400;">
-                <h4 class="font-hero fs-5 text-gold-soft fw-normal mb-1">Nationwide Pakistan Delivery Guarantee</h4>
-                <p class="text-muted-luxury mb-0">All flacons are encased in impact-resistant cushioned packaging and dispatched through premium courier services (TCS Express Air, Leopards).</p>
-                <ul class="d-flex flex-column gap-2 text-muted-luxury ps-3 mb-0">
-                    <li><strong class="text-ivory">Major Hubs:</strong> Lahore, Karachi, Islamabad, Rawalpindi — 24 to 48 hours.</li>
-                    <li><strong class="text-ivory">Other Cities:</strong> 2 to 4 business days.</li>
-                    <li><strong class="text-ivory">Hassle-Free Exchange:</strong> If you feel the scent does not suit your aura, contact our WhatsApp Concierge within 7 days for an unconditional exchange.</li>
-                </ul>
-            </div>
-
-            <!-- Tab 4: Reviews -->
-            <div x-show="currentTab === 'reviews'" class="d-flex flex-column gap-4" style="display: none;">
-                
-                <!-- Submit Review Form -->
-                <div class="p-4 p-md-5 bg-wine-card border border-gold-25 rounded-4 d-flex flex-column gap-3.5">
-                    <h4 class="font-hero fs-4 text-ivory fw-normal mb-0 gold-gradient-text">Share Your Olfactory Impression</h4>
-                    <form action="{{ route('reviews.store', $product->id) }}" method="POST" class="d-flex flex-column gap-3 font-sans">
-                        @csrf
-                        <div class="row g-3">
-                            <div class="col-12 col-md-4">
-                                <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your Name *</label>
-                                <input type="text" name="customer_name" required placeholder="e.g. Tariq Mehmood" class="form-control form-control-luxury text-xs py-2 px-3">
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your City in Pakistan *</label>
-                                <input type="text" name="customer_city" required placeholder="e.g. Lahore / Karachi" class="form-control form-control-luxury text-xs py-2 px-3">
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Rating *</label>
-                                <select name="rating" required class="form-select form-control-luxury text-xs py-2 px-3">
-                                    <option value="5" class="bg-wine-dark text-light-parchment">5 Stars - Imperial Masterpiece</option>
-                                    <option value="4" class="bg-wine-dark text-light-parchment">4 Stars - Highly Refined</option>
-                                    <option value="3" class="bg-wine-dark text-light-parchment">3 Stars - Pleasant Formulation</option>
-                                    <option value="2" class="bg-wine-dark text-light-parchment">2 Stars - Average</option>
-                                    <option value="1" class="bg-wine-dark text-light-parchment">1 Star - Disappointed</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Review Title</label>
-                            <input type="text" name="title" placeholder="e.g. Monumental sillage at an evening wedding" class="form-control form-control-luxury text-xs py-2 px-3">
-                        </div>
-                        <div>
-                            <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your Review *</label>
-                            <textarea name="comment" required rows="3" placeholder="Share your experience regarding projection, longevity, and compliments received..." class="form-control form-control-luxury text-xs py-2 px-3"></textarea>
-                        </div>
-                        <button type="submit" class="btn-pill-gold align-self-start" style="padding: 11px 26px;">
-                            <span>Submit Verified Review</span>
-                            <i class="fas fa-arrow-right-long btn-arrow"></i>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Existing Reviews List -->
-                <div class="d-flex flex-column gap-3 font-sans">
-                    @forelse($product->reviews as $review)
-                        <div class="p-4 bg-wine-card border border-gold-20 rounded-4 d-flex flex-column gap-2 shadow-sm">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold text-xs fw-bold" style="width: 32px; height: 32px;">
-                                        {{ substr($review->user_name ?? 'P', 0, 1) }}
-                                    </div>
-                                    <div>
-                                        <span class="text-ivory fw-semibold" style="font-size: 0.95rem;">{{ $review->user_name }}</span>
-                                        <span class="text-success ms-2" style="font-size: 10px;"><i class="fas fa-check-circle"></i> Verified &bull; {{ $review->user_city ?? 'Pakistan' }}</span>
-                                    </div>
+            <!-- Collapsible Reviews Section -->
+            <div x-show="reviewsOpen" x-cloak class="mt-5 pt-4 border-top border-gold-20">
+                <div class="d-flex flex-column gap-4">
+                    <!-- Submit Review Form -->
+                    <div class="p-4 p-md-5 bg-wine-card border border-gold-25 rounded-4 d-flex flex-column gap-3.5">
+                        <h4 class="font-hero fs-4 text-ivory fw-normal mb-0 gold-gradient-text">Share Your Olfactory Impression</h4>
+                        <form action="{{ route('reviews.store', $product->id) }}" method="POST" class="d-flex flex-column gap-3 font-sans">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-12 col-md-4">
+                                    <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your Name *</label>
+                                    <input type="text" name="customer_name" required placeholder="e.g. Tariq Mehmood" class="form-control form-control-luxury text-xs py-2 px-3">
                                 </div>
-                                <div class="d-flex text-gold text-xs">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        <i class="fas fa-star {{ $i <= $review->rating ? '' : 'opacity-25' }}"></i>
-                                    @endfor
+                                <div class="col-12 col-md-4">
+                                    <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your City in Pakistan *</label>
+                                    <input type="text" name="customer_city" required placeholder="e.g. Lahore / Karachi" class="form-control form-control-luxury text-xs py-2 px-3">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Rating *</label>
+                                    <select name="rating" required class="form-select form-control-luxury text-xs py-2 px-3">
+                                        <option value="5" class="bg-wine-dark text-light-parchment">5 Stars - Imperial Masterpiece</option>
+                                        <option value="4" class="bg-wine-dark text-light-parchment">4 Stars - Highly Refined</option>
+                                        <option value="3" class="bg-wine-dark text-light-parchment">3 Stars - Pleasant Formulation</option>
+                                        <option value="2" class="bg-wine-dark text-light-parchment">2 Stars - Average</option>
+                                        <option value="1" class="bg-wine-dark text-light-parchment">1 Star - Disappointed</option>
+                                    </select>
                                 </div>
                             </div>
-                            @if($review->review_title)
-                                <h5 class="text-xs fw-semibold text-gold-soft mb-0">{{ $review->review_title }}</h5>
-                            @endif
-                            <p class="text-xs text-muted-luxury lh-base font-light mb-0">
-                                "{{ $review->comment }}"
-                            </p>
-                        </div>
-                    @empty
-                        <p class="text-xs text-muted-luxury fst-italic text-center py-4 mb-0">Be the first connoisseur to review this masterpiece.</p>
-                    @endforelse
-                </div>
+                            <div>
+                                <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Review Title</label>
+                                <input type="text" name="title" placeholder="e.g. Monumental sillage at an evening wedding" class="form-control form-control-luxury text-xs py-2 px-3">
+                            </div>
+                            <div>
+                                <label class="d-block text-xs text-uppercase tracking-wider text-gold mb-1 fw-medium">Your Review *</label>
+                                <textarea name="comment" required rows="3" placeholder="Share your experience regarding projection, longevity, and compliments received..." class="form-control form-control-luxury text-xs py-2 px-3"></textarea>
+                            </div>
+                            <button type="submit" class="btn-pill-gold align-self-start" style="padding: 11px 26px;">
+                                <span>Submit Verified Review</span>
+                                <i class="fas fa-arrow-right-long btn-arrow"></i>
+                            </button>
+                        </form>
+                    </div>
 
+                    <!-- Existing Reviews List -->
+                    <div class="d-flex flex-column gap-3 font-sans">
+                        @forelse($product->reviews as $review)
+                            <div class="p-4 bg-wine-card border border-gold-20 rounded-4 d-flex flex-column gap-2 shadow-sm">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="rounded-circle bg-wine-accent border border-gold-40 d-flex align-items-center justify-content-center text-gold text-xs fw-bold" style="width: 32px; height: 32px;">
+                                            {{ substr($review->user_name ?? 'P', 0, 1) }}
+                                        </div>
+                                        <div>
+                                            <span class="text-ivory fw-semibold" style="font-size: 0.95rem;">{{ $review->user_name }}</span>
+                                            <span class="text-success ms-2" style="font-size: 10px;"><i class="fas fa-check-circle"></i> Verified &bull; {{ $review->user_city ?? 'Pakistan' }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex text-gold text-xs">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <i class="fas fa-star {{ $i <= $review->rating ? '' : 'opacity-25' }}"></i>
+                                        @endfor
+                                    </div>
+                                </div>
+                                @if($review->review_title)
+                                    <h5 class="text-xs fw-semibold text-gold-soft mb-0">{{ $review->review_title }}</h5>
+                                @endif
+                                <p class="text-xs text-muted-luxury lh-base font-light mb-0">
+                                    "{{ $review->comment }}"
+                                </p>
+                            </div>
+                        @empty
+                            <p class="text-xs text-muted-luxury fst-italic text-center py-4 mb-0">Be the first connoisseur to review this masterpiece.</p>
+                        @endforelse
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -701,18 +667,20 @@
         </div>
     </div>
 
-
-
 </div>
 
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        if (document.querySelector('.related-products-swiper') && !document.querySelector('.related-products-swiper').swiper && typeof Swiper !== 'undefined') {
+        const relatedEl = document.querySelector('.related-products-swiper');
+        if (relatedEl && typeof Swiper !== 'undefined') {
+            if (relatedEl.swiper) {
+                relatedEl.swiper.destroy(true, true);
+            }
             new Swiper('.related-products-swiper', {
-                slidesPerView: 1.35,
-                spaceBetween: 14,
-                speed: 800,
+                slidesPerView: 1.15,
+                spaceBetween: 12,
+                speed: 700,
                 loop: false,
                 grabCursor: true,
                 resistance: true,
@@ -721,6 +689,9 @@
                 touchAngle: 45,
                 threshold: 4,
                 watchSlidesProgress: true,
+                observer: true,
+                observeParents: true,
+                observeSlideChildren: true,
                 lazyPreloadPrevNext: 2,
                 pagination: {
                     el: '.related-swiper-pagination',
@@ -732,6 +703,8 @@
                     prevEl: '.related-prev',
                 },
                 breakpoints: {
+                    340: { slidesPerView: 1.15, spaceBetween: 12 },
+                    400: { slidesPerView: 1.35, spaceBetween: 14 },
                     480: { slidesPerView: 1.8, spaceBetween: 16 },
                     576: { slidesPerView: 2.2, spaceBetween: 18 },
                     768: { slidesPerView: 3, spaceBetween: 20 },
