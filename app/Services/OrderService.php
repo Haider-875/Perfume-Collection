@@ -46,6 +46,9 @@ class OrderService
         }
 
         $paymentMethodKey = $data['payment_method'] ?? 'cod';
+        if ($paymentMethodKey === 'easypaisa' && (!empty($data['transaction_id']) || !empty($data['wallet_type']) || !empty($data['receipt_file']))) {
+            $paymentMethodKey = 'wallet_transfer';
+        }
         $paymentGateway = $this->paymentGatewayManager->get($paymentMethodKey);
 
         return DB::transaction(function () use ($cart, $data, $userId, $paymentMethodKey, $paymentGateway) {
