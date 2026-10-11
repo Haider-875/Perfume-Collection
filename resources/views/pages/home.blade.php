@@ -281,7 +281,7 @@
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
                             <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
-                                Signature<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
+                                Signature<br><span class="fs-6 tracking-widest fw-bold" style="color: #780d24 !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
                             <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Most loved and iconic designer scents with 14+ hours projection.
@@ -290,9 +290,7 @@
 
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
-                            <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
-                                <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                            <span class="discover-glass-pill rounded-pill text-white shadow-sm">
                                 <span>discover</span>
                             </span>
                         </div>
@@ -312,7 +310,7 @@
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
                             <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
-                                Men's<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
+                                Men's<br><span class="fs-6 tracking-widest fw-bold" style="color: #780d24 !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
                             <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Bold, magnetic, and commanding masculine fragrance profiles with extraordinary sillage.
@@ -321,9 +319,7 @@
 
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
-                            <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
-                                <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                            <span class="discover-glass-pill rounded-pill text-white shadow-sm">
                                 <span>discover</span>
                             </span>
                         </div>
@@ -343,7 +339,7 @@
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
                             <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
-                                Women's<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
+                                Women's<br><span class="fs-6 tracking-widest fw-bold" style="color: #780d24 !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
                             <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Graceful florals, seductive gourmands, and luminous feminine scents.
@@ -352,9 +348,7 @@
 
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
-                            <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
-                                <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                            <span class="discover-glass-pill rounded-pill text-white shadow-sm">
                                 <span>discover</span>
                             </span>
                         </div>
