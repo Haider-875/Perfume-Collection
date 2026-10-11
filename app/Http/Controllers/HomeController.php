@@ -20,18 +20,17 @@ class HomeController extends Controller
         $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
         $collections = Collection::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
+        // Featured Collection: All newly added products / latest impressions
         $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
-            ->where(function($q) {
-                $q->where('is_featured', true)->orWhere('is_bestseller', true);
-            })
-            ->take(8)
+            ->where('is_featured', true)
+            ->orderBy('id', 'desc')
             ->get();
 
         if ($featuredProducts->isEmpty()) {
             $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
                 ->active()
-                ->take(8)
+                ->orderBy('id', 'desc')
                 ->get();
         }
 
@@ -42,17 +41,22 @@ class HomeController extends Controller
             ->get();
 
         if ($bestsellers->isEmpty()) {
-            $bestsellers = $featuredProducts;
+            $bestsellers = $featuredProducts->take(8);
         }
 
+        // New Release Impressions (swapped): Classic formulations from previous featured collection
         $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()
             ->newArrivals()
-            ->take(8)
+            ->orderBy('id', 'asc')
             ->get();
 
         if ($newArrivals->isEmpty()) {
-            $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])->active()->latest()->take(8)->get();
+            $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                ->active()
+                ->whereIn('id', [1, 2, 3, 4, 5, 6, 7])
+                ->orderBy('id', 'asc')
+                ->get();
         }
 
         $restockedProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
