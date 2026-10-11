@@ -26,10 +26,10 @@
 </section>
 
 <!-- Collection Main Content -->
-<section class="py-5" style="background-color: #F7F3EE;" 
+<section class="py-4 py-md-5 collection-main-section" style="background-color: #F7F3EE;" 
     x-data="{ mobileFiltersOpen: false }"
     x-init="$watch('mobileFiltersOpen', val => document.body.classList.toggle('overflow-hidden', val))">
-    <div class="container px-3 px-lg-4">
+    <div class="container px-2 px-sm-3 px-lg-4">
         
         <!-- Mobile Filter Backdrop (d-lg-none) -->
         <div x-show="mobileFiltersOpen"
@@ -175,9 +175,9 @@
             <!-- Products Grid (2 Columns Mobile, 3 Columns Desktop) -->
             <main class="col-12 col-lg-9">
                 @if($products->count() > 0)
-                    <div class="row row-cols-2 row-cols-md-3 g-3 g-md-4">
+                    <div class="collection-products-grid">
                         @foreach($products as $product)
-                            <div class="col">
+                            <div class="collection-product-item">
                                 <x-product-card :product="$product" />
                             </div>
                         @endforeach

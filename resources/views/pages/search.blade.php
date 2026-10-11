@@ -37,7 +37,7 @@
 
 <!-- Search Results Grid -->
 <section class="py-5" style="background-color: #F7F3EE;">
-    <div class="container px-3 px-lg-4">
+    <div class="container px-2 px-sm-3 px-lg-4">
         @if($products->count() > 0)
             <div class="d-flex align-items-center justify-content-between mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                 <p class="text-xs tracking-wider mb-0" style="color: #6B605B;">
@@ -48,9 +48,9 @@
                 </a>
             </div>
 
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4">
+            <div class="collection-products-grid search-products-grid">
                 @foreach($products as $product)
-                    <div class="col">
+                    <div class="collection-product-item">
                         <x-product-card :product="$product" />
                     </div>
                 @endforeach

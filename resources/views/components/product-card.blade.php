@@ -1,25 +1,25 @@
 @props(['product'])
 
-<div class="product-card position-relative bg-white border border-subtle luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2 p-sm-3 h-100" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
+<div class="product-card position-relative bg-white border border-subtle luxury-hover-card rounded-3 rounded-md-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2 p-sm-3 h-100" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
     
     <!-- Badges Row -->
-    <div class="position-absolute top-0 start-0 m-2 m-sm-3 z-2 d-flex flex-column gap-1 pointer-events-none">
+    <div class="position-absolute top-0 start-0 product-card-badges z-2 d-flex flex-column gap-1 pointer-events-none" style="top: 8px; left: 8px; z-index: 3;">
         @if($product->is_bestseller)
-            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29 !important;">
+            <span class="product-badge badge-bestseller bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content;">
                 ★ BESTSELLER
             </span>
         @elseif($product->is_new_arrival)
-            <span class="bg-success text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em;">
+            <span class="product-badge badge-new bg-success text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #2D6A4F !important; padding: 2.5px 7px; width: fit-content;">
                 NEW ARRIVAL
             </span>
         @elseif($product->is_featured)
-            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29 !important;">
+            <span class="product-badge badge-featured bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content;">
                 EXCLUSIVE
             </span>
         @endif
 
         @if($product->has_discount)
-            <span class="bg-danger text-white fw-bold px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; width: fit-content; background-color: #9E2A2B !important;">
+            <span class="product-badge badge-discount bg-danger text-white fw-bold rounded-pill shadow-sm" style="font-size: 9px; width: fit-content; background-color: #9E2A2B !important; padding: 2.5px 7px;">
                 -{{ $product->discount_percentage }}%
             </span>
         @endif
@@ -28,19 +28,20 @@
     <!-- Flacon Image Wrap (Clean, Spacious Presentation on Light Surface) -->
     <a href="{{ route('shop.show', $product->slug) }}" 
        class="product-card-media position-relative w-100 aspect-1x1 rounded-3 overflow-hidden d-flex align-items-center justify-content-center mb-2 mb-md-3 text-decoration-none"
-       style="aspect-ratio: 1 / 1; background-color: #FAF7F2; border: 1px solid #EFEAE5;">
+       style="aspect-ratio: 1 / 1; background-color: #FAF7F2; border: 1px solid #EFEAE5;"
+       aria-label="{{ $product->name }}">
         <img src="{{ $product->primary_image_url }}" 
              alt="{{ $product->name }}" 
              onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-             class="w-100 h-100 object-fit-cover transition-smooth" 
-             style="aspect-ratio: 1 / 1;"
+             class="w-100 h-100 object-fit-contain transition-smooth" 
+             style="aspect-ratio: 1 / 1; object-fit: contain !important; object-position: center !important;"
              loading="lazy">
         @if($product->hover_image && $product->hover_image !== $product->thumbnail_image)
             <img src="{{ $product->hover_image_url }}" 
                  alt="{{ $product->name }} Presentation" 
                  onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-0 transition-smooth" 
-                 style="aspect-ratio: 1 / 1;"
+                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-contain opacity-0 transition-smooth" 
+                 style="aspect-ratio: 1 / 1; object-fit: contain !important; object-position: center !important;"
                  loading="lazy">
         @endif
     </a>

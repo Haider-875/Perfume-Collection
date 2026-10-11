@@ -5193,16 +5193,20 @@ body.overflow-hidden {
    ========================================================================== */
 @media (max-width: 767.98px) {
 
-    /* Retain luxury card structure on mobile */
+    /* Retain luxury card structure on mobile with maximized card width and comfortable padding */
     .product-card {
         background: #FFFFFF !important;
         border: 1px solid #E8E0DA !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
-        padding: 10px !important;
+        padding: 7px 7px 10px 7px !important;
         border-radius: 12px !important;
         display: flex !important;
         flex-direction: column !important;
+        justify-content: space-between !important;
         height: 100% !important;
+        width: 100% !important;
+        min-height: auto !important;
+        box-sizing: border-box !important;
     }
 
     /* Outer hover transform disabled on mobile to prevent jerking */
@@ -5211,16 +5215,54 @@ body.overflow-hidden {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
     }
 
-    /* 1. Product Image: clean stage */
+    /* 1. Product Image: Spacious luxury presentation with object-fit: contain */
     .product-card .product-card-media {
-        border-radius: 8px !important;
-        border: 1px solid rgba(232, 224, 218, 0.6) !important;
+        border-radius: 10px !important;
+        border: 1px solid #EFEAE5 !important;
         background: #FAF7F2 !important;
         margin-bottom: 8px !important;
         min-height: unset !important;
         aspect-ratio: 1 / 1 !important;
+        width: 100% !important;
         overflow: hidden !important;
         position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 6px !important;
+    }
+
+    .product-card .product-card-media img {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        object-position: center !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* Badges Row on Mobile */
+    .product-card .product-card-badges {
+        top: 6px !important;
+        left: 6px !important;
+        margin: 0 !important;
+        z-index: 5 !important;
+        gap: 3px !important;
+    }
+
+    .product-card .product-badge,
+    .product-card .badge-bestseller,
+    .product-card .badge-discount,
+    .product-card .badge-new,
+    .product-card .badge-featured {
+        font-size: 8.5px !important;
+        padding: 2.5px 6.5px !important;
+        border-radius: 9999px !important;
+        letter-spacing: 0.06em !important;
+        line-height: 1.2 !important;
+        font-weight: 700 !important;
+        width: fit-content !important;
     }
 
     /* Hide Impression Tag & Star Rating on mobile for clean Visual Order: Image -> Title -> Price -> Button */
@@ -5229,56 +5271,72 @@ body.overflow-hidden {
         display: none !important;
     }
 
-    /* 2. Product Title: Standardized text sizing (~14px) and 2-line clean alignment */
+    /* 2. Product Title: Standardized Cormorant Garamond text sizing (~13.5px-14px) and 2-line alignment */
     .product-card .product-card-title {
-        font-size: 0.88rem !important;
-        line-height: 1.35 !important;
-        font-weight: 500 !important;
+        font-size: 13.5px !important;
+        line-height: 1.3 !important;
+        font-weight: 600 !important;
         margin-bottom: 4px !important;
-        min-height: 2.7em !important;
+        min-height: 2.6em !important;
         display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         text-align: center !important;
+        letter-spacing: 0.01em !important;
     }
 
     .product-card .product-card-title a {
         color: #211D1E !important;
         font-size: inherit !important;
+        text-decoration: none !important;
     }
 
-    /* 3. Product Price: Strictly ~2-3px smaller than main title text (11.5px / 12px) */
+    /* 3. Product Price: Clear, prominent Maroon & Charcoal contrast */
     .product-card .product-card-pricing {
-        font-size: 11.5px !important;
-        line-height: 1.35 !important;
-        margin-top: 2px !important;
-        margin-bottom: 6px !important;
         display: flex !important;
         align-items: baseline !important;
         justify-content: center !important;
         flex-wrap: wrap !important;
-        column-gap: 3px !important;
-        row-gap: 1px !important;
+        column-gap: 4px !important;
+        row-gap: 2px !important;
+        margin-top: 2px !important;
+        margin-bottom: 6px !important;
+        line-height: 1.3 !important;
         text-align: center !important;
     }
 
-    .product-card .product-card-pricing * {
+    .product-card .product-price-min {
         font-size: 11.5px !important;
-        line-height: 1.35 !important;
+        font-weight: 500 !important;
+        color: #6B605B !important;
+    }
+
+    .product-card .product-price-main {
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        color: #541B29 !important;
     }
 
     .product-card .product-price-unit {
-        font-size: 10px !important;
-        opacity: 0.8 !important;
+        font-size: 9.5px !important;
+        font-weight: 500 !important;
+        color: #786C67 !important;
     }
 
-    /* 4. Product Button: Rounded-rectangle, comfortable touch size, arrow removed */
+    .product-card .product-price-sep {
+        font-size: 11px !important;
+        opacity: 0.5 !important;
+        color: #786C67 !important;
+    }
+
+    /* 4. Product Button: Full-width, comfortable touch size (>= 40px), elegant typography */
     .product-card .product-card-action {
-        border-top: none !important;
-        padding-top: 0 !important;
+        border-top: 1px solid #F0EAE4 !important;
+        padding-top: 6px !important;
         margin-top: auto !important;
+        width: 100% !important;
     }
 
     .product-card .product-card-action button,
@@ -5286,12 +5344,28 @@ body.overflow-hidden {
         border-radius: 8px !important;
         min-height: 40px !important;
         height: 40px !important;
-        padding: 8px 12px !important;
+        padding: 6px 10px !important;
         font-size: 11.5px !important;
         font-weight: 600 !important;
-        letter-spacing: 0.06em !important;
+        letter-spacing: 0.05em !important;
         text-transform: uppercase !important;
         width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        background-color: #541B29 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+    }
+
+    .product-card .product-card-action button i.fa-cart-shopping {
+        font-size: 11px !important;
+    }
+
+    .product-card .product-card-action button span {
+        font-size: 11.5px !important;
+        white-space: nowrap !important;
     }
 
     /* Remove arrow icon from card button on mobile */
@@ -5601,44 +5675,146 @@ p, .lead {
         --bs-gutter-y: 0.65rem;
     }
 
-    /* 2-column mobile product cards fine-tuning */
+    /* 11. Collection Products CSS Grid System & Responsive Breakpoints */
+    .collection-products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    .collection-product-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: flex !important;
+        height: 100% !important;
+    }
+
+    .collection-product-item .product-card {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+/* Tablet (768px - 991.98px): 3 product cards per row */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .collection-products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .collection-product-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: flex !important;
+        height: 100% !important;
+    }
+
+    .collection-product-item .product-card {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+/* Desktop (992px+ in 9-column main catalog body): 3 product cards per row */
+@media (min-width: 992px) {
+    .collection-products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 24px !important;
+        width: 100% !important;
+    }
+
+    .collection-product-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: flex !important;
+        height: 100% !important;
+    }
+
+    .collection-product-item .product-card {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+/* Wide desktop for 4-card grids (such as search without sidebar) */
+@media (min-width: 1200px) {
+    .search-products-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+/* Mobile containers padding & gutter reduction on collection pages to maximize card width */
+@media (max-width: 767.98px) {
+    .collection-main-section .container,
+    section.collection-main-section > .container,
+    section[style*="#F7F3EE"] > .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .row.row-cols-2 {
+        --bs-gutter-x: 10px !important;
+        --bs-gutter-y: 10px !important;
+    }
+
+    .row.row-cols-2 > .col {
+        display: flex !important;
+    }
+
+    .row.row-cols-2 > .col > .product-card {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+/* Ultra small devices (320px - 350px) */
+@media (max-width: 350px) {
+    .collection-products-grid {
+        gap: 6px !important;
+    }
+
+    .collection-main-section .container,
+    section.collection-main-section > .container,
+    section[style*="#F7F3EE"] > .container {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+    }
+
+    .product-card {
+        padding: 5px 5px 8px 5px !important;
+    }
+
     .product-card .product-card-title {
-        font-size: 13px !important;
-        min-height: 2.6em !important;
-        margin-bottom: 3px !important;
+        font-size: 12.5px !important;
+        min-height: 2.5em !important;
     }
 
-    .product-card .product-card-pricing {
-        font-size: 11px !important;
+    .product-card .product-price-main {
+        font-size: 12.5px !important;
     }
 
+    .product-card .product-price-min {
+        font-size: 10.5px !important;
+    }
+
+    .product-card .product-price-unit {
+        font-size: 9px !important;
+    }
+
+    .product-card .product-card-action button,
     .product-card .btn-cart-gradient {
         min-height: 38px !important;
         height: 38px !important;
         font-size: 10.5px !important;
-        padding: 6px 10px !important;
-    }
-}
-
-/* Ultra small devices (320px) */
-@media (max-width: 350px) {
-    .container,
-    .container-fluid {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
-
-    .product-card {
-        padding: 8px !important;
-    }
-
-    .product-card .product-card-title {
-        font-size: 12px !important;
-    }
-
-    .product-card .btn-cart-gradient {
-        font-size: 10px !important;
         padding: 5px 6px !important;
-        letter-spacing: 0.02em !important;
+        gap: 4px !important;
+    }
+
+    .product-card .product-card-action button span {
+        font-size: 10.5px !important;
     }
 }
