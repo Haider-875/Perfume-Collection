@@ -1530,29 +1530,89 @@ p.font-sans,
     min-height: 1.25rem;
 }
 
-/* Product Card Add To Cart Button with Gradient and White Font */
+/* Product & Bundle Card Add To Cart Button with Gradient and White Font */
 .product-card .btn-gold,
-.product-card .btn-cart-gradient {
+.product-card .btn-cart-gradient,
+.bundle-card .btn-gold,
+.bundle-card .btn-cart-gradient,
+.bundle-card .product-card-action button {
     background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.35);
     border-radius: var(--radius-md, 8px) !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .product-card .btn-gold *,
-.product-card .btn-cart-gradient * {
+.product-card .btn-cart-gradient *,
+.bundle-card .btn-gold *,
+.bundle-card .btn-cart-gradient *,
+.bundle-card .product-card-action button * {
     color: #ffffff !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
 .product-card .btn-gold:hover,
-.product-card .btn-cart-gradient:hover {
+.product-card .btn-cart-gradient:hover,
+.bundle-card .btn-gold:hover,
+.bundle-card .btn-cart-gradient:hover,
+.bundle-card .product-card-action button:hover {
     background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
     color: #ffffff !important;
     border-color: rgba(255, 255, 255, 0.35) !important;
     box-shadow: 0 6px 22px rgba(163, 24, 56, 0.55), 0 0 14px rgba(196, 36, 75, 0.4) !important;
     transform: translateY(-2px);
+}
+
+/* Bundle Card Architecture (Synced with Product Card Visual Standards) */
+.bundle-card {
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.bundle-card:hover {
+    border-color: rgba(133, 16, 41, 0.8) !important;
+    box-shadow: 0 12px 35px rgba(133, 16, 41, 0.18) !important;
+    transform: translateY(-2px);
+}
+
+.bundle-card .product-card-media {
+    aspect-ratio: 1 / 1;
+    background-color: #FAF7F2;
+    border: 1px solid #EFEAE5;
+}
+
+.bundle-card .product-card-media img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bundle-card:hover .product-card-media img {
+    transform: scale(1.04);
+}
+
+.bundle-card .product-card-title {
+    min-height: 2.2rem;
+    line-height: 1.35;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.bundle-card .product-card-title a {
+    color: #211D1E !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    transition: color 0.2s ease;
+}
+
+.bundle-card .product-card-title a:hover {
+    color: #780D24 !important;
+}
+
+.bundle-card .bundle-items-box {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bundle-card:hover .bundle-items-box {
+    border-color: #DFD7CE !important;
 }
 
 /* 10. Layout Spacing Bridges */
@@ -2183,29 +2243,27 @@ p.font-sans,
     margin: 0 0.5rem;
 }
 
-/* Bundle Dedicated Buttons (Haute Parfumerie Grand Presentation - Glassmorphism UI) */
+/* Bundle Dedicated Buttons (Haute Parfumerie Grand Presentation - Synced Visual Design) */
 .btn-bundle-bag {
     width: 100%;
-    min-height: 48px;
+    min-height: 42px;
     position: relative;
-    background: rgba(84, 27, 41, 0.82) !important;
-    backdrop-filter: blur(14px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
     color: #ffffff !important;
-    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     font-weight: 600 !important;
-    font-size: 0.82rem !important;
-    letter-spacing: 0.12em !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
-    box-shadow: 0 4px 18px rgba(84, 27, 41, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     cursor: pointer;
     text-decoration: none !important;
     z-index: 1;
@@ -2213,12 +2271,13 @@ p.font-sans,
 
 .btn-bundle-bag * {
     color: #ffffff !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
 .btn-bundle-bag:hover {
-    background: rgba(120, 13, 36, 0.95) !important;
-    border-color: rgba(255, 255, 255, 0.55) !important;
-    box-shadow: 0 8px 26px rgba(84, 27, 41, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 6px 22px rgba(163, 24, 56, 0.55), 0 0 14px rgba(196, 36, 75, 0.4) !important;
     transform: translateY(-2px);
     color: #ffffff !important;
 }
@@ -2231,14 +2290,14 @@ p.font-sans,
 
 .btn-bundle-whatsapp {
     width: 100%;
-    min-height: 48px;
+    min-height: 42px;
     position: relative;
     background: #15693a !important;
     color: #ffffff !important;
-    font-family: var(--font-sans), 'Poppins', sans-serif !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     font-weight: 600 !important;
-    font-size: 0.82rem !important;
-    letter-spacing: 0.1em !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: var(--radius-md, 8px) !important;
@@ -2247,10 +2306,15 @@ p.font-sans,
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     cursor: pointer;
     text-decoration: none !important;
     z-index: 1;
+}
+
+.btn-bundle-whatsapp * {
+    color: #ffffff !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
 .btn-bundle-whatsapp:hover {
@@ -2267,16 +2331,16 @@ p.font-sans,
 
 .btn-bundle-buynow {
     width: 100%;
-    min-height: 48px;
+    min-height: 42px;
     position: relative;
     background: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(14px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
     color: #541B29 !important;
-    font-family: var(--font-sans), sans-serif !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     font-weight: 600 !important;
-    font-size: 0.82rem !important;
-    letter-spacing: 0.12em !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase;
     border: 1.5px solid rgba(84, 27, 41, 0.28) !important;
     outline: none !important;
@@ -2286,7 +2350,7 @@ p.font-sans,
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     cursor: pointer;
     text-decoration: none !important;
     z-index: 1;
@@ -2294,6 +2358,7 @@ p.font-sans,
 
 .btn-bundle-buynow * {
     color: #541B29 !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
 .btn-bundle-buynow:hover {
@@ -5686,8 +5751,9 @@ body.overflow-hidden {
         color: #786C67 !important;
     }
 
-    /* 4. Product Button: Full-width, comfortable touch size (>= 40px), elegant typography */
-    .product-card .product-card-action {
+    /* 4. Product & Bundle Button: Full-width, comfortable touch size (>= 40px), elegant typography */
+    .product-card .product-card-action,
+    .bundle-card .product-card-action {
         border-top: 1px solid #F0EAE4 !important;
         padding-top: 6px !important;
         margin-top: auto !important;
@@ -5695,7 +5761,9 @@ body.overflow-hidden {
     }
 
     .product-card .product-card-action button,
-    .product-card .btn-cart-gradient {
+    .product-card .btn-cart-gradient,
+    .bundle-card .product-card-action button,
+    .bundle-card .btn-cart-gradient {
         border-radius: 8px !important;
         min-height: 40px !important;
         height: 40px !important;
@@ -5712,20 +5780,26 @@ body.overflow-hidden {
         background-color: #541B29 !important;
         color: #FFFFFF !important;
         border: none !important;
+        font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     }
 
-    .product-card .product-card-action button i.fa-cart-shopping {
+    .product-card .product-card-action button i.fa-cart-shopping,
+    .bundle-card .product-card-action button i.fa-cart-shopping {
         font-size: 11px !important;
     }
 
-    .product-card .product-card-action button span {
+    .product-card .product-card-action button span,
+    .bundle-card .product-card-action button span {
         font-size: 11.5px !important;
         white-space: nowrap !important;
+        font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     }
 
     /* Remove arrow icon from card button on mobile */
     .product-card .btn-arrow,
-    .product-card .fa-arrow-right-long {
+    .product-card .fa-arrow-right-long,
+    .bundle-card .btn-arrow,
+    .bundle-card .fa-arrow-right-long {
         display: none !important;
     }
 }
@@ -6127,29 +6201,36 @@ p, .lead {
         padding-right: 6px !important;
     }
 
-    .product-card {
+    .product-card,
+    .bundle-card {
         padding: 5px 5px 8px 5px !important;
     }
 
-    .product-card .product-card-title {
+    .product-card .product-card-title,
+    .bundle-card .product-card-title {
         font-size: 12.5px !important;
-        min-height: 2.5em !important;
+        min-height: 2.2em !important;
     }
 
-    .product-card .product-price-main {
+    .product-card .product-price-main,
+    .bundle-card .product-price-main {
         font-size: 12.5px !important;
     }
 
-    .product-card .product-price-min {
+    .product-card .product-price-min,
+    .bundle-card .product-price-min {
         font-size: 10.5px !important;
     }
 
-    .product-card .product-price-unit {
+    .product-card .product-price-unit,
+    .bundle-card .product-price-unit {
         font-size: 9px !important;
     }
 
     .product-card .product-card-action button,
-    .product-card .btn-cart-gradient {
+    .product-card .btn-cart-gradient,
+    .bundle-card .product-card-action button,
+    .bundle-card .btn-cart-gradient {
         min-height: 38px !important;
         height: 38px !important;
         font-size: 10.5px !important;
@@ -6157,7 +6238,8 @@ p, .lead {
         gap: 4px !important;
     }
 
-    .product-card .product-card-action button span {
+    .product-card .product-card-action button span,
+    .bundle-card .product-card-action button span {
         font-size: 10.5px !important;
     }
 }

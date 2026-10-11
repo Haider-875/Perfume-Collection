@@ -374,7 +374,7 @@
                     </p>
                 </div>
 
-                <div class="row g-4">
+                <div class="row g-3 g-lg-4">
                     @foreach($bundles as $bundle)
                         <div class="col-12 col-md-4">
                             <x-bundle-card :bundle="$bundle" />
@@ -382,7 +382,7 @@
                     @endforeach
                 </div>
 
-                <div class="text-center mt-5">
+                <div class="text-center mt-4 mt-md-5">
                     <a href="{{ route('bundles.index') }}" class="btn-discovery-glass px-4 py-3" style="text-decoration: none;">
                         <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
                     </a>

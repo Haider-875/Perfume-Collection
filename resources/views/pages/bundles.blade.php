@@ -85,14 +85,14 @@
                                 >
                                 @if($bundle->savings_amount > 0)
                                     <div class="position-absolute top-0 start-0 m-3">
-                                        <span class="badge-savings-luxury shadow-sm">
+                                        <span class="product-badge badge-discount bg-danger text-white fw-bold rounded-pill shadow-sm" style="font-size: 9.5px; width: fit-content; background-color: #9E2A2B !important; padding: 3px 9px;">
                                             SAVE RS. {{ number_format($bundle->savings_amount) }}
                                         </span>
                                     </div>
                                 @endif
                                 <div class="position-absolute bottom-0 end-0 m-3">
-                                    <span class="badge-savings-luxury shadow-sm" style="background-color: #FAF7F2; color: #541B29; border: 1px solid #E8E0DA;">
-                                        EXTRAIT SET
+                                    <span class="product-badge badge-featured text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9.5px; background-color: #541B29 !important; padding: 3px 9px;">
+                                        ★ EXTRAIT SET
                                     </span>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                                         onclick="addBundleToCart({{ $bundle->id }})"
                                         class="btn-bundle-bag"
                                     >
-                                        <i class="fas fa-shopping-bag"></i>
+                                        <i class="fas fa-cart-shopping"></i>
                                         <span>ADD BUNDLE TO BAG</span>
                                     </button>
 
