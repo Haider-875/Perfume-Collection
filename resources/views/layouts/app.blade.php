@@ -53,7 +53,10 @@
     @stack('styles')
 </head>
 
-<body class="bg-theme-main text-ivory font-sans" x-data="{ mobileMenuOpen: false }">
+<body class="bg-theme-main text-ivory font-sans"
+    x-data="{ mobileMenuOpen: false }"
+    x-init="$watch('mobileMenuOpen', val => document.body.classList.toggle('overflow-hidden', val))"
+    :class="{ 'overflow-hidden': mobileMenuOpen }">
 
     @php
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
@@ -93,12 +96,15 @@
             <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner" style="height: 5rem;">
                 <!-- Mobile Left: Hamburger Button (d-lg-none) -->
                 <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
-                    <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
+                    <button type="button"
+                        id="mobileMenuToggle"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
                         class="border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn"
-                        aria-label="Toggle Menu"
+                        aria-label="Toggle Navigation Menu"
+                        :aria-expanded="mobileMenuOpen.toString()"
                         style="color: #211D1E !important; touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
                         <i class="fas fa-bars" x-show="!mobileMenuOpen"></i>
-                        <i class="fas fa-times" x-show="mobileMenuOpen"></i>
+                        <i class="fas fa-times" x-show="mobileMenuOpen" x-cloak></i>
                     </button>
                 </div>
 
@@ -210,6 +216,7 @@
     <!-- 3. Off-Canvas Animated Mobile Menu & Backdrop -->
     <div x-show="mobileMenuOpen"
         x-cloak
+        id="mobileNavBackdrop"
         @click="mobileMenuOpen = false"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
@@ -218,10 +225,12 @@
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         class="mobile-offcanvas-backdrop d-lg-none"
+        :class="{ 'active': mobileMenuOpen }"
         style="z-index: 1055;"></div>
 
     <div x-show="mobileMenuOpen"
         x-cloak
+        id="mobileNavDrawer"
         @keydown.escape.window="mobileMenuOpen = false"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 -translate-x-full" 
@@ -230,6 +239,7 @@
         x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-0 -translate-x-full"
         class="mobile-offcanvas-drawer p-3 p-sm-4 d-lg-none"
+        :class="{ 'active': mobileMenuOpen }"
         style="z-index: 1060; background-color: #FFFFFF !important; color: #211D1E !important; border-right: 1px solid #E8E0DA;">
         <!-- Mobile Menu Header -->
         <div class="d-flex align-items-center justify-content-between pb-3 flex-shrink-0" style="border-bottom: 1px solid #E8E0DA;">
@@ -238,7 +248,9 @@
                     style="height: 2.25rem; width: auto; object-fit: contain;">
                 <span class="font-hero text-uppercase tracking-wider" style="font-size: 1rem; color: #211D1E !important;">Perfumes Collection</span>
             </div>
-            <button type="button" @click="mobileMenuOpen = false"
+            <button type="button"
+                id="closeMobileNav"
+                @click="mobileMenuOpen = false"
                 class="border-0 bg-transparent fs-2 p-1 d-flex align-items-center justify-content-center"
                 style="width: 44px; height: 44px; touch-action: manipulation; color: #211D1E !important;"
                 aria-label="Close navigation">&times;</button>
@@ -302,7 +314,7 @@
         <!-- Mobile Menu Footer Actions -->
         <div class="border-top border-gold-20 pt-3 vstack gap-2 flex-shrink-0">
             <button type="button"
-                onclick="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
+                @click="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
                 class="w-100 btn-gold py-2.5 text-xs tracking-widest text-uppercase d-flex align-items-center justify-center gap-2"
                 style="min-height: 44px;">
                 <i class="fas fa-wand-magic-sparkles"></i>

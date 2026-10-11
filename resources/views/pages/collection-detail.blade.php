@@ -42,6 +42,7 @@
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
             class="mobile-offcanvas-backdrop d-lg-none"
+            :class="{ 'active': mobileFiltersOpen }"
             style="z-index: 1055;"></div>
 
         <!-- Mobile Filter Offcanvas Drawer (d-lg-none) -->
@@ -55,6 +56,7 @@
             x-transition:leave-start="opacity-100 translate-x-0"
             x-transition:leave-end="opacity-0 -translate-x-full"
             class="mobile-filter-drawer p-3 p-sm-4 d-lg-none shadow-lg"
+            :class="{ 'active': mobileFiltersOpen }"
             style="z-index: 1060; background-color: #FFFFFF; color: #211D1E; border-right: 1px solid #E8E0DA;">
             
             <!-- Mobile Drawer Header -->

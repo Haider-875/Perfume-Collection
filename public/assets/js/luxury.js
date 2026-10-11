@@ -665,9 +665,70 @@ function initMobileNav() {
     const menuBtn = document.getElementById('mobileMenuToggle');
     const navDrawer = document.getElementById('mobileNavDrawer');
     const closeBtn = document.getElementById('closeMobileNav');
+    const backdrop = document.getElementById('mobileNavBackdrop');
 
-    if (!menuBtn || !navDrawer) return;
+    if (!menuBtn && !navDrawer) return;
 
-    menuBtn.addEventListener('click', () => navDrawer.classList.add('active'));
-    if (closeBtn) closeBtn.addEventListener('click', () => navDrawer.classList.remove('active'));
+    const openNav = () => {
+        if (navDrawer) navDrawer.classList.add('active');
+        if (backdrop) backdrop.classList.add('active');
+        document.body.classList.add('overflow-hidden');
+    };
+
+    const closeNav = () => {
+        if (navDrawer) navDrawer.classList.remove('active');
+        if (backdrop) backdrop.classList.remove('active');
+        document.body.classList.remove('overflow-hidden');
+    };
+
+    // If Alpine.js is loaded, Alpine handles @click and state synchronization.
+    // This vanilla listener acts as a bulletproof fallback if Alpine fails or is delayed.
+    if (menuBtn) {
+        menuBtn.addEventListener('click', (e) => {
+            if (!window.Alpine) {
+                e.preventDefault();
+                if (navDrawer && navDrawer.classList.contains('active')) {
+                    closeNav();
+                } else {
+                    openNav();
+                }
+            }
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            if (!window.Alpine) {
+                e.preventDefault();
+                closeNav();
+            }
+        });
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', (e) => {
+            if (!window.Alpine) {
+                e.preventDefault();
+                closeNav();
+            }
+        });
+    }
+
+    if (navDrawer) {
+        navDrawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!window.Alpine) {
+                    closeNav();
+                }
+            });
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navDrawer && navDrawer.classList.contains('active')) {
+            if (!window.Alpine) {
+                closeNav();
+            }
+        }
+    });
 }
