@@ -277,15 +277,13 @@
 
                                 <!-- Primary Add To Bag Button -->
                                 <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1"
-                                    style="min-height: 48px; background-color: #541B29; border: 1px solid #541B29; color: #FFFFFF;">
+                                    style="min-height: 48px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;">
                                     <span class="text-nowrap text-white">ADD TO BAG</span>
                                     <i class="fas fa-arrow-right-long btn-arrow text-white"></i>
                                 </button>
-                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 48px; background-color: #FFFFFF; color: #541B29; border: 1.5px solid #541B29; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; padding: 13px 24px;"
-                                    onmouseover="this.style.backgroundColor='#FAF7F2';"
-                                    onmouseout="this.style.backgroundColor='#FFFFFF';">
-                                    <span>BUY NOW</span>
-                                    <i class="fas fa-arrow-right-long btn-arrow"></i>
+                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 48px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; color: #FFFFFF !important; border: none !important; outline: none !important; border-radius: 8px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13.5px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; padding: 13px 24px; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;">
+                                    <span class="text-white">BUY NOW</span>
+                                    <i class="fas fa-arrow-right-long btn-arrow text-white"></i>
                                 </button>
                             </div>
 
@@ -655,7 +653,7 @@
                                         style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px; font-size: 0.85rem; padding: 10px 14px;"></textarea>
                                 </div>
                                 <button type="submit" class="align-self-start border-0 fw-semibold"
-                                    style="background-color: #541B29; color: #FFFFFF; border-radius: 8px; padding: 12px 28px; font-size: 0.85rem; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    style="background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; color: #FFFFFF; border-radius: 8px; padding: 12px 28px; font-size: 0.85rem; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none !important; outline: none !important; box-shadow: 0 4px 16px rgba(120, 13, 36, 0.35);">
                                     <span>Submit Verified Review</span>
                                     <i class="fas fa-arrow-right-long"></i>
                                 </button>

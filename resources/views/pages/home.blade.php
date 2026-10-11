@@ -291,8 +291,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
-                                style="background-color: #541B29 !important;">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -323,8 +322,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
-                                style="background-color: #541B29 !important;">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -355,8 +353,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm"
-                                style="background-color: #541B29 !important;">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -392,7 +389,7 @@
                 </div>
 
                 <div class="text-center mt-5">
-                    <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
+                    <a href="{{ route('bundles.index') }}" class="btn-discovery-glass px-4 py-3" style="text-decoration: none;">
                         <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
                     </a>
                 </div>

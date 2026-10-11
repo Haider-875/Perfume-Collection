@@ -71,8 +71,8 @@
     <!-- Actions -->
     <div>
         <button onclick="addBundleToCart({{ $bundle->id }})" 
-                class="btn-bundle-bag w-100 d-flex align-items-center justify-content-center gap-2 text-white" 
-                style="height: 42px; font-size: 0.78rem; background-color: #541B29 !important; border: none; border-radius: 8px;">
+                class="btn-bundle-bag w-100 d-flex align-items-center justify-content-center gap-2" 
+                style="height: 42px; font-size: 0.78rem;">
             <i class="fas fa-shopping-bag"></i>
             <span>ADD BUNDLE TO BAG</span>
         </button>

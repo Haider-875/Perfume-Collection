@@ -2183,21 +2183,24 @@ p.font-sans,
     margin: 0 0.5rem;
 }
 
-/* Bundle Dedicated Buttons (Haute Parfumerie Grand Presentation) */
+/* Bundle Dedicated Buttons (Haute Parfumerie Grand Presentation - Glassmorphism UI) */
 .btn-bundle-bag {
     width: 100%;
     min-height: 48px;
     position: relative;
-    background: #541B29 !important;
+    background: rgba(84, 27, 41, 0.82) !important;
+    backdrop-filter: blur(14px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
     color: #ffffff !important;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.12em !important;
     text-transform: uppercase;
-    border: 1px solid #541B29 !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
-    box-shadow: 0 4px 16px rgba(84, 27, 41, 0.3);
+    box-shadow: 0 4px 18px rgba(84, 27, 41, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex;
     align-items: center;
@@ -2213,8 +2216,9 @@ p.font-sans,
 }
 
 .btn-bundle-bag:hover {
-    background: #3B121C !important;
-    box-shadow: 0 8px 24px rgba(84, 27, 41, 0.45) !important;
+    background: rgba(120, 13, 36, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+    box-shadow: 0 8px 26px rgba(84, 27, 41, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
     transform: translateY(-2px);
     color: #ffffff !important;
 }
@@ -2265,16 +2269,19 @@ p.font-sans,
     width: 100%;
     min-height: 48px;
     position: relative;
-    background-color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(14px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
     color: #541B29 !important;
     font-family: var(--font-sans), sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.12em !important;
     text-transform: uppercase;
-    border: 1.5px solid #541B29 !important;
+    border: 1.5px solid rgba(84, 27, 41, 0.28) !important;
+    outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
     transition: all 0.3s ease !important;
     display: flex;
     align-items: center;
@@ -2285,16 +2292,72 @@ p.font-sans,
     z-index: 1;
 }
 
+.btn-bundle-buynow * {
+    color: #541B29 !important;
+}
+
 .btn-bundle-buynow:hover {
-    background-color: #FAF7F2 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     color: #3B121C !important;
-    border-color: #3B121C !important;
+    border-color: #541B29 !important;
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(84, 27, 41, 0.18) !important;
 }
 
 .btn-bundle-buynow:active {
     transform: translateY(0px) scale(0.985) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Glassmorphism Discover Buttons */
+.discover-glass-pill {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(14px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    outline: none !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.home-category-card:hover .discover-glass-pill,
+.discover-glass-pill:hover {
+    background: rgba(255, 255, 255, 0.38) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+.btn-discovery-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    color: #541B29 !important;
+    border: 1.5px solid rgba(84, 27, 41, 0.22) !important;
+    outline: none !important;
+    border-radius: 999px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-size: 0.82rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-discovery-glass * {
+    color: #541B29 !important;
+}
+
+.btn-discovery-glass:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: #541B29 !important;
+    color: #541B29 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(84, 27, 41, 0.2) !important;
 }
 
 /* ==========================================================================
@@ -4105,68 +4168,117 @@ body.overflow-hidden {
     flex-shrink: 0;
 }
 
+/* Product Page Primary Action Buttons (Haute Parfumerie Gradient & Borderless) */
+.pdp-action-row .btn-pill-gold,
+.pdp-action-row .btn-pill-buynow,
+.btn-pill-gold,
+.btn-pill-buynow {
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: var(--radius-md, 8px) !important;
+    box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    letter-spacing: 0.08em !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.pdp-action-row .btn-pill-gold *,
+.pdp-action-row .btn-pill-buynow *,
+.btn-pill-gold *,
+.btn-pill-buynow * {
+    color: #FFFFFF !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.pdp-action-row .btn-pill-gold:hover,
+.pdp-action-row .btn-pill-buynow:hover,
+.btn-pill-gold:hover,
+.btn-pill-buynow:hover {
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border: none !important;
+    outline: none !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(163, 24, 56, 0.6), 0 0 16px rgba(196, 36, 75, 0.45) !important;
+}
+
 .pdp-sticky-btn-buy {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #541B29 !important;
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
     color: #FFFFFF !important;
-    border: 1px solid #541B29 !important;
+    border: none !important;
+    outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
     height: 40px;
     padding: 0 1rem;
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     font-size: 12px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.09em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    box-shadow: 0 2px 8px rgba(84, 27, 41, 0.25);
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer;
     transition: all 0.3s ease !important;
     touch-action: manipulation;
 }
 
+.pdp-sticky-btn-buy * {
+    color: #FFFFFF !important;
+}
+
 .pdp-sticky-btn-buy:hover,
 .pdp-sticky-btn-buy:active {
-    background-color: #3b111b !important;
-    border-color: #3b111b !important;
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border: none !important;
+    outline: none !important;
     color: #FFFFFF !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(84, 27, 41, 0.35);
+    box-shadow: 0 6px 18px rgba(163, 24, 56, 0.55) !important;
 }
 
 .pdp-sticky-btn-bag {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF !important;
-    color: #541B29 !important;
-    border: 1.5px solid #541B29 !important;
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
     height: 40px;
     padding: 0 1rem;
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
     font-size: 12px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.09em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3) !important;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     touch-action: manipulation;
 }
 
+.pdp-sticky-btn-bag * {
+    color: #FFFFFF !important;
+}
+
 .pdp-sticky-btn-bag:hover {
-    background: #FAF7F2 !important;
-    border-color: #541B29 !important;
-    color: #541B29 !important;
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border: none !important;
+    outline: none !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(163, 24, 56, 0.55) !important;
 }
 
 .pdp-sticky-btn-bag:active {
     transform: translateY(0) scale(0.985) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
 }
 
 @media (max-width: 360px) {
