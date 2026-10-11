@@ -390,8 +390,8 @@ p.font-sans,
 
 .product-card .aspect-1x1 {
     aspect-ratio: 1 / 1 !important;
-    min-height: 180px;
-    background-color: #0d0407;
+    min-height: unset;
+    background-color: #FAF7F2;
 }
 
 /* Announcement Bar (Royal Imperial Wine & Gold Haute Parfumerie) */
@@ -3371,29 +3371,30 @@ svg {
 
 @media (max-width: 768px) {
     .hero-slider-section {
-        height: 85vh;
-        height: 85svh;
+        height: auto;
         min-height: 520px;
+        padding-top: 2rem;
+        padding-bottom: 3.5rem;
     }
 
     .hero-slider-section .collidez-hero-arrow {
-        width: 42px;
-        height: 42px;
-    }
-
-    .hero-slider-section .collidez-hero-arrow svg {
-        width: 17px;
-        height: 17px;
+        display: none !important;
     }
 
     .hero-slider-section .hero__title {
-        font-size: clamp(2.3rem, 10vw, 3.6rem);
-        line-height: 0.95;
+        font-size: clamp(2rem, 8vw, 3.2rem) !important;
+        line-height: 1.05 !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .hero-slider-section .hero__statement {
-        font-size: 13px;
-        padding: 0 8px;
+        font-size: 13.5px !important;
+        line-height: 1.5 !important;
+        padding: 0 12px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-slider-section .hero__kicker {
@@ -3405,8 +3406,9 @@ svg {
     .collidez-pill {
         height: 44px;
         min-height: 44px;
-        padding: 0 24px;
+        padding: 0 22px;
         font-size: 12px;
+        white-space: nowrap;
     }
 }
 
@@ -5191,33 +5193,34 @@ body.overflow-hidden {
    ========================================================================== */
 @media (max-width: 767.98px) {
 
-    /* D. Remove card background, border outline, shadow, and box container on mobile */
+    /* Retain luxury card structure on mobile */
     .product-card {
-        background: transparent !important;
-        background-image: none !important;
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
+        background: #FFFFFF !important;
+        border: 1px solid #E8E0DA !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+        padding: 10px !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
     }
 
     /* Outer hover transform disabled on mobile to prevent jerking */
     .product-card.luxury-hover-card:hover {
         transform: none !important;
-        box-shadow: none !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
     }
 
-    /* 1. Product Image: clean stage directly on page without surrounding box */
+    /* 1. Product Image: clean stage */
     .product-card .product-card-media {
-        border-radius: 12px !important;
-        border: none !important;
-        background: transparent !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(232, 224, 218, 0.6) !important;
+        background: #FAF7F2 !important;
         margin-bottom: 8px !important;
         min-height: unset !important;
         aspect-ratio: 1 / 1 !important;
         overflow: hidden !important;
-        box-shadow: none !important;
+        position: relative !important;
     }
 
     /* Hide Impression Tag & Star Rating on mobile for clean Visual Order: Image -> Title -> Price -> Button */
@@ -5229,7 +5232,6 @@ body.overflow-hidden {
     /* 2. Product Title: Standardized text sizing (~14px) and 2-line clean alignment */
     .product-card .product-card-title {
         font-size: 0.88rem !important;
-        /* ~14px */
         line-height: 1.35 !important;
         font-weight: 500 !important;
         margin-bottom: 4px !important;
@@ -5250,7 +5252,6 @@ body.overflow-hidden {
     /* 3. Product Price: Strictly ~2-3px smaller than main title text (11.5px / 12px) */
     .product-card .product-card-pricing {
         font-size: 11.5px !important;
-        /* 2.5px smaller than 14px title */
         line-height: 1.35 !important;
         margin-top: 2px !important;
         margin-bottom: 6px !important;
@@ -5273,17 +5274,16 @@ body.overflow-hidden {
         opacity: 0.8 !important;
     }
 
-    /* 4. Product Button: Rounded-rectangle (not pill), comfortable touch size, arrow removed */
+    /* 4. Product Button: Rounded-rectangle, comfortable touch size, arrow removed */
     .product-card .product-card-action {
         border-top: none !important;
         padding-top: 0 !important;
-        margin-top: 8px !important;
+        margin-top: auto !important;
     }
 
     .product-card .product-card-action button,
     .product-card .btn-cart-gradient {
         border-radius: 8px !important;
-        /* Rounded-rectangle button */
         min-height: 40px !important;
         height: 40px !important;
         padding: 8px 12px !important;
@@ -5291,9 +5291,10 @@ body.overflow-hidden {
         font-weight: 600 !important;
         letter-spacing: 0.06em !important;
         text-transform: uppercase !important;
+        width: 100% !important;
     }
 
-    /* A. Remove arrow icon from card button on mobile */
+    /* Remove arrow icon from card button on mobile */
     .product-card .btn-arrow,
     .product-card .fa-arrow-right-long {
         display: none !important;
@@ -5323,7 +5324,321 @@ select option {
     color: #211D1E !important;
 }
 
-.rounded-pill {
-    border-radius: var(--bs-border-radius-pill) !important;
-    padding: 10px !important;
+/* ==========================================================================
+   11. MASTER PIXEL-PERFECT RESPONSIVE SYSTEM
+   Mobile (320px, 375px, 390px, 430px), Tablets (768px, 1024px), Desktop (1280px+)
+   ========================================================================== */
+
+/* 1. Viewport & Overflow Shields (Zero Horizontal Scrolling) */
+html,
+body {
+    max-width: 100vw !important;
+    overflow-x: clip !important;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 2. Responsive Typography System (Fluid Clamps) */
+h1, .h1 {
+    font-size: clamp(1.85rem, 5vw, 3rem) !important;
+    line-height: 1.15;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+h2, .h2 {
+    font-size: clamp(1.5rem, 4vw, 2.35rem) !important;
+    line-height: 1.2;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+h3, .h3 {
+    font-size: clamp(1.25rem, 3.2vw, 1.85rem) !important;
+    line-height: 1.25;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+h4, .h4 {
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem) !important;
+    line-height: 1.3;
+}
+
+p, .lead {
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+/* 3. Sticky Navbar & Mobile Header Ergonomics */
+.site-header-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: #FAF7F2;
+}
+
+.site-nav-icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991.98px) {
+    .site-navbar-inner {
+        height: 4.25rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .site-brand-wrapper {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: calc(100% - 140px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .site-brand-logo {
+        height: 2.35rem !important;
+        max-width: 140px !important;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 375px) {
+    .site-navbar-inner {
+        height: 3.85rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    .site-brand-wrapper {
+        max-width: calc(100% - 120px);
+    }
+
+    .site-brand-logo {
+        height: 2.05rem !important;
+        max-width: 115px !important;
+    }
+
+    .site-nav-icon-btn {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+    }
+}
+
+/* 4. Badges (Strict Proportions & Position) */
+.badge,
+.product-badge,
+.collidez-badge {
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+}
+
+.badge-extrait,
+.badge.rounded-pill {
+    padding: 3px 8px !important;
+    font-size: 10px !important;
+}
+
+/* 5. Buttons & Touch Targets */
+.btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-sm {
+    min-height: 36px;
+}
+
+@media (max-width: 575.98px) {
+    .hero-btn-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .hero-btn-group .collidez-pill,
+    .hero-btn-group .btn {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    .pdp-action-row {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .pdp-action-row > * {
+        width: 100% !important;
+    }
+
+    .pdp-action-row .quantity-stepper {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+}
+
+/* 6. Product Detail Page (PDP) Mobile Layout */
+@media (max-width: 767.98px) {
+    .pdp-gallery-main {
+        aspect-ratio: 1 / 1 !important;
+        max-height: 360px !important;
+    }
+}
+
+/* 7. Category & Promo Cards */
+@media (max-width: 767.98px) {
+    .home-category-card {
+        min-height: 270px !important;
+    }
+}
+
+/* 8. Sliders / Carousels Responsive Placement */
+.swiper-button-next,
+.swiper-button-prev {
+    touch-action: manipulation;
+}
+
+@media (max-width: 767.98px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+}
+
+/* 9. Checkout Responsive Layout & iOS Auto-zoom Prevention */
+@media (max-width: 991.98px) {
+    .checkout-order-summary-card {
+        position: static !important;
+        top: auto !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    input.form-control,
+    select.form-select,
+    textarea.form-control {
+        font-size: 16px !important; /* Prevents auto-zoom in iOS Safari */
+    }
+}
+
+/* 10. Footer Responsive Styling */
+.footer-social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #E8E0DA;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #541B29;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.footer-social-link:hover,
+.footer-social-link:focus {
+    background-color: #541B29;
+    color: #FAF7F2;
+    border-color: #541B29;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 767.98px) {
+    footer.site-footer {
+        text-align: center;
+    }
+
+    footer.site-footer .footer-col-title {
+        margin-top: 1.25rem;
+    }
+
+    footer.site-footer .footer-social-group {
+        justify-content: center !important;
+    }
+}
+
+/* 11. Responsive Containers & Grid Spacing */
+@media (max-width: 575.98px) {
+    .container,
+    .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .row.g-4 {
+        --bs-gutter-x: 0.75rem;
+        --bs-gutter-y: 0.75rem;
+    }
+
+    .row.g-3 {
+        --bs-gutter-x: 0.65rem;
+        --bs-gutter-y: 0.65rem;
+    }
+
+    /* 2-column mobile product cards fine-tuning */
+    .product-card .product-card-title {
+        font-size: 13px !important;
+        min-height: 2.6em !important;
+        margin-bottom: 3px !important;
+    }
+
+    .product-card .product-card-pricing {
+        font-size: 11px !important;
+    }
+
+    .product-card .btn-cart-gradient {
+        min-height: 38px !important;
+        height: 38px !important;
+        font-size: 10.5px !important;
+        padding: 6px 10px !important;
+    }
+}
+
+/* Ultra small devices (320px) */
+@media (max-width: 350px) {
+    .container,
+    .container-fluid {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .product-card {
+        padding: 8px !important;
+    }
+
+    .product-card .product-card-title {
+        font-size: 12px !important;
+    }
+
+    .product-card .btn-cart-gradient {
+        font-size: 10px !important;
+        padding: 5px 6px !important;
+        letter-spacing: 0.02em !important;
+    }
 }

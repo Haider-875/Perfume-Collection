@@ -93,7 +93,7 @@
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
     <header class="sticky-top site-header">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
-            <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner" style="height: 5rem;">
+            <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner">
                 <!-- Mobile Left: Hamburger Button (d-lg-none) -->
                 <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
                     <button type="button"
@@ -187,10 +187,10 @@
                 </nav>
 
                 <!-- Right: Action Icons (Search, Cart) -->
-                <div class="d-flex align-items-center gap-3 gap-md-4 flex-shrink-0" style="z-index: 2;">
+                <div class="d-flex align-items-center gap-2 gap-sm-3 gap-md-4 flex-shrink-0" style="z-index: 2;">
                     <!-- Search Modal Trigger -->
                     <button type="button" id="searchModalTrigger"
-                        class="border-0 bg-transparent p-1 fs-5"
+                        class="border-0 bg-transparent p-1 fs-5 site-nav-icon-btn"
                         title="Search Fragrances"
                         aria-label="Search Fragrances"
                         style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease;">
@@ -199,7 +199,7 @@
 
                     <!-- Slide-in Cart Trigger -->
                     <button type="button" id="cartDrawerTrigger"
-                        class="position-relative border-0 bg-transparent p-1 fs-5"
+                        class="position-relative border-0 bg-transparent p-1 fs-5 site-nav-icon-btn"
                         title="Your Cart"
                         aria-label="View Shopping Cart"
                         style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease;">
@@ -423,14 +423,14 @@
 
             <!-- Bottom Copyright & Social Icons -->
             <div class="pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3" style="font-size: 0.76rem; border-top: 1px solid #E8E0DA !important; color: #786C67;">
-                <div>
+                <div class="text-center text-md-start">
                     &copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Perfumes Collection' }}. All rights reserved. Registered Haute Parfumerie in Pakistan.
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <a href="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-instagram"></i></a>
-                    <a href="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" class="fs-6 text-success"><i class="fab fa-whatsapp"></i></a>
-                    <a href="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" target="_blank" class="fs-6" style="color: #6B605B;"><i class="fab fa-youtube"></i></a>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" rel="noopener noreferrer" class="footer-social-link text-success" aria-label="WhatsApp Concierge"><i class="fab fa-whatsapp"></i></a>
+                    <a href="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>

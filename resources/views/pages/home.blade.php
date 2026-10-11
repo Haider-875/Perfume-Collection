@@ -263,8 +263,8 @@
                 <!-- Card 1: Signature Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'all') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px; border: 1px solid #E8E0DA;">
+                        class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/categories/collection_signature.jpg') }}"
                             alt="Signature Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
@@ -296,8 +296,8 @@
                 <!-- Card 2: Men's Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'men') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px; border: 1px solid #E8E0DA;">
+                        class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/perfumes/prod_spice_bomb.jpg') }}" alt="Men's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_leather_smoke.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
@@ -328,8 +328,8 @@
                 <!-- Card 3: Women's Collection -->
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'women') }}"
-                        class="position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="min-height: 420px; border: 1px solid #E8E0DA;">
+                        class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
+                        style="border: 1px solid #E8E0DA;">
                         <img src="{{ asset('assets/images/perfumes/prod_rose_oud.jpg') }}" alt="Women's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_eclair_caramel.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
@@ -594,9 +594,9 @@
                     </div>
 
                     <!-- Luxury Navigation Controls on Start (Left) & Last (Right) -->
-                    <div class="swiper-button-prev testimonials-prev luxury-swiper-prev d-flex" 
+                    <div class="swiper-button-prev testimonials-prev luxury-swiper-prev d-none d-md-flex" 
                          aria-label="Previous review"></div>
-                    <div class="swiper-button-next testimonials-next luxury-swiper-next d-flex" 
+                    <div class="swiper-button-next testimonials-next luxury-swiper-next d-none d-md-flex" 
                          aria-label="Next review"></div>
 
                     <!-- Pagination Dots -->

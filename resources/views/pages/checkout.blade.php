@@ -89,7 +89,7 @@
                 <!-- Left Column: Checkout Steps (col-12 col-lg-7) -->
                 <div class="col-12 col-lg-7 d-flex flex-column gap-4">
                     <!-- Step 1: Customer Contact & Delivery Address -->
-                    <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                             <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">1</span>
                             <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Contact & Delivery Address</h2>
@@ -216,7 +216,7 @@
                     </div>
 
                     <!-- Step 2: Courier Logistics Service -->
-                    <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                             <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
                             <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Nationwide Express Delivery</h2>
@@ -241,7 +241,7 @@
                     </div>
 
                     <!-- Step 3: Payment Methods -->
-                    <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                             <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">3</span>
                             <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Select Payment Method</h2>
@@ -526,7 +526,7 @@
 
                 <!-- Right Column: Order Summary & Coupon (col-12 col-lg-5) -->
                 <div class="col-12 col-lg-5 d-flex flex-column gap-4">
-                    <div class="p-4 p-md-5 rounded-4 shadow-sm sticky-top" style="top: 112px; background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm sticky-top checkout-order-summary-card" style="top: 112px; background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <h3 class="font-serif fs-5 fw-normal pb-3 d-flex align-items-center justify-content-between mb-0" style="color: #211D1E; border-bottom: 1px solid #E8E0DA;">
                             <span>Order Summary</span>
                             <span class="text-xs tracking-wider text-uppercase" style="color: #541B29; font-weight: 600;">({{ $cart->items->sum('quantity') }} Items)</span>

@@ -260,7 +260,7 @@
                         <div class="d-flex flex-column gap-3 my-1">
 
                             <!-- Row 1: Quantity Stepper + Add To Bag Stadium Pill Button -->
-                            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                            <div class="d-flex flex-wrap align-items-center gap-2 gap-sm-3 pdp-action-row">
 
                                 <!-- Custom Luxury Quantity Stepper -->
                                 <div class="pdp-qty-stepper-box shadow-xs">
@@ -276,14 +276,13 @@
                                 </div>
 
                                 <!-- Primary Add To Bag Button -->
-                                <button type="button" @click="addToCart()" class=" btn-pill-gold shadow-sm"
+                                <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1"
                                     style="min-height: 48px; background-color: #541B29; border: 1px solid #541B29; color: #FFFFFF;">
                                     <span class="text-nowrap text-white">ADD TO BAG</span>
                                     <i class="fas fa-arrow-right-long btn-arrow text-white"></i>
                                 </button>
-                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm" style="min-height: 48px; background-color: #FFFFFF; color: #541B29; border: 1.5px solid #541B29; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none;
-                                    padding:13px 28px;
-                                    " onmouseover="this.style.backgroundColor='#FAF7F2';"
+                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 48px; background-color: #FFFFFF; color: #541B29; border: 1.5px solid #541B29; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; padding: 13px 24px;"
+                                    onmouseover="this.style.backgroundColor='#FAF7F2';"
                                     onmouseout="this.style.backgroundColor='#FFFFFF';">
                                     <span>BUY NOW</span>
                                     <i class="fas fa-arrow-right-long btn-arrow"></i>

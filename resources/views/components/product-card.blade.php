@@ -1,25 +1,25 @@
 @props(['product'])
 
-<div class="product-card position-relative bg-white border border-subtle luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-3 p-sm-3 h-100" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
+<div class="product-card position-relative bg-white border border-subtle luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2 p-sm-3 h-100" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
     
     <!-- Badges Row -->
     <div class="position-absolute top-0 start-0 m-2 m-sm-3 z-2 d-flex flex-column gap-1 pointer-events-none">
         @if($product->is_bestseller)
-            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 10px; letter-spacing: 0.12em; background-color: #541B29 !important;">
+            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29 !important;">
                 ★ BESTSELLER
             </span>
         @elseif($product->is_new_arrival)
-            <span class="bg-success text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 10px; letter-spacing: 0.12em;">
+            <span class="bg-success text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em;">
                 NEW ARRIVAL
             </span>
         @elseif($product->is_featured)
-            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 10px; letter-spacing: 0.12em; background-color: #541B29 !important;">
+            <span class="bg-gradient-wine-badge text-white fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29 !important;">
                 EXCLUSIVE
             </span>
         @endif
 
         @if($product->has_discount)
-            <span class="bg-danger text-white fw-bold px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 10px; width: fit-content; background-color: #9E2A2B !important;">
+            <span class="bg-danger text-white fw-bold px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; width: fit-content; background-color: #9E2A2B !important;">
                 -{{ $product->discount_percentage }}%
             </span>
         @endif
@@ -28,7 +28,7 @@
     <!-- Flacon Image Wrap (Clean, Spacious Presentation on Light Surface) -->
     <a href="{{ route('shop.show', $product->slug) }}" 
        class="product-card-media position-relative w-100 aspect-1x1 rounded-3 overflow-hidden d-flex align-items-center justify-content-center mb-2 mb-md-3 text-decoration-none"
-       style="aspect-ratio: 1 / 1; min-height: 180px; background-color: #FAF7F2; border: 1px solid #EFEAE5;">
+       style="aspect-ratio: 1 / 1; background-color: #FAF7F2; border: 1px solid #EFEAE5;">
         <img src="{{ $product->primary_image_url }}" 
              alt="{{ $product->name }}" 
              onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
@@ -93,11 +93,11 @@
     <!-- Prominent Full-Width Luxury Add to Cart Button -->
     <div class="product-card-action mt-2 mt-md-3 pt-0 pt-md-2" style="border-top: 1px solid #E8E0DA;">
         <button onclick="addToCartAjax({{ $product->id }}, 1)" 
-                class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2 text-white"
-                style="min-height: 42px; background-color: #541B29 !important; border-radius: 8px; border: none;"
+                class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white"
+                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping text-white" style="font-size: 11px;"></i>
-            <span class="text-white">Add to Cart</span>
+            <span class="text-white text-nowrap" style="font-size: 11.5px;">Add to Cart</span>
             <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
         </button>
     </div>
