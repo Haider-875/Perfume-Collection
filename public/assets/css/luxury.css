@@ -2330,6 +2330,29 @@ p.font-sans,
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
 }
 
+/* Category Card Typography & Contrast Optimization */
+.home-category-card {
+    min-height: 380px !important;
+}
+
+.home-category-card h3 {
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.75) !important;
+    font-weight: 500 !important;
+}
+
+.home-category-card h3 span {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+}
+
+.home-category-card p {
+    color: #FFFFFF !important;
+    font-size: 13.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
 .btn-discovery-glass {
     display: inline-flex;
     align-items: center;

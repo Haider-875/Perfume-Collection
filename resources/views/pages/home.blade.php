@@ -253,12 +253,12 @@
 
             <!-- Section Header -->
             <div class="text-center mx-auto mb-5" style="max-width: 48rem;">
-                <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
-                    style="font-size: 11px;">EXPLORE CATEGORIES</span>
-                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
+                <span class="d-block mb-2 fw-bold text-uppercase tracking-luxury"
+                    style="font-size: 11.5px; color: #780D24 !important; letter-spacing: 0.26em;">EXPLORE CATEGORIES</span>
+                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #1A1416 !important;">
                     Find Your Perfect Match
                 </h2>
-                <p class="text-xs text-md-sm mt-2 lh-base fw-light mx-auto" style="max-width: 40rem; color: #6B605B;">
+                <p class="mt-2 lh-base mx-auto" style="max-width: 42rem; color: #2C2422 !important; font-size: 0.95rem; font-weight: 400;">
                     Explore our curated Collections — From Special Blends to Privé Collection to Exclusif Collection to
                     Signature Collection. We offer unique handcrafted blends to rare bold scents and timeless classics at unbeatable prices.
                 </p>
@@ -271,19 +271,19 @@
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'all') }}"
                         class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="border: 1px solid #E8E0DA;">
+                        style="border: 1px solid rgba(255, 255, 255, 0.15); min-height: 380px;">
                         <img src="{{ asset('assets/images/categories/collection_signature.jpg') }}"
                             alt="Signature Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10, 3, 5, 0.88) 0%, rgba(18, 5, 10, 0.52) 48%, rgba(8, 2, 4, 0.92) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
-                                Signature<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
+                            <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
+                                Signature<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Most loved and iconic designer scents with 14+ hours projection.
                             </p>
                         </div>
@@ -291,7 +291,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -303,18 +303,18 @@
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'men') }}"
                         class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="border: 1px solid #E8E0DA;">
+                        style="border: 1px solid rgba(255, 255, 255, 0.15); min-height: 380px;">
                         <img src="{{ asset('assets/images/perfumes/prod_spice_bomb.jpg') }}" alt="Men's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_leather_smoke.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10, 3, 5, 0.88) 0%, rgba(18, 5, 10, 0.52) 48%, rgba(8, 2, 4, 0.92) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
-                                Men's<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
+                            <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
+                                Men's<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Bold, magnetic, and commanding masculine fragrance profiles with extraordinary sillage.
                             </p>
                         </div>
@@ -322,7 +322,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -334,18 +334,18 @@
                 <div class="col-12 col-md-4">
                     <a href="{{ route('collections.show', 'women') }}"
                         class="home-category-card position-relative rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-4 text-white text-decoration-none luxury-hover-card"
-                        style="border: 1px solid #E8E0DA;">
+                        style="border: 1px solid rgba(255, 255, 255, 0.15); min-height: 380px;">
                         <img src="{{ asset('assets/images/perfumes/prod_rose_oud.jpg') }}" alt="Women's Collection"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_eclair_caramel.jpg') }}';"
                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover transition-smooth">
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(33, 29, 30, 0.2) 0%, rgba(33, 29, 30, 0.75) 100%);"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10, 3, 5, 0.88) 0%, rgba(18, 5, 10, 0.52) 48%, rgba(8, 2, 4, 0.92) 100%);"></div>
 
                         <!-- Top Card Info -->
                         <div class="position-relative z-2 vstack gap-1">
-                            <h3 class="font-serif fs-3 fw-medium text-uppercase lh-1 text-white">
-                                Women's<br><span class="fs-6 tracking-widest fw-normal text-white-50">COLLECTION</span>
+                            <h3 class="font-serif fs-2 fw-medium text-uppercase lh-1 text-white mb-1" style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.7); letter-spacing: 0.03em;">
+                                Women's<br><span class="fs-6 tracking-widest fw-bold" style="color: #E5C378 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
-                            <p class="text-xs text-white-75 fw-light pt-2 lh-base" style="max-width: 20rem;">
+                            <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
                                 Graceful florals, seductive gourmands, and luminous feminine scents.
                             </p>
                         </div>
@@ -353,7 +353,7 @@
                         <!-- Bottom Discover Pill -->
                         <div class="position-relative z-2 pt-3">
                             <span
-                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3 py-2 rounded-3 text-white text-xs fw-semibold text-uppercase tracking-wider shadow-sm">
+                                class="discover-glass-pill d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill text-white text-xs fw-bold text-uppercase tracking-wider shadow-sm">
                                 <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                                 <span>discover</span>
                             </span>
@@ -369,13 +369,13 @@
     @if($bundles->count() > 0)
         <section class="py-5 border-bottom" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
             <div class="container px-3 px-lg-4">
-                <div class="text-center mx-auto mb-5" style="max-width: 42rem;">
-                    <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
-                        style="font-size: 11px;">CURATED COFFRETS & SIGNATURE PAIRINGS</span>
-                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
+                <div class="text-center mx-auto mb-5" style="max-width: 44rem;">
+                    <span class="d-block mb-2 fw-bold text-uppercase tracking-luxury"
+                        style="font-size: 11.5px; color: #780D24 !important; letter-spacing: 0.26em;">CURATED COFFRETS & SIGNATURE PAIRINGS</span>
+                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #1A1416 !important;">
                         Luxury Fragrance Bundles
                     </h2>
-                    <p class="text-xs text-md-sm mt-2 fw-light" style="color: #6B605B;">
+                    <p class="mt-2 mx-auto" style="color: #2C2422 !important; font-size: 0.95rem; font-weight: 400; line-height: 1.6;">
                         Presented in custom gold-stamped coffrets. Enjoy up to 30% privileged savings across Pakistan.
                     </p>
                 </div>
