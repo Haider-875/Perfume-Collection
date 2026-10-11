@@ -41,7 +41,7 @@
                             </p>
 
                             <!-- Stadium Rolling-Text Action Pills -->
-                            <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mt-2">
+                            <div class="hero-btn-group d-flex align-items-center justify-content-center mt-2">
                                 <a href="{{ $slide->cta_url ?? route('collections.show', 'all') }}"
                                     class="collidez-pill collidez-pill--gold">
                                     <span class="collidez-roll">
@@ -83,12 +83,20 @@
                             <h1 class="hero__title font-hero">PERFUMES COLLECTION</h1>
                             <p class="hero__statement font-sans">Luxury Extrait de Parfum Impressions inspired by global niche
                                 fragrance houses.</p>
-                            <a href="{{ route('collections.show', 'all') }}" class="collidez-pill collidez-pill--gold">
-                                <span class="collidez-roll">
-                                    <span class="collidez-roll__a">EXPLORE CATALOG</span>
-                                    <span class="collidez-roll__b" aria-hidden="true">EXPLORE CATALOG</span>
-                                </span>
-                            </a>
+                            <div class="hero-btn-group d-flex align-items-center justify-content-center mt-2">
+                                <a href="{{ route('collections.show', 'all') }}" class="collidez-pill collidez-pill--gold">
+                                    <span class="collidez-roll">
+                                        <span class="collidez-roll__a">EXPLORE CATALOG</span>
+                                        <span class="collidez-roll__b" aria-hidden="true">EXPLORE CATALOG</span>
+                                    </span>
+                                </a>
+                                <a href="{{ route('collections.show', 'all') }}" class="collidez-pill collidez-pill--outline">
+                                    <span class="collidez-roll">
+                                        <span class="collidez-roll__a">EXPLORE VAULT</span>
+                                        <span class="collidez-roll__b" aria-hidden="true">EXPLORE VAULT</span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @endforelse

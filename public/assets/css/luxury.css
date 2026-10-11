@@ -3105,27 +3105,55 @@ svg {
 }
 
 /* Collidez Stadium Rolling Pills */
+/* Hero CTA Action Pills (Wasted Vindey Typeface, No Outline, Card Gradient Maroon) */
+.hero-btn-group {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 .collidez-pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 48px;
     min-height: 48px;
-    padding: 0 32px;
+    padding: 0 28px;
     border-radius: 999px;
-    font-family: var(--font-sans), 'Poppins', sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 13.5px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     white-space: nowrap;
     text-decoration: none !important;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(.19, 1, .22, 1);
-    margin-top: clamp(16px, 2vw, 26px);
+    transition: all 0.35s cubic-bezier(.19, 1, .22, 1);
+    margin-top: clamp(14px, 1.8vw, 24px);
     opacity: 0;
     transform: translate3d(0, 20px, 0);
+    border: none !important;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.collidez-pill *,
+.collidez-roll,
+.collidez-roll__a,
+.collidez-roll__b {
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.collidez-pill:focus,
+.collidez-pill:active {
+    outline: none !important;
+    border: none !important;
 }
 
 .hero-slider-section .swiper-slide-active .collidez-pill {
@@ -3134,48 +3162,56 @@ svg {
     transition-delay: 0.65s;
 }
 
-/* Primary Hero Button: Signature Deep Maroon with Warm Gold Border */
+/* Primary Hero Button: Card's Haute Parfumerie Maroon Gradient (No Outline) */
 .collidez-pill--gold {
-    background: #541B29 !important;
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
     color: #FFFFFF !important;
-    border: 1.5px solid rgba(212, 175, 55, 0.55) !important;
-    box-shadow: 0 6px 22px rgba(84, 27, 41, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
 }
 
 .collidez-pill--gold * {
     color: #FFFFFF !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
-.collidez-pill--gold:hover {
-    background: #702537 !important;
-    border-color: rgba(212, 175, 55, 0.8) !important;
+.collidez-pill--gold:hover,
+.collidez-pill--gold:focus {
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    border: none !important;
+    outline: none !important;
     color: #FFFFFF !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(84, 27, 41, 0.7) !important;
+    box-shadow: 0 8px 26px rgba(163, 24, 56, 0.6), 0 0 16px rgba(196, 36, 75, 0.45) !important;
 }
 
 .collidez-pill--gold:hover * {
     color: #FFFFFF !important;
 }
 
-/* Secondary Hero Button: Elegant Frosted Glass Outline */
+/* Secondary Hero Button: Frosted Glass UI (No Outline) */
 .collidez-pill--outline {
-    background: rgba(255, 255, 255, 0.14) !important;
+    background: rgba(255, 255, 255, 0.18) !important;
     color: #FFFFFF !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+    border: none !important;
+    outline: none !important;
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
 }
 
 .collidez-pill--outline * {
     color: #FFFFFF !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
-.collidez-pill--outline:hover {
-    background: #FFFFFF !important;
+.collidez-pill--outline:hover,
+.collidez-pill--outline:focus {
+    background: rgba(255, 255, 255, 0.95) !important;
     color: #541B29 !important;
-    border-color: #FFFFFF !important;
+    border: none !important;
+    outline: none !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
 }
@@ -3420,12 +3456,34 @@ svg {
         white-space: nowrap;
     }
 
-    .collidez-pill {
-        height: 44px;
-        min-height: 44px;
-        padding: 0 22px;
-        font-size: 12px;
-        white-space: nowrap;
+    .hero-btn-group {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 380px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .hero-btn-group .collidez-pill {
+        flex: 1 1 0px !important;
+        width: auto !important;
+        max-width: 180px !important;
+        min-width: 0 !important;
+        height: 42px !important;
+        min-height: 42px !important;
+        padding: 0 10px !important;
+        font-size: 11.5px !important;
+        font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+        margin-top: 14px !important;
+        border: none !important;
+        outline: none !important;
     }
 }
 
@@ -3441,6 +3499,21 @@ svg {
 
     .hero-slider-section .hero__title {
         font-size: 1.85rem !important;
+    }
+
+    .hero-btn-group {
+        gap: 6px !important;
+        max-width: 320px !important;
+    }
+
+    .hero-btn-group .collidez-pill {
+        height: 38px !important;
+        min-height: 38px !important;
+        padding: 0 6px !important;
+        font-size: 10px !important;
+        letter-spacing: 0.04em !important;
+        border: none !important;
+        outline: none !important;
     }
 }
 
@@ -5581,18 +5654,6 @@ p, .lead {
 }
 
 @media (max-width: 575.98px) {
-    .hero-btn-group {
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 0.75rem !important;
-    }
-
-    .hero-btn-group .collidez-pill,
-    .hero-btn-group .btn {
-        width: 100% !important;
-        text-align: center;
-    }
-
     .pdp-action-row {
         flex-direction: column !important;
         width: 100% !important;
