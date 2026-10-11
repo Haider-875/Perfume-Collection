@@ -9,7 +9,6 @@
         province: '{{ old('province', $defaultAddress->province ?? 'Punjab') }}',
         city: '{{ old('city', $defaultAddress->city ?? 'Lahore') }}',
         paymentMethod: '{{ old('payment_method', 'cod') }}',
-        walletType: '{{ old('wallet_type', 'easypaisa') }}',
         shippingCost: {{ $shippingCost }},
         subtotal: {{ $cart->subtotal }},
         discount: {{ $cart->discount_amount }},
@@ -20,10 +19,6 @@
         provincesData: {{ json_encode($provinces) }},
         getCities() {
             return this.provincesData[this.province] || [];
-        },
-        copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert('Copied to clipboard: ' + text);
         },
         applyCoupon() {
             if (!this.couponCode) return;
@@ -109,7 +104,6 @@
                                                         document.getElementById('input_name').value = '{{ $addr->recipient_name }}';
                                                         document.getElementById('input_phone').value = '{{ $addr->phone }}';
                                                         document.getElementById('input_address').value = '{{ $addr->street_address }}';
-                                                        document.getElementById('input_postal').value = '{{ $addr->postal_code }}';
                                                     "
                                                     class="text-start p-3 rounded-3 text-xs w-100 shadow-sm transition btn" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;">
                                                 <div class="fw-semibold" style="color: #211D1E;">{{ $addr->recipient_name }}</div>
@@ -179,25 +173,11 @@
                                        class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                             </div>
 
-                            <div class="row g-3">
-                                <div class="col-12 col-md-4">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Area / Sector / Block</label>
-                                    <input type="text" name="area" value="{{ old('area') }}" 
-                                           placeholder="e.g. DHA Phase 5 / Gulberg"
-                                           class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Prominent Landmark</label>
-                                    <input type="text" name="landmark" value="{{ old('landmark') }}" 
-                                           placeholder="e.g. Near Siddiq Trade Centre"
-                                           class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Postal Code</label>
-                                    <input type="text" id="input_postal" name="postal_code" value="{{ old('postal_code', $defaultAddress->postal_code ?? '') }}" 
-                                           placeholder="e.g. 54000"
-                                           class="form-control text-xs py-2 px-3 font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                </div>
+                            <div>
+                                <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Area / Sector / Block (Optional)</label>
+                                <input type="text" name="area" value="{{ old('area') }}" 
+                                       placeholder="e.g. DHA Phase 5 / Gulberg / Bahria Town"
+                                       class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                             </div>
 
                             <div>
@@ -215,35 +195,10 @@
                         </div>
                     </div>
 
-                    <!-- Step 2: Courier Logistics Service -->
+                    <!-- Step 2: Payment Methods -->
                     <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                             <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
-                            <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Nationwide Express Delivery</h2>
-                        </div>
-
-                        <div class="p-3 rounded-3 d-flex align-items-center justify-content-between" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">
-                                    <i class="fas fa-truck-fast"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm fw-semibold" style="color: #211D1E;">Tracked Courier (TCS / Leopards / PostEx / Trax)</div>
-                                    <div class="text-xs" style="color: #6B605B;">Guaranteed delivery within 2-4 business days across Pakistan</div>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <span class="font-serif fs-6 fw-bold" style="color: #541B29;">
-                                    {{ $shippingCost == 0 ? 'FREE' : 'Rs. ' . number_format($shippingCost, 0) }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Payment Methods -->
-                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
-                        <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
-                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">3</span>
                             <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Select Payment Method</h2>
                         </div>
 
@@ -254,257 +209,46 @@
                                  @click="paymentMethod = 'cod'">
                                 <div class="p-3 d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="cod" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
+                                        <input type="radio" name="payment_method" value="cod" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
                                         <div>
                                             <span class="text-sm fw-semibold" style="color: #211D1E;">Cash on Delivery (COD)</span>
                                             <p class="text-xs mb-0" style="color: #6B605B;">Pay cash in hand to the courier rider upon delivery at your doorstep</p>
                                         </div>
                                     </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Nationwide</span>
+                                    <span class="text-uppercase fw-bold px-2 py-1 rounded flex-shrink-0 ms-2" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Nationwide</span>
                                 </div>
                             </div>
 
-                            @if(config('app.show_bank_payment_frontend', false))
-                            <!-- 2. Direct Bank Transfer / Raast (Temporarily hidden from UI via config toggle) -->
-                            <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'bank_transfer' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'">
-                                <div class="p-3 d-flex align-items-center justify-content-between" @click="paymentMethod = 'bank_transfer'">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="bank_transfer" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Direct Bank Transfer / Raast Instant</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Transfer via Bank App, ATM, or Raast with instant confirmation</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #6B605B;">Manual</span>
-                                </div>
-
-                                <!-- Bank Transfer Details Drawer -->
-                                <div x-show="paymentMethod === 'bank_transfer'" x-cloak class="p-4 d-flex flex-column gap-3 text-xs" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA;">
-                                    <div class="p-3 rounded-3 d-flex flex-column gap-2 shadow-sm" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                        <div class="font-serif fs-6 fw-bold mb-1" style="color: #541B29;">Perfumes Collection Official Bank Details</div>
-                                        <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                            <span style="color: #6B605B;">Bank Name:</span>
-                                            <span class="fw-semibold" style="color: #211D1E;">{{ $bankDetails['bank_name'] }}</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                            <span style="color: #6B605B;">Account Title:</span>
-                                            <span class="fw-semibold" style="color: #211D1E;">{{ $bankDetails['account_title'] }}</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                            <span style="color: #6B605B;">Account Number:</span>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span class="font-mono fw-bold" style="color: #211D1E;">{{ $bankDetails['account_number'] }}</span>
-                                                <button type="button" @click="copyText('{{ $bankDetails['account_number'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-wrap justify-content-between align-items-center py-1 gap-1" style="border-bottom: 1px solid #E8E0DA;">
-                                            <span style="color: #6B605B;">IBAN:</span>
-                                            <div class="d-flex align-items-center gap-2 flex-wrap">
-                                                <span class="font-mono fw-bold break-words-all" style="color: #211D1E;">{{ $bankDetails['iban'] }}</span>
-                                                <button type="button" @click="copyText('{{ $bankDetails['iban'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold flex-shrink-0" style="font-size: 11px; color: #541B29;">Copy</button>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center py-1">
-                                            <span style="color: #6B605B;">Raast Instant ID:</span>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span class="font-mono fw-bold" style="color: #541B29;">{{ $bankDetails['raast_id'] }}</span>
-                                                <button type="button" @click="copyText('{{ $bankDetails['raast_id'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Bank Transaction ID / Reference (TID)</label>
-                                            <input type="text" name="transaction_id" placeholder="e.g. FT261003894"
-                                                   class="form-control text-xs py-2 px-3 font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Attach Transfer Screenshot</label>
-                                            <input type="file" name="receipt_file" accept="image/*,.pdf"
-                                                   class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                        </div>
-                                    </div>
-                                    <p class="fst-italic mb-0" style="font-size: 11px; color: #6B605B;">
-                                        * You can also upload your receipt later or send it to our WhatsApp concierge after placing your order.
-                                    </p>
-                                </div>
-                            </div>
-                            @endif
-
-                            <!-- 3. Mobile Wallets (EasyPaisa / JazzCash / SadaPay / NayaPay) -->
-                            <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'wallet_transfer' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'">
-                                <div class="p-3 d-flex align-items-center justify-content-between" @click="paymentMethod = 'wallet_transfer'">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="wallet_transfer" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Mobile Wallets (EasyPaisa / JazzCash / SadaPay / NayaPay)</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Send money directly to our registered merchant mobile account</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Instant</span>
-                                </div>
-
-                                <div x-show="paymentMethod === 'wallet_transfer'" x-cloak class="p-4 d-flex flex-column gap-3 text-xs" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA;">
-                                    <!-- Wallet Selector Tabs -->
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <button type="button" @click="walletType = 'easypaisa'" 
-                                                :style="walletType === 'easypaisa' ? 'background-color: #541B29; color: #FFFFFF; border-color: #541B29;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA;'"
-                                                class="btn px-3 py-1-5 rounded-3 text-xs text-uppercase tracking-wider transition border">
-                                            EasyPaisa
-                                        </button>
-                                        <button type="button" @click="walletType = 'jazzcash'" 
-                                                :style="walletType === 'jazzcash' ? 'background-color: #541B29; color: #FFFFFF; border-color: #541B29;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA;'"
-                                                class="btn px-3 py-1-5 rounded-3 text-xs text-uppercase tracking-wider transition border">
-                                            JazzCash
-                                        </button>
-                                        <button type="button" @click="walletType = 'sadapay'" 
-                                                :style="walletType === 'sadapay' ? 'background-color: #541B29; color: #FFFFFF; border-color: #541B29;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA;'"
-                                                class="btn px-3 py-1-5 rounded-3 text-xs text-uppercase tracking-wider transition border">
-                                            SadaPay
-                                        </button>
-                                        <button type="button" @click="walletType = 'nayapay'" 
-                                                :style="walletType === 'nayapay' ? 'background-color: #541B29; color: #FFFFFF; border-color: #541B29;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA;'"
-                                                class="btn px-3 py-1-5 rounded-3 text-xs text-uppercase tracking-wider transition border">
-                                            NayaPay
-                                        </button>
-                                    </div>
-                                    <input type="hidden" name="wallet_type" :value="walletType">
-
-                                    <!-- Wallet Account Card -->
-                                    <div class="p-3 rounded-3 d-flex flex-column gap-2 shadow-sm" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                        <template x-if="walletType === 'easypaisa'">
-                                            <div>
-                                                <div class="text-sm text-success fw-bold mb-1">EasyPaisa Account Details</div>
-                                                <div class="d-flex justify-content-between py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                                    <span style="color: #6B605B;">Account Title:</span>
-                                                    <span class="fw-semibold" style="color: #211D1E;">{{ $walletDetails['easypaisa']['account_title'] }}</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between py-1">
-                                                    <span style="color: #6B605B;">Mobile Number:</span>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <span class="font-mono fw-bold" style="color: #211D1E;">{{ $walletDetails['easypaisa']['account_number'] }}</span>
-                                                        <button type="button" @click="copyText('{{ $walletDetails['easypaisa']['account_number'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <template x-if="walletType === 'jazzcash'">
-                                            <div>
-                                                <div class="text-sm text-warning fw-bold mb-1">JazzCash Account Details</div>
-                                                <div class="d-flex justify-content-between py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                                    <span style="color: #6B605B;">Account Title:</span>
-                                                    <span class="fw-semibold" style="color: #211D1E;">{{ $walletDetails['jazzcash']['account_title'] }}</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between py-1">
-                                                    <span style="color: #6B605B;">Mobile Number:</span>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <span class="font-mono fw-bold" style="color: #211D1E;">{{ $walletDetails['jazzcash']['account_number'] }}</span>
-                                                        <button type="button" @click="copyText('{{ $walletDetails['jazzcash']['account_number'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <template x-if="walletType === 'sadapay'">
-                                            <div>
-                                                <div class="text-sm text-info fw-bold mb-1">SadaPay Account Details</div>
-                                                <div class="d-flex justify-content-between py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                                    <span style="color: #6B605B;">Account Title:</span>
-                                                    <span class="fw-semibold" style="color: #211D1E;">{{ $walletDetails['sadapay']['account_title'] }}</span>
-                                                </div>
-                                                <div class="d-flex flex-wrap justify-content-between py-1 gap-1">
-                                                    <span style="color: #6B605B;">Account / IBAN:</span>
-                                                    <div class="d-flex align-items-center gap-2 flex-wrap">
-                                                        <span class="font-mono fw-bold break-words-all" style="color: #211D1E;">{{ $walletDetails['sadapay']['account_number'] }}</span>
-                                                        <button type="button" @click="copyText('{{ $walletDetails['sadapay']['account_number'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold flex-shrink-0" style="font-size: 11px; color: #541B29;">Copy</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <template x-if="walletType === 'nayapay'">
-                                            <div>
-                                                <div class="text-sm text-warning-emphasis fw-bold mb-1">NayaPay Account Details</div>
-                                                <div class="d-flex justify-content-between py-1" style="border-bottom: 1px solid #E8E0DA;">
-                                                    <span style="color: #6B605B;">Account Title:</span>
-                                                    <span class="fw-semibold" style="color: #211D1E;">{{ $walletDetails['nayapay']['account_title'] }}</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between py-1">
-                                                    <span style="color: #6B605B;">NayaPay ID:</span>
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <span class="font-mono fw-bold" style="color: #211D1E;">{{ $walletDetails['nayapay']['nayapay_id'] }}</span>
-                                                        <button type="button" @click="copyText('{{ $walletDetails['nayapay']['nayapay_id'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
-
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Wallet Transaction ID (TID)</label>
-                                            <input type="text" name="transaction_id" placeholder="e.g. 9876543210"
-                                                   class="form-control text-xs py-2 px-3 font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Payment Screenshot</label>
-                                            <input type="file" name="receipt_file" accept="image/*,.pdf"
-                                                   class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 4. JazzCash Online Gateway (Instant) -->
-                            <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'jazzcash' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
-                                 @click="paymentMethod = 'jazzcash'">
-                                <div class="p-3 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="jazzcash" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">JazzCash Online Gateway (Instant MPIN / Card)</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Pay directly from your JazzCash wallet via MPIN prompt or Debit Card</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Automated</span>
-                                </div>
-                            </div>
-
-                            <!-- 5. EasyPaisa Online Gateway (Instant) -->
+                            <!-- 2. Easypaisa -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
                                  :style="paymentMethod === 'easypaisa' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
                                  @click="paymentMethod = 'easypaisa'">
                                 <div class="p-3 d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="easypaisa" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
+                                        <input type="radio" name="payment_method" value="easypaisa" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
                                         <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">EasyPaisa Online Gateway (Instant OTP)</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Hosted EasyPaisa payment gateway with real-time verification</p>
+                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Easypaisa</span>
+                                            <p class="text-xs mb-0" style="color: #6B605B;">Instant mobile wallet payment & direct online gateway</p>
                                         </div>
                                     </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Automated</span>
+                                    <span class="text-uppercase fw-bold px-2 py-1 rounded flex-shrink-0 ms-2" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Instant</span>
                                 </div>
                             </div>
 
-                            <!-- 6. Debit / Credit Card (Safepay) -->
+                            <!-- 3. Debit / Credit Card (Visa / MasterCard / PayPak) -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
                                  :style="paymentMethod === 'safepay' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
                                  @click="paymentMethod = 'safepay'">
                                 <div class="p-3 d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="safepay" x-model="paymentMethod" class="form-check-input m-0" style="accent-color: #541B29;">
+                                        <input type="radio" name="payment_method" value="safepay" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
                                         <div>
                                             <span class="text-sm fw-semibold" style="color: #211D1E;">Debit / Credit Card (Visa / MasterCard / PayPak)</span>
                                             <p class="text-xs mb-0" style="color: #6B605B;">256-bit encrypted card checkout powered by Safepay</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center gap-1 text-xs font-mono fw-bold" style="color: #541B29;">
-                                        <span>VISA</span> &bull; <span>MC</span>
+                                    <div class="d-flex align-items-center gap-1 text-xs font-mono fw-bold flex-shrink-0 ms-2" style="color: #541B29;">
+                                        <span>VISA</span> &bull; <span>MC</span> &bull; <span>PAYPAK</span>
                                     </div>
                                 </div>
                             </div>
