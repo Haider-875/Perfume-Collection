@@ -462,7 +462,7 @@
 
         <!-- Drawer Footer with Subtotal, Trust Assurance & Checkout -->
         <div id="cartDrawerFooter" class="p-3.5 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF !important; border-top: 1px solid #E8E0DA !important;">
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between px-2">
                 <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Subtotal:</span>
                 <span id="cartDrawerSubtotal" class="font-serif fs-4 fw-bold" style="color: #541B29 !important;">Rs. 0</span>
             </div>
@@ -480,7 +480,7 @@
             </div>
 
             <!-- Action Buttons: Side-by-side in Same Line with 5px Gap -->
-            <div class="d-flex align-items-center pt-1" style="gap: 5px;">
+            <div class="d-flex align-items-center pt-1 p-2" style="gap: 5px;">
                 <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I want to complete my perfume order with Cash on Delivery.') }}"
                     target="_blank"
                     class="cart-btn-whatsapp-buynow text-decoration-none">

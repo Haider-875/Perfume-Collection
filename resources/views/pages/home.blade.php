@@ -27,7 +27,6 @@
                         <div class="hero__content">
                             <!-- Delicate Eyebrow / Kicker -->
                             <p class="hero__kicker">
-                                <span>✦</span>
                                 <span>{{ $slide->badge_text ?? 'HAUTE PARFUMERIE • EXTRAIT DE PARFUM' }}</span>
                             </p>
 
@@ -80,7 +79,7 @@
                         </div>
                         <div class="hero__shade" aria-hidden="true"></div>
                         <div class="hero__content">
-                            <p class="hero__kicker">✦ &nbsp;AUTHENTIC LUXURY IMPRESSIONS</p>
+                            <p class="hero__kicker">AUTHENTIC LUXURY IMPRESSIONS</p>
                             <h1 class="hero__title font-hero">PERFUMES COLLECTION</h1>
                             <p class="hero__statement font-sans">Luxury Extrait de Parfum Impressions inspired by global niche
                                 fragrance houses.</p>

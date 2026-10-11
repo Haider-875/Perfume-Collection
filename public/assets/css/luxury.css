@@ -3033,24 +3033,27 @@ svg {
 .hero-slider-section .hero__kicker {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 6px;
     font-family: var(--font-sans), 'Poppins', sans-serif;
-    font-size: clamp(10.5px, 0.95vw, 12px);
-    font-weight: 600 !important;
+    font-size: clamp(10px, 0.85vw, 11.5px);
+    font-weight: 300 !important;
     text-transform: uppercase;
-    letter-spacing: 0.28em;
-    color: #F7EFE2 !important;
-    background: rgba(84, 27, 41, 0.65);
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    padding: 6px 20px;
+    letter-spacing: 0.24em;
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.32) !important;
+    padding: 5px 18px;
     border-radius: 999px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    margin-bottom: clamp(14px, 1.6vw, 22px);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: clamp(12px, 1.5vw, 20px);
     opacity: 0;
     transform: translate3d(0, 18px, 0);
     transition: opacity 1.2s cubic-bezier(.19, 1, .22, 1), transform 1.2s cubic-bezier(.19, 1, .22, 1);
+    white-space: nowrap;
 }
 
 .hero-slider-section .swiper-slide-active .hero__kicker {
@@ -3371,10 +3374,15 @@ svg {
 
 @media (max-width: 768px) {
     .hero-slider-section {
-        height: auto;
+        height: 85vh;
+        height: 85svh;
         min-height: 520px;
-        padding-top: 2rem;
-        padding-bottom: 3.5rem;
+        max-height: 720px;
+    }
+
+    .hero-slider-section .hero__content {
+        padding: 60px 16px 80px;
+        justify-content: center;
     }
 
     .hero-slider-section .collidez-hero-arrow {
@@ -3382,25 +3390,34 @@ svg {
     }
 
     .hero-slider-section .hero__title {
-        font-size: clamp(2rem, 8vw, 3.2rem) !important;
+        font-size: clamp(2rem, 7.5vw, 3.2rem) !important;
         line-height: 1.05 !important;
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
 
     .hero-slider-section .hero__statement {
-        font-size: 13.5px !important;
-        line-height: 1.5 !important;
-        padding: 0 12px;
-        max-width: 520px;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        font-weight: 300 !important;
+        padding: 0 10px;
+        max-width: 480px;
         margin-left: auto;
         margin-right: auto;
     }
 
     .hero-slider-section .hero__kicker {
-        font-size: 10px;
-        padding: 5px 14px;
-        letter-spacing: 0.22em;
+        font-size: 9.5px !important;
+        font-weight: 300 !important;
+        padding: 4px 14px !important;
+        letter-spacing: 0.2em !important;
+        margin-bottom: 12px !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(14px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.28) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+        white-space: nowrap;
     }
 
     .collidez-pill {
@@ -3409,6 +3426,21 @@ svg {
         padding: 0 22px;
         font-size: 12px;
         white-space: nowrap;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-slider-section .hero__kicker {
+        font-size: 8.5px !important;
+        padding: 3.5px 10px !important;
+        letter-spacing: 0.15em !important;
+        max-width: 92%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .hero-slider-section .hero__title {
+        font-size: 1.85rem !important;
     }
 }
 
