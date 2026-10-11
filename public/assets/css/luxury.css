@@ -1615,6 +1615,33 @@ p.font-sans,
     border-color: #DFD7CE !important;
 }
 
+.bundle-card .product-price-main {
+    font-size: 1.45rem !important;
+    color: #541B29 !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.bundle-card .product-price-min {
+    font-size: 13px !important;
+    color: #786C67 !important;
+}
+
+.bundle-card .product-price-savings {
+    font-size: 11px !important;
+    color: #9E2A2B !important;
+    font-weight: 600 !important;
+}
+
+.bundle-card .bundle-items-box li {
+    gap: 0.5rem !important;
+}
+
+.bundle-card .bundle-items-box li i.fa-check {
+    margin-right: 0.5rem !important;
+}
+
 /* 10. Layout Spacing Bridges */
 .space-y-1>*+* {
     margin-top: 0.25rem;
@@ -5663,19 +5690,24 @@ body.overflow-hidden {
     }
 
     /* Badges Row on Mobile */
-    .product-card .product-card-badges {
+    .product-card .product-card-badges,
+    .bundle-card .product-card-badges {
         top: 6px !important;
         left: 6px !important;
         margin: 0 !important;
         z-index: 5 !important;
         gap: 3px !important;
+        max-width: calc(100% - 12px) !important;
     }
 
     .product-card .product-badge,
     .product-card .badge-bestseller,
     .product-card .badge-discount,
     .product-card .badge-new,
-    .product-card .badge-featured {
+    .product-card .badge-featured,
+    .bundle-card .product-badge,
+    .bundle-card .badge-discount,
+    .bundle-card .badge-featured {
         font-size: 8.5px !important;
         padding: 2.5px 6.5px !important;
         border-radius: 9999px !important;
@@ -5683,6 +5715,8 @@ body.overflow-hidden {
         line-height: 1.2 !important;
         font-weight: 700 !important;
         width: fit-content !important;
+        max-width: 100% !important;
+        white-space: nowrap !important;
     }
 
     /* Hide Impression Tag & Star Rating on mobile for clean Visual Order: Image -> Title -> Price -> Button */
