@@ -2454,17 +2454,54 @@ p.font-sans,
     box-shadow: 0 14px 40px rgba(84, 27, 41, 0.08);
 }
 
+/* Interactive Luxury Flacon Smooth Coordinate Zoom & Pan */
+.pdp-zoom-container {
+    position: relative;
+    width: 100%;
+    min-height: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+    border-radius: 16px;
+    cursor: zoom-in;
+    background: transparent;
+    touch-action: pan-y;
+}
+
 .pdp-flacon-img {
     max-height: 420px;
     width: auto;
     max-width: 100%;
     object-fit: contain;
     filter: drop-shadow(0 14px 28px rgba(84, 27, 41, 0.12));
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center center;
+    will-change: transform, transform-origin;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform-origin 0.08s ease-out;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
-.pdp-flacon-stage:hover .pdp-flacon-img {
-    transform: scale(1.03);
+.pdp-zoom-container.is-zoomed .pdp-flacon-img {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform-origin 0.04s ease-out;
+}
+
+.pdp-zoom-hint {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(232, 224, 218, 0.85);
+    color: #541B29;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 3;
+}
+
+.pdp-zoom-container.is-zoomed .pdp-zoom-hint,
+.pdp-zoom-container:hover .pdp-zoom-hint {
+    opacity: 0;
+    transform: scale(0.85);
 }
 
 .pdp-thumb-item {

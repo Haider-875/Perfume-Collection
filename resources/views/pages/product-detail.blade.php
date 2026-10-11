@@ -92,12 +92,16 @@
                                 </span>
                             </div>
 
-                            <!-- Product Bottle (Crisp, Perfectly Proportioned) -->
-                            <div class="position-relative d-flex align-items-center justify-content-center my-2"
+                            <!-- Product Bottle with Smooth Coordinate Zoom on Hover & Touch -->
+                            <div id="pdpZoomContainer" class="pdp-zoom-container position-relative d-flex align-items-center justify-content-center my-2 overflow-hidden rounded-3"
                                 style="min-height: 290px; width: 100%;">
                                 <img id="pdpMasterImage" src="{{ $product->primary_image_url }}" alt="{{ $product->name }}"
                                     onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
                                     class="pdp-flacon-img">
+                                <div class="pdp-zoom-hint position-absolute bottom-0 end-0 m-2 px-2.5 py-1 rounded-pill d-flex align-items-center gap-1 shadow-sm">
+                                    <i class="fas fa-search-plus" style="font-size: 9.5px;"></i>
+                                    <span style="font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">ZOOM</span>
+                                </div>
                             </div>
 
                             <div class="text-uppercase mt-2 font-sans fw-medium"
@@ -112,7 +116,7 @@
                             <div class="d-flex align-items-center justify-content-center gap-2 overflow-x-auto py-1">
                                 @foreach($product->images as $img)
                                     <button type="button"
-                                        onclick="document.getElementById('pdpMasterImage').src='{{ asset($img->image_path) }}'; document.querySelectorAll('.pdp-thumb-item').forEach(b => { b.classList.remove('active'); }); this.classList.add('active');"
+                                        onclick="if (window.switchPdpImage) { window.switchPdpImage('{{ asset($img->image_path) }}', this); } else { document.getElementById('pdpMasterImage').src='{{ asset($img->image_path) }}'; }"
                                         class="pdp-thumb-item {{ $loop->first ? 'active' : '' }}">
                                         <img src="{{ asset($img->image_path) }}" alt="{{ $img->alt_text }}"
                                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
@@ -762,6 +766,100 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Global Thumbnail Image Switcher
+            window.switchPdpImage = function(src, btn) {
+                const master = document.getElementById('pdpMasterImage');
+                const container = document.getElementById('pdpZoomContainer');
+                if (master) {
+                    master.style.transform = 'scale(1)';
+                    master.style.transformOrigin = 'center center';
+                    master.src = src;
+                }
+                if (container) {
+                    container.classList.remove('is-zoomed');
+                }
+                document.querySelectorAll('.pdp-thumb-item').forEach(b => b.classList.remove('active'));
+                if (btn) btn.classList.add('active');
+            };
+
+            // Smooth Precision Coordinate Zoom on Hover & Touch
+            (function initPdpImageZoom() {
+                const container = document.getElementById('pdpZoomContainer');
+                const image = document.getElementById('pdpMasterImage');
+                if (!container || !image) return;
+
+                const ZOOM_SCALE = 2.25;
+                let isZoomed = false;
+                let rafId = null;
+
+                function applyZoom(clientX, clientY) {
+                    const rect = container.getBoundingClientRect();
+                    if (!rect.width || !rect.height) return;
+
+                    // Relative percentages inside container (0% to 100%)
+                    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+                    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        image.style.transformOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+                        image.style.transform = `scale(${ZOOM_SCALE})`;
+                        container.classList.add('is-zoomed');
+                        isZoomed = true;
+                    });
+                }
+
+                function clearZoom() {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    image.style.transform = 'scale(1)';
+                    container.classList.remove('is-zoomed');
+                    isZoomed = false;
+
+                    setTimeout(() => {
+                        if (!isZoomed) {
+                            image.style.transformOrigin = 'center center';
+                        }
+                    }, 350);
+                }
+
+                // Desktop Mouse Events
+                container.addEventListener('mouseenter', function (e) {
+                    applyZoom(e.clientX, e.clientY);
+                });
+
+                container.addEventListener('mousemove', function (e) {
+                    applyZoom(e.clientX, e.clientY);
+                });
+
+                container.addEventListener('mouseleave', function () {
+                    clearZoom();
+                });
+
+                // Mobile / Touchscreen Events ("hath s hover kare / touch & pan")
+                container.addEventListener('touchstart', function (e) {
+                    if (e.touches && e.touches.length === 1) {
+                        applyZoom(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: true });
+
+                container.addEventListener('touchmove', function (e) {
+                    if (e.touches && e.touches.length === 1) {
+                        if (e.cancelable) {
+                            e.preventDefault();
+                        }
+                        applyZoom(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: false });
+
+                container.addEventListener('touchend', function () {
+                    clearZoom();
+                });
+
+                container.addEventListener('touchcancel', function () {
+                    clearZoom();
+                });
+            })();
+
             const relatedEl = document.querySelector('.related-products-swiper');
             if (relatedEl && typeof Swiper !== 'undefined') {
                 if (relatedEl.swiper) {
