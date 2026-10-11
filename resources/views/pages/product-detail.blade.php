@@ -285,9 +285,9 @@
                                     <span class="text-nowrap text-white">ADD TO BAG</span>
                                     <i class="fas fa-arrow-right-long btn-arrow text-white"></i>
                                 </button>
-                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 48px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; color: #FFFFFF !important; border: none !important; outline: none !important; border-radius: 8px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13.5px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; padding: 13px 24px; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;">
-                                    <span class="text-white">BUY NOW</span>
-                                    <i class="fas fa-arrow-right-long btn-arrow text-white"></i>
+                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1">
+                                    <span>BUY NOW</span>
+                                    <i class="fas fa-arrow-right-long btn-arrow"></i>
                                 </button>
                             </div>
 

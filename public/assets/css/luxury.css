@@ -4263,9 +4263,7 @@ body.overflow-hidden {
 
 /* Product Page Primary Action Buttons (Haute Parfumerie Gradient & Borderless) */
 .pdp-action-row .btn-pill-gold,
-.pdp-action-row .btn-pill-buynow,
-.btn-pill-gold,
-.btn-pill-buynow {
+.btn-pill-gold {
     background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
     color: #FFFFFF !important;
     border: none !important;
@@ -4278,17 +4276,13 @@ body.overflow-hidden {
 }
 
 .pdp-action-row .btn-pill-gold *,
-.pdp-action-row .btn-pill-buynow *,
-.btn-pill-gold *,
-.btn-pill-buynow * {
+.btn-pill-gold * {
     color: #FFFFFF !important;
     font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
 }
 
 .pdp-action-row .btn-pill-gold:hover,
-.pdp-action-row .btn-pill-buynow:hover,
-.btn-pill-gold:hover,
-.btn-pill-buynow:hover {
+.btn-pill-gold:hover {
     background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
     border: none !important;
     outline: none !important;
@@ -4297,13 +4291,65 @@ body.overflow-hidden {
     box-shadow: 0 8px 26px rgba(163, 24, 56, 0.6), 0 0 16px rgba(196, 36, 75, 0.45) !important;
 }
 
+/* Product Page Glassmorphism Buy Now Button */
+.pdp-action-row .btn-pill-buynow,
+.btn-pill-buynow {
+    min-height: 48px;
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    color: #780d24 !important;
+    border: 1.5px solid rgba(120, 13, 36, 0.35) !important;
+    outline: none !important;
+    border-radius: var(--radius-md, 8px) !important;
+    box-shadow: 0 4px 18px rgba(120, 13, 36, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.95) !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    font-size: 13.5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-decoration: none !important;
+    padding: 13px 24px !important;
+}
+
+.pdp-action-row .btn-pill-buynow *,
+.btn-pill-buynow * {
+    color: #780d24 !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    transition: color 0.3s ease;
+}
+
+.pdp-action-row .btn-pill-buynow:hover,
+.btn-pill-buynow:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: #780d24 !important;
+    color: #780d24 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(120, 13, 36, 0.22), inset 0 1px 2px rgba(255, 255, 255, 1) !important;
+}
+
+.pdp-action-row .btn-pill-buynow:active,
+.btn-pill-buynow:active {
+    transform: translateY(0) scale(0.985) !important;
+    box-shadow: 0 2px 8px rgba(120, 13, 36, 0.12) !important;
+}
+
+/* Mobile Sticky Bar Glassmorphism Buy Now Button */
 .pdp-sticky-btn-buy {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
-    color: #FFFFFF !important;
-    border: none !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    color: #780d24 !important;
+    border: 1.5px solid rgba(120, 13, 36, 0.35) !important;
     outline: none !important;
     border-radius: var(--radius-md, 8px) !important;
     height: 40px;
@@ -4314,24 +4360,23 @@ body.overflow-hidden {
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.9) !important;
     cursor: pointer;
     transition: all 0.3s ease !important;
     touch-action: manipulation;
 }
 
 .pdp-sticky-btn-buy * {
-    color: #FFFFFF !important;
+    color: #780d24 !important;
 }
 
 .pdp-sticky-btn-buy:hover,
 .pdp-sticky-btn-buy:active {
-    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
-    border: none !important;
-    outline: none !important;
-    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: #780d24 !important;
+    color: #780d24 !important;
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(163, 24, 56, 0.55) !important;
+    box-shadow: 0 6px 18px rgba(120, 13, 36, 0.22) !important;
 }
 
 .pdp-sticky-btn-bag {
