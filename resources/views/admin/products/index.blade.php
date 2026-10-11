@@ -22,6 +22,10 @@
         <i class="fa-solid fa-file-export text-muted"></i>
         <span class="d-none d-sm-inline">Export CSV</span>
     </a>
+    <a href="{{ url('/seed-production-catalog') }}" class="admin-btn-secondary" title="Sync & Seed Catalog Products (Wasmer / No-Terminal)">
+        <i class="fa-solid fa-arrows-rotate text-warning"></i>
+        <span class="d-none d-md-inline">Sync Catalog</span>
+    </a>
     <a href="{{ route('admin.products.create') }}" class="admin-btn-primary">
         <i class="fa-solid fa-plus"></i>
         <span>Craft Fragrance</span>

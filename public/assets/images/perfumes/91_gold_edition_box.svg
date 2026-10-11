@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="boxGlow_91 GOLD EDITION" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#CA8A04" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#080304" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="boxGold_91 GOLD EDITION" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FDE047"/>
+      <stop offset="70%" stop-color="#CA8A04"/>
+      <stop offset="100%" stop-color="#FDE047"/>
+    </linearGradient>
+    <filter id="boxShadow_91 GOLD EDITION" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="#080304"/>
+  <circle cx="300" cy="420" r="280" fill="url(#boxGlow_91 GOLD EDITION)"/>
+
+  <g filter="url(#boxShadow_91 GOLD EDITION)">
+    <!-- Velvet Textured Outer Box Flap -->
+    <rect x="130" y="150" width="340" height="530" rx="8" fill="#1C150A" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2.5"/>
+    <rect x="145" y="165" width="310" height="500" rx="4" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-opacity="0.3" stroke-width="1.5"/>
+
+    <!-- Gold Foil Corner Accents -->
+    <path d="M150 195 L150 170 L175 170" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2"/>
+    <path d="M450 195 L450 170 L425 170" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2"/>
+    <path d="M150 635 L150 660 L175 660" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2"/>
+    <path d="M450 635 L450 660 L425 660" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2"/>
+
+    <!-- Royal Monogram Seal -->
+    <circle cx="300" cy="290" r="42" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="2"/>
+    <circle cx="300" cy="290" r="35" fill="none" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="1" stroke-dasharray="4,2"/>
+    <text x="300" y="298" font-family="'Cinzel', serif" font-size="20" font-weight="bold" fill="url(#boxGold_91 GOLD EDITION)" text-anchor="middle" letter-spacing="3">PC</text>
+
+    <!-- Brand Header -->
+    <text x="300" y="375" font-family="'Cinzel', serif" font-size="11" font-weight="bold" fill="url(#boxGold_91 GOLD EDITION)" text-anchor="middle" letter-spacing="4">PERFUMES COLLECTION</text>
+    <text x="300" y="395" font-family="'Montserrat', sans-serif" font-size="8" fill="#A8A29E" text-anchor="middle" letter-spacing="3">HAUTE PARFUMERIE • ATELIER</text>
+
+    <line x1="210" y1="425" x2="390" y2="425" stroke="url(#boxGold_91 GOLD EDITION)" stroke-width="1.5"/>
+
+    <!-- Product Title & Reserve Tagline -->
+    <text x="300" y="470" font-family="'Cinzel', serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">91 GOLD EDITION</text>
+    <text x="300" y="500" font-family="'Montserrat', sans-serif" font-size="9" font-weight="600" fill="#FDE047" text-anchor="middle" letter-spacing="3">24K SAFFRON & IMPERIAL OUD</text>
+
+    <line x1="250" y1="535" x2="350" y2="535" stroke="url(#boxGold_91 GOLD EDITION)" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- Spec Badges -->
+    <text x="300" y="580" font-family="'Cinzel', serif" font-size="9" fill="#D6D3D1" text-anchor="middle" letter-spacing="2">EXTRAIT DE PARFUM • 50ML / 100ML</text>
+    <text x="300" y="605" font-family="'Montserrat', sans-serif" font-size="8" fill="#78716C" text-anchor="middle" letter-spacing="2">35% OIL CONCENTRATION • LONG LASTING</text>
+  </g>
+</svg>
