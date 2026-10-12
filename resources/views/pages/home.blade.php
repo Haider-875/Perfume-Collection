@@ -390,7 +390,7 @@
 
                 <div class="text-center mt-3 mt-md-5">
                     <a href="{{ route('bundles.index') }}" class="btn-discovery-glass" style="text-decoration: none;">
-                        <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
+                        <span>VIEW ALL BUNDLES & GIFTS</span>
                     </a>
                 </div>
             </div>
