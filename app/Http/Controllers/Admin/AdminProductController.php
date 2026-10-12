@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Exports\PerfumePriceListSampleExport;
 use App\Models\ActivityLog;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductPrice;
 use App\Models\ProductVariant;
 use App\Models\ScentNote;
+use App\Services\PerfumeProductImportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminProductController extends Controller
 {
@@ -388,97 +392,112 @@ class AdminProductController extends Controller
 
     public function importView()
     {
-        return view('admin.products.import');
+        $lastSummary = session('last_import_summary');
+        $hasErrorReport = session()->has('import_error_report');
+
+        return view('admin.products.import', compact('lastSummary', 'hasErrorReport'));
     }
 
-    public function importProcess(Request $request)
+    public function importPreview(Request $request, PerfumeProductImportService $importService)
     {
         $request->validate([
-            'csv_file' => ['required', 'file', 'mimes:csv,txt', 'max:8192'],
+            'import_file' => ['required', 'file', 'mimes:xlsx,xls,csv,txt', 'max:10240'],
+            'duplicate_handling' => ['nullable', 'in:update,skip,create'],
+        ], [
+            'import_file.required' => 'Please select an Excel (.xlsx, .xls) or CSV file to upload.',
+            'import_file.mimes' => 'The upload file must be an Excel spreadsheet (.xlsx, .xls) or a CSV file (.csv).',
+            'import_file.max' => 'The file size must not exceed 10MB.',
         ]);
 
-        $file = $request->file('csv_file');
-        $path = $file->getRealPath();
-        $handle = fopen($path, 'r');
+        $duplicateHandling = $request->input('duplicate_handling', 'update');
+        $file = $request->file('import_file');
 
-        $header = fgetcsv($handle, 2000, ',');
-        if (!$header) {
-            return back()->with('error', 'The uploaded CSV file is empty or corrupted.');
+        $result = $importService->parseAndValidate($file, $duplicateHandling);
+
+        if (!$result['success']) {
+            return back()->with('error', $result['message']);
         }
 
-        $createdCount = 0;
-        $updatedCount = 0;
-        $errors = [];
-        $rowNumber = 1;
+        $token = Str::random(32);
 
-        $defaultCategory = Category::firstOrCreate(['name' => 'Signature Impressions'], ['slug' => 'signature-impressions']);
+        session([
+            'import_preview_' . $token => [
+                'filename' => $result['filename'],
+                'rows' => $result['rows'],
+                'stats' => $result['stats'],
+                'duplicate_handling' => $duplicateHandling,
+            ]
+        ]);
 
-        while (($data = fgetcsv($handle, 2000, ',')) !== false) {
-            $rowNumber++;
-            if (count($data) < 3) continue;
+        return view('admin.products.import-preview', [
+            'importToken' => $token,
+            'filename' => $result['filename'],
+            'stats' => $result['stats'],
+            'rows' => $result['rows'],
+            'duplicateHandling' => $duplicateHandling,
+        ]);
+    }
 
-            $name = trim($data[0] ?? '');
-            $impressionOf = trim($data[1] ?? '');
-            $sku = trim($data[2] ?? '');
-            $price = (float)($data[3] ?? 0);
-            $stock = (int)($data[4] ?? 20);
-            $categoryName = trim($data[5] ?? 'Signature Impressions');
-            $gender = trim($data[6] ?? 'Unisex');
+    public function importConfirm(Request $request, PerfumeProductImportService $importService)
+    {
+        $request->validate([
+            'import_token' => ['required', 'string'],
+            'duplicate_handling' => ['required', 'in:update,skip,create'],
+        ]);
 
-            if (empty($name) || empty($sku) || $price <= 0) {
-                $errors[] = "Row {$rowNumber}: Missing Name, SKU, or valid Price.";
-                continue;
-            }
+        $token = $request->input('import_token');
+        $sessionKey = 'import_preview_' . $token;
+        $sessionData = session($sessionKey);
 
-            $category = Category::where('name', $categoryName)->first() ?? $defaultCategory;
-
-            $existing = Product::where('sku', $sku)->first();
-            if ($existing) {
-                $existing->name = $name;
-                $existing->impression_of = $impressionOf;
-                $existing->price = $price;
-                $existing->stock = $stock;
-                $existing->in_stock = $stock > 0;
-                $existing->category_id = $category->id;
-                $existing->gender = in_array($gender, ['Men', 'Women', 'Unisex']) ? $gender : 'Unisex';
-                $existing->save();
-                $updatedCount++;
-            } else {
-                $slug = Str::slug($name);
-                if (Product::where('slug', $slug)->exists()) $slug .= '-' . rand(100, 999);
-
-                Product::create([
-                    'name' => $name,
-                    'impression_of' => $impressionOf,
-                    'slug' => $slug,
-                    'sku' => $sku,
-                    'price' => $price,
-                    'stock' => $stock,
-                    'in_stock' => $stock > 0,
-                    'category_id' => $category->id,
-                    'gender' => in_array($gender, ['Men', 'Women', 'Unisex']) ? $gender : 'Unisex',
-                    'volume_ml' => 100,
-                    'concentration' => 'Extrait de Parfum (35% Oil)',
-                    'longevity' => '14+ Hours Beast Mode',
-                    'sillage' => 'Heavy / Room-Filling',
-                    'thumbnail_image' => 'assets/images/perfumes/oud_royale.svg',
-                    'is_active' => true,
-                ]);
-                $createdCount++;
-            }
+        if (!$sessionData || empty($sessionData['rows'])) {
+            return redirect()->route('admin.products.import')
+                ->with('error', 'Import session has expired or is invalid. Please re-upload your Excel/CSV file.');
         }
 
-        fclose($handle);
+        $duplicateHandling = $request->input('duplicate_handling', $sessionData['duplicate_handling'] ?? 'update');
+        $importResult = $importService->executeImport($sessionData['rows'], $duplicateHandling);
 
-        ActivityLog::record('imported', "Imported CSV product catalogue ({$createdCount} created, {$updatedCount} updated)");
+        if (!$importResult['success']) {
+            return redirect()->route('admin.products.import')
+                ->with('error', $importResult['message'] ?? 'Database import failed.');
+        }
 
-        return back()->with('success', "CSV Import Complete: {$createdCount} new creations created, {$updatedCount} updated.")
-            ->with('import_errors', $errors);
+        if (!empty($importResult['failed_rows'])) {
+            session(['import_error_report' => $importResult['failed_rows']]);
+        } else {
+            session()->forget('import_error_report');
+        }
+
+        session([
+            'last_import_summary' => [
+                'total' => count($sessionData['rows']),
+                'created' => $importResult['created_count'],
+                'updated' => $importResult['updated_count'],
+                'skipped' => $importResult['skipped_count'],
+                'failed' => $importResult['failed_count'],
+                'has_errors' => !empty($importResult['failed_rows']),
+            ]
+        ]);
+
+        session()->forget($sessionKey);
+
+        $msg = "Excel Import Complete: {$importResult['created_count']} creations added, {$importResult['updated_count']} updated, {$importResult['skipped_count']} skipped.";
+        if ($importResult['failed_count'] > 0) {
+            $msg .= " ({$importResult['failed_count']} failed — error report is ready for download).";
+        }
+
+        return redirect()->route('admin.products.import')->with('success', $msg);
+    }
+
+    public function sampleExcel()
+    {
+        $filename = 'ravaha_perfume_pricelist_template.xlsx';
+        return Excel::download(new PerfumePriceListSampleExport, $filename);
     }
 
     public function sampleCsv()
     {
-        $filename = 'ravaha_sample_product_template.csv';
+        $filename = 'ravaha_perfume_pricelist_template.csv';
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
@@ -486,14 +505,94 @@ class AdminProductController extends Controller
 
         $callback = function () {
             $handle = fopen('php://output', 'w');
-            fputcsv($handle, ['Name', 'Impression Of', 'SKU', 'Price', 'Stock', 'Category', 'Gender']);
-            fputcsv($handle, ['Santal Desire', 'Santal 33 by Le Labo', 'RVH-SAN-01', '3450', '30', 'Woody & Smoky', 'Unisex']);
-            fputcsv($handle, ['Baroque Rouge 540', 'Baccarat Rouge 540 by MFK', 'RVH-BR-02', '3850', '25', 'Amber & Oriental', 'Unisex']);
-            fputcsv($handle, ['Gentleman Pride', 'Tuxedo by YSL', 'RVH-TUX-03', '3650', '20', 'Men Impressions', 'Men']);
+            fputcsv($handle, [
+                'Name',
+                'Impression Of',
+                'SKU',
+                'Category',
+                'Gender',
+                '30ml Price (PKR)',
+                '50ml Price (PKR)',
+                '60ml Price (PKR)',
+                '100ml Price (PKR)',
+                'Stock'
+            ]);
+            fputcsv($handle, ['Oud Royale Extrait', 'Imperial Agarwood & Rose', 'RVH-OUD-01', 'Woody & Oriental', 'Unisex', '1850', '2850', '3450', '4950', '45']);
+            fputcsv($handle, ['Baroque Rouge 540', 'Baccarat Rouge 540 by MFK', 'RVH-BR-02', 'Amber & Warm', 'Unisex', '1950', '2950', '3650', '5200', '35']);
+            fputcsv($handle, ['Santal Desire', 'Santal 33 by Le Labo', 'RVH-SAN-03', 'Woody & Smoky', 'Unisex', '1750', '2750', '3350', '4800', '40']);
+            fputcsv($handle, ['Smoked Birch & Leather', 'Tuscan Leather by Tom Ford', 'RVH-LTHR-04', 'Smoky & Leathery', 'Men', '1850', '2850', '3450', '4950', '30']);
+            fputcsv($handle, ['Taif Velvet Rose', 'Velvet Rose & Oud by Jo Malone', 'RVH-ROSE-05', 'Floral & Oriental', 'Women', '1650', '2550', '3150', '4500', '25']);
+            fputcsv($handle, ['Murree Mist', 'Silver Mountain Water by Creed', 'RVH-MIST-06', 'Fresh & Citrus', 'Unisex', '1500', '2400', '2950', '4200', '50']);
             fclose($handle);
         };
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function downloadErrorReport()
+    {
+        $failedRows = session('import_error_report', []);
+
+        if (empty($failedRows)) {
+            return back()->with('error', 'No recent import error report found.');
+        }
+
+        $filename = 'ravaha_import_errors_' . date('Y-m-d_His') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($failedRows) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, ['Row Number', 'Perfume Name', 'SKU', 'Failure Reason']);
+            foreach ($failedRows as $item) {
+                fputcsv($handle, [
+                    $item['row'] ?? '',
+                    $item['name'] ?? '',
+                    $item['sku'] ?? '',
+                    $item['reason'] ?? '',
+                ]);
+            }
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function importProcess(Request $request, PerfumeProductImportService $importService)
+    {
+        $file = $request->file('import_file') ?? $request->file('csv_file');
+
+        if (!$file) {
+            return back()->with('error', 'Please select an Excel or CSV file to import.');
+        }
+
+        $duplicateHandling = $request->input('duplicate_handling', 'update');
+        $parsed = $importService->parseAndValidate($file, $duplicateHandling);
+
+        if (!$parsed['success']) {
+            return back()->with('error', $parsed['message']);
+        }
+
+        $importResult = $importService->executeImport($parsed['rows'], $duplicateHandling);
+
+        if (!empty($importResult['failed_rows'])) {
+            session(['import_error_report' => $importResult['failed_rows']]);
+        }
+
+        session([
+            'last_import_summary' => [
+                'total' => count($parsed['rows']),
+                'created' => $importResult['created_count'],
+                'updated' => $importResult['updated_count'],
+                'skipped' => $importResult['skipped_count'],
+                'failed' => $importResult['failed_count'],
+                'has_errors' => !empty($importResult['failed_rows']),
+            ]
+        ]);
+
+        return back()->with('success', "Import Complete: {$importResult['created_count']} created, {$importResult['updated_count']} updated, {$importResult['skipped_count']} skipped.");
     }
 
     public function bulkAction(Request $request)

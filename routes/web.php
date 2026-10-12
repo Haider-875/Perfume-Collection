@@ -151,7 +151,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/products/bulk-action', [AdminProductController::class, 'bulkAction'])->name('products.bulk');
     Route::get('/products/import', [AdminProductController::class, 'importView'])->name('products.import');
     Route::post('/products/import', [AdminProductController::class, 'importProcess'])->name('products.import.process');
+    Route::post('/products/import/preview', [AdminProductController::class, 'importPreview'])->name('products.import.preview');
+    Route::post('/products/import/confirm', [AdminProductController::class, 'importConfirm'])->name('products.import.confirm');
     Route::get('/products/sample-csv', [AdminProductController::class, 'sampleCsv'])->name('products.sample-csv');
+    Route::get('/products/sample-excel', [AdminProductController::class, 'sampleExcel'])->name('products.sample-excel');
+    Route::get('/products/import/error-report', [AdminProductController::class, 'downloadErrorReport'])->name('products.import.error-report');
     Route::get('/products/export-csv', [AdminProductController::class, 'exportCsv'])->name('products.export-csv');
 
     // Bundles Suite

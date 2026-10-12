@@ -10,13 +10,17 @@
         <i class="fa-solid fa-layer-group text-primary"></i>
         <span>Categories</span>
     </a>
+    <a href="{{ route('admin.products.sample-excel') }}" class="admin-btn-secondary" title="Download sample Excel template (.xlsx)">
+        <i class="fa-solid fa-file-excel text-success"></i>
+        <span class="d-none d-sm-inline">Sample Excel</span>
+    </a>
     <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download sample CSV template">
         <i class="fa-solid fa-file-csv text-muted"></i>
         <span class="d-none d-sm-inline">Sample CSV</span>
     </a>
-    <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary" title="Bulk import formulations">
-        <i class="fa-solid fa-file-import text-muted"></i>
-        <span class="d-none d-sm-inline">Import CSV</span>
+    <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary" title="Bulk import Excel or CSV price list">
+        <i class="fa-solid fa-file-import text-primary"></i>
+        <span class="d-none d-sm-inline">Import Price List</span>
     </a>
     <a href="{{ route('admin.products.export-csv') }}" class="admin-btn-secondary" title="Export catalog to CSV">
         <i class="fa-solid fa-file-export text-muted"></i>

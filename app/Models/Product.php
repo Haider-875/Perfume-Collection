@@ -107,6 +107,11 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function prices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class)->where('is_approved', true)->latest();

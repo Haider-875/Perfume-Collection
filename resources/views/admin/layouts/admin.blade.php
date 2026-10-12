@@ -671,9 +671,14 @@
             </a>
 
             <div class="sidebar-heading">CATALOGUE</div>
-            <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.index') || request()->routeIs('admin.products.create') || request()->routeIs('admin.products.edit') ? 'active' : '' }}">
                 <i class="fa-solid fa-spray-can-sparkles"></i>
                 <span>Products & Impressions</span>
+            </a>
+
+            <a href="{{ route('admin.products.import') }}" class="sidebar-link {{ request()->routeIs('admin.products.import*') ? 'active' : '' }}">
+                <i class="fa-solid fa-file-import"></i>
+                <span>Bulk Price Import</span>
             </a>
 
             <a href="{{ route('admin.bundles.index') }}" class="sidebar-link {{ request()->routeIs('admin.bundles.*') ? 'active' : '' }}">
