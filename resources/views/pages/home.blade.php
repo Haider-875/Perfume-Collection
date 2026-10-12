@@ -388,8 +388,8 @@
                     @endforeach
                 </div>
 
-                <div class="text-center mt-4 mt-md-5">
-                    <a href="{{ route('bundles.index') }}" class="btn-discovery-glass px-4 py-3" style="text-decoration: none;">
+                <div class="text-center mt-3 mt-md-5">
+                    <a href="{{ route('bundles.index') }}" class="btn-discovery-glass" style="text-decoration: none;">
                         <span>VIEW ALL DISCOVERY BUNDLES & GIFT SETS</span>
                     </a>
                 </div>
