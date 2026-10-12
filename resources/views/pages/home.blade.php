@@ -635,57 +635,84 @@
                             $readTime = $hBlog->read_time ?? '5 Min Read';
                             $formattedDate = $hBlog->published_at ? \Carbon\Carbon::parse($hBlog->published_at)->format('M d, Y') : 'Recent Edition';
                             $author = $hBlog->author_name ?? 'Master Nose';
+                            
+                            // High-quality asset images mapped by index to guarantee unique photos
+                            $journalAssetImages = [
+                                0 => 'assets/images/blogs/blog_extrait_science.jpg',
+                                1 => 'assets/images/blogs/blog_mughal_attar.jpg',
+                                2 => 'assets/images/blogs/blog_wedding_wardrobe.jpg',
+                            ];
+                            $journalFallbackPerfumes = [
+                                0 => 'assets/images/perfumes/prod_oud_royale.jpg',
+                                1 => 'assets/images/perfumes/prod_rose_oud.jpg',
+                                2 => 'assets/images/perfumes/prod_attar.jpg',
+                            ];
+
+                            // If image is missing, empty, or .svg vector, use the corresponding rich journal photo
+                            $cleanDbImage = trim((string)($hBlog->image ?? ''));
+                            if (!empty($cleanDbImage) && !str_ends_with(strtolower($cleanDbImage), '.svg')) {
+                                $cardImageSrc = asset($cleanDbImage);
+                            } else {
+                                $cardImageSrc = asset($journalAssetImages[$loop->index % 3] ?? 'assets/images/blogs/blog_extrait_science.jpg');
+                            }
+                            $cardFallbackSrc = asset($journalFallbackPerfumes[$loop->index % 3] ?? 'assets/images/perfumes/prod_oud_royale.jpg');
                         @endphp
                         <div class="col-12 col-md-6 col-lg-4">
-                            <article class="home-blog-card blog-card position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2.5 p-sm-3 h-100" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
+                            <article class="home-blog-card blog-card position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column h-100 p-3 p-sm-3.5" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
                                 <!-- Image Pedestal Wrap -->
-                                <div class="blog-card-image-wrap position-relative w-100 rounded-3 overflow-hidden mb-2.5" style="aspect-ratio: 16 / 10; min-height: 160px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                                <div class="blog-card-image-wrap position-relative w-100 rounded-3 overflow-hidden mb-3 mb-sm-3.5" style="aspect-ratio: 16 / 10; min-height: 170px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                     <!-- Badges Row -->
                                     <div class="position-absolute top-0 start-0 m-2 m-sm-2.5 z-2">
-                                        <span class="fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF;">
+                                        <span class="fw-bold text-uppercase px-2.5 py-1 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF;">
                                             {{ $categoryName }}
                                         </span>
                                     </div>
                                     <div class="position-absolute top-0 end-0 m-2 m-sm-2.5 z-2">
-                                        <span class="px-2 py-0-5 rounded-pill" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9px; color: #211D1E !important;">
+                                        <span class="px-2.5 py-1 rounded-pill fw-medium" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important;">
                                             {{ $readTime }}
                                         </span>
                                     </div>
-                                    <img src="{{ asset($hBlog->image) }}"
+                                    <img src="{{ $cardImageSrc }}"
                                          alt="{{ $hBlog->title }}"
                                          loading="lazy"
-                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
-                                         class="w-100 h-100 object-fit-cover transition-smooth"
+                                         onerror="this.onerror=null; this.src='{{ $cardFallbackSrc }}';"
+                                         class="w-100 h-100 object-fit-cover transition-smooth blog-card-img"
                                          style="object-fit: cover; object-position: center;">
                                 </div>
 
-                                <!-- Content (Matching Product Card Body Layout) -->
-                                <div class="d-flex flex-column flex-grow-1 justify-content-between px-1">
-                                    <div>
-                                        <div class="blog-meta d-flex align-items-center gap-2 mb-1.5" style="font-size: 10.5px; color: #786C67;">
+                                <!-- Card Body with Generous Vertical Gaps -->
+                                <div class="blog-card-body d-flex flex-column flex-grow-1 justify-content-between px-1">
+                                    <div class="blog-card-content d-flex flex-column gap-2.5 gap-md-3 mb-3">
+                                        <!-- Meta Row -->
+                                        <div class="blog-meta d-flex align-items-center gap-2" style="font-size: 11px; color: #786C67; font-weight: 500;">
+                                            <i class="far fa-calendar-alt text-brand" style="font-size: 10.5px; color: #851029;"></i>
                                             <span>{{ $formattedDate }}</span>
                                             <span>&bull;</span>
                                             <span>By {{ Str::limit($author, 22) }}</span>
                                         </div>
-                                        <h3 class="blog-card-title font-serif fw-medium lh-sm mb-1.5">
+
+                                        <!-- Title -->
+                                        <h3 class="blog-card-title font-serif fw-medium lh-sm m-0">
                                             <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-decoration-none hover-text-gold transition-smooth">
                                                 {{ $hBlog->title }}
                                             </a>
                                         </h3>
-                                        <p class="blog-card-excerpt text-xs lh-base mb-2.5">
+
+                                        <!-- Excerpt -->
+                                        <p class="blog-card-excerpt text-xs lh-base m-0" style="color: #5C524D; font-size: 0.86rem; line-height: 1.55;">
                                             {{ $hBlog->excerpt ?? Str::limit(strip_tags($hBlog->content), 120) }}
                                         </p>
                                     </div>
 
                                     <!-- Read Guide Button with Velvet Gradient -->
-                                    <div class="blog-card-action mt-auto pt-2" style="border-top: 1px solid #E8E0DA;">
+                                    <div class="blog-card-action mt-auto pt-3" style="border-top: 1px solid #E8E0DA;">
                                         <a href="{{ route('blogs.show', $hBlog->slug) }}" 
-                                           class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white text-decoration-none shadow-sm"
-                                           style="min-height: 40px; border-radius: 8px; border: none; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
+                                           class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2 text-white text-decoration-none shadow-sm"
+                                           style="min-height: 42px; border-radius: 8px; border: none; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
                                            title="Read Guide">
-                                            <i class="fas fa-book-open text-white" style="font-size: 11px;"></i>
-                                            <span class="text-white text-nowrap" style="font-size: 11.5px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Read Guide</span>
-                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-sm-inline-block" style="font-size: 11px;"></i>
+                                            <i class="fas fa-book-open text-white" style="font-size: 12px;"></i>
+                                            <span class="text-white text-nowrap" style="font-size: 12px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Read Guide</span>
+                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-inline-block" style="font-size: 11px;"></i>
                                         </a>
                                     </div>
                                 </div>
