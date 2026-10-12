@@ -522,19 +522,21 @@ p.font-sans,
 .header-nav {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    justify-content: center;
+    gap: 1.5rem;
     height: 5rem;
+    font-size: 13px !important;
 }
 
 @media (min-width: 1200px) {
     .header-nav {
-        gap: 2.25rem;
+        gap: 2rem;
     }
 }
 
 @media (min-width: 1400px) {
     .header-nav {
-        gap: 2.75rem;
+        gap: 2.5rem;
     }
 }
 
@@ -544,7 +546,7 @@ p.font-sans,
     align-items: center;
     height: 5rem;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
-    font-size: 0.85rem;
+    font-size: 13px !important;
     font-weight: 500 !important;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -647,7 +649,7 @@ p.font-sans,
     align-items: center;
     padding: 0.6rem 0.9rem;
     font-family: var(--font-sans), 'Poppins', sans-serif !important;
-    font-size: 0.82rem;
+    font-size: 13px !important;
     font-weight: 400 !important;
     letter-spacing: 0.04em;
     color: #211D1E;
@@ -3248,7 +3250,8 @@ svg {
     transform: scale(1);
 }
 
-.hero-slider-section .hero__zoom img {
+.hero-slider-section .hero__zoom img,
+.hero-slider-section .hero__zoom video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -3359,8 +3362,9 @@ svg {
     flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
+    gap: 14px !important;
     width: auto !important;
+    margin-top: clamp(16px, 2vw, 24px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
 }
@@ -3383,7 +3387,7 @@ svg {
     position: relative;
     overflow: hidden;
     transition: all 0.35s cubic-bezier(.19, 1, .22, 1);
-    margin-top: clamp(14px, 1.8vw, 24px);
+    margin-top: 0 !important;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     border: none !important;
@@ -3656,52 +3660,298 @@ svg {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
 }
 
-@media (max-width: 768px) {
+/* ==========================================================================
+   TABLET & MOBILE RESPONSIVE SYSTEM FOR HERO SLIDER & VIDEO BANNERS
+   ========================================================================== */
+
+/* 1. Tablet Screens (768px - 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
     .hero-slider-section {
-        height: 85vh;
-        height: 85svh;
-        min-height: 520px;
-        max-height: 720px;
+        height: 75vh !important;
+        height: 75svh !important;
+        min-height: 560px !important;
+        max-height: 760px !important;
+        border-bottom: 1px solid rgba(232, 224, 218, 0.2) !important;
+    }
+
+    .hero-slider-section .hero__media {
+        will-change: transform;
+    }
+
+    .hero-slider-section .hero__zoom {
+        transform-origin: center bottom !important;
+        transform: scale(1.04) !important;
+    }
+
+    .hero-slider-section .swiper-slide-active .hero__zoom {
+        transform-origin: center bottom !important;
+        transform: scale(1) !important;
+    }
+
+    .hero-slider-section .hero__zoom video,
+    .hero-slider-section .hero__zoom img {
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        object-fit: cover !important;
+        object-position: center bottom !important;
+        pointer-events: none !important;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+
+    .hero-slider-section .hero__shade {
+        background:
+            radial-gradient(ellipse at 50% 40%, rgba(20, 6, 10, 0.12) 0%, rgba(12, 3, 6, 0.40) 70%, rgba(8, 2, 4, 0.72) 100%),
+            linear-gradient(180deg, rgba(12, 3, 6, 0.52) 0%, rgba(12, 3, 6, 0.08) 28%, rgba(12, 3, 6, 0.14) 65%, rgba(10, 3, 5, 0.48) 100%) !important;
     }
 
     .hero-slider-section .hero__content {
-        padding: 60px 16px 80px;
-        justify-content: center;
+        padding: 60px 24px 60px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .hero-slider-section .hero__kicker {
+        font-size: 10.5px !important;
+        padding: 5px 16px !important;
+        letter-spacing: 0.2em !important;
+        margin-bottom: 12px !important;
+    }
+
+    .hero-slider-section .hero__title {
+        font-size: clamp(2.4rem, 5.2vw, 3.6rem) !important;
+        line-height: 1.02 !important;
+        max-width: 18ch !important;
+        margin-bottom: 0 !important;
+    }
+
+    .hero-slider-section .hero__statement {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+        max-width: 500px !important;
+        margin-top: 14px !important;
+        padding: 0 16px !important;
+    }
+
+    .hero-btn-group {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        margin-top: 20px !important;
+    }
+
+    .hero-btn-group .collidez-pill {
+        height: 46px !important;
+        min-height: 46px !important;
+        padding: 0 24px !important;
+        font-size: 12.5px !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-slider-section .collidez-hero-arrow {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .hero-slider-section .collidez-hero-arrow--prev {
+        left: 16px !important;
+    }
+
+    .hero-slider-section .collidez-hero-arrow--next {
+        right: 16px !important;
+    }
+
+    .hero-slider-section .hero__meter {
+        bottom: 20px !important;
+        right: 24px !important;
+    }
+
+    .hero-slider-section .hero__counter {
+        font-size: 1.45rem !important;
+    }
+
+    .hero-slider-section .hero__progress-bar {
+        width: 54px !important;
+    }
+}
+
+/* 2. Mobile Phones (<= 767.98px) */
+@media (max-width: 767.98px) {
+    .hero-slider-section {
+        height: 85vh !important;
+        height: 85svh !important;
+        min-height: 580px !important;
+        max-height: 820px !important;
+        border-bottom: 1px solid rgba(232, 224, 218, 0.2) !important;
+    }
+
+    .hero-slider-section .hero__media {
+        will-change: transform;
+    }
+
+    .hero-slider-section .hero__zoom {
+        transform-origin: center bottom !important;
+        transform: scale(1.04) !important;
+        transition: transform 5s cubic-bezier(.19, 1, .22, 1);
+    }
+
+    .hero-slider-section .swiper-slide-active .hero__zoom {
+        transform-origin: center bottom !important;
+        transform: scale(1) !important;
+    }
+
+    .hero-slider-section .hero__zoom video,
+    .hero-slider-section .hero__zoom img {
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        object-fit: cover !important;
+        object-position: center bottom !important;
+        pointer-events: none !important;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+
+    .hero-slider-section .hero__shade {
+        background:
+            radial-gradient(ellipse at 50% 36%, rgba(20, 6, 10, 0.12) 0%, rgba(12, 3, 6, 0.38) 68%, rgba(8, 2, 4, 0.70) 100%),
+            linear-gradient(180deg, rgba(12, 3, 6, 0.52) 0%, rgba(12, 3, 6, 0.06) 28%, rgba(12, 3, 6, 0.12) 68%, rgba(10, 3, 5, 0.45) 100%) !important;
+    }
+
+    .hero-slider-section .hero__content {
+        padding: 40px 16px 40px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
     }
 
     .hero-slider-section .collidez-hero-arrow {
         display: none !important;
     }
 
-    .hero-slider-section .hero__title {
-        font-size: clamp(2rem, 7.5vw, 3.2rem) !important;
-        line-height: 1.05 !important;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+    .hero-slider-section .hero__foot {
+        display: none !important;
     }
 
-    .hero-slider-section .hero__statement {
-        font-size: 13px !important;
-        line-height: 1.45 !important;
-        font-weight: 300 !important;
-        padding: 0 10px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
+    .hero-slider-section .hero__meter {
+        display: none !important;
     }
 
     .hero-slider-section .hero__kicker {
         font-size: 9.5px !important;
-        font-weight: 300 !important;
+        font-weight: 400 !important;
         padding: 4px 14px !important;
-        letter-spacing: 0.2em !important;
-        margin-bottom: 12px !important;
-        background: rgba(255, 255, 255, 0.12) !important;
+        letter-spacing: 0.18em !important;
+        margin-bottom: 10px !important;
+        background: rgba(255, 255, 255, 0.16) !important;
         backdrop-filter: blur(14px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.28) !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
-        white-space: nowrap;
+        border: 1px solid rgba(255, 255, 255, 0.32) !important;
+        white-space: nowrap !important;
+    }
+
+    .hero-slider-section .hero__title {
+        font-size: clamp(1.85rem, 6.8vw, 2.6rem) !important;
+        line-height: 1.04 !important;
+        letter-spacing: 0.01em !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 16ch !important;
+        margin-bottom: 0 !important;
+        text-shadow: 0 3px 20px rgba(0, 0, 0, 0.85), 0 1px 4px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    .hero-slider-section .hero__statement {
+        font-size: 12px !important;
+        line-height: 1.44 !important;
+        font-weight: 300 !important;
+        padding: 0 6px !important;
+        max-width: 340px !important;
+        margin-top: 10px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        color: rgba(255, 255, 255, 0.94) !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .hero-btn-group {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 340px !important;
+        margin-top: 16px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .hero-btn-group .collidez-pill {
+        flex: 1 1 0px !important;
+        width: auto !important;
+        max-width: 165px !important;
+        min-width: 0 !important;
+        height: 40px !important;
+        min-height: 40px !important;
+        padding: 0 8px !important;
+        font-size: 11px !important;
+        font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+        margin-top: 0 !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 999px !important;
+    }
+}
+
+/* 3. Small Mobile Devices (<= 375px) */
+@media (max-width: 375px) {
+    .hero-slider-section {
+        height: 82vh !important;
+        height: 82svh !important;
+        min-height: 540px !important;
+        max-height: 720px !important;
+    }
+
+    .hero-slider-section .hero__content {
+        padding: 30px 12px 30px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .hero-slider-section .hero__kicker {
+        font-size: 8.5px !important;
+        padding: 3.5px 11px !important;
+        letter-spacing: 0.14em !important;
+        margin-bottom: 8px !important;
+        max-width: 95%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .hero-slider-section .hero__title {
+        font-size: 1.65rem !important;
+        line-height: 1.05 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .hero-slider-section .hero__statement {
+        font-size: 11px !important;
+        line-height: 1.38 !important;
+        max-width: 290px !important;
+        margin-top: 8px !important;
     }
 
     .hero-btn-group {
@@ -3711,57 +3961,17 @@ svg {
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
-        width: 100% !important;
-        max-width: 380px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    .hero-btn-group .collidez-pill {
-        flex: 1 1 0px !important;
-        width: auto !important;
-        max-width: 180px !important;
-        min-width: 0 !important;
-        height: 42px !important;
-        min-height: 42px !important;
-        padding: 0 10px !important;
-        font-size: 11.5px !important;
-        font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
-        white-space: nowrap !important;
-        text-align: center !important;
+        max-width: 300px !important;
         margin-top: 14px !important;
-        border: none !important;
-        outline: none !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero-slider-section .hero__kicker {
-        font-size: 8.5px !important;
-        padding: 3.5px 10px !important;
-        letter-spacing: 0.15em !important;
-        max-width: 92%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    .hero-slider-section .hero__title {
-        font-size: 1.85rem !important;
-    }
-
-    .hero-btn-group {
-        gap: 6px !important;
-        max-width: 320px !important;
     }
 
     .hero-btn-group .collidez-pill {
-        height: 38px !important;
-        min-height: 38px !important;
+        height: 37px !important;
+        min-height: 37px !important;
         padding: 0 6px !important;
-        font-size: 10px !important;
-        letter-spacing: 0.04em !important;
-        border: none !important;
-        outline: none !important;
+        font-size: 9.5px !important;
+        letter-spacing: 0.03em !important;
+        margin-top: 0 !important;
     }
 }
 
@@ -5935,6 +6145,46 @@ p, .lead {
     justify-content: center;
 }
 
+/* Centered Desktop Luxury Navigation (Grid 3-column + Flex alignment) */
+@media (min-width: 992px) {
+    .site-navbar-inner {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+        align-items: center;
+        width: 100%;
+        min-height: 5rem;
+        position: relative;
+    }
+
+    .site-brand-wrapper {
+        grid-column: 1;
+        justify-self: start;
+        display: flex;
+        align-items: center;
+        flex: 1 1 0%;
+    }
+
+    .header-nav {
+        grid-column: 2;
+        justify-self: center;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        flex: 0 0 auto;
+        font-size: 13px !important;
+    }
+
+    .site-header-actions {
+        grid-column: 3;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1 1 0%;
+    }
+}
+
 @media (max-width: 991.98px) {
     .site-navbar-inner {
         height: 4.25rem !important;
@@ -5952,7 +6202,8 @@ p, .lead {
         justify-content: center;
     }
 
-    .site-brand-logo {
+    .site-brand-logo,
+    .site-logo-img {
         height: 2.35rem !important;
         max-width: 140px !important;
         object-fit: contain;
@@ -5970,7 +6221,8 @@ p, .lead {
         max-width: calc(100% - 120px);
     }
 
-    .site-brand-logo {
+    .site-brand-logo,
+    .site-logo-img {
         height: 2.05rem !important;
         max-width: 115px !important;
     }

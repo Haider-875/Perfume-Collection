@@ -37,9 +37,13 @@
                                 <div class="admin-thumb-box" 
                                      onclick="window.previewImage('{{ $slide->image_url }}', '{{ addslashes($slide->title) }}')"
                                      title="Click to preview slide banner">
-                                    <img src="{{ $slide->image_url }}" alt="{{ $slide->title }}" 
-                                         class="admin-thumb-img"
-                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
+                                    @if($slide->is_video)
+                                        <video src="{{ $slide->image_url }}" class="admin-thumb-img" muted playsinline style="object-fit: cover; width: 100%; height: 100%;"></video>
+                                    @else
+                                        <img src="{{ $slide->image_url }}" alt="{{ $slide->title }}" 
+                                             class="admin-thumb-img"
+                                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';">
+                                    @endif
                                 </div>
                             </td>
                             <td>

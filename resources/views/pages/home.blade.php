@@ -6,7 +6,7 @@
 @section('content')
 
     <!-- 1. Hero Full-Screen Swiper Slider (Collidez Cuisine Haute Parfumerie Style) -->
-    <section class="hero-slider-section position-relative w-100 overflow-hidden" style="border-bottom: 1px solid #E8E0DA;">
+    <section class="hero-slider-section position-relative w-100 overflow-hidden" style="border-bottom: 1px solid rgba(232, 224, 218, 0.2);">
         <div class="swiper hero-master-swiper w-100 h-100">
             <div class="swiper-wrapper">
                 @forelse($heroSlides as $slideIndex => $slide)
@@ -14,9 +14,15 @@
                         <!-- Zooming Background Media -->
                         <div class="hero__media">
                             <div class="hero__zoom">
-                                <img src="{{ asset($slide->image) }}" alt="{{ $slide->title }}"
-                                    onerror="this.onerror=null; this.src='{{ asset('assets/images/slides/hero_1.jpg') }}';"
-                                    class="w-100 h-100 object-fit-cover">
+                                @if($slide->is_video || Str::endsWith(strtolower($slide->image ?? ''), ['.mp4', '.webm', '.ogg', '.mov']))
+                                    <video autoplay loop muted playsinline class="w-100 h-100 object-fit-cover" preload="auto">
+                                        <source src="{{ asset($slide->image) }}" type="video/mp4">
+                                    </video>
+                                @else
+                                    <img src="{{ asset($slide->image) }}" alt="{{ $slide->title }}"
+                                        onerror="this.onerror=null; this.src='{{ asset('assets/images/slides/hero_1.jpg') }}';"
+                                        class="w-100 h-100 object-fit-cover">
+                                @endif
                             </div>
                         </div>
 
@@ -715,15 +721,46 @@
                     nextEl: '.hero-next-btn',
                     prevEl: '.hero-prev-btn',
                 },
+                grabCursor: true,
+                touchRatio: 1.2,
+                touchAngle: 45,
+                resistanceRatio: 0.85,
                 on: {
                     init: function () {
                         updateCollidezHeroMeter(this);
+                        playSlideVideos(this);
                     },
                     slideChange: function () {
                         updateCollidezHeroMeter(this);
+                        playSlideVideos(this);
                     }
                 }
             });
+            window.heroSwiperInstance = heroSwiper;
+
+            function playSlideVideos(swiper) {
+                try {
+                    const activeSlide = swiper.slides ? swiper.slides[swiper.activeIndex] : null;
+                    if (activeSlide) {
+                        const video = activeSlide.querySelector('video');
+                        if (video) {
+                            video.setAttribute('playsinline', '');
+                            video.setAttribute('webkit-playsinline', '');
+                            video.muted = true;
+                            if (video.paused) {
+                                video.play().catch(() => {});
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+
+            // Unlock mobile playback on first touch if OS power-saving restricted autoplay
+            document.addEventListener('touchstart', function () {
+                if (window.heroSwiperInstance) {
+                    playSlideVideos(window.heroSwiperInstance);
+                }
+            }, { once: true, passive: true });
 
             function updateCollidezHeroMeter(swiper) {
                 const currentEl = document.querySelector('.hero__counter-current');

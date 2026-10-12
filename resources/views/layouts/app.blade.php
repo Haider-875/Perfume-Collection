@@ -43,7 +43,7 @@
     <link rel="preload" href="{{ asset('assets/fonts/Wasted-Vindey.ttf') }}" as="font" type="font/ttf" crossorigin>
 
     <!-- Master Luxury Theme Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}?v={{ filemtime(public_path('assets/css/luxury.css')) }}">
 
     <!-- Alpine.js & Collapse Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.13.5/dist/cdn.min.js"></script>
@@ -93,7 +93,7 @@
     <!-- 2. Sticky Translucent Luxury Navbar (Wine Black Glass & Gold Accents) -->
     <header class="sticky-top site-header">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
-            <div class="d-flex align-items-center justify-content-between w-100 site-navbar-inner">
+            <div class="d-flex d-lg-grid align-items-center justify-content-between w-100 site-navbar-inner position-relative">
                 <!-- Mobile Left: Hamburger Button (d-lg-none) -->
                 <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
                     <button type="button"
@@ -123,7 +123,7 @@
                 </div>
 
                 <!-- Center: Primary Navigation Links (Desktop Only) -->
-                <nav class="d-none d-lg-flex align-items-center header-nav">
+                <nav class="d-none d-lg-flex align-items-center justify-content-center header-nav">
                     <a href="{{ route('home') }}"
                         class="nav-link-luxury {{ request()->routeIs('home') ? 'active' : '' }}">
                         Home
@@ -187,7 +187,7 @@
                 </nav>
 
                 <!-- Right: Action Icons (Search, Cart) -->
-                <div class="d-flex align-items-center gap-2 gap-sm-3 gap-md-4 flex-shrink-0" style="z-index: 2;">
+                <div class="d-flex align-items-center justify-content-end gap-2 gap-sm-3 gap-md-4 flex-shrink-0 site-header-actions" style="z-index: 2;">
                     <!-- Search Modal Trigger -->
                     <button type="button" id="searchModalTrigger"
                         class="border-0 bg-transparent p-1 fs-5 site-nav-icon-btn"

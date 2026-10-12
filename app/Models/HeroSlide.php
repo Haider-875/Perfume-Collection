@@ -31,4 +31,9 @@ class HeroSlide extends Model
     {
         return asset($this->image);
     }
+
+    public function getIsVideoAttribute()
+    {
+        return \Illuminate\Support\Str::endsWith(strtolower($this->image ?? ''), ['.mp4', '.webm', '.ogg', '.mov']);
+    }
 }
