@@ -62,33 +62,8 @@
             </p>
         @endif
 
-        <!-- Included Flacons Breakdown (With 0.5rem gap between tick icon and text) -->
-        @if($bundle->items && $bundle->items->count() > 0)
-            <div class="bundle-items-box rounded-3 p-2 p-sm-2.5 my-1.5 flex-grow-1 text-start" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                <div class="fw-semibold mb-1.5 d-flex align-items-center justify-content-between text-uppercase tracking-wider" style="font-size: 9.5px; color: #541B29;">
-                    <span class="d-flex align-items-center gap-1">
-                        <i class="fas fa-layer-group" style="color: #9E7D3B; font-size: 9.5px;"></i> Included in Set:
-                    </span>
-                    <span class="badge rounded-pill fw-medium" style="font-size: 8.5px; background-color: #EFE8E1; color: #541B29; padding: 2px 6px;">
-                        {{ $bundle->items->count() }} Flacons
-                    </span>
-                </div>
-                <ul class="list-unstyled vstack gap-1.5 mb-0">
-                    @foreach($bundle->items as $bItem)
-                        <li class="d-flex align-items-center text-truncate" style="color: #6B605B; font-size: 10.5px; gap: 0.5rem !important;">
-                            <i class="fas fa-check flex-shrink-0" style="font-size: 8.5px; color: #780D24; margin-right: 0.5rem !important;"></i>
-                            <span class="text-truncate">
-                                <strong style="color: #211D1E;">{{ $bItem->product->name ?? 'Luxury Flacon' }}</strong>
-                                <span style="font-size: 9px; color: #786C67;">({{ $bItem->custom_size_label ?? ($bItem->product && $bItem->product->volume_ml ? $bItem->product->volume_ml . 'ml Extrait' : 'Extrait de Parfum') }})</span>
-                            </span>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <!-- Dual Pricing / Range (Increased price size for prominent luxury presentation) -->
-        <div class="product-card-pricing my-1 d-flex align-items-baseline justify-content-center gap-2 flex-wrap">
+        <div class="product-card-pricing mt-auto pt-2 mb-1 d-flex align-items-baseline justify-content-center gap-2 flex-wrap">
             @if($bundle->original_price > $bundle->bundle_price)
                 <span class="product-price-min text-decoration-line-through fw-normal text-nowrap" style="color: #786C67; font-size: 13px;">
                     {{ $bundle->formatted_original_price }}
