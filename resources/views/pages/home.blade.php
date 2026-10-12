@@ -258,13 +258,13 @@
         <div class="container px-3 px-lg-4">
 
             <!-- Section Header -->
-            <div class="text-center mx-auto mb-5" style="max-width: 48rem;">
-                <span class="d-block mb-2 fw-bold text-uppercase tracking-luxury"
-                    style="font-size: 11.5px; color: #780D24 !important; letter-spacing: 0.26em;">EXPLORE CATEGORIES</span>
-                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #1A1416 !important;">
+            <div class="perfect-match-header text-center mx-auto mb-4 mb-md-5" style="max-width: 48rem;">
+                <span class="perfect-match-eyebrow d-block mb-1.5 mb-md-2 fw-bold text-uppercase tracking-luxury text-center"
+                    style="color: #780D24 !important;">EXPLORE CATEGORIES</span>
+                <h2 class="perfect-match-title font-serif fw-normal text-uppercase tracking-tight text-center" style="color: #1A1416 !important;">
                     Find Your Perfect Match
                 </h2>
-                <p class="mt-2 lh-base mx-auto" style="max-width: 42rem; color: #2C2422 !important; font-size: 0.95rem; font-weight: 400;">
+                <p class="perfect-match-desc mt-2 lh-base mx-auto text-center" style="max-width: 42rem; color: #2C2422 !important; text-align: center !important;">
                     Explore our curated Collections — From Special Blends to Privé Collection to Exclusif Collection to
                     Signature Collection. We offer unique handcrafted blends to rare bold scents and timeless classics at unbeatable prices.
                 </p>

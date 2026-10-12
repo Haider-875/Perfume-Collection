@@ -2608,6 +2608,83 @@ p.font-sans,
     }
 }
 
+/* Section 4: Explore Categories / Find Your Perfect Match Header */
+.perfect-match-header {
+    text-align: center !important;
+}
+
+.perfect-match-header .perfect-match-eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.26em;
+    text-align: center !important;
+    display: block;
+}
+
+.perfect-match-header .perfect-match-title {
+    font-size: clamp(1.45rem, 3.2vw, 2.35rem) !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+}
+
+.perfect-match-header .perfect-match-desc {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.65;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 767.98px) {
+    .perfect-match-header {
+        margin-bottom: 1.75rem !important;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .perfect-match-header .perfect-match-eyebrow {
+        font-size: 9.5px !important;
+        letter-spacing: 0.16em !important;
+        margin-bottom: 6px !important;
+        text-align: center !important;
+    }
+
+    .perfect-match-header .perfect-match-title {
+        font-size: 1.35rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 8px !important;
+        text-align: center !important;
+    }
+
+    .perfect-match-header .perfect-match-desc {
+        font-size: 0.80rem !important;
+        line-height: 1.55 !important;
+        max-width: 96% !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .perfect-match-header .perfect-match-eyebrow {
+        font-size: 9px !important;
+        letter-spacing: 0.14em !important;
+    }
+
+    .perfect-match-header .perfect-match-title {
+        font-size: 1.22rem !important;
+        line-height: 1.28 !important;
+    }
+
+    .perfect-match-header .perfect-match-desc {
+        font-size: 0.76rem !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+}
+
 /* Category Card Typography & Contrast Optimization */
 .home-category-card {
     min-height: 380px !important;
