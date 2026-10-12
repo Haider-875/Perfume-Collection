@@ -1644,6 +1644,158 @@ p.font-sans,
     margin-right: 0.5rem !important;
 }
 
+/* ==========================================================================
+   BLOG / CHRONICLES CARD SUITE (HOMEPAGE & ARCHIVE)
+   Refined Typography, Luxury Velvet Gradient Button, Responsive Mobile Scaling
+   ========================================================================== */
+.home-blog-card,
+.blog-card {
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.home-blog-card:hover,
+.blog-card:hover {
+    border-color: rgba(133, 16, 41, 0.8) !important;
+    box-shadow: 0 12px 35px rgba(133, 16, 41, 0.18) !important;
+    transform: translateY(-2px);
+}
+
+.home-blog-card .blog-card-title,
+.blog-card .blog-card-title {
+    font-size: 1.02rem !important;
+    line-height: 1.35 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.75rem;
+}
+
+.home-blog-card .blog-card-title a,
+.blog-card .blog-card-title a {
+    color: #211D1E !important;
+    transition: color 0.2s ease;
+}
+
+.home-blog-card .blog-card-title a:hover,
+.blog-card .blog-card-title a:hover {
+    color: #780D24 !important;
+}
+
+.home-blog-card .blog-card-excerpt,
+.blog-card .blog-card-excerpt {
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+    color: #514744 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.45rem;
+}
+
+/* Blog Card Luxury Velvet Gradient Action Button */
+.home-blog-card .btn-cart-gradient,
+.home-blog-card .blog-card-action a,
+.blog-card .btn-cart-gradient {
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.35);
+    border-radius: 8px !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-decoration: none !important;
+}
+
+.home-blog-card .btn-cart-gradient *,
+.home-blog-card .blog-card-action a *,
+.blog-card .btn-cart-gradient * {
+    color: #ffffff !important;
+    font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.home-blog-card .btn-cart-gradient:hover,
+.home-blog-card .blog-card-action a:hover,
+.blog-card .btn-cart-gradient:hover {
+    background: linear-gradient(135deg, #c4244b 0%, #991635 50%, #590a1a 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 6px 22px rgba(163, 24, 56, 0.55), 0 0 14px rgba(196, 36, 75, 0.4) !important;
+    transform: translateY(-2px);
+}
+
+/* Mobile & Tablet Responsive Optimizations for Blog Cards */
+@media (max-width: 767.98px) {
+    .home-blog-card,
+    .blog-card {
+        padding: 10px 12px !important;
+    }
+
+    .home-blog-card .blog-card-image-wrap {
+        aspect-ratio: 16 / 9 !important;
+        min-height: 140px !important;
+        max-height: 180px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .home-blog-card .blog-meta {
+        font-size: 10px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .home-blog-card .blog-card-title,
+    .blog-card .blog-card-title {
+        font-size: 0.90rem !important;
+        line-height: 1.3 !important;
+        min-height: auto !important;
+        margin-bottom: 4px !important;
+    }
+
+    .home-blog-card .blog-card-excerpt,
+    .blog-card .blog-card-excerpt {
+        font-size: 0.74rem !important;
+        line-height: 1.35 !important;
+        min-height: auto !important;
+        margin-bottom: 8px !important;
+    }
+
+    .home-blog-card .blog-card-action a,
+    .home-blog-card .btn-cart-gradient {
+        min-height: 36px !important;
+        height: 36px !important;
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-blog-card .blog-card-title,
+    .blog-card .blog-card-title {
+        font-size: 0.84rem !important;
+        line-height: 1.28 !important;
+    }
+
+    .home-blog-card .blog-card-excerpt,
+    .blog-card .blog-card-excerpt {
+        font-size: 0.70rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .home-blog-card .blog-meta {
+        font-size: 9.5px !important;
+    }
+
+    .home-blog-card .blog-card-action a,
+    .home-blog-card .btn-cart-gradient {
+        min-height: 34px !important;
+        height: 34px !important;
+        padding: 5px 8px !important;
+        font-size: 10.5px !important;
+    }
+}
+
 /* 10. Layout Spacing Bridges */
 .space-y-1>*+* {
     margin-top: 0.25rem;
@@ -6031,7 +6183,10 @@ body.overflow-hidden {
     .product-card .product-card-action button,
     .product-card .btn-cart-gradient,
     .bundle-card .product-card-action button,
-    .bundle-card .btn-cart-gradient {
+    .bundle-card .btn-cart-gradient,
+    .home-blog-card .blog-card-action a,
+    .home-blog-card .btn-cart-gradient,
+    .blog-card .btn-cart-gradient {
         border-radius: 8px !important;
         min-height: 40px !important;
         height: 40px !important;
@@ -6045,7 +6200,7 @@ body.overflow-hidden {
         align-items: center !important;
         justify-content: center !important;
         gap: 6px !important;
-        background-color: #541B29 !important;
+        background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
         color: #FFFFFF !important;
         border: none !important;
         font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;
@@ -6540,7 +6695,9 @@ p, .lead {
     .product-card .product-card-action button,
     .product-card .btn-cart-gradient,
     .bundle-card .product-card-action button,
-    .bundle-card .btn-cart-gradient {
+    .bundle-card .btn-cart-gradient,
+    .home-blog-card .blog-card-action a,
+    .home-blog-card .btn-cart-gradient {
         min-height: 38px !important;
         height: 38px !important;
         font-size: 10.5px !important;

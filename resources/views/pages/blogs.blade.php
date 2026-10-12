@@ -86,7 +86,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($blogs as $blog)
                 <div class="col">
-                    <article class="rounded-3 overflow-hidden d-flex flex-column h-100 transition shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <article class="blog-card luxury-hover-card rounded-3 overflow-hidden d-flex flex-column h-100 transition shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="position-relative overflow-hidden" style="height: 224px; background-color: #FAF7F2;">
                             <img 
                                 src="{{ asset($blog->image) }}" 
@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                        <div class="p-3 p-md-4 flex-grow-1 d-flex flex-column justify-content-between">
                             <div class="d-flex flex-column gap-2">
                                 <div class="d-flex align-items-center gap-2" style="font-size: 11px; color: #786C67;">
                                     <span>{{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('M d, Y') : 'Recent' }}</span>
@@ -108,13 +108,13 @@
                                     <span>{{ $blog->reading_time_min ?? 4 }} min read</span>
                                 </div>
 
-                                <h3 class="font-serif fs-5 lh-sm mb-0">
+                                <h3 class="blog-card-title font-serif fw-medium lh-sm mb-0">
                                     <a href="{{ route('blogs.show', $blog->slug) }}" class="text-decoration-none transition" style="color: #211D1E !important;">
                                         {{ $blog->title }}
                                     </a>
                                 </h3>
 
-                                <p class="text-xs lh-base mb-0" style="color: #514744;">
+                                <p class="blog-card-excerpt text-xs lh-base mb-0" style="color: #514744;">
                                     {{ $blog->summary ?? \Illuminate\Support\Str::limit(strip_tags($blog->content), 120) }}
                                 </p>
                             </div>

@@ -637,17 +637,17 @@
                             $author = $hBlog->author_name ?? 'Master Nose';
                         @endphp
                         <div class="col-12 col-md-6 col-lg-4">
-                            <article class="position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-3 p-sm-3 h-100" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
+                            <article class="home-blog-card blog-card position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2.5 p-sm-3 h-100" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
                                 <!-- Image Pedestal Wrap -->
-                                <div class="position-relative w-100 rounded-3 overflow-hidden mb-3" style="aspect-ratio: 16 / 10; min-height: 200px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                                <div class="blog-card-image-wrap position-relative w-100 rounded-3 overflow-hidden mb-2.5" style="aspect-ratio: 16 / 10; min-height: 160px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                     <!-- Badges Row -->
-                                    <div class="position-absolute top-0 start-0 m-2.5 z-2">
-                                        <span class="fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.12em; background-color: #541B29; color: #FFFFFF;">
+                                    <div class="position-absolute top-0 start-0 m-2 m-sm-2.5 z-2">
+                                        <span class="fw-bold text-uppercase px-2 py-0-5 rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF;">
                                             {{ $categoryName }}
                                         </span>
                                     </div>
-                                    <div class="position-absolute top-0 end-0 m-2.5 z-2">
-                                        <span class="px-2 py-0-5 rounded-pill" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important;">
+                                    <div class="position-absolute top-0 end-0 m-2 m-sm-2.5 z-2">
+                                        <span class="px-2 py-0-5 rounded-pill" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9px; color: #211D1E !important;">
                                             {{ $readTime }}
                                         </span>
                                     </div>
@@ -662,27 +662,30 @@
                                 <!-- Content (Matching Product Card Body Layout) -->
                                 <div class="d-flex flex-column flex-grow-1 justify-content-between px-1">
                                     <div>
-                                        <div class="d-flex align-items-center gap-2 mb-2" style="font-size: 11px; color: #786C67;">
+                                        <div class="blog-meta d-flex align-items-center gap-2 mb-1.5" style="font-size: 10.5px; color: #786C67;">
                                             <span>{{ $formattedDate }}</span>
                                             <span>&bull;</span>
                                             <span>By {{ Str::limit($author, 22) }}</span>
                                         </div>
-                                        <h3 class="font-serif fs-5 fw-medium lh-sm mb-2" style="min-height: 2.8rem; color: #211D1E !important;">
-                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-decoration-none hover-text-gold transition-smooth" style="color: #211D1E !important;">
+                                        <h3 class="blog-card-title font-serif fw-medium lh-sm mb-1.5">
+                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-decoration-none hover-text-gold transition-smooth">
                                                 {{ $hBlog->title }}
                                             </a>
                                         </h3>
-                                        <p class="text-xs lh-base mb-3" style="color: #514744; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4rem;">
+                                        <p class="blog-card-excerpt text-xs lh-base mb-2.5">
                                             {{ $hBlog->excerpt ?? Str::limit(strip_tags($hBlog->content), 120) }}
                                         </p>
                                     </div>
 
-                                    <!-- Read Guide Button -->
-                                    <div class="mt-auto pt-2.5" style="border-top: 1px solid #E8E0DA;">
+                                    <!-- Read Guide Button with Velvet Gradient -->
+                                    <div class="blog-card-action mt-auto pt-2" style="border-top: 1px solid #E8E0DA;">
                                         <a href="{{ route('blogs.show', $hBlog->slug) }}" 
-                                           class="w-100 py-2.5 px-3 text-xs tracking-wider fw-semibold d-flex align-items-center justify-content-center text-white text-decoration-none shadow-sm"
-                                           style="min-height: 42px; background-color: #541B29; border: 1px solid #541B29; border-radius: 8px;">
-                                            <span class="text-white">Read Guide</span>
+                                           class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white text-decoration-none shadow-sm"
+                                           style="min-height: 40px; border-radius: 8px; border: none; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
+                                           title="Read Guide">
+                                            <i class="fas fa-book-open text-white" style="font-size: 11px;"></i>
+                                            <span class="text-white text-nowrap" style="font-size: 11.5px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Read Guide</span>
+                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-sm-inline-block" style="font-size: 11px;"></i>
                                         </a>
                                     </div>
                                 </div>
