@@ -662,14 +662,16 @@
                                 <!-- Image Pedestal Wrap -->
                                 <div class="blog-card-image-wrap position-relative w-100 rounded-3 overflow-hidden mb-3 mb-sm-3.5" style="aspect-ratio: 16 / 10; min-height: 170px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                     <!-- Badges Row -->
-                                    <div class="position-absolute top-0 start-0 m-2 m-sm-2.5 z-2">
-                                        <span class="fw-bold text-uppercase px-2.5 py-1 rounded-pill shadow-sm" style="font-size: 9.5px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF;">
+                                    <div class="blog-card-badges-row position-absolute top-0 start-0 end-0 p-2 p-sm-2.5 d-flex align-items-center justify-content-between gap-2 z-2" style="pointer-events: none;">
+                                        <span class="blog-card-category-badge rounded-pill fw-bold text-uppercase shadow-sm" 
+                                              style="font-size: 9.5px; letter-spacing: 0.08em; background-color: #541B29; color: #FFFFFF; padding: 4.5px 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; max-width: calc(100% - 85px); overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,0.18);"
+                                              title="{{ $categoryName }}">
                                             {{ $categoryName }}
                                         </span>
-                                    </div>
-                                    <div class="position-absolute top-0 end-0 m-2 m-sm-2.5 z-2">
-                                        <span class="px-2.5 py-1 rounded-pill fw-medium" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important;">
-                                            {{ $readTime }}
+                                        <span class="blog-card-readtime-badge rounded-pill fw-medium shadow-xs" 
+                                              style="background-color: rgba(255, 255, 255, 0.94); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important; padding: 4.5px 10px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; flex-shrink: 0;">
+                                            <i class="far fa-clock" style="font-size: 8.5px; color: #851029;"></i>
+                                            <span>{{ $readTime }}</span>
                                         </span>
                                     </div>
                                     <img src="{{ $cardImageSrc }}"
@@ -704,15 +706,15 @@
                                         </p>
                                     </div>
 
-                                    <!-- Read Guide Button with Velvet Gradient -->
-                                    <div class="blog-card-action mt-auto pt-3" style="border-top: 1px solid #E8E0DA;">
+                                    <!-- Read Guide Button (Matches New Release Impressions Card Button) -->
+                                    <div class="blog-card-action mt-auto pt-2 pt-md-3" style="border-top: 1px solid #E8E0DA;">
                                         <a href="{{ route('blogs.show', $hBlog->slug) }}" 
-                                           class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2 text-white text-decoration-none shadow-sm"
-                                           style="min-height: 42px; border-radius: 8px; border: none; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
+                                           class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white text-decoration-none shadow-sm"
+                                           style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
                                            title="Read Guide">
-                                            <i class="fas fa-book-open text-white" style="font-size: 12px;"></i>
-                                            <span class="text-white text-nowrap" style="font-size: 12px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Read Guide</span>
-                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-inline-block" style="font-size: 11px;"></i>
+                                            <i class="fas fa-book-open text-white" style="font-size: 11px;"></i>
+                                            <span class="text-white text-nowrap" style="font-size: 11.5px;">Read Guide</span>
+                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -721,10 +723,10 @@
                     @endforeach
                 </div>
 
-                <!-- Centered Bottom Action -->
-                <div class="text-center mt-5 pt-2">
-                    <a href="{{ route('blogs.index') }}" class="btn py-2.5 px-4 text-xs tracking-wider fw-semibold text-decoration-none shadow-sm" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; border-radius: 8px;">
-                        Explore All Journal Guides
+                <!-- Centered Bottom Action (Matches New Release Impressions CTA) -->
+                <div class="text-center mt-4 mt-lg-5">
+                    <a href="{{ route('blogs.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
+                        <span>Explore All Journal Guides</span>
                     </a>
                 </div>
             </div>

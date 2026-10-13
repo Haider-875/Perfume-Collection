@@ -40,7 +40,7 @@
                             style="object-fit: cover; object-position: center;"
                             onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
                         >
-                        <div class="position-absolute top-0 start-0 m-3 px-3 py-1 rounded text-uppercase fw-semibold" style="font-size: 10px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF;">
+                        <div class="position-absolute top-0 start-0 m-3 px-3 py-1.5 rounded-pill text-uppercase fw-semibold shadow-sm" style="font-size: 10px; letter-spacing: 0.1em; background-color: #541B29; color: #FFFFFF; display: inline-flex; align-items: center; line-height: 1; border: 1px solid rgba(255,255,255,0.18); white-space: nowrap;">
                             FEATURED CHRONICLE
                         </div>
                     </div>
@@ -88,6 +88,18 @@
                 <div class="col">
                     <article class="blog-card luxury-hover-card rounded-3 overflow-hidden d-flex flex-column h-100 transition shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="position-relative overflow-hidden" style="height: 224px; background-color: #FAF7F2;">
+                            <div class="blog-card-badges-row position-absolute top-0 start-0 end-0 p-2 p-sm-2.5 d-flex align-items-center justify-content-between gap-2 z-2" style="pointer-events: none;">
+                                <span class="blog-card-category-badge rounded-pill fw-bold text-uppercase shadow-sm" 
+                                      style="font-size: 9.5px; letter-spacing: 0.08em; background-color: #541B29; color: #FFFFFF; padding: 4.5px 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; max-width: calc(100% - 85px); overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,0.18);"
+                                      title="{{ $blog->category ?? $blog->category_name ?? 'Olfactory Art' }}">
+                                    {{ $blog->category ?? $blog->category_name ?? 'Olfactory Art' }}
+                                </span>
+                                <span class="blog-card-readtime-badge rounded-pill fw-medium shadow-xs" 
+                                      style="background-color: rgba(255, 255, 255, 0.94); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important; padding: 4.5px 10px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; flex-shrink: 0;">
+                                    <i class="far fa-clock" style="font-size: 8.5px; color: #851029;"></i>
+                                    <span>{{ $blog->read_time ?? ($blog->reading_time_min ? $blog->reading_time_min . ' min read' : '5 min read') }}</span>
+                                </span>
+                            </div>
                             <img 
                                 src="{{ asset($blog->image) }}" 
                                 alt="{{ $blog->title }}" 
@@ -95,9 +107,6 @@
                                 style="object-fit: cover; object-position: center;"
                                 onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
                             >
-                            <div class="position-absolute top-0 end-0 m-3 px-2 py-1 rounded" style="background-color: rgba(255,255,255,0.92); border: 1px solid #E8E0DA; font-size: 10px; color: #211D1E; font-weight: 500;">
-                                {{ $blog->category_name ?? 'Olfactory Art' }}
-                            </div>
                         </div>
 
                         <div class="p-3 p-md-4 flex-grow-1 d-flex flex-column justify-content-between">
