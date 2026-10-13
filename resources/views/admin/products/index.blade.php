@@ -123,7 +123,7 @@
                         <th class="text-end">Price (PKR)</th>
                         <th class="text-end">Vault Stock</th>
                         <th class="text-center">Status</th>
-                        <th class="text-end" style="width: 90px;">Actions</th>
+                        <th class="text-end" style="width: 105px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="overflow-hidden">
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="text-dark fw-semibold text-decoration-none d-block text-truncate" style="max-width: 240px;">
-                                            {{ $product->name }}
+                                             {{ $product->name }}
                                         </a>
                                         <small class="text-muted d-block text-truncate" style="font-size: 13px;">
                                             {{ $product->scent_family ?? 'Eau de Parfum' }} &bull; {{ $product->variants->count() }} sizes
@@ -183,7 +183,7 @@
                                 @endif
                             </td>
                             <td class="text-end">
-                                <div class="d-inline-flex align-items-center gap-1.5">
+                                <div class="d-inline-flex align-items-center gap-2">
                                     <a href="{{ route('shop.show', $product->slug) }}" target="_blank" 
                                        class="admin-action-btn admin-action-view" title="Preview on live store">
                                         <i class="fa-solid fa-eye"></i>

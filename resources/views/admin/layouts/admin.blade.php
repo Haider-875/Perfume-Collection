@@ -788,18 +788,124 @@
             border-radius: 0.375rem !important;
         }
 
-        /* Standard Pagination Bar */
+        /* Action buttons spacing */
+        .table td .d-inline-flex,
+        .admin-actions-cell .d-inline-flex {
+            gap: 8px !important;
+        }
+        .gap-1\.5 {
+            gap: 8px !important;
+        }
+
+        /* Standard SaaS Admin Pagination Bar */
         .admin-pagination-bar {
-            padding: 0.85rem 1.25rem !important;
+            padding: 0.95rem 1.5rem !important;
             border-top: 1px solid #e2e8f0 !important;
             background-color: #f8fafc !important;
             display: flex !important;
             align-items: center !important;
-            justify-content: center !important;
+            justify-content: space-between !important;
+            width: 100% !important;
         }
-        .pagination .page-link {
+
+        .admin-pagination-wrapper {
+            width: 100% !important;
+        }
+
+        .admin-pagination-info {
             font-size: 13.5px !important;
-            padding: 0.45rem 0.85rem !important;
+            color: #64748b !important;
+        }
+
+        .admin-pagination-list {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+        }
+
+        .admin-page-item {
+            display: inline-flex !important;
+            list-style: none !important;
+        }
+
+        .admin-page-link {
+            min-width: 36px !important;
+            height: 36px !important;
+            padding: 0 10px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 6px !important;
+            border: 1px solid #e2e8f0 !important;
+            background-color: #ffffff !important;
+            color: #334155 !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            transition: all 0.15s ease !important;
+            user-select: none;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .admin-page-link:hover {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        .admin-page-link.active,
+        .admin-page-item.active .admin-page-link {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 1px 3px rgba(13, 110, 253, 0.3) !important;
+        }
+
+        .admin-page-link.disabled,
+        .admin-page-item.disabled .admin-page-link {
+            opacity: 0.55 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            background-color: #f8fafc !important;
+            color: #94a3b8 !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: none !important;
+        }
+
+        .admin-page-dots {
+            border: none !important;
+            background: transparent !important;
+            color: #94a3b8 !important;
+            box-shadow: none !important;
+            min-width: 24px !important;
+        }
+
+        /* Fallback for standard bootstrap pagination if rendered */
+        .admin-pagination-bar .pagination {
+            margin: 0 !important;
+            gap: 6px !important;
+        }
+        .admin-pagination-bar .page-link {
+            font-size: 13px !important;
+            min-width: 36px !important;
+            height: 36px !important;
+            padding: 0 10px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 6px !important;
+            border: 1px solid #e2e8f0 !important;
+            color: #334155 !important;
+            background-color: #ffffff !important;
+        }
+        .admin-pagination-bar .page-item.active .page-link {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+            color: #ffffff !important;
         }
 
         /* Grid Utilities Bridge */
