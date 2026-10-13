@@ -17,5 +17,6 @@ class VerifyCsrfToken extends Middleware
         'payments/jazzcash/*',
         'payments/easypaisa/*',
         'payments/safepay/*',
+        'admin/products/import*',
     ];
 }

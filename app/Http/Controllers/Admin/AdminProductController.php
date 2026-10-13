@@ -419,15 +419,15 @@ class AdminProductController extends Controller
         }
 
         $token = Str::random(32);
+        $previewData = [
+            'filename' => $result['filename'],
+            'rows' => $result['rows'],
+            'stats' => $result['stats'],
+            'duplicate_handling' => $duplicateHandling,
+        ];
 
-        session([
-            'import_preview_' . $token => [
-                'filename' => $result['filename'],
-                'rows' => $result['rows'],
-                'stats' => $result['stats'],
-                'duplicate_handling' => $duplicateHandling,
-            ]
-        ]);
+        session(['import_preview_' . $token => $previewData]);
+        \Illuminate\Support\Facades\Cache::put('import_preview_' . $token, $previewData, now()->addHours(2));
 
         return view('admin.products.import-preview', [
             'importToken' => $token,
@@ -447,7 +447,7 @@ class AdminProductController extends Controller
 
         $token = $request->input('import_token');
         $sessionKey = 'import_preview_' . $token;
-        $sessionData = session($sessionKey);
+        $sessionData = session($sessionKey) ?? \Illuminate\Support\Facades\Cache::get($sessionKey);
 
         if (!$sessionData || empty($sessionData['rows'])) {
             return redirect()->route('admin.products.import')

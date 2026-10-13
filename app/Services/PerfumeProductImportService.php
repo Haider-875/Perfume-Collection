@@ -212,6 +212,15 @@ class PerfumeProductImportService
         $failedCount = 0;
         $failedRows = [];
 
+        // Ensure product_prices table exists (important for Wasmer / serverless deployments)
+        if (!\Illuminate\Support\Facades\Schema::hasTable('product_prices')) {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Auto-migration notice: ' . $e->getMessage());
+            }
+        }
+
         $defaultCategory = Category::firstOrCreate(
             ['name' => 'Signature Impressions'],
             ['slug' => 'signature-impressions']
