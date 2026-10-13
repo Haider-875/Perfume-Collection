@@ -261,7 +261,7 @@
         border-radius: 9999px;
     }
 
-    /* Best Selling Table */
+    /* Best Selling & Orders Tables */
     .bestseller-table th {
         font-size: 11px !important;
         font-weight: 700 !important;
@@ -271,6 +271,7 @@
         border-bottom: 1px solid #f1f5f9 !important;
         padding: 0.65rem 0.75rem !important;
         background-color: transparent !important;
+        white-space: nowrap !important;
     }
     .bestseller-table td {
         font-size: 13px !important;
@@ -278,6 +279,7 @@
         border-bottom: 1px solid #f8fafc !important;
         vertical-align: middle !important;
         background-color: transparent !important;
+        white-space: nowrap !important;
     }
     .bestseller-table tr:hover td {
         background-color: #f8fafc !important;
@@ -444,6 +446,10 @@
         .stat-card-value {
             font-size: 1.55rem;
         }
+        .bestseller-table th, .bestseller-table td {
+            padding: 0.55rem 0.6rem !important;
+            font-size: 12px !important;
+        }
     }
 </style>
 @endpush
@@ -572,7 +578,7 @@
                         <div class="text-secondary fw-semibold small mb-1">Total Profit</div>
                         <div class="d-flex align-items-baseline gap-3 flex-wrap">
                             <div class="profit-headline-val">
-                                {{ $totalRevenue > 0 ? ('$' . number_format($totalRevenue / 1000, 1) . 'K') : '$446.7K' }}
+                                {{ $totalRevenue > 0 ? ('Rs. ' . number_format($totalRevenue, 0)) : 'Rs. 446,700' }}
                             </div>
                             <div class="d-flex align-items-center gap-1">
                                 <span class="stat-trend-pill-green">
@@ -593,11 +599,11 @@
                         <div class="tooltip-date">Jan 18, 2026</div>
                         <div class="tooltip-row text-dark">
                             <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #2563eb; display: inline-block;"></span>
-                            <span class="fw-bold">$12,324</span> <span class="text-muted">this month</span>
+                            <span class="fw-bold">Rs. 12,324</span> <span class="text-muted">this month</span>
                         </div>
                         <div class="tooltip-row text-muted">
                             <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #cbd5e1; display: inline-block;"></span>
-                            <span class="fw-bold">$5,563</span> <span class="text-muted">last month</span>
+                            <span class="fw-bold">Rs. 5,563</span> <span class="text-muted">last month</span>
                         </div>
                     </div>
                 </div>
@@ -669,11 +675,11 @@
                                     $mockIds = ['#83009', '#83001', '#83004', '#83002', '#83005'];
                                     $mockRatings = ['(5.0)', '(4.8)', '(4.7)', '(4.5)', '(4.5)'];
                                     $mockUnits = ['2,310 sold', '1,230 sold', '812 sold', '645 sold', '572 sold'];
-                                    $mockRevs = ['$124,820', '$92,662', '$74,640', '$62,820', '$46,724'];
+                                    $mockRevs = ['Rs. 124,820', 'Rs. 92,662', 'Rs. 74,640', 'Rs. 62,820', 'Rs. 46,724'];
                                     
                                     $rowId = $prodObj ? ('#' . str_pad($prodObj->id, 5, '8300', STR_PAD_LEFT)) : ($mockIds[$index] ?? '#83009');
                                     $rowSold = ($item->total_qty ?? 0) > 0 ? (number_format($item->total_qty) . ' sold') : ($mockUnits[$index] ?? '812 sold');
-                                    $rowRevenue = ($item->total_sales ?? 0) > 0 ? ('$' . number_format($item->total_sales, 0)) : ($mockRevs[$index] ?? '$74,640');
+                                    $rowRevenue = ($item->total_sales ?? 0) > 0 ? ('Rs. ' . number_format($item->total_sales, 0)) : ($mockRevs[$index] ?? 'Rs. 74,640');
                                     $rowRating = ($prodObj && $prodObj->rating_avg > 0) ? '(' . number_format($prodObj->rating_avg, 1) . ')' : ($mockRatings[$index] ?? '(4.8)');
                                     
                                     $thumb = $prodObj && $prodObj->thumbnail_image ? asset($prodObj->thumbnail_image) : asset('assets/images/brand/logo.png');
@@ -707,8 +713,70 @@
                                         </div>
                                     </td>
                                     <td class="text-secondary">2,310 sold</td>
-                                    <td class="fw-bold text-success">$124,820</td>
+                                    <td class="fw-bold text-success">Rs. 124,820</td>
                                     <td class="text-warning fw-semibold"><i class="fa-solid fa-star me-1"></i>(5.0)</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. Recent Orders & Transactions Table Card (Moved Directly Below Best Selling Products) -->
+            <div class="dash-card p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="h6 fw-bold text-dark mb-0">Recent Orders & Transactions</h2>
+                        <div class="stat-subtext">Latest customer acquisitions across nationwide territories</div>
+                    </div>
+                    <a href="{{ route('admin.orders.index') }}" class="btn-dash-widget py-1 px-3">
+                        <span>View All Orders</span>
+                        <i class="fa-solid fa-arrow-right ms-1" style="font-size: 10px;"></i>
+                    </a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table bestseller-table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Customer</th>
+                                <th>Location</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentOrders as $ord)
+                                <tr>
+                                    <td class="font-monospace fw-bold text-primary">#{{ $ord->order_number }}</td>
+                                    <td>
+                                        <div class="fw-semibold text-dark">{{ $ord->customer_name }}</div>
+                                        <div class="stat-subtext">{{ $ord->customer_phone }}</div>
+                                    </td>
+                                    <td class="text-secondary">{{ $ord->city }}, {{ $ord->province }}</td>
+                                    <td class="fw-bold text-dark">{{ $ord->formatted_total }}</td>
+                                    <td>
+                                        <span class="badge {{ $ord->payment_status === 'paid' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->payment_status === 'pending_verification' ? 'bg-warning-subtle text-warning border border-warning-subtle' : 'bg-light text-secondary border') }}">
+                                            {{ str_replace('_', ' ', $ord->payment_status) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge {{ $ord->order_status === 'delivered' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->order_status === 'shipped' ? 'bg-primary-subtle text-primary border border-primary-subtle' : 'bg-light text-dark border') }}">
+                                            {{ $ord->order_status }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="{{ route('admin.orders.show', $ord->id) }}" class="btn btn-sm btn-light border py-1 px-2.5" title="Inspect Order Details">
+                                            <i class="fa-regular fa-eye me-1 text-primary"></i>Inspect
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">No recent orders in database.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -873,67 +941,7 @@
             </div>
         </div>
 
-        <!-- Recent Orders Table -->
-        <div class="dash-card p-4">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <div>
-                    <h3 class="h6 fw-bold text-dark mb-0">Recent Orders & Transactions</h3>
-                    <div class="stat-subtext">Latest customer acquisitions across nationwide territories</div>
-                </div>
-                <a href="{{ route('admin.orders.index') }}" class="btn-dash-widget py-1 px-3">
-                    <span>View All Orders</span>
-                    <i class="fa-solid fa-arrow-right ms-1" style="font-size: 10px;"></i>
-                </a>
-            </div>
 
-            <div class="table-responsive">
-                <table class="table bestseller-table mb-0">
-                    <thead>
-                        <tr>
-                            <th>Order Number</th>
-                            <th>Customer</th>
-                            <th>Location</th>
-                            <th>Total</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                            <th class="text-end">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($recentOrders as $ord)
-                            <tr>
-                                <td class="font-monospace fw-bold text-primary">#{{ $ord->order_number }}</td>
-                                <td>
-                                    <div class="fw-semibold text-dark">{{ $ord->customer_name }}</div>
-                                    <div class="stat-subtext">{{ $ord->customer_phone }}</div>
-                                </td>
-                                <td class="text-secondary">{{ $ord->city }}, {{ $ord->province }}</td>
-                                <td class="fw-bold text-dark">{{ $ord->formatted_total }}</td>
-                                <td>
-                                    <span class="badge {{ $ord->payment_status === 'paid' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->payment_status === 'pending_verification' ? 'bg-warning-subtle text-warning border border-warning-subtle' : 'bg-light text-secondary border') }}">
-                                        {{ str_replace('_', ' ', $ord->payment_status) }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="badge {{ $ord->order_status === 'delivered' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->order_status === 'shipped' ? 'bg-primary-subtle text-primary border border-primary-subtle' : 'bg-light text-dark border') }}">
-                                        {{ $ord->order_status }}
-                                    </span>
-                                </td>
-                                <td class="text-end">
-                                    <a href="{{ route('admin.orders.show', $ord->id) }}" class="btn btn-sm btn-light border py-1 px-2.5" title="Inspect Order Details">
-                                        <i class="fa-regular fa-eye me-1 text-primary"></i>Inspect
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center text-muted py-4">No recent orders in database.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <!-- Regional Intelligence & Low Stock Alerts -->
         <div class="row g-4">
@@ -1084,7 +1092,7 @@
                         usePointStyle: true,
                         callbacks: {
                             label: function(context) {
-                                return ' ' + context.dataset.label + ': $' + context.parsed.y.toLocaleString();
+                                return ' ' + context.dataset.label + ': Rs. ' + context.parsed.y.toLocaleString();
                             }
                         }
                     }
