@@ -57,8 +57,8 @@ function initSwiperSliders() {
     // Bestsellers / Featured Collection Carousel
     if (document.querySelector('.bestsellers-swiper') && !document.querySelector('.bestsellers-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.bestsellers-swiper', {
-            slidesPerView: 1.35,
-            spaceBetween: 14,
+            slidesPerView: 1.15,
+            spaceBetween: 12,
             speed: 800,
             rewind: true,
             autoplay: {
@@ -84,6 +84,8 @@ function initSwiperSliders() {
                 prevEl: '.bestseller-prev',
             },
             breakpoints: {
+                340: { slidesPerView: 1.15, spaceBetween: 12 },
+                400: { slidesPerView: 1.35, spaceBetween: 14 },
                 480: { slidesPerView: 1.8, spaceBetween: 16 },
                 576: { slidesPerView: 2.2, spaceBetween: 18 },
                 768: { slidesPerView: 3, spaceBetween: 20 },
@@ -95,8 +97,8 @@ function initSwiperSliders() {
     // New Release Impressions Carousel
     if (document.querySelector('.newarrivals-swiper') && !document.querySelector('.newarrivals-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.newarrivals-swiper', {
-            slidesPerView: 1.35,
-            spaceBetween: 14,
+            slidesPerView: 1.15,
+            spaceBetween: 12,
             speed: 800,
             rewind: true,
             autoplay: {
@@ -122,6 +124,8 @@ function initSwiperSliders() {
                 prevEl: '.newarrivals-prev',
             },
             breakpoints: {
+                340: { slidesPerView: 1.15, spaceBetween: 12 },
+                400: { slidesPerView: 1.35, spaceBetween: 14 },
                 480: { slidesPerView: 1.8, spaceBetween: 16 },
                 576: { slidesPerView: 2.2, spaceBetween: 18 },
                 768: { slidesPerView: 3, spaceBetween: 20 },

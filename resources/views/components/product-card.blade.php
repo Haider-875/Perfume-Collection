@@ -2,34 +2,35 @@
 
 <div class="product-card position-relative bg-white border border-subtle luxury-hover-card rounded-3 rounded-md-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-2 p-sm-3 h-100" style="background-color: #FFFFFF !important; border-color: #E8E0DA !important;">
     
-    <!-- Badges Row -->
-    <div class="position-absolute top-0 start-0 product-card-badges z-2 d-flex flex-column gap-1 pointer-events-none" style="top: 8px; left: 8px; z-index: 3;">
-        @if($product->is_bestseller)
-            <span class="product-badge badge-bestseller bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content;">
-                ★ BESTSELLER
-            </span>
-        @elseif($product->is_new_arrival)
-            <span class="product-badge badge-new bg-success text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #2D6A4F !important; padding: 2.5px 7px; width: fit-content;">
-                NEW ARRIVAL
-            </span>
-        @elseif($product->is_featured)
-            <span class="product-badge badge-featured bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 9px; letter-spacing: 0.1em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content;">
-                EXCLUSIVE
-            </span>
-        @endif
-
-        @if($product->has_discount)
-            <span class="product-badge badge-discount bg-danger text-white fw-bold rounded-pill shadow-sm" style="font-size: 9px; width: fit-content; background-color: #9E2A2B !important; padding: 2.5px 7px;">
-                -{{ $product->discount_percentage }}%
-            </span>
-        @endif
-    </div>
-
     <!-- Flacon Image Wrap (Clean, Spacious Presentation on Light Surface) -->
     <a href="{{ route('shop.show', $product->slug) }}" 
        class="product-card-media position-relative w-100 aspect-1x1 rounded-3 overflow-hidden d-flex align-items-center justify-content-center mb-2 mb-md-3 text-decoration-none"
        style="aspect-ratio: 1 / 1; background-color: #FAF7F2; border: 1px solid #EFEAE5;"
        aria-label="{{ $product->name }}">
+       
+        <!-- Badges Row (Anchored strictly inside the image frame) -->
+        <div class="position-absolute top-0 start-0 product-card-badges z-2 d-flex flex-column gap-1 pointer-events-none" style="top: 8px; left: 8px; z-index: 3; max-width: calc(100% - 16px);">
+            @if($product->is_bestseller)
+                <span class="product-badge badge-bestseller bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 8.5px; letter-spacing: 0.08em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content; max-width: 100%; white-space: nowrap;">
+                    ★ BESTSELLER
+                </span>
+            @elseif($product->is_new_arrival)
+                <span class="product-badge badge-new bg-success text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 8.5px; letter-spacing: 0.08em; background-color: #2D6A4F !important; padding: 2.5px 7px; width: fit-content; max-width: 100%; white-space: nowrap;">
+                    NEW ARRIVAL
+                </span>
+            @elseif($product->is_featured)
+                <span class="product-badge badge-featured bg-gradient-wine-badge text-white fw-bold text-uppercase rounded-pill shadow-sm" style="font-size: 8.5px; letter-spacing: 0.08em; background-color: #541B29 !important; padding: 2.5px 7px; width: fit-content; max-width: 100%; white-space: nowrap;">
+                    EXCLUSIVE
+                </span>
+            @endif
+
+            @if($product->has_discount)
+                <span class="product-badge badge-discount bg-danger text-white fw-bold rounded-pill shadow-sm" style="font-size: 8.5px; width: fit-content; background-color: #9E2A2B !important; padding: 2.5px 7px;">
+                    -{{ $product->discount_percentage }}%
+                </span>
+            @endif
+        </div>
+
         <img src="{{ $product->primary_image_url }}" 
              alt="{{ $product->name }}" 
              onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
@@ -48,28 +49,28 @@
 
     <!-- Product Metadata & Content -->
     <div class="product-card-body d-flex flex-column flex-grow-1 text-center px-1">
-        <!-- Impression Tag (Desktop Only, Hidden on Mobile for clean Image -> Title order) -->
-        <div class="product-card-impression mb-1 text-center d-none d-md-block">
+        <!-- Impression / Category Tag (Refined editorial typography) -->
+        <div class="product-card-impression mb-1 text-center">
             @if($product->impression_of)
-                <span class="fw-medium d-block text-truncate" style="font-size: 11px; color: #6B605B;" title="Impression of {{ $product->impression_of }}">
+                <span class="fw-medium d-block text-truncate" style="font-size: 10.5px; color: #6B605B; letter-spacing: 0.05em;" title="Impression of {{ $product->impression_of }}">
                     Impression of <span class="fw-semibold" style="color: #541B29;">{{ $product->impression_of }}</span>
                 </span>
             @else
-                <span class="fw-medium d-block text-uppercase tracking-wider" style="font-size: 11px; color: #9E7D3B;">
+                <span class="fw-medium d-block text-uppercase tracking-wider text-truncate" style="font-size: 10px; color: #9E7D3B; letter-spacing: 0.12em;">
                     Signature Luxury Extrait
                 </span>
             @endif
         </div>
 
         <!-- Product Title (Cormorant Garamond Elegance) -->
-        <h3 class="product-card-title font-serif fs-5 fw-medium mb-1">
+        <h3 class="product-card-title font-serif fw-medium mb-1" title="{{ $product->name }}">
             <a href="{{ route('shop.show', $product->slug) }}" class="text-decoration-none" style="color: #211D1E !important;">{{ $product->name }}</a>
         </h3>
 
         <!-- Dual Pricing / Range in Charcoal & Maroon -->
         <div class="product-card-pricing my-1 d-flex align-items-baseline justify-content-center gap-1 flex-wrap">
             <span class="text-nowrap d-inline-flex align-items-baseline gap-1">
-                <span class="product-price-min fw-medium" style="color: #211D1E !important;">
+                <span class="product-price-min fw-medium" style="color: #6B605B !important;">
                     Rs. {{ number_format(max(450, round($product->effective_price * 0.22, -1))) }}
                 </span>
                 <span class="product-price-unit fw-medium text-uppercase" style="color: #786C67; font-size: 10px;">/10ml</span>
@@ -95,7 +96,7 @@
     <div class="product-card-action mt-2 mt-md-3 pt-0 pt-md-2" style="border-top: 1px solid #E8E0DA;">
         <button onclick="addToCartAjax({{ $product->id }}, 1)" 
                 class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white"
-                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none;"
+                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping text-white" style="font-size: 11px;"></i>
             <span class="text-white text-nowrap" style="font-size: 11.5px;">Add to Cart</span>

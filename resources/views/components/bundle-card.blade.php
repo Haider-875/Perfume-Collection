@@ -51,7 +51,7 @@
         </div>
 
         <!-- Bundle Title (Wasted Vindey Serif Typography) -->
-        <h3 class="product-card-title font-serif fs-5 fw-medium mb-1">
+        <h3 class="product-card-title font-serif fw-medium mb-1" title="{{ $bundle->name }}">
             <a href="{{ route('bundles.index') }}" class="text-decoration-none" style="color: #211D1E !important;">{{ $bundle->name }}</a>
         </h3>
 
@@ -85,7 +85,7 @@
     <div class="product-card-action mt-2 mt-md-3 pt-0 pt-md-2" style="border-top: 1px solid #E8E0DA;">
         <button onclick="addBundleToCart({{ $bundle->id }})" 
                 class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white"
-                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
+                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping text-white" style="font-size: 11px;"></i>
             <span class="text-white text-nowrap" style="font-size: 11.5px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Add to Cart</span>
