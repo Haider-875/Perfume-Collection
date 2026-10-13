@@ -6,10 +6,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Panel') | Perfumes Collection</title>
 
-    <!-- Google Fonts: DM Sans & Jost -->
+    <!-- Luxury Brand Favicon & Icons -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/brand/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/brand/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/brand/apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta name="theme-color" content="#541B29">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Jost -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5.3 CSS ONLY -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,19 +34,29 @@
 
     <style>
         :root {
-            --sidebar-width: 260px;
-            --sidebar-bg: #1e293b;
-            --sidebar-hover: #334155;
-            --sidebar-active: #0d6efd;
-            --body-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --card-border: #e2e8f0;
+            --sidebar-width: 255px;
+            --sidebar-bg: #ffffff;
+            --sidebar-border: #f1f3f7;
+            --sidebar-link-text: #64748b;
+            --sidebar-link-hover: #f8fafc;
+            --sidebar-link-active-bg: #eff6ff;
+            --sidebar-link-active-text: #2563eb;
+            --body-bg: #f4f6fa;
+            --card-bg: #ffffff;
+            --card-border: #f1f3f7;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 6px 18px rgba(0, 0, 0, 0.02);
+            --text-dark: #111827;
+            --text-muted: #8c9ba8;
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
         }
 
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 14.5px;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
             background-color: var(--body-bg);
             color: var(--text-dark);
             min-height: 100vh;
@@ -45,10 +64,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Sidebar Styling */
+        /* Modern White Sidebar (Matching Reference Image) */
         #adminSidebar {
             width: var(--sidebar-width);
             background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--sidebar-border);
             position: fixed;
             top: 0;
             bottom: 0;
@@ -56,93 +76,217 @@
             z-index: 1040;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
-            box-shadow: 2px 0 8px rgba(0,0,0,0.06);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 2px 0 12px rgba(15, 23, 42, 0.02);
         }
 
         .sidebar-brand {
-            height: 70px;
+            height: 72px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 0 1.25rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid var(--sidebar-border);
             text-decoration: none;
         }
 
-        .sidebar-brand img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
+        .sidebar-brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+        }
+
+        .sidebar-brand-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            flex-shrink: 0;
         }
 
         .sidebar-brand-text {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: #111827;
             font-size: 1.15rem;
-            letter-spacing: 0.06em;
+            letter-spacing: -0.02em;
             line-height: 1.2;
+        }
+
+        .sidebar-collapse-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid #f1f3f7;
+            background: #ffffff;
+            color: #8c9ba8;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+        .sidebar-collapse-btn:hover {
+            color: #111827;
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
         }
 
         .sidebar-nav {
             flex: 1;
             overflow-y: auto;
-            padding: 1rem 0.75rem;
+            padding: 1rem 0.85rem;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background-color: #e2e8f0;
+            border-radius: 4px;
         }
 
         .sidebar-heading {
-            font-size: 13px !important;
+            font-size: 11px !important;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: #94a3b8;
-            padding: 0.75rem 0.75rem 0.35rem;
+            padding: 0.85rem 0.75rem 0.35rem;
         }
 
         .sidebar-link {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.65rem 0.75rem;
-            color: #cbd5e1;
+            justify-content: space-between;
+            padding: 0.65rem 0.85rem;
+            color: var(--sidebar-link-text);
             text-decoration: none;
-            border-radius: 0.375rem;
-            font-size: 14.5px !important;
+            border-radius: 0.65rem;
+            font-size: 14px !important;
             font-weight: 500;
-            transition: all 0.2s ease;
-            margin-bottom: 0.15rem;
+            transition: all 0.15s ease;
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-link-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .sidebar-link i {
             width: 1.25rem;
             text-align: center;
-            font-size: 1rem !important;
-            color: #94a3b8;
+            font-size: 15px !important;
+            color: #8c9ba8;
+            transition: color 0.15s ease;
         }
 
         .sidebar-link:hover {
-            color: #ffffff;
-            background-color: var(--sidebar-hover);
+            color: #111827;
+            background-color: var(--sidebar-link-hover);
         }
 
         .sidebar-link:hover i {
-            color: #ffffff;
+            color: #111827;
         }
 
+        /* Active Sidebar Link (Matching Reference Soft Blue Pill) */
         .sidebar-link.active {
-            color: #ffffff;
-            background-color: var(--sidebar-active);
-            font-weight: 600;
+            color: var(--sidebar-link-active-text) !important;
+            background-color: var(--sidebar-link-active-bg) !important;
+            font-weight: 600 !important;
         }
 
         .sidebar-link.active i {
+            color: var(--sidebar-link-active-text) !important;
+        }
+
+        .sidebar-active-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #2563eb;
+            display: inline-block;
+        }
+
+        /* Sidebar Promo Card ("Upgrade to Premium!" in Reference Image) */
+        .sidebar-promo-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 1rem;
             color: #ffffff;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar-promo-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .promo-icon-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            font-size: 13px;
+        }
+        .promo-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 3px;
+        }
+        .promo-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.4;
+            margin-bottom: 11px;
+        }
+        .promo-btn {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 9999px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            padding: 0.42rem 1rem !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35) !important;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .promo-btn:hover {
+            background-color: #1d4ed8 !important;
+            color: #ffffff !important;
+            transform: translateY(-1px);
         }
 
         .sidebar-footer {
-            padding: 0.75rem 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            background-color: rgba(0, 0, 0, 0.15);
+            padding: 0.85rem 1rem;
+            border-top: 1px solid var(--sidebar-border);
+            background-color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -158,22 +302,120 @@
             transition: all 0.3s ease;
         }
 
+        /* Topbar (Matching Reference Image) */
         .admin-topbar {
-            height: 70px;
+            height: 72px;
             background-color: #ffffff;
-            border-bottom: 1px solid var(--card-border);
-            padding: 0 1.5rem;
+            border-bottom: 1px solid var(--sidebar-border);
+            padding: 0 1.75rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1020;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.015);
+        }
+
+        .topbar-search-box {
+            background-color: #ffffff;
+            border: 1px solid #eef1f6;
+            border-radius: 9999px;
+            padding: 0.45rem 1rem;
+            width: 320px;
+            transition: all 0.2s ease;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+        .topbar-search-box:focus-within {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .topbar-search-input {
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            font-size: 13px !important;
+            height: auto !important;
+            outline: none !important;
+            color: #111827 !important;
+            width: 100%;
+        }
+        .search-kbd-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: #94a3b8;
+            background-color: #f8fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .topbar-icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 1px solid #eef1f6;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            position: relative;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .topbar-icon-btn:hover {
+            background-color: #f8fafc;
+            color: #111827;
+            border-color: #cbd5e1;
+        }
+        .topbar-icon-btn .unread-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #2563eb;
+            border: 1.5px solid #ffffff;
+        }
+
+        .topbar-avatar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            cursor: pointer;
+        }
+        .topbar-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1.5px solid #e2e8f0;
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .topbar-avatar .avatar-online-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #10b981;
+            border: 2px solid #ffffff;
         }
 
         .admin-content {
-            padding: 1.75rem 1.5rem;
+            padding: 1.75rem 1.75rem;
             flex: 1;
         }
 
@@ -646,109 +888,179 @@
     <!-- Mobile Backdrop -->
     <div class="sidebar-backdrop" :class="{ 'show': mobileNav }" @click="mobileNav = false"></div>
 
-    <!-- Simple Modern Bootstrap Sidebar -->
+    @php
+        $sidebarPendingCount = $pendingVerificationsCount ?? \App\Models\Order::where('payment_status', 'pending_verification')->count();
+    @endphp
+
+    <!-- Modern Bootstrap Sidebar with Full Perfumes Collection Navigation -->
     <aside id="adminSidebar" :class="{ 'show': mobileNav }">
-        <!-- Brand Header (Left Logo + Perfumes Collection + Mobile Close Button) -->
-        <div class="sidebar-brand justify-content-between">
-            <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none">
-                <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" class="me-2">
+        <!-- Brand Header (Left Brand + Collapse Icon) -->
+        <div class="sidebar-brand">
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-brand-logo-wrap">
+                <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" style="height: 38px; width: auto; object-fit: contain;">
                 <div>
                     <div class="sidebar-brand-text">PERFUMES COLLECTION</div>
-                    <small class="text-secondary text-uppercase" style="font-size: 13px; letter-spacing: 0.12em;">Admin Center</small>
+                    <small class="text-secondary text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 0.1em; display: block; line-height: 1.1;">Admin Center</small>
                 </div>
             </a>
-            <button type="button" @click="mobileNav = false" class="btn text-white-50 border-0 p-1 d-lg-none" style="font-size: 1.25rem;" aria-label="Close Sidebar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <div class="d-flex align-items-center gap-1">
+                <button type="button" class="sidebar-collapse-btn d-none d-lg-inline-flex" title="Sidebar View">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+                <button type="button" @click="mobileNav = false" class="btn text-secondary border-0 p-1 d-lg-none" aria-label="Close Sidebar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Navigation Links -->
+        <!-- Navigation Links with All Original Boutique Sections -->
         <nav class="sidebar-nav">
+            <!-- MAIN -->
             <div class="sidebar-heading">MAIN</div>
             <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Dashboard</span>
+                <div class="sidebar-link-inner">
+                    @if(request()->routeIs('admin.dashboard'))
+                        <i class="fa-solid fa-check small text-primary" style="width: 14px; font-size: 11px !important;"></i>
+                    @else
+                        <i class="fa-solid fa-chart-pie"></i>
+                    @endif
+                    <span>Dashboard</span>
+                </div>
             </a>
 
+            <!-- CATALOGUE -->
             <div class="sidebar-heading">CATALOGUE</div>
             <a href="{{ route('admin.products.index') }}" class="sidebar-link {{ request()->routeIs('admin.products.index') || request()->routeIs('admin.products.create') || request()->routeIs('admin.products.edit') ? 'active' : '' }}">
-                <i class="fa-solid fa-spray-can-sparkles"></i>
-                <span>Products & Impressions</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-spray-can-sparkles"></i>
+                    <span>Products & Impressions</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.products.import') }}" class="sidebar-link {{ request()->routeIs('admin.products.import*') ? 'active' : '' }}">
-                <i class="fa-solid fa-file-import"></i>
-                <span>Bulk Price Import</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-file-import"></i>
+                    <span>Bulk Price Import</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.bundles.index') }}" class="sidebar-link {{ request()->routeIs('admin.bundles.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-gift"></i>
-                <span>Bundles & Sets</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-gift"></i>
+                    <span>Bundles & Sets</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.categories.index') }}" class="sidebar-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-layer-group"></i>
-                <span>Categories</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Categories</span>
+                </div>
             </a>
 
+            <!-- SALES & CUSTOMERS -->
             <div class="sidebar-heading">SALES & CUSTOMERS</div>
             <a href="{{ route('admin.orders.index') }}" class="sidebar-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-receipt"></i>
-                <span>Orders & Receipts</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>Orders & Receipts</span>
+                </div>
+                @if($sidebarPendingCount > 0)
+                    <span class="badge" style="background-color: #ecfdf5; color: #10b981; border: 1px solid #d1fae5; font-size: 11px; padding: 0.2rem 0.55rem; border-radius: 9999px; font-weight: 700;">
+                        {{ $sidebarPendingCount }}
+                    </span>
+                @endif
             </a>
 
             <a href="{{ route('admin.customers.index') }}" class="sidebar-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-users"></i>
-                <span>Customers</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.coupons.index') }}" class="sidebar-link {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-ticket"></i>
-                <span>Coupons & Discounts</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Coupons & Discounts</span>
+                </div>
             </a>
 
+            <!-- CONTENT -->
             <div class="sidebar-heading">CONTENT</div>
             <a href="{{ route('admin.hero-slides.index') }}" class="sidebar-link {{ request()->routeIs('admin.hero-slides.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-images"></i>
-                <span>Hero Banners</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-images"></i>
+                    <span>Hero Banners</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.blogs.index') }}" class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-newspaper"></i>
-                <span>Blog Articles</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Blog Articles</span>
+                </div>
             </a>
 
+            <!-- ADMINISTRATION -->
             <div class="sidebar-heading">ADMINISTRATION</div>
             <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-user-shield"></i>
-                <span>Staff & Roles</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Staff & Roles</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.settings.index') }}" class="sidebar-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-gear"></i>
-                <span>Store Settings</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Store Settings</span>
+                </div>
             </a>
 
             <a href="{{ route('admin.activity-logs.index') }}" class="sidebar-link {{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Activity Logs</span>
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Activity Logs</span>
+                </div>
             </a>
+
+            <!-- Storefront Direct Link -->
+            <a href="{{ route('home') }}" target="_blank" class="sidebar-link mt-2">
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-store"></i>
+                    <span>View Boutique</span>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px !important; color: #94a3b8; width: auto;"></i>
+            </a>
+
+            <!-- Bottom Upgrade / VIP Concierge Card (Styled as in Reference) -->
+            <div class="sidebar-promo-card p-3 mt-3 mb-2">
+                <div class="promo-icon-badge mb-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="promo-title">VIP Concierge & Services</div>
+                <div class="promo-desc">Manage store telemetry, roles, and exclusive impressions.</div>
+                <a href="{{ route('admin.settings.index') }}" class="promo-btn">
+                    Store Settings
+                </a>
+            </div>
         </nav>
 
-        <!-- Sidebar Footer -->
+        <!-- Sidebar Footer (Monogram Avatar & Sign Out) -->
         <div class="sidebar-footer">
-            <div class="d-flex align-items-center text-white text-decoration-none">
-                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 14px;">
+            <div class="d-flex align-items-center text-decoration-none">
+                <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 13px; background-color: #eff6ff; color: #2563eb; border: 1.5px solid #dbeafe;">
                     {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                 </div>
-                <div class="overflow-hidden" style="max-width: 130px;">
-                    <div class="small fw-semibold text-truncate text-white">{{ Auth::user()->name ?? 'Admin' }}</div>
-                    <small class="text-secondary d-block text-truncate" style="font-size: 13px;">{{ Auth::user()->role ?? 'Administrator' }}</small>
+                <div class="overflow-hidden" style="max-width: 120px;">
+                    <div class="fw-semibold text-truncate text-dark" style="font-size: 13px;">{{ Auth::user()->name ?? 'Admin' }}</div>
+                    <small class="text-muted d-block text-truncate" style="font-size: 11px;">{{ Auth::user()->role ?? 'Store Admin' }}</small>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-1" title="Logout">
+                <button type="submit" class="btn btn-sm btn-light border-0 p-1 text-secondary" title="Logout">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
             </form>
@@ -757,40 +1069,59 @@
 
     <!-- Main Content Layout -->
     <div id="adminMain">
-        <!-- Top Navbar -->
+        <!-- Top Navbar (Matching Reference Image) -->
         <header class="admin-topbar">
+            <!-- Left: Mobile Menu + Search Pill -->
             <div class="d-flex align-items-center gap-3">
                 <button type="button" class="btn btn-sm btn-light border d-lg-none" @click="mobileNav = true">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <div>
-                    <h5 class="mb-0 fw-bold text-dark font-['Jost']">@yield('page_title', 'Dashboard')</h5>
-                    <small class="text-muted d-none d-sm-inline">@yield('page_subtitle', 'Perfumes Collection Management Suite')</small>
+
+                <!-- Search Input Pill (Matching Reference: "Search anything... ⌘K") -->
+                <div class="topbar-search-box d-none d-md-flex align-items-center">
+                    <i class="fa-solid fa-magnifying-glass text-muted me-2" style="font-size: 13px;"></i>
+                    <input type="text" class="topbar-search-input" placeholder="Search anything..." aria-label="Search anything">
+                    <span class="search-kbd-badge">⌘K</span>
                 </div>
             </div>
 
+            <!-- Right: Theme, Notifications, Avatar -->
             <div class="d-flex align-items-center gap-2">
                 @yield('header_actions')
 
-                <!-- View Store Button -->
-                <a href="{{ route('home') }}" target="_blank" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1">
-                    <i class="fa-solid fa-arrow-up-right-from-square small"></i>
-                    <span class="d-none d-sm-inline">View Store</span>
+                <!-- Theme / Brightness Icon -->
+                <button type="button" class="topbar-icon-btn" title="Toggle Theme">
+                    <i class="fa-regular fa-sun"></i>
+                </button>
+
+                <!-- Notifications Bell with Dot -->
+                <a href="{{ route('admin.orders.index', ['payment_status' => 'pending_verification']) }}" class="topbar-icon-btn position-relative" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    @if(!empty($sidebarPendingCount) && $sidebarPendingCount > 0)
+                        <span class="unread-dot"></span>
+                    @endif
                 </a>
 
-                <!-- User Dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-light border dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user-circle"></i>
-                        <span class="d-none d-md-inline">{{ Auth::user()->name ?? 'Admin' }}</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
-                        <li><a class="dropdown-item" href="{{ route('admin.settings.index') }}"><i class="fa-solid fa-gear me-2 text-muted"></i>Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                <!-- User Dropdown with Avatar & Online Dot -->
+                <div class="dropdown ms-1">
+                    <div class="topbar-avatar-wrap dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <div class="topbar-avatar">
+                            {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                            <span class="avatar-online-dot"></span>
+                        </div>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" style="border-radius: 12px; min-width: 180px;">
+                        <li class="px-3 py-2 border-bottom">
+                            <div class="fw-bold text-dark small">{{ Auth::user()->name ?? 'Admin' }}</div>
+                            <div class="text-muted small" style="font-size: 11px;">{{ Auth::user()->email ?? 'admin@store.com' }}</div>
+                        </li>
+                        <li><a class="dropdown-item py-2" href="{{ route('home') }}" target="_blank"><i class="fa-solid fa-store me-2 text-muted"></i>View Boutique</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('admin.settings.index') }}"><i class="fa-solid fa-gear me-2 text-muted"></i>Store Settings</a></li>
+                        <li><hr class="dropdown-divider my-1"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="dropdown-item text-danger"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</button>
+                                <button type="submit" class="dropdown-item py-2 text-danger"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Sign Out</button>
                             </form>
                         </li>
                     </ul>

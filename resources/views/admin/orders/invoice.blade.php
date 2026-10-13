@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Invoice #{{ $order->order_number }} - Perfumes Collection</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/brand/favicon-32x32.png') }}">
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

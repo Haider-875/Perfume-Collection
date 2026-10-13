@@ -1,0 +1,19 @@
+{
+    "name": "Perfumes Collection",
+    "short_name": "Perfumes Collection",
+    "icons": [
+        {
+            "src": "/assets/images/brand/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/brand/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#541B29",
+    "background_color": "#FAF7F2",
+    "display": "standalone"
+}
