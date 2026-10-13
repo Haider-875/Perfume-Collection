@@ -944,66 +944,47 @@
                 </div>
             </div>
 
-            <!-- 3. Pakistani Geographic Distribution Card -->
+            <!-- 3. Orders by City Table Card -->
             <div class="dash-card p-4">
                 <div class="d-flex align-items-center justify-content-between mb-1">
-                    <h3 class="h6 fw-bold text-dark mb-0">Pakistani Geographic Distribution</h3>
-                    <span class="badge" style="background-color: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-size: 11px;">
-                        <i class="fa-solid fa-map-location-dot me-1"></i> Pakistan
-                    </span>
+                    <h3 class="h6 fw-bold text-dark mb-0">Orders by City</h3>
+                    <span class="text-secondary small fw-medium" style="font-size: 11px;">Pakistan</span>
                 </div>
-                <div class="stat-subtext mb-3">Order volume across metropolitan hubs and provinces</div>
+                <div class="stat-subtext mb-3">Order volume and sales revenue by city</div>
 
-                <!-- Top Metros Single-Line Clean Layout -->
-                <div class="mb-3">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <span class="text-uppercase fw-bold text-primary" style="font-size: 11px; letter-spacing: 0.5px;">
-                            <i class="fa-solid fa-city me-1"></i> Top Metros
-                        </span>
-                        <span class="text-muted" style="font-size: 11px;">Orders &amp; Volume</span>
-                    </div>
-                    <div class="d-flex flex-column gap-1.5">
-                        @forelse($ordersByCity as $cityStat)
-                            <div class="d-flex justify-content-between align-items-center py-1.5 px-2.5 rounded-2 bg-light border border-light-subtle" style="font-size: 12.5px;">
-                                <div class="d-flex align-items-center gap-1.5">
-                                    <i class="fa-solid fa-location-dot text-primary" style="font-size: 11px;"></i>
-                                    <span class="fw-semibold text-dark">{{ $cityStat->city ?? 'Unknown' }}</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-1.5">
-                                    <span class="badge bg-white text-dark border border-light-subtle fw-bold" style="font-size: 11px;">
-                                        {{ $cityStat->total_orders }} {{ Str::plural('order', $cityStat->total_orders) }}
-                                    </span>
-                                    <span class="fw-semibold text-secondary" style="font-size: 11.5px;">
-                                        Rs. {{ number_format($cityStat->total_amount, 0) }}
-                                    </span>
-                                </div>
-                            </div>
-                        @empty
-                            <div class="small text-muted py-2 text-center">No regional orders yet.</div>
-                        @endforelse
-                    </div>
-                </div>
-
-                <!-- Provinces Pill Tags Layout -->
-                <div class="pt-2 border-top border-light-subtle">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <span class="text-uppercase fw-bold text-primary" style="font-size: 11px; letter-spacing: 0.5px;">
-                            <i class="fa-solid fa-landmark-flag me-1"></i> Provinces
-                        </span>
-                        <span class="text-muted" style="font-size: 11px;">Coverage</span>
-                    </div>
-                    <div class="d-flex flex-wrap gap-1.5">
-                        @forelse($ordersByProvince as $provStat)
-                            <div class="d-flex align-items-center gap-1.5 py-1 px-2.5 rounded-pill bg-light border border-light-subtle" style="font-size: 12px;">
-                                <span class="fw-semibold text-dark">{{ $provStat->province ?? 'Unspecified' }}</span>
-                                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5" style="font-size: 10px;">
-                                    {{ $provStat->total_orders }}
-                                </span>
-                            </div>
-                        @empty
-                            <div class="small text-muted py-1">No province records.</div>
-                        @endforelse
-                    </div>
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr class="border-bottom border-light-subtle">
+                                <th class="text-muted fw-bold pb-2 ps-0 text-uppercase" style="font-size: 11px; letter-spacing: 0.04em;">City</th>
+                                <th class="text-muted fw-bold pb-2 text-center text-uppercase" style="font-size: 11px; letter-spacing: 0.04em;">Orders</th>
+                                <th class="text-muted fw-bold pb-2 pe-0 text-end text-uppercase" style="font-size: 11px; letter-spacing: 0.04em;">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($ordersByCity as $cityStat)
+                                <tr class="border-bottom border-light-subtle last:border-0">
+                                    <td class="py-2.5 ps-0">
+                                        <span class="fw-semibold text-dark" style="font-size: 13px;">{{ $cityStat->city ?? 'Unknown' }}</span>
+                                    </td>
+                                    <td class="py-2.5 text-center">
+                                        <span class="badge bg-light text-secondary border fw-semibold px-2 py-1" style="font-size: 11.5px;">
+                                            {{ $cityStat->total_orders }}
+                                        </span>
+                                    </td>
+                                    <td class="py-2.5 pe-0 text-end">
+                                        <span class="fw-bold text-dark" style="font-size: 12.5px;">
+                                            Rs. {{ number_format($cityStat->total_amount, 0) }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-3">No city orders recorded yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
