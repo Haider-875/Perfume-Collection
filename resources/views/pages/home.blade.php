@@ -10,7 +10,56 @@
         <div class="swiper hero-master-swiper w-100 h-100">
             <div class="swiper-wrapper">
                 @forelse($heroSlides as $slideIndex => $slide)
-                    <div class="swiper-slide position-relative w-100 h-100 overflow-hidden">
+                    @php
+                        $slideImage = strtolower($slide->image ?? '');
+                        if (str_contains($slideImage, '91_perfume_banner')) {
+                            $slideDuration = 10000;
+                            $scenes = [
+                                [
+                                    'time' => 0,
+                                    'title' => 'Discover Your Signature Scent',
+                                    'desc' => 'Explore exceptional fragrances crafted to express individuality with captivating floral chords, rich woods, and warm sensual amber.'
+                                ],
+                                [
+                                    'time' => 2.8,
+                                    'title' => '91 Sports',
+                                    'desc' => 'Bold, fresh, and magnetic. An exhilarating blend of chilled aquatic notes, zesty bergamot, and warm woody amber.'
+                                ]
+                            ];
+                        } elseif (str_contains($slideImage, '91_gold_banner')) {
+                            $slideDuration = 6000;
+                            $scenes = [
+                                [
+                                    'time' => 0,
+                                    'title' => '91° Gold Edition',
+                                    'desc' => 'Opulent and regal. A masterwork of gilded amber, sparkling bergamot, and aged cedarwood radiating pure royal distinction.'
+                                ]
+                            ];
+                        } elseif (str_contains($slideImage, 'marjaan_perfume_banner')) {
+                            $slideDuration = 6000;
+                            $scenes = [
+                                [
+                                    'time' => 0,
+                                    'title' => 'Marjaan',
+                                    'desc' => 'Mystical, sensual, and unforgettable. An enchanting oriental fusion of rare aged oud, smoky florals, and warm resinous amber.'
+                                ]
+                            ];
+                        } else {
+                            $slideDuration = 6000;
+                            $scenes = [
+                                [
+                                    'time' => 0,
+                                    'title' => $slide->title ?? 'Discover Your Signature Scent',
+                                    'desc' => $slide->subtitle ?? 'Explore captivating fragrances, refined notes, and timeless elegance for an unforgettable presence.'
+                                ]
+                            ];
+                        }
+                        $initialTitle = $scenes[0]['title'];
+                        $initialDesc = $scenes[0]['desc'];
+                    @endphp
+                    <div class="swiper-slide position-relative w-100 h-100 overflow-hidden"
+                        data-slide-duration="{{ $slideDuration }}"
+                        data-scenes='@json($scenes)'>
                         <!-- Zooming Background Media -->
                         <div class="hero__media">
                             <div class="hero__zoom">
@@ -19,7 +68,7 @@
                                         <source src="{{ asset($slide->image) }}" type="video/mp4">
                                     </video>
                                 @else
-                                    <img src="{{ asset($slide->image) }}" alt="{{ $slide->title }}"
+                                    <img src="{{ asset($slide->image) }}" alt="{{ $initialTitle }}"
                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/slides/hero_1.jpg') }}';"
                                         class="w-100 h-100 object-fit-cover">
                                 @endif
@@ -36,15 +85,18 @@
                                 <span>{{ $slide->badge_text ?? 'HAUTE PARFUMERIE • EXTRAIT DE PARFUM' }}</span>
                             </p>
 
-                            <!-- Monumental Typography Title -->
-                            <h1 class="hero__title font-hero">
-                                {!! $slide->title !!}
-                            </h1>
+                            <!-- Synced Dynamic Perfume Info Container -->
+                            <div class="hero__synced-body" aria-live="polite">
+                                <!-- Monumental Typography Title -->
+                                <h1 class="hero__title font-hero" data-perfume-title>
+                                    {{ $initialTitle }}
+                                </h1>
 
-                            <!-- Statement Subtitle -->
-                            <p class="hero__statement font-sans">
-                                {{ $slide->subtitle ?? 'Hand-crafted with 40% Extrait de Parfum concentration for beast-mode longevity across Pakistan.' }}
-                            </p>
+                                <!-- Statement Subtitle -->
+                                <p class="hero__statement font-sans" data-perfume-desc>
+                                    {{ $initialDesc }}
+                                </p>
+                            </div>
 
                             <!-- Stadium Rolling-Text Action Pills -->
                             <div class="hero-btn-group d-flex align-items-center justify-content-center mt-2">
@@ -86,9 +138,10 @@
                         <div class="hero__shade" aria-hidden="true"></div>
                         <div class="hero__content">
                             <p class="hero__kicker">AUTHENTIC LUXURY IMPRESSIONS</p>
-                            <h1 class="hero__title font-hero">PERFUMES COLLECTION</h1>
-                            <p class="hero__statement font-sans">Luxury Extrait de Parfum Impressions inspired by global niche
-                                fragrance houses.</p>
+                            <div class="hero__synced-body" aria-live="polite">
+                                <h1 class="hero__title font-hero" data-perfume-title>PERFUMES COLLECTION</h1>
+                                <p class="hero__statement font-sans" data-perfume-desc>Luxury Extrait de Parfum Impressions inspired by global niche fragrance houses.</p>
+                            </div>
                             <div class="hero-btn-group d-flex align-items-center justify-content-center mt-2">
                                 <a href="{{ route('collections.show', 'all') }}" class="collidez-pill collidez-pill--gold">
                                     <span class="collidez-roll">
@@ -221,7 +274,7 @@
             <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">CURATED FORMULATIONS</span>
-                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
+                <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight" style="color: #211D1E !important;">
                     Featured Collection
                 </h2>
             </div>
@@ -261,7 +314,7 @@
             <div class="perfect-match-header text-center mx-auto mb-4 mb-md-5" style="max-width: 48rem;">
                 <span class="perfect-match-eyebrow d-block mb-1.5 mb-md-2 fw-bold text-uppercase tracking-luxury text-center"
                     style="color: #780D24 !important;">EXPLORE CATEGORIES</span>
-                <h2 class="perfect-match-title font-serif fw-normal text-uppercase tracking-tight text-center" style="color: #1A1416 !important;">
+                <h2 class="perfect-match-title font-serif fw-bold text-uppercase tracking-tight text-center" style="color: #1A1416 !important;">
                     Find Your Perfect Match
                 </h2>
                 <p class="perfect-match-desc mt-2 lh-base mx-auto text-center" style="max-width: 42rem; color: #2C2422 !important; text-align: center !important;">
@@ -372,7 +425,7 @@
                 <div class="text-center mx-auto mb-5" style="max-width: 44rem;">
                     <span class="d-block mb-2 fw-bold text-uppercase tracking-luxury"
                         style="font-size: 11.5px; color: #780D24 !important; letter-spacing: 0.26em;">CURATED COFFRETS & SIGNATURE PAIRINGS</span>
-                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #1A1416 !important;">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight" style="color: #1A1416 !important;">
                         Luxury Fragrance Bundles
                     </h2>
                     <p class="mt-2 mx-auto" style="color: #2C2422 !important; font-size: 0.95rem; font-weight: 400; line-height: 1.6;">
@@ -388,9 +441,9 @@
                     @endforeach
                 </div>
 
-                <div class="text-center mt-3 mt-md-5">
-                    <a href="{{ route('bundles.index') }}" class="btn-discovery-glass" style="text-decoration: none;">
-                        <span>VIEW ALL BUNDLES & GIFTS</span>
+                <div class="text-center mt-4 mt-lg-5">
+                    <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
+                        <span>View All Bundles & Gifts</span>
                     </a>
                 </div>
             </div>
@@ -403,7 +456,7 @@
             <div class="text-center mx-auto mb-4" style="max-width: 42rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury"
                     style="font-size: 11px;">FRESHLY MACERATED</span>
-                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
+                <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight" style="color: #211D1E !important;">
                     New Release Impressions
                 </h2>
                 <div class="mx-auto mt-2" style="width: 4rem; height: 2px; background-color: #9E7D3B;"></div>
@@ -441,7 +494,7 @@
             <div class="text-center mx-auto mb-5" style="max-width: 48rem;">
                 <span class="d-block text-gold mb-2 fw-semibold text-uppercase tracking-luxury" style="font-size: 11px;">THE
                     PERFUMES COLLECTION PROMISE</span>
-                <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight" style="color: #211D1E !important;">
+                <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight" style="color: #211D1E !important;">
                     Why Discerning Fragrance Lovers Choose Us
                 </h2>
                 <p class="text-sm mt-2 lh-base fw-light" style="color: #6B605B;">
@@ -514,7 +567,7 @@
                          style="font-size: 11px; letter-spacing: 2px; color: #541B29;">
                         <span>VERIFIED PATRON IMPRESSIONS</span>
                     </div>
-                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase tracking-tight mb-2" style="color: #211D1E !important;">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight mb-2" style="color: #211D1E !important;">
                         Voices of Our Connoisseurs
                     </h2>
                     <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 text-xs" style="color: #6B605B;">
@@ -619,7 +672,7 @@
                    <div class="d-inline-flex align-items-center justify-content-center gap-2 mb-2">
                         <span class="fw-semibold text-uppercase tracking-luxury" style="font-size: 11px; letter-spacing: 0.22em; color: #541B29;">FRAGRANCE JOURNAL</span>
                     </div>
-                    <h2 class="font-serif fs-2 fs-md-1 fw-normal text-uppercase mb-2" style="letter-spacing: 0.04em; color: #211D1E !important;">
+                    <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase mb-2" style="letter-spacing: 0.04em; color: #211D1E !important;">
                         Olfactory Chronicles & Guides
                     </h2>
                     <p class="mb-0 font-sans" style="font-size: 0.92rem; line-height: 1.6; color: #6B605B;">
@@ -738,11 +791,11 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Collidez Haute Parfumerie Hero Swiper
+            // Collidez Haute Parfumerie Hero Swiper with Scene-Synchronized Typography
             const heroSwiper = new Swiper('.hero-master-swiper', {
                 loop: true,
                 autoplay: {
-                    delay: 6000,
+                    delay: 10000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
@@ -760,37 +813,117 @@
                 on: {
                     init: function () {
                         updateCollidezHeroMeter(this);
-                        playSlideVideos(this);
+                        initVideoSync();
+                        handleSlideActive(this);
                     },
                     slideChange: function () {
                         updateCollidezHeroMeter(this);
-                        playSlideVideos(this);
+                        handleSlideActive(this);
                     }
                 }
             });
             window.heroSwiperInstance = heroSwiper;
 
-            function playSlideVideos(swiper) {
-                try {
-                    const activeSlide = swiper.slides ? swiper.slides[swiper.activeIndex] : null;
-                    if (activeSlide) {
-                        const video = activeSlide.querySelector('video');
-                        if (video) {
-                            video.setAttribute('playsinline', '');
-                            video.setAttribute('webkit-playsinline', '');
-                            video.muted = true;
-                            if (video.paused) {
-                                video.play().catch(() => {});
+            function initVideoSync() {
+                const slides = document.querySelectorAll('.hero-master-swiper .swiper-slide');
+                slides.forEach(slide => {
+                    const video = slide.querySelector('video');
+                    const rawScenes = slide.getAttribute('data-scenes');
+                    if (!video || !rawScenes) return;
+
+                    let scenes = [];
+                    try {
+                        scenes = JSON.parse(rawScenes);
+                    } catch (e) {
+                        return;
+                    }
+
+                    if (!Array.isArray(scenes) || scenes.length === 0) return;
+
+                    slide._scenes = scenes;
+                    slide._currentSceneIndex = 0;
+
+                    video.addEventListener('timeupdate', function () {
+                        if (!slide.classList.contains('swiper-slide-active')) return;
+
+                        const currentTime = video.currentTime || 0;
+                        let targetIndex = 0;
+                        for (let i = 0; i < scenes.length; i++) {
+                            if (currentTime >= scenes[i].time) {
+                                targetIndex = i;
                             }
                         }
+
+                        if (slide._currentSceneIndex !== targetIndex) {
+                            slide._currentSceneIndex = targetIndex;
+                            const targetScene = scenes[targetIndex];
+                            const syncedBody = slide.querySelector('.hero__synced-body');
+                            const titleEl = slide.querySelector('[data-perfume-title]');
+                            const descEl = slide.querySelector('[data-perfume-desc]');
+
+                            if (syncedBody && titleEl && descEl) {
+                                syncedBody.classList.add('is-changing');
+                                setTimeout(() => {
+                                    titleEl.textContent = targetScene.title;
+                                    descEl.textContent = targetScene.desc;
+                                    syncedBody.classList.remove('is-changing');
+                                }, 220);
+                            }
+                        }
+                    });
+                });
+            }
+
+            function handleSlideActive(swiper) {
+                try {
+                    const activeSlide = swiper.slides ? swiper.slides[swiper.activeIndex] : null;
+                    if (!activeSlide) return;
+
+                    const activeVideo = activeSlide.querySelector('video');
+                    if (activeVideo) {
+                        activeVideo.setAttribute('playsinline', '');
+                        activeVideo.setAttribute('webkit-playsinline', '');
+                        activeVideo.muted = true;
+                        
+                        if (activeVideo.currentTime >= (activeVideo.duration - 0.5) || activeVideo.ended) {
+                            activeVideo.currentTime = 0;
+                        }
+                        if (activeVideo.paused) {
+                            activeVideo.play().catch(() => {});
+                        }
                     }
-                } catch(e) {}
+
+                    if (activeSlide._scenes && activeSlide._scenes.length > 0) {
+                        const targetScene = activeSlide._scenes[0];
+                        activeSlide._currentSceneIndex = 0;
+                        const titleEl = activeSlide.querySelector('[data-perfume-title]');
+                        const descEl = activeSlide.querySelector('[data-perfume-desc]');
+                        if (titleEl && descEl) {
+                            titleEl.textContent = targetScene.title;
+                            descEl.textContent = targetScene.desc;
+                        }
+                    }
+
+                    const slideDuration = parseInt(activeSlide.getAttribute('data-slide-duration'), 10);
+                    if (slideDuration && swiper.params && swiper.params.autoplay) {
+                        swiper.params.autoplay.delay = slideDuration;
+                    }
+
+                    swiper.slides.forEach((slide, idx) => {
+                        if (idx !== swiper.activeIndex) {
+                            const vid = slide.querySelector('video');
+                            if (vid && !vid.paused) {
+                                vid.pause();
+                            }
+                        }
+                    });
+                } catch (e) {}
             }
 
             // Unlock mobile playback on first touch if OS power-saving restricted autoplay
             document.addEventListener('touchstart', function () {
                 if (window.heroSwiperInstance) {
-                    playSlideVideos(window.heroSwiperInstance);
+                    handleSlideActive(window.heroSwiperInstance);
                 }
             }, { once: true, passive: true });
 
