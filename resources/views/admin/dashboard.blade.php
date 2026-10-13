@@ -284,6 +284,61 @@
     .bestseller-table tr:hover td {
         background-color: #f8fafc !important;
     }
+
+    /* Recent Orders Custom Compact Table */
+    .recent-orders-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+    .recent-orders-table th {
+        font-size: 10.5px !important;
+        font-weight: 700 !important;
+        color: #94a3b8 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        padding: 0.65rem 0.55rem !important;
+        background-color: transparent !important;
+        white-space: nowrap !important;
+    }
+    .recent-orders-table td {
+        font-size: 12px !important;
+        padding: 0.65rem 0.55rem !important;
+        border-bottom: 1px solid #f8fafc !important;
+        vertical-align: middle !important;
+        background-color: transparent !important;
+        white-space: nowrap !important;
+    }
+    .recent-orders-table tr:hover td {
+        background-color: #f8fafc !important;
+    }
+    .order-status-badge {
+        font-size: 10.5px !important;
+        font-weight: 600 !important;
+        padding: 0.22rem 0.5rem !important;
+        border-radius: 6px !important;
+        letter-spacing: 0.02em !important;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    /* Custom slim scrollbar for table-responsive */
+    .table-responsive::-webkit-scrollbar {
+        height: 5px;
+    }
+    .table-responsive::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 9999px;
+    }
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 9999px;
+    }
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
     .product-img-thumb {
         width: 38px;
         height: 38px;
@@ -449,6 +504,10 @@
         .bestseller-table th, .bestseller-table td {
             padding: 0.55rem 0.6rem !important;
             font-size: 12px !important;
+        }
+        .recent-orders-table th, .recent-orders-table td {
+            padding: 0.5rem 0.45rem !important;
+            font-size: 11.5px !important;
         }
     }
 </style>
@@ -726,7 +785,7 @@
             <div class="dash-card p-4">
                 <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="h6 fw-bold text-dark mb-0">Recent Orders & Transactions</h2>
+                        <h2 class="h6 fw-bold text-dark mb-0">Recent Orders &amp; Transactions</h2>
                         <div class="stat-subtext">Latest customer acquisitions across nationwide territories</div>
                     </div>
                     <a href="{{ route('admin.orders.index') }}" class="btn-dash-widget py-1 px-3">
@@ -736,41 +795,68 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table bestseller-table mb-0 align-middle">
+                    <table class="table recent-orders-table mb-0 align-middle">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Customer</th>
-                                <th>Location</th>
-                                <th>Total</th>
-                                <th>Payment</th>
-                                <th>Status</th>
-                                <th class="text-end">Action</th>
+                                <th style="min-width: 95px;">Order #</th>
+                                <th style="min-width: 125px;">Customer</th>
+                                <th style="min-width: 100px;">Location</th>
+                                <th style="min-width: 85px;">Total</th>
+                                <th style="min-width: 95px;">Payment</th>
+                                <th style="min-width: 85px;">Status</th>
+                                <th style="min-width: 80px;" class="text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($recentOrders as $ord)
                                 <tr>
-                                    <td class="font-monospace fw-bold text-primary">#{{ $ord->order_number }}</td>
                                     <td>
-                                        <div class="fw-semibold text-dark">{{ $ord->customer_name }}</div>
-                                        <div class="stat-subtext">{{ $ord->customer_phone }}</div>
-                                    </td>
-                                    <td class="text-secondary">{{ $ord->city }}, {{ $ord->province }}</td>
-                                    <td class="fw-bold text-dark">{{ $ord->formatted_total }}</td>
-                                    <td>
-                                        <span class="badge {{ $ord->payment_status === 'paid' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->payment_status === 'pending_verification' ? 'bg-warning-subtle text-warning border border-warning-subtle' : 'bg-light text-secondary border') }}">
-                                            {{ str_replace('_', ' ', $ord->payment_status) }}
+                                        <span class="font-monospace fw-bold text-primary" style="font-size: 11.5px;" title="Order #{{ $ord->order_number }}">
+                                            #{{ $ord->order_number }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="badge {{ $ord->order_status === 'delivered' ? 'bg-success-subtle text-success border border-success-subtle' : ($ord->order_status === 'shipped' ? 'bg-primary-subtle text-primary border border-primary-subtle' : 'bg-light text-dark border') }}">
+                                        <div class="fw-semibold text-dark text-truncate" style="max-width: 135px; font-size: 12.5px;">{{ $ord->customer_name }}</div>
+                                        <div class="text-muted" style="font-size: 11px;">{{ $ord->customer_phone }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-dark fw-medium text-truncate" style="max-width: 105px; font-size: 12px;">{{ $ord->city }}</div>
+                                        <div class="text-muted text-truncate" style="max-width: 105px; font-size: 10.5px;">{{ $ord->province }}</div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold text-dark" style="font-size: 12.5px;">{{ $ord->formatted_total }}</span>
+                                    </td>
+                                    <td>
+                                        @if($ord->payment_status === 'paid')
+                                            <span class="order-status-badge bg-success-subtle text-success border border-success-subtle">
+                                                <i class="fa-solid fa-check me-1" style="font-size: 9px;"></i>Paid
+                                            </span>
+                                        @elseif($ord->payment_status === 'pending_verification')
+                                            <span class="order-status-badge bg-warning-subtle text-warning border border-warning-subtle" title="Pending Verification">
+                                                <i class="fa-regular fa-clock me-1" style="font-size: 9px;"></i>Pending Verif
+                                            </span>
+                                        @else
+                                            <span class="order-status-badge bg-light text-secondary border">
+                                                {{ ucfirst($ord->payment_status) }}
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            $stClass = match($ord->order_status) {
+                                                'delivered' => 'bg-success-subtle text-success border border-success-subtle',
+                                                'shipped' => 'bg-primary-subtle text-primary border border-primary-subtle',
+                                                'confirmed', 'processing' => 'bg-info-subtle text-info border border-info-subtle',
+                                                default => 'bg-light text-dark border',
+                                            };
+                                        @endphp
+                                        <span class="order-status-badge {{ $stClass }} text-uppercase" style="font-size: 10px;">
                                             {{ $ord->order_status }}
                                         </span>
                                     </td>
                                     <td class="text-end">
-                                        <a href="{{ route('admin.orders.show', $ord->id) }}" class="btn btn-sm btn-light border py-1 px-2.5" title="Inspect Order Details">
-                                            <i class="fa-regular fa-eye me-1 text-primary"></i>Inspect
+                                        <a href="{{ route('admin.orders.show', $ord->id) }}" class="btn btn-sm btn-light border py-1 px-2 text-primary fw-semibold" style="font-size: 11.5px; border-radius: 6px;" title="Inspect Order Details">
+                                            <i class="fa-regular fa-eye me-1"></i>Inspect
                                         </a>
                                     </td>
                                 </tr>
@@ -855,6 +941,101 @@
                     <a href="{{ route('admin.customers.index') }}" class="btn-show-details">
                         Show details
                     </a>
+                </div>
+            </div>
+
+            <!-- 3. Pakistani Geographic Distribution Card -->
+            <div class="dash-card p-4">
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                    <h3 class="h6 fw-bold text-dark mb-0">Pakistani Geographic Distribution</h3>
+                    <span class="badge" style="background-color: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-size: 11px;">
+                        <i class="fa-solid fa-map-location-dot me-1"></i> Pakistan
+                    </span>
+                </div>
+                <div class="stat-subtext mb-3">Order volume across metropolitan hubs and provinces</div>
+
+                <!-- Top Metros Single-Line Clean Layout -->
+                <div class="mb-3">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="text-uppercase fw-bold text-primary" style="font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="fa-solid fa-city me-1"></i> Top Metros
+                        </span>
+                        <span class="text-muted" style="font-size: 11px;">Orders &amp; Volume</span>
+                    </div>
+                    <div class="d-flex flex-column gap-1.5">
+                        @forelse($ordersByCity as $cityStat)
+                            <div class="d-flex justify-content-between align-items-center py-1.5 px-2.5 rounded-2 bg-light border border-light-subtle" style="font-size: 12.5px;">
+                                <div class="d-flex align-items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-primary" style="font-size: 11px;"></i>
+                                    <span class="fw-semibold text-dark">{{ $cityStat->city ?? 'Unknown' }}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-1.5">
+                                    <span class="badge bg-white text-dark border border-light-subtle fw-bold" style="font-size: 11px;">
+                                        {{ $cityStat->total_orders }} {{ Str::plural('order', $cityStat->total_orders) }}
+                                    </span>
+                                    <span class="fw-semibold text-secondary" style="font-size: 11.5px;">
+                                        Rs. {{ number_format($cityStat->total_amount, 0) }}
+                                    </span>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="small text-muted py-2 text-center">No regional orders yet.</div>
+                        @endforelse
+                    </div>
+                </div>
+
+                <!-- Provinces Pill Tags Layout -->
+                <div class="pt-2 border-top border-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="text-uppercase fw-bold text-primary" style="font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="fa-solid fa-landmark-flag me-1"></i> Provinces
+                        </span>
+                        <span class="text-muted" style="font-size: 11px;">Coverage</span>
+                    </div>
+                    <div class="d-flex flex-wrap gap-1.5">
+                        @forelse($ordersByProvince as $provStat)
+                            <div class="d-flex align-items-center gap-1.5 py-1 px-2.5 rounded-pill bg-light border border-light-subtle" style="font-size: 12px;">
+                                <span class="fw-semibold text-dark">{{ $provStat->province ?? 'Unspecified' }}</span>
+                                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5" style="font-size: 10px;">
+                                    {{ $provStat->total_orders }}
+                                </span>
+                            </div>
+                        @empty
+                            <div class="small text-muted py-1">No province records.</div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Low Stock Alerts Card -->
+            <div class="dash-card p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="h6 fw-bold text-dark mb-0">Low Stock Alerts</h3>
+                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle" style="font-size: 11px;">
+                        &le; 10 bottles
+                    </span>
+                </div>
+
+                <div class="d-flex flex-column gap-2">
+                    @forelse($lowStockProducts as $lowProd)
+                        <div class="d-flex align-items-center justify-content-between py-1.5 border-bottom border-light-subtle last:border-0">
+                            <div style="min-width: 0; flex: 1;" class="me-2">
+                                <a href="{{ route('admin.products.edit', $lowProd->id) }}" class="fw-semibold text-dark text-truncate d-block" style="font-size: 13px;" title="{{ $lowProd->name }}">
+                                    {{ $lowProd->name }}
+                                </a>
+                                <small class="text-muted d-block" style="font-size: 11px;">{{ $lowProd->category->name ?? 'Fragrance' }}</small>
+                            </div>
+                            <span class="badge {{ $lowProd->stock <= 3 ? 'bg-danger-subtle text-danger border border-danger-subtle' : 'bg-warning-subtle text-warning border border-warning-subtle' }} px-2 py-1" style="font-size: 11px;">
+                                {{ $lowProd->stock }} left
+                            </span>
+                        </div>
+                    @empty
+                        <div class="text-success small py-3 text-center">
+                            <i class="fa-solid fa-check-circle me-1"></i> All products well stocked.
+                        </div>
+                    @endforelse
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -870,7 +1051,7 @@
             <span class="badge" style="background-color: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-size: 12px;">
                 <i class="fa-solid fa-bolt me-1"></i> Operations
             </span>
-            <span class="fw-bold text-dark">Live Store Operations, Orders & Inventory Intelligence</span>
+            <span class="fw-bold text-dark">Live Boutique Traffic Telemetry &amp; Device Split</span>
         </div>
         <div class="d-flex align-items-center gap-2 text-muted small">
             <span x-text="expandedOps ? 'Collapse View' : 'Expand View'"></span>
@@ -936,83 +1117,6 @@
                                 <div class="bg-secondary rounded-pill h-100" style="width: {{ $desktopPercentage }}%"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Regional Intelligence & Low Stock Alerts -->
-        <div class="row g-4">
-            <!-- Pakistani Regional Metros -->
-            <div class="col-12 col-lg-8">
-                <div class="dash-card p-4">
-                    <h3 class="h6 fw-bold text-dark mb-1">Pakistani Geographic Distribution</h3>
-                    <div class="stat-subtext mb-3">Order volume across metropolitan hubs and provinces</div>
-
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="p-3 bg-light rounded-3 border">
-                                <div class="text-uppercase small fw-bold text-primary mb-2">Top Metros</div>
-                                <div class="space-y-1.5">
-                                    @forelse($ordersByCity as $cityStat)
-                                        <div class="d-flex justify-content-between small">
-                                            <span class="text-dark">{{ $cityStat->city ?? 'Unknown' }}</span>
-                                            <span class="text-muted fw-semibold">{{ $cityStat->total_orders }} orders (Rs. {{ number_format($cityStat->total_amount, 0) }})</span>
-                                        </div>
-                                    @empty
-                                        <div class="small text-muted">No regional orders yet.</div>
-                                    @endforelse
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <div class="p-3 bg-light rounded-3 border">
-                                <div class="text-uppercase small fw-bold text-primary mb-2">Provinces</div>
-                                <div class="space-y-1.5">
-                                    @forelse($ordersByProvince as $provStat)
-                                        <div class="d-flex justify-content-between small">
-                                            <span class="text-dark">{{ $provStat->province ?? 'Unspecified' }}</span>
-                                            <span class="text-muted fw-semibold">{{ $provStat->total_orders }} orders</span>
-                                        </div>
-                                    @empty
-                                        <div class="small text-muted">No regional orders yet.</div>
-                                    @endforelse
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Low Stock Alerts -->
-            <div class="col-12 col-lg-4">
-                <div class="dash-card p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h3 class="h6 fw-bold text-dark mb-0">Low Stock Alerts</h3>
-                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle">&le; 10 bottles</span>
-                    </div>
-
-                    <div class="space-y-2.5">
-                        @forelse($lowStockProducts as $lowProd)
-                            <div class="d-flex align-items-center justify-content-between pb-2 border-bottom last:border-0">
-                                <div>
-                                    <a href="{{ route('admin.products.edit', $lowProd->id) }}" class="fw-semibold text-dark text-truncate d-block" style="max-width: 170px; font-size: 13px;">
-                                        {{ $lowProd->name }}
-                                    </a>
-                                    <small class="text-muted">{{ $lowProd->category->name ?? 'Fragrance' }}</small>
-                                </div>
-                                <span class="badge {{ $lowProd->stock <= 3 ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' }}">
-                                    {{ $lowProd->stock }} left
-                                </span>
-                            </div>
-                        @empty
-                            <div class="text-success small py-3 text-center">
-                                <i class="fa-solid fa-check-circle me-1"></i> All products well stocked.
-                            </div>
-                        @endforelse
                     </div>
                 </div>
             </div>
