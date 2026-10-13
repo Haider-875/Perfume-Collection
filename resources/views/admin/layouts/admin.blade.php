@@ -23,6 +23,14 @@
     <!-- Bootstrap 5.3 CSS ONLY -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Theme Initialization Script (Prevents FOUT) -->
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('pc_admin_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -35,12 +43,12 @@
     <style>
         :root {
             --sidebar-width: 255px;
-            --sidebar-bg: #ffffff;
-            --sidebar-border: #f1f3f7;
-            --sidebar-link-text: #64748b;
-            --sidebar-link-hover: #f8fafc;
-            --sidebar-link-active-bg: #eff6ff;
-            --sidebar-link-active-text: #2563eb;
+            --sidebar-bg: #0f172a;
+            --sidebar-border: rgba(255, 255, 255, 0.08);
+            --sidebar-link-text: #94a3b8;
+            --sidebar-link-hover: rgba(255, 255, 255, 0.06);
+            --sidebar-link-active-bg: #2563eb;
+            --sidebar-link-active-text: #ffffff;
             --body-bg: #f4f6fa;
             --card-bg: #ffffff;
             --card-border: #f1f3f7;
@@ -62,9 +70,10 @@
             min-height: 100vh;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
-        /* Modern White Sidebar (Matching Reference Image) */
+        /* Modern Dark Left Menu Bar */
         #adminSidebar {
             width: var(--sidebar-width);
             background-color: var(--sidebar-bg);
@@ -77,7 +86,7 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 2px 0 12px rgba(15, 23, 42, 0.02);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
         }
 
         .sidebar-brand {
@@ -88,6 +97,7 @@
             padding: 0 1.25rem;
             border-bottom: 1px solid var(--sidebar-border);
             text-decoration: none;
+            background-color: var(--sidebar-bg);
         }
 
         .sidebar-brand-logo-wrap {
@@ -114,8 +124,8 @@
         .sidebar-brand-text {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
-            color: #111827;
-            font-size: 1.15rem;
+            color: #f8fafc;
+            font-size: 1.12rem;
             letter-spacing: -0.02em;
             line-height: 1.2;
         }
@@ -124,9 +134,9 @@
             width: 32px;
             height: 32px;
             border-radius: 8px;
-            border: 1px solid #f1f3f7;
-            background: #ffffff;
-            color: #8c9ba8;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -135,9 +145,9 @@
             cursor: pointer;
         }
         .sidebar-collapse-btn:hover {
-            color: #111827;
-            background-color: #f8fafc;
-            border-color: #e2e8f0;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-nav {
@@ -150,7 +160,7 @@
             width: 4px;
         }
         .sidebar-nav::-webkit-scrollbar-thumb {
-            background-color: #e2e8f0;
+            background-color: rgba(255, 255, 255, 0.12);
             border-radius: 4px;
         }
 
@@ -159,7 +169,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: #94a3b8;
+            color: #64748b;
             padding: 0.85rem 0.75rem 0.35rem;
         }
 
@@ -187,24 +197,25 @@
             width: 1.25rem;
             text-align: center;
             font-size: 15px !important;
-            color: #8c9ba8;
+            color: #64748b;
             transition: color 0.15s ease;
         }
 
         .sidebar-link:hover {
-            color: #111827;
+            color: #f8fafc;
             background-color: var(--sidebar-link-hover);
         }
 
         .sidebar-link:hover i {
-            color: #111827;
+            color: #f8fafc;
         }
 
-        /* Active Sidebar Link (Matching Reference Soft Blue Pill) */
+        /* Active Sidebar Link (Distinct vibrant blue with white text) */
         .sidebar-link.active {
             color: var(--sidebar-link-active-text) !important;
             background-color: var(--sidebar-link-active-bg) !important;
             font-weight: 600 !important;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
         }
 
         .sidebar-link.active i {
@@ -215,16 +226,17 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: #2563eb;
+            background-color: #ffffff;
             display: inline-block;
         }
 
         /* Sidebar Promo Card ("Upgrade to Premium!" in Reference Image) */
         .sidebar-promo-card {
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(145deg, #1e293b 0%, #0b1120 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 1rem;
             color: #ffffff;
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -286,7 +298,7 @@
         .sidebar-footer {
             padding: 0.85rem 1rem;
             border-top: 1px solid var(--sidebar-border);
-            background-color: #ffffff;
+            background-color: var(--sidebar-bg);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -996,8 +1008,325 @@
         .admin-action-btn {
             font-size: 13.5px !important;
         }
-        .sidebar-link {
-            font-size: 14.5px !important;
+        /* ==========================================================================
+           DARK & LIGHT MODE THEMING ENGINE
+           ========================================================================== */
+        /* Dark Theme Variables & Component Inversion */
+        [data-theme="dark"] {
+            --body-bg: #0b0f19;
+            --card-bg: #111827;
+            --card-border: #1f293d;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+            --text-dark: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        [data-theme="dark"] body {
+            background-color: #0b0f19 !important;
+            color: #f1f5f9 !important;
+        }
+
+        /* Topbar in Dark Mode */
+        [data-theme="dark"] .admin-topbar {
+            background-color: #111827 !important;
+            border-bottom-color: #1f293d !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+        [data-theme="dark"] .topbar-search-box {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+        }
+        [data-theme="dark"] .topbar-search-input {
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .topbar-search-input::placeholder {
+            color: #64748b !important;
+        }
+        [data-theme="dark"] .search-kbd-badge {
+            background-color: #0f172a !important;
+            border-color: #24324c !important;
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .topbar-icon-btn {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .topbar-icon-btn:hover {
+            background-color: #24324c !important;
+            color: #f8fafc !important;
+            border-color: #3b82f6 !important;
+        }
+        [data-theme="dark"] .topbar-icon-btn .unread-dot {
+            border-color: #182235 !important;
+        }
+        [data-theme="dark"] .topbar-avatar {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+            border-color: #334155 !important;
+            color: #60a5fa !important;
+        }
+        [data-theme="dark"] .topbar-avatar .avatar-online-dot {
+            border-color: #111827 !important;
+        }
+
+        /* Dropdowns in Dark Mode */
+        [data-theme="dark"] .dropdown-menu {
+            background-color: #111827 !important;
+            border: 1px solid #1f293d !important;
+            color: #f1f5f9 !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+        }
+        [data-theme="dark"] .dropdown-menu .dropdown-item {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .dropdown-menu .dropdown-item:hover {
+            background-color: #1e293b !important;
+            color: #ffffff !important;
+        }
+        [data-theme="dark"] .dropdown-menu .dropdown-divider {
+            border-color: #1f293d !important;
+        }
+        [data-theme="dark"] .dropdown-menu .text-dark {
+            color: #f8fafc !important;
+        }
+
+        /* Cards, Surfaces & Containers in Dark Mode */
+        [data-theme="dark"] .admin-card,
+        [data-theme="dark"] .bg-brand-surface,
+        [data-theme="dark"] .bg-brand-card,
+        [data-theme="dark"] .card {
+            background-color: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f1f5f9 !important;
+        }
+        [data-theme="dark"] .card-header,
+        [data-theme="dark"] .admin-card-header {
+            background-color: #151e30 !important;
+            border-bottom-color: #1f293d !important;
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .card-footer,
+        [data-theme="dark"] .admin-card-footer {
+            background-color: #151e30 !important;
+            border-top-color: #1f293d !important;
+            color: #cbd5e1 !important;
+        }
+
+        /* Filter Bar in Dark Mode */
+        [data-theme="dark"] .admin-filter-bar {
+            background-color: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f1f5f9 !important;
+        }
+
+        /* Tables & Lists in Dark Mode */
+        [data-theme="dark"] table,
+        [data-theme="dark"] .table {
+            background-color: #111827 !important;
+            color: #f1f5f9 !important;
+            border-color: #1f293d !important;
+        }
+        [data-theme="dark"] th,
+        [data-theme="dark"] .table thead th {
+            background-color: #162032 !important;
+            color: #cbd5e1 !important;
+            border-bottom-color: #1f293d !important;
+        }
+        [data-theme="dark"] td,
+        [data-theme="dark"] .table tbody td {
+            background-color: #111827 !important;
+            color: #e2e8f0 !important;
+            border-bottom-color: #1a2436 !important;
+        }
+        [data-theme="dark"] tr:hover td,
+        [data-theme="dark"] .table tbody tr:hover td {
+            background-color: #182235 !important;
+            color: #ffffff !important;
+        }
+
+        /* Form Inputs & Controls in Dark Mode */
+        [data-theme="dark"] input[type="text"],
+        [data-theme="dark"] input[type="email"],
+        [data-theme="dark"] input[type="password"],
+        [data-theme="dark"] input[type="number"],
+        [data-theme="dark"] input[type="url"],
+        [data-theme="dark"] input[type="date"],
+        [data-theme="dark"] select,
+        [data-theme="dark"] textarea,
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: #162032 !important;
+            color: #f8fafc !important;
+            border-color: #24324c !important;
+        }
+        [data-theme="dark"] input::placeholder,
+        [data-theme="dark"] textarea::placeholder {
+            color: #64748b !important;
+        }
+        [data-theme="dark"] input:focus,
+        [data-theme="dark"] select:focus,
+        [data-theme="dark"] textarea:focus,
+        [data-theme="dark"] .form-control:focus,
+        [data-theme="dark"] .form-select:focus {
+            background-color: #182235 !important;
+            border-color: #3b82f6 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+        }
+        [data-theme="dark"] .form-label,
+        [data-theme="dark"] label {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .input-group-text {
+            background-color: #1f293d !important;
+            border-color: #24324c !important;
+            color: #cbd5e1 !important;
+        }
+
+        /* Buttons & Actions in Dark Mode */
+        [data-theme="dark"] .admin-btn-secondary {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .admin-btn-secondary:hover {
+            background-color: #24324c !important;
+            color: #ffffff !important;
+            border-color: #3b82f6 !important;
+        }
+        [data-theme="dark"] .admin-btn-reset {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .admin-btn-reset:hover {
+            background-color: #24324c !important;
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .admin-action-btn {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .admin-action-btn:hover {
+            background-color: #24324c !important;
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .admin-action-view:hover {
+            color: #60a5fa !important;
+            background-color: rgba(37, 99, 235, 0.2) !important;
+            border-color: #3b82f6 !important;
+        }
+        [data-theme="dark"] .admin-action-edit:hover {
+            color: #60a5fa !important;
+            background-color: rgba(37, 99, 235, 0.2) !important;
+            border-color: #3b82f6 !important;
+        }
+        [data-theme="dark"] .admin-action-delete:hover {
+            color: #f87171 !important;
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            border-color: #ef4444 !important;
+        }
+
+        /* SaaS Pagination in Dark Mode */
+        [data-theme="dark"] .admin-pagination-bar {
+            background-color: #141c2b !important;
+            border-top-color: #1f293d !important;
+        }
+        [data-theme="dark"] .admin-pagination-info {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .admin-page-link,
+        [data-theme="dark"] .admin-pagination-bar .page-link {
+            background-color: #182235 !important;
+            border-color: #24324c !important;
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .admin-page-link:hover,
+        [data-theme="dark"] .admin-pagination-bar .page-link:hover {
+            background-color: #24324c !important;
+            color: #ffffff !important;
+            border-color: #3b82f6 !important;
+        }
+        [data-theme="dark"] .admin-page-link.disabled,
+        [data-theme="dark"] .admin-page-item.disabled .admin-page-link,
+        [data-theme="dark"] .admin-pagination-bar .page-item.disabled .page-link {
+            background-color: #131a27 !important;
+            border-color: #1f293d !important;
+            color: #64748b !important;
+        }
+        [data-theme="dark"] .admin-thumb-box {
+            background-color: #162032 !important;
+            border-color: #24324c !important;
+        }
+
+        /* Text Contrast Inversions in Dark Mode */
+        [data-theme="dark"] .text-dark { color: #f8fafc !important; }
+        [data-theme="dark"] .text-muted { color: #94a3b8 !important; }
+        [data-theme="dark"] .text-secondary { color: #94a3b8 !important; }
+        [data-theme="dark"] .text-brand-text { color: #f8fafc !important; }
+        [data-theme="dark"] .text-brand-muted { color: #94a3b8 !important; }
+        [data-theme="dark"] .border-brand-border { border-color: #1f293d !important; }
+        [data-theme="dark"] .border { border-color: #1f293d !important; }
+        [data-theme="dark"] .border-bottom { border-bottom-color: #1f293d !important; }
+        [data-theme="dark"] .border-top { border-top-color: #1f293d !important; }
+
+        /* Badges In Dark Mode */
+        [data-theme="dark"] .admin-badge-secondary {
+            background-color: #1e293b !important;
+            color: #cbd5e1 !important;
+            border-color: #334155 !important;
+        }
+        [data-theme="dark"] .admin-badge-success {
+            background-color: rgba(16, 185, 129, 0.15) !important;
+            color: #34d399 !important;
+            border-color: rgba(16, 185, 129, 0.3) !important;
+        }
+        [data-theme="dark"] .admin-badge-warning {
+            background-color: rgba(245, 158, 11, 0.15) !important;
+            color: #fbbf24 !important;
+            border-color: rgba(245, 158, 11, 0.3) !important;
+        }
+        [data-theme="dark"] .admin-badge-danger {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            color: #f87171 !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+        }
+        [data-theme="dark"] .admin-badge-info {
+            background-color: rgba(37, 99, 235, 0.15) !important;
+            color: #60a5fa !important;
+            border-color: rgba(37, 99, 235, 0.3) !important;
+        }
+
+        /* Modals in Dark Mode */
+        [data-theme="dark"] .modal-content {
+            background-color: #111827 !important;
+            border: 1px solid #1f293d !important;
+            color: #f8fafc !important;
+        }
+        [data-theme="dark"] .modal-header {
+            border-bottom-color: #1f293d !important;
+        }
+        [data-theme="dark"] .modal-footer {
+            border-top-color: #1f293d !important;
+        }
+        [data-theme="dark"] .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        /* Theme Toggle Icon Switching */
+        .theme-toggle-btn .theme-icon-sun {
+            display: none;
+        }
+        .theme-toggle-btn .theme-icon-moon {
+            display: inline-block;
+        }
+        [data-theme="dark"] .theme-toggle-btn .theme-icon-sun {
+            display: inline-block;
+            color: #fbbf24 !important;
+        }
+        [data-theme="dark"] .theme-toggle-btn .theme-icon-moon {
+            display: none;
         }
     </style>
     @stack('styles')
@@ -1176,17 +1505,17 @@
         <!-- Sidebar Footer (Monogram Avatar & Sign Out) -->
         <div class="sidebar-footer">
             <div class="d-flex align-items-center text-decoration-none">
-                <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 13px; background-color: #eff6ff; color: #2563eb; border: 1.5px solid #dbeafe;">
+                <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 13px; background-color: #1e293b; color: #60a5fa; border: 1.5px solid rgba(255, 255, 255, 0.12);">
                     {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                 </div>
                 <div class="overflow-hidden" style="max-width: 120px;">
-                    <div class="fw-semibold text-truncate text-dark" style="font-size: 13px;">{{ Auth::user()->name ?? 'Admin' }}</div>
-                    <small class="text-muted d-block text-truncate" style="font-size: 11px;">{{ Auth::user()->role ?? 'Store Admin' }}</small>
+                    <div class="fw-semibold text-truncate text-white" style="font-size: 13px;">{{ Auth::user()->name ?? 'Admin' }}</div>
+                    <small class="text-secondary d-block text-truncate" style="font-size: 11px;">{{ Auth::user()->role ?? 'Store Admin' }}</small>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-light border-0 p-1 text-secondary" title="Logout">
+                <button type="submit" class="btn btn-sm border-0 p-1 text-secondary" style="background: transparent; color: #94a3b8;" title="Logout" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
             </form>
@@ -1215,9 +1544,10 @@
             <div class="d-flex align-items-center gap-2">
                 @yield('header_actions')
 
-                <!-- Theme / Brightness Icon -->
-                <button type="button" class="topbar-icon-btn" title="Toggle Theme">
-                    <i class="fa-regular fa-sun"></i>
+                <!-- Dark & Light Mode Toggle Button -->
+                <button type="button" class="topbar-icon-btn theme-toggle-btn" id="themeToggleBtn" onclick="window.toggleAdminTheme()" title="Toggle Dark / Light Mode" aria-label="Toggle Dark or Light Mode">
+                    <i class="fa-solid fa-moon theme-icon-moon"></i>
+                    <i class="fa-solid fa-sun theme-icon-sun"></i>
                 </button>
 
                 <!-- Notifications Bell with Dot -->
@@ -1330,6 +1660,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Dark & Light Mode Theme Controller
+        window.toggleAdminTheme = function() {
+            var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            try {
+                localStorage.setItem('pc_admin_theme', newTheme);
+            } catch (e) {
+                console.warn('LocalStorage unavailable for theme storage:', e);
+            }
+            window.dispatchEvent(new CustomEvent('admin-theme-changed', {
+                detail: { theme: newTheme }
+            }));
+        };
+
         // Global Image Preview Dispatcher
         window.previewImage = function(url, title) {
             if (!url) return;
