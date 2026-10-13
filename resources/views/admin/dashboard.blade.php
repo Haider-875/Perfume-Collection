@@ -416,6 +416,35 @@
     .telemetry-toggle-header:hover {
         border-color: #cbd5e1;
     }
+
+    @media (max-width: 767.98px) {
+        .dash-header-bar {
+            margin-bottom: 1.15rem;
+            gap: 0.75rem;
+        }
+        .dash-main-title {
+            font-size: 1.45rem;
+        }
+        .dash-header-actions {
+            width: 100%;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .date-range-pill {
+            width: 100%;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 0.45rem 0.85rem;
+        }
+        .dash-card {
+            padding: 1.15rem 1rem;
+            border-radius: 1rem;
+        }
+        .stat-card-value {
+            font-size: 1.55rem;
+        }
+    }
 </style>
 @endpush
 

@@ -419,65 +419,82 @@
             flex: 1;
         }
 
+        .sidebar-backdrop {
+            display: none;
+        }
+
         /* Mobile Sidebar adjustments */
         @media (max-width: 991.98px) {
             #adminSidebar {
-                margin-left: calc(-1 * var(--sidebar-width));
+                transform: translateX(-100%);
+                margin-left: 0 !important;
+                transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
             }
             #adminSidebar.show {
-                margin-left: 0;
+                transform: translateX(0);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
             }
             #adminMain {
-                margin-left: 0;
+                margin-left: 0 !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                min-width: 0 !important;
             }
             .sidebar-backdrop {
+                display: block;
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(2px);
                 z-index: 1030;
-                display: none;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.25s ease, visibility 0.25s ease;
             }
             .sidebar-backdrop.show {
-                display: block;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
             }
         }
 
         @media (max-width: 767.98px) {
             .admin-topbar {
-                height: auto !important;
-                min-height: 58px;
-                padding: 0.6rem 1rem !important;
-                flex-wrap: wrap;
-                gap: 0.5rem;
+                height: 60px !important;
+                min-height: 60px;
+                padding: 0 1rem !important;
+                flex-wrap: nowrap;
+                gap: 0.75rem;
             }
             .admin-content {
-                padding: 1rem 0.75rem !important;
+                padding: 0.85rem 0.75rem !important;
             }
             .admin-filter-bar {
-                padding: 0.85rem !important;
+                padding: 0.75rem !important;
             }
             .admin-card {
-                margin-bottom: 1rem;
+                margin-bottom: 0.85rem;
             }
             .table-responsive {
                 max-width: 100%;
                 overflow-x: auto !important;
                 -webkit-overflow-scrolling: touch;
                 overscroll-behavior-x: contain;
+                margin-bottom: 0;
             }
             input[type="text"], input[type="email"], input[type="password"], input[type="number"], 
             input[type="url"], input[type="date"], select, textarea, .form-control, .form-select {
-                font-size: 16px !important;
-                min-height: 44px;
+                font-size: 15px !important;
             }
         }
 
         html, body {
-            max-width: 100%;
-            overflow-x: clip;
+            max-width: 100vw;
+            overflow-x: hidden !important;
         }
 
         body.overflow-hidden {
@@ -883,7 +900,10 @@
       x-init="$watch('mobileNav', val => document.body.classList.toggle('overflow-hidden', val))"
       :class="{ 'overflow-hidden': mobileNav }"
       @open-preview.window="previewModal = true; previewImgUrl = $event.detail.url; previewImgTitle = $event.detail.title || 'Image Preview'" 
-      @keydown.escape.window="previewModal = false">
+      @keydown.escape.window="previewModal = false; mobileNav = false"
+      @toggle-mobile-sidebar.window="mobileNav = !mobileNav"
+      @close-mobile-sidebar.window="mobileNav = false"
+      @open-mobile-sidebar.window="mobileNav = true">
 
     <!-- Mobile Backdrop -->
     <div class="sidebar-backdrop" :class="{ 'show': mobileNav }" @click="mobileNav = false"></div>
@@ -907,8 +927,8 @@
                 <button type="button" class="sidebar-collapse-btn d-none d-lg-inline-flex" title="Sidebar View">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
-                <button type="button" @click="mobileNav = false" class="btn text-secondary border-0 p-1 d-lg-none" aria-label="Close Sidebar">
-                    <i class="fa-solid fa-xmark"></i>
+                <button type="button" @click="mobileNav = false" class="btn text-secondary border-0 d-lg-none" aria-label="Close Sidebar" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;">
+                    <i class="fa-solid fa-xmark" style="font-size: 16px;"></i>
                 </button>
             </div>
         </div>
@@ -1073,7 +1093,7 @@
         <header class="admin-topbar">
             <!-- Left: Mobile Menu + Search Pill -->
             <div class="d-flex align-items-center gap-3">
-                <button type="button" class="btn btn-sm btn-light border d-lg-none" @click="mobileNav = true">
+                <button type="button" class="btn btn-sm btn-light border d-lg-none" @click="mobileNav = true" aria-label="Open Sidebar" data-sidebar-toggle style="width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
@@ -1211,6 +1231,54 @@
                 detail: { url: url, title: title || 'Image Preview' }
             }));
         };
+
+        // Standalone Mobile Sidebar Toggle (Dispatches Alpine Event or Applies Direct Fallback)
+        window.toggleMobileSidebar = function(forceState) {
+            const hasAlpine = typeof Alpine !== 'undefined' && window.Alpine;
+            if (hasAlpine) {
+                if (forceState === true) {
+                    window.dispatchEvent(new CustomEvent('open-mobile-sidebar'));
+                } else if (forceState === false) {
+                    window.dispatchEvent(new CustomEvent('close-mobile-sidebar'));
+                } else {
+                    window.dispatchEvent(new CustomEvent('toggle-mobile-sidebar'));
+                }
+                return;
+            }
+
+            const sidebar = document.getElementById('adminSidebar');
+            const backdrop = document.querySelector('.sidebar-backdrop');
+            if (!sidebar) return;
+            const shouldOpen = forceState !== undefined ? forceState : !sidebar.classList.contains('show');
+            sidebar.classList.toggle('show', shouldOpen);
+            if (backdrop) backdrop.classList.toggle('show', shouldOpen);
+            document.body.classList.toggle('overflow-hidden', shouldOpen);
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wire fallback listeners only if Alpine isn't loaded after delay
+            setTimeout(function() {
+                if (typeof Alpine === 'undefined') {
+                    document.querySelectorAll('[data-sidebar-toggle]').forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            window.toggleMobileSidebar();
+                        });
+                    });
+                    const backdrop = document.querySelector('.sidebar-backdrop');
+                    if (backdrop) {
+                        backdrop.addEventListener('click', function() {
+                            window.toggleMobileSidebar(false);
+                        });
+                    }
+                    document.querySelectorAll('#adminSidebar [aria-label="Close Sidebar"]').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            window.toggleMobileSidebar(false);
+                        });
+                    });
+                }
+            }, 300);
+        });
     </script>
 
     @stack('scripts')
