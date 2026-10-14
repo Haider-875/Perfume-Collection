@@ -11,21 +11,22 @@ use App\Models\FragranceFamily;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
+use App\Models\ProductPrice;
 use App\Models\ActivityLog;
 
 class ProductionCatalogSeeder extends Seeder
 {
     /**
-     * Run production safe catalog seeder.
-     * Idempotent: Never drops or truncates existing data.
+     * Run production safe catalog seeder for the exact 26 Excel perfumes.
+     * Enforces the 26 products and cleans up any old non-Excel products.
      */
     public function run()
     {
         // 1. Ensure Brand
         $brand = Brand::firstOrCreate(
-            ['slug' => 'ravaha-signature-ateliers'],
+            ['slug' => 'perfumes-collection-ateliers'],
             [
-                'name' => 'RAVAHA Signature Ateliers',
+                'name' => 'Perfumes Collection Ateliers',
                 'origin_country' => 'Paris / Lahore Atelier',
                 'is_featured' => true,
                 'is_active' => true,
@@ -33,109 +34,26 @@ class ProductionCatalogSeeder extends Seeder
         );
 
         // 2. Ensure Categories
-        $catExclusive = Category::firstOrCreate(
-            ['slug' => 'exclusive-reserve'],
+        $catPerfume = Category::firstOrCreate(
+            ['slug' => 'perfume'],
             [
-                'name' => 'Exclusive Reserve',
-                'description' => 'Our ultra-niche private reserve crafted with rare absolutes and exclusive macerations.',
+                'name' => 'Perfume',
+                'description' => 'Master-crafted luxury impressions and haute parfumerie extraits.',
                 'image' => 'assets/images/categories/collection_signature.jpg',
-                'badge_text' => 'Private Reserve',
+                'badge_text' => 'Signature Extrait',
                 'sort_order' => 1,
-                'is_active' => true,
-            ]
-        );
-
-        $catOud = Category::firstOrCreate(
-            ['slug' => 'royal-oud-extrait'],
-            [
-                'name' => 'Royal Oud & Extraits',
-                'description' => 'Aged Cambodian agarwood and royal amber formulations.',
-                'badge_text' => 'Signature',
-                'sort_order' => 2,
-                'image' => 'assets/images/categories/collection_signature.jpg',
-                'is_active' => true,
-            ]
-        );
-
-        $catFrench = Category::firstOrCreate(
-            ['slug' => 'french-niche-collection'],
-            [
-                'name' => 'French Niche Collection',
-                'description' => 'Haute couture compositions crafted with authentic French Grasse fragrance oils.',
-                'badge_text' => 'Haute Couture',
-                'sort_order' => 3,
-                'image' => 'assets/images/categories/collection_candles.jpg',
-                'is_active' => true,
-            ]
-        );
-
-        $catAttar = Category::firstOrCreate(
-            ['slug' => 'attar'],
-            [
-                'name' => 'Attar Collection',
-                'description' => 'Pure concentrated alcohol-free attar oils and traditional macerations.',
-                'badge_text' => 'Alcohol-Free',
-                'sort_order' => 4,
-                'image' => 'assets/images/categories/collection_attar.jpg',
-                'is_active' => true,
-            ]
-        );
-
-        $catFloral = Category::firstOrCreate(
-            ['slug' => 'imperial-floral-saffron'],
-            [
-                'name' => 'Imperial Floral & Saffron',
-                'description' => 'Velvety rose petals, night-blooming Lahori jasmine, and radiant orange blossom.',
-                'badge_text' => 'Radiant',
-                'sort_order' => 5,
-                'image' => 'assets/images/categories/collection_signature.jpg',
-                'is_active' => true,
-            ]
-        );
-
-        $catLeather = Category::firstOrCreate(
-            ['slug' => 'leather-woody'],
-            [
-                'name' => 'Leather & Woody Collection',
-                'description' => 'Smoky Tuscan leather, aged birch, and rich cedarwood extraits.',
-                'badge_text' => 'Power & Sillage',
-                'sort_order' => 6,
-                'image' => 'assets/images/categories/collection_signature.jpg',
-                'is_active' => true,
-            ]
-        );
-
-        $catSports = Category::firstOrCreate(
-            ['slug' => 'sports-active-fresh'],
-            [
-                'name' => 'Sports & Active Fresh',
-                'description' => 'High octane, frosted spearmint and marine freshness for active lifestyles.',
-                'badge_text' => 'High Performance',
-                'sort_order' => 7,
-                'image' => 'assets/images/categories/collection_candles.jpg',
                 'is_active' => true,
             ]
         );
 
         // 3. Ensure Collections
-        $colExclusive = Collection::firstOrCreate(
-            ['slug' => 'exclusive'],
-            [
-                'name' => 'Exclusive Reserve',
-                'description' => 'Private reserve flacons macerated with aged agarwood and precious rare absolutes.',
-                'badge_text' => 'Private Reserve',
-                'sort_order' => 1,
-                'is_featured' => true,
-            ]
-        );
-
         $colMen = Collection::firstOrCreate(
             ['slug' => 'men'],
             [
-                'name' => 'Men\'s Haute Parfumerie',
-                'description' => 'Commanding, smoky leather, vintage tobacco, and dark woody extraits.',
+                'name' => "Men's Haute Parfumerie",
+                'description' => 'Commanding, smoky leather, aromatic woods, and rich spices.',
                 'badge_text' => 'Power & Sillage',
-                'sort_order' => 2,
+                'sort_order' => 1,
                 'is_featured' => true,
             ]
         );
@@ -143,10 +61,10 @@ class ProductionCatalogSeeder extends Seeder
         $colWomen = Collection::firstOrCreate(
             ['slug' => 'women'],
             [
-                'name' => 'Women\'s Imperial Flora',
-                'description' => 'Sensual Taif rose petals, night-blooming jasmine, and warm amber vanilla nectar.',
+                'name' => "Women's Imperial Flora",
+                'description' => 'Sensual florals, luscious gourmands, and luminous amber extraits.',
                 'badge_text' => 'Sensual & Radiant',
-                'sort_order' => 3,
+                'sort_order' => 2,
                 'is_featured' => true,
             ]
         );
@@ -154,779 +72,615 @@ class ProductionCatalogSeeder extends Seeder
         $colUnisex = Collection::firstOrCreate(
             ['slug' => 'unisex'],
             [
-                'name' => 'Unisex Niche Extraits',
-                'description' => 'Transcendent compositions balancing crisp citrus, ambergris, and sweet balsamic woods.',
+                'name' => "Unisex & Niche Extraits",
+                'description' => 'Transcendent compositions balancing ambergris, warm woods, and precious resins.',
                 'badge_text' => 'Transcendent',
+                'sort_order' => 3,
+                'is_featured' => true,
+            ]
+        );
+
+        $colExclusive = Collection::firstOrCreate(
+            ['slug' => 'exclusive'],
+            [
+                'name' => "Exclusive Reserve",
+                'description' => 'Hand-macerated private reserve formulations for connoisseurs.',
+                'badge_text' => 'Private Reserve',
                 'sort_order' => 4,
                 'is_featured' => true,
             ]
         );
 
-        $colNight = Collection::firstOrCreate(
-            ['slug' => 'night-evening'],
-            [
-                'name' => 'Night & Evening Collection',
-                'description' => 'Intoxicating night signatures with magnetic sillage and unforgettable projection.',
-                'badge_text' => 'Night Power',
-                'sort_order' => 5,
-                'is_featured' => true,
-            ]
-        );
-
-        $colSports = Collection::firstOrCreate(
-            ['slug' => 'sports'],
-            [
-                'name' => 'Sports & Active Collection',
-                'description' => 'Dynamic cooling extraits engineered to thrive under heat and intense movement.',
-                'badge_text' => 'Active Scent',
-                'sort_order' => 6,
-                'is_featured' => true,
-            ]
-        );
-
-        // 4. Ensure Fragrance Families
-        $ffWoody = FragranceFamily::firstOrCreate(
-            ['slug' => 'woody-oriental-oud'],
-            [
-                'name' => 'Woody Oriental & Royal Oud',
-                'accent_color' => '#C9A24B',
-                'description' => 'Aged Cambodian agarwood, Mysore sandalwood, and warm amber resin.',
-            ]
-        );
-
-        $ffFloral = FragranceFamily::firstOrCreate(
-            ['slug' => 'floral-amber'],
-            [
-                'name' => 'Imperial Rose & Golden Amber',
-                'accent_color' => '#E0A96D',
-                'description' => 'Velvety Taif Rose, Damascus petals, and golden ambergris.',
-            ]
-        );
-
-        $ffLeather = FragranceFamily::firstOrCreate(
-            ['slug' => 'smoky-leather-spice'],
-            [
-                'name' => 'Smoky Leather & Royal Spice',
-                'accent_color' => '#8C6D53',
-                'description' => 'Tuscan leather, Kashmiri saffron, crushed black cardamom, and smoked birch.',
-            ]
-        );
-
-        $ffFresh = FragranceFamily::firstOrCreate(
-            ['slug' => 'citrus-aromatic-mist'],
-            [
-                'name' => 'Citrus Aromatic & Mountain Mist',
-                'accent_color' => '#5C9EAD',
-                'description' => 'Crisp Italian bergamot, Himalayan pine needle, and silver musk.',
-            ]
-        );
-
+        // 4. Fragrance Families
         $ffGourmand = FragranceFamily::firstOrCreate(
-            ['slug' => 'gourmand-bourbon-vanilla'],
-            [
-                'name' => 'Gourmand Velvet & Bourbon Vanilla',
-                'accent_color' => '#A0522D',
-                'description' => 'Dark cocoa, Madagascar bourbon vanilla, and roasted tonka bean.',
-            ]
+            ['slug' => 'gourmand-vanille'],
+            ['name' => 'Warm Gourmand & Bourbon Vanilla', 'accent_color' => '#A0522D', 'description' => 'Caramel, dates, cinnamon, and dark bourbon vanilla.']
+        );
+        $ffLeather = FragranceFamily::firstOrCreate(
+            ['slug' => 'leather-spice'],
+            ['name' => 'Smoky Leather & Royal Spice', 'accent_color' => '#8C6D53', 'description' => 'Tuscan leather, black suede, and Kashmiri saffron.']
+        );
+        $ffFloral = FragranceFamily::firstOrCreate(
+            ['slug' => 'floral-nectar'],
+            ['name' => 'Imperial Floral & White Flowers', 'accent_color' => '#E0A96D', 'description' => 'Tuberose, jasmine sambac, and white musk.']
+        );
+        $ffFresh = FragranceFamily::firstOrCreate(
+            ['slug' => 'fresh-aquatic-citrus'],
+            ['name' => 'Fresh Aquatic & Oceanic Bergamot', 'accent_color' => '#5C9EAD', 'description' => 'Crisp bergamot, aquatic accords, and cedarwood.']
+        );
+        $ffWoody = FragranceFamily::firstOrCreate(
+            ['slug' => 'woody-oud-amber'],
+            ['name' => 'Woody Oriental & Royal Oud', 'accent_color' => '#C9A24B', 'description' => 'Rare agarwood, Mysore sandalwood, and golden amber.']
         );
 
-        // 5. Complete 26 Products Catalog from Product List
-        $perfumes = [
-            // 1. Lattafa Khamrah (Oriental / Unisex)
+        // 5. The exact 26 Excel perfumes list
+        $productsData = [
             [
-                'name' => 'Lattafa Khumrah',
-                'impression_of' => 'Midnight Oud Exclusive (Lattafa Khamrah Impression)',
+                'sku' => 'RVH-001',
+                'name' => 'Lattafa Khumrah (Midnight Oud Exclusive)',
                 'slug' => 'lattafa-khumrah-midnight-oud-exclusive',
-                'sku' => 'PC-LAT-KHUMRAH',
-                'category_id' => $catOud->id,
+                'impression_of' => 'Midnight Oud Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffGourmand->id,
                 'gender' => 'Unisex',
-                'price' => 3850.00,
-                'sale_price' => 3450.00,
-                'compare_at_price' => 4500.00,
-                'stock' => 50,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colUnisex->id, $colNight->id],
-                'tagline' => 'Warm Resinous Dates, Sweet Cinnamon, Praline & Midnight Smoked Oud',
-                'description' => 'An opulent, sensual gourmand oriental elixir. Opens with a decadent swirl of rich spiced dates, fiery cinnamon, and nutmeg, melting into a heart of velvety praline and tuberose, anchored by smoked benzoin, bourbon vanilla, and precious midnight agarwood.',
-                'top_notes_summary' => 'Cinnamon, Nutmeg, Calabrian Bergamot',
-                'heart_notes_summary' => 'Spiced Dates, Praline, Tuberose, Mahonial',
-                'base_notes_summary' => 'Bourbon Vanilla, Tonka Bean, Benzoin, Smoked Agarwood, Amberwood',
+                'stock' => 100,
+                'base_price' => 2300,
+                'sale_price' => 2300,
+                'compare_at_price' => 2800,
+                'prices' => [30 => 1350, 50 => 2300, 100 => 4000],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Warm Cinnamon, Sweet Praline, Nutmeg & Midnight Smoked Amber',
+                'description' => 'A deeply opulent blend of warm cinnamon, sweet dates, and creamy praline infused with midnight amber. Engineered with 35% extrait concentration for rich 14+ hours sillage.',
                 'thumbnail_image' => 'assets/images/perfumes/lattafa_khumrah.svg',
-                'hover_image' => 'assets/images/perfumes/prod_lattafa_khumrah.jpg',
+                'hover_image' => 'assets/images/perfumes/lattafa_khumrah_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
-                'is_new_arrival' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 2. Eclair (Caramel) (Oriental / Women)
             [
-                'name' => 'Eclair (Caramel Fantasy)',
-                'impression_of' => 'Caramel Fantasy Exclusive (Lattafa Eclaire Impression)',
+                'sku' => 'RVH-002',
+                'name' => 'Eclair (Caramel Fantasy Exclusive)',
                 'slug' => 'eclair-caramel-fantasy-exclusive',
-                'sku' => 'PC-ECL-CARAMEL',
-                'category_id' => $catFrench->id,
+                'impression_of' => 'Caramel Fantasy Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffGourmand->id,
-                'gender' => 'Women',
-                'price' => 3850.00,
-                'sale_price' => 3400.00,
-                'compare_at_price' => 4600.00,
-                'stock' => 45,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colWomen->id, $colUnisex->id],
-                'tagline' => 'Decadent Golden Caramel, Sweet Milk, Whipped Cream & Honeyed Vanilla',
-                'description' => 'A luscious indulgence of milky caramel confection and whipped sugar. Evoking artisanal French patisseries, this cozy gourmand wraps you in a comforting aura of melted butterscotch, white blossoms, and silky Madagascar vanilla.',
-                'top_notes_summary' => 'Caramel, Sweet Condensed Milk, Wild Honey',
-                'heart_notes_summary' => 'Whipped Cream, White Flowers, Roasted Almonds',
-                'base_notes_summary' => 'Madagascar Vanilla Bean, Praline, Soft White Musk',
-                'thumbnail_image' => 'assets/images/perfumes/eclair_caramel.svg',
-                'hover_image' => 'assets/images/perfumes/prod_eclair_caramel.jpg',
+                'gender' => 'Unisex',
+                'stock' => 100,
+                'base_price' => 2800,
+                'sale_price' => 2800,
+                'compare_at_price' => 3400,
+                'prices' => [30 => 1350, 50 => 2800, 100 => 4800],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Golden Salted Caramel, Fluffy Vanilla Marshmallow & Warm Milk',
+                'description' => 'A mouthwatering gourmand dream featuring golden caramel drizzle, whipped vanilla cream, and soft tonka bean. Leaves an irresistible comforting luxury scent trail.',
+                'thumbnail_image' => 'assets/images/perfumes/eclair.svg',
+                'hover_image' => 'assets/images/perfumes/eclair_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
-                'is_new_arrival' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 3. Marjaan (Unisex)
             [
+                'sku' => 'RVH-003',
                 'name' => 'Marjaan',
-                'impression_of' => 'Marjaan Unisex Extrait',
-                'slug' => 'marjaan-unisex',
-                'sku' => 'PC-MRJ-UNISEX',
-                'category_id' => $catAttar->id,
-                'fragrance_family_id' => $ffFloral->id,
+                'slug' => 'marjaan',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
+                'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Unisex',
-                'price' => 3500.00,
-                'sale_price' => 2999.00,
-                'compare_at_price' => 4200.00,
-                'stock' => 35,
-                'volume_ml' => 50,
-                'collections' => [$colUnisex->id],
-                'tagline' => 'Precious Red Amber, Saffron Threads & Radiant Damascena Rose',
-                'description' => 'Marjaan is an enchanting bridge between traditional oriental warmth and modern floral luxury. Bursting with crisp ruby apple and golden saffron over a velvety bed of dark amber and sacred woods.',
-                'top_notes_summary' => 'Red Apple, Kashmiri Saffron, Pink Pepper',
-                'heart_notes_summary' => 'Damascena Rose Petals, Lahori Jasmine, Patchouli',
-                'base_notes_summary' => 'Warm Ambergris, Mysore Sandalwood, Royal White Musk',
+                'stock' => 100,
+                'base_price' => 2800,
+                'sale_price' => 2800,
+                'compare_at_price' => 3400,
+                'prices' => [30 => 1350, 50 => 2800, 100 => 4800],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Red Coral Amber, Aged Sandalwood & Sweet Velvet Spices',
+                'description' => 'Inspired by the precious gemstones of the Arabian Sea. Marjaan unfolds with radiant spices, aged Mysore sandalwood, and a warm, glowing amber base.',
                 'thumbnail_image' => 'assets/images/perfumes/marjaan.svg',
-                'hover_image' => 'assets/images/perfumes/prod_marjaan.jpg',
-                'is_featured' => false,
+                'hover_image' => 'assets/images/perfumes/marjaan_box.svg',
+                'is_featured' => true,
                 'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 4. My Way (Paris) (Women)
             [
+                'sku' => 'RVH-004',
                 'name' => 'My Way (Paris Ladies)',
-                'impression_of' => 'Paris Ladies (Armani My Way Impression)',
                 'slug' => 'my-way-paris-ladies',
-                'sku' => 'PC-MYW-PARIS',
-                'category_id' => $catFloral->id,
+                'impression_of' => 'Paris Ladies',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Women',
-                'price' => 3500.00,
-                'sale_price' => 2999.00,
-                'compare_at_price' => 4200.00,
-                'stock' => 40,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2900,
+                'sale_price' => 2900,
+                'compare_at_price' => 3500,
+                'prices' => [30 => 1350, 50 => 2900, 100 => 4400],
                 'collections' => [$colWomen->id],
-                'tagline' => 'Radiant Egyptian Orange Blossom, Indian Tuberose & Silky Vanilla',
-                'description' => 'An authentic impression of the iconic Paris floral masterpiece. A bright and luminous white bouquet crafted with vibrant citrus blossoms, intoxicating night-blooming tuberose, and an elegant base of cedarwood and bourbon vanilla.',
-                'top_notes_summary' => 'Egyptian Orange Blossom, Calabrian Bergamot',
-                'heart_notes_summary' => 'Indian Tuberose, Jasmine Sambac',
-                'base_notes_summary' => 'Madagascar Vanilla, Virginian Cedarwood, White Musk',
+                'tagline' => 'Egyptian Orange Blossom, Radiant Tuberose & White Cedar',
+                'description' => 'A luminous bouquet of bright white flowers from Egypt and India, underpinned by sensual bourbon vanilla and clean white musk. Elegant and timeless.',
                 'thumbnail_image' => 'assets/images/perfumes/my_way.svg',
                 'hover_image' => 'assets/images/perfumes/my_way_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 5. Afnan Supremacy (Men)
             [
+                'sku' => 'RVH-005',
                 'name' => 'Afnan Supremacy',
-                'impression_of' => 'Supremacy Silver Pour Homme (Afnan Supremacy Impression)',
                 'slug' => 'afnan-supremacy',
-                'sku' => 'PC-AFN-SUPREMACY',
-                'category_id' => $catFrench->id,
-                'fragrance_family_id' => $ffLeather->id,
-                'gender' => 'Men',
-                'price' => 3950.00,
-                'sale_price' => 3499.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 40,
-                'volume_ml' => 50,
-                'collections' => [$colMen->id],
-                'tagline' => 'Smoky Birch, Tart Pineapple, Blackcurrant & Majestic Oakmoss',
-                'description' => 'A commanding powerhouse for the modern leader. Crisp Italian bergamot, juicy blackcurrant, and smoked birch wood create a magnetic masculine signature with beast-mode longevity and projection.',
-                'top_notes_summary' => 'Pineapple, Blackcurrant, Bergamot, Crisp Apple',
-                'heart_notes_summary' => 'Smoked Birch, Moroccan Jasmine, Rose, Patchouli',
-                'base_notes_summary' => 'Grey Ambergris, Oakmoss, Musk, Bourbon Vanilla',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
+                'fragrance_family_id' => $ffWoody->id,
+                'gender' => 'Unisex',
+                'stock' => 100,
+                'base_price' => 3000,
+                'sale_price' => 3000,
+                'compare_at_price' => 3700,
+                'prices' => [30 => 1500, 50 => 3000, 100 => 5000],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Smoky Birch, Blackcurrant, Bergamot & Royal Ambergris',
+                'description' => 'A powerhouse composition delivering an assertive smoky birch and crisp blackcurrant opening that settles into magnetic patchouli, oakmoss, and royal ambergris.',
                 'thumbnail_image' => 'assets/images/perfumes/afnan_supremacy.svg',
                 'hover_image' => 'assets/images/perfumes/afnan_supremacy_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 6. Gucci Bloom (Women)
             [
+                'sku' => 'RVH-006',
                 'name' => 'Gucci Bloom',
-                'impression_of' => 'Bloom Floral Nectar (Gucci Bloom Impression)',
-                'slug' => 'gucci-bloom-women',
-                'sku' => 'PC-GCB-BLOOM',
-                'category_id' => $catFloral->id,
+                'slug' => 'gucci-bloom',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Women',
-                'price' => 3500.00,
-                'sale_price' => 2999.00,
-                'compare_at_price' => 4200.00,
-                'stock' => 35,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2000,
+                'sale_price' => 2000,
+                'compare_at_price' => 2500,
+                'prices' => [30 => 1300, 50 => 2000, 100 => 3500],
                 'collections' => [$colWomen->id],
-                'tagline' => 'Natural White Floral Tuberose, Jasmine Sambac & Powdery Rangoon Creeper',
-                'description' => 'Transport yourself to an expansive garden bursting with diverse blooms. Crafted with natural tuberose absolute and Jasmine Sambac extract, enriched by the rare powdery nuance of red Rangoon creeper.',
-                'top_notes_summary' => 'Green Notes, Wild Orange Blossom',
-                'heart_notes_summary' => 'Natural Tuberose, Jasmine Sambac, Rangoon Creeper',
-                'base_notes_summary' => 'Orris Butter, Sandalwood, Royal Vanilla Musk',
+                'tagline' => 'Natural Tuberose, Jasmine Sambac & Rangoon Creeper Petals',
+                'description' => 'Captures the rich scent of a thriving English garden filled with an abundance of flowers. Pure white tuberose absolute, powdery jasmine bud, and velvety floral accords.',
                 'thumbnail_image' => 'assets/images/perfumes/gucci_bloom.svg',
                 'hover_image' => 'assets/images/perfumes/gucci_bloom_box.svg',
+                'is_featured' => false,
+                'is_bestseller' => false,
+                'is_new_arrival' => false,
+            ],
+            [
+                'sku' => 'RVH-007',
+                'name' => '9PM Night Out (Night Out Exclusive)',
+                'slug' => '9pm-night-out-exclusive',
+                'impression_of' => 'Night Out Exclusive',
+                'category_id' => $catPerfume->id,
+                'fragrance_family_id' => $ffGourmand->id,
+                'gender' => 'Unisex',
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3100,
+                'prices' => [30 => 1500, 50 => 2500, 100 => 3750],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Crisp Wild Apple, Spicy Cinnamon, Lavender & Deep Vanilla Amber',
+                'description' => 'The ultimate clubbing and evening signature. Electric apple and cinnamon upfront that evolves into smooth lavender, orange blossom, and an addictive vanilla amber aura.',
+                'thumbnail_image' => 'assets/images/perfumes/9pm_night_out.svg',
+                'hover_image' => 'assets/images/perfumes/9pm_night_out_box.svg',
+                'is_featured' => true,
+                'is_bestseller' => true,
+                'is_new_arrival' => false,
+            ],
+            [
+                'sku' => 'RVH-008',
+                'name' => 'Rebel',
+                'slug' => 'rebel',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
+                'fragrance_family_id' => $ffFresh->id,
+                'gender' => 'Men',
+                'stock' => 100,
+                'base_price' => 2250,
+                'sale_price' => 2250,
+                'compare_at_price' => 2800,
+                'prices' => [30 => 1350, 50 => 2250, 100 => 3500],
+                'collections' => [$colMen->id],
+                'tagline' => 'Calabrian Bergamot, Sichuan Pepper, Lavender & Raw Ambroxan',
+                'description' => 'Raw, noble, and radically fresh. Bursting with sun-drenched bergamot, sharp Sichuan pepper, and a powerful trail of woody ambroxan.',
+                'thumbnail_image' => 'assets/images/perfumes/rebel.svg',
+                'hover_image' => 'assets/images/perfumes/rebel_box.svg',
                 'is_featured' => false,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 7. 9PM Night Out (Night / Unisex)
             [
-                'name' => '9PM Night Out',
-                'impression_of' => 'Night Out Exclusive (Afnan 9PM Night Edition Impression)',
-                'slug' => '9pm-night-out-exclusive',
-                'sku' => 'PC-9PM-NIGHTOUT',
-                'category_id' => $catFrench->id,
+                'sku' => 'RVH-009',
+                'name' => '9PM After 9',
+                'slug' => '9pm-after-9',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffGourmand->id,
-                'gender' => 'Unisex',
-                'price' => 3850.00,
-                'sale_price' => 3400.00,
-                'compare_at_price' => 4500.00,
-                'stock' => 45,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colMen->id, $colNight->id, $colUnisex->id],
-                'tagline' => 'Spiced Cinnamon Bark, Crisp Green Apple, Night Blossom & Deep Amber',
-                'description' => 'The ultimate party and evening powerhouse. Blends mouth-watering crisp green apple and sweet cinnamon bark with magnetic dark amber and tonka bean, leaving an unforgettable trail in every room.',
-                'top_notes_summary' => 'Spiced Cinnamon, Green Apple, Wild Bergamot',
-                'heart_notes_summary' => 'Night Blooming Lavender, Orange Blossom, Lily of Valley',
-                'base_notes_summary' => 'Golden Ambergris, Madagascar Vanilla, Tonka Bean, Patchouli',
-                'thumbnail_image' => 'assets/images/perfumes/9pm_nightout.svg',
-                'hover_image' => 'assets/images/perfumes/9pm_nightout_box.svg',
-                'is_featured' => true,
-                'is_bestseller' => true,
-                'is_new_arrival' => true,
-            ],
-
-            // 8. Rebel (Men)
-            [
-                'name' => 'Rebel',
-                'impression_of' => 'Rebel Pour Homme Extrait',
-                'slug' => 'rebel-men',
-                'sku' => 'PC-RBL-MEN',
-                'category_id' => $catFrench->id,
-                'fragrance_family_id' => $ffFresh->id,
                 'gender' => 'Men',
-                'price' => 3500.00,
-                'sale_price' => 2999.00,
-                'compare_at_price' => 4200.00,
-                'stock' => 30,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2300,
+                'sale_price' => 2300,
+                'compare_at_price' => 2900,
+                'prices' => [30 => 1300, 50 => 2300, 100 => 3400],
                 'collections' => [$colMen->id],
-                'tagline' => 'Electric Pink Pepper, Sparkling Citrus, Elemi Resin & Dark Cedar',
-                'description' => 'Bold, daring, and unapologetically masculine. Rebel blends fiery spices with crisp Mediterranean citrus and smoky cedarwood resin to create an electric aura of confidence.',
-                'top_notes_summary' => 'Pink Peppercorn, Italian Mandarin, Cardamom',
-                'heart_notes_summary' => 'Elemi Resin, Clary Sage, Lavender',
-                'base_notes_summary' => 'Smoked Cedarwood, Haitian Vetiver, Amber Crystals',
-                'thumbnail_image' => 'assets/images/perfumes/rebel_men.svg',
-                'hover_image' => 'assets/images/perfumes/rebel_men_box.svg',
+                'tagline' => 'Sensual Cardamom, Roasted Tonka, Rich Amber & Dark Woods',
+                'description' => 'A darker, deeper after-hours variation crafted with warm crushed cardamom, toasted tonka bean, and seductive dark woods.',
+                'thumbnail_image' => 'assets/images/perfumes/9pm_after_9.svg',
+                'hover_image' => 'assets/images/perfumes/9pm_after_9_box.svg',
                 'is_featured' => false,
                 'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 9. 9PM (After 9) (Men)
             [
-                'name' => '9PM (After 9)',
-                'impression_of' => 'After 9 Pour Homme (JPG Ultra Male / 9PM Impression)',
-                'slug' => '9pm-after-9',
-                'sku' => 'PC-9PM-AFTER9',
-                'category_id' => $catFrench->id,
-                'fragrance_family_id' => $ffGourmand->id,
-                'gender' => 'Men',
-                'price' => 3600.00,
-                'sale_price' => 3100.00,
-                'compare_at_price' => 4400.00,
-                'stock' => 50,
-                'volume_ml' => 50,
-                'collections' => [$colMen->id, $colNight->id],
-                'tagline' => 'Sweet Vanilla Mint, Spiced Cinnamon, Juicy Pear & Ambergris',
-                'description' => 'The celebrated signature for nightlife and intimate evenings. A seductive fusion of succulent spiced pear, sweet vanilla mint, and warm tonka bean engineered for long-lasting sillage.',
-                'top_notes_summary' => 'Juicy Pear, Wild Lavender, Mint, Bergamot',
-                'heart_notes_summary' => 'Spiced Cinnamon, Clary Sage, Cumin',
-                'base_notes_summary' => 'Black Bourbon Vanilla, Ambergris, Cedarwood, Patchouli',
-                'thumbnail_image' => 'assets/images/perfumes/9pm_after9.svg',
-                'hover_image' => 'assets/images/perfumes/9pm_after9_box.svg',
-                'is_featured' => true,
-                'is_bestseller' => true,
-                'is_new_arrival' => false,
-            ],
-
-            // 10. Ombre Leather (The Leather) (Men / Leather)
-            [
+                'sku' => 'RVH-010',
                 'name' => 'Ombre Leather (The Leather)',
-                'impression_of' => 'The Leather (Tom Ford Ombré Leather Impression)',
                 'slug' => 'ombre-leather-the-leather',
-                'sku' => 'PC-OML-THELEATHER',
-                'category_id' => $catLeather->id,
+                'impression_of' => 'The Leather',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffLeather->id,
                 'gender' => 'Men',
-                'price' => 3950.00,
-                'sale_price' => 3499.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 40,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2600,
+                'sale_price' => 2600,
+                'compare_at_price' => 3200,
+                'prices' => [30 => 1500, 50 => 2600, 100 => 3900],
                 'collections' => [$colMen->id],
-                'tagline' => 'Cardamom Noir, Rich Black Suede Leather, Jasmine & Earthy Moss',
-                'description' => 'A tactile and boundless leather impression. Driven by textured black leather and spiced cardamom, softened by wild jasmine sambac and rich white moss for an intoxicating presence.',
-                'top_notes_summary' => 'Cardamom Noir, Saffron',
-                'heart_notes_summary' => 'Black Suede Leather, Jasmine Sambac',
-                'base_notes_summary' => 'White Moss, Dark Patchouli, Amber',
+                'tagline' => 'Black Leather, Rich Cardamom, Jasmine Sambac & Earthy Moss',
+                'description' => 'Vast, untethered, and tactile. Rich floral leather and spices evoke the still air and open spaces of the American Southwest.',
                 'thumbnail_image' => 'assets/images/perfumes/ombre_leather.svg',
-                'hover_image' => 'assets/images/perfumes/sultan_cuir_box.svg',
+                'hover_image' => 'assets/images/perfumes/ombre_leather_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 11. Tuscan Leather (Leather Temptation) (Men / Leather)
             [
+                'sku' => 'RVH-011',
                 'name' => 'Tuscan Leather (Leather Temptation)',
-                'impression_of' => 'Leather Temptation (Tom Ford Tuscan Leather Impression)',
                 'slug' => 'tuscan-leather-leather-temptation',
-                'sku' => 'PC-TUS-LEATHER',
-                'category_id' => $catLeather->id,
+                'impression_of' => 'Leather Temptation',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffLeather->id,
                 'gender' => 'Men',
-                'price' => 3950.00,
-                'sale_price' => 3499.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 35,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2400,
+                'sale_price' => 2400,
+                'compare_at_price' => 3000,
+                'prices' => [30 => 1200, 50 => 2400, 100 => 4000],
                 'collections' => [$colMen->id],
-                'tagline' => 'Wild Raspberry, Crimson Saffron, Night Thyme & Raw Tuscan Leather',
-                'description' => 'The raw, sophisticated standard of luxury leather perfumery. Saffron and succulent raspberry lend a sweet modern contrast to prime Tuscan leather, frankincense, and smoked woods.',
-                'top_notes_summary' => 'Wild Raspberry, Crimson Saffron, Wild Thyme',
-                'heart_notes_summary' => 'Olibanum Frankincense, Night Jasmine',
-                'base_notes_summary' => 'Tuscan Leather, Black Suede, Amberwood',
+                'tagline' => 'Tuscan Leather, Bittersweet Raspberry, Saffron & Night Thyme',
+                'description' => 'A legendary chypre blend fusing raw, supple Tuscan leather with sweet tart raspberry, golden saffron, and smoky olibanum resin.',
                 'thumbnail_image' => 'assets/images/perfumes/tuscan_leather.svg',
-                'hover_image' => 'assets/images/perfumes/sultan_cuir_box.svg',
-                'is_featured' => true,
-                'is_bestseller' => true,
+                'hover_image' => 'assets/images/perfumes/tuscan_leather_box.svg',
+                'is_featured' => false,
+                'is_bestseller' => false,
                 'is_new_arrival' => false,
             ],
-
-            // 12. Sentinal (Exclusive / Men)
             [
-                'name' => 'Sentinal',
-                'impression_of' => 'Sentinal Private Reserve Exclusive',
+                'sku' => 'RVH-012',
+                'name' => 'Sentinal (Exclusive)',
                 'slug' => 'sentinal-exclusive',
-                'sku' => 'PC-SNT-EXCLUSIVE',
-                'category_id' => $catExclusive->id,
+                'impression_of' => 'Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffWoody->id,
-                'gender' => 'Men',
-                'price' => 4200.00,
-                'sale_price' => 3700.00,
-                'compare_at_price' => 5000.00,
-                'stock' => 30,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colMen->id],
-                'tagline' => 'Dark Plum, Smoked Birch, Black Cardamom & Royal Ambergris',
-                'description' => 'A private reserve extrait engineered for sovereign gravitas. Rich spiced plum blends seamlessly with aged cedarwood, smoky incense, and dark ambergris for an authoritative sillage.',
-                'top_notes_summary' => 'Dark Spiced Plum, Cardamom, Bergamot',
-                'heart_notes_summary' => 'Smoked Birch, Nutmeg, Cashmere Wood',
-                'base_notes_summary' => 'Royal Ambergris, Aged Agarwood, Dark Vanilla',
+                'gender' => 'Unisex',
+                'stock' => 100,
+                'base_price' => 3500,
+                'sale_price' => 3500,
+                'compare_at_price' => 4200,
+                'prices' => [30 => 2000, 50 => 3500, 100 => 5500],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Rare Royal Woods, Golden Frankincense & Midnight Amber Extrait',
+                'description' => 'A towering presence of royal frankincense, smoked cedar, and liquid ambergris. Built for collectors who command immediate reverence.',
                 'thumbnail_image' => 'assets/images/perfumes/sentinal.svg',
                 'hover_image' => 'assets/images/perfumes/sentinal_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 13. Black Opium (Charm) (Women)
             [
+                'sku' => 'RVH-013',
                 'name' => 'Black Opium (Charm)',
-                'impression_of' => 'Charm (YSL Black Opium Impression)',
-                'slug' => 'black-opium-charm-women',
-                'sku' => 'PC-BOP-CHARM',
-                'category_id' => $catFrench->id,
+                'slug' => 'black-opium-charm',
+                'impression_of' => 'Charm',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffGourmand->id,
                 'gender' => 'Women',
-                'price' => 3500.00,
-                'sale_price' => 2999.00,
-                'compare_at_price' => 4200.00,
-                'stock' => 45,
-                'volume_ml' => 50,
-                'collections' => [$colWomen->id, $colNight->id],
-                'tagline' => 'Shot of Dark Roasted Coffee, Orange Blossom, Pink Pepper & Sweet Vanilla',
-                'description' => 'An addictive shot of adrenaline and sensual warmth. Opens with energizing dark espresso beans and spicy pink pepper, mellowing into velvety white flowers and rich bourbon vanilla.',
-                'top_notes_summary' => 'Dark Roasted Coffee, Pink Pepper, Orange Blossom',
-                'heart_notes_summary' => 'Jasmine Sambac, Bitter Almond, Licorice',
-                'base_notes_summary' => 'Bourbon Vanilla, Patchouli, Cedarwood, Cashmere',
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3000,
+                'prices' => [30 => 1300, 50 => 2500, 100 => 3500],
+                'collections' => [$colWomen->id],
+                'tagline' => 'Adrenaline-Rich Black Coffee, White Florals & Sweet Vanilla',
+                'description' => 'The addictive feminine scent that captivates instantly. Energizing dark roasted coffee beans softened by radiant white blossoms and warm cedar vanilla.',
                 'thumbnail_image' => 'assets/images/perfumes/black_opium.svg',
                 'hover_image' => 'assets/images/perfumes/black_opium_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 14. Crush (Unisex)
             [
+                'sku' => 'RVH-014',
                 'name' => 'Crush',
-                'impression_of' => 'Crush Velvet Extrait',
-                'slug' => 'crush-unisex',
-                'sku' => 'PC-CRS-UNISEX',
-                'category_id' => $catFrench->id,
+                'slug' => 'crush',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Unisex',
-                'price' => 3400.00,
-                'sale_price' => 2899.00,
-                'compare_at_price' => 4000.00,
-                'stock' => 35,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3100,
+                'prices' => [30 => 1200, 50 => 2500, 100 => 3700],
                 'collections' => [$colUnisex->id],
-                'tagline' => 'Wild Crushed Berries, Sunlit Peach Nectar & Golden Amber Crystals',
-                'description' => 'A playful yet opulent cocktail of crushed summer fruits and golden amber warmth. Radiates irresistible charm and vibrant youthful charisma on both men and women.',
-                'top_notes_summary' => 'Wild Crushed Berries, Peach Nectar, Pink Grapefruit',
-                'heart_notes_summary' => 'Red Rose Petals, Peony, Magnolia Blossom',
-                'base_notes_summary' => 'Amber Crystals, Soft Cashmere, White Musk',
-                'thumbnail_image' => 'assets/images/perfumes/crush_unisex.svg',
-                'hover_image' => 'assets/images/perfumes/crush_unisex_box.svg',
+                'tagline' => 'Pink Peppercorn, Peony Petals, Exotic Spices & Radiant Amber',
+                'description' => 'An exhilarating burst of fresh pink peppercorn and blooming peony flowers resting on a clean, luminous amber base.',
+                'thumbnail_image' => 'assets/images/perfumes/crush.svg',
+                'hover_image' => 'assets/images/perfumes/crush_box.svg',
                 'is_featured' => false,
                 'is_bestseller' => false,
-                'is_new_arrival' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 15. Republic (Stronger With You) (Unisex / Men)
             [
+                'sku' => 'RVH-015',
                 'name' => 'Republic (Stronger With You)',
-                'impression_of' => 'Republic (Armani Stronger With You Impression)',
                 'slug' => 'republic-stronger-with-you',
-                'sku' => 'PC-REP-SWY',
-                'category_id' => $catFrench->id,
+                'impression_of' => 'Stronger With You',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffGourmand->id,
                 'gender' => 'Unisex',
-                'price' => 3600.00,
-                'sale_price' => 3100.00,
-                'compare_at_price' => 4400.00,
-                'stock' => 40,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3100,
+                'prices' => [30 => 1300, 50 => 2500, 100 => 4000],
                 'collections' => [$colUnisex->id, $colMen->id],
-                'tagline' => 'Spiced Cardamom, Roasted Chestnut, Pink Pepper & Smoked Vanilla',
-                'description' => 'An unpredictable and confident gourmand-fougere impression. Combines spicy pink pepper and cardamom with a delicious heart of candied chestnut and rich smoked bourbon vanilla.',
-                'top_notes_summary' => 'Cardamom, Pink Pepper, Violet Leaves, Mint',
-                'heart_notes_summary' => 'Candied Chestnut, Sage, Cinnamon, Melon',
-                'base_notes_summary' => 'Bourbon Vanilla, Amberwood, Cedarwood, Guaiac Wood',
-                'thumbnail_image' => 'assets/images/perfumes/republic_swy.svg',
-                'hover_image' => 'assets/images/perfumes/republic_swy_box.svg',
+                'tagline' => 'Glazed Chestnut, Sage, Cardamom & Smoky Vanilla Jungle Essence',
+                'description' => 'Magnetic and confident. Infused with sweet glazed candied chestnut accord, aromatic wild sage, and creamy smoked vanilla.',
+                'thumbnail_image' => 'assets/images/perfumes/republic.svg',
+                'hover_image' => 'assets/images/perfumes/republic_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 16. Bombshell (Women)
             [
+                'sku' => 'RVH-016',
                 'name' => 'Bombshell',
-                'impression_of' => 'Bombshell Flora Extrait (Victoria\'s Secret Bombshell Impression)',
-                'slug' => 'bombshell-women',
-                'sku' => 'PC-BMS-WOMEN',
-                'category_id' => $catFloral->id,
+                'slug' => 'bombshell',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Women',
-                'price' => 3400.00,
-                'sale_price' => 2899.00,
-                'compare_at_price' => 4000.00,
-                'stock' => 50,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2100,
+                'sale_price' => 2100,
+                'compare_at_price' => 2700,
+                'prices' => [30 => 1200, 50 => 2100, 100 => 3500],
                 'collections' => [$colWomen->id],
-                'tagline' => 'Purple Passion Fruit, Shangri-La Peony, Vanilla Orchid & Sunlit Citrus',
-                'description' => 'Pakistan\'s most requested fruity-floral fragrance impression. Sparkling with exotic purple passionfruit and citrus sunshine, blended seamlessly with delicate Shangri-La peonies and vanilla orchids.',
-                'top_notes_summary' => 'Purple Passion Fruit, Grapefruit, Pineapple, Strawberry',
-                'heart_notes_summary' => 'Shangri-La Yellow Peony, Vanilla Orchid, Jasmine, Lily of the Valley',
-                'base_notes_summary' => 'White Musk, Blonde Woods, Oakmoss',
+                'tagline' => 'Purple Passion Fruit, Shangri-La Yellow Peony & Vanilla Orchid',
+                'description' => 'Bright, glamorous, and sparkling. A joyful cocktail of freshly picked exotic passion fruit, Shangri-La peonies, and warm sun-drenched woods.',
                 'thumbnail_image' => 'assets/images/perfumes/bombshell.svg',
                 'hover_image' => 'assets/images/perfumes/bombshell_box.svg',
-                'is_featured' => true,
-                'is_bestseller' => true,
+                'is_featured' => false,
+                'is_bestseller' => false,
                 'is_new_arrival' => false,
             ],
-
-            // 17. Xerjoff Naxos (Caribbean Exclusive) (Luxury / Unisex)
             [
+                'sku' => 'RVH-017',
                 'name' => 'Xerjoff Naxos (Caribbean Exclusive)',
-                'impression_of' => 'Caribbean Exclusive (Xerjoff 1861 Naxos Impression)',
                 'slug' => 'xerjoff-naxos-caribbean-exclusive',
-                'sku' => 'PC-XRF-NAXOS',
-                'category_id' => $catExclusive->id,
+                'impression_of' => 'Caribbean Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Unisex',
-                'price' => 4500.00,
-                'sale_price' => 3950.00,
-                'compare_at_price' => 5500.00,
-                'stock' => 30,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colUnisex->id, $colMen->id],
-                'tagline' => 'Golden Mountain Honey, Sweet Blonde Tobacco, Sicilian Citrus & Tonka',
-                'description' => 'A masterwork tribute to Sicilian heritage and Caribbean warmth. Opens with crisp Italian bergamot and lavender, melting into golden honey, sweet cinnamon, rich blonde tobacco leaves, and bourbon vanilla.',
-                'top_notes_summary' => 'Bergamot, Sicilian Lemon, French Alpine Lavender',
-                'heart_notes_summary' => 'Mountain Honey, Cinnamon Bark, Cashmeran, Jasmine Sambac',
-                'base_notes_summary' => 'Blonde Tobacco Leaf, Tonka Bean, Madagascar Vanilla',
+                'stock' => 100,
+                'base_price' => 4000,
+                'sale_price' => 4000,
+                'compare_at_price' => 5000,
+                'prices' => [30 => 2000, 50 => 4000, 100 => 6000],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Raw Honey, Golden Tobacco Leaf, Sicilian Citrus & Cashmeran',
+                'description' => 'A celebratory tribute to the Sicilian heritage. Sparkling bergamot and lemon blended harmoniously with rich organic honey, aromatic lavender, and dried blonde tobacco leaf.',
                 'thumbnail_image' => 'assets/images/perfumes/xerjoff_naxos.svg',
                 'hover_image' => 'assets/images/perfumes/xerjoff_naxos_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
-                'is_new_arrival' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 18. Azzaro Wanted (Mission) (Men)
             [
+                'sku' => 'RVH-018',
                 'name' => 'Azzaro Wanted (Mission)',
-                'impression_of' => 'Mission (Azzaro Wanted / Most Wanted Impression)',
                 'slug' => 'azzaro-wanted-mission',
-                'sku' => 'PC-AZZ-WANTED',
-                'category_id' => $catFrench->id,
+                'impression_of' => 'Mission',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFresh->id,
                 'gender' => 'Men',
-                'price' => 3600.00,
-                'sale_price' => 3100.00,
-                'compare_at_price' => 4400.00,
-                'stock' => 40,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2300,
+                'sale_price' => 2300,
+                'compare_at_price' => 2900,
+                'prices' => [30 => 1300, 50 => 2300, 100 => 3700],
                 'collections' => [$colMen->id],
-                'tagline' => 'Zesty Lemon, Warm Ginger, Cardamom & Smoky Amberwood',
-                'description' => 'Designed for the charismatic achiever who lives life on his own terms. Fresh ginger and zesty lemon fuse with fiery Guatemalan cardamom and amberwood for an electrifying woody-spicy trail.',
-                'top_notes_summary' => 'Calabrian Lemon, Spiced Ginger, Lavender, Mint',
-                'heart_notes_summary' => 'Guatemalan Cardamom, Juniper, Apple, Geranium',
-                'base_notes_summary' => 'Haitian Vetiver, Tonka Bean, Amberwood, Cedar',
+                'tagline' => 'Calabrian Lemon, Spicy Ginger, Cade Wood & Haitian Vetiver',
+                'description' => 'Designed for the bold and charismatic man. An intense fresh woody-spicy fragrance with fiery ginger, lemon zest, and smoky vetiver.',
                 'thumbnail_image' => 'assets/images/perfumes/azzaro_wanted.svg',
                 'hover_image' => 'assets/images/perfumes/azzaro_wanted_box.svg',
                 'is_featured' => false,
-                'is_bestseller' => true,
+                'is_bestseller' => false,
                 'is_new_arrival' => false,
             ],
-
-            // 19. The White Oud (Unisex)
             [
+                'sku' => 'RVH-019',
                 'name' => 'The White Oud',
-                'impression_of' => 'The White Oud Soft Amber & Agarwood',
-                'slug' => 'the-white-oud-unisex',
-                'sku' => 'PC-WHO-UNISEX',
-                'category_id' => $catOud->id,
+                'slug' => 'the-white-oud',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Unisex',
-                'price' => 3800.00,
-                'sale_price' => 3300.00,
-                'compare_at_price' => 4600.00,
-                'stock' => 35,
-                'volume_ml' => 50,
-                'collections' => [$colUnisex->id, $colExclusive->id],
-                'tagline' => 'White Floral Dew, Spiced Cardamom, Soft White Agarwood & Skin Musk',
-                'description' => 'A clean, ethereal take on traditional oud. White Oud blends transparent floral dew with cardamom spice and gentle white agarwood, creating a royal scent that is never overpowering.',
-                'top_notes_summary' => 'White Floral Dew, Cardamom, Artemisia',
-                'heart_notes_summary' => 'White Agarwood Resin, Ambergris, Jasmine',
-                'base_notes_summary' => 'Clean Royal Musk, Mysore Sandalwood, Cypriol',
+                'stock' => 100,
+                'base_price' => 2600,
+                'sale_price' => 2600,
+                'compare_at_price' => 3200,
+                'prices' => [30 => 1500, 50 => 2600, 100 => 4200],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Velvety White Musk, Silky Agarwood & Clean Soft Amber',
+                'description' => 'A pristine, ethereal take on royal oud. Blends clean crystalline white musk with a smooth, refined agarwood base and soft powdery floral accords.',
                 'thumbnail_image' => 'assets/images/perfumes/the_white_oud.svg',
                 'hover_image' => 'assets/images/perfumes/the_white_oud_box.svg',
                 'is_featured' => true,
-                'is_bestseller' => false,
-                'is_new_arrival' => true,
+                'is_bestseller' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 20. Arabian Sea (Bleu de Chanel) (Unisex)
             [
+                'sku' => 'RVH-020',
                 'name' => 'Arabian Sea (Bleu de Chanel)',
-                'impression_of' => 'Bleu de Chanel Aquatic Marine (Arabian Sea Impression)',
-                'slug' => 'arabian-sea-bleu-de-chanel-unisex',
-                'sku' => 'PC-ARS-BDC',
-                'category_id' => $catFrench->id,
+                'slug' => 'arabian-sea-bleu-de-chanel',
+                'impression_of' => 'Bleu de Chanel',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFresh->id,
                 'gender' => 'Unisex',
-                'price' => 3800.00,
-                'sale_price' => 3300.00,
-                'compare_at_price' => 4600.00,
-                'stock' => 50,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2600,
+                'sale_price' => 2600,
+                'compare_at_price' => 3200,
+                'prices' => [30 => 1400, 50 => 2600, 100 => 3800],
                 'collections' => [$colUnisex->id, $colMen->id],
-                'tagline' => 'Grapefruit, Marine Sea Salt, Smoked Incense & Rich Cedarwood',
-                'description' => 'The ultimate expression of fresh oceanic sophistication. Opens with sun-drenched grapefruit and crisp mint, deepened by mysterious frankincense and rich sandalwood.',
-                'top_notes_summary' => 'Grapefruit, Lemon, Mint, Pink Peppercorn',
-                'heart_notes_summary' => 'Ginger, Nutmeg, Jasmine, Iso E Super',
-                'base_notes_summary' => 'Incense, Vetiver, Cedarwood, Sandalwood, Patchouli',
+                'tagline' => 'Grapefruit Zest, Marine Ozone, Smoked Incense & New Caledonian Sandalwood',
+                'description' => 'The quintessential blue signature. Zesty pink grapefruit and cool mint surge into deep aquatic notes and a refined cedar-incense base.',
                 'thumbnail_image' => 'assets/images/perfumes/arabian_sea.svg',
                 'hover_image' => 'assets/images/perfumes/arabian_sea_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 21. Erba Pura (Roman Memory) (Unisex)
             [
+                'sku' => 'RVH-021',
                 'name' => 'Erba Pura (Roman Memory)',
-                'impression_of' => 'Roman Memory (Sospiro / Xerjoff Erba Pura Impression)',
-                'slug' => 'erba-pura-roman-memory-unisex',
-                'sku' => 'PC-EBP-ROMAN',
-                'category_id' => $catFrench->id,
-                'fragrance_family_id' => $ffFresh->id,
+                'slug' => 'erba-pura-roman-memory',
+                'impression_of' => 'Roman Memory',
+                'category_id' => $catPerfume->id,
+                'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Unisex',
-                'price' => 3950.00,
-                'sale_price' => 3450.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 45,
-                'volume_ml' => 50,
-                'collections' => [$colUnisex->id],
-                'tagline' => 'Sicilian Orange, Calabrian Bergamot, Exotic Fruits & Sensual White Musk',
-                'description' => 'A mouthwatering basket of glistening Mediterranean fruits soaked in sweet Sicilian citrus. Macerated with an aristocratic white musk and amber base that projects for days.',
-                'top_notes_summary' => 'Sicilian Orange, Calabrian Bergamot, Sicilian Lemon',
-                'heart_notes_summary' => 'Mediterranean Summer Fruits Basket',
-                'base_notes_summary' => 'Sensual White Musk, Madagascar Bourbon Vanilla, Amber',
+                'stock' => 100,
+                'base_price' => 2400,
+                'sale_price' => 2400,
+                'compare_at_price' => 3000,
+                'prices' => [30 => 1200, 50 => 2400, 100 => 4000],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Sicilian Orange & Lemon, Mediterranean Fruit Basket & Fluffy White Musk',
+                'description' => 'An intoxicating fruit basket explosion. Sweet Sicilian oranges and Calabrian bergamot drenched in liquid amber and enveloped by an enduring sensual white musk cloud.',
                 'thumbnail_image' => 'assets/images/perfumes/erba_pura.svg',
                 'hover_image' => 'assets/images/perfumes/erba_pura_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
                 'is_new_arrival' => false,
             ],
-
-            // 22. Hawas Ice (Ice Heaven) (Unisex)
             [
+                'sku' => 'RVH-022',
                 'name' => 'Hawas Ice (Ice Heaven)',
-                'impression_of' => 'Ice Heaven (Rasasi Hawas Ice Impression)',
-                'slug' => 'hawas-ice-ice-heaven-unisex',
-                'sku' => 'PC-HWI-ICEHEAVEN',
-                'category_id' => $catFrench->id,
+                'slug' => 'hawas-ice-ice-heaven',
+                'impression_of' => 'Ice Heaven',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFresh->id,
                 'gender' => 'Unisex',
-                'price' => 3950.00,
-                'sale_price' => 3450.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 50,
-                'volume_ml' => 50,
-                'collections' => [$colUnisex->id, $colMen->id],
-                'tagline' => 'Frozen Green Apple, Star Anise, Aquatic Driftwood, Plum & Ambergris',
-                'description' => 'The colder, crisper edition of the viral Hawas formula. Sub-zero frozen Italian citrus and icy green apple meet aquatic mint and rich ambergris for maximum summer compliment factor.',
-                'top_notes_summary' => 'Frozen Apple, Italian Bergamot, Sicilian Lemon, Star Anise',
-                'heart_notes_summary' => 'Cardamom, Plum, Orange Blossom, Aquatic Accord',
-                'base_notes_summary' => 'Ambergris, Musk, Driftwood, Oakmoss',
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3200,
+                'prices' => [30 => 1500, 50 => 2500, 100 => 3750],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Frosted Italian Lemon, Star Anise, Mint & Oceanic Ambergris',
+                'description' => 'Sub-zero aquatic power. Frosty citrus and crystalline mint energized by star anise and resting on a long-lasting oceanic ambergris foundation.',
                 'thumbnail_image' => 'assets/images/perfumes/hawas_ice.svg',
                 'hover_image' => 'assets/images/perfumes/hawas_ice_box.svg',
                 'is_featured' => true,
                 'is_bestseller' => true,
-                'is_new_arrival' => true,
+                'is_new_arrival' => false,
             ],
-
-            // 23. Silk Musk (Exclusive / Unisex)
             [
-                'name' => 'Silk Musk',
-                'impression_of' => 'Silk Musk Royal Reserve Exclusive',
+                'sku' => 'RVH-023',
+                'name' => 'Silk Musk (Exclusive)',
                 'slug' => 'silk-musk-exclusive',
-                'sku' => 'PC-SLK-MUSK',
-                'category_id' => $catExclusive->id,
+                'impression_of' => 'Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFloral->id,
                 'gender' => 'Unisex',
-                'price' => 3950.00,
-                'sale_price' => 3450.00,
-                'compare_at_price' => 4800.00,
-                'stock' => 35,
-                'volume_ml' => 50,
+                'stock' => 100,
+                'base_price' => 2400,
+                'sale_price' => 2400,
+                'compare_at_price' => 3000,
+                'prices' => [30 => 1200, 50 => 2400, 100 => 4400],
                 'collections' => [$colExclusive->id, $colUnisex->id],
-                'tagline' => 'Velvety White Lily, Silken Cashmere, Royal Skin Musk & Golden Honey',
-                'description' => 'Pure luxury in liquid form. Silk Musk wraps the wearer in an angelic veil of soft white petals, sheer cashmere wood, and velvety royal musk that lingers intimately all day.',
-                'top_notes_summary' => 'White Lily, Silk Petal Accord, Sweet Mandarin',
-                'heart_notes_summary' => 'Powdery Cashmere, Jasmine Blossom, Golden Honey',
-                'base_notes_summary' => 'Pure Royal White Musk, Amber Resin, Mysore Sandalwood',
+                'tagline' => 'Royal White Musk, Lily of the Valley, Soft Powdery Violet & Amber',
+                'description' => 'Pure silk draped across bare skin. Incredibly clean, soothing, and serene. Blended with powdery floral nectar and silky musk that lasts through the day.',
                 'thumbnail_image' => 'assets/images/perfumes/silk_musk.svg',
                 'hover_image' => 'assets/images/perfumes/silk_musk_box.svg',
                 'is_featured' => true,
-                'is_bestseller' => true,
+                'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 24. 91 Sports (Sports / Men / Unisex)
             [
+                'sku' => 'RVH-024',
                 'name' => '91 Sports',
-                'impression_of' => '91 Sports Performance Extrait Exclusive',
-                'slug' => '91-sports-exclusive',
-                'sku' => 'PC-91-SPORTS',
-                'category_id' => $catSports->id,
+                'slug' => '91-sports',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffFresh->id,
                 'gender' => 'Men',
-                'price' => 3850.00,
-                'sale_price' => 3350.00,
-                'compare_at_price' => 4600.00,
-                'stock' => 40,
-                'volume_ml' => 50,
-                'collections' => [$colSports->id, $colMen->id, $colUnisex->id],
-                'tagline' => 'Frosted Spearmint, Sea Salt Mist, Clary Sage & Smoked Cedarwood',
-                'description' => 'Formulated for dynamic athletes and active lifestyles. Delivers an immediate blast of frosty spearmint and marine freshness supported by clean musk that thrives under body heat.',
-                'top_notes_summary' => 'Frosted Spearmint, Italian Mandarin, Sea Salt',
-                'heart_notes_summary' => 'Clary Sage, Lavender, Crisp Rosemary',
-                'base_notes_summary' => 'Smoked Cedarwood, White Ambergris, Clean Musk',
+                'stock' => 100,
+                'base_price' => 2700,
+                'sale_price' => 2700,
+                'compare_at_price' => 3300,
+                'prices' => [60 => 2700],
+                'collections' => [$colMen->id],
+                'tagline' => 'Crisp Grapefruit, Cooling Mint, Aquatic Accord & Clean Cedarwood',
+                'description' => 'Dynamic athletic performance extrait formulated to withstand intense heat and activity while maintaining an invigorating, ultra-crisp trail.',
                 'thumbnail_image' => 'assets/images/perfumes/91_sports.svg',
                 'hover_image' => 'assets/images/perfumes/91_sports_box.svg',
-                'is_featured' => false,
+                'is_featured' => true,
                 'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 25. 91 Degree (Sports / Men)
             [
+                'sku' => 'RVH-025',
                 'name' => '91 Degree',
-                'impression_of' => '91 Degree High Octane Extrait Exclusive',
-                'slug' => '91-degree-exclusive',
-                'sku' => 'PC-91-DEGREE',
-                'category_id' => $catSports->id,
+                'slug' => '91-degree',
+                'impression_of' => null,
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffLeather->id,
-                'gender' => 'Men',
-                'price' => 3850.00,
-                'sale_price' => 3350.00,
-                'compare_at_price' => 4600.00,
-                'stock' => 40,
-                'volume_ml' => 50,
-                'collections' => [$colSports->id, $colMen->id],
-                'tagline' => 'Fiery Red Chili Pepper, Spiced Nutmeg, Saddle Leather & Dark Amber',
-                'description' => 'High octane warmth that turns up the heat. A spicy leather powerhouse blending red pepper heat with crushed nutmeg, resinous labdanum, and rich dark amber.',
-                'top_notes_summary' => 'Red Pepper, Pink Peppercorn, Calabrian Bergamot',
-                'heart_notes_summary' => 'Nutmeg, Saddle Leather, Clove, Cinnamon',
-                'base_notes_summary' => 'Dark Amber, Indonesian Patchouli, Smoked Vetiver',
+                'gender' => 'Unisex',
+                'stock' => 100,
+                'base_price' => 2500,
+                'sale_price' => 2500,
+                'compare_at_price' => 3100,
+                'prices' => [30 => 1300, 50 => 2500],
+                'collections' => [$colExclusive->id, $colUnisex->id],
+                'tagline' => 'Fiery Spices, Nutmeg, Saddle Leather & Smoked Patchouli',
+                'description' => 'A masterwork of thermodynamic contrast. Blends blazing red peppercorns with warm saddle leather and deep smoked patchouli resin.',
                 'thumbnail_image' => 'assets/images/perfumes/91_degree.svg',
                 'hover_image' => 'assets/images/perfumes/91_degree_box.svg',
-                'is_featured' => false,
+                'is_featured' => true,
                 'is_bestseller' => false,
                 'is_new_arrival' => true,
             ],
-
-            // 26. 91 Gold Edition (Exclusive / Unisex)
             [
-                'name' => '91 Gold Edition',
-                'impression_of' => '91 Gold Edition All Exclusive Reserve',
-                'slug' => '91-gold-edition-exclusive',
-                'sku' => 'PC-91-GOLD',
-                'category_id' => $catExclusive->id,
+                'sku' => 'RVH-026',
+                'name' => '91 Gold Edition (All Exclusive)',
+                'slug' => '91-gold-edition-all-exclusive',
+                'impression_of' => 'All Exclusive',
+                'category_id' => $catPerfume->id,
                 'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Unisex',
-                'price' => 4500.00,
-                'sale_price' => 3950.00,
-                'compare_at_price' => 5500.00,
-                'stock' => 30,
-                'volume_ml' => 50,
-                'collections' => [$colExclusive->id, $colUnisex->id, $colMen->id],
+                'stock' => 100,
+                'base_price' => 3500,
+                'sale_price' => 3500,
+                'compare_at_price' => 4500,
+                'prices' => [30 => 1800, 50 => 3500, 100 => 5500],
+                'collections' => [$colExclusive->id, $colUnisex->id],
                 'tagline' => '24K Saffron, Rare Aged Agarwood, Bourbon Vanilla & Royal Ambergris',
-                'description' => 'The crown jewel of the 91 collection. Hand-macerated with ultra-pure saffron strands, aged Cambodian agarwood, and opulent ambergris for unmatched regal distinction.',
-                'top_notes_summary' => '24K Kashmiri Saffron, Cardamom Noir, Blood Orange',
-                'heart_notes_summary' => 'Royal Damascus Rose, Golden Labdanum, Smoked Birch',
-                'base_notes_summary' => 'Aged Cambodian Oud, Bourbon Vanilla, Golden Ambergris',
+                'description' => 'The pinnacle of private reserve luxury. Macerated with Kashmiri saffron strands, vintage agarwood, and ambergris for regal sillage.',
                 'thumbnail_image' => 'assets/images/perfumes/91_gold_edition.svg',
                 'hover_image' => 'assets/images/perfumes/91_gold_edition_box.svg',
                 'is_featured' => true,
@@ -935,18 +689,29 @@ class ProductionCatalogSeeder extends Seeder
             ],
         ];
 
-        // 6. Insert or Update Products
-        $insertedCount = 0;
-        $updatedCount = 0;
+        // 6. Delete any products not in this exact 26 list
+        $allowedSkus = array_column($productsData, 'sku');
+        $removed = Product::whereNotIn('sku', $allowedSkus)->get();
+        foreach ($removed as $oldP) {
+            $oldP->collections()->detach();
+            $oldP->scentNotes()->detach();
+            ProductVariant::where('product_id', $oldP->id)->delete();
+            ProductPrice::where('product_id', $oldP->id)->delete();
+            ProductImage::where('product_id', $oldP->id)->delete();
+            $oldP->delete();
+        }
 
-        foreach ($perfumes as $pData) {
-            $collections = $pData['collections'] ?? [];
-            unset($pData['collections']);
+        // 7. Upsert 26 Products
+        foreach ($productsData as $data) {
+            $collections = $data['collections'] ?? [];
+            $prices = $data['prices'] ?? [];
+            $basePrice = $data['base_price'] ?? 2500;
+            unset($data['collections'], $data['prices'], $data['base_price']);
 
-            $product = Product::where('slug', $pData['slug'])->orWhere('sku', $pData['sku'])->first();
-
+            $product = Product::where('sku', $data['sku'])->first();
             $payload = array_merge([
                 'brand_id' => $brand->id,
+                'price' => $basePrice,
                 'concentration' => 'Extrait de Parfum (35% Oil Concentration)',
                 'longevity' => '12-16 Hours (Long Lasting)',
                 'sillage' => 'Strong / Noticeable Sillage',
@@ -954,98 +719,68 @@ class ProductionCatalogSeeder extends Seeder
                 'time_of_day' => 'Day & Evening',
                 'in_stock' => true,
                 'is_active' => true,
-                'rating_avg' => rand(48, 50) / 10,
-                'reviews_count' => rand(15, 65),
-                'meta_title' => $pData['name'] . ' | Perfumes Collection Pakistan',
-                'meta_description' => $pData['tagline'] . '. High concentration luxury impression crafted in Pakistan.',
-            ], $pData);
+                'rating_avg' => 4.9,
+                'reviews_count' => rand(25, 65),
+                'meta_title' => $data['name'] . ' | Perfumes Collection Pakistan',
+                'meta_description' => $data['tagline'] . '. High concentration luxury impression crafted in Pakistan.',
+                'top_notes_summary' => 'Calabrian Bergamot, Pink Pepper, Golden Amber',
+                'heart_notes_summary' => 'Damascus Rose, Spiced Cinnamon, White Jasmine',
+                'base_notes_summary' => 'Bourbon Vanilla, Mysore Sandalwood, Royal Musk',
+            ], $data);
 
             if (!$product) {
                 $product = Product::create($payload);
-                $insertedCount++;
             } else {
                 $product->update($payload);
-                $updatedCount++;
             }
 
-            // Sync collections
             if (!empty($collections)) {
-                $product->collections()->syncWithoutDetaching($collections);
+                $product->collections()->sync($collections);
             }
 
-            // Sync ProductImage entries
-            // 1) Primary Image
+            // Sync ProductImage
             ProductImage::updateOrCreate(
-                [
-                    'product_id' => $product->id,
-                    'is_primary' => true,
-                ],
-                [
-                    'image_path' => $product->thumbnail_image,
-                    'alt_text' => $product->name . ' - Primary Flacon',
-                    'sort_order' => 1,
-                ]
+                ['product_id' => $product->id, 'is_primary' => true],
+                ['image_path' => $product->thumbnail_image, 'alt_text' => $product->name, 'sort_order' => 1]
             );
-
-            // 2) Secondary / Hover Image
-            if ($product->hover_image && $product->hover_image !== $product->thumbnail_image) {
+            if ($product->hover_image) {
                 ProductImage::updateOrCreate(
-                    [
-                        'product_id' => $product->id,
-                        'is_primary' => false,
-                        'sort_order' => 2,
-                    ],
-                    [
-                        'image_path' => $product->hover_image,
-                        'alt_text' => $product->name . ' - Luxury Presentation Box',
-                    ]
+                    ['product_id' => $product->id, 'is_primary' => false],
+                    ['image_path' => $product->hover_image, 'alt_text' => $product->name . ' Box', 'sort_order' => 2]
                 );
             }
 
-            // Sync Variants (50ml Flacon & 100ml Collector Flacon)
-            // 50ml Default Variant
-            ProductVariant::updateOrCreate(
-                [
+            // Sync ProductPrice
+            ProductPrice::where('product_id', $product->id)->delete();
+            foreach ($prices as $size => $price) {
+                ProductPrice::create([
                     'product_id' => $product->id,
-                    'volume_ml' => 50,
-                ],
-                [
-                    'size_label' => '50ml Flacon',
-                    'price' => $product->price,
-                    'sale_price' => $product->sale_price,
-                    'sku' => $product->sku . '-50ML',
-                    'stock' => $product->stock,
-                    'is_default' => true,
-                ]
-            );
+                    'size' => $size . 'ml',
+                    'price' => $price,
+                ]);
+            }
 
-            // 100ml Variant
-            $price100 = round($product->price * 1.65, -2);
-            $salePrice100 = $product->sale_price ? round($product->sale_price * 1.65, -2) : null;
-
-            ProductVariant::updateOrCreate(
-                [
+            // Sync ProductVariant
+            ProductVariant::where('product_id', $product->id)->delete();
+            $isFirst = true;
+            foreach ($prices as $size => $price) {
+                ProductVariant::create([
                     'product_id' => $product->id,
-                    'volume_ml' => 100,
-                ],
-                [
-                    'size_label' => '100ml Collector Flacon',
-                    'price' => $price100,
-                    'sale_price' => $salePrice100,
-                    'sku' => $product->sku . '-100ML',
-                    'stock' => max(15, (int)($product->stock * 0.7)),
-                    'is_default' => false,
-                ]
-            );
+                    'size_label' => $size . 'ml Flacon',
+                    'volume_ml' => $size,
+                    'price' => $price,
+                    'sale_price' => $price,
+                    'sku' => $product->sku . '-' . $size . 'ML',
+                    'stock' => 100,
+                    'is_default' => $size === 50 || ($isFirst && !isset($prices[50])),
+                ]);
+                $isFirst = false;
+            }
         }
 
         ActivityLog::record(
             'production_catalog_seeded',
-            "Production catalog seeded successfully. {$insertedCount} products created, {$updatedCount} products updated."
+            "Production catalog seeded successfully with exact 26 Excel perfumes."
         );
-
-        if ($this->command) {
-            $this->command->info("Production catalog seeded successfully! Added: {$insertedCount}, Updated: {$updatedCount}");
-        }
     }
 }

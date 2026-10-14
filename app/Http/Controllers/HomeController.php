@@ -110,8 +110,8 @@ class HomeController extends Controller
         if ($newArrivals->isEmpty()) {
             $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
                 ->active()
-                ->whereIn('id', [1, 2, 3, 4, 5, 6, 7])
                 ->orderBy('id', 'asc')
+                ->take(8)
                 ->get();
         }
 
