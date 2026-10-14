@@ -685,7 +685,7 @@
                                         {{ $product->name }}
                                     </div>
                                     <p class="mb-0 font-sans" 
-                                       style="color: #4A403A; font-size: 0.86rem; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                       style="color: #4A403A; font-size: 0.88rem; line-height: 1.65;">
                                         {{ $review->comment }}
                                     </p>
                                 </div>
