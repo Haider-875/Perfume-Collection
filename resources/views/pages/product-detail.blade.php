@@ -670,34 +670,23 @@
                         <!-- Existing Reviews List -->
                         <div class="d-flex flex-column gap-3 font-sans">
                             @forelse($product->reviews as $review)
-                                <div class="p-4 rounded-4 d-flex flex-column gap-2 shadow-sm"
-                                    style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
-                                                style="width: 32px; height: 32px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29; font-size: 11px;">
-                                                {{ substr($review->user_name ?? 'P', 0, 1) }}
-                                            </div>
-                                            <div>
-                                                <span class="fw-semibold"
-                                                    style="font-size: 0.95rem; color: #211D1E;">{{ $review->user_name }}</span>
-                                                <span class="text-success ms-2" style="font-size: 10px;"><i
-                                                        class="fas fa-check-circle"></i> Verified &bull;
-                                                    {{ $review->user_city ?? 'Pakistan' }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex text-xs" style="color: #9E7D3B;">
+                                <div class="p-3.5 rounded-3 d-flex flex-column gap-1.5 shadow-sm"
+                                    style="background-color: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 12px;">
+                                    <div class="d-flex align-items-center justify-content-between gap-2">
+                                        <span class="fw-bold text-truncate"
+                                            style="font-size: 0.95rem; color: #110D0E;">{{ $review->user_name }}</span>
+                                        <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d;">
                                             @for($i = 1; $i <= 5; $i++)
                                                 <i class="fas fa-star {{ $i <= $review->rating ? '' : 'opacity-25' }}"></i>
                                             @endfor
                                         </div>
                                     </div>
-                                    @if($review->review_title)
-                                        <h5 class="text-xs fw-semibold mb-0" style="color: #541B29;">{{ $review->review_title }}
-                                        </h5>
-                                    @endif
-                                    <p class="text-xs lh-base font-light mb-0" style="color: #4A403A;">
-                                        "{{ $review->comment }}"
+                                    <div class="fw-semibold text-truncate" style="font-size: 0.82rem; color: #8A4B59;">
+                                        {{ $product->name }}
+                                    </div>
+                                    <p class="mb-0 font-sans" 
+                                       style="color: #4A403A; font-size: 0.85rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                        {{ $review->comment }}
                                     </p>
                                 </div>
                             @empty

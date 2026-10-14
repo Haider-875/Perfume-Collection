@@ -1316,25 +1316,38 @@ class LuxuryPerfumeSeeder extends Seeder
                 }
             }
 
-            // Reviews
+            // Reviews with diverse Pakistani connoisseurs
+            $sampleReviews = [
+                ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Unbelievable longevity in Karachi humidity. Projects effortlessly for 14+ hours.'],
+                ['name' => 'Hina Rizvi', 'city' => 'Karachi, DHA Phase 6', 'comment' => 'Exquisite maceration with zero synthetic sharpness. Smells like pure luxury.'],
+                ['name' => 'Syed Tariq Mehmood', 'city' => 'Karachi, PECHS', 'comment' => 'Super fast delivery to PECHS. Easily rivals imported 300 USD niche extrait.'],
+                ['name' => 'Usman Tariq', 'city' => 'Lahore, Gulberg III', 'comment' => 'Rich, regal projection that lasts all day on clothes. Highly recommended.'],
+                ['name' => 'Dr. Sarah Qureshi', 'city' => 'Islamabad, F-7', 'comment' => 'A masterclass in perfumery. The magnetic flacon feels extraordinarily premium.'],
+                ['name' => 'Saadullah Khan', 'city' => 'Peshawar, University Town', 'comment' => 'Bold sillage with an intoxicating drydown. A true crowd-pleaser.'],
+                ['name' => 'Zainab Murtaza', 'city' => 'Karachi, Gulshan', 'comment' => 'Smooth and addictive. Received compliments all evening at a family dinner.'],
+                ['name' => 'Mustafa Kamal', 'city' => 'Karachi, North Nazimabad', 'comment' => 'Visible oil concentration on skin. True extrait de parfum quality.'],
+            ];
+            $selectedReview = $sampleReviews[($product->id ?? 1) % count($sampleReviews)];
+            $secondReview = $sampleReviews[(($product->id ?? 1) + 3) % count($sampleReviews)];
+
             Review::create([
                 'product_id' => $product->id,
-                'customer_name' => 'Hamza Sheikh',
-                'customer_city' => 'Lahore, DHA',
+                'customer_name' => $selectedReview['name'],
+                'customer_city' => $selectedReview['city'],
                 'rating' => 5,
-                'title' => 'Beast mode performance in Pakistan!',
-                'comment' => 'Easily lasts 16+ hours on my sherwani and clothes. Packaging and heavy magnetic cap feel extraordinarily premium.',
+                'title' => 'Masterpiece Formulation',
+                'comment' => $selectedReview['comment'],
                 'verified_purchase' => true,
                 'is_approved' => true,
             ]);
 
             Review::create([
                 'product_id' => $product->id,
-                'customer_name' => 'Dr. Ayesha Malik',
-                'customer_city' => 'Islamabad, F-7',
+                'customer_name' => $secondReview['name'],
+                'customer_city' => $secondReview['city'],
                 'rating' => 5,
-                'title' => 'Regal, authentic, and unforgettable aura',
-                'comment' => 'Received countless compliments at an embassy gala. Super fast 24h delivery in Islamabad via TCS.',
+                'title' => 'Extraordinary Sillage',
+                'comment' => $secondReview['comment'],
                 'verified_purchase' => true,
                 'is_approved' => true,
             ]);
