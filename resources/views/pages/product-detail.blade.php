@@ -670,22 +670,22 @@
                         <!-- Existing Reviews List -->
                         <div class="d-flex flex-column gap-3 font-sans">
                             @forelse($product->reviews as $review)
-                                <div class="p-3.5 rounded-3 d-flex flex-column gap-1.5 shadow-sm"
-                                    style="background-color: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 12px;">
-                                    <div class="d-flex align-items-center justify-content-between gap-2">
+                                <div class="rounded-3 d-flex flex-column shadow-sm"
+                                    style="background-color: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 14px; padding: 22px 20px;">
+                                    <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
                                         <span class="fw-bold text-truncate"
-                                            style="font-size: 0.95rem; color: #110D0E;">{{ $review->user_name }}</span>
-                                        <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d;">
+                                            style="font-size: 0.98rem; color: #110D0E;">{{ $review->user_name }}</span>
+                                        <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d; gap: 2px;">
                                             @for($i = 1; $i <= 5; $i++)
                                                 <i class="fas fa-star {{ $i <= $review->rating ? '' : 'opacity-25' }}"></i>
                                             @endfor
                                         </div>
                                     </div>
-                                    <div class="fw-semibold text-truncate" style="font-size: 0.82rem; color: #8A4B59;">
+                                    <div class="fw-semibold text-truncate mb-2.5 font-sans" style="font-size: 0.82rem; color: #8A4B59;">
                                         {{ $product->name }}
                                     </div>
                                     <p class="mb-0 font-sans" 
-                                       style="color: #4A403A; font-size: 0.85rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                       style="color: #4A403A; font-size: 0.86rem; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                         {{ $review->comment }}
                                     </p>
                                 </div>

@@ -590,16 +590,16 @@
                         <div class="swiper-wrapper">
                             @foreach($recentReviews as $rev)
                                 <div class="swiper-slide h-auto">
-                                    <div class="testimonial-card-luxury p-3.5 p-sm-4 d-flex flex-column justify-content-between h-100 w-100"
-                                         style="background: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 12px;">
+                                    <div class="testimonial-card-luxury d-flex flex-column justify-content-between h-100 w-100"
+                                         style="background: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 14px; padding: 22px 20px;">
                                         
                                         <div>
                                             <!-- Reviewer Name & 5-Star Rating Row -->
-                                            <div class="d-flex align-items-center justify-content-between gap-2 mb-1.5">
-                                                <span class="fw-bold text-truncate" style="font-size: 0.95rem; color: #110D0E !important;">
+                                            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                                                <span class="fw-bold text-truncate" style="font-size: 0.98rem; color: #110D0E !important; letter-spacing: 0.01em;">
                                                     {{ $rev->user_name }}
                                                 </span>
-                                                <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d;">
+                                                <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d; gap: 2px;">
                                                     @for($i = 1; $i <= 5; $i++)
                                                         <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'opacity-25' }}"></i>
                                                     @endfor
@@ -608,14 +608,14 @@
 
                                             <!-- Perfume Name -->
                                             @if($rev->product)
-                                                <div class="fw-semibold text-truncate mb-2 font-sans" style="font-size: 0.82rem; color: #8A4B59;">
+                                                <div class="fw-semibold text-truncate mb-2.5 font-sans" style="font-size: 0.82rem; color: #8A4B59;">
                                                     {{ $rev->product->name }}
                                                 </div>
                                             @endif
 
-                                            <!-- Short 1 to 1.5 lines review -->
+                                            <!-- Short 1 to 1.5 lines review with line-height gap -->
                                             <p class="mb-0 font-sans" 
-                                               style="color: #4A403A; font-size: 0.85rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                               style="color: #4A403A; font-size: 0.86rem; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                                 {{ $rev->comment }}
                                             </p>
                                         </div>
