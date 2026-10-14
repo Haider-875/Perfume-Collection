@@ -118,7 +118,7 @@
                                             </div>
                                             <button @click="addToBag({{ $prod->id }})" 
                                                     class="btn py-1 px-2.5 text-uppercase fw-semibold fs-8 d-inline-flex align-items-center gap-1 text-white shadow-sm" style="background-color: #541B29; border-radius: 6px;">
-                                                <svg class="bi" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                                <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 11px;" aria-hidden="true"></i>
                                                 <span>Add to Bag</span>
                                             </button>
                                         </div>

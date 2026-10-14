@@ -77,7 +77,7 @@
             </span>
             <span class="product-price-sep opacity-50 fw-light" style="color: #786C67 !important;">&ndash;</span>
             <span class="text-nowrap d-inline-flex align-items-baseline gap-1">
-                <span class="product-price-main fw-bold" style="color: #541B29 !important;">
+                <span class="product-price-main price-gradient-luxury fw-bold">
                     {{ $product->formatted_effective_price }}
                 </span>
                 <span class="product-price-unit fw-medium text-uppercase" style="color: #786C67; font-size: 10px;">/{{ $product->volume_ml }}ml</span>
@@ -98,7 +98,7 @@
                 class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white"
                 style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
                 title="Add to Cart">
-            <i class="fas fa-cart-shopping text-white" style="font-size: 11px;"></i>
+            <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 11px;" aria-hidden="true"></i>
             <span class="text-white text-nowrap" style="font-size: 11.5px;">Add to Cart</span>
             <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
         </button>

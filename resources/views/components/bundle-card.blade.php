@@ -70,11 +70,11 @@
                 </span>
                 <span class="product-price-sep opacity-50 fw-light d-none d-sm-inline" style="color: #786C67 !important;">&bull;</span>
             @endif
-            <span class="product-price-main fw-bold font-serif text-nowrap" style="color: #541B29 !important; font-size: 1.45rem !important; line-height: 1.2;">
+            <span class="product-price-main price-gradient-luxury fw-bold font-serif text-nowrap" style="font-size: 1.45rem !important; line-height: 1.2;">
                 {{ $bundle->formatted_bundle_price }}
             </span>
             @if($bundle->savings_amount > 0)
-                <span class="product-price-savings fw-semibold text-nowrap" style="font-size: 11px; color: #9E2A2B;">
+                <span class="product-price-savings fw-semibold text-nowrap" style="font-size: 11px;">
                     Save {{ $bundle->formatted_savings }}
                 </span>
             @endif
@@ -85,9 +85,9 @@
     <div class="product-card-action mt-2 mt-md-3 pt-0 pt-md-2" style="border-top: 1px solid #E8E0DA;">
         <button onclick="addBundleToCart({{ $bundle->id }})" 
                 class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white"
-                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;"
+                style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
                 title="Add to Cart">
-            <i class="fas fa-cart-shopping text-white" style="font-size: 11px;"></i>
+            <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 11px;" aria-hidden="true"></i>
             <span class="text-white text-nowrap" style="font-size: 11.5px; font-family: 'Wasted Vindey', 'Cormorant Garamond', Georgia, serif !important;">Add to Cart</span>
             <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
         </button>

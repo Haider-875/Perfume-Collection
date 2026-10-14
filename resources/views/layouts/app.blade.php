@@ -320,23 +320,22 @@
             </a>
         </div>
 
-        <!-- Mobile Menu Footer Actions -->
-        <div class="border-top border-gold-20 pt-3 vstack gap-2 flex-shrink-0">
-            <button type="button"
-                @click="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
-                class="w-100 btn-gold py-2.5 text-xs tracking-widest text-uppercase d-flex align-items-center justify-center gap-2"
-                style="min-height: 44px;">
-                <i class="fas fa-wand-magic-sparkles"></i>
-                <span>LAUNCH SCENT FINDER QUIZ</span>
-            </button>
-
-            <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out for perfume recommendations.') }}"
-                target="_blank"
-                class="w-100 btn-whatsapp py-2.5 text-xs tracking-wider text-uppercase d-flex align-items-center justify-center gap-2 text-decoration-none"
-                style="min-height: 44px;">
-                <i class="fab fa-whatsapp"></i>
-                <span>WHATSAPP CONCIERGE ORDER</span>
-            </a>
+        <!-- Mobile Menu Footer Actions (Side-by-side matching "Your Fragrance Bag") -->
+        <div class="border-top pt-3 flex-shrink-0" style="border-color: #E8E0DA !important;">
+            <div class="d-flex align-items-center" style="gap: 5px;">
+                <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out for perfume recommendations.') }}"
+                    target="_blank"
+                    class="cart-btn-whatsapp-buynow text-decoration-none">
+                    <i class="fab fa-whatsapp fs-6"></i>
+                    <span>WHATSAPP</span>
+                </a>
+                <button type="button"
+                    @click="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
+                    class="cart-btn-checkout border-0 text-decoration-none">
+                    <i class="fas fa-wand-magic-sparkles" style="font-size: 11px;"></i>
+                    <span>SCENT QUIZ</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -497,8 +496,7 @@
                     <span>WHATSAPP</span>
                 </a>
                 <a href="{{ route('checkout.index') }}"
-                    class="cart-btn-checkout text-decoration-none"
-                    style="background-color: #541B29 !important; color: #FFFFFF !important;">
+                    class="cart-btn-checkout text-decoration-none">
                     <span>CHECKOUT</span>
                     <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
                 </a>

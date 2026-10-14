@@ -174,9 +174,9 @@
                                     <button 
                                         type="button"
                                         onclick="addBundleToCart({{ $bundle->id }})"
-                                        class="btn-bundle-bag"
+                                        class="btn-bundle-bag d-flex align-items-center justify-content-center gap-2"
                                     >
-                                        <i class="fas fa-cart-shopping"></i>
+                                        <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 13px;" aria-hidden="true"></i>
                                         <span>ADD BUNDLE TO BAG</span>
                                     </button>
 

@@ -136,24 +136,23 @@ function initSwiperSliders() {
 
 
 
-    // Testimonials Carousel
+    // Testimonials Carousel (Voices of Our Connoisseurs)
     if (document.querySelector('.testimonials-swiper') && !document.querySelector('.testimonials-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.testimonials-swiper', {
-            slidesPerView: 1.05,
-            spaceBetween: 16,
-            speed: 400,
-            loop: true,
+            slidesPerView: 1.15,
+            spaceBetween: 14,
+            speed: 700,
+            loop: false,
+            rewind: true,
             grabCursor: true,
-            preventInteractionOnTransition: false,
-            touchMoveStopPropagation: false,
             resistance: true,
-            resistanceRatio: 0.85,
-            touchRatio: 1.25,
+            resistanceRatio: 0.75,
+            touchRatio: 1.15,
             touchAngle: 45,
             threshold: 4,
             watchSlidesProgress: true,
             autoplay: { 
-                delay: 4200, 
+                delay: 4000, 
                 disableOnInteraction: false, 
                 pauseOnMouseEnter: true
             },
@@ -163,7 +162,7 @@ function initSwiperSliders() {
                 prevEl: '.testimonials-prev',
             },
             breakpoints: {
-                340: { slidesPerView: 1.05, spaceBetween: 14 },
+                340: { slidesPerView: 1.12, spaceBetween: 14 },
                 480: { slidesPerView: 1.25, spaceBetween: 16 },
                 640: { slidesPerView: 1.8, spaceBetween: 18 },
                 768: { slidesPerView: 2.2, spaceBetween: 20 },
@@ -638,7 +637,7 @@ function initQuickView() {
                             </div>
                             <div style="display: flex; gap: 12px;">
                                 <a href="${url}" class="btn-gold" style="flex-grow: 1;">EXPERIENCE FLACON</a>
-                                <button onclick="addToCartAjax(${id}, 1)" class="btn-outline-gold"><i class="fas fa-shopping-bag"></i></button>
+                                <button onclick="addToCartAjax(${id}, 1)" class="btn-gold d-inline-flex align-items-center justify-content-center text-white" style="min-width: 44px; color: #ffffff !important;" title="Add to Cart"><i class="fas fa-cart-shopping text-white" style="font-size: 13px; color: #ffffff !important;" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>

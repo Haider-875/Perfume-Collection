@@ -129,7 +129,7 @@
                         <!-- 4-Pillar Trust Highlights (Desktop only under gallery) -->
                         <div class="pdp-trust-grid font-sans d-none d-md-grid">
                             <div class="pdp-trust-card">
-                                <i class="fas fa-droplet fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-droplet fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">38% Extrait
                                         de Parfum</div>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-hourglass-half fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-hourglass-half fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours
                                         Beast Mode</div>
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-truck-fast fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-truck-fast fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">Fast
                                         Courier Service</div>
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-rotate fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-rotate fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">7-Day Scent
                                         Exchange</div>
@@ -218,19 +218,19 @@
                         <!-- Pricing & Savings (Completely Unboxed, Clean & Elegant) -->
                         <div class="d-flex flex-column gap-1.5 font-sans text-start my-1">
                             <div class="d-flex align-items-center gap-3">
-                                <span class="pdp-price-amount" style="color: #541B29 !important;" x-text="formattedPrice">
+                                <span class="pdp-price-amount price-gradient-luxury" x-text="formattedPrice">
                                     {{ $product->formatted_effective_price }}
                                 </span>
                                 <span class="text-sm text-decoration-line-through" style="color: #615652;"
                                     x-text="formattedComparePrice"></span>
                                 <template x-if="savingsPercent > 0">
-                                    <span class="badge-savings-luxury" style="font-size: 10px;">
+                                    <span class="badge-savings-luxury badge-save-gradient" style="font-size: 10px;">
                                         SAVE <span x-text="savingsPercent"></span>%
                                     </span>
                                 </template>
                             </div>
                             <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 11.5px; color: #4A4240;">
-                                <i class="fas fa-truck-fast" style="color: #541B29;"></i>
+                                <i class="fas fa-truck-fast pdp-icon-gradient"></i>
                                 <span>Complimentary TCS Express Air Delivery on Orders Above Rs. 3,500</span>
                             </div>
                         </div>
@@ -250,10 +250,12 @@
                                         @click="selectedVariantId = {{ $variant->id }}; selectedPrice = {{ $variant->price }}; selectedComparePrice = {{ $variant->compare_at_price ?? 0 }}; selectedLabel = '{{ $variant->size_label }}';"
                                         :class="selectedVariantId === {{ $variant->id }} ? 'active' : ''"
                                         class="pdp-size-btn shadow-xs">
+                                        <i class="fas fa-wine-bottle pdp-size-btn-icon" aria-hidden="true"></i>
                                         <span>{{ $shortSize }}</span>
                                     </button>
                                 @empty
                                     <button type="button" class="pdp-size-btn active shadow-xs">
+                                        <i class="fas fa-wine-bottle pdp-size-btn-icon" aria-hidden="true"></i>
                                         <span>{{ $product->volume_ml }}ml</span>
                                     </button>
                                 @endforelse
@@ -280,10 +282,10 @@
                                 </div>
 
                                 <!-- Primary Add To Bag Button -->
-                                <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1"
+                                <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2"
                                     style="min-height: 48px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;">
+                                    <i class="fas fa-cart-shopping text-white" style="font-size: 13px;" aria-hidden="true"></i>
                                     <span class="text-nowrap text-white">ADD TO BAG</span>
-                                    <!-- <i class="fas fa-arrow-right-long btn-arrow text-white"></i> -->
                                 </button>
                                 <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1">
                                     <span>BUY NOW</span>
@@ -300,7 +302,7 @@
                             style="border-top: 1px solid #E8E0DA;">
                             <div class="d-flex align-items-center justify-content-between" style="color: #110D0E;">
                                 <span class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-box-open" style="color: #541B29;"></i>
+                                    <i class="fas fa-box-open pdp-icon-gradient"></i>
                                     <span>Carefully packaged to preserve fragrance oils</span>
                                 </span>
                                 <span class="text-success fw-medium" style="font-size: 11px;"><i
@@ -315,7 +317,7 @@
                         <!-- 4-Pillar Trust Highlights (Mobile only: positioned under Packaging & Dispatch Note) -->
                         <div class="pdp-trust-grid font-sans d-grid d-md-none mt-2">
                             <div class="pdp-trust-card">
-                                <i class="fas fa-droplet fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-droplet fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">38% Extrait
                                         de Parfum</div>
@@ -323,7 +325,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-hourglass-half fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-hourglass-half fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours
                                         Beast Mode</div>
@@ -331,7 +333,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-truck-fast fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-truck-fast fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">Fast
                                         Courier Service</div>
@@ -339,7 +341,7 @@
                                 </div>
                             </div>
                             <div class="pdp-trust-card">
-                                <i class="fas fa-rotate fs-5" style="color: #541B29;"></i>
+                                <i class="fas fa-rotate fs-5 pdp-icon-gradient"></i>
                                 <div>
                                     <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">7-Day Scent
                                         Exchange</div>
@@ -442,7 +444,7 @@
                                 <span
                                     class="text-xs text-uppercase tracking-widest fw-semibold d-flex align-items-center gap-2"
                                     style="color: #541B29;">
-                                    <i class="fas fa-sparkles" style="color: #9E7D3B;"></i>
+                                    <i class="fas fa-wind pdp-note-icon-gradient" aria-hidden="true"></i>
                                     <span>Top Notes (First 15 - 45 Mins)</span>
                                 </span>
                                 <span class="text-uppercase fw-medium" style="font-size: 10px; color: #4A4240;">Opening
@@ -459,7 +461,7 @@
                                 <span
                                     class="text-xs text-uppercase tracking-widest fw-semibold d-flex align-items-center gap-2"
                                     style="color: #541B29;">
-                                    <i class="fas fa-heart" style="color: #9E7D3B;"></i>
+                                    <i class="fas fa-heart pdp-note-icon-gradient" aria-hidden="true"></i>
                                     <span>Middle Notes (2 - 6 Hours)</span>
                                 </span>
                                 <span class="text-uppercase fw-medium" style="font-size: 10px; color: #4A4240;">Sensual
@@ -476,7 +478,7 @@
                                 <span
                                     class="text-xs text-uppercase tracking-widest fw-semibold d-flex align-items-center gap-2"
                                     style="color: #541B29;">
-                                    <i class="fas fa-tree" style="color: #9E7D3B;"></i>
+                                    <i class="fas fa-gem pdp-note-icon-gradient" aria-hidden="true"></i>
                                     <span>Base Notes (6 - 18+ Hours)</span>
                                 </span>
                                 <span class="text-uppercase fw-semibold" style="font-size: 10px; color: #541B29;">14+ Hours
@@ -510,7 +512,7 @@
                             </div>
                             <div class="w-100 rounded-pill overflow-hidden"
                                 style="height: 8px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                <div class="h-100 rounded-pill" style="background: #541B29; width: 95%;"></div>
+                                <div class="h-100 rounded-pill" style="background: linear-gradient(90deg, #a31838 0%, #780d24 100%); width: 95%;"></div>
                             </div>
                         </div>
 
@@ -524,7 +526,7 @@
                             </div>
                             <div class="w-100 rounded-pill overflow-hidden"
                                 style="height: 8px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                <div class="h-100 rounded-pill" style="background: #541B29; width: 90%;"></div>
+                                <div class="h-100 rounded-pill" style="background: linear-gradient(90deg, #a31838 0%, #780d24 100%); width: 90%;"></div>
                             </div>
                         </div>
 
@@ -537,7 +539,7 @@
                             </div>
                             <div class="w-100 rounded-pill overflow-hidden"
                                 style="height: 8px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                <div class="h-100 rounded-pill" style="background: #541B29; width: 95%;"></div>
+                                <div class="h-100 rounded-pill" style="background: linear-gradient(90deg, #a31838 0%, #780d24 100%); width: 95%;"></div>
                             </div>
                         </div>
 
@@ -563,14 +565,15 @@
         </section>
 
         <!-- 5. PDP The Impression Story (Single Clean Button, Uncluttered Layout) -->
-        <section class="py-5 py-lg-6" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;"
+        <section class="py-4 py-lg-5" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;"
             x-data="{ reviewsOpen: false }">
             <div class="container px-3 px-lg-4" style="max-width: 960px;">
 
                 <!-- Retained Single Button: The Impression Story -->
-                <div class="text-center mb-4 mb-lg-5 font-sans">
-                    <button type="button" class="pdp-tab-btn pdp-tab-active" style="cursor: default;">
-                        The Impression Story
+                <div class="text-center mb-3 mb-lg-4 font-sans">
+                    <button type="button" class="pdp-tab-btn pdp-tab-active btn-impression-story" style="cursor: default;">
+                        <i class="fas fa-feather-pointed me-1.5" aria-hidden="true"></i>
+                        <span>The Impression Story</span>
                     </button>
                 </div>
 
@@ -746,7 +749,7 @@
                 <!-- Left Info: Title & Price -->
                 <div class="pdp-sticky-info">
                     <div class="pdp-sticky-name">{{ $product->name }}</div>
-                    <div class="pdp-sticky-price" x-text="formattedPrice">{{ $product->formatted_effective_price }}</div>
+                    <div class="pdp-sticky-price price-gradient-luxury" x-text="formattedPrice">{{ $product->formatted_effective_price }}</div>
                 </div>
 
                 <!-- Right Buttons: BUY NOW + ADD TO BAG -->
@@ -754,7 +757,8 @@
                     <button type="button" @click="buyNow()" class="pdp-sticky-btn-buy" aria-label="Buy Now Instantly">
                         <span>BUY NOW</span>
                     </button>
-                    <button type="button" @click="addToCart()" class="pdp-sticky-btn-bag" aria-label="Add to Bag">
+                    <button type="button" @click="addToCart()" class="pdp-sticky-btn-bag d-inline-flex align-items-center justify-content-center gap-1.5" aria-label="Add to Bag">
+                        <i class="fas fa-cart-shopping text-white" style="font-size: 11.5px;" aria-hidden="true"></i>
                         <span>ADD TO BAG</span>
                     </button>
                 </div>
