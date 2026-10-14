@@ -166,19 +166,6 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // 3. Hero Slides (Swiper Slider for Homepage)
         HeroSlide::create([
-            'title' => "REVIVAL 50",
-            'subtitle' => "Hand-crafted with 40% Extrait de Parfum concentration, blending aged Cambodian agarwood and smoky birch. Engineered for 16+ hours of beast-mode projection across Pakistan.",
-            'badge_text' => "WINNER FRAGRANCE OF THE YEAR 2026",
-            'image' => 'assets/videos/91_perfume_banner.mp4',
-            'cta_text' => "SHOP IMPRESSIONS",
-            'cta_url' => "/collections/all",
-            'secondary_cta_text' => "FIND YOUR SCENT",
-            'secondary_cta_url' => "#scent-advisor",
-            'sort_order' => 1,
-            'is_active' => true,
-        ]);
-
-        HeroSlide::create([
             'title' => "BLEU IMPERIAL",
             'subtitle' => "A magnetic fusion of sun-drenched Italian bergamot, fresh sea salt, and rich cedarwood. Formulated with Grasse French oils for an all-day commanding masculine trail.",
             'badge_text' => "TOP SELLER 2026",
@@ -187,7 +174,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'cta_url' => "/collections/men",
             'secondary_cta_text' => "WHATSAPP ADVISOR",
             'secondary_cta_url' => "https://wa.me/923363685732",
-            'sort_order' => 2,
+            'sort_order' => 1,
             'is_active' => true,
         ]);
 
@@ -200,6 +187,19 @@ class LuxuryPerfumeSeeder extends Seeder
             'cta_url' => "/collections/bundles",
             'secondary_cta_text' => "VIEW DISCOVERY SET",
             'secondary_cta_url' => "/perfume/the-imperial-discovery-coffret-set-of-5",
+            'sort_order' => 2,
+            'is_active' => true,
+        ]);
+
+        HeroSlide::create([
+            'title' => "REVIVAL 50",
+            'subtitle' => "Hand-crafted with 40% Extrait de Parfum concentration, blending aged Cambodian agarwood and smoky birch. Engineered for 16+ hours of beast-mode projection across Pakistan.",
+            'badge_text' => "WINNER FRAGRANCE OF THE YEAR 2026",
+            'image' => 'assets/videos/91_perfume_banner.mp4',
+            'cta_text' => "SHOP IMPRESSIONS",
+            'cta_url' => "/collections/all",
+            'secondary_cta_text' => "FIND YOUR SCENT",
+            'secondary_cta_url' => "#scent-advisor",
             'sort_order' => 3,
             'is_active' => true,
         ]);

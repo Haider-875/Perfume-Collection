@@ -12,21 +12,7 @@
                 @forelse($heroSlides as $slideIndex => $slide)
                     @php
                         $slideImage = strtolower($slide->image ?? '');
-                        if (str_contains($slideImage, '91_perfume_banner')) {
-                            $slideDuration = 10000;
-                            $scenes = [
-                                [
-                                    'time' => 0,
-                                    'title' => 'Discover Your Signature Scent',
-                                    'desc' => 'Explore exceptional fragrances crafted to express individuality with captivating floral chords, rich woods, and warm sensual amber.'
-                                ],
-                                [
-                                    'time' => 2.8,
-                                    'title' => '91 Sports',
-                                    'desc' => 'Bold, fresh, and magnetic. An exhilarating blend of chilled aquatic notes, zesty bergamot, and warm woody amber.'
-                                ]
-                            ];
-                        } elseif (str_contains($slideImage, '91_gold_banner')) {
+                        if (str_contains($slideImage, '91_gold_banner')) {
                             $slideDuration = 6000;
                             $scenes = [
                                 [
@@ -42,6 +28,20 @@
                                     'time' => 0,
                                     'title' => 'Marjaan',
                                     'desc' => 'Mystical, sensual, and unforgettable. An enchanting oriental fusion of rare aged oud, smoky florals, and warm resinous amber.'
+                                ]
+                            ];
+                        } elseif (str_contains($slideImage, '91_perfume_banner')) {
+                            $slideDuration = 10000;
+                            $scenes = [
+                                [
+                                    'time' => 0,
+                                    'title' => 'Discover Your Signature Scent',
+                                    'desc' => 'Explore exceptional fragrances crafted to express individuality with captivating floral chords, rich woods, and warm sensual amber.'
+                                ],
+                                [
+                                    'time' => 2.8,
+                                    'title' => '91 Sports',
+                                    'desc' => 'Bold, fresh, and magnetic. An exhilarating blend of chilled aquatic notes, zesty bergamot, and warm woody amber.'
                                 ]
                             ];
                         } else {
@@ -64,7 +64,7 @@
                         <div class="hero__media">
                             <div class="hero__zoom">
                                 @if($slide->is_video || Str::endsWith(strtolower($slide->image ?? ''), ['.mp4', '.webm', '.ogg', '.mov']))
-                                    <video autoplay loop muted playsinline class="w-100 h-100 object-fit-cover" preload="auto">
+                                    <video autoplay loop muted playsinline class="w-100 h-100 object-fit-cover hero-banner-video" preload="auto">
                                         <source src="{{ asset($slide->image) }}" type="video/mp4">
                                     </video>
                                 @else
@@ -771,7 +771,7 @@
             const heroSwiper = new Swiper('.hero-master-swiper', {
                 loop: true,
                 autoplay: {
-                    delay: 10000,
+                    delay: 6000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },

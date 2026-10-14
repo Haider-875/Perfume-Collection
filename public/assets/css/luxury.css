@@ -3917,12 +3917,25 @@ svg {
     object-position: center center;
 }
 
+.hero-slider-section .hero__zoom video,
+.hero-banner-video {
+    /* Color Enhancement & Optical Noise / Grain Suppression */
+    filter: contrast(1.06) saturate(1.18) brightness(1.02);
+    -webkit-filter: contrast(1.06) saturate(1.18) brightness(1.02);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform, filter;
+}
+
 .hero-slider-section .hero__shade {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 50% 48%, rgba(20, 6, 10, 0.25) 0%, rgba(12, 3, 6, 0.6) 70%, rgba(8, 2, 4, 0.85) 100%),
-        linear-gradient(180deg, rgba(12, 3, 6, 0.55) 0%, rgba(12, 3, 6, 0.15) 25%, rgba(12, 3, 6, 0.35) 60%, rgba(10, 3, 5, 0.88) 100%);
+        radial-gradient(ellipse at 50% 50%, rgba(15, 5, 8, 0.12) 0%, rgba(12, 3, 6, 0.45) 65%, rgba(8, 2, 4, 0.82) 100%),
+        linear-gradient(180deg, rgba(12, 3, 6, 0.45) 0%, rgba(12, 3, 6, 0.08) 28%, rgba(12, 3, 6, 0.25) 65%, rgba(10, 3, 5, 0.82) 100%);
     pointer-events: none;
     z-index: 2;
 }
