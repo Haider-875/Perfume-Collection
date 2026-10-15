@@ -73,6 +73,7 @@ class CollectionController extends Controller
             $query->where(function($q) use ($searchTerm) {
                 $q->where('name', 'like', $searchTerm)
                   ->orWhere('description', 'like', $searchTerm)
+                  ->orWhere('tagline', 'like', $searchTerm)
                   ->orWhere('top_notes_summary', 'like', $searchTerm)
                   ->orWhere('heart_notes_summary', 'like', $searchTerm)
                   ->orWhere('base_notes_summary', 'like', $searchTerm);
@@ -88,14 +89,43 @@ class CollectionController extends Controller
 
         // 3. Scent Note Filter
         if ($request->filled('note')) {
-            $query->whereHas('scentNotes', function($q) use ($request) {
-                $q->where('scent_notes.slug', $request->note);
+            $noteSlug = $request->note;
+            $query->where(function($q) use ($noteSlug) {
+                $q->whereHas('scentNotes', function($sq) use ($noteSlug) {
+                    $sq->where('scent_notes.slug', $noteSlug);
+                });
+
+                $noteWord = str_replace('-', ' ', $noteSlug);
+                $q->orWhere('top_notes_summary', 'like', '%' . $noteWord . '%')
+                  ->orWhere('heart_notes_summary', 'like', '%' . $noteWord . '%')
+                  ->orWhere('base_notes_summary', 'like', '%' . $noteWord . '%')
+                  ->orWhere('tagline', 'like', '%' . $noteWord . '%')
+                  ->orWhere('description', 'like', '%' . $noteWord . '%');
+
+                $keywords = explode('-', $noteSlug);
+                foreach ($keywords as $kw) {
+                    if (strlen($kw) >= 4 && !in_array($kw, ['noir', 'white', 'royal', 'golden', 'bark', 'leaf', 'bean', 'dew'])) {
+                        $q->orWhere('top_notes_summary', 'like', '%' . $kw . '%')
+                          ->orWhere('heart_notes_summary', 'like', '%' . $kw . '%')
+                          ->orWhere('base_notes_summary', 'like', '%' . $kw . '%')
+                          ->orWhere('tagline', 'like', '%' . $kw . '%');
+                    }
+                }
             });
         }
 
         // 4. Size / Volume (ml)
         if ($request->filled('volume_ml')) {
-            $query->where('volume_ml', $request->volume_ml);
+            $vol = (int) $request->volume_ml;
+            $query->where(function($q) use ($vol) {
+                $q->where('volume_ml', $vol)
+                  ->orWhereHas('prices', function($pq) use ($vol) {
+                      $pq->where('size', 'like', $vol . '%');
+                  })
+                  ->orWhereHas('variants', function($vq) use ($vol) {
+                      $vq->where('volume_ml', $vol);
+                  });
+            });
         }
 
         // 5. Price Range
@@ -131,9 +161,9 @@ class CollectionController extends Controller
 
         $products = $query->paginate(12)->withQueryString();
 
-        $fragranceFamilies = FragranceFamily::withCount('products')->get();
-        $scentNotes = ScentNote::orderBy('name')->take(20)->get();
-        $allCollections = Collection::where('is_active', true)->get();
+        $fragranceFamilies = FragranceFamily::has('products')->withCount('products')->orderBy('name')->get();
+        $scentNotes = ScentNote::has('products')->withCount('products')->orderBy('name')->get();
+        $allCollections = Collection::where('is_active', true)->orderBy('sort_order')->get();
 
         return view('pages.collection-detail', compact(
             'collection',

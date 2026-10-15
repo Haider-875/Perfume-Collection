@@ -801,6 +801,58 @@ class ProductionCatalogSeeder extends Seeder
             }
         }
 
+        // 8. Sync Scent Notes for all 26 Products
+        $allScentNotes = \App\Models\ScentNote::all();
+        if ($allScentNotes->isNotEmpty()) {
+            foreach (Product::whereIn('sku', $allowedSkus)->get() as $p) {
+                $top = strtolower($p->top_notes_summary ?? '');
+                $heart = strtolower($p->heart_notes_summary ?? '');
+                $base = strtolower($p->base_notes_summary ?? '');
+                $full = strtolower($p->name . ' ' . $p->tagline . ' ' . $p->description . ' ' . $top . ' ' . $heart . ' ' . $base);
+
+                $syncData = [];
+                foreach ($allScentNotes as $n) {
+                    $cleanName = strtolower(preg_replace('/[^a-zA-Z0-9\s]/', ' ', $n->name));
+                    $words = array_filter(explode(' ', $cleanName));
+                    $matched = false;
+                    $layer = 'heart';
+
+                    foreach ($words as $w) {
+                        if (strlen($w) >= 4 && !in_array($w, ['noir', 'white', 'royal', 'golden', 'bark', 'leaf', 'bean', 'dew'])) {
+                            if (strpos($top, $w) !== false) {
+                                $matched = true;
+                                $layer = 'top';
+                                break;
+                            } elseif (strpos($heart, $w) !== false) {
+                                $matched = true;
+                                $layer = 'heart';
+                                break;
+                            } elseif (strpos($base, $w) !== false) {
+                                $matched = true;
+                                $layer = 'base';
+                                break;
+                            } elseif (strpos($full, $w) !== false) {
+                                $matched = true;
+                                $layer = 'heart';
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($matched) {
+                        $syncData[$n->id] = [
+                            'note_layer' => $layer,
+                            'prominence_percentage' => 33,
+                        ];
+                    }
+                }
+
+                if (!empty($syncData)) {
+                    $p->scentNotes()->sync($syncData);
+                }
+            }
+        }
+
         ActivityLog::record(
             'production_catalog_seeded',
             "Production catalog seeded successfully with exact 26 Excel perfumes."
