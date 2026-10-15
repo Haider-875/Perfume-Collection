@@ -200,6 +200,11 @@ class Product extends Model
         return $this->primary_image_url;
     }
 
+    public function getMainImageUrlAttribute()
+    {
+        return $this->primary_image_url;
+    }
+
     // WhatsApp Direct Order Message Generator
     public function getWhatsAppOrderUrlAttribute()
     {
