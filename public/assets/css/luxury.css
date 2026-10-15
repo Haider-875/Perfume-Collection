@@ -3919,23 +3919,24 @@ svg {
 
 .hero-slider-section .hero__zoom video,
 .hero-banner-video {
-    /* Color Enhancement & Optical Noise / Grain Suppression */
-    filter: contrast(1.06) saturate(1.18) brightness(1.02);
-    -webkit-filter: contrast(1.06) saturate(1.18) brightness(1.02);
+    /* Color Enhancement, Optical Sharpness & Grain Suppression */
+    opacity: 0.92;
+    filter: contrast(1.10) saturate(1.22) brightness(1.04);
+    -webkit-filter: contrast(1.10) saturate(1.22) brightness(1.04);
     image-rendering: -webkit-optimize-contrast;
-    image-rendering: auto;
+    image-rendering: crisp-edges;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform: translateZ(0);
-    will-change: transform, filter;
+    will-change: transform, filter, opacity;
 }
 
 .hero-slider-section .hero__shade {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 50% 50%, rgba(15, 5, 8, 0.12) 0%, rgba(12, 3, 6, 0.45) 65%, rgba(8, 2, 4, 0.82) 100%),
-        linear-gradient(180deg, rgba(12, 3, 6, 0.45) 0%, rgba(12, 3, 6, 0.08) 28%, rgba(12, 3, 6, 0.25) 65%, rgba(10, 3, 5, 0.82) 100%);
+        radial-gradient(ellipse at 50% 50%, rgba(15, 5, 8, 0.08) 0%, rgba(12, 3, 6, 0.38) 65%, rgba(8, 2, 4, 0.78) 100%),
+        linear-gradient(180deg, rgba(12, 3, 6, 0.38) 0%, rgba(12, 3, 6, 0.05) 28%, rgba(12, 3, 6, 0.20) 65%, rgba(10, 3, 5, 0.78) 100%);
     pointer-events: none;
     z-index: 2;
 }
@@ -4395,7 +4396,8 @@ svg {
     }
 
     .hero-slider-section .hero__zoom video,
-    .hero-slider-section .hero__zoom img {
+    .hero-slider-section .hero__zoom img,
+    .hero-slider-section .hero-banner-video {
         width: 100% !important;
         height: 100% !important;
         min-width: 100% !important;
@@ -4406,12 +4408,17 @@ svg {
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         transform: translateZ(0);
+        opacity: 0.92 !important;
+        filter: contrast(1.10) saturate(1.22) brightness(1.04) !important;
+        -webkit-filter: contrast(1.10) saturate(1.22) brightness(1.04) !important;
+        image-rendering: -webkit-optimize-contrast !important;
+        will-change: transform, filter, opacity !important;
     }
 
     .hero-slider-section .hero__shade {
         background:
-            radial-gradient(ellipse at 50% 40%, rgba(20, 6, 10, 0.12) 0%, rgba(12, 3, 6, 0.40) 70%, rgba(8, 2, 4, 0.72) 100%),
-            linear-gradient(180deg, rgba(12, 3, 6, 0.52) 0%, rgba(12, 3, 6, 0.08) 28%, rgba(12, 3, 6, 0.14) 65%, rgba(10, 3, 5, 0.48) 100%) !important;
+            radial-gradient(ellipse at 50% 40%, rgba(20, 6, 10, 0.08) 0%, rgba(12, 3, 6, 0.32) 70%, rgba(8, 2, 4, 0.68) 100%),
+            linear-gradient(180deg, rgba(12, 3, 6, 0.46) 0%, rgba(12, 3, 6, 0.06) 28%, rgba(12, 3, 6, 0.12) 65%, rgba(10, 3, 5, 0.44) 100%) !important;
     }
 
     .hero-slider-section .hero__content {
@@ -4519,7 +4526,8 @@ svg {
     }
 
     .hero-slider-section .hero__zoom video,
-    .hero-slider-section .hero__zoom img {
+    .hero-slider-section .hero__zoom img,
+    .hero-slider-section .hero-banner-video {
         width: 100% !important;
         height: 100% !important;
         min-width: 100% !important;
@@ -4530,12 +4538,17 @@ svg {
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         transform: translateZ(0);
+        opacity: 0.92 !important;
+        filter: contrast(1.10) saturate(1.22) brightness(1.04) !important;
+        -webkit-filter: contrast(1.10) saturate(1.22) brightness(1.04) !important;
+        image-rendering: -webkit-optimize-contrast !important;
+        will-change: transform, filter, opacity !important;
     }
 
     .hero-slider-section .hero__shade {
         background:
-            radial-gradient(ellipse at 50% 36%, rgba(20, 6, 10, 0.12) 0%, rgba(12, 3, 6, 0.38) 68%, rgba(8, 2, 4, 0.70) 100%),
-            linear-gradient(180deg, rgba(12, 3, 6, 0.52) 0%, rgba(12, 3, 6, 0.06) 28%, rgba(12, 3, 6, 0.12) 68%, rgba(10, 3, 5, 0.45) 100%) !important;
+            radial-gradient(ellipse at 50% 36%, rgba(20, 6, 10, 0.08) 0%, rgba(12, 3, 6, 0.30) 68%, rgba(8, 2, 4, 0.65) 100%),
+            linear-gradient(180deg, rgba(12, 3, 6, 0.46) 0%, rgba(12, 3, 6, 0.05) 28%, rgba(12, 3, 6, 0.10) 68%, rgba(10, 3, 5, 0.40) 100%) !important;
     }
 
     .hero-slider-section .hero__content {

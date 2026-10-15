@@ -64,7 +64,7 @@
                         <div class="hero__media">
                             <div class="hero__zoom">
                                 @if($slide->is_video || Str::endsWith(strtolower($slide->image ?? ''), ['.mp4', '.webm', '.ogg', '.mov']))
-                                    <video autoplay loop muted playsinline class="w-100 h-100 object-fit-cover hero-banner-video" preload="auto">
+                                    <video autoplay loop muted playsinline webkit-playsinline class="w-100 h-100 object-fit-cover hero-banner-video" preload="auto">
                                         <source src="{{ asset($slide->image) }}" type="video/mp4">
                                     </video>
                                 @else

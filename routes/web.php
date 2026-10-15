@@ -229,61 +229,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 | Directly trigger migrations and production catalog seeder via browser URL.
 */
 Route::get('/sync-hero-slides', function () {
-    $videoMap = [
-        1 => 'assets/videos/91_perfume_banner.mp4',
-        2 => 'assets/videos/91_gold_banner.mp4',
-        3 => 'assets/videos/marjaan_perfume_banner.mp4',
-    ];
-    $slides = \App\Models\HeroSlide::orderBy('sort_order', 'asc')->get();
-    if ($slides->isEmpty()) {
-        \App\Models\HeroSlide::create([
-            'title' => "REVIVAL 50",
-            'subtitle' => "Hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration for 14+ hours longevity across Pakistan.",
-            'badge_text' => "HAUTE PARFUMERIE • EXTRAIT DE PARFUM",
-            'image' => $videoMap[1],
-            'cta_text' => "DISCOVER COLLECTION",
-            'cta_url' => "/collections/all",
-            'secondary_cta_text' => "EXPLORE VAULT",
-            'secondary_cta_url' => "/collections/all",
-            'sort_order' => 1,
-            'is_active' => true,
-        ]);
-        \App\Models\HeroSlide::create([
-            'title' => "BLEU IMPERIAL",
-            'subtitle' => "A magnetic fusion of sun-drenched Italian bergamot, fresh sea salt, and rich cedarwood. Formulated with Grasse French oils for an all-day commanding masculine trail.",
-            'badge_text' => "TOP SELLER 2026",
-            'image' => $videoMap[2],
-            'cta_text' => "EXPLORE COUTURE",
-            'cta_url' => "/collections/men",
-            'secondary_cta_text' => "WHATSAPP ADVISOR",
-            'secondary_cta_url' => "https://wa.me/923363685732",
-            'sort_order' => 2,
-            'is_active' => true,
-        ]);
-        \App\Models\HeroSlide::create([
-            'title' => "ROYAL OUD & AMBER",
-            'subtitle' => "An aristocratic private reserve macerated for 90 days with rare Kashmiri saffron and golden ambergris. Experience timeless luxury crafted specifically for evening galas.",
-            'badge_text' => "PRIVATE RESERVE COLLECTION",
-            'image' => $videoMap[3],
-            'cta_text' => "EXPLORE SETS",
-            'cta_url' => "/collections/bundles",
-            'secondary_cta_text' => "VIEW DISCOVERY SET",
-            'secondary_cta_url' => "/perfume/the-imperial-discovery-coffret-set-of-5",
-            'sort_order' => 3,
-            'is_active' => true,
-        ]);
-    } else {
-        foreach ($slides as $slide) {
-            if (isset($videoMap[$slide->sort_order])) {
-                $slide->image = $videoMap[$slide->sort_order];
-                $slide->save();
-            }
-        }
-    }
+    $slides = \App\Http\Controllers\HomeController::syncHeroBanners();
     return response()->json([
         'status' => 'success',
-        'message' => 'Hero slides synchronized with video banners',
-        'slides' => \App\Models\HeroSlide::all(['id', 'title', 'image', 'sort_order']),
+        'message' => 'Hero slides synchronized with 3 high-definition video banners',
+        'slides' => $slides->map(fn($s) => ['id' => $s->id, 'title' => $s->title, 'image' => $s->image, 'sort_order' => $s->sort_order]),
     ]);
 });
 
@@ -303,19 +253,8 @@ Route::get('/seed-production-catalog', function (\Illuminate\Http\Request $reque
 
     // 1b. Sync Hero Slides with video banners
     try {
-        $videoMap = [
-            1 => 'assets/videos/91_perfume_banner.mp4',
-            2 => 'assets/videos/91_gold_banner.mp4',
-            3 => 'assets/videos/marjaan_perfume_banner.mp4',
-        ];
-        $slides = \App\Models\HeroSlide::orderBy('sort_order', 'asc')->get();
-        foreach ($slides as $slide) {
-            if (isset($videoMap[$slide->sort_order])) {
-                $slide->image = $videoMap[$slide->sort_order];
-                $slide->save();
-            }
-        }
-        $executedSteps[] = 'Hero slides synchronized with video banners.';
+        \App\Http\Controllers\HomeController::syncHeroBanners();
+        $executedSteps[] = 'Hero slides synchronized with 3 high-definition video banners.';
     } catch (\Throwable $e) {
         $executedSteps[] = 'Hero slides sync notice: ' . $e->getMessage();
     }

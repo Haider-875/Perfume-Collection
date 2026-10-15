@@ -17,76 +17,16 @@ class HomeController extends Controller
     {
         $heroSlides = HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
-        // Self-heal / sync video slides if database has legacy static image slides, is empty, or needs new banner order
-        $needsSync = $heroSlides->isEmpty() || 
-            ($heroSlides->isNotEmpty() && (
-                !\Illuminate\Support\Str::endsWith(strtolower($heroSlides->first()->image ?? ''), ['.mp4', '.webm']) ||
-                !str_contains(strtolower($heroSlides->first()->image ?? ''), '91_gold_banner')
-            ));
+        // Ensure all 3 distinct video banners exist in the exact sequence: 91_gold_banner, marjaan_perfume_banner, 91_perfume_banner
+        $needsSync = $heroSlides->count() !== 3 ||
+            $heroSlides->pluck('image')->unique()->count() !== 3 ||
+            $heroSlides->pluck('sort_order')->values()->toArray() !== [1, 2, 3] ||
+            !str_contains(strtolower($heroSlides[0]->image ?? ''), '91_gold_banner') ||
+            !str_contains(strtolower($heroSlides[1]->image ?? ''), 'marjaan_perfume_banner') ||
+            !str_contains(strtolower($heroSlides[2]->image ?? ''), '91_perfume_banner');
 
         if ($needsSync) {
-            $videoMap = [
-                1 => 'assets/videos/91_gold_banner.mp4',
-                2 => 'assets/videos/marjaan_perfume_banner.mp4',
-                3 => 'assets/videos/91_perfume_banner.mp4',
-            ];
-            if ($heroSlides->isEmpty()) {
-                HeroSlide::create([
-                    'title' => "BLEU IMPERIAL",
-                    'subtitle' => "A magnetic fusion of sun-drenched Italian bergamot, fresh sea salt, and rich cedarwood. Formulated with Grasse French oils for an all-day commanding masculine trail.",
-                    'badge_text' => "TOP SELLER 2026",
-                    'image' => $videoMap[1],
-                    'cta_text' => "EXPLORE COUTURE",
-                    'cta_url' => "/collections/men",
-                    'secondary_cta_text' => "WHATSAPP ADVISOR",
-                    'secondary_cta_url' => "https://wa.me/923363685732",
-                    'sort_order' => 1,
-                    'is_active' => true,
-                ]);
-                HeroSlide::create([
-                    'title' => "ROYAL OUD & AMBER",
-                    'subtitle' => "An aristocratic private reserve macerated for 90 days with rare Kashmiri saffron and golden ambergris. Experience timeless luxury crafted specifically for evening galas.",
-                    'badge_text' => "PRIVATE RESERVE COLLECTION",
-                    'image' => $videoMap[2],
-                    'cta_text' => "EXPLORE SETS",
-                    'cta_url' => "/collections/bundles",
-                    'secondary_cta_text' => "VIEW DISCOVERY SET",
-                    'secondary_cta_url' => "/perfume/the-imperial-discovery-coffret-set-of-5",
-                    'sort_order' => 2,
-                    'is_active' => true,
-                ]);
-                HeroSlide::create([
-                    'title' => "REVIVAL 50",
-                    'subtitle' => "Hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration for 14+ hours longevity across Pakistan.",
-                    'badge_text' => "HAUTE PARFUMERIE • EXTRAIT DE PARFUM",
-                    'image' => $videoMap[3],
-                    'cta_text' => "DISCOVER COLLECTION",
-                    'cta_url' => "/collections/all",
-                    'secondary_cta_text' => "EXPLORE VAULT",
-                    'secondary_cta_url' => "/collections/all",
-                    'sort_order' => 3,
-                    'is_active' => true,
-                ]);
-                $heroSlides = HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-            } else {
-                foreach ($heroSlides as $slide) {
-                    $img = strtolower($slide->image ?? '');
-                    if (str_contains($img, '91_gold_banner') || $slide->title === 'BLEU IMPERIAL') {
-                        $slide->sort_order = 1;
-                        $slide->image = $videoMap[1];
-                        $slide->save();
-                    } elseif (str_contains($img, 'marjaan_perfume_banner') || $slide->title === 'ROYAL OUD & AMBER') {
-                        $slide->sort_order = 2;
-                        $slide->image = $videoMap[2];
-                        $slide->save();
-                    } elseif (str_contains($img, '91_perfume_banner') || $slide->title === 'REVIVAL 50') {
-                        $slide->sort_order = 3;
-                        $slide->image = $videoMap[3];
-                        $slide->save();
-                    }
-                }
-                $heroSlides = HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-            }
+            $heroSlides = self::syncHeroBanners();
         }
         
         $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
@@ -177,5 +117,57 @@ class HomeController extends Controller
             'recentReviews',
             'recentBlogs'
         ));
+    }
+
+    /**
+     * Cleanly sync and guarantee exact 3 video banners in sequence
+     */
+    public static function syncHeroBanners()
+    {
+        $slidesData = [
+            1 => [
+                'title' => "91° GOLD EDITION",
+                'subtitle' => "A magnetic fusion of sun-drenched Italian bergamot, fresh sea salt, and rich cedarwood. Formulated with Grasse French oils for an all-day commanding masculine trail.",
+                'badge_text' => "TOP SELLER 2026",
+                'image' => 'assets/videos/91_gold_banner.mp4',
+                'cta_text' => "EXPLORE COUTURE",
+                'cta_url' => "/collections/men",
+                'secondary_cta_text' => "WHATSAPP ADVISOR",
+                'secondary_cta_url' => "https://wa.me/923363685732",
+                'sort_order' => 1,
+                'is_active' => true,
+            ],
+            2 => [
+                'title' => "MARJAAN",
+                'subtitle' => "An aristocratic private reserve macerated for 90 days with rare Kashmiri saffron and golden ambergris. Experience timeless luxury crafted specifically for evening galas.",
+                'badge_text' => "PRIVATE RESERVE COLLECTION",
+                'image' => 'assets/videos/marjaan_perfume_banner.mp4',
+                'cta_text' => "EXPLORE SETS",
+                'cta_url' => "/collections/bundles",
+                'secondary_cta_text' => "VIEW DISCOVERY SET",
+                'secondary_cta_url' => "/perfume/the-imperial-discovery-coffret-set-of-5",
+                'sort_order' => 2,
+                'is_active' => true,
+            ],
+            3 => [
+                'title' => "REVIVAL 50",
+                'subtitle' => "Hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration for 14+ hours longevity across Pakistan.",
+                'badge_text' => "HAUTE PARFUMERIE • EXTRAIT DE PARFUM",
+                'image' => 'assets/videos/91_perfume_banner.mp4',
+                'cta_text' => "DISCOVER COLLECTION",
+                'cta_url' => "/collections/all",
+                'secondary_cta_text' => "EXPLORE VAULT",
+                'secondary_cta_url' => "/collections/all",
+                'sort_order' => 3,
+                'is_active' => true,
+            ],
+        ];
+
+        HeroSlide::truncate();
+        foreach ($slidesData as $data) {
+            HeroSlide::create($data);
+        }
+
+        return HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
     }
 }
