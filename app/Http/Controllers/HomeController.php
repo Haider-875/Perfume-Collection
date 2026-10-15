@@ -92,6 +92,18 @@ class HomeController extends Controller
         $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
         $collections = Collection::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
+        // Self-heal / sync catalog if database has legacy .svg placeholders or missing items
+        try {
+            if (Product::where('thumbnail_image', 'like', '%.svg')->exists() || Product::where('sku', 'like', 'RVH-%')->count() < 26) {
+                \Illuminate\Support\Facades\Artisan::call('db:seed', [
+                    '--class' => 'Database\\Seeders\\ProductionCatalogSeeder',
+                    '--force' => true,
+                ]);
+            }
+        } catch (\Throwable $e) {
+            // Non-blocking fallback
+        }
+
         // Featured Collection: All newly added products / latest impressions
         $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
             ->active()

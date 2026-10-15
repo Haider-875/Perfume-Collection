@@ -186,16 +186,32 @@ class Product extends Model
 
     public function getPrimaryImageUrlAttribute()
     {
-        if ($this->thumbnail_image && file_exists(public_path($this->thumbnail_image))) {
-            return asset($this->thumbnail_image);
+        if ($this->thumbnail_image) {
+            if (filter_var($this->thumbnail_image, FILTER_VALIDATE_URL)) {
+                return $this->thumbnail_image;
+            }
+            if (file_exists(public_path($this->thumbnail_image))) {
+                return asset($this->thumbnail_image);
+            }
+            if (!str_ends_with(strtolower($this->thumbnail_image), '.svg')) {
+                return asset($this->thumbnail_image);
+            }
         }
         return asset('assets/images/perfumes/prod_signature.jpg');
     }
 
     public function getHoverImageUrlAttribute()
     {
-        if ($this->hover_image && file_exists(public_path($this->hover_image))) {
-            return asset($this->hover_image);
+        if ($this->hover_image) {
+            if (filter_var($this->hover_image, FILTER_VALIDATE_URL)) {
+                return $this->hover_image;
+            }
+            if (file_exists(public_path($this->hover_image))) {
+                return asset($this->hover_image);
+            }
+            if (!str_ends_with(strtolower($this->hover_image), '.svg')) {
+                return asset($this->hover_image);
+            }
         }
         return $this->primary_image_url;
     }

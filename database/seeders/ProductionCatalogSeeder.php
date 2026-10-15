@@ -709,7 +709,8 @@ class ProductionCatalogSeeder extends Seeder
             $collections = $data['collections'] ?? [];
             $prices = $data['prices'] ?? [];
             $basePrice = $data['base_price'] ?? 2500;
-            unset($data['collections'], $data['prices'], $data['base_price']);
+            $galleryImages = $data['gallery_images'] ?? [];
+            unset($data['collections'], $data['prices'], $data['base_price'], $data['gallery_images']);
 
             $product = Product::where('sku', $data['sku'])->first();
             $payload = array_merge([
@@ -760,8 +761,8 @@ class ProductionCatalogSeeder extends Seeder
                     'is_primary' => false,
                 ]);
             }
-            if (!empty($data['gallery_images'])) {
-                foreach ($data['gallery_images'] as $galleryImg) {
+            if (!empty($galleryImages)) {
+                foreach ($galleryImages as $galleryImg) {
                     ProductImage::create([
                         'product_id' => $product->id,
                         'image_path' => $galleryImg,

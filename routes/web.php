@@ -345,10 +345,14 @@ Route::get('/seed-production-catalog', function (\Illuminate\Http\Request $reque
     $totalProducts = \App\Models\Product::count();
     $totalCategories = \App\Models\Category::count();
     $totalVariants = \App\Models\ProductVariant::count();
-    $catalogProducts = \App\Models\Product::where('sku', 'like', 'PC-%')
+    $catalogProducts = \App\Models\Product::where('sku', 'like', 'RVH-%')
+        ->orWhere('sku', 'like', 'PC-%')
         ->with('category')
-        ->orderBy('id', 'desc')
+        ->orderBy('id', 'asc')
         ->get();
+    if ($catalogProducts->isEmpty()) {
+        $catalogProducts = \App\Models\Product::with('category')->orderBy('id', 'desc')->get();
+    }
 
     // JSON response for API / curl
     if ($request->wantsJson() || $request->query('format') === 'json') {
