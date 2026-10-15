@@ -15,24 +15,28 @@
 
     {{-- Sort By (Only for Mobile Drawer where desktop top bar sort is hidden) --}}
     @if(isset($isMobileDrawer) && $isMobileDrawer)
-    <div class="mb-1">
+    <div class="mb-2">
         <label for="mobileSortSelect" class="d-block text-xs text-uppercase tracking-wider fw-bold mb-1.5" style="color: #211D1E; font-size: 11px; letter-spacing: 0.08em;">
             Sort By
         </label>
-        <select 
-            name="sort" 
-            id="mobileSortSelect"
-            onchange="this.form.submit()" 
-            class="form-select w-100 py-2.5 pe-4 ps-3 rounded-3 shadow-sm"
-            style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 42px;"
-        >
-            <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
-            <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
-            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-            <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rated</option>
-            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
-        </select>
+        <div class="position-relative">
+            <i class="fas fa-arrow-down-short-wide position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
+            <select 
+                name="sort" 
+                id="mobileSortSelect" 
+                onchange="this.form.submit()" 
+                class="form-select w-100 rounded-3 shadow-xs"
+                style="background: linear-gradient(180deg, #FFFFFF 0%, #FAF6F0 100%) !important; border: 1px solid #E2D7CF !important; color: #211D1E !important; font-size: 12px !important; font-weight: 600 !important; height: 44px !important; padding: 8px 36px 8px 36px !important; cursor: pointer; box-shadow: 0 2px 8px rgba(84, 27, 41, 0.06) !important; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
+            >
+                <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
+                <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
+                <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+                <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+                <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rated</option>
+                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
+            </select>
+            <i class="fas fa-chevron-down position-absolute top-50 translate-middle-y" style="right: 14px; font-size: 10px; color: #541B29; pointer-events: none; z-index: 2;"></i>
+        </div>
     </div>
     @endif
 

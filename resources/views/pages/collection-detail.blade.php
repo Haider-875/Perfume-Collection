@@ -130,7 +130,7 @@
                     </div>
 
                     <!-- Desktop Sort Form Controls -->
-                    <form action="{{ url()->current() }}" method="GET" class="d-none d-lg-flex align-items-center gap-2">
+                    <form action="{{ url()->current() }}" method="GET" class="d-none d-lg-flex align-items-center gap-2.5" style="font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;">
                         @foreach(request()->except('sort', 'page') as $key => $val)
                             @if(is_array($val))
                                 @foreach($val as $v)
@@ -141,14 +141,15 @@
                             @endif
                         @endforeach
                         
-                        <label for="sortSelect" class="text-xs text-uppercase tracking-widest fw-semibold mb-0" style="color: #211D1E;">Sort By:</label>
+                        <label for="sortSelect" class="text-xs text-uppercase tracking-wider fw-bold mb-0" style="color: #6B605B; font-size: 11px; letter-spacing: 0.08em;">Sort By:</label>
                         <div class="position-relative">
+                            <i class="fas fa-arrow-down-short-wide position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
                             <select 
                                 name="sort" 
                                 id="sortSelect" 
                                 onchange="this.form.submit()" 
-                                class="form-select shadow-sm text-xs py-1.5 pe-4 ps-2.5 rounded-3"
-                                style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;"
+                                class="form-select rounded-3 shadow-xs"
+                                style="background: linear-gradient(180deg, #FFFFFF 0%, #FAF6F0 100%) !important; border: 1px solid #E2D7CF !important; color: #211D1E !important; font-size: 12px !important; font-weight: 600 !important; height: 42px !important; padding: 8px 36px 8px 36px !important; cursor: pointer; box-shadow: 0 2px 8px rgba(84, 27, 41, 0.06) !important; appearance: none; -webkit-appearance: none; -moz-appearance: none;"
                             >
                                 <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured Creations</option>
                                 <option value="bestseller" {{ request('sort') == 'bestseller' ? 'selected' : '' }}>Most Coveted (Bestsellers)</option>
@@ -157,6 +158,7 @@
                                 <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rated</option>
                                 <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest Releases</option>
                             </select>
+                            <i class="fas fa-chevron-down position-absolute top-50 translate-middle-y" style="right: 14px; font-size: 10px; color: #541B29; pointer-events: none; z-index: 2;"></i>
                         </div>
                     </form>
                 </div>
