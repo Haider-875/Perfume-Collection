@@ -243,7 +243,7 @@
                         class="form-control text-center rounded-2"
                         style="width: 38%; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 38px;"
                     >
-                    <button type="submit" class="btn text-white py-1.5 px-2.5 rounded-2 text-uppercase fw-semibold shadow-xs d-flex align-items-center justify-content-center" style="width: 24%; height: 38px; font-size: 11px; letter-spacing: 0.04em; background-color: #541B29; border: 1px solid #541B29;" title="Apply price range">
+                    <button type="submit" class="btn text-white py-1.5 px-2.5 rounded-2 text-uppercase fw-semibold shadow-xs d-flex align-items-center justify-content-center" style="width: 24%; height: 38px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #7A283C 0%, #541B29 100%); border: 1px solid #541B29; box-shadow: 0 2px 8px rgba(84, 27, 41, 0.25);" title="Apply price range">
                         Apply
                     </button>
                 </div>
@@ -251,7 +251,7 @@
         </div>
     </div>
 
-    {{-- Group 3: Bottle Size (Segmented 3-button touch control: 30ml, 50ml, 100ml) --}}
+    {{-- Group 3: Bottle Size (Segmented Gradient Touch Buttons: 30ml, 50ml, 100ml) --}}
     <div class="pt-2.5" style="border-top: 1px solid #E8E0DA;" x-data="{ openVolume: true }">
         <button 
             type="button" 
@@ -275,7 +275,7 @@
                         <a 
                             href="{{ request()->fullUrlWithQuery(['volume_ml' => request('volume_ml') == $vol ? null : $vol]) }}"
                             class="d-flex align-items-center justify-content-center w-100 rounded-3 transition text-decoration-none shadow-xs"
-                            style="height: 42px; font-size: 12px; {{ request('volume_ml') == $vol ? 'background-color: #541B29; color: #FFFFFF; border: 1px solid #541B29; font-weight: 600;' : 'background-color: #FAF7F2; color: #211D1E; border: 1px solid #E8E0DA; font-weight: 500;' }}"
+                            style="height: 42px; font-size: 12px; {{ request('volume_ml') == $vol ? 'background: linear-gradient(135deg, #7A283C 0%, #541B29 100%); color: #FFFFFF; border: 1px solid #541B29; font-weight: 600; box-shadow: 0 4px 10px rgba(84, 27, 41, 0.28);' : 'background: linear-gradient(180deg, #FFFFFF 0%, #FAF5EF 100%); color: #211D1E; border: 1px solid #E8E0DA; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.03);' }}"
                         >
                             {{ $vol }} ml
                         </a>
@@ -285,58 +285,7 @@
         </div>
     </div>
 
-    {{-- Group 4: Scent Notes (Curated Signature Notes Pills) --}}
-    <div class="pt-2.5" style="border-top: 1px solid #E8E0DA;" x-data="{ openNotes: {{ request('note') ? 'true' : 'false' }}, showAllNotes: false }">
-        <button 
-            type="button" 
-            @click="openNotes = !openNotes"
-            class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
-            aria-label="Toggle Scent Notes"
-        >
-            <span class="d-flex align-items-center gap-1.5" style="color: #211D1E; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
-                <span>Scent Notes</span>
-                @if(request('note'))
-                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0.5" style="font-size: 9px; background-color: #541B29;">1</span>
-                @else
-                    <span style="font-size: 11px; font-weight: 500; color: #786C67;">({{ count($scentNotes) }})</span>
-                @endif
-            </span>
-            <i class="fas fa-chevron-down" :style="openNotes ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #786C67;"></i>
-        </button>
-
-        <div x-show="openNotes" x-cloak class="pt-1">
-            <div class="d-flex flex-wrap gap-1.5">
-                @foreach($scentNotes as $index => $note)
-                    <a 
-                        href="{{ request()->fullUrlWithQuery(['note' => request('note') == $note->slug ? null : $note->slug]) }}" 
-                        x-show="showAllNotes || {{ $index }} < 10 || '{{ request('note') }}' === '{{ $note->slug }}'"
-                        class="rounded-pill transition text-decoration-none d-inline-flex align-items-center gap-1 shadow-xs"
-                        style="padding: 6px 12px; font-size: 11px; {{ request('note') == $note->slug ? 'background-color: #541B29; color: #FFFFFF; border: 1px solid #541B29; font-weight: 600;' : 'background-color: #FAF7F2; color: #4A403A; border: 1px solid #E8E0DA; font-weight: 500;' }}"
-                    >
-                        @if(request('note') == $note->slug)
-                            <i class="fas fa-check" style="font-size: 8px;"></i>
-                        @endif
-                        <span>{{ $note->name }}</span>
-                    </a>
-                @endforeach
-            </div>
-
-            @if(count($scentNotes) > 10)
-                <div class="pt-2 text-center">
-                    <button 
-                        type="button" 
-                        @click="showAllNotes = !showAllNotes"
-                        class="btn btn-link p-0 text-decoration-none"
-                        style="font-size: 11px; font-weight: 600; color: #541B29;"
-                    >
-                        <span x-text="showAllNotes ? 'Show less notes' : 'Show all notes (+{{ count($scentNotes) - 10 }})'"></span>
-                    </button>
-                </div>
-            @endif
-        </div>
-    </div>
-
-    {{-- Group 5: Collections Navigation --}}
+    {{-- Group 4: Collections Navigation --}}
     <div class="pt-2.5" style="border-top: 1px solid #E8E0DA;" x-data="{ openCollections: {{ $slug !== 'all' ? 'true' : 'false' }} }">
         <button 
             type="button" 
