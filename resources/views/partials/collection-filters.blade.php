@@ -225,25 +225,30 @@
 
             {{-- Custom Price Range Inputs --}}
             <div class="pt-2" style="border-top: 1px solid #E8E0DA;">
-                <div class="d-flex align-items-center gap-1.5">
+                <div class="d-flex align-items-center">
                     <input 
                         type="number" 
                         name="min_price" 
                         value="{{ request('min_price') }}" 
                         placeholder="Min (Rs)" 
                         class="form-control text-center rounded-2"
-                        style="width: 38%; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 38px;"
+                        style="flex: 1; min-width: 0; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 38px;"
                     >
-                    <span style="font-size: 12px; color: #A89F99;">–</span>
+                    <span class="px-1 text-muted" style="font-size: 12px; flex-shrink: 0;">–</span>
                     <input 
                         type="number" 
                         name="max_price" 
                         value="{{ request('max_price') }}" 
                         placeholder="Max (Rs)" 
                         class="form-control text-center rounded-2"
-                        style="width: 38%; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 38px;"
+                        style="flex: 1; min-width: 0; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px; height: 38px;"
                     >
-                    <button type="submit" class="btn text-white py-1.5 px-2.5 rounded-2 text-uppercase fw-semibold shadow-xs d-flex align-items-center justify-content-center" style="width: 24%; height: 38px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #7A283C 0%, #541B29 100%); border: 1px solid #541B29; box-shadow: 0 2px 8px rgba(84, 27, 41, 0.25);" title="Apply price range">
+                    <button 
+                        type="submit" 
+                        class="btn text-white py-1.5 px-3 rounded-2 text-uppercase fw-bold shadow-sm d-flex align-items-center justify-content-center" 
+                        style="flex-shrink: 0; margin-left: 10px !important; height: 38px; font-size: 11px; letter-spacing: 0.06em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; background-color: #7A1C33 !important; border: none !important; color: #FFFFFF !important; box-shadow: 0 4px 12px rgba(122, 28, 51, 0.35) !important;" 
+                        title="Apply price range"
+                    >
                         Apply
                     </button>
                 </div>
@@ -252,7 +257,7 @@
     </div>
 
     {{-- Group 3: Bottle Size (Segmented Gradient Touch Buttons: 30ml, 50ml, 100ml) --}}
-    <div class="pt-2.5" style="border-top: 1px solid #E8E0DA;" x-data="{ openVolume: true }">
+    <div class="pt-2.5 pb-3" style="border-top: 1px solid #E8E0DA;" x-data="{ openVolume: true }">
         <button 
             type="button" 
             @click="openVolume = !openVolume"
@@ -268,14 +273,14 @@
             <i class="fas fa-chevron-down" :style="openVolume ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
         </button>
 
-        <div x-show="openVolume" x-cloak class="pt-1">
-            <div class="row g-2">
+        <div x-show="openVolume" x-cloak class="pt-1 pb-2">
+            <div class="row g-2 mb-2">
                 @foreach([30, 50, 100] as $vol)
                     <div class="col-4">
                         <a 
                             href="{{ request()->fullUrlWithQuery(['volume_ml' => request('volume_ml') == $vol ? null : $vol]) }}"
                             class="d-flex align-items-center justify-content-center w-100 rounded-3 transition text-decoration-none shadow-xs"
-                            style="height: 42px; font-size: 12px; {{ request('volume_ml') == $vol ? 'background: linear-gradient(135deg, #7A283C 0%, #541B29 100%); color: #FFFFFF; border: 1px solid #541B29; font-weight: 600; box-shadow: 0 4px 10px rgba(84, 27, 41, 0.28);' : 'background: linear-gradient(180deg, #FFFFFF 0%, #FAF5EF 100%); color: #211D1E; border: 1px solid #E8E0DA; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.03);' }}"
+                            style="height: 42px; font-size: 12px; {{ request('volume_ml') == $vol ? 'background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: 1px solid #541B29 !important; font-weight: 600; box-shadow: 0 4px 12px rgba(122, 28, 51, 0.35) !important;' : 'background: linear-gradient(180deg, #FFFFFF 0%, #FAF5EF 100%) !important; color: #211D1E !important; border: 1px solid #E8E0DA !important; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.03);' }}"
                         >
                             {{ $vol }} ml
                         </a>
