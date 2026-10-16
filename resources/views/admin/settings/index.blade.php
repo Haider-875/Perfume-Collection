@@ -367,19 +367,15 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Instagram Profile URL</label>
-                            <input type="url" name="social_instagram" value="{{ $settings['social_instagram'] ?? 'https://instagram.com/perfumescollection' }}">
+                            <input type="url" name="social_instagram" value="{{ $settings['social_instagram'] ?? 'https://www.instagram.com/perfumescollectionoffical?vrfl=MTU3aGN1aW83NHBqMQ==' }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Facebook Page URL</label>
-                            <input type="url" name="social_facebook" value="{{ $settings['social_facebook'] ?? 'https://facebook.com/perfumescollection' }}">
+                            <input type="url" name="social_facebook" value="{{ $settings['social_facebook'] ?? 'https://www.facebook.com/share/19hj89MXpm/' }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">TikTok Profile URL</label>
                             <input type="url" name="social_tiktok" value="{{ $settings['social_tiktok'] ?? 'https://tiktok.com/@perfumescollection' }}">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">YouTube Channel URL</label>
-                            <input type="url" name="social_youtube" value="{{ $settings['social_youtube'] ?? 'https://youtube.com/@perfumescollection' }}">
                         </div>
                     </div>
                 </div>

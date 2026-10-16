@@ -438,10 +438,9 @@
                     &copy; {{ date('Y') }} {{ $settings['site_name'] ?? 'Perfumes Collection' }}. All rights reserved. Registered Haute Parfumerie in Pakistan.
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <a href="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ $settings['social_instagram'] ?? 'https://www.instagram.com/perfumescollectionoffical?vrfl=MTU3aGN1aW83NHBqMQ==' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $settings['social_facebook'] ?? 'https://www.facebook.com/share/19hj89MXpm/' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://wa.me/{{ $whatsappNum }}" target="_blank" rel="noopener noreferrer" class="footer-social-link text-success" aria-label="WhatsApp Concierge"><i class="fab fa-whatsapp"></i></a>
-                    <a href="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>

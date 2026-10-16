@@ -157,8 +157,8 @@ class LuxuryPerfumeSeeder extends Seeder
             'easypaisa_account_title' => 'Perfumes Collection',
             'jazzcash_number' => '03363685732',
             'jazzcash_account_title' => 'Perfumes Collection',
-            'instagram_url' => 'https://instagram.com/perfumescollection',
-            'facebook_url' => 'https://facebook.com/perfumescollection',
+            'instagram_url' => 'https://www.instagram.com/perfumescollectionoffical?vrfl=MTU3aGN1aW83NHBqMQ==',
+            'facebook_url' => 'https://www.facebook.com/share/19hj89MXpm/',
         ];
         foreach ($settings as $k => $v) {
             Setting::create(['key' => $k, 'value' => $v, 'group' => str_starts_with($k, 'payment_') || str_contains($k, 'bank_') || str_contains($k, 'easypaisa') || str_contains($k, 'jazzcash') ? 'payments' : 'store']);

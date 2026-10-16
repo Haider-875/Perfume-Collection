@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 $cleanWhatsapp = '92' . substr($cleanWhatsapp, 1);
             }
             $view->with('whatsappNum', $cleanWhatsapp ?: '923363685732');
+            $view->with('settings', function_exists('settings') ? settings() : []);
         });
     }
 }
