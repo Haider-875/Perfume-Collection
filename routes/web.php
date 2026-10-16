@@ -569,3 +569,13 @@ Route::get('/run-production-seeder', function () {
     return redirect()->route('system.seed-catalog');
 });
 
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Blade views, application, and config caches cleared successfully for Wasmer/production.'
+    ]);
+});
+

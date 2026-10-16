@@ -191,35 +191,10 @@ function initBackToTop() {
     });
 }
 
-// 4. Toast Notification Dispatcher
+// 4. Toast Notification Dispatcher (Removed to prevent intrusive popups)
 window.showLuxuryToast = function(message, type = 'success') {
-    let container = document.querySelector('.toast-container');
-    if (!container) {
-        container = document.createElement('div');
-        container.className = 'toast-container';
-        document.body.appendChild(container);
-    }
-
-    const toast = document.createElement('div');
-    toast.className = 'luxury-toast';
-    const icon = type === 'success' ? 'fa-gem' : (type === 'info' ? 'fa-compass' : 'fa-bell');
-    
-    toast.innerHTML = `
-        <i class="fas ${icon}" style="color: var(--gold-primary); font-size: 1.1rem;"></i>
-        <div>
-            <div style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: #92400e;">RAVAHA PARFUMS</div>
-            <div style="font-size: 0.82rem; color: #1f2937;">${message}</div>
-        </div>
-    `;
-
-    container.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.transition = 'all 0.4s ease';
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 400);
-    }, 3800);
+    // Popups completely disabled as requested
+    return;
 };
 
 // 5. Cart Drawer AJAX Engine
@@ -345,7 +320,6 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null) {
         const overlay = document.getElementById('cartDrawerOverlay');
         if (drawer) drawer.classList.add('active');
         if (overlay) overlay.classList.add('active');
-        window.showLuxuryToast('Flacon added to your private collection', 'success');
     })
     .catch(err => console.error(err));
 };
@@ -366,7 +340,6 @@ window.addBundleToCart = function(bundleId) {
         const overlay = document.getElementById('cartDrawerOverlay');
         if (drawer) drawer.classList.add('active');
         if (overlay) overlay.classList.add('active');
-        window.showLuxuryToast('Luxury Bundle added to your cart!', 'success');
     })
     .catch(err => console.error(err));
 };
@@ -414,7 +387,6 @@ window.removeCartItem = function(itemId) {
     .then(res => res.json())
     .then(data => {
         renderCartUI(data);
-        window.showLuxuryToast('Item removed from cart', 'info');
     });
 };
 

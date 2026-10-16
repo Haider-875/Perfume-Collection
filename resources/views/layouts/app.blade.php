@@ -12,7 +12,7 @@
     <meta name="description"
         content="@yield('meta_description', 'Handcrafted Extrait de Parfum luxury impressions formulated with French oils for 14+ hour longevity in Pakistan. 100% authentic impressions.')">
     <meta name="keywords"
-        content="perfumes collection, luxury impressions pakistan, buy rawaha lookalike, extrait de parfum lahore, buy perfume online karachi, best long lasting fragrance islamabad">
+        content="perfumes collection, luxury impressions pakistan, extrait de parfum lahore, buy perfume online karachi, best long lasting fragrance islamabad">
 
     <!-- OpenGraph & Social Cards -->
     <meta property="og:title" content="@yield('title', 'Perfumes Collection | Luxury Extrait de Parfum Impressions')">
@@ -59,6 +59,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
 
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
     @stack('styles')
 </head>
 
@@ -636,7 +639,7 @@
 
     <!-- Swiper & Luxury JS Engine -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="{{ asset('assets/js/luxury.js') }}"></script>
+    <script src="{{ asset('assets/js/luxury.js') }}?v={{ file_exists(public_path('assets/js/luxury.js')) ? filemtime(public_path('assets/js/luxury.js')) : time() }}"></script>
 
     <script>
         // Announcement Bar Swiper

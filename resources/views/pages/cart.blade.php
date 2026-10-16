@@ -149,7 +149,7 @@
                                 <div class="d-flex flex-column gap-2">
                                     <label class="d-block fw-semibold text-uppercase" style="font-size: 10px; letter-spacing: 0.2em; color: #541B29;">Coupon Voucher</label>
                                     <div class="d-flex gap-2">
-                                        <input type="text" x-model="couponCode" placeholder="e.g. WELCOME500"
+                                        <input type="text" x-model="couponCode" placeholder=""
                                                class="form-control text-xs py-2 px-3 text-uppercase font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                                         <button type="button" @click="applyCoupon()" :disabled="couponLoading"
                                                 class="btn-gold fw-semibold text-xs text-uppercase px-3 py-2 rounded-3 text-nowrap">

@@ -2,12 +2,61 @@
 
 @section('title', 'Secure Checkout — Perfumes Collection')
 
+@push('styles')
+<style>
+    .tid-input::placeholder,
+    .checkout-input::placeholder {
+        font-size: 11px !important;
+        opacity: 0.65;
+        letter-spacing: normal;
+    }
+    .checkout-input, 
+    textarea.checkout-input {
+        font-size: 12px !important;
+    }
+    select.checkout-select,
+    .checkout-select {
+        height: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        font-size: 11.5px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 12px !important;
+        padding-right: 32px !important;
+        background-color: #FAF7F2 !important;
+        border: 1px solid #E8E0DA !important;
+        border-radius: 8px !important;
+        color: #211D1E !important;
+    }
+    .checkout-input:focus, .checkout-select:focus, textarea.checkout-input:focus {
+        background-color: #FFFFFF !important;
+        border-color: #541B29 !important;
+        box-shadow: 0 0 0 3px rgba(84, 27, 41, 0.08) !important;
+    }
+    .btn-gold,
+    .btn-gradient {
+        background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        box-shadow: 0 4px 14px rgba(122, 28, 51, 0.3) !important;
+    }
+    .btn-gold:hover,
+    .btn-gradient:hover {
+        background: linear-gradient(135deg, #C94363 0%, #8D213C 50%, #541B29 100%) !important;
+        color: #FFFFFF !important;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(122, 28, 51, 0.4) !important;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="py-5 min-vh-100" 
      style="background-color: #F7F3EE; border-bottom: 1px solid #E8E0DA; color: #211D1E;"
      x-data="{
-        province: '{{ old('province', $defaultAddress->province ?? 'Punjab') }}',
-        city: '{{ old('city', $defaultAddress->city ?? 'Lahore') }}',
+        province: '{{ old('province', '') }}',
+        city: '{{ old('city', '') }}',
         paymentMethod: '{{ old('payment_method', 'cod') }}',
         walletType: '{{ old('wallet_type', 'easypaisa') }}',
         shippingCost: {{ $shippingCost }},
@@ -23,7 +72,6 @@
         },
         copyText(text) {
             navigator.clipboard.writeText(text);
-            alert('Copied to clipboard: ' + text);
         },
         applyCoupon() {
             if (!this.couponCode) return;
@@ -89,16 +137,19 @@
                 <!-- Left Column: Checkout Steps (col-12 col-lg-7) -->
                 <div class="col-12 col-lg-7 d-flex flex-column gap-4">
                     <!-- Step 1: Customer Contact & Delivery Address -->
-                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
-                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">1</span>
-                            <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Contact & Delivery Address</h2>
+                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">1</span>
+                            <div>
+                                <h2 class="font-serif fw-normal mb-0" style="font-size: 1.25rem; color: #211D1E;">Contact & Delivery Address</h2>
+                                <span class="d-block text-muted" style="font-size: 11px; margin-top: 2px;">Where should we dispatch your luxury fragrance order?</span>
+                            </div>
                         </div>
 
                         <!-- Saved Address Quick Selector for logged in user -->
                         @if(auth()->check() && $savedAddresses->isNotEmpty())
                             <div class="mb-4 p-3 rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                <label class="d-block text-xs text-uppercase tracking-wider mb-2 fw-semibold" style="color: #541B29;">Select Saved Address</label>
+                                <label class="d-block text-uppercase tracking-wider mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Select Saved Address</label>
                                 <div class="row g-2">
                                     @foreach($savedAddresses as $addr)
                                         <div class="col-12 col-md-6">
@@ -110,10 +161,10 @@
                                                         document.getElementById('input_phone').value = '{{ $addr->phone }}';
                                                         document.getElementById('input_address').value = '{{ $addr->street_address }}';
                                                     "
-                                                    class="text-start p-3 rounded-3 text-xs w-100 shadow-sm transition btn" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;">
-                                                <div class="fw-semibold" style="color: #211D1E;">{{ $addr->recipient_name }}</div>
-                                                <div class="text-truncate" style="color: #6B605B;">{{ $addr->street_address }}</div>
-                                                <div style="color: #541B29; font-weight: 500;">{{ $addr->city }}, {{ $addr->province }}</div>
+                                                    class="text-start p-3 rounded-3 w-100 shadow-sm transition btn" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E;">
+                                                <div class="fw-semibold" style="color: #211D1E; font-size: 12.5px;">{{ $addr->recipient_name }}</div>
+                                                <div class="text-truncate text-muted" style="font-size: 11.5px;">{{ $addr->street_address }}</div>
+                                                <div style="color: #541B29; font-weight: 500; font-size: 11px;">{{ $addr->city }}, {{ $addr->province }}</div>
                                             </button>
                                         </div>
                                     @endforeach
@@ -121,38 +172,48 @@
                             </div>
                         @endif
 
-                        <div class="d-flex flex-column gap-3 text-xs">
+                        <div class="d-flex flex-column gap-3">
+                            <!-- Full Name & Email -->
                             <div class="row g-3">
                                 <div class="col-12 col-md-6">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Full Name *</label>
+                                    <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" id="input_name" name="customer_name" required 
-                                           value="{{ old('customer_name', auth()->user()->name ?? ($defaultAddress->recipient_name ?? '')) }}" 
-                                           placeholder="e.g. Syed Daniyal Ahmed"
-                                           class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                           value="{{ old('customer_name') }}" 
+                                           placeholder="e.g. Muhammad Ali"
+                                           class="form-control checkout-input" 
+                                           style="height: 40px; font-size: 12px; padding: 0 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Email Address (Order Confirmation) *</label>
+                                    <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Email Address (Order Confirmation) <span class="text-danger">*</span></label>
                                     <input type="email" name="customer_email" required 
-                                           value="{{ old('customer_email', auth()->user()->email ?? '') }}" 
-                                           placeholder="patron@domain.com"
-                                           class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                           value="{{ old('customer_email') }}" 
+                                           placeholder="e.g. name@example.com"
+                                           class="form-control checkout-input" 
+                                           style="height: 40px; font-size: 12px; padding: 0 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                                 </div>
                             </div>
 
+                            <!-- Mobile Contact -->
                             <div>
-                                <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Pakistani Mobile Contact (03XX-XXXXXXX) *</label>
+                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Pakistani Mobile Contact (03XX-XXXXXXX) <span class="text-danger">*</span></label>
                                 <input type="tel" id="input_phone" name="customer_phone" required 
-                                       value="{{ old('customer_phone', auth()->user()->phone ?? ($defaultAddress->phone ?? '')) }}" 
+                                       value="{{ old('customer_phone') }}" 
                                        placeholder="e.g. 03001234567"
-                                       class="form-control text-xs py-2 px-3 font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
-                                <p class="mt-1 mb-0" style="font-size: 11px; color: #6B605B;">Courier rider will call you on this active number prior to doorstep delivery.</p>
+                                       class="form-control font-mono checkout-input" 
+                                       style="height: 40px; font-size: 12px; padding: 0 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                <small class="d-block mt-1 text-muted" style="font-size: 11px;">
+                                    <i class="fas fa-info-circle me-1" style="color: #541B29;"></i>Courier rider will call you on this active number prior to doorstep delivery.
+                                </small>
                             </div>
 
+                            <!-- Province & City -->
                             <div class="row g-3">
                                 <div class="col-12 col-md-6">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Province / Region *</label>
+                                    <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Province / Region <span class="text-danger">*</span></label>
                                     <select name="province" x-model="province" required 
-                                            class="form-select text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                            class="form-select checkout-select" 
+                                            style="height: 38px; min-height: 38px; font-size: 11.5px; padding: 0 30px 0 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px; cursor: pointer;">
+                                        <option value="" disabled :selected="!province">Select Province</option>
                                         @foreach($provinces as $prov => $cities)
                                             <option value="{{ $prov }}">{{ $prov }}</option>
                                         @endforeach
@@ -160,9 +221,11 @@
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">City in Pakistan *</label>
+                                    <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">City in Pakistan <span class="text-danger">*</span></label>
                                     <select name="city" x-model="city" required 
-                                            class="form-select text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                            class="form-select checkout-select" 
+                                            style="height: 38px; min-height: 38px; font-size: 11.5px; padding: 0 30px 0 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px; cursor: pointer;">
+                                        <option value="" disabled :selected="!city">Select City</option>
                                         <template x-for="c in getCities()" :key="c">
                                             <option :value="c.split(' (')[0]" x-text="c" :selected="c.split(' (')[0] === city"></option>
                                         </template>
@@ -170,103 +233,162 @@
                                 </div>
                             </div>
 
+                            <!-- Street Address -->
                             <div>
-                                <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Street Address / House / Flat Number *</label>
+                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Street Address / House / Flat Number <span class="text-danger">*</span></label>
                                 <input type="text" id="input_address" name="shipping_address" required 
-                                       value="{{ old('shipping_address', $defaultAddress->street_address ?? '') }}" 
-                                       placeholder="e.g. House # 42-A, Street 14"
-                                       class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                       value="{{ old('shipping_address') }}" 
+                                       placeholder="e.g. House #, Street #, Apartment"
+                                       class="form-control checkout-input" 
+                                       style="height: 40px; font-size: 12px; padding: 0 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                             </div>
 
+                            <!-- Area / Sector / Landmark -->
                             <div>
-                                <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Area / Sector / Block (Optional)</label>
+                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Area / Sector / Landmark <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
                                 <input type="text" name="area" value="{{ old('area') }}" 
-                                       placeholder="e.g. DHA Phase 5 / Gulberg / Bahria Town"
-                                       class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                       placeholder="e.g. Area, Sector, Block or Nearest Landmark"
+                                       class="form-control checkout-input" 
+                                       style="height: 40px; font-size: 12px; padding: 0 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
                             </div>
 
+                            <!-- Special Delivery Instructions -->
                             <div>
-                                <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Special Delivery Instructions (Optional)</label>
-                                <textarea name="order_notes" rows="2" placeholder="e.g. Please call before arriving or leave with security gate."
-                                          class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">{{ old('order_notes') }}</textarea>
+                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Special Delivery Instructions <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
+                                <textarea name="order_notes" rows="2" placeholder="e.g. Call before arrival or leave with security gate"
+                                          class="form-control checkout-input" 
+                                          style="font-size: 12px; padding: 10px 14px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">{{ old('order_notes') }}</textarea>
                             </div>
 
                             @if(auth()->check())
                                 <div class="pt-2 d-flex align-items-center gap-2">
-                                    <input type="checkbox" id="save_address" name="save_address" value="1" class="form-check-input m-0" style="border-color: #E8E0DA;">
-                                    <label for="save_address" class="cursor-pointer text-xs mb-0" style="color: #6B605B;">Save this address to my account for faster checkout next time</label>
+                                    <input type="checkbox" id="save_address" name="save_address" value="1" class="form-check-input m-0" style="border-color: #D4C7BD; width: 16px; height: 16px; accent-color: #541B29; cursor: pointer;">
+                                    <label for="save_address" class="cursor-pointer mb-0" style="font-size: 12px; color: #6B605B;">Save this address to my account for faster checkout next time</label>
                                 </div>
                             @endif
                         </div>
                     </div>
 
                     <!-- Step 2: Payment Methods -->
-                    <div class="p-3 p-sm-4 p-md-5 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                    <div class="p-3 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
-                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
-                            <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Select Payment Method</h2>
+                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
+                            <div>
+                                <h2 class="font-serif fw-normal mb-0" style="font-size: 1.25rem; color: #211D1E;">Select Payment Method</h2>
+                                <span class="d-block text-muted" style="font-size: 11px; margin-top: 2px;">Encrypted, safe and verified payment channels</span>
+                            </div>
                         </div>
 
                         <div class="d-flex flex-column gap-3">
                             <!-- 1. Cash on Delivery (COD) -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'cod' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
+                                 :style="paymentMethod === 'cod' ? 'border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
                                  @click="paymentMethod = 'cod'">
-                                <div class="p-3 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="cod" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Cash on Delivery (COD)</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Pay cash in hand to the courier rider upon delivery at your doorstep</p>
+                                <div class="p-3 p-sm-4 d-flex align-items-start gap-3">
+                                    <input type="radio" name="payment_method" value="cod" x-model="paymentMethod" class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 17px; height: 17px; cursor: pointer;">
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
+                                            <span class="fw-semibold" style="font-size: 14px; color: #211D1E;">Cash on Delivery (COD)</span>
+                                            <span class="text-uppercase fw-bold px-2 py-0.5 rounded flex-shrink-0" style="font-size: 9.5px; letter-spacing: 0.05em; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">Nationwide</span>
                                         </div>
+                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">Pay cash in hand to the courier rider upon delivery at your doorstep</p>
                                     </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded flex-shrink-0 ms-2" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Nationwide</span>
                                 </div>
                             </div>
 
                             <!-- 2. Easypaisa Direct Transfer -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'wallet_transfer' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'">
-                                <div class="p-3 d-flex align-items-center justify-content-between" @click="paymentMethod = 'wallet_transfer'">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="wallet_transfer" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Easypaisa</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">Transfer payment directly to our registered EasyPaisa account</p>
+                                 :style="paymentMethod === 'wallet_transfer' ? 'border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'">
+                                <div class="p-3 p-sm-4 d-flex align-items-start gap-3" @click="paymentMethod = 'wallet_transfer'">
+                                    <input type="radio" name="payment_method" value="wallet_transfer" x-model="paymentMethod" class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 17px; height: 17px; cursor: pointer;">
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
+                                            <span class="fw-semibold" style="font-size: 14px; color: #211D1E;">Easypaisa</span>
+                                            <span class="text-uppercase fw-bold px-2 py-0.5 rounded flex-shrink-0" style="font-size: 9.5px; letter-spacing: 0.05em; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">Instant</span>
                                         </div>
+                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">Transfer payment directly to our registered EasyPaisa account</p>
                                     </div>
-                                    <span class="text-uppercase fw-bold px-2 py-1 rounded flex-shrink-0 ms-2" style="font-size: 10px; letter-spacing: 0.05em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">Instant</span>
                                 </div>
 
-                                <div x-show="paymentMethod === 'wallet_transfer'" x-cloak class="p-4 d-flex flex-column gap-3 text-xs" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA;">
+                                <!-- Easypaisa Drawer -->
+                                <div x-show="paymentMethod === 'wallet_transfer'" x-cloak class="p-3 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA; padding: 20px !important;">
                                     <input type="hidden" name="wallet_type" value="easypaisa">
 
-                                    <!-- EasyPaisa Account Card -->
-                                    <div class="p-3 rounded-3 d-flex flex-column gap-2 shadow-sm" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                        <div class="text-sm fw-bold mb-1" style="color: #198754;">EasyPaisa Account Details</div>
-                                        <div class="d-flex justify-content-between py-1" style="border-bottom: 1px solid #E8E0DA;">
+                                    <!-- EasyPaisa Account Details Card -->
+                                    <div class="rounded-3 shadow-xs d-flex flex-column gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; padding: 16px 18px;">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="fas fa-wallet" style="color: #198754; font-size: 13px;"></i>
+                                                <span class="fw-bold text-uppercase" style="font-size: 11.5px; letter-spacing: 0.04em; color: #198754;">EasyPaisa Account Details</span>
+                                            </div>
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0.5" style="font-size: 10px;">Official</span>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center py-1.5" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
                                             <span style="color: #6B605B;">Account Title:</span>
                                             <span class="fw-semibold" style="color: #211D1E;">{{ $walletDetails['easypaisa']['account_title'] }}</span>
                                         </div>
-                                        <div class="d-flex justify-content-between py-1">
+
+                                        <div class="d-flex justify-content-between align-items-center py-1" style="font-size: 12px;">
                                             <span style="color: #6B605B;">Mobile Number:</span>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span class="font-mono fw-bold" style="color: #211D1E;">{{ $walletDetails['easypaisa']['account_number'] }}</span>
-                                                <button type="button" @click="copyText('{{ $walletDetails['easypaisa']['account_number'] }}')" class="btn btn-link p-0 text-decoration-underline text-uppercase fw-semibold" style="font-size: 11px; color: #541B29;">Copy</button>
+                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
+                                                <span class="font-mono fw-bold px-2 py-0.5 rounded" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12.5px;">{{ $walletDetails['easypaisa']['account_number'] }}</span>
+                                                <button type="button" 
+                                                        @click="navigator.clipboard.writeText('{{ $walletDetails['easypaisa']['account_number'] }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
+                                                        class="btn btn-sm text-uppercase fw-semibold transition d-inline-flex align-items-center justify-content-center" 
+                                                        style="height: 28px; min-width: 68px; padding: 0 14px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: none !important; border-radius: 6px; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.3) !important;">
+                                                    <span x-text="copied ? 'Copied' : 'Copy'">Copy</span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row g-3">
+                                    <!-- TID & Custom File Upload Inputs Row -->
+                                    <div class="row g-3 pt-2">
+                                        <!-- TID Input -->
                                         <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">EasyPaisa Transaction ID (TID)</label>
-                                            <input type="text" name="transaction_id" placeholder="e.g. 9876543210"
-                                                   class="form-control text-xs py-2 px-3 font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                            <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; color: #541B29;">
+                                                EasyPaisa TID (Transaction ID)
+                                            </label>
+                                            <div class="position-relative d-flex align-items-center">
+                                                <span class="position-absolute start-0 ps-3 d-flex align-items-center pointer-events-none" style="color: #7A1C33; z-index: 2;">
+                                                    <i class="fas fa-receipt" style="font-size: 13px;"></i>
+                                                </span>
+                                                <input type="text" name="transaction_id" placeholder="e.g. 10-digit TID (from SMS)"
+                                                       class="form-control font-mono tid-input" 
+                                                       style="height: 44px; padding-left: 38px; padding-right: 14px; font-size: 12px; background-color: #FAF7F2; border: 1.5px solid #D4C7BD; color: #211D1E; border-radius: 8px;">
+                                            </div>
+                                            <small class="d-block mt-1 text-muted" style="font-size: 10.5px;">Enter 10-digit transaction ID received in SMS.</small>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <label class="d-block text-uppercase tracking-wider mb-1 fw-semibold" style="font-size: 11px; color: #541B29;">Payment Screenshot</label>
-                                            <input type="file" name="receipt_file" accept="image/*,.pdf"
-                                                   class="form-control text-xs py-2 px-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+
+                                        <!-- Custom File Upload UI -->
+                                        <div class="col-12 col-md-6" x-data="{ fileName: '' }">
+                                            <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; color: #541B29;">
+                                                Payment Screenshot <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <label class="d-flex align-items-center justify-content-between rounded-3 cursor-pointer transition w-100 m-0"
+                                                       style="height: 44px; padding: 0 8px 0 14px; background-color: #FAF7F2; border: 1.5px dashed #D4C7BD; border-radius: 8px;">
+                                                    <input type="file" name="receipt_file" accept="image/*,.pdf" 
+                                                           class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" 
+                                                           style="z-index: 2;"
+                                                           @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''">
+                                                    <div class="d-flex align-items-center gap-2 overflow-hidden pe-2" style="z-index: 1;">
+                                                        <i :class="fileName ? 'fas fa-check-circle text-success' : 'fas fa-cloud-arrow-up'" 
+                                                           :style="fileName ? 'font-size: 13px;' : 'color: #541B29; font-size: 13px;'"></i>
+                                                        <span class="text-truncate" style="font-size: 12px; color: #211D1E;" 
+                                                              x-text="fileName ? fileName : 'Upload receipt (Image / PDF)'">
+                                                            Upload receipt (Image / PDF)
+                                                        </span>
+                                                    </div>
+                                                    <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 fw-semibold text-uppercase transition" 
+                                                          style="height: 30px; padding: 0 14px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border-radius: 6px; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.3) !important; z-index: 1;"
+                                                          x-text="fileName ? 'Change' : 'Browse'">
+                                                        Browse
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <small class="d-block mt-1 text-muted" style="font-size: 10.5px;">Attach screenshot of transfer or PDF receipt.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -274,18 +396,20 @@
 
                             <!-- 3. Debit / Credit Card (Visa / MasterCard / PayPak) -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
-                                 :style="paymentMethod === 'safepay' ? 'border: 2px solid #541B29; background-color: #FAF7F2;' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
+                                 :style="paymentMethod === 'safepay' ? 'border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
                                  @click="paymentMethod = 'safepay'">
-                                <div class="p-3 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <input type="radio" name="payment_method" value="safepay" x-model="paymentMethod" class="form-check-input m-0 flex-shrink-0" style="accent-color: #541B29;">
-                                        <div>
-                                            <span class="text-sm fw-semibold" style="color: #211D1E;">Debit / Credit Card (Visa / MasterCard / PayPak)</span>
-                                            <p class="text-xs mb-0" style="color: #6B605B;">256-bit encrypted card checkout powered by Safepay</p>
+                                <div class="p-3 p-sm-4 d-flex align-items-start gap-3">
+                                    <input type="radio" name="payment_method" value="safepay" x-model="paymentMethod" class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 17px; height: 17px; cursor: pointer;">
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
+                                            <span class="fw-semibold" style="font-size: 14px; color: #211D1E;">Debit / Credit Card</span>
+                                            <div class="d-flex align-items-center gap-1 font-mono fw-bold flex-shrink-0" style="font-size: 9.5px; color: #541B29;">
+                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">VISA</span>
+                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">MC</span>
+                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">PAYPAK</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-1 text-xs font-mono fw-bold flex-shrink-0 ms-2" style="color: #541B29;">
-                                        <span>VISA</span> &bull; <span>MC</span> &bull; <span>PAYPAK</span>
+                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">256-bit encrypted card checkout powered by Safepay</p>
                                     </div>
                                 </div>
                             </div>
@@ -295,9 +419,10 @@
                     <!-- Submit Button -->
                     <div>
                         <button type="submit" 
-                                class="w-100 btn-gold py-3 text-xs fw-semibold text-uppercase tracking-widest shadow-xl d-flex align-items-center justify-content-center gap-2" style="border-radius: 8px;">
+                                class="w-100 py-3 text-xs fw-semibold text-uppercase tracking-widest shadow-xl d-flex align-items-center justify-content-center gap-2 transition" 
+                                style="height: 48px; border-radius: 8px; border: none !important; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 18px rgba(122, 28, 51, 0.35) !important;">
                             <span>Place Confirmed Order</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right ms-1"></i>
                         </button>
                         <p class="text-center mt-3 mb-0" style="font-size: 11px; color: #6B605B;">
                             By placing this order, you confirm acceptance of our delivery policies and 7-day scent satisfaction guarantee.
@@ -348,10 +473,12 @@
                                 <div class="mb-3">
                                     <label class="d-block fw-semibold mb-1" style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: #541B29;">Discount Code / Voucher</label>
                                     <div class="d-flex gap-2">
-                                        <input type="text" x-model="couponCode" placeholder="e.g. ROYAL10 / FIRSTORDER" 
-                                               class="form-control text-xs py-2 px-3 text-uppercase font-mono" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px;">
+                                        <input type="text" x-model="couponCode" placeholder="" 
+                                               class="form-control text-xs text-uppercase font-mono checkout-input" 
+                                               style="height: 38px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E; border-radius: 8px; font-size: 12px; padding: 0 12px;">
                                         <button type="button" @click="applyCoupon()" :disabled="couponLoading"
-                                                class="btn-gold fw-semibold text-xs text-uppercase px-3 py-2 rounded-3 text-nowrap">
+                                                class="fw-semibold text-xs text-uppercase px-3 rounded-3 text-nowrap transition d-inline-flex align-items-center justify-content-center"
+                                                style="height: 38px; border: none !important; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.25) !important;">
                                             <span x-show="!couponLoading">Apply</span>
                                             <span x-show="couponLoading" x-cloak>...</span>
                                         </button>

@@ -72,7 +72,7 @@ if (!function_exists('ravaha_whatsapp_url')) {
      * @param string $message
      * @return string
      */
-    function ravaha_whatsapp_url($message = 'Assalam o Alaikum! I would like to inquire about RAVAHA Parfums.')
+    function ravaha_whatsapp_url($message = 'Assalam o Alaikum! I would like to inquire about Perfumes Collection.')
     {
         $rawNumber = settings('site_whatsapp', '+92 336 3685732');
         $cleanNumber = preg_replace('/[^0-9]/', '', $rawNumber);
