@@ -140,6 +140,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     // Overview Dashboard & Live Analytics
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::post('/cache/purge', [AdminDashboardController::class, 'purgeCache'])->name('cache.purge');
 
     // Products Management Suite
     Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');

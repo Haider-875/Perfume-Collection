@@ -1541,8 +1541,16 @@
             </div>
 
             <!-- Right: Theme, Notifications, Avatar -->
-            <div class="d-flex align-items-center gap-2">
                 @yield('header_actions')
+
+                <!-- 1-Click Instant Cache Purge Button -->
+                <form method="POST" action="{{ route('admin.cache.purge') }}" class="d-inline" onsubmit="return confirm('Purge application cache? This will clear all compiled views and refresh product listings immediately.');">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-outline-warning d-flex align-items-center gap-1.5 px-2.5 py-1.5 rounded-pill shadow-xs" title="Clear Application Cache & Refresh Site" style="font-size: 12px; font-weight: 600; border-color: rgba(245, 158, 11, 0.4); color: #d97706;">
+                        <i class="fa-solid fa-bolt" style="font-size: 11px;"></i>
+                        <span class="d-none d-sm-inline">Purge Cache</span>
+                    </button>
+                </form>
 
                 <!-- Dark & Light Mode Toggle Button -->
                 <button type="button" class="topbar-icon-btn theme-toggle-btn" id="themeToggleBtn" onclick="window.toggleAdminTheme()" title="Toggle Dark / Light Mode" aria-label="Toggle Dark or Light Mode">

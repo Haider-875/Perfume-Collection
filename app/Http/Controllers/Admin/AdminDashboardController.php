@@ -179,4 +179,17 @@ class AdminDashboardController extends Controller
             'recentOrders'
         ));
     }
+
+    public function purgeCache(Request $request)
+    {
+        try {
+            \Illuminate\Support\Facades\Cache::flush();
+            \Illuminate\Support\Facades\Artisan::call('cache:clear');
+            \Illuminate\Support\Facades\Artisan::call('view:clear');
+
+            return back()->with('success', 'Application & view cache purged successfully! All products and settings are now 100% fresh.');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Failed to purge cache: ' . $e->getMessage());
+        }
+    }
 }

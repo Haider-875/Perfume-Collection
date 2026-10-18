@@ -27,6 +27,16 @@ class Collection extends Model
         'sort_order' => 'integer',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        });
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        });
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_collection')
