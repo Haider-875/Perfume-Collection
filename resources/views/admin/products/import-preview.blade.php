@@ -5,12 +5,10 @@
 @section('page_subtitle', 'Review parsed formulations, multi-size pricing (30ml, 50ml, 60ml, 100ml), and duplicate checks before committing to the database.')
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2 flex-wrap">
-    <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Cancel & Upload New File</span>
-    </a>
-</div>
+<a href="{{ route('admin.products.import') }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Cancel & Upload New File</span>
+</a>
 @endsection
 
 @section('content')

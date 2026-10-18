@@ -5,20 +5,18 @@
 @section('page_subtitle', 'Upload Excel (.xlsx) or CSV price lists with multi-size pricing (30ml, 50ml, 60ml, 100ml), automatic SKU generation, and pre-import validation.')
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2 flex-wrap">
-    <a href="{{ route('admin.products.sample-excel') }}" class="admin-btn-secondary" title="Download Excel template (.xlsx)">
-        <i class="fa-solid fa-file-excel text-success"></i>
-        <span>Sample Excel (.xlsx)</span>
-    </a>
-    <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download CSV template (.csv)">
-        <i class="fa-solid fa-file-csv text-primary"></i>
-        <span>Sample CSV</span>
-    </a>
-    <a href="{{ route('admin.products.index') }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Back to Vault</span>
-    </a>
-</div>
+<a href="{{ route('admin.products.sample-excel') }}" class="admin-btn-secondary" title="Download Excel template (.xlsx)">
+    <i class="fa-solid fa-file-excel text-success"></i>
+    <span>Sample Excel (.xlsx)</span>
+</a>
+<a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download CSV template (.csv)">
+    <i class="fa-solid fa-file-csv text-primary"></i>
+    <span>Sample CSV</span>
+</a>
+<a href="{{ route('admin.products.index') }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back to Vault</span>
+</a>
 @endsection
 
 @section('content')

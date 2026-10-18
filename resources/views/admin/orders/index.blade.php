@@ -5,13 +5,11 @@
 @section('page_subtitle', 'Process acquisitions, verify payment slips, update fulfillment status, and track couriers')
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2">
-    <a href="{{ route('admin.orders.export-csv', request()->query()) }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-file-export text-muted"></i>
-        <span class="d-none d-sm-inline">Export Orders CSV</span>
-        <span class="d-sm-none">Export</span>
-    </a>
-</div>
+<a href="{{ route('admin.orders.export-csv', request()->query()) }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-file-export text-muted"></i>
+    <span class="d-none d-sm-inline">Export Orders CSV</span>
+    <span class="d-sm-none">Export</span>
+</a>
 @endsection
 
 @section('content')

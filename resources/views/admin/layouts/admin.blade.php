@@ -1541,8 +1541,7 @@
             </div>
 
             <!-- Right: Theme, Notifications, Avatar -->
-                @yield('header_actions')
-
+            <div class="d-flex align-items-center gap-2">
                 <!-- 1-Click Instant Cache Purge Button -->
                 <form method="POST" action="{{ route('admin.cache.purge') }}" class="d-inline" onsubmit="return confirm('Purge application cache? This will clear all compiled views and refresh product listings immediately.');">
                     @csrf
@@ -1628,6 +1627,24 @@
 
         <!-- Main Body -->
         <main class="admin-content">
+            @if(!request()->routeIs('admin.dashboard') && (View::hasSection('page_title') || View::hasSection('header_actions')))
+                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+                    <div>
+                        @hasSection('page_title')
+                            <h1 class="h4 fw-bold text-dark mb-1">@yield('page_title')</h1>
+                        @endif
+                        @hasSection('page_subtitle')
+                            <p class="text-muted small mb-0">@yield('page_subtitle')</p>
+                        @endif
+                    </div>
+                    @hasSection('header_actions')
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            @yield('header_actions')
+                        </div>
+                    @endif
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>

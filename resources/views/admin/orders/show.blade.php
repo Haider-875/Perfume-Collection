@@ -5,20 +5,18 @@
 @section('page_subtitle', 'Placed on ' . $order->created_at->format('d F Y \a\t h:i A') . ' | ' . $order->city . ', ' . $order->province)
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2 flex-wrap">
-    <a href="{{ route('admin.orders.invoice', $order->id) }}" target="_blank" class="admin-btn-secondary" title="Print Invoice">
-        <i class="fa-solid fa-print"></i>
-        <span>Print Invoice</span>
-    </a>
-    <a href="{{ route('admin.orders.packing-slip', $order->id) }}" target="_blank" class="admin-btn-secondary" title="Print Packing Slip">
-        <i class="fa-solid fa-box"></i>
-        <span>Packing Slip</span>
-    </a>
-    <a href="{{ route('admin.orders.index') }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Orders List</span>
-    </a>
-</div>
+<a href="{{ route('admin.orders.invoice', $order->id) }}" target="_blank" class="admin-btn-secondary" title="Print Invoice">
+    <i class="fa-solid fa-print"></i>
+    <span>Print Invoice</span>
+</a>
+<a href="{{ route('admin.orders.packing-slip', $order->id) }}" target="_blank" class="admin-btn-secondary" title="Print Packing Slip">
+    <i class="fa-solid fa-box"></i>
+    <span>Packing Slip</span>
+</a>
+<a href="{{ route('admin.orders.index') }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Orders List</span>
+</a>
 @endsection
 
 @section('content')

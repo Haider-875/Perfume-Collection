@@ -5,16 +5,14 @@
 @section('page_subtitle', 'SKU: ' . $product->sku . ' | Collection: ' . ($product->category->name ?? 'Unassigned'))
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2 flex-wrap">
-    <a href="{{ route('shop.show', $product->slug) }}" target="_blank" class="admin-btn-secondary" title="View live on storefront">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        <span>Live Preview</span>
-    </a>
-    <a href="{{ route('admin.products.index') }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Vault List</span>
-    </a>
-</div>
+<a href="{{ route('shop.show', $product->slug) }}" target="_blank" class="admin-btn-secondary" title="View live on storefront">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    <span>Live Preview</span>
+</a>
+<a href="{{ route('admin.products.index') }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Vault List</span>
+</a>
 @endsection
 
 @section('content')

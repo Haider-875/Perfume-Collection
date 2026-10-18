@@ -5,16 +5,14 @@
 @section('page_subtitle', 'Slug: /blogs/' . $blog->slug)
 
 @section('header_actions')
-<div class="d-flex align-items-center gap-2 flex-wrap">
-    <a href="{{ route('blogs.show', $blog->slug) }}" target="_blank" class="admin-btn-secondary" title="View live article">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        <span>Live Preview</span>
-    </a>
-    <a href="{{ route('admin.blogs.index') }}" class="admin-btn-secondary">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Journal List</span>
-    </a>
-</div>
+<a href="{{ route('blogs.show', $blog->slug) }}" target="_blank" class="admin-btn-secondary" title="View live article">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    <span>Live Preview</span>
+</a>
+<a href="{{ route('admin.blogs.index') }}" class="admin-btn-secondary">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Journal List</span>
+</a>
 @endsection
 
 @section('content')

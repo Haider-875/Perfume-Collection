@@ -5,39 +5,37 @@
 @section('page_subtitle', 'Manage formulation inventory, pricing variants, olfactory notes, and stock levels')
 
 @section('header_actions')
-    <div class="d-flex align-items-center gap-2 ">
-        <a href="{{ route('admin.categories.index') }}" class="admin-btn-secondary" title="Manage Fragrance Categories">
-            <i class="fa-solid fa-layer-group text-primary"></i>
-            <span>Categories</span>
-        </a>
-        <a href="{{ route('admin.products.sample-excel') }}" class="admin-btn-secondary"
-            title="Download sample Excel template (.xlsx)">
-            <i class="fa-solid fa-file-excel text-success"></i>
-            <span class="d-none d-sm-inline">Sample Excel</span>
-        </a>
-        <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download sample CSV template">
-            <i class="fa-solid fa-file-csv text-muted"></i>
-            <span class="d-none d-sm-inline">Sample CSV</span>
-        </a>
-        <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary"
-            title="Bulk import Excel or CSV price list">
-            <i class="fa-solid fa-file-import text-primary"></i>
-            <span class="d-none d-sm-inline">Import Price List</span>
-        </a>
-        <a href="{{ route('admin.products.export-csv') }}" class="admin-btn-secondary" title="Export catalog to CSV">
-            <i class="fa-solid fa-file-export text-muted"></i>
-            <span class="d-none d-sm-inline">Export CSV</span>
-        </a>
-        <a href="{{ url('/seed-production-catalog') }}" class="admin-btn-secondary"
-            title="Sync & Seed Catalog Products (Wasmer / No-Terminal)">
-            <i class="fa-solid fa-arrows-rotate text-warning"></i>
-            <span class="d-none d-md-inline">Sync Catalog</span>
-        </a>
-        <a href="{{ route('admin.products.create') }}" class="admin-btn-primary">
-            <i class="fa-solid fa-plus"></i>
-            <span>Craft Fragrance</span>
-        </a>
-    </div>
+    <a href="{{ route('admin.categories.index') }}" class="admin-btn-secondary" title="Manage Fragrance Categories">
+        <i class="fa-solid fa-layer-group text-primary"></i>
+        <span>Categories</span>
+    </a>
+    <a href="{{ route('admin.products.sample-excel') }}" class="admin-btn-secondary"
+        title="Download sample Excel template (.xlsx)">
+        <i class="fa-solid fa-file-excel text-success"></i>
+        <span class="d-none d-sm-inline">Sample Excel</span>
+    </a>
+    <a href="{{ route('admin.products.sample-csv') }}" class="admin-btn-secondary" title="Download sample CSV template">
+        <i class="fa-solid fa-file-csv text-muted"></i>
+        <span class="d-none d-sm-inline">Sample CSV</span>
+    </a>
+    <a href="{{ route('admin.products.import') }}" class="admin-btn-secondary"
+        title="Bulk import Excel or CSV price list">
+        <i class="fa-solid fa-file-import text-primary"></i>
+        <span class="d-none d-sm-inline">Import Price List</span>
+    </a>
+    <a href="{{ route('admin.products.export-csv') }}" class="admin-btn-secondary" title="Export catalog to CSV">
+        <i class="fa-solid fa-file-export text-muted"></i>
+        <span class="d-none d-sm-inline">Export CSV</span>
+    </a>
+    <a href="{{ url('/seed-production-catalog') }}" class="admin-btn-secondary"
+        title="Sync & Seed Catalog Products (Wasmer / No-Terminal)">
+        <i class="fa-solid fa-arrows-rotate text-warning"></i>
+        <span class="d-none d-md-inline">Sync Catalog</span>
+    </a>
+    <a href="{{ route('admin.products.create') }}" class="admin-btn-primary">
+        <i class="fa-solid fa-plus"></i>
+        <span>Craft Fragrance</span>
+    </a>
 @endsection
 
 @section('content')
