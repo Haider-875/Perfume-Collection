@@ -200,6 +200,18 @@ class Product extends Model
         return asset('assets/images/perfumes/prod_signature.jpg');
     }
 
+    public function getPrimaryWebpUrlAttribute()
+    {
+        if ($this->thumbnail_image) {
+            $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $this->thumbnail_image);
+            if (file_exists(public_path($webpPath))) {
+                return asset($webpPath);
+            }
+        }
+        $defaultWebp = 'assets/images/perfumes/prod_signature.webp';
+        return file_exists(public_path($defaultWebp)) ? asset($defaultWebp) : null;
+    }
+
     public function getHoverImageUrlAttribute()
     {
         if ($this->hover_image) {
@@ -214,6 +226,17 @@ class Product extends Model
             }
         }
         return $this->primary_image_url;
+    }
+
+    public function getHoverWebpUrlAttribute()
+    {
+        if ($this->hover_image) {
+            $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $this->hover_image);
+            if (file_exists(public_path($webpPath))) {
+                return asset($webpPath);
+            }
+        }
+        return $this->primary_webp_url;
     }
 
     public function getMainImageUrlAttribute()

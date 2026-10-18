@@ -2385,6 +2385,10 @@ h3.product-card-title {
     transform: scale(1.045) !important;
 }
 
+.product-card:hover .product-hover-pic {
+    opacity: 1 !important;
+}
+
 
 /* ==========================================================================
    LUXURY PAGINATION SYSTEM - BUTTONS & LINKS

@@ -31,19 +31,35 @@
             @endif
         </div>
 
-        <img src="{{ $product->primary_image_url }}" 
-             alt="{{ $product->name }}" 
-             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-             class="w-100 h-100 object-fit-contain transition-smooth" 
-             style="aspect-ratio: 1 / 1; object-fit: contain !important; object-position: center !important;"
-             loading="lazy">
-        @if($product->hover_image && $product->hover_image !== $product->thumbnail_image)
-            <img src="{{ $product->hover_image_url }}" 
-                 alt="{{ $product->name }} Presentation" 
+        <picture class="w-100 h-100 d-flex align-items-center justify-content-center">
+            @if($product->primary_webp_url)
+                <source srcset="{{ $product->primary_webp_url }}" type="image/webp">
+            @endif
+            <img src="{{ $product->primary_image_url }}" 
+                 alt="{{ $product->name }}" 
+                 width="400" 
+                 height="400"
+                 decoding="async"
                  onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
-                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-contain opacity-0 transition-smooth" 
+                 class="w-100 h-100 object-fit-contain transition-smooth" 
                  style="aspect-ratio: 1 / 1; object-fit: contain !important; object-position: center !important;"
                  loading="lazy">
+        </picture>
+        @if($product->hover_image && $product->hover_image !== $product->thumbnail_image)
+            <picture class="position-absolute top-0 start-0 w-100 h-100 opacity-0 transition-smooth product-hover-pic pointer-events-none">
+                @if($product->hover_webp_url)
+                    <source srcset="{{ $product->hover_webp_url }}" type="image/webp">
+                @endif
+                <img src="{{ $product->hover_image_url }}" 
+                     alt="{{ $product->name }} Presentation" 
+                     width="400" 
+                     height="400"
+                     decoding="async"
+                     onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
+                     class="w-100 h-100 object-fit-contain" 
+                     style="aspect-ratio: 1 / 1; object-fit: contain !important; object-position: center !important;"
+                     loading="lazy">
+            </picture>
         @endif
     </a>
 
