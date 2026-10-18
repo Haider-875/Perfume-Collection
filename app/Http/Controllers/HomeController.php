@@ -10,94 +10,99 @@ use App\Models\Category;
 use App\Models\Bundle;
 use App\Models\Blog;
 use App\Models\Review;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $heroSlides = HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+        $data = Cache::remember('homepage_curated_data_v1', 1800, function () {
+            $heroSlides = HeroSlide::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
-        // If no hero slides exist at all, populate initial default banners
-        if ($heroSlides->isEmpty()) {
-            $heroSlides = self::syncHeroBanners();
-        }
-        
-        $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
-        $collections = Collection::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+            // If no hero slides exist at all, populate initial default banners
+            if ($heroSlides->isEmpty()) {
+                $heroSlides = self::syncHeroBanners();
+            }
 
-        // Featured Collection: All newly added products / latest impressions
-        $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
-            ->active()
-            ->where('is_featured', true)
-            ->orderBy('id', 'desc')
-            ->get();
+            $featuredCategories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->take(4)->get();
+            $collections = Collection::where('is_active', true)->orderBy('sort_order', 'asc')->get();
 
-        if ($featuredProducts->isEmpty()) {
+            // Featured Collection: All newly added products / latest impressions
             $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
                 ->active()
+                ->where('is_featured', true)
                 ->orderBy('id', 'desc')
                 ->get();
-        }
 
-        $bestsellers = Product::with(['category', 'fragranceFamily', 'scentNotes'])
-            ->active()
-            ->bestsellers()
-            ->take(8)
-            ->get();
+            if ($featuredProducts->isEmpty()) {
+                $featuredProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                    ->active()
+                    ->orderBy('id', 'desc')
+                    ->get();
+            }
 
-        if ($bestsellers->isEmpty()) {
-            $bestsellers = $featuredProducts->take(8);
-        }
-
-        // New Release Impressions (swapped): Classic formulations from previous featured collection
-        $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
-            ->active()
-            ->newArrivals()
-            ->orderBy('id', 'asc')
-            ->get();
-
-        if ($newArrivals->isEmpty()) {
-            $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+            $bestsellers = Product::with(['category', 'fragranceFamily', 'scentNotes'])
                 ->active()
-                ->orderBy('id', 'asc')
+                ->bestsellers()
                 ->take(8)
                 ->get();
-        }
 
-        $restockedProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
-            ->active()
-            ->latest()
-            ->take(8)
-            ->get();
+            if ($bestsellers->isEmpty()) {
+                $bestsellers = $featuredProducts->take(8);
+            }
 
-        $bundles = Bundle::where('is_active', true)->with('items.product')->take(3)->get();
+            // New Release Impressions (swapped): Classic formulations from previous featured collection
+            $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                ->active()
+                ->newArrivals()
+                ->orderBy('id', 'asc')
+                ->get();
 
-        $collaborationProduct = Product::where('is_collaboration', true)->first();
+            if ($newArrivals->isEmpty()) {
+                $newArrivals = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                    ->active()
+                    ->orderBy('id', 'asc')
+                    ->take(8)
+                    ->get();
+            }
 
-        $recentReviews = Review::with('product')
-            ->where('is_approved', true)
-            ->latest()
-            ->take(20)
-            ->get();
+            $restockedProducts = Product::with(['category', 'fragranceFamily', 'scentNotes'])
+                ->active()
+                ->latest()
+                ->take(8)
+                ->get();
 
-        $recentBlogs = Blog::where('is_published', true)
-            ->orderBy('published_at', 'desc')
-            ->take(3)
-            ->get();
+            $bundles = Bundle::where('is_active', true)->with('items.product')->take(3)->get();
 
-        return view('pages.home', compact(
-            'heroSlides',
-            'featuredCategories',
-            'collections',
-            'featuredProducts',
-            'bestsellers',
-            'newArrivals',
-            'restockedProducts',
-            'bundles',
-            'collaborationProduct',
-            'recentReviews',
-            'recentBlogs'
-        ));
+            $collaborationProduct = Product::where('is_collaboration', true)->first();
+
+            $recentReviews = Review::with('product')
+                ->where('is_approved', true)
+                ->latest()
+                ->take(20)
+                ->get();
+
+            $recentBlogs = Blog::where('is_published', true)
+                ->orderBy('published_at', 'desc')
+                ->take(3)
+                ->get();
+
+            return compact(
+                'heroSlides',
+                'featuredCategories',
+                'collections',
+                'featuredProducts',
+                'bestsellers',
+                'newArrivals',
+                'restockedProducts',
+                'bundles',
+                'collaborationProduct',
+                'recentReviews',
+                'recentBlogs'
+            );
+        });
+
+        return view('pages.home', $data);
     }
 
     /**

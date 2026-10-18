@@ -12,43 +12,48 @@ if (!function_exists('settings')) {
      */
     function settings($key = null, $default = null)
     {
-        if (is_null($key)) {
-            return Setting::all()->pluck('value', 'key')->toArray();
+        static $cachedDict = null;
+        if ($cachedDict === null) {
+            try {
+                $cachedDict = \Illuminate\Support\Facades\Cache::remember('app_settings_all_dict', 86400, function () {
+                    return Setting::all()->pluck('value', 'key')->toArray();
+                });
+            } catch (\Throwable $e) {
+                $cachedDict = [];
+            }
         }
 
-        try {
-            $val = Setting::get($key);
-            if ($val !== null && $val !== '') {
-                return $val;
-            }
+        if (is_null($key)) {
+            return $cachedDict;
+        }
 
-            // Key aliases mapping
-            $aliases = [
-                'site_name' => ['store_name'],
-                'store_name' => ['site_name'],
-                'site_whatsapp' => ['whatsapp', 'store_whatsapp'],
-                'whatsapp' => ['site_whatsapp', 'store_whatsapp'],
-                'site_phone' => ['phone', 'store_phone'],
-                'phone' => ['site_phone', 'store_phone'],
-                'site_email' => ['email', 'store_email'],
-                'email' => ['site_email', 'store_email'],
-                'site_address' => ['address_lahore', 'store_address'],
-                'store_address' => ['site_address', 'address_lahore'],
-            ];
+        if (array_key_exists($key, $cachedDict) && $cachedDict[$key] !== null && $cachedDict[$key] !== '') {
+            return $cachedDict[$key];
+        }
 
-            if (isset($aliases[$key])) {
-                foreach ($aliases[$key] as $aliasKey) {
-                    $aliasVal = Setting::get($aliasKey);
-                    if ($aliasVal !== null && $aliasVal !== '') {
-                        return $aliasVal;
-                    }
+        // Key aliases mapping
+        $aliases = [
+            'site_name' => ['store_name'],
+            'store_name' => ['site_name'],
+            'site_whatsapp' => ['whatsapp', 'store_whatsapp'],
+            'whatsapp' => ['site_whatsapp', 'store_whatsapp'],
+            'site_phone' => ['phone', 'store_phone'],
+            'phone' => ['site_phone', 'store_phone'],
+            'site_email' => ['email', 'store_email'],
+            'email' => ['site_email', 'store_email'],
+            'site_address' => ['address_lahore', 'store_address'],
+            'store_address' => ['site_address', 'address_lahore'],
+        ];
+
+        if (isset($aliases[$key])) {
+            foreach ($aliases[$key] as $aliasKey) {
+                if (array_key_exists($aliasKey, $cachedDict) && $cachedDict[$aliasKey] !== null && $cachedDict[$aliasKey] !== '') {
+                    return $cachedDict[$aliasKey];
                 }
             }
-
-            return $default;
-        } catch (\Throwable $e) {
-            return $default;
         }
+
+        return $default;
     }
 }
 

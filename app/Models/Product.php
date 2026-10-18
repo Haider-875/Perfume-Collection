@@ -74,6 +74,16 @@ class Product extends Model
         'views_count' => 'integer',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        });
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        });
+    }
+
     // Relationships
     public function category()
     {

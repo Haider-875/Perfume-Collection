@@ -17,12 +17,22 @@ class Setting extends Model
 
     public static function get($key, $default = null)
     {
-        $setting = static::where('key', $key)->first();
-        return $setting ? $setting->value : $default;
+        static $cachedDict = null;
+        if ($cachedDict === null) {
+            try {
+                $cachedDict = \Illuminate\Support\Facades\Cache::remember('app_settings_all_dict', 86400, function () {
+                    return static::all()->pluck('value', 'key')->toArray();
+                });
+            } catch (\Throwable $e) {
+                $cachedDict = [];
+            }
+        }
+        return array_key_exists($key, $cachedDict) ? $cachedDict[$key] : $default;
     }
 
     public static function set($key, $value, $group = 'general')
     {
+        \Illuminate\Support\Facades\Cache::forget('app_settings_all_dict');
         return static::updateOrCreate(
             ['key' => $key],
             ['value' => $value, 'group' => $group]
