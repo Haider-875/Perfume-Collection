@@ -134,7 +134,37 @@ function initSwiperSliders() {
         });
     }
 
-
+    // Exclusive Fragrances Video Showcase Carousel
+    if (document.querySelector('.exclusive-video-swiper') && !document.querySelector('.exclusive-video-swiper').swiper && typeof Swiper !== 'undefined') {
+        new Swiper('.exclusive-video-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            speed: 750,
+            rewind: true,
+            grabCursor: true,
+            resistance: true,
+            touchRatio: 1.15,
+            pagination: {
+                el: '.exclusive-pagination',
+                clickable: true,
+            },
+            on: {
+                slideChange: function () {
+                    const slides = this.slides;
+                    slides.forEach((slide, idx) => {
+                        const video = slide.querySelector('video');
+                        if (video) {
+                            if (idx === this.activeIndex) {
+                                video.play().catch(() => {});
+                            } else {
+                                video.pause();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
 
     // Testimonials Carousel (Voices of Our Connoisseurs)
     if (document.querySelector('.testimonials-swiper') && !document.querySelector('.testimonials-swiper').swiper && typeof Swiper !== 'undefined') {
@@ -360,6 +390,42 @@ window.buyBundleNow = function(bundleId) {
     .catch(() => {
         window.location.href = '/checkout';
     });
+};
+
+window.buyProductNow = function(productId, quantity = 1, variantId = null) {
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCsrfToken()
+        },
+        body: JSON.stringify({ product_id: productId, quantity: quantity, variant_id: variantId })
+    })
+    .then(res => res.json())
+    .then(() => {
+        window.location.href = '/checkout';
+    })
+    .catch(() => {
+        window.location.href = '/checkout';
+    });
+};
+
+window.toggleVideoSound = function(btn) {
+    const wrap = btn.closest('.exclusive-video-wrap');
+    if (!wrap) return;
+    const video = wrap.querySelector('video');
+    if (!video) return;
+    video.muted = !video.muted;
+    const icon = btn.querySelector('i');
+    if (icon) {
+        if (video.muted) {
+            icon.className = 'fas fa-volume-xmark';
+            btn.title = 'Unmute Sound';
+        } else {
+            icon.className = 'fas fa-volume-high';
+            btn.title = 'Mute Sound';
+        }
+    }
 };
 
 window.updateCartItemQty = function(itemId, qty) {

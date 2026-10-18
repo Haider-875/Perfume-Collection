@@ -7666,3 +7666,291 @@ p, .lead {
         font-size: 10px !important;
     }
 }
+
+/* ==========================================================================
+   Exclusive Fragrances Video Showcase Carousel Styles
+   ========================================================================== */
+.exclusive-carousel-wrapper {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.exclusive-video-swiper {
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #E8E0DA !important;
+    background: #FFFFFF !important;
+}
+
+.exclusive-slide-card {
+    min-height: 520px;
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.exclusive-video-col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    min-height: 520px;
+    background: #0D0508;
+    position: relative;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    overflow: hidden;
+}
+
+.exclusive-video-wrap {
+    height: 100%;
+    min-height: 520px;
+}
+
+.exclusive-showcase-video {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+    display: block;
+}
+
+.exclusive-details-col {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    background-color: #FFFFFF !important;
+    padding: 3rem 3.25rem 2.5rem 3.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+/* Glassmorphism Floating Badge on Video - Pure Typography Without Icons */
+.exclusive-glass-badge {
+    background: rgba(18, 8, 12, 0.5) !important;
+    backdrop-filter: blur(16px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Exclusive Section Save Badge Luxury Gradient */
+.exclusive-save-badge,
+.badge-save-gradient {
+    background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    padding: 3.5px 9px !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 2px 8px rgba(120, 13, 36, 0.32), 0 1px 3px rgba(212, 154, 61, 0.22) !important;
+}
+
+/* Eyebrow & Longevity Badge Styles */
+.exclusive-eyebrow-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0.85rem;
+}
+
+.exclusive-longevity-badge {
+    background-color: #FAF4EB !important;
+    color: #780D24 !important;
+    border: 1px solid #EAD8B8 !important;
+    font-size: 11px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
+    padding: 3.5px 10px !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+
+/* Add to Cart Wine Luxury Gradient */
+.btn-exclusive-cart {
+    background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 4px 18px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-exclusive-cart:hover {
+    background: linear-gradient(135deg, #b81d42 0%, #8c102b 50%, #5e0c1b 100%) !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(120, 13, 36, 0.45) !important;
+}
+
+/* Exclusive Swiper Navigation Controls - Hidden so no intrusive UI cuts onto card or screen */
+.exclusive-carousel-wrapper .exclusive-prev,
+.exclusive-carousel-wrapper .exclusive-next {
+    display: none !important;
+}
+
+/* Clean, Minimal Pagination Outside the Card */
+.exclusive-pagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 1.5rem !important;
+}
+
+.exclusive-pagination .swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+    background: #B0A39B !important;
+    opacity: 0.45 !important;
+    margin: 0 !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-radius: 9999px !important;
+}
+
+.exclusive-pagination .swiper-pagination-bullet-active {
+    width: 28px !important;
+    background: #541B29 !important;
+    opacity: 1 !important;
+}
+
+/* Responsive Rules for Tablet and Mobile Screens */
+@media (max-width: 1199.98px) {
+    .exclusive-details-col {
+        padding: 2.5rem 2.25rem 2.25rem 2.25rem !important;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .exclusive-carousel-wrapper {
+        max-width: 100%;
+    }
+
+    .exclusive-slide-card {
+        min-height: auto;
+        flex-direction: column !important;
+    }
+
+    .exclusive-video-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        min-height: auto;
+        height: 330px !important;
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+    .exclusive-video-wrap {
+        min-height: auto;
+        height: 100% !important;
+    }
+
+    .exclusive-showcase-video {
+        min-height: auto;
+        height: 100% !important;
+    }
+
+    .exclusive-details-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+        padding: 2.25rem 2rem 2.25rem 2rem !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .exclusive-video-col {
+        height: 290px !important;
+    }
+    
+    .exclusive-details-col {
+        padding: 1.75rem 1.35rem 1.75rem 1.35rem !important;
+    }
+
+    .exclusive-details-col h3 {
+        font-size: 1.45rem !important;
+    }
+
+    .exclusive-eyebrow-wrap {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .exclusive-longevity-badge {
+        font-size: 10px !important;
+        padding: 3px 8.5px !important;
+        margin-top: 2px !important;
+    }
+}
+
+/* ==========================================================================
+   Luxury Breadcrumbs Component Styles
+   ========================================================================== */
+.luxury-breadcrumbs-wrapper {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 100%;
+}
+
+.breadcrumb-parents-pill {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E8E0DA !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.25s ease !important;
+}
+
+.breadcrumb-parents-pill a:hover {
+    color: #541B29 !important;
+}
+
+.breadcrumb-active-badge {
+    background-color: #FAF4EB !important;
+    border: 1px solid #EAD8B8 !important;
+    color: #541B29 !important;
+    box-shadow: 0 2px 8px rgba(120, 13, 36, 0.04) !important;
+    transition: all 0.25s ease !important;
+    text-align: center !important;
+    word-break: break-word;
+}
+
+@media (min-width: 768px) {
+    .luxury-breadcrumbs-wrapper {
+        flex-direction: row !important;
+        gap: 8px !important;
+    }
+    .breadcrumb-parents-pill {
+        margin-bottom: 0 !important;
+    }
+}

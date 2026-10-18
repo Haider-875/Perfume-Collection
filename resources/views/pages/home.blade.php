@@ -418,32 +418,171 @@
         </div>
     </section>
 
-    <!-- 5. Bundles & Discovery Coffrets -->
-    @if($bundles->count() > 0)
-        <section class="py-5 border-bottom" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
+    <!-- 5. Exclusive Fragrances Video Showcase (Haute Parfumerie in Motion) -->
+    @if(isset($exclusiveFragrances) && $exclusiveFragrances->count() > 0)
+        <section class="py-5 border-bottom position-relative overflow-hidden" style="background-color: #F7F3EE !important; border-color: #E8E0DA !important;">
             <div class="container px-3 px-lg-4">
-                <div class="text-center mx-auto mb-5" style="max-width: 44rem;">
+                <!-- Section Header -->
+                <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 46rem;">
                     <span class="d-block mb-2 fw-bold text-uppercase tracking-luxury"
-                        style="font-size: 11.5px; color: #780D24 !important; letter-spacing: 0.26em;">CURATED COFFRETS & SIGNATURE PAIRINGS</span>
+                        style="font-size: 11px; color: #780D24 !important; letter-spacing: 0.25em;">
+                        PRIVATE RESERVE IN MOTION
+                    </span>
                     <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase tracking-tight" style="color: #1A1416 !important;">
-                        Luxury Fragrance Bundles
+                        Exclusive Fragrances
                     </h2>
-                    <p class="mt-2 mx-auto" style="color: #2C2422 !important; font-size: 0.95rem; font-weight: 400; line-height: 1.6;">
-                        Presented in custom gold-stamped coffrets. Enjoy up to 30% privileged savings across Pakistan.
+                    <div class="mx-auto mt-2 mb-3" style="width: 4rem; height: 2px; background-color: #9E7D3B;"></div>
+                    <p class="mt-2 mx-auto lh-base" style="color: #4A3E39 !important; font-size: 0.95rem; font-weight: 400; max-width: 38rem;">
+                        Hand-macerated Extrait de Parfum compositions engineered with 35%–40% pure French oil concentration for monumental sillage across Pakistan.
                     </p>
                 </div>
 
-                <div class="row g-3 g-lg-4">
-                    @foreach($bundles as $bundle)
-                        <div class="col-12 col-md-4">
-                            <x-bundle-card :bundle="$bundle" />
+                <!-- Exclusive Video Carousel Swiper -->
+                <div class="position-relative exclusive-carousel-wrapper">
+                    <div class="swiper exclusive-video-swiper rounded-4 shadow-sm" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
+                        <div class="swiper-wrapper">
+                            @foreach($exclusiveFragrances as $item)
+                                <div class="swiper-slide h-auto">
+                                    <div class="exclusive-slide-card row g-0 align-items-stretch h-100">
+                                        
+                                        <!-- Left Column: Cinematic Video Player (Strictly Left Aligned 50% on Desktop) -->
+                                        <div class="col-12 col-lg-6 position-relative overflow-hidden exclusive-video-col" style="background: #0D0508;">
+                                            <div class="exclusive-video-wrap position-relative w-100 h-100 d-flex align-items-center justify-content-center">
+                                                <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="exclusive-showcase-video w-100 h-100 object-fit-cover">
+                                                    <source src="{{ asset($item->video) }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                
+                                                <!-- Video Gradient Overlay -->
+                                                <div class="exclusive-video-vignette position-absolute top-0 start-0 w-100 h-100 pointer-events-none"
+                                                     style="background: linear-gradient(180deg, rgba(13,5,8,0.18) 0%, rgba(13,5,8,0) 45%, rgba(13,5,8,0.38) 100%);"></div>
+
+                                                <!-- Top Left Floating Glassmorphism Badge (Clean Typography without Any Icons) -->
+                                                <div class="position-absolute top-0 start-0 m-3 m-md-4 z-2 pointer-events-none">
+                                                    <span class="exclusive-glass-badge px-3 py-1.5 rounded-pill text-uppercase text-white d-inline-flex align-items-center shadow-sm">
+                                                        {{ $item->badge }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Right Column: Product Details & Purchase Actions (Strictly Right Aligned 50% on Desktop) -->
+                                        <div class="col-12 col-lg-6 d-flex flex-column justify-content-between exclusive-details-col" style="background: #FFFFFF;">
+                                            <div class="exclusive-content-inner">
+                                                <!-- Header Category / Eyebrow & Longevity (Responsive Spacing) -->
+                                                <div class="exclusive-eyebrow-wrap">
+                                                    <span class="font-sans fw-semibold text-uppercase tracking-luxury" style="font-family: 'Poppins', sans-serif; font-size: 10.5px; color: #9E7D3B; letter-spacing: 0.18em;">
+                                                        HAUTE PARFUMERIE • 35%-40% EXTRAIT
+                                                    </span>
+                                                    <span class="exclusive-longevity-badge">
+                                                        {{ $item->longevity }}
+                                                    </span>
+                                                </div>
+
+                                                <!-- Perfume Title (Exact Product Page pdp-title Typography) -->
+                                                <h3 class="pdp-title mb-1.5" style="font-family: 'Wasted Vindey', 'Cormorant Garamond', serif !important; font-size: clamp(1.85rem, 2.6vw, 2.45rem) !important; font-weight: 500 !important; line-height: 1.15; color: #110D0E !important;">
+                                                    @if($item->slug)
+                                                        <a href="{{ route('shop.show', $item->slug) }}" class="text-decoration-none transition-smooth hover-maroon" style="color: #110D0E !important;">
+                                                            {{ $item->name }}
+                                                        </a>
+                                                    @else
+                                                        <span style="color: #110D0E !important;">{{ $item->name }}</span>
+                                                    @endif
+                                                </h3>
+
+                                                <!-- Tagline / Scent Chords (Exact Product Page Italic Luxury Tagline Style) -->
+                                                @if(!empty($item->tagline))
+                                                    <p class="font-sans fst-italic fw-light mb-2.5 text-start" style="font-size: 0.95rem; color: #541B29; line-height: 1.5;">
+                                                        "{{ $item->tagline }}"
+                                                    </p>
+                                                @endif
+
+                                                <!-- Small Description -->
+                                                <p class="font-sans mb-3 lh-base" style="font-family: 'Poppins', sans-serif; color: #4A4240; font-size: 13px; font-weight: 400; line-height: 1.65;">
+                                                    {{ $item->description }}
+                                                </p>
+
+                                                <!-- Ratings Row -->
+                                                <div class="d-flex align-items-center gap-2 mb-3 pb-2.5" style="border-bottom: 1px solid #EFEAE5;">
+                                                    <div class="d-inline-flex align-items-center gap-1 text-gold">
+                                                        @for($s = 1; $s <= 5; $s++)
+                                                            <i class="fas fa-star" style="color: #C9A24B; font-size: 11px;"></i>
+                                                        @endfor
+                                                    </div>
+                                                    <span class="font-sans fw-bold" style="font-size: 12px; color: #1A1416;">
+                                                        {{ number_format($item->rating, 1) }}
+                                                    </span>
+                                                    <span class="font-sans" style="color: #7A6F68; font-size: 11px;">
+                                                        &bull; {{ $item->reviews_count }} Verified Patron Reviews
+                                                    </span>
+                                                </div>
+
+                                                <!-- Price Section (Exact Product Page pdp-price-amount + Gradient Save Badge) -->
+                                                <div class="d-flex align-items-center gap-2.5 gap-sm-3 flex-wrap mb-4 pb-2">
+                                                    <div class="d-flex align-items-baseline gap-1.5">
+                                                        <span class="pdp-price-amount price-gradient-luxury"
+                                                              style="font-family: 'Poppins', sans-serif !important; font-size: clamp(1.75rem, 2.5vw, 2.15rem) !important; font-weight: 700 !important; background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block; line-height: 1.1;">
+                                                            Rs. {{ number_format($item->price) }}
+                                                        </span>
+                                                        <span class="font-sans fw-medium text-uppercase" style="color: #7A6F68; font-size: 11px;">
+                                                            / {{ $item->volume }}
+                                                        </span>
+                                                    </div>
+
+                                                    @if($item->original_price > $item->price)
+                                                        <span class="font-sans text-decoration-line-through" style="color: #615652; font-size: 13px;">
+                                                            Rs. {{ number_format($item->original_price) }}
+                                                        </span>
+                                                        <span class="badge-savings-luxury badge-save-gradient font-sans"
+                                                              style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3.5px 9px; border-radius: 9999px; display: inline-flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 2px 8px rgba(120, 13, 36, 0.32);">
+                                                            SAVE RS. {{ number_format($item->savings) }} ({{ $item->discount_percent }}% OFF)
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- Action Buttons (Generous Spacing & Gap from Price Section) -->
+                                            <div class="pt-4 pt-sm-4 pb-1 mt-3 mt-lg-4" style="border-top: 1px solid #EFEAE5;">
+                                                <div class="row g-2 g-sm-3">
+                                                    <!-- Add to Cart Button (Rich Wine Gradient) -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <button type="button"
+                                                                onclick="addToCartAjax({{ $item->id ?? 1 }}, 1)"
+                                                                class="btn-exclusive-cart w-100 py-2.5 py-sm-3 px-3 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2 rounded-3 shadow-sm transition-smooth"
+                                                                style="background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; color: #FFFFFF !important; border: none !important; font-size: 11.5px; letter-spacing: 0.1em; min-height: 48px; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2) !important;">
+                                                            <i class="fas fa-cart-shopping text-white" style="font-size: 12px;"></i>
+                                                            <span class="text-white text-nowrap">ADD TO CART</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Buy Now Button (Product Page Glassmorphism Style) -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <button type="button"
+                                                                onclick="buyProductNow({{ $item->id ?? 1 }}, 1)"
+                                                                class="btn-pill-buynow w-100 shadow-sm"
+                                                                style="min-height: 48px;">
+                                                            <span>BUY NOW</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    <!-- Clean, Subtle Pagination Indicator Outside Card (No Intrusive Controls on Screen) -->
+                    <div class="swiper-pagination exclusive-pagination position-relative mt-3 pt-1 text-center"></div>
                 </div>
 
+                <!-- Bottom Action: Explore Full Collection -->
                 <div class="text-center mt-4 mt-lg-5">
-                    <a href="{{ route('bundles.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
-                        <span>View All Bundles & Gifts</span>
+                    <a href="{{ route('collections.show', 'all') }}" class="btn-outline-gold px-4 py-3"
+                       style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center;">
+                        <span>Explore Full Extrait Collection</span>
                     </a>
                 </div>
             </div>
@@ -977,6 +1116,46 @@
 
             // New Release Impressions Swiper (Section 6)
             createCarouselSwiper('.newarrivals-swiper', '.newarrivals-swiper-pagination', '.newarrivals-next', '.newarrivals-prev');
+
+            // Exclusive Fragrances Video Carousel Swiper (Section 5)
+            const exclusiveSwiperEl = document.querySelector('.exclusive-video-swiper');
+            if (exclusiveSwiperEl && typeof Swiper !== 'undefined') {
+                if (exclusiveSwiperEl.swiper) {
+                    exclusiveSwiperEl.swiper.destroy(true, true);
+                }
+                const exclusiveSwiper = new Swiper('.exclusive-video-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    speed: 700,
+                    loop: true,
+                    grabCursor: true,
+                    watchSlidesProgress: true,
+                    observer: true,
+                    observeParents: true,
+                    autoplay: {
+                        delay: 7000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    },
+                    pagination: {
+                        el: '.exclusive-pagination',
+                        clickable: true,
+                    },
+                    on: {
+                        slideChange: function () {
+                            const activeSlide = this.slides[this.activeIndex];
+                            if (activeSlide) {
+                                const v = activeSlide.querySelector('video');
+                                if (v) {
+                                    v.currentTime = 0;
+                                    v.play().catch(() => {});
+                                }
+                            }
+                        }
+                    }
+                });
+                window.exclusiveSwiperInstance = exclusiveSwiper;
+            }
 
             // Testimonials Swiper (Section 8 - Haute Parfumerie Patron Reviews)
             const testimonialsEl = document.querySelector('.testimonials-swiper');

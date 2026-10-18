@@ -11,8 +11,7 @@
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Collections', 'url' => route('collections.show', 'all')],
-            ['label' => $collection ? $collection->name : 'All Impressions']
+            ['label' => 'Collections', 'url' => route('collections.show', 'all')]
         ]" />
 
         <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #541B29;">HAUTE PARFUMERIE COLLECTION</span>
