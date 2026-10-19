@@ -1021,7 +1021,9 @@
             --text-muted: #94a3b8;
         }
 
-        [data-theme="dark"] body {
+        [data-theme="dark"] body,
+        [data-theme="dark"] #adminMain,
+        [data-theme="dark"] main {
             background-color: #0b0f19 !important;
             color: #f1f5f9 !important;
         }
@@ -1092,6 +1094,7 @@
 
         /* Cards, Surfaces & Containers in Dark Mode */
         [data-theme="dark"] .admin-card,
+        [data-theme="dark"] .dash-card,
         [data-theme="dark"] .bg-brand-surface,
         [data-theme="dark"] .bg-brand-card,
         [data-theme="dark"] .card {
@@ -1270,6 +1273,25 @@
         [data-theme="dark"] .border { border-color: #1f293d !important; }
         [data-theme="dark"] .border-bottom { border-bottom-color: #1f293d !important; }
         [data-theme="dark"] .border-top { border-top-color: #1f293d !important; }
+        [data-theme="dark"] .border-light,
+        [data-theme="dark"] .border-light-subtle { border-color: #1f293d !important; }
+        [data-theme="dark"] .border-secondary-subtle { border-color: #24324c !important; }
+
+        /* Bootstrap Light Surfaces & Badges in Dark Mode */
+        [data-theme="dark"] .bg-white { background-color: #111827 !important; color: #f1f5f9 !important; }
+        [data-theme="dark"] .bg-light { background-color: #182235 !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .bg-light-subtle { background-color: #182235 !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .bg-secondary-subtle { background-color: #1e293b !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .bg-primary-subtle { background-color: rgba(37, 99, 235, 0.15) !important; color: #60a5fa !important; border-color: rgba(37, 99, 235, 0.3) !important; }
+        [data-theme="dark"] .bg-success-subtle { background-color: rgba(16, 185, 129, 0.15) !important; color: #34d399 !important; border-color: rgba(16, 185, 129, 0.3) !important; }
+        [data-theme="dark"] .bg-warning-subtle { background-color: rgba(245, 158, 11, 0.15) !important; color: #fbbf24 !important; border-color: rgba(245, 158, 11, 0.3) !important; }
+        [data-theme="dark"] .bg-danger-subtle { background-color: rgba(239, 68, 68, 0.15) !important; color: #f87171 !important; border-color: rgba(239, 68, 68, 0.3) !important; }
+        [data-theme="dark"] .bg-info-subtle { background-color: rgba(6, 182, 212, 0.15) !important; color: #22d3ee !important; border-color: rgba(6, 182, 212, 0.3) !important; }
+        [data-theme="dark"] .btn-light { background-color: #182235 !important; border-color: #24324c !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .btn-light:hover { background-color: #24324c !important; border-color: #3b82f6 !important; color: #ffffff !important; }
+        [data-theme="dark"] .btn-outline-secondary { border-color: #24324c !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] .btn-outline-secondary:hover { background-color: #182235 !important; color: #ffffff !important; }
+        [data-theme="dark"] .badge.bg-light { background-color: #182235 !important; color: #cbd5e1 !important; border-color: #24324c !important; }
 
         /* Badges In Dark Mode */
         [data-theme="dark"] .admin-badge-secondary {
@@ -1450,13 +1472,6 @@
                 </div>
             </a>
 
-            <a href="{{ route('admin.blogs.index') }}" class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
-                <div class="sidebar-link-inner">
-                    <i class="fa-solid fa-newspaper"></i>
-                    <span>Blog Articles</span>
-                </div>
-            </a>
-
             <!-- ADMINISTRATION -->
             <div class="sidebar-heading">ADMINISTRATION</div>
             <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
@@ -1489,17 +1504,6 @@
                 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px !important; color: #94a3b8; width: auto;"></i>
             </a>
 
-            <!-- Bottom Upgrade / VIP Concierge Card (Styled as in Reference) -->
-            <div class="sidebar-promo-card p-3 mt-3 mb-2">
-                <div class="promo-icon-badge mb-2">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <div class="promo-title">VIP Concierge & Services</div>
-                <div class="promo-desc">Manage store telemetry, roles, and exclusive impressions.</div>
-                <a href="{{ route('admin.settings.index') }}" class="promo-btn">
-                    Store Settings
-                </a>
-            </div>
         </nav>
 
         <!-- Sidebar Footer (Monogram Avatar & Sign Out) -->

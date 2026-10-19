@@ -95,16 +95,31 @@ class AdminCategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::withCount('products')->findOrFail($id);
+        $name = $category->name;
+        $productsCount = $category->products_count;
 
-        if ($category->products_count > 0) {
-            return redirect()->route('admin.categories.index')->with('error', "Cannot delete '{$category->name}' because it contains {$category->products_count} active fragrances.");
+        // Disassociate products from this category safely (nullOnDelete)
+        if ($productsCount > 0) {
+            $category->products()->update(['category_id' => null]);
         }
 
-        $name = $category->name;
+        // Clean up uploaded image if exists
+        if ($category->image && Str::startsWith($category->image, 'uploads/categories/')) {
+            $fullPath = public_path($category->image);
+            if (file_exists($fullPath)) {
+                @unlink($fullPath);
+            }
+        }
+
         $category->delete();
 
-        ActivityLog::record('category_deleted', "Deleted category '{$name}'");
+        ActivityLog::record('category_deleted', "Deleted category '{$name}'" . ($productsCount > 0 ? " ({$productsCount} fragrances unassigned)" : ""));
 
-        return redirect()->route('admin.categories.index')->with('success', "Category '{$name}' deleted.");
+        $msg = "Category '{$name}' deleted successfully.";
+        if ($productsCount > 0) {
+            $msg .= " ({$productsCount} associated fragrances unassigned).";
+        }
+
+        return redirect()->route('admin.categories.index')->with('success', $msg);
     }
 }

@@ -49,6 +49,9 @@
     .date-range-pill:hover {
         border-color: #cbd5e1;
     }
+    .date-range-pill::after {
+        display: none !important;
+    }
 
     /* Action Buttons */
     .btn-dash-widget {
@@ -510,6 +513,242 @@
             font-size: 11.5px !important;
         }
     }
+
+    /* ==========================================================================
+       DASHBOARD DARK MODE STYLES
+       ========================================================================== */
+    [data-theme="dark"] .dash-main-title {
+        color: #f8fafc !important;
+    }
+
+    [data-theme="dark"] .date-range-pill {
+        background-color: #111827 !important;
+        border-color: #1f293d !important;
+        color: #cbd5e1 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+    [data-theme="dark"] .date-range-pill:hover {
+        background-color: #162032 !important;
+        border-color: #334155 !important;
+        color: #ffffff !important;
+    }
+    [data-theme="dark"] .date-range-pill .text-secondary {
+        color: #94a3b8 !important;
+    }
+
+    [data-theme="dark"] .dash-header-actions .dropdown-menu {
+        background-color: #111827 !important;
+        border: 1px solid #1f293d !important;
+        color: #f1f5f9 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    }
+    [data-theme="dark"] .dash-header-actions .dropdown-item {
+        color: #cbd5e1 !important;
+    }
+    [data-theme="dark"] .dash-header-actions .dropdown-item:hover {
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+    }
+    [data-theme="dark"] .dash-header-actions .dropdown-item.active {
+        background-color: rgba(37, 99, 235, 0.25) !important;
+        color: #60a5fa !important;
+    }
+    [data-theme="dark"] .dash-header-actions input[type="date"] {
+        background-color: #1e293b !important;
+        border-color: #334155 !important;
+        color: #f1f5f9 !important;
+        color-scheme: dark;
+    }
+
+    [data-theme="dark"] .btn-dash-widget {
+        background-color: #111827 !important;
+        border-color: #1f293d !important;
+        color: #cbd5e1 !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+    [data-theme="dark"] .btn-dash-widget:hover {
+        background-color: #162032 !important;
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
+    }
+
+    [data-theme="dark"] .dash-card {
+        background-color: #111827 !important;
+        border-color: #1f293d !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+        color: #f1f5f9 !important;
+    }
+
+    [data-theme="dark"] .stat-card-title {
+        color: #94a3b8 !important;
+    }
+    [data-theme="dark"] .stat-icon-badge {
+        background-color: #182235 !important;
+        color: #60a5fa !important;
+        border: 1px solid #24324c !important;
+    }
+    [data-theme="dark"] .stat-card-value {
+        color: #f8fafc !important;
+    }
+    [data-theme="dark"] .stat-trend-pill-green {
+        background-color: rgba(16, 185, 129, 0.15) !important;
+        color: #34d399 !important;
+        border-color: rgba(16, 185, 129, 0.3) !important;
+    }
+    [data-theme="dark"] .stat-trend-pill-red {
+        background-color: rgba(239, 68, 68, 0.15) !important;
+        color: #f87171 !important;
+        border-color: rgba(239, 68, 68, 0.3) !important;
+    }
+    [data-theme="dark"] .stat-subtext {
+        color: #64748b !important;
+    }
+
+    [data-theme="dark"] .btn-circle-more {
+        color: #64748b !important;
+    }
+    [data-theme="dark"] .btn-circle-more:hover {
+        background-color: #182235 !important;
+        color: #f8fafc !important;
+    }
+
+    [data-theme="dark"] .profit-headline-val {
+        color: #f8fafc !important;
+    }
+
+    [data-theme="dark"] .chart-tooltip-demo {
+        background-color: #162032 !important;
+        border-color: #24324c !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    }
+    [data-theme="dark"] .tooltip-date {
+        color: #f8fafc !important;
+    }
+    [data-theme="dark"] .tooltip-row.text-dark {
+        color: #f8fafc !important;
+    }
+    [data-theme="dark"] .cust-segment-label {
+        color: #cbd5e1 !important;
+    }
+
+    [data-theme="dark"] .bestseller-table th {
+        color: #94a3b8 !important;
+        border-bottom-color: #1f293d !important;
+    }
+    [data-theme="dark"] .bestseller-table td {
+        border-bottom-color: #1a2436 !important;
+        color: #e2e8f0 !important;
+    }
+    [data-theme="dark"] .bestseller-table tr:hover td {
+        background-color: #182235 !important;
+    }
+    [data-theme="dark"] .product-img-thumb {
+        background-color: #162032 !important;
+        border-color: #24324c !important;
+    }
+
+    [data-theme="dark"] .recent-orders-table th {
+        color: #94a3b8 !important;
+        border-bottom-color: #1f293d !important;
+    }
+    [data-theme="dark"] .recent-orders-table td {
+        border-bottom-color: #1a2436 !important;
+        color: #e2e8f0 !important;
+    }
+    [data-theme="dark"] .recent-orders-table tr:hover td {
+        background-color: #182235 !important;
+    }
+
+    [data-theme="dark"] .order-status-badge.bg-light,
+    [data-theme="dark"] .badge.bg-light {
+        background-color: #182235 !important;
+        color: #cbd5e1 !important;
+        border-color: #24324c !important;
+    }
+
+    [data-theme="dark"] .table-responsive::-webkit-scrollbar-track {
+        background: #111827 !important;
+    }
+    [data-theme="dark"] .table-responsive::-webkit-scrollbar-thumb {
+        background: #24324c !important;
+    }
+    [data-theme="dark"] .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #3b82f6 !important;
+    }
+
+    [data-theme="dark"] .day-bar {
+        background-color: #1f293d !important;
+    }
+    [data-theme="dark"] .day-bar.active-peak {
+        background-color: #2563eb !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.5) !important;
+    }
+    [data-theme="dark"] .day-bar-label {
+        color: #64748b !important;
+    }
+    [data-theme="dark"] .day-bar-label.active-label {
+        color: #60a5fa !important;
+    }
+
+    [data-theme="dark"] .gauge-svg path[stroke="#f1f5f9"] {
+        stroke: #1f293d !important;
+    }
+    [data-theme="dark"] .gauge-val-text {
+        color: #f8fafc !important;
+    }
+    [data-theme="dark"] .gauge-target-text {
+        color: #94a3b8 !important;
+    }
+    [data-theme="dark"] .btn-show-details {
+        background-color: #182235 !important;
+        border-color: #24324c !important;
+        color: #cbd5e1 !important;
+    }
+    [data-theme="dark"] .btn-show-details:hover {
+        background-color: #24324c !important;
+        color: #ffffff !important;
+        border-color: #3b82f6 !important;
+    }
+
+    [data-theme="dark"] .telemetry-toggle-header {
+        background-color: #111827 !important;
+        border-color: #1f293d !important;
+    }
+    [data-theme="dark"] .telemetry-toggle-header:hover {
+        background-color: #162032 !important;
+        border-color: #334155 !important;
+    }
+
+    [data-theme="dark"] .dash-card a.text-dark {
+        color: #f8fafc !important;
+    }
+    [data-theme="dark"] .dash-card a.text-dark:hover {
+        color: #60a5fa !important;
+    }
+
+    [data-theme="dark"] .w-100.bg-light.rounded-pill {
+        background-color: #1f293d !important;
+    }
+
+    [data-theme="dark"] .border-light-subtle {
+        border-color: #1f293d !important;
+    }
+
+    [data-theme="dark"] div[style*="border-color: #f1f3f7"],
+    [data-theme="dark"] .border-top[style*="border-color: #f1f3f7"] {
+        border-color: #1f293d !important;
+    }
+
+    [data-theme="dark"] span.badge[style*="background-color: #eff6ff"] {
+        background-color: #182235 !important;
+        border-color: #24324c !important;
+        color: #60a5fa !important;
+    }
+    [data-theme="dark"] span.badge[style*="background-color: #ecfdf5"] {
+        background-color: rgba(16, 185, 129, 0.15) !important;
+        border-color: rgba(16, 185, 129, 0.3) !important;
+        color: #34d399 !important;
+    }
 </style>
 @endpush
 
@@ -521,13 +760,113 @@
     </div>
 
     <div class="dash-header-actions">
-        <!-- Date Range Filter Pill -->
-        <div class="date-range-pill" title="Filter analytics period">
-            <i class="fa-regular fa-calendar text-muted me-2" style="font-size: 13px;"></i>
-            <span>Jan 1, 2026 - Feb 1, 2026</span>
-            <span class="mx-2 text-muted" style="opacity: 0.6;">|</span>
-            <span class="fw-semibold text-secondary">Last 30 days</span>
-            <i class="fa-solid fa-chevron-down ms-2 text-muted" style="font-size: 10px;"></i>
+        <!-- Date Range Filter Pill Dropdown -->
+        <div class="dropdown">
+            <button class="date-range-pill dropdown-toggle" type="button" id="dateRangeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" title="Filter analytics period">
+                <i class="fa-regular fa-calendar text-muted me-2" style="font-size: 13px;"></i>
+                <span class="text-dark">{{ $currentRangeLabel }}</span>
+                <span class="mx-2 text-muted" style="opacity: 0.6;">|</span>
+                <span class="fw-semibold text-primary">{{ $presetTitle }}</span>
+                <i class="fa-solid fa-chevron-down ms-2 text-muted" style="font-size: 10px;"></i>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-end p-3 shadow-lg border-0 rounded-4" style="min-width: 320px; z-index: 1050;" aria-labelledby="dateRangeDropdown">
+                <div class="d-flex align-items-center justify-content-between px-2 mb-2">
+                    <span class="fw-bold text-uppercase text-muted" style="font-size: 11px; letter-spacing: 0.05em;">Date Presets</span>
+                    <span class="badge bg-primary-subtle text-primary" style="font-size: 10px;">Active: {{ $presetTitle }}</span>
+                </div>
+
+                <div class="d-grid gap-1 mb-3">
+                    <a href="{{ route('admin.dashboard', ['range' => 'today']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'today' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-sun text-warning" style="font-size: 11px; width: 14px;"></i>
+                            <span>Today</span>
+                        </span>
+                        @if($range === 'today') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => 'yesterday']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'yesterday' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-backward-step text-secondary" style="font-size: 11px; width: 14px;"></i>
+                            <span>Yesterday</span>
+                        </span>
+                        @if($range === 'yesterday') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => '7d']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === '7d' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-calendar-week text-info" style="font-size: 11px; width: 14px;"></i>
+                            <span>Last 7 days</span>
+                        </span>
+                        @if($range === '7d') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => '30d']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === '30d' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-regular fa-calendar-days text-primary" style="font-size: 11px; width: 14px;"></i>
+                            <span>Last 30 days</span>
+                        </span>
+                        @if($range === '30d') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => 'this_month']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'this_month' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-calendar-check text-success" style="font-size: 11px; width: 14px;"></i>
+                            <span>This Month</span>
+                        </span>
+                        @if($range === 'this_month') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => 'last_month']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'last_month' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left text-muted" style="font-size: 11px; width: 14px;"></i>
+                            <span>Last Month</span>
+                        </span>
+                        @if($range === 'last_month') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => 'this_year']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'this_year' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-calendar text-danger" style="font-size: 11px; width: 14px;"></i>
+                            <span>This Year</span>
+                        </span>
+                        @if($range === 'this_year') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+
+                    <a href="{{ route('admin.dashboard', ['range' => 'all_time']) }}" class="dropdown-item rounded-3 py-1.5 px-2.5 d-flex align-items-center justify-content-between {{ $range === 'all_time' ? 'active fw-bold' : '' }}">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-infinity text-purple" style="font-size: 11px; width: 14px;"></i>
+                            <span>All Time</span>
+                        </span>
+                        @if($range === 'all_time') <i class="fa-solid fa-check text-primary small"></i> @endif
+                    </a>
+                </div>
+
+                <div class="border-top pt-2.5">
+                    <div class="fw-bold text-uppercase text-muted px-2 mb-2" style="font-size: 11px; letter-spacing: 0.05em;">Custom Date Range</div>
+                    <form method="GET" action="{{ route('admin.dashboard') }}" class="d-flex flex-column gap-2 px-1">
+                        <input type="hidden" name="range" value="custom">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label class="form-label small text-muted mb-1" style="font-size: 11px;">From</label>
+                                <input type="date" name="start_date" class="form-control form-control-sm rounded-3" value="{{ $startDateFormatted }}" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small text-muted mb-1" style="font-size: 11px;">To</label>
+                                <input type="date" name="end_date" class="form-control form-control-sm rounded-3" value="{{ $endDateFormatted }}" required>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 mt-1">
+                            <button type="submit" class="btn btn-sm btn-primary w-100 rounded-3 fw-semibold">
+                                <i class="fa-solid fa-filter me-1"></i>Apply Filter
+                            </button>
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-light border w-auto rounded-3" title="Reset to default (Last 30 days)">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <!-- Add Widget Action -->
@@ -556,12 +895,18 @@
                 </div>
             </div>
             <div class="stat-card-mid">
-                <div class="stat-card-value">{{ number_format($todayVisitsCount > 0 ? $todayVisitsCount : 16431) }}</div>
-                <div class="stat-trend-pill-green">
-                    <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> 15.5%
-                </div>
+                <div class="stat-card-value">{{ number_format($periodPageViews) }}</div>
+                @if($viewsGrowth >= 0)
+                    <div class="stat-trend-pill-green">
+                        <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($viewsGrowth), 1) }}%
+                    </div>
+                @else
+                    <div class="stat-trend-pill-red">
+                        <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> {{ number_format(abs($viewsGrowth), 1) }}%
+                    </div>
+                @endif
             </div>
-            <div class="stat-subtext">vs. 14,053 last period</div>
+            <div class="stat-subtext">vs. {{ number_format($prevPeriodPageViews) }} last period</div>
         </div>
     </div>
 
@@ -575,31 +920,43 @@
                 </div>
             </div>
             <div class="stat-card-mid">
-                <div class="stat-card-value">{{ number_format($todayUniqueVisitors > 0 ? $todayUniqueVisitors : 6225) }}</div>
-                <div class="stat-trend-pill-green">
-                    <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> 8.4%
-                </div>
+                <div class="stat-card-value">{{ number_format($periodUniqueVisitors) }}</div>
+                @if($visitorsGrowth >= 0)
+                    <div class="stat-trend-pill-green">
+                        <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($visitorsGrowth), 1) }}%
+                    </div>
+                @else
+                    <div class="stat-trend-pill-red">
+                        <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> {{ number_format(abs($visitorsGrowth), 1) }}%
+                    </div>
+                @endif
             </div>
-            <div class="stat-subtext">vs. 5,732 last period</div>
+            <div class="stat-subtext">vs. {{ number_format($prevPeriodUniqueVisitors) }} last period</div>
         </div>
     </div>
 
-    <!-- Card 3: Click / AOV -->
+    <!-- Card 3: Avg Order Value (AOV) -->
     <div class="col-12 col-sm-6 col-xl-3">
         <div class="dash-card">
             <div class="stat-card-top">
-                <span class="stat-card-title">Click</span>
+                <span class="stat-card-title">Avg. Order Value</span>
                 <div class="stat-icon-badge">
                     <i class="fa-solid fa-arrow-pointer"></i>
                 </div>
             </div>
             <div class="stat-card-mid">
-                <div class="stat-card-value">2,832</div>
-                <div class="stat-trend-pill-red">
-                    <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> 10.5%
-                </div>
+                <div class="stat-card-value">Rs. {{ number_format($periodAOV, 0) }}</div>
+                @if($aovGrowth >= 0)
+                    <div class="stat-trend-pill-green">
+                        <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($aovGrowth), 1) }}%
+                    </div>
+                @else
+                    <div class="stat-trend-pill-red">
+                        <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> {{ number_format(abs($aovGrowth), 1) }}%
+                    </div>
+                @endif
             </div>
-            <div class="stat-subtext">vs. 3,294 last period</div>
+            <div class="stat-subtext">vs. Rs. {{ number_format($prevPeriodAOV, 0) }} last period</div>
         </div>
     </div>
 
@@ -613,12 +970,18 @@
                 </div>
             </div>
             <div class="stat-card-mid">
-                <div class="stat-card-value">{{ number_format($totalOrdersCount > 0 ? $totalOrdersCount : 1224) }}</div>
-                <div class="stat-trend-pill-green">
-                    <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> 4.4%
-                </div>
+                <div class="stat-card-value">{{ number_format($periodOrdersCount) }}</div>
+                @if($ordersGrowth >= 0)
+                    <div class="stat-trend-pill-green">
+                        <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($ordersGrowth), 1) }}%
+                    </div>
+                @else
+                    <div class="stat-trend-pill-red">
+                        <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> {{ number_format(abs($ordersGrowth), 1) }}%
+                    </div>
+                @endif
             </div>
-            <div class="stat-subtext">vs. 1,186 last period</div>
+            <div class="stat-subtext">vs. {{ number_format($prevPeriodOrdersCount) }} last period</div>
         </div>
     </div>
 </div>
@@ -634,15 +997,21 @@
             <div class="dash-card p-4">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
-                        <div class="text-secondary fw-semibold small mb-1">Total Profit</div>
+                        <div class="text-secondary fw-semibold small mb-1">Total Period Revenue</div>
                         <div class="d-flex align-items-baseline gap-3 flex-wrap">
                             <div class="profit-headline-val">
-                                {{ $totalRevenue > 0 ? ('Rs. ' . number_format($totalRevenue, 0)) : 'Rs. 446,700' }}
+                                Rs. {{ number_format($periodRevenue, 0) }}
                             </div>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="stat-trend-pill-green">
-                                    <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> 24.4%
-                                </span>
+                                @if($revenueGrowth >= 0)
+                                    <span class="stat-trend-pill-green">
+                                        <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($revenueGrowth), 1) }}%
+                                    </span>
+                                @else
+                                    <span class="stat-trend-pill-red">
+                                        <i class="fa-solid fa-arrow-down" style="font-size: 9px;"></i> {{ number_format(abs($revenueGrowth), 1) }}%
+                                    </span>
+                                @endif
                                 <span class="stat-subtext ms-1">vs. last period</span>
                             </div>
                         </div>
@@ -655,14 +1024,14 @@
 
                     <!-- In-Chart Floating Tooltip Match (Styled as in Reference) -->
                     <div class="chart-tooltip-demo d-none d-md-block">
-                        <div class="tooltip-date">Jan 18, 2026</div>
+                        <div class="tooltip-date">{{ $currentRangeLabel }}</div>
                         <div class="tooltip-row text-dark">
                             <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #2563eb; display: inline-block;"></span>
-                            <span class="fw-bold">Rs. 12,324</span> <span class="text-muted">this month</span>
+                            <span class="fw-bold">Rs. {{ number_format($periodRevenue, 0) }}</span> <span class="text-muted">{{ $presetTitle }}</span>
                         </div>
                         <div class="tooltip-row text-muted">
                             <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #cbd5e1; display: inline-block;"></span>
-                            <span class="fw-bold">Rs. 5,563</span> <span class="text-muted">last month</span>
+                            <span class="fw-bold">Rs. {{ number_format($prevPeriodRevenue, 0) }}</span> <span class="text-muted">prev period</span>
                         </div>
                     </div>
                 </div>
@@ -1122,18 +1491,25 @@
         grayGradient.addColorStop(0, 'rgba(203, 213, 225, 0.15)');
         grayGradient.addColorStop(1, 'rgba(203, 213, 225, 0.0)');
 
-        // Dates matching reference X-Axis ticks
-        const labels = ['1 Jan', '8 Jan', '15 Jan', '22 Jan', '29 Jan'];
-        const activeTrend = [5200, 4800, 11400, 8900, 14200];
-        const lastPeriodTrend = [4100, 3900, 6800, 5200, 7100];
+        // Dynamic labels & trends passed from controller based on active date range
+        const labels = @json($chartLabels);
+        const activeTrend = @json($salesTrend);
+        const lastPeriodTrend = @json($comparisonTrend);
 
-        new Chart(ctx, {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const isDarkInit = (currentTheme === 'dark');
+
+        const maxVal = Math.max(...activeTrend, ...lastPeriodTrend, 5000);
+        const yMax = Math.ceil((maxVal * 1.25) / 1000) * 1000;
+        const stepSize = Math.max(1000, Math.ceil(yMax / 4 / 1000) * 1000);
+
+        const profitChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'This Month',
+                        label: '{{ $presetTitle }}',
                         data: activeTrend,
                         borderColor: '#2563eb',
                         borderWidth: 2.5,
@@ -1143,11 +1519,11 @@
                         pointBackgroundColor: '#2563eb',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
-                        pointRadius: 4,
+                        pointRadius: labels.length > 20 ? 2 : 4,
                         pointHoverRadius: 6
                     },
                     {
-                        label: 'Last Month',
+                        label: 'Previous Period',
                         data: lastPeriodTrend,
                         borderColor: '#cbd5e1',
                         borderWidth: 1.8,
@@ -1167,17 +1543,17 @@
                         display: false
                     },
                     tooltip: {
-                        backgroundColor: '#ffffff',
-                        titleColor: '#111827',
-                        bodyColor: '#475569',
-                        borderColor: '#edf0f5',
+                        backgroundColor: isDarkInit ? '#162032' : '#ffffff',
+                        titleColor: isDarkInit ? '#f8fafc' : '#111827',
+                        bodyColor: isDarkInit ? '#cbd5e1' : '#475569',
+                        borderColor: isDarkInit ? '#24324c' : '#edf0f5',
                         borderWidth: 1,
                         padding: 10,
                         boxPadding: 4,
                         usePointStyle: true,
                         callbacks: {
                             label: function(context) {
-                                return ' ' + context.dataset.label + ': Rs. ' + context.parsed.y.toLocaleString();
+                                return ' ' + context.dataset.label + ': Rs. ' + Number(context.parsed.y || 0).toLocaleString();
                             }
                         }
                     }
@@ -1193,13 +1569,14 @@
                             font: {
                                 size: 11,
                                 family: "'Plus Jakarta Sans', sans-serif"
-                            }
+                            },
+                            maxTicksLimit: 12
                         }
                     },
                     y: {
                         position: 'left',
                         grid: {
-                            color: '#f8fafc',
+                            color: isDarkInit ? 'rgba(255, 255, 255, 0.05)' : '#f8fafc',
                             drawBorder: false
                         },
                         ticks: {
@@ -1210,15 +1587,28 @@
                             },
                             callback: function(value) {
                                 if (value === 0) return '0';
-                                return (value / 1000) + 'K';
+                                if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
+                                if (value >= 1000) return Math.round(value / 1000) + 'K';
+                                return value;
                             },
-                            stepSize: 5000
+                            stepSize: stepSize
                         },
                         min: 0,
-                        max: 15000
+                        max: yMax
                     }
                 }
             }
+        });
+
+        // Dynamic theme synchronization for Chart.js
+        window.addEventListener('admin-theme-changed', function (e) {
+            const isDark = (e.detail?.theme === 'dark');
+            profitChart.options.scales.y.grid.color = isDark ? 'rgba(255, 255, 255, 0.05)' : '#f8fafc';
+            profitChart.options.plugins.tooltip.backgroundColor = isDark ? '#162032' : '#ffffff';
+            profitChart.options.plugins.tooltip.titleColor = isDark ? '#f8fafc' : '#111827';
+            profitChart.options.plugins.tooltip.bodyColor = isDark ? '#cbd5e1' : '#475569';
+            profitChart.options.plugins.tooltip.borderColor = isDark ? '#24324c' : '#edf0f5';
+            profitChart.update();
         });
     });
 </script>

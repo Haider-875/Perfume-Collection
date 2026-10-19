@@ -23,10 +23,6 @@
                 </h5>
                 <small class="text-muted">Total {{ $categories->count() }} categories configured in your boutique</small>
             </div>
-            <button type="button" class="admin-btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal" onclick="openCreateCategoryModal()">
-                <i class="fa-solid fa-plus"></i>
-                <span>Add New Category</span>
-            </button>
         </div>
 
         <div class="table-responsive">
@@ -97,15 +93,13 @@
                                             title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
-                                    @if($category->products_count === 0)
-                                        <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" onsubmit="return confirm('Delete this category?');" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="admin-action-btn admin-action-delete" title="Delete Category">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    @endif
+                                    <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" onsubmit="return confirm('Are you sure you want to delete category \'{{ addslashes($category->name) }}\'?{{ $category->products_count > 0 ? ' (' . $category->products_count . ' associated fragrances will be unassigned)' : '' }}');" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="admin-action-btn admin-action-delete" title="Delete Category">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -238,12 +232,18 @@
                             </label>
                         </div>
                     </div>
-                    <div class="modal-footer border-top py-2.5 px-4 bg-light d-flex justify-content-end gap-2">
-                        <button type="button" class="admin-btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="admin-btn-primary">
-                            <i class="fa-solid fa-check"></i>
-                            <span>Update Category</span>
+                    <div class="modal-footer border-top py-2.5 px-4 bg-light d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1.5 px-3 py-1.5" id="modalDeleteBtn" onclick="deleteCategoryFromModal()">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Delete Category</span>
                         </button>
+                        <div class="d-flex align-items-center gap-2">
+                            <button type="button" class="admin-btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="admin-btn-primary">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Update Category</span>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -251,7 +251,14 @@
     </div>
 </div>
 
+<form id="modalDeleteForm" method="POST" action="" style="display: none;">
+    @csrf
+    @method('DELETE')
+</form>
+
 <script>
+    let currentEditingCategory = null;
+
     function openCreateCategoryModal() {
         const modalEl = document.getElementById('createCategoryModal');
         if (window.bootstrap && bootstrap.Modal) {
@@ -260,6 +267,7 @@
     }
 
     function openEditCategoryModal(category) {
+        currentEditingCategory = category;
         document.getElementById('editCategoryForm').action = '/admin/categories/' + category.id;
         document.getElementById('editCategoryName').value = category.name || '';
         document.getElementById('editCategoryDescription').value = category.description || '';
@@ -270,6 +278,17 @@
         const modalEl = document.getElementById('editCategoryModal');
         if (window.bootstrap && bootstrap.Modal) {
             bootstrap.Modal.getOrCreateInstance(modalEl).show();
+        }
+    }
+
+    function deleteCategoryFromModal() {
+        if (!currentEditingCategory) return;
+        const count = currentEditingCategory.products_count || 0;
+        const warn = count > 0 ? ` (${count} associated fragrances will be unassigned)` : '';
+        if (confirm(`Are you sure you want to delete category "${currentEditingCategory.name}"?${warn}`)) {
+            const form = document.getElementById('modalDeleteForm');
+            form.action = '/admin/categories/' + currentEditingCategory.id;
+            form.submit();
         }
     }
 </script>
