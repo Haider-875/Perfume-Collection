@@ -1353,62 +1353,9 @@ class LuxuryPerfumeSeeder extends Seeder
             ]);
         }
 
-        // 10. Curated Bundles (Multi-Product Bundles inspired by Rawaha reference)
-        $bundle1 = Bundle::create([
-            'name' => 'The Royal Mughal Duo (Oud Royale + Noor-e-Gulab)',
-            'slug' => 'royal-mughal-duo-bundle',
-            'sku' => 'BNDL-MUGHAL-DUO',
-            'tagline' => 'Imperial Agarwood meets Velvet Taif Rose (2x 100ml Extraits)',
-            'description' => 'Pair our two most iconic creations: Oud Royale 1947 and Noor-e-Gulab Rose Absolute. Includes luxury velvet double-presentation coffret.',
-            'original_price' => 33000.00,
-            'bundle_price' => 26999.00,
-            'savings_amount' => 6001.00,
-            'image' => 'assets/images/perfumes/mughal_duo_bundle.svg',
-            'badge_text' => 'SAVE RS. 6,000',
-            'is_active' => true,
-        ]);
-
-        if (isset($createdProducts['oud-royale-1947-extrait'])) {
-            BundleItem::create(['bundle_id' => $bundle1->id, 'product_id' => $createdProducts['oud-royale-1947-extrait']->id, 'quantity' => 1, 'custom_size_label' => '100ml Flacon']);
-        }
-        if (isset($createdProducts['noor-e-gulab-rose-absolute'])) {
-            BundleItem::create(['bundle_id' => $bundle1->id, 'product_id' => $createdProducts['noor-e-gulab-rose-absolute']->id, 'quantity' => 1, 'custom_size_label' => '100ml Flacon']);
-        }
-
-        $bundle2 = Bundle::create([
-            'name' => 'The Executive Sillage Duo (Sultan\'s Cuir + Lahore Nights)',
-            'slug' => 'executive-sillage-duo-bundle',
-            'sku' => 'BNDL-EXEC-DUO',
-            'tagline' => 'Tuscan Leather & Smoked Resinous Amber for Power Presence',
-            'description' => 'The ultimate masculine power combo. Sultan\'s Cuir & Tuscan Tobacco paired with Lahore Nights Smoked Amber in full 100ml collector flacons.',
-            'original_price' => 33500.00,
-            'bundle_price' => 27999.00,
-            'savings_amount' => 5501.00,
-            'image' => 'assets/images/perfumes/executive_bundle.svg',
-            'badge_text' => 'SAVE RS. 5,500',
-            'is_active' => true,
-        ]);
-
-        if (isset($createdProducts['sultans-cuir-tuscan-tobacco'])) {
-            BundleItem::create(['bundle_id' => $bundle2->id, 'product_id' => $createdProducts['sultans-cuir-tuscan-tobacco']->id, 'quantity' => 1, 'custom_size_label' => '100ml Flacon']);
-        }
-        if (isset($createdProducts['lahore-nights-smoked-amber'])) {
-            BundleItem::create(['bundle_id' => $bundle2->id, 'product_id' => $createdProducts['lahore-nights-smoked-amber']->id, 'quantity' => 1, 'custom_size_label' => '100ml Flacon']);
-        }
-
-        $bundle3 = Bundle::create([
-            'name' => 'The Pure Attar Connoisseur Trio',
-            'slug' => 'pure-attar-connoisseur-trio',
-            'sku' => 'BNDL-ATTAR-TRIO',
-            'tagline' => '3x 12ml Hand-Cut Crystal Flacons (Dehn al Oud + Motia + Sandalwood)',
-            'description' => '100% pure alcohol-free concentrated perfume oils in crystal flacons with glass applicator rods.',
-            'original_price' => 45000.00,
-            'bundle_price' => 37999.00,
-            'savings_amount' => 7001.00,
-            'image' => 'assets/images/perfumes/attar_trio_bundle.svg',
-            'badge_text' => 'SAVE RS. 7,000',
-            'is_active' => true,
-        ]);
+        // 10. Curated Bundles (Multi-Product Bundles seeded via BundleSeeder)
+        require_once __DIR__ . '/BundleSeeder.php';
+        (new BundleSeeder())->run();
 
         // 11. Blogs / Fragrance Chronicles
         Blog::create([

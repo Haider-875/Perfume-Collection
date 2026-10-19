@@ -78,8 +78,12 @@ class CartService
     {
         $price = 0;
         if ($bundleId) {
-            $bundle = Bundle::findOrFail($bundleId);
+            $bundle = Bundle::with('items')->findOrFail($bundleId);
             $price = $bundle->bundle_price;
+            if (!$productId) {
+                $firstItem = $bundle->items->first();
+                $productId = $firstItem ? $firstItem->product_id : Product::first()?->id;
+            }
         } elseif ($variantId) {
             $variant = ProductVariant::findOrFail($variantId);
             $price = $variant->effective_price;
@@ -89,11 +93,15 @@ class CartService
             $price = $product->effective_price;
         }
 
-        $existing = CartItem::where('cart_id', $cart->id)
-            ->where('product_id', $productId)
-            ->where('product_variant_id', $variantId)
-            ->where('bundle_id', $bundleId)
-            ->first();
+        $existingQuery = CartItem::where('cart_id', $cart->id);
+        if ($bundleId) {
+            $existingQuery->where('bundle_id', $bundleId);
+        } else {
+            $existingQuery->where('product_id', $productId)
+                          ->where('product_variant_id', $variantId)
+                          ->whereNull('bundle_id');
+        }
+        $existing = $existingQuery->first();
 
         if ($existing) {
             $existing->quantity += $quantity;

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+require_once __DIR__ . '/BundleSeeder.php';
+
 class DatabaseSeeder extends Seeder
 {
     public function run()
@@ -11,6 +13,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LuxuryPerfumeSeeder::class,
             ProductionCatalogSeeder::class,
+            BundleSeeder::class,
             RealisticReviewsSeeder::class,
         ]);
     }

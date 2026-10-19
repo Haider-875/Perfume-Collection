@@ -271,21 +271,21 @@
         <!-- Mobile Menu Navigation Links -->
         <div class="py-3 vstack gap-2 flex-grow-1 overflow-y-auto">
             <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
+                class="font-hero fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Home
             </a>
 
             <!-- Mobile Collections Accordion -->
             <div x-data="{ colOpen: true }" class="py-2" style="border-bottom: 1px solid #E8E0DA;">
                 <button type="button" @click="colOpen = !colOpen"
-                    class="w-100 border-0 bg-transparent text-start d-flex align-items-center justify-content-between font-serif fs-5 p-0"
-                    style="color: #211D1E !important;">
+                    class="w-100 border-0 bg-transparent text-start d-flex align-items-center justify-content-between font-hero fs-5 p-0"
+                    style="color: #211D1E !important; letter-spacing: 0.04em;">
                     <span>Shop & Collections</span>
                     <i class="fas fa-chevron-down" style="font-size: 11px; color: #541B29;"
                         :class="colOpen ? 'rotate-180' : ''"></i>
                 </button>
-                <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm" style="color: #6B605B;">
+                <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm font-hero" style="color: #6B605B; letter-spacing: 0.03em;">
                     <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">All Impressions Catalog</a>
                     <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false"
@@ -302,23 +302,23 @@
             </div>
 
             <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
+                class="font-hero fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Bundles & Discovery Sets
             </a>
             <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
+                class="font-hero fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Olfactory Journal
             </a>
             <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
+                class="font-hero fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Our Artisanal Craft
             </a>
             <a href="{{ route('pages.contact') }}" @click="mobileMenuOpen = false"
-                class="font-serif fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA;">
+                class="font-hero fs-5 py-2 text-decoration-none"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Contact & VIP Concierge
             </a>
         </div>

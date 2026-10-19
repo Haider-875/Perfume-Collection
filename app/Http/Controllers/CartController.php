@@ -30,13 +30,13 @@ class CartController extends Controller
             'items' => $cart->items->map(function($item) {
                 return [
                     'id' => $item->id,
-                    'name' => $item->bundle ? $item->bundle->name : $item->product->name,
-                    'variant' => $item->variant ? $item->variant->size_label : ($item->bundle ? 'Curated Bundle' : $item->product->volume_ml . 'ml Flacon'),
+                    'name' => $item->bundle ? $item->bundle->name : ($item->product?->name ?? 'Fragrance Flacon'),
+                    'variant' => $item->variant ? $item->variant->size_label : ($item->bundle ? 'Curated Bundle' : ($item->product ? $item->product->volume_ml . 'ml Flacon' : '50ml Flacon')),
                     'price' => 'Rs. ' . number_format($item->price, 0),
                     'quantity' => $item->quantity,
                     'total' => $item->formatted_total,
-                    'image' => $item->bundle ? $item->bundle->image_url : $item->product->primary_image_url,
-                    'url' => $item->bundle ? '/collections/bundles' : route('shop.show', $item->product->slug),
+                    'image' => $item->bundle ? $item->bundle->image_url : ($item->product?->primary_image_url ?? asset('assets/images/perfumes/prod_signature.jpg')),
+                    'url' => $item->bundle ? '/collections/bundles' : ($item->product ? route('shop.show', $item->product->slug) : '/collections/bundles'),
                 ];
             }),
         ]);

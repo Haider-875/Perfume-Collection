@@ -93,7 +93,7 @@ class ProductController extends Controller
         $products = $query->paginate(12)->withQueryString();
 
         $categories = Category::where('is_active', true)->withCount('activeProducts')->get();
-        $fragranceFamilies = FragranceFamily::withCount('products')->get();
+        $fragranceFamilies = FragranceFamily::has('products')->withCount('products')->orderBy('name')->get();
         $scentNotes = ScentNote::orderBy('name')->take(20)->get();
 
         $currentCategory = $request->filled('category') ? Category::where('slug', $request->category)->first() : null;

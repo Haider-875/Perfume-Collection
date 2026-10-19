@@ -138,12 +138,14 @@ function initSwiperSliders() {
     if (document.querySelector('.exclusive-video-swiper') && !document.querySelector('.exclusive-video-swiper').swiper && typeof Swiper !== 'undefined') {
         new Swiper('.exclusive-video-swiper', {
             slidesPerView: 1,
-            spaceBetween: 24,
-            speed: 750,
+            spaceBetween: 0,
+            speed: 850,
             rewind: true,
+            autoHeight: true,
             grabCursor: true,
             resistance: true,
-            touchRatio: 1.15,
+            resistanceRatio: 0.85,
+            touchRatio: 1.1,
             pagination: {
                 el: '.exclusive-pagination',
                 clickable: true,
@@ -155,6 +157,7 @@ function initSwiperSliders() {
                         const video = slide.querySelector('video');
                         if (video) {
                             if (idx === this.activeIndex) {
+                                video.currentTime = 0;
                                 video.play().catch(() => {});
                             } else {
                                 video.pause();
@@ -354,7 +357,13 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null) {
     .catch(err => console.error(err));
 };
 
-window.addBundleToCart = function(bundleId) {
+window.addBundleToCart = function(bundleId, btnElement = null) {
+    const originalHtml = btnElement ? btnElement.innerHTML : null;
+    if (btnElement) {
+        btnElement.disabled = true;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-white"></i> <span>ADDING...</span>';
+    }
+
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -363,18 +372,47 @@ window.addBundleToCart = function(bundleId) {
         },
         body: JSON.stringify({ bundle_id: bundleId, quantity: 1 })
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+    })
     .then(data => {
-        renderCartUI(data);
+        if (typeof renderCartUI === 'function') {
+            renderCartUI(data);
+        }
         const drawer = document.getElementById('luxuryCartDrawer');
         const overlay = document.getElementById('cartDrawerOverlay');
         if (drawer) drawer.classList.add('active');
         if (overlay) overlay.classList.add('active');
+
+        document.querySelectorAll('.cart-count, #cartCountBadge, #headerCartCount').forEach(el => {
+            el.textContent = data.count || (parseInt(el.textContent || '0') + 1);
+            el.style.display = 'inline-flex';
+        });
+
+        if (btnElement) {
+            btnElement.innerHTML = '<i class="fas fa-check text-white"></i> <span>ADDED!</span>';
+            setTimeout(() => {
+                btnElement.disabled = false;
+                btnElement.innerHTML = originalHtml;
+            }, 1800);
+        }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+        console.error('Error adding bundle:', err);
+        if (btnElement) {
+            btnElement.disabled = false;
+            btnElement.innerHTML = originalHtml;
+        }
+        alert('Could not add bundle to bag. Please try again.');
+    });
 };
 
-window.buyBundleNow = function(bundleId) {
+window.buyBundleNow = function(bundleId, btnElement = null) {
+    if (btnElement) {
+        btnElement.disabled = true;
+        btnElement.innerHTML = '<span>PROCESSING...</span>';
+    }
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -383,7 +421,6 @@ window.buyBundleNow = function(bundleId) {
         },
         body: JSON.stringify({ bundle_id: bundleId, quantity: 1 })
     })
-    .then(res => res.json())
     .then(() => {
         window.location.href = '/checkout';
     })

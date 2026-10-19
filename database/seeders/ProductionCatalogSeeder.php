@@ -14,6 +14,8 @@ use App\Models\ProductVariant;
 use App\Models\ProductPrice;
 use App\Models\ActivityLog;
 
+require_once __DIR__ . '/BundleSeeder.php';
+
 class ProductionCatalogSeeder extends Seeder
 {
     /**
@@ -322,7 +324,7 @@ class ProductionCatalogSeeder extends Seeder
                 'slug' => 'ombre-leather-the-leather',
                 'impression_of' => 'The Leather',
                 'category_id' => $catPerfume->id,
-                'fragrance_family_id' => $ffLeather->id,
+                'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Men',
                 'stock' => 100,
                 'base_price' => 2600,
@@ -344,7 +346,7 @@ class ProductionCatalogSeeder extends Seeder
                 'slug' => 'tuscan-leather-leather-temptation',
                 'impression_of' => 'Leather Temptation',
                 'category_id' => $catPerfume->id,
-                'fragrance_family_id' => $ffLeather->id,
+                'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Men',
                 'stock' => 100,
                 'base_price' => 2400,
@@ -652,7 +654,7 @@ class ProductionCatalogSeeder extends Seeder
                 'slug' => '91-degree',
                 'impression_of' => null,
                 'category_id' => $catPerfume->id,
-                'fragrance_family_id' => $ffLeather->id,
+                'fragrance_family_id' => $ffWoody->id,
                 'gender' => 'Unisex',
                 'stock' => 100,
                 'base_price' => 2500,
@@ -853,9 +855,12 @@ class ProductionCatalogSeeder extends Seeder
             }
         }
 
+        // 9. Seed curated bundles linked to the 26 live perfumes
+        $this->call(BundleSeeder::class);
+
         ActivityLog::record(
             'production_catalog_seeded',
-            "Production catalog seeded successfully with exact 26 Excel perfumes."
+            "Production catalog seeded successfully with exact 26 Excel perfumes and curated bundles."
         );
     }
 }

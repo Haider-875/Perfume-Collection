@@ -71,17 +71,17 @@
             </div>
 
             <!-- Mobile Drawer Form Content -->
-            <div class="flex-grow-1 overflow-y-auto pe-1">
+            <div class="flex-grow-1 overflow-y-auto pe-1" style="scrollbar-width: none; -ms-overflow-style: none;">
                 @include('partials.collection-filters', ['formId' => 'mobileCollectionFilterForm', 'isMobileDrawer' => true])
             </div>
 
             <!-- Mobile Drawer Sticky Action Footer -->
             <div class="pt-3 mt-2 flex-shrink-0 d-flex align-items-center gap-2" style="border-top: 1px solid #E8E0DA;">
-                <button type="button" @click="mobileFiltersOpen = false" class="flex-grow-1 py-2.5 text-center text-xs text-uppercase tracking-wider fw-semibold rounded-3 text-white border-0 shadow-sm" style="background-color: #541B29;">
-                    View {{ $products->total() }} Compositions
+                <button type="button" @click="mobileFiltersOpen = false" class="flex-grow-1 btn-view-compositions">
+                    <span>View Compositions</span>
                 </button>
-                @if(request()->hasAny(['family', 'note', 'volume_ml', 'min_price', 'max_price', 'q']))
-                    <a href="{{ url()->current() }}" class="py-2 px-3 text-center text-xs text-uppercase tracking-wider rounded-3 text-decoration-none shadow-sm" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29;">
+                @if(request()->hasAny(['family', 'note', 'volume_ml', 'q']))
+                    <a href="{{ url()->current() }}" class="py-2.5 px-3 text-center text-xs text-uppercase tracking-wider rounded-3 text-decoration-none shadow-sm fw-semibold" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; white-space: nowrap;">
                         Reset
                     </a>
                 @endif
@@ -107,8 +107,7 @@
                             $activeFilterCount = (request('q') ? 1 : 0) 
                                 + (request('family') ? 1 : 0) 
                                 + (request('note') ? 1 : 0) 
-                                + (request('volume_ml') ? 1 : 0) 
-                                + (request('min_price') || request('max_price') ? 1 : 0);
+                                + (request('volume_ml') ? 1 : 0);
                         @endphp
                         @if($activeFilterCount > 0)
                             <span class="badge rounded-pill fw-bold px-1.5 py-0.5 text-white" style="font-size: 9px; min-width: 16px; background-color: #541B29;">{{ $activeFilterCount }}</span>
@@ -168,7 +167,7 @@
             
             <!-- Desktop Sidebar Filters (Permanently in grid flow on desktop) -->
             <aside class="col-12 col-lg-3 d-none d-lg-block">
-                <div class="rounded-4 p-4 shadow-sm sticky-top" style="top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                <div class="rounded-4 p-4 shadow-sm sticky-top" style="top: 100px; background-color: #FFFFFF; border: 1px solid #E8E0DA; overflow: visible;">
                     @include('partials.collection-filters', ['formId' => 'collectionFilterForm', 'isMobileDrawer' => false])
                 </div>
             </aside>

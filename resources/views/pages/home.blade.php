@@ -442,8 +442,8 @@
                     <div class="swiper exclusive-video-swiper rounded-4 shadow-sm" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="swiper-wrapper">
                             @foreach($exclusiveFragrances as $item)
-                                <div class="swiper-slide h-auto">
-                                    <div class="exclusive-slide-card row g-0 align-items-stretch h-100">
+                                <div class="swiper-slide">
+                                    <div class="exclusive-slide-card row g-0">
                                         
                                         <!-- Left Column: Cinematic Video Player (Strictly Left Aligned 50% on Desktop) -->
                                         <div class="col-12 col-lg-6 position-relative overflow-hidden exclusive-video-col" style="background: #0D0508;">
@@ -455,7 +455,7 @@
                                                 
                                                 <!-- Video Gradient Overlay -->
                                                 <div class="exclusive-video-vignette position-absolute top-0 start-0 w-100 h-100 pointer-events-none"
-                                                     style="background: linear-gradient(180deg, rgba(13,5,8,0.18) 0%, rgba(13,5,8,0) 45%, rgba(13,5,8,0.38) 100%);"></div>
+                                                     style="background: linear-gradient(180deg, rgba(13,5,8,0.28) 0%, rgba(13,5,8,0) 40%, rgba(13,5,8,0.52) 100%);"></div>
 
                                                 <!-- Top Left Floating Glassmorphism Badge (Clean Typography without Any Icons) -->
                                                 <div class="position-absolute top-0 start-0 m-3 m-md-4 z-2 pointer-events-none">
@@ -518,10 +518,10 @@
                                                 </div>
 
                                                 <!-- Price Section (Exact Product Page pdp-price-amount + Gradient Save Badge) -->
-                                                <div class="d-flex align-items-center gap-2.5 gap-sm-3 flex-wrap mb-4 pb-2">
-                                                    <div class="d-flex align-items-baseline gap-1.5">
+                                                <div class="d-flex flex-column gap-1.5 mb-2 pb-0">
+                                                    <div class="d-flex align-items-baseline gap-2 flex-wrap">
                                                         <span class="pdp-price-amount price-gradient-luxury"
-                                                              style="font-family: 'Poppins', sans-serif !important; font-size: clamp(1.75rem, 2.5vw, 2.15rem) !important; font-weight: 700 !important; background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block; line-height: 1.1;">
+                                                              style="font-family: 'Poppins', sans-serif !important; font-size: clamp(1.7rem, 2.4vw, 2.15rem) !important; font-weight: 700 !important; background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block; line-height: 1.1;">
                                                             Rs. {{ number_format($item->price) }}
                                                         </span>
                                                         <span class="font-sans fw-medium text-uppercase" style="color: #7A6F68; font-size: 11px;">
@@ -530,19 +530,21 @@
                                                     </div>
 
                                                     @if($item->original_price > $item->price)
-                                                        <span class="font-sans text-decoration-line-through" style="color: #615652; font-size: 13px;">
-                                                            Rs. {{ number_format($item->original_price) }}
-                                                        </span>
-                                                        <span class="badge-savings-luxury badge-save-gradient font-sans"
-                                                              style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3.5px 9px; border-radius: 9999px; display: inline-flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 2px 8px rgba(120, 13, 36, 0.32);">
-                                                            SAVE RS. {{ number_format($item->savings) }} ({{ $item->discount_percent }}% OFF)
-                                                        </span>
+                                                        <div class="d-flex align-items-center gap-2.5 pt-1">
+                                                            <span class="font-sans text-decoration-line-through" style="color: #615652; font-size: 13px;">
+                                                                Rs. {{ number_format($item->original_price) }}
+                                                            </span>
+                                                            <span class="badge-savings-luxury badge-save-gradient font-sans ms-1"
+                                                                  style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3.5px 9px; border-radius: 9999px; display: inline-flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 2px 8px rgba(120, 13, 36, 0.32);">
+                                                                SAVE RS. {{ number_format($item->savings) }} ({{ $item->discount_percent }}% OFF)
+                                                            </span>
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>
 
-                                            <!-- Action Buttons (Generous Spacing & Gap from Price Section) -->
-                                            <div class="pt-4 pt-sm-4 pb-1 mt-3 mt-lg-4" style="border-top: 1px solid #EFEAE5;">
+                                            <!-- Action Buttons (Reduced, Clean Spacing from Price Section) -->
+                                            <div class="pt-2.5 pt-sm-3 pb-1 mt-2 mt-lg-2.5" style="border-top: 1px solid #EFEAE5;">
                                                 <div class="row g-2 g-sm-3">
                                                     <!-- Add to Cart Button (Rich Wine Gradient) -->
                                                     <div class="col-12 col-sm-6">
@@ -1126,14 +1128,17 @@
                 const exclusiveSwiper = new Swiper('.exclusive-video-swiper', {
                     slidesPerView: 1,
                     spaceBetween: 0,
-                    speed: 700,
+                    speed: 850,
                     loop: true,
+                    autoHeight: true,
                     grabCursor: true,
                     watchSlidesProgress: true,
                     observer: true,
                     observeParents: true,
+                    resistanceRatio: 0.85,
+                    touchRatio: 1.1,
                     autoplay: {
-                        delay: 7000,
+                        delay: 6500,
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
                     },
@@ -1142,15 +1147,27 @@
                         clickable: true,
                     },
                     on: {
-                        slideChange: function () {
+                        init: function () {
                             const activeSlide = this.slides[this.activeIndex];
                             if (activeSlide) {
                                 const v = activeSlide.querySelector('video');
                                 if (v) {
-                                    v.currentTime = 0;
                                     v.play().catch(() => {});
                                 }
                             }
+                        },
+                        slideChange: function () {
+                            this.slides.forEach((slide, idx) => {
+                                const v = slide.querySelector('video');
+                                if (v) {
+                                    if (idx === this.activeIndex) {
+                                        v.currentTime = 0;
+                                        v.play().catch(() => {});
+                                    } else {
+                                        v.pause();
+                                    }
+                                }
+                            });
                         }
                     }
                 });
