@@ -73,14 +73,14 @@
                 @if ($paginator->onFirstPage())
                     <li class="luxury-page-item disabled" aria-disabled="true" aria-label="Previous Page">
                         <span class="luxury-page-link luxury-page-arrow disabled">
-                            <i class="fas fa-chevron-left" style="font-size: 10px;"></i>
+                            <i class="fas fa-chevron-left"></i>
                             <span class="d-none d-sm-inline ms-1.5">Prev</span>
                         </span>
                     </li>
                 @else
                     <li class="luxury-page-item">
                         <a href="{{ $paginator->previousPageUrl() }}" class="luxury-page-link luxury-page-arrow" rel="prev" aria-label="Previous Page">
-                            <i class="fas fa-chevron-left" style="font-size: 10px;"></i>
+                            <i class="fas fa-chevron-left"></i>
                             <span class="d-none d-sm-inline ms-1.5">Prev</span>
                         </a>
                     </li>
@@ -116,21 +116,21 @@
                     <li class="luxury-page-item">
                         <a href="{{ $paginator->nextPageUrl() }}" class="luxury-page-link luxury-page-arrow" rel="next" aria-label="Next Page">
                             <span class="d-none d-sm-inline me-1.5">Next</span>
-                            <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </a>
                     </li>
                 @else
                     <li class="luxury-page-item disabled" aria-disabled="true" aria-label="Next Page">
                         <span class="luxury-page-link luxury-page-arrow disabled">
                             <span class="d-none d-sm-inline me-1.5">Next</span>
-                            <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </span>
                     </li>
                 @endif
             </ul>
 
             {{-- Intelligent Results Summary --}}
-            <div class="luxury-pagination-summary text-center font-sans mt-2" style="font-size: 11.5px; letter-spacing: 0.04em; color: #6B605B;">
+            <div class="luxury-pagination-summary text-center font-sans">
                 Page <span class="fw-semibold" style="color: #541B29;">{{ $paginator->currentPage() }}</span> of <span class="fw-semibold" style="color: #541B29;">{{ $paginator->lastPage() }}</span>
                 <span class="opacity-50 mx-1.5">&bull;</span>
                 Showing <span class="fw-semibold" style="color: #211D1E;">{{ $paginator->firstItem() ?? 0 }}&ndash;{{ $paginator->lastItem() ?? 0 }}</span> of <span class="fw-semibold" style="color: #541B29;">{{ $paginator->total() }}</span> Creations

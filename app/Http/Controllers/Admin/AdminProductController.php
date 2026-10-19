@@ -620,4 +620,30 @@ class AdminProductController extends Controller
 
         return back()->with('error', 'Invalid bulk action.');
     }
+
+    public function quickStock(Request $request, $id)
+    {
+        $request->validate([
+            'stock' => 'required|integer|min:0',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $oldStock = $product->stock;
+        $product->stock = (int) $request->stock;
+        $product->in_stock = ($product->stock > 0);
+        $product->save();
+
+        ActivityLog::record('stock_updated', "Quick restocked '{$product->name}' from {$oldStock} to {$product->stock} bottles", $product);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => "Stock for '{$product->name}' updated to {$product->stock} bottles.",
+                'stock' => $product->stock,
+                'in_stock' => $product->in_stock,
+            ]);
+        }
+
+        return back()->with('success', "Stock for '{$product->name}' updated to {$product->stock} bottles successfully.");
+    }
 }

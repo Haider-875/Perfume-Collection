@@ -61,18 +61,18 @@
 .btn-view-compositions {
     background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 16px rgba(120, 13, 36, 0.38) !important;
+    box-shadow: 0 4px 14px rgba(120, 13, 36, 0.32) !important;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     text-decoration: none !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     font-family: 'Poppins', sans-serif !important;
-    padding: 13px 24px !important;
-    min-height: 46px;
-    font-size: 11.5px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.12em !important;
+    padding: 10px 20px !important;
+    min-height: 41px;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,9 +152,10 @@
         right: 5px !important;
     }
     .btn-view-compositions {
-        padding: 12px 20px !important;
-        min-height: 44px;
-        font-size: 11px !important;
+        padding: 9px 18px !important;
+        min-height: 39px;
+        font-size: 10.5px !important;
+        letter-spacing: 0.08em !important;
     }
 }
 </style>

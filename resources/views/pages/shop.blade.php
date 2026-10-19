@@ -94,10 +94,10 @@
                         <div class="d-flex align-items-center gap-2">
                             <button type="button" 
                                     @click="mobileFiltersOpen = true"
-                                    class="d-lg-none d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-xs fw-semibold border shadow-sm"
-                                    style="background-color: #FFFFFF; border-color: #E8E0DA !important; color: #211D1E;"
+                                    class="d-lg-none d-inline-flex align-items-center gap-2 px-3 rounded-pill fw-semibold border shadow-xs"
+                                    style="background-color: #FFFFFF; border-color: #E8E0DA !important; color: #211D1E; font-size: 12px; height: 36px; line-height: 1;"
                                     aria-label="Open filter and scent notes drawer">
-                                <i class="fas fa-filter" style="color: #541B29;"></i>
+                                <i class="fas fa-filter" style="color: #541B29; font-size: 11px;"></i>
                                 <span>Filters & Notes</span>
                                 @php
                                     $activeFilterCountShop = (request('q') ? 1 : 0) 
@@ -107,7 +107,7 @@
                                         + (request('min_price') || request('max_price') ? 1 : 0);
                                 @endphp
                                 @if($activeFilterCountShop > 0)
-                                    <span class="badge rounded-pill fw-bold px-1.5 py-0.5 text-white" style="font-size: 9px; min-width: 16px; background-color: #541B29;">{{ $activeFilterCountShop }}</span>
+                                    <span class="badge rounded-pill fw-bold text-white d-inline-flex align-items-center justify-content-center" style="font-size: 9px; width: 18px; height: 18px; padding: 0; background-color: #541B29;">{{ $activeFilterCountShop }}</span>
                                 @endif
                             </button>
                             <div class="d-none d-lg-block collection-results-count" style="font-size: 0.85rem; letter-spacing: 0.03em; color: #6B605B;">
@@ -149,7 +149,7 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="mt-5 d-flex justify-content-center">
+                    <div class="mt-4 mt-md-5 d-flex justify-content-center">
                         {{ $products->links() }}
                     </div>
                 @else

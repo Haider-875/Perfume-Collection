@@ -997,12 +997,12 @@
             <div class="dash-card p-4">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
-                        <div class="text-secondary fw-semibold small mb-1">Total Period Revenue</div>
+                        <div class="text-secondary fw-semibold small mb-1" id="revenueSubheadLabel">Total Period Revenue</div>
                         <div class="d-flex align-items-baseline gap-3 flex-wrap">
-                            <div class="profit-headline-val">
+                            <div class="profit-headline-val" id="revenueHeadlineVal">
                                 Rs. {{ number_format($periodRevenue, 0) }}
                             </div>
-                            <div class="d-flex align-items-center gap-1">
+                            <div class="d-flex align-items-center gap-1" id="revenueGrowthBadge">
                                 @if($revenueGrowth >= 0)
                                     <span class="stat-trend-pill-green">
                                         <i class="fa-solid fa-arrow-up" style="font-size: 9px;"></i> {{ number_format(abs($revenueGrowth), 1) }}%
@@ -1021,19 +1021,6 @@
                 <!-- Spline Area Chart Canvas -->
                 <div class="position-relative" style="height: 230px;">
                     <canvas id="profitChart"></canvas>
-
-                    <!-- In-Chart Floating Tooltip Match (Styled as in Reference) -->
-                    <div class="chart-tooltip-demo d-none d-md-block">
-                        <div class="tooltip-date">{{ $currentRangeLabel }}</div>
-                        <div class="tooltip-row text-dark">
-                            <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #2563eb; display: inline-block;"></span>
-                            <span class="fw-bold">Rs. {{ number_format($periodRevenue, 0) }}</span> <span class="text-muted">{{ $presetTitle }}</span>
-                        </div>
-                        <div class="tooltip-row text-muted">
-                            <span style="width: 7px; height: 7px; border-radius: 50%; background-color: #cbd5e1; display: inline-block;"></span>
-                            <span class="fw-bold">Rs. {{ number_format($prevPeriodRevenue, 0) }}</span> <span class="text-muted">prev period</span>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Inside Card Bottom: Customer Channel Breakdown -->
@@ -1360,31 +1347,87 @@
             <!-- 4. Low Stock Alerts Card -->
             <div class="dash-card p-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h3 class="h6 fw-bold text-dark mb-0">Low Stock Alerts</h3>
-                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle" style="font-size: 11px;">
-                        &le; 10 bottles
-                    </span>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-warning" style="font-size: 13.5px;"></i>
+                        <h3 class="h6 fw-bold text-dark mb-0">Low Stock Alerts</h3>
+                    </div>
+                    <a href="{{ route('admin.products.index', ['stock_status' => 'low_stock']) }}" class="btn-dash-widget py-1 px-2.5 text-decoration-none" style="font-size: 11px;" title="View all low stock fragrances">
+                        <span>View All</span>
+                        <i class="fa-solid fa-arrow-right" style="font-size: 9px;"></i>
+                    </a>
                 </div>
 
-                <div class="d-flex flex-column gap-2">
-                    @forelse($lowStockProducts as $lowProd)
-                        <div class="d-flex align-items-center justify-content-between py-1.5 border-bottom border-light-subtle last:border-0">
-                            <div style="min-width: 0; flex: 1;" class="me-2">
-                                <a href="{{ route('admin.products.edit', $lowProd->id) }}" class="fw-semibold text-dark text-truncate d-block" style="font-size: 13px;" title="{{ $lowProd->name }}">
-                                    {{ $lowProd->name }}
-                                </a>
-                                <small class="text-muted d-block" style="font-size: 11px;">{{ $lowProd->category->name ?? 'Fragrance' }}</small>
+                @if($lowStockProducts->isNotEmpty())
+                    <div class="d-flex align-items-center justify-content-between p-2 rounded-3 mb-3" style="background-color: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.22);">
+                        <div class="d-flex align-items-center gap-1.5 text-warning small fw-semibold" style="font-size: 11.5px;">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                            <span><strong>{{ $lowStockProducts->count() }}</strong> fragrances below minimum threshold (less than 10 units)</span>
+                        </div>
+                        <span class="badge bg-warning text-dark fw-bold" style="font-size: 10px;">Action Needed</span>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2.5">
+                        @foreach($lowStockProducts as $lowProd)
+                            @php
+                                $thumbImg = $lowProd->thumbnail_image ? asset($lowProd->thumbnail_image) : asset('assets/images/brand/logo.png');
+                                $stockPct = min(100, max(10, round(($lowProd->stock / 25) * 100)));
+                                $isCritical = ($lowProd->stock <= 3);
+                            @endphp
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom border-light-subtle last:border-0 gap-2">
+                                <div class="d-flex align-items-center gap-2.5 overflow-hidden" style="flex: 1; min-width: 0;">
+                                    <img src="{{ $thumbImg }}" alt="{{ $lowProd->name }}" class="rounded-2 border flex-shrink-0" style="width: 36px; height: 36px; object-fit: cover;" onerror="this.src='{{ asset('assets/images/brand/logo.png') }}'">
+                                    <div class="overflow-hidden" style="min-width: 0;">
+                                        <a href="{{ route('admin.products.edit', $lowProd->id) }}" class="fw-semibold text-dark text-truncate d-block text-decoration-none" style="font-size: 12.5px;" title="{{ $lowProd->name }}">
+                                            {{ $lowProd->name }}
+                                        </a>
+                                        <div class="d-flex align-items-center gap-2 mt-0.5">
+                                            <span class="text-muted" style="font-size: 10.5px;">{{ $lowProd->category->name ?? 'Fragrance' }}</span>
+                                            <span class="text-muted" style="font-size: 9px; opacity: 0.5;">&bull;</span>
+                                            <span class="text-muted font-monospace" style="font-size: 10px;">{{ $lowProd->sku }}</span>
+                                        </div>
+                                        <div class="w-100 bg-light rounded-pill overflow-hidden mt-1" style="height: 4px; max-width: 120px;">
+                                            <div class="rounded-pill h-100 {{ $isCritical ? 'bg-danger' : 'bg-warning' }}" style="width: {{ $stockPct }}%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center gap-1.5 flex-shrink-0">
+                                    @if($lowProd->stock <= 0)
+                                        <span class="badge bg-danger text-white px-2 py-1 fw-bold" style="font-size: 10.5px;">Out of Stock</span>
+                                    @elseif($isCritical)
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 fw-bold" style="font-size: 10.5px;" title="Critical Stock Level">
+                                            <i class="fa-solid fa-circle-exclamation me-1" style="font-size: 9px;"></i>{{ $lowProd->stock }} left
+                                        </span>
+                                    @else
+                                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2 py-1 fw-bold" style="font-size: 10.5px;">
+                                            {{ $lowProd->stock }} left
+                                        </span>
+                                    @endif
+
+                                    <button type="button" 
+                                            class="btn btn-sm btn-light border py-1 px-2 text-primary fw-semibold d-inline-flex align-items-center gap-1" 
+                                            style="font-size: 11px; border-radius: 6px;" 
+                                            onclick="openQuickRestockModal({{ $lowProd->id }}, '{{ addslashes($lowProd->name) }}', {{ $lowProd->stock }})" 
+                                            title="Quick Restock Inventory">
+                                        <i class="fa-solid fa-plus text-primary" style="font-size: 10px;"></i>
+                                        <span>Restock</span>
+                                    </button>
+                                </div>
                             </div>
-                            <span class="badge {{ $lowProd->stock <= 3 ? 'bg-danger-subtle text-danger border border-danger-subtle' : 'bg-warning-subtle text-warning border border-warning-subtle' }} px-2 py-1" style="font-size: 11px;">
-                                {{ $lowProd->stock }} left
-                            </span>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-4">
+                        <div class="rounded-circle bg-success-subtle text-success d-inline-flex align-items-center justify-content-center mb-2" style="width: 42px; height: 42px;">
+                            <i class="fa-solid fa-circle-check fs-5"></i>
                         </div>
-                    @empty
-                        <div class="text-success small py-3 text-center">
-                            <i class="fa-solid fa-check-circle me-1"></i> All products well stocked.
-                        </div>
-                    @endforelse
-                </div>
+                        <div class="fw-bold text-dark small mb-1">All Fragrances Well Stocked</div>
+                        <div class="text-muted" style="font-size: 11px;">Every catalog item currently has healthy inventory above 10 units.</div>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-light border mt-3 px-3 py-1" style="font-size: 11.5px; border-radius: 6px;">
+                            Manage Inventory
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -1469,10 +1512,97 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
+
+<!-- Quick Restock Modal -->
+<div class="modal fade" id="quickRestockModal" tabindex="-1" aria-labelledby="quickRestockModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header px-4 py-3 border-bottom" style="background-color: var(--card-bg, #ffffff);">
+                <div class="d-flex align-items-center gap-2.5">
+                    <div class="rounded-circle bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                        <i class="fa-solid fa-boxes-packing fs-6"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title h6 fw-bold mb-0 text-dark" id="quickRestockModalLabel">Quick Restock Fragrance</h5>
+                        <div class="text-muted" style="font-size: 11px;">Update inventory quantity in real-time</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form id="quickRestockForm" method="POST" action="">
+                @csrf
+                <div class="modal-body p-4">
+                    <!-- Fragrance Card Details -->
+                    <div class="p-3 rounded-3 mb-3" style="background-color: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.12);">
+                        <div class="fw-bold text-dark mb-1" id="restockProductName" style="font-size: 13.5px;">-</div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="text-muted small" style="font-size: 11.5px;">Current Stock in Boutique:</span>
+                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle fw-bold" id="restockCurrentStockBadge">0 units</span>
+                        </div>
+                    </div>
+
+                    <!-- Preset Quick Add Buttons -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted text-uppercase mb-1.5" style="font-size: 10.5px; letter-spacing: 0.5px;">
+                            Quick Add Batches
+                        </label>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-2 px-2.5 py-1 fw-semibold" style="font-size: 12px;" onclick="addRestockQty(5)">+5</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-2 px-2.5 py-1 fw-semibold" style="font-size: 12px;" onclick="addRestockQty(10)">+10</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-2 px-2.5 py-1 fw-semibold" style="font-size: 12px;" onclick="addRestockQty(25)">+25</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-2 px-2.5 py-1 fw-semibold" style="font-size: 12px;" onclick="addRestockQty(50)">+50</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-2 px-2.5 py-1 fw-semibold" style="font-size: 12px;" onclick="addRestockQty(100)">+100</button>
+                        </div>
+                    </div>
+
+                    <!-- Target / Updated Stock Input -->
+                    <div class="mb-3">
+                        <label for="restockStockInput" class="form-label small fw-semibold text-dark mb-1">
+                            New Total Stock (Bottles / Units) <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted border-end-0">
+                                <i class="fa-solid fa-cubes-stacked"></i>
+                            </span>
+                            <input type="number" 
+                                   class="form-control border-start-0 ps-0 fw-bold" 
+                                   id="restockStockInput" 
+                                   name="stock" 
+                                   min="0" 
+                                   step="1" 
+                                   required 
+                                   placeholder="Enter total stock quantity"
+                                   oninput="updateRestockStockPreview()">
+                        </div>
+                        <div class="form-text mt-1.5 text-muted" style="font-size: 11px;">
+                            Directly enter the new total stock or click the batch buttons above.
+                        </div>
+                    </div>
+
+                    <!-- Live Calculation Notice -->
+                    <div id="restockDiffBadge" class="p-2 rounded-2 text-center small fw-semibold" style="font-size: 11.5px; background-color: #f8fafc; border: 1px dashed #cbd5e1;">
+                        Please adjust stock quantity above.
+                    </div>
+                </div>
+
+                <div class="modal-footer px-4 py-3 bg-light border-top d-flex align-items-center justify-content-between">
+                    <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-1.5" data-bs-dismiss="modal" style="font-size: 12.5px; border-radius: 6px;">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-primary px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5" style="font-size: 12.5px; border-radius: 6px;">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Save &amp; Restock</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -1538,23 +1668,78 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 plugins: {
                     legend: {
                         display: false
                     },
                     tooltip: {
-                        backgroundColor: isDarkInit ? '#162032' : '#ffffff',
-                        titleColor: isDarkInit ? '#f8fafc' : '#111827',
-                        bodyColor: isDarkInit ? '#cbd5e1' : '#475569',
-                        borderColor: isDarkInit ? '#24324c' : '#edf0f5',
-                        borderWidth: 1,
-                        padding: 10,
-                        boxPadding: 4,
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: isDarkInit ? '#111827' : '#ffffff',
+                        titleColor: isDarkInit ? '#f8fafc' : '#0f172a',
+                        bodyColor: isDarkInit ? '#cbd5e1' : '#334155',
+                        borderColor: isDarkInit ? '#24324c' : '#e2e8f0',
+                        borderWidth: 1.5,
+                        padding: 12,
+                        boxPadding: 6,
                         usePointStyle: true,
+                        titleFont: {
+                            size: 12,
+                            weight: '700',
+                            family: "'Plus Jakarta Sans', sans-serif"
+                        },
+                        bodyFont: {
+                            size: 12,
+                            weight: '600',
+                            family: "'Plus Jakarta Sans', sans-serif"
+                        },
                         callbacks: {
+                            title: function(items) {
+                                if (!items.length) return '';
+                                return items[0].label;
+                            },
                             label: function(context) {
-                                return ' ' + context.dataset.label + ': Rs. ' + Number(context.parsed.y || 0).toLocaleString();
+                                const val = Number(context.parsed.y || 0);
+                                return ' ' + context.dataset.label + ': Rs. ' + val.toLocaleString();
+                            },
+                            afterBody: function(items) {
+                                if (items.length >= 2) {
+                                    const current = Number(items[0].parsed.y || 0);
+                                    const prev = Number(items[1].parsed.y || 0);
+                                    const diff = current - prev;
+                                    if (prev > 0) {
+                                        const pct = ((diff / prev) * 100).toFixed(1);
+                                        const sign = diff >= 0 ? '+' : '';
+                                        return 'Growth: ' + sign + pct + '% (Rs. ' + sign + diff.toLocaleString() + ')';
+                                    }
+                                }
+                                return '';
                             }
+                        }
+                    }
+                },
+                onHover: function (event, activeElements) {
+                    const canvas = event.chart.canvas;
+                    canvas.style.cursor = activeElements.length ? 'crosshair' : 'default';
+
+                    const headVal = document.getElementById('revenueHeadlineVal');
+                    const subLbl = document.getElementById('revenueSubheadLabel');
+
+                    if (activeElements.length > 0) {
+                        const idx = activeElements[0].index;
+                        const val = activeTrend[idx] || 0;
+                        const dateLbl = labels[idx];
+                        
+                        if (headVal) {
+                            headVal.textContent = 'Rs. ' + Number(val).toLocaleString();
+                        }
+                        if (subLbl) {
+                            subLbl.innerHTML = '<span class="text-primary fw-bold"><i class="fa-regular fa-calendar-check me-1"></i>' + dateLbl + '</span> <span class="text-muted">(Hovered)</span>';
                         }
                     }
                 },
@@ -1600,16 +1785,117 @@
             }
         });
 
+        // Mouse leave restore handler
+        const chartCanvas = document.getElementById('profitChart');
+        if (chartCanvas) {
+            chartCanvas.addEventListener('mouseleave', function () {
+                const headVal = document.getElementById('revenueHeadlineVal');
+                const subLbl = document.getElementById('revenueSubheadLabel');
+                if (headVal) {
+                    headVal.textContent = 'Rs. {{ number_format($periodRevenue, 0) }}';
+                }
+                if (subLbl) {
+                    subLbl.textContent = 'Total Period Revenue';
+                }
+            });
+        }
+
         // Dynamic theme synchronization for Chart.js
         window.addEventListener('admin-theme-changed', function (e) {
             const isDark = (e.detail?.theme === 'dark');
             profitChart.options.scales.y.grid.color = isDark ? 'rgba(255, 255, 255, 0.05)' : '#f8fafc';
-            profitChart.options.plugins.tooltip.backgroundColor = isDark ? '#162032' : '#ffffff';
-            profitChart.options.plugins.tooltip.titleColor = isDark ? '#f8fafc' : '#111827';
-            profitChart.options.plugins.tooltip.bodyColor = isDark ? '#cbd5e1' : '#475569';
-            profitChart.options.plugins.tooltip.borderColor = isDark ? '#24324c' : '#edf0f5';
+            profitChart.options.plugins.tooltip.backgroundColor = isDark ? '#111827' : '#ffffff';
+            profitChart.options.plugins.tooltip.titleColor = isDark ? '#f8fafc' : '#0f172a';
+            profitChart.options.plugins.tooltip.bodyColor = isDark ? '#cbd5e1' : '#334155';
+            profitChart.options.plugins.tooltip.borderColor = isDark ? '#24324c' : '#e2e8f0';
             profitChart.update();
         });
     });
+
+    // ==========================================
+    // Quick Restock Modal Logic
+    // ==========================================
+    let currentRestockBase = 0;
+    let quickRestockModalInstance = null;
+
+    window.openQuickRestockModal = function(productId, productName, currentStock) {
+        currentRestockBase = parseInt(currentStock, 10) || 0;
+        
+        const modalEl = document.getElementById('quickRestockModal');
+        const formEl = document.getElementById('quickRestockForm');
+        const nameEl = document.getElementById('restockProductName');
+        const badgeEl = document.getElementById('restockCurrentStockBadge');
+        const inputEl = document.getElementById('restockStockInput');
+        
+        if (formEl) {
+            formEl.action = '/admin/products/' + productId + '/quick-stock';
+        }
+        if (nameEl) {
+            nameEl.textContent = productName;
+        }
+        if (badgeEl) {
+            badgeEl.textContent = currentRestockBase + (currentRestockBase === 1 ? ' unit left' : ' units left');
+            badgeEl.className = currentRestockBase <= 3 
+                ? 'badge bg-danger-subtle text-danger border border-danger-subtle fw-bold' 
+                : 'badge bg-warning-subtle text-warning border border-warning-subtle fw-bold';
+        }
+        
+        // Default suggestion: add 20 units
+        const defaultNewStock = currentRestockBase + 20;
+        if (inputEl) {
+            inputEl.value = defaultNewStock;
+        }
+        
+        window.updateRestockStockPreview();
+
+        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            quickRestockModalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            quickRestockModalInstance.show();
+        } else if (modalEl) {
+            modalEl.classList.add('show');
+            modalEl.style.display = 'block';
+        }
+    };
+
+    window.addRestockQty = function(addAmount) {
+        const inputEl = document.getElementById('restockStockInput');
+        if (!inputEl) return;
+        
+        let currentVal = parseInt(inputEl.value, 10);
+        if (isNaN(currentVal) || currentVal < currentRestockBase) {
+            currentVal = currentRestockBase;
+        }
+        inputEl.value = currentVal + parseInt(addAmount, 10);
+        window.updateRestockStockPreview();
+    };
+
+    window.updateRestockStockPreview = function() {
+        const inputEl = document.getElementById('restockStockInput');
+        const diffBadge = document.getElementById('restockDiffBadge');
+        if (!inputEl || !diffBadge) return;
+
+        const newVal = parseInt(inputEl.value, 10);
+        if (isNaN(newVal) || newVal < 0) {
+            diffBadge.innerHTML = '<span class="text-danger">Please enter a valid stock quantity (0 or more).</span>';
+            diffBadge.style.backgroundColor = '#fef2f2';
+            diffBadge.style.borderColor = '#fecaca';
+            return;
+        }
+
+        const diff = newVal - currentRestockBase;
+        if (diff > 0) {
+            diffBadge.innerHTML = `<span class="text-success"><i class="fa-solid fa-arrow-trend-up me-1"></i> Adding <strong>+${diff}</strong> bottles (New Total: <strong>${newVal}</strong>)</span>`;
+            diffBadge.style.backgroundColor = 'rgba(16, 185, 129, 0.08)';
+            diffBadge.style.borderColor = 'rgba(16, 185, 129, 0.25)';
+        } else if (diff === 0) {
+            diffBadge.innerHTML = `<span class="text-muted"><i class="fa-solid fa-minus me-1"></i> Stock remains unchanged at <strong>${newVal}</strong> units.</span>`;
+            diffBadge.style.backgroundColor = '#f8fafc';
+            diffBadge.style.borderColor = '#cbd5e1';
+        } else {
+            diffBadge.innerHTML = `<span class="text-warning"><i class="fa-solid fa-arrow-trend-down me-1"></i> Decreasing stock by <strong>${Math.abs(diff)}</strong> (New Total: <strong>${newVal}</strong>)</span>`;
+            diffBadge.style.backgroundColor = '#fffbeb';
+            diffBadge.style.borderColor = '#fde68a';
+        }
+    };
 </script>
 @endpush

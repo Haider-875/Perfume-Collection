@@ -2404,14 +2404,18 @@ h3.product-card-title {
    LUXURY PAGINATION SYSTEM - BUTTONS & LINKS
    ========================================================================== */
 .pagination {
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 5px !important;
     list-style: none !important;
-    padding: 0 !important;
+    padding: 4px 8px !important;
     margin: 0 !important;
     flex-wrap: wrap !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E8E0DA !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
 }
 
 .pagination .page-item {
@@ -2422,30 +2426,30 @@ h3.product-card-title {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 42px !important;
-    height: 42px !important;
-    padding: 6px 14px !important;
-    font-family: var(--font-sans), 'Montserrat', sans-serif !important;
-    font-size: 0.85rem !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    padding: 0 10px !important;
+    font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.82rem !important;
     font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.03em !important;
     color: #211D1E !important;
-    background: #FFFFFF !important;
-    border: 1px solid #E8E0DA !important;
-    border-radius: 8px !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 9999px !important;
     text-decoration: none !important;
-    box-shadow: 0 2px 6px rgba(33, 29, 30, 0.05) !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 /* Hover & Focus State */
 .pagination .page-link:hover,
 .pagination .page-link:focus {
-    color: #FFFFFF !important;
-    background: #541B29 !important;
-    border-color: #541B29 !important;
-    box-shadow: 0 4px 12px rgba(84, 27, 41, 0.25) !important;
-    transform: translateY(-2px) !important;
+    color: #541B29 !important;
+    background: #FAF7F2 !important;
+    border-color: #E8E0DA !important;
+    box-shadow: none !important;
+    transform: translateY(-1px) !important;
     z-index: 2 !important;
 }
 
@@ -2456,8 +2460,8 @@ h3.product-card-title {
     background: #541B29 !important;
     border-color: #541B29 !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 14px rgba(84, 27, 41, 0.35) !important;
-    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(84, 27, 41, 0.3) !important;
+    transform: none !important;
     cursor: default !important;
 }
 
@@ -2466,9 +2470,10 @@ h3.product-card-title {
 .pagination .page-link:disabled,
 .pagination .page-link[aria-disabled="true"] {
     color: #A89F9A !important;
-    background: #FAF7F2 !important;
-    border-color: #E8E0DA !important;
+    background: transparent !important;
+    border-color: transparent !important;
     box-shadow: none !important;
+    opacity: 0.35 !important;
     cursor: not-allowed !important;
     transform: none !important;
     pointer-events: none !important;
@@ -2477,8 +2482,9 @@ h3.product-card-title {
 /* Icons & SVGs inside Pagination Links */
 .pagination .page-link svg,
 .pagination .page-link i {
-    width: 14px !important;
-    height: 14px !important;
+    width: 12px !important;
+    height: 12px !important;
+    font-size: 10px !important;
     fill: currentColor !important;
     line-height: 1 !important;
 }
@@ -6502,80 +6508,98 @@ body.overflow-hidden {
 }
 
 /* ==========================================================================
-   7. LUXURY PAGINATION UI (DESKTOP & MOBILE OPTIMIZED)
+   7. LUXURY PAGINATION UI (RESPONSIVE & MOBILE OPTIMIZED)
    ========================================================================== */
 .luxury-pagination-nav {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
     margin-bottom: 1.5rem;
 }
 
-.luxury-pagination {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    background: #FFFFFF;
-    border: 1px solid #E8E0DA;
-    border-radius: var(--radius-md, 8px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+.luxury-pagination,
+.pagination {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    padding: 4px 8px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E8E0DA !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+    margin-bottom: 0 !important;
+    list-style: none !important;
+    flex-wrap: wrap !important;
 }
 
-.luxury-page-item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.luxury-page-item,
+.pagination .page-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
 }
 
-.luxury-page-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 38px;
-    height: 38px;
-    padding: 0 10px;
-    border-radius: 6px;
-    font-family: var(--font-sans), 'Poppins', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #211D1E;
-    background: transparent;
-    border: 1px solid transparent;
-    text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    user-select: none;
+.luxury-page-link,
+.pagination .page-item .page-link,
+.pagination .page-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    padding: 0 10px !important;
+    border-radius: 9999px !important;
+    font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em !important;
+    color: #211D1E !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+    user-select: none !important;
 }
 
-.luxury-page-link:hover {
-    color: #541B29;
-    border-color: #E8E0DA;
-    background: #FAF7F2;
-    transform: translateY(-1px);
+.luxury-page-link:hover,
+.pagination .page-item .page-link:hover {
+    color: #541B29 !important;
+    border-color: #E8E0DA !important;
+    background: #FAF7F2 !important;
+    transform: translateY(-1px) !important;
 }
 
 .luxury-page-link.active,
-.luxury-page-item.active .luxury-page-link {
+.luxury-page-item.active .luxury-page-link,
+.pagination .page-item.active .page-link,
+.pagination .page-link.active {
     background: #541B29 !important;
     color: #ffffff !important;
     border-color: #541B29 !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 12px rgba(84, 27, 41, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(84, 27, 41, 0.3) !important;
+    transform: none !important;
+    cursor: default !important;
 }
 
 .luxury-page-arrow {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 0 12px;
-    color: #541B29;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    padding: 0 10px !important;
+    color: #541B29 !important;
 }
 
 .luxury-page-arrow.disabled,
-.luxury-page-item.disabled .luxury-page-link {
-    opacity: 0.35;
-    cursor: not-allowed;
-    pointer-events: none;
+.luxury-page-item.disabled .luxury-page-link,
+.pagination .page-item.disabled .page-link,
+.pagination .page-link[aria-disabled="true"] {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
     border-color: transparent !important;
     background: transparent !important;
     color: #A0958E !important;
@@ -6584,89 +6608,142 @@ body.overflow-hidden {
 }
 
 .luxury-page-dots {
-    color: #6B605B;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    min-width: 24px;
-    cursor: default;
-}
-
-/* Fallback styling for standard Bootstrap .pagination elements */
-.pagination {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 6px !important;
-    padding: 6px 10px !important;
-    background: #FFFFFF !important;
-    border: 1px solid #E8E0DA !important;
-    border-radius: 9999px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
-    margin-bottom: 0 !important;
-}
-
-.pagination .page-item .page-link {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 38px !important;
-    height: 38px !important;
-    padding: 0 10px !important;
-    border-radius: 9999px !important;
-    font-family: var(--font-sans), 'Poppins', sans-serif !important;
-    font-size: 0.85rem !important;
-    font-weight: 500 !important;
-    color: #211D1E !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    box-shadow: none !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.pagination .page-item .page-link:hover {
-    color: #541B29 !important;
-    border-color: #E8E0DA !important;
-    background: #FAF7F2 !important;
-    transform: translateY(-1px) !important;
-}
-
-.pagination .page-item.active .page-link {
-    background: #541B29 !important;
-    color: #ffffff !important;
-    border-color: #541B29 !important;
+    color: #6B605B !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 12px rgba(84, 27, 41, 0.25) !important;
+    letter-spacing: 0.08em !important;
+    min-width: 22px !important;
+    cursor: default !important;
 }
 
-.pagination .page-item.disabled .page-link {
-    opacity: 0.35 !important;
-    color: #A0958E !important;
-    background: transparent !important;
-    border-color: transparent !important;
-    cursor: not-allowed !important;
-    pointer-events: none !important;
-    transform: none !important;
+.luxury-pagination-summary {
+    font-size: 11.5px !important;
+    letter-spacing: 0.04em !important;
+    color: #6B605B !important;
+    margin-top: 6px !important;
 }
 
-@media (max-width: 575.98px) {
+/* Tablet & Mobile Screens (<= 767.98px) */
+@media (max-width: 767.98px) {
+    .luxury-pagination-nav {
+        margin-top: 1rem !important;
+        margin-bottom: 1.25rem !important;
+    }
 
     .luxury-pagination,
     .pagination {
         gap: 3px !important;
-        padding: 4px 6px !important;
-        border-radius: 14px !important;
+        padding: 3px 6px !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
     }
 
     .luxury-page-link,
-    .pagination .page-item .page-link {
-        min-width: 32px !important;
-        height: 32px !important;
+    .pagination .page-item .page-link,
+    .pagination .page-link {
+        min-width: 30px !important;
+        height: 30px !important;
         padding: 0 6px !important;
-        font-size: 0.78rem !important;
+        font-size: 0.76rem !important;
+        border-radius: 9999px !important;
     }
 
     .luxury-page-arrow {
-        padding: 0 8px !important;
+        min-width: 30px !important;
+        height: 30px !important;
+        padding: 0 6px !important;
+    }
+
+    .luxury-page-arrow i {
+        font-size: 9px !important;
+    }
+
+    .luxury-page-dots {
+        min-width: 18px !important;
+        font-size: 11px !important;
+    }
+
+    .luxury-pagination-summary {
+        font-size: 11px !important;
+        margin-top: 5px !important;
+    }
+}
+
+/* Small Smartphone Devices (<= 480px) */
+@media (max-width: 480px) {
+    .luxury-pagination-nav {
+        margin-top: 0.75rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .luxury-pagination,
+    .pagination {
+        gap: 2px !important;
+        padding: 2.5px 4px !important;
+        border-radius: 9999px !important;
+        max-width: 100% !important;
+    }
+
+    .luxury-page-link,
+    .pagination .page-item .page-link,
+    .pagination .page-link {
+        min-width: 27px !important;
+        height: 27px !important;
+        line-height: 27px !important;
+        padding: 0 4px !important;
+        font-size: 0.72rem !important;
+        border-radius: 9999px !important;
+    }
+
+    .luxury-page-arrow {
+        min-width: 27px !important;
+        height: 27px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .luxury-page-arrow i {
+        font-size: 8.5px !important;
+    }
+
+    .luxury-page-dots {
+        min-width: 15px !important;
+        font-size: 10px !important;
+    }
+
+    .luxury-pagination-summary {
+        font-size: 10.5px !important;
+        letter-spacing: 0.02em !important;
+        margin-top: 4px !important;
+    }
+}
+
+/* Extra Small Phones (<= 360px) */
+@media (max-width: 360px) {
+    .luxury-pagination,
+    .pagination {
+        gap: 1.5px !important;
+        padding: 2px 3px !important;
+    }
+
+    .luxury-page-link,
+    .pagination .page-item .page-link,
+    .pagination .page-link {
+        min-width: 25px !important;
+        height: 25px !important;
+        line-height: 25px !important;
+        padding: 0 2px !important;
+        font-size: 0.68rem !important;
+    }
+
+    .luxury-page-arrow {
+        min-width: 25px !important;
+        height: 25px !important;
+    }
+
+    .luxury-pagination-summary {
+        font-size: 10px !important;
     }
 }
 

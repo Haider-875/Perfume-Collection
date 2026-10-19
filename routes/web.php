@@ -148,6 +148,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::post('/products/{id}/quick-stock', [AdminProductController::class, 'quickStock'])->name('products.quick-stock');
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
     Route::post('/products/bulk-action', [AdminProductController::class, 'bulkAction'])->name('products.bulk');
     Route::get('/products/import', [AdminProductController::class, 'importView'])->name('products.import');
