@@ -650,8 +650,8 @@
                     <div
                         class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
-                            <i class="fas fa-droplet"></i>
+                            style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%) !important; border: 1px solid #EAD8B8 !important;">
+                            <i class="fas fa-droplet gradient-gold-icon" style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block;"></i>
                         </div>
                         <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">35% - 40% Extrait Concentration
                         </h3>
@@ -667,8 +667,8 @@
                     <div
                         class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
-                            <i class="fas fa-flask"></i>
+                            style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%) !important; border: 1px solid #EAD8B8 !important;">
+                            <i class="fas fa-flask gradient-gold-icon" style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block;"></i>
                         </div>
                         <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">Grasse French Fragrance Oils
                         </h3>
@@ -684,8 +684,8 @@
                     <div
                         class="p-4 p-md-5 rounded-4 text-center vstack gap-3 luxury-hover-card h-100" style="background-color: #FFFFFF !important; border: 1px solid #E8E0DA !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <div class="rounded-3 d-flex align-items-center justify-content-center fs-3 mx-auto shadow-sm"
-                            style="width: 4rem; height: 4rem; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
-                            <i class="fas fa-shield-halved"></i>
+                            style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%) !important; border: 1px solid #EAD8B8 !important;">
+                            <i class="fas fa-shield-halved gradient-gold-icon" style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block;"></i>
                         </div>
                         <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">Hassle-Free Pakistani Experience</h3>
                         <p class="text-xs text-sm lh-base fw-light mb-0" style="color: #6B605B;">
@@ -775,129 +775,6 @@
 
                     <!-- Pagination Dots -->
                     <div class="swiper-pagination testimonials-pagination position-relative mt-2 text-center"></div>
-                </div>
-            </div>
-        </section>
-    @endif
-
-    <!-- 9. Fragrance Journal Preview -->
-    @if($recentBlogs->count() > 0)
-        <section class="py-5" style="background-color: #F7F3EE;">
-            <div class="container px-3 px-lg-4">
-                <!-- Centered Section Header -->
-                <div class="text-center mx-auto mb-5 pb-1" style="max-width: 680px;">
-                   <div class="d-inline-flex align-items-center justify-content-center gap-2 mb-2">
-                        <span class="fw-semibold text-uppercase tracking-luxury" style="font-size: 11px; letter-spacing: 0.22em; color: #541B29;">FRAGRANCE JOURNAL</span>
-                    </div>
-                    <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase mb-2" style="letter-spacing: 0.04em; color: #211D1E !important;">
-                        Olfactory Chronicles & Guides
-                    </h2>
-                    <p class="mb-0 font-sans" style="font-size: 0.92rem; line-height: 1.6; color: #6B605B;">
-                        Master perfumery secrets, royal attar heritage of Lahore, and artisanal wear guides curated by our master noses.
-                    </p>
-                </div>
-
-                <!-- 3 Royal Blog Cards -->
-                <div class="row g-4 justify-content-center">
-                    @foreach($recentBlogs as $hBlog)
-                        @php
-                            $categoryName = $hBlog->category ?? $hBlog->category_name ?? 'Haute Parfumerie';
-                            $readTime = $hBlog->read_time ?? '5 Min Read';
-                            $formattedDate = $hBlog->published_at ? \Carbon\Carbon::parse($hBlog->published_at)->format('M d, Y') : 'Recent Edition';
-                            $author = $hBlog->author_name ?? 'Master Nose';
-                            
-                            // High-quality asset images mapped by index to guarantee unique photos
-                            $journalAssetImages = [
-                                0 => 'assets/images/blogs/blog_extrait_science.jpg',
-                                1 => 'assets/images/blogs/blog_mughal_attar.jpg',
-                                2 => 'assets/images/blogs/blog_wedding_wardrobe.jpg',
-                            ];
-                            $journalFallbackPerfumes = [
-                                0 => 'assets/images/perfumes/prod_oud_royale.jpg',
-                                1 => 'assets/images/perfumes/prod_rose_oud.jpg',
-                                2 => 'assets/images/perfumes/prod_attar.jpg',
-                            ];
-
-                            // If image is missing, empty, or .svg vector, use the corresponding rich journal photo
-                            $cleanDbImage = trim((string)($hBlog->image ?? ''));
-                            if (!empty($cleanDbImage) && !str_ends_with(strtolower($cleanDbImage), '.svg')) {
-                                $cardImageSrc = asset($cleanDbImage);
-                            } else {
-                                $cardImageSrc = asset($journalAssetImages[$loop->index % 3] ?? 'assets/images/blogs/blog_extrait_science.jpg');
-                            }
-                            $cardFallbackSrc = asset($journalFallbackPerfumes[$loop->index % 3] ?? 'assets/images/perfumes/prod_oud_royale.jpg');
-                        @endphp
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <article class="home-blog-card blog-card position-relative luxury-hover-card rounded-4 overflow-hidden shadow-sm d-flex flex-column h-100 p-3 p-sm-3.5" style="background: #FFFFFF; border: 1px solid #E8E0DA;">
-                                <!-- Image Pedestal Wrap -->
-                                <div class="blog-card-image-wrap position-relative w-100 rounded-3 overflow-hidden mb-3 mb-sm-3.5" style="aspect-ratio: 16 / 10; min-height: 170px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                    <!-- Badges Row -->
-                                    <div class="blog-card-badges-row position-absolute top-0 start-0 end-0 p-2 p-sm-2.5 d-flex align-items-center justify-content-between gap-2 z-2" style="pointer-events: none;">
-                                        <span class="blog-card-category-badge rounded-pill fw-bold text-uppercase shadow-sm" 
-                                              style="font-size: 9.5px; letter-spacing: 0.08em; background-color: #541B29; color: #FFFFFF; padding: 4.5px 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; max-width: calc(100% - 85px); overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,0.18);"
-                                              title="{{ $categoryName }}">
-                                            {{ $categoryName }}
-                                        </span>
-                                        <span class="blog-card-readtime-badge rounded-pill fw-medium shadow-xs" 
-                                              style="background-color: rgba(255, 255, 255, 0.94); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid #E8E0DA; font-size: 9.5px; color: #211D1E !important; padding: 4.5px 10px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; flex-shrink: 0;">
-                                            <i class="far fa-clock" style="font-size: 8.5px; color: #851029;"></i>
-                                            <span>{{ $readTime }}</span>
-                                        </span>
-                                    </div>
-                                    <img src="{{ $cardImageSrc }}"
-                                         alt="{{ $hBlog->title }}"
-                                         loading="lazy"
-                                         onerror="this.onerror=null; this.src='{{ $cardFallbackSrc }}';"
-                                         class="w-100 h-100 object-fit-cover transition-smooth blog-card-img"
-                                         style="object-fit: cover; object-position: center;">
-                                </div>
-
-                                <!-- Card Body with Generous Vertical Gaps -->
-                                <div class="blog-card-body d-flex flex-column flex-grow-1 justify-content-between px-1">
-                                    <div class="blog-card-content d-flex flex-column gap-2.5 gap-md-3 mb-3">
-                                        <!-- Meta Row -->
-                                        <div class="blog-meta d-flex align-items-center gap-2" style="font-size: 11px; color: #786C67; font-weight: 500;">
-                                            <i class="far fa-calendar-alt text-brand" style="font-size: 10.5px; color: #851029;"></i>
-                                            <span>{{ $formattedDate }}</span>
-                                            <span>&bull;</span>
-                                            <span>By {{ Str::limit($author, 22) }}</span>
-                                        </div>
-
-                                        <!-- Title -->
-                                        <h3 class="blog-card-title font-serif fw-medium lh-sm m-0">
-                                            <a href="{{ route('blogs.show', $hBlog->slug) }}" class="text-decoration-none hover-text-gold transition-smooth">
-                                                {{ $hBlog->title }}
-                                            </a>
-                                        </h3>
-
-                                        <!-- Excerpt -->
-                                        <p class="blog-card-excerpt text-xs lh-base m-0" style="color: #5C524D; font-size: 0.86rem; line-height: 1.55;">
-                                            {{ $hBlog->excerpt ?? Str::limit(strip_tags($hBlog->content), 120) }}
-                                        </p>
-                                    </div>
-
-                                    <!-- Read Guide Button (Matches New Release Impressions Card Button) -->
-                                    <div class="blog-card-action mt-auto pt-2 pt-md-3" style="border-top: 1px solid #E8E0DA;">
-                                        <a href="{{ route('blogs.show', $hBlog->slug) }}" 
-                                           class="w-100 btn-gold btn-cart-gradient py-2 py-sm-2.5 px-2 px-sm-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-1.5 gap-sm-2 text-white text-decoration-none shadow-sm"
-                                           style="min-height: 40px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
-                                           title="Read Guide">
-                                            <i class="fas fa-book-open text-white" style="font-size: 11px;"></i>
-                                            <span class="text-white text-nowrap" style="font-size: 11.5px;">Read Guide</span>
-                                            <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    @endforeach
-                </div>
-
-                <!-- Centered Bottom Action (Matches New Release Impressions CTA) -->
-                <div class="text-center mt-4 mt-lg-5">
-                    <a href="{{ route('blogs.index') }}" class="btn-outline-gold px-4 py-3" style="background-color: #FFFFFF !important; color: #541B29 !important; border: 1px solid #E8E0DA !important; border-radius: 8px; text-decoration: none;">
-                        <span>Explore All Journal Guides</span>
-                    </a>
                 </div>
             </div>
         </section>

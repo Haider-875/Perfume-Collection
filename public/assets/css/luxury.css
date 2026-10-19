@@ -158,6 +158,16 @@ body {
     background: #541B29;
 }
 
+/* Luxury Brand Gradient Icon Utility */
+.gradient-gold-icon,
+.gradient-luxury-icon {
+    background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: inline-block !important;
+}
+
 /* Animations */
 @keyframes goldShimmer {
     0% {
@@ -7056,7 +7066,10 @@ p, .lead {
 
 @media (max-width: 991.98px) {
     .site-navbar-inner {
-        height: 4.25rem !important;
+        min-height: 4.65rem !important;
+        height: auto !important;
+        padding-top: 0.35rem !important;
+        padding-bottom: 0.35rem !important;
         padding-left: 0.75rem !important;
         padding-right: 0.75rem !important;
     }
@@ -7065,7 +7078,7 @@ p, .lead {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        max-width: calc(100% - 140px);
+        max-width: calc(100% - 130px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -7073,27 +7086,34 @@ p, .lead {
 
     .site-brand-logo,
     .site-logo-img {
-        height: 2.35rem !important;
-        max-width: 140px !important;
+        height: 3.45rem !important;
+        max-height: 56px !important;
+        width: auto !important;
+        max-width: 160px !important;
         object-fit: contain;
     }
 }
 
 @media (max-width: 375px) {
     .site-navbar-inner {
-        height: 3.85rem !important;
+        min-height: 4.25rem !important;
+        height: auto !important;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
     }
 
     .site-brand-wrapper {
-        max-width: calc(100% - 120px);
+        max-width: calc(100% - 110px);
     }
 
     .site-brand-logo,
     .site-logo-img {
-        height: 2.05rem !important;
-        max-width: 115px !important;
+        height: 3.1rem !important;
+        max-height: 50px !important;
+        width: auto !important;
+        max-width: 140px !important;
     }
 
     .site-nav-icon-btn {

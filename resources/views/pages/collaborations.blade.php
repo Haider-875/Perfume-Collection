@@ -47,7 +47,7 @@
                         <a href="{{ route('shop.show', 'oud-royale-1947') }}" class="btn py-2.5 px-4 text-xs tracking-wider fw-semibold text-white text-decoration-none shadow-sm" style="background-color: #541B29; border-radius: 8px;">
                             DISCOVER COVETED FLACON
                         </a>
-                        <a href="{{ route('pages.contact') }}" class="btn py-2.5 px-4 text-xs tracking-wider fw-semibold text-decoration-none shadow-sm" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; border-radius: 8px;">
+                        <a href="https://wa.me/923363685732?text={{ urlencode('Salam! I am interested in requesting a bespoke commission.') }}" target="_blank" class="btn py-2.5 px-4 text-xs tracking-wider fw-semibold text-decoration-none shadow-sm" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; border-radius: 8px;">
                             REQUEST BESPOKE COMMISSION
                         </a>
                     </div>

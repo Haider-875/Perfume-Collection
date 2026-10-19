@@ -6,27 +6,26 @@
 @section('content')
 
 <!-- Blog Detail Header -->
-<article class="py-5" style="background-color: #F7F3EE;">
-    <div class="container px-3 px-lg-4" style="max-width: 896px;">
+<article class="py-4 py-md-5" style="background-color: #F7F3EE;">
+    <div class="container px-3 px-lg-4" style="max-width: 860px;">
         
-        <!-- Breadcrumbs Component -->
+        <!-- Breadcrumbs Component (Only parent navigation to keep title clean) -->
         <x-breadcrumbs :items="[
             ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Fragrance Chronicles', 'url' => route('blogs.index')],
-            ['label' => $blog->title]
+            ['label' => 'Fragrance Chronicles', 'url' => route('blogs.index')]
         ]" />
 
         <!-- Meta Header -->
-        <div class="text-center d-flex flex-column gap-3 mb-4">
+        <div class="text-center d-flex flex-column gap-2.5 gap-md-3 mb-4 mx-auto" style="max-width: 760px;">
             <div>
-                <span class="d-inline-block fw-semibold px-3 py-1 rounded text-uppercase" style="font-size: 11px; letter-spacing: 0.3em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
+                <span class="d-inline-block fw-semibold px-2.5 py-0.5 rounded text-uppercase tracking-wider" style="font-size: 10px; letter-spacing: 0.2em; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                     {{ $blog->category_name ?? 'HAUTE OLFACTION' }}
                 </span>
             </div>
-            <h1 class="font-serif display-5 lh-sm fw-normal mb-0" style="color: #211D1E;">
+            <h1 class="font-serif fw-bold mb-0" style="color: #211D1E; font-size: clamp(1.35rem, 2.8vw, 1.95rem); line-height: 1.35; letter-spacing: -0.01em;">
                 {{ $blog->title }}
             </h1>
-            <div class="d-flex align-items-center justify-content-center gap-3 text-xs" style="color: #786C67;">
+            <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 gap-sm-3 text-xs" style="color: #786C67; font-size: 12px;">
                 <span>By <strong style="color: #541B29;">{{ $blog->author_name ?? 'Master Parfumeur' }}</strong></span>
                 <span>&bull;</span>
                 <span>{{ $blog->published_at ? \Carbon\Carbon::parse($blog->published_at)->format('F d, Y') : 'Recent' }}</span>
@@ -36,79 +35,57 @@
         </div>
 
         <!-- Featured Image -->
-        <div class="blog-detail-featured-media mb-5" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; border-radius: 16px; overflow: hidden;">
+        <div class="blog-detail-featured-media mb-4 mb-md-5 shadow-xs" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; border-radius: 14px; overflow: hidden;">
             <img 
                 src="{{ asset($blog->image) }}" 
                 alt="{{ $blog->title }}" 
                 class="blog-detail-featured-img w-100 h-100 object-fit-cover"
                 onerror="this.onerror=null; this.src='{{ asset('assets/images/blogs/blog_extrait_science.jpg') }}';"
-                style="object-fit: cover; object-position: center; max-height: 480px;"
+                style="object-fit: cover; object-position: center; max-height: 440px;"
             >
         </div>
 
         <!-- Article Rich Content -->
-        <div class="lh-lg fw-normal d-flex flex-column gap-4" style="font-size: 1.05rem; color: #4A403A;">
+        <div class="lh-lg fw-normal d-flex flex-column gap-3.5 gap-md-4" style="font-size: clamp(0.92rem, 1.6vw, 1rem); line-height: 1.75; color: #4A403A;">
             {!! $blog->content !!}
         </div>
 
         <!-- Author Bio Box -->
-        <div class="mt-5 p-4 rounded-3 d-flex flex-column flex-sm-row align-items-center gap-4" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
-            <div class="rounded-circle d-flex align-items-center justify-content-center fs-3 flex-shrink-0" style="width: 64px; height: 64px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
-                <i class="fas fa-gem"></i>
+        <div class="mt-4 mt-md-5 p-3 p-sm-4 rounded-3 d-flex flex-column flex-sm-row align-items-center gap-3 gap-sm-3.5 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 shadow-xs" 
+                 style="width: 52px; height: 52px; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%) !important; border: 1px solid #EAD8B8 !important;">
+                <i class="fas fa-gem gradient-gold-icon" style="font-size: 1.25rem; background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block;"></i>
             </div>
-            <div class="text-center text-sm-start">
-                <h4 class="font-serif fs-5 mb-1" style="color: #211D1E;">{{ $blog->author_name ?? 'Maison d\'Orient Master Parfumeur' }}</h4>
-                <p class="text-xs lh-base mb-0" style="color: #514744;">
+            <div class="text-center text-sm-start flex-grow-1">
+                <h4 class="font-serif fw-semibold mb-1" style="color: #211D1E; font-size: clamp(0.95rem, 2vw, 1.1rem);">
+                    {{ $blog->author_name ?? 'Master Parfumeur M. Al-Farabi' }}
+                </h4>
+                <p class="mb-0 fw-light" style="color: #6B605B; font-size: clamp(0.78rem, 1.6vw, 0.85rem); line-height: 1.55;">
                     Trained in Grasse, France with extensive mastery of Eastern distillation, curating bespoke Extrait de Parfum formulas designed to withstand Pakistan’s tropical summer heat and dry winters.
                 </p>
             </div>
         </div>
 
-        <!-- Share Actions -->
-        <div class="mt-4 pt-4 d-flex flex-wrap align-items-center justify-content-between gap-3" style="border-top: 1px solid #E8E0DA;">
-            <span class="text-xs text-uppercase tracking-widest fw-semibold" style="color: #541B29;">Share this Chronicle:</span>
+        <!-- Share Actions (Instagram, Facebook, WhatsApp only) -->
+        <div class="mt-4 pt-3 pt-md-4 d-flex flex-wrap align-items-center justify-content-between gap-3" style="border-top: 1px solid #E8E0DA;">
+            <span class="text-xs text-uppercase tracking-wider fw-semibold" style="color: #541B29; font-size: 11px;">Share this Chronicle:</span>
             <div class="d-flex align-items-center gap-2">
-                <a href="https://wa.me/?text={{ urlencode($blog->title . ' ' . url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition" style="width: 36px; height: 36px; background-color: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.4); color: #25D366;">
-                    <i class="fab fa-whatsapp"></i>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition" title="Instagram" style="width: 36px; height: 36px; background-color: rgba(225, 48, 108, 0.1); border-color: rgba(225, 48, 108, 0.35); color: #E1306C;">
+                    <i class="fab fa-instagram" style="font-size: 15px;"></i>
                 </a>
-                <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition text-primary" style="width: 36px; height: 36px; background-color: rgba(13, 110, 253, 0.15); border-color: rgba(13, 110, 253, 0.4);">
-                    <i class="fab fa-facebook-f"></i>
+                <!-- Facebook -->
+                <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition" title="Facebook" style="width: 36px; height: 36px; background-color: rgba(24, 119, 242, 0.1); border-color: rgba(24, 119, 242, 0.35); color: #1877F2;">
+                    <i class="fab fa-facebook-f" style="font-size: 14px;"></i>
                 </a>
-                <a href="https://twitter.com/intent/tweet?text={{ urlencode($blog->title) }}&url={{ urlencode(url()->current()) }}" target="_blank" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition text-info" style="width: 36px; height: 36px; background-color: rgba(13, 202, 240, 0.15); border-color: rgba(13, 202, 240, 0.4);">
-                    <i class="fab fa-twitter"></i>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/?text={{ urlencode($blog->title . ' ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="rounded-circle border d-flex align-items-center justify-content-center text-decoration-none transition" title="WhatsApp" style="width: 36px; height: 36px; background-color: rgba(37, 211, 102, 0.12); border-color: rgba(37, 211, 102, 0.4); color: #25D366;">
+                    <i class="fab fa-whatsapp" style="font-size: 16px;"></i>
                 </a>
             </div>
         </div>
 
     </div>
 </article>
-
-<!-- Related Articles & Featured Flacons -->
-@if($relatedBlogs->count() > 0)
-    <section class="py-5" style="background-color: #FAF7F2; border-top: 1px solid #E8E0DA;">
-        <div class="container px-3 px-lg-4">
-            <div class="text-center mb-4">
-                <span class="d-block fw-semibold" style="font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #541B29;">FURTHER READING</span>
-                <h3 class="font-serif fs-3 mt-1 mb-0" style="color: #211D1E;">Related Fragrance Essays</h3>
-            </div>
-
-            <div class="row row-cols-1 row-cols-md-3 g-3">
-                @foreach($relatedBlogs as $rBlog)
-                    <div class="col">
-                        <div class="rounded-3 p-4 h-100 transition shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
-                            <span class="d-block text-uppercase tracking-wider mb-2 fw-semibold" style="font-size: 10px; color: #541B29;">{{ $rBlog->category_name ?? 'Fragrance' }}</span>
-                            <h4 class="font-serif fs-6 mb-2">
-                                <a href="{{ route('blogs.show', $rBlog->slug) }}" class="text-decoration-none transition" style="color: #211D1E !important;">{{ $rBlog->title }}</a>
-                            </h4>
-                            <p class="text-xs mb-0" style="color: #514744;">
-                                {{ $rBlog->summary ?? \Illuminate\Support\Str::limit(strip_tags($rBlog->content), 80) }}
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-@endif
 
 @endsection

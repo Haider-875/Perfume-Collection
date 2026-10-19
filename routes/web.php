@@ -50,12 +50,12 @@ Route::get('/collections/{collection}/products/{slug}', [ProductController::clas
 Route::post('/perfume/{id}/review', [ProductController::class, 'storeReview'])->name('reviews.store');
 
 // Fragrance Chronicles (Blogs)
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::redirect('/blogs', '/')->name('blogs.index');
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 
 // Brand Heritage & Concierge Pages
 Route::get('/about', [PageController::class, 'about'])->name('pages.about');
-Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
+Route::redirect('/contact', '/')->name('pages.contact');
 Route::get('/collaborations', [PageController::class, 'collaborations'])->name('pages.collaborations');
 Route::get('/faq', [PageController::class, 'faq'])->name('pages.faq');
 Route::get('/search', [PageController::class, 'search'])->name('pages.search');

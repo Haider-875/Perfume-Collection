@@ -91,7 +91,7 @@
                     </div>
                     <div class="swiper-slide">
                         <i class="fas fa-hand-holding-dollar text-gold"></i>
-                        <span>Cash on Delivery (COD) Available Across All Cities in Pakistan</span>
+                        <span>Cash on Delivery Available Across All Cities in Pakistan</span>
                     </div>
                     <div class="swiper-slide">
                         <i class="fab fa-whatsapp text-success"></i>
@@ -124,7 +124,7 @@
                 <div class="d-flex align-items-center gap-3 flex-shrink-0 site-brand-wrapper">
                     <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 gap-sm-3 text-decoration-none site-brand-link">
                         <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
-                            class="img-fluid site-logo-img" style="height: 2.75rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(133,16,41,0.35));">
+                            class="img-fluid site-logo-img" style="height: 3.25rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(133,16,41,0.35));">
                         <div class="d-none d-lg-flex flex-column site-brand-text">
                             <span class="font-hero text-uppercase lh-1 gold-gradient-text" style="font-size: 1.15rem; letter-spacing: 0.14em; font-weight: 400; color: #211D1E !important;">PERFUMES
                                 <br> COLLECTION</span>
@@ -296,8 +296,6 @@
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Unisex & Pure Oud</a>
                     <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
                         class="d-block py-1 fw-semibold text-decoration-none" style="color: #541B29;">Bundles & Discovery Sets (Save 25%)</a>
-                    <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                        class="d-block py-1 text-decoration-none" style="color: #6B605B;">Fragrance Chronicles</a>
                 </div>
             </div>
 
@@ -306,20 +304,10 @@
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Bundles & Discovery Sets
             </a>
-            <a href="{{ route('blogs.index') }}" @click="mobileMenuOpen = false"
-                class="font-hero fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
-                Olfactory Journal
-            </a>
             <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false"
                 class="font-hero fs-5 py-2 text-decoration-none"
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Our Artisanal Craft
-            </a>
-            <a href="{{ route('pages.contact') }}" @click="mobileMenuOpen = false"
-                class="font-hero fs-5 py-2 text-decoration-none"
-                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
-                Contact & VIP Concierge
             </a>
         </div>
 
@@ -402,8 +390,6 @@
                     <ul class="list-unstyled vstack gap-2 mb-0" style="font-size: 0.76rem;">
                         <li><a href="{{ route('pages.about') }}"
                                 class="text-decoration-none transition-all" style="color: #6B605B;">Our Artisanal Craft</a></li>
-                        <li><a href="{{ route('pages.contact') }}"
-                                class="text-decoration-none transition-all" style="color: #6B605B;">Contact Scent Concierge</a></li>
                         <li><a href="{{ route('pages.faq') }}"
                                 class="text-decoration-none transition-all" style="color: #6B605B;">Frequently Asked Questions</a></li>
                         <li><a href="{{ route('policies.shipping') }}"
@@ -423,7 +409,7 @@
                         <p class="fw-light mb-0" style="font-size: 0.76rem; color: #6B605B;">
                             An exclusive patronage for discerning fragrance connoisseurs across Pakistan. Enjoy handcrafted private reserve formulations, bespoke scent consultations, and complimentary nationwide express courier delivery.
                         </p>
-                        <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 0.75rem; color: #541B29;">
+                        <div class="d-flex align-items-center justify-content-center gap-2 pt-1 text-center w-100" style="font-size: 0.75rem; color: #541B29;">
                             <i class="fas fa-gem" style="color: #9E7D3B;"></i>
                             <span class="text-uppercase tracking-wider fw-medium">Handcrafted in Pakistan</span>
                         </div>
