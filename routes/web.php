@@ -239,6 +239,31 @@ Route::get('/sync-hero-slides', function () {
     ]);
 });
 
+Route::get('/seed-bundles', function (\Illuminate\Http\Request $request) {
+    try {
+        $seeder = new \Database\Seeders\BundleSeeder();
+        $seeder->run();
+        $bundles = \App\Models\Bundle::with('items.product')->get();
+        return response()->json([
+            'status' => 'success',
+            'environment' => 'Wasmer / Serverless',
+            'count' => $bundles->count(),
+            'bundles' => $bundles->map(fn($b) => [
+                'name' => $b->name,
+                'slug' => $b->slug,
+                'price' => $b->bundle_price,
+                'items_count' => $b->items->count(),
+            ]),
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'environment' => 'Wasmer / Serverless',
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+});
+
 Route::get('/seed-production-catalog', function (\Illuminate\Http\Request $request) {
     $executedSteps = [];
     $startTime = microtime(true);

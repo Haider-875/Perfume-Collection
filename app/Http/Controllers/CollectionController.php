@@ -16,6 +16,16 @@ class CollectionController extends Controller
     {
         // Special case: Bundles page
         if ($slug === 'bundles') {
+            // Auto-heal / Ensure standard 10 luxury bundles exist (vital for serverless / Wasmer deployments)
+            if (Bundle::where('slug', 'imperial-leather-tobacco-duo')->doesntExist() || Bundle::count() < 10) {
+                try {
+                    $seeder = new \Database\Seeders\BundleSeeder();
+                    $seeder->run();
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::warning('Automatic BundleSeeder execution notice: ' . $e->getMessage());
+                }
+            }
+
             $bundles = Bundle::where('is_active', true)
                 ->with([
                     'items.product.variants',

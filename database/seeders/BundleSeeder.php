@@ -15,13 +15,66 @@ class BundleSeeder extends Seeder
      */
     public function run()
     {
-        // 1. Clean existing bundles and bundle items
-        BundleItem::truncate();
-        Bundle::truncate();
+        // 1. Clean existing bundles and bundle items safely (foreign key safe across MySQL & SQLite)
+        try {
+            BundleItem::query()->delete();
+            Bundle::query()->delete();
+        } catch (\Throwable $e) {
+            // fallback
+        }
 
-        // 2. Fetch all active perfumes keyed by SKU and slug for reliable mapping
-        $productsBySku = Product::where('is_active', true)->get()->keyBy('sku');
-        $productsBySlug = Product::where('is_active', true)->get()->keyBy('slug');
+        if (\Illuminate\Support\Facades\DB::getDriverName() === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = OFF;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
+
+        try {
+            BundleItem::truncate();
+            Bundle::truncate();
+        } catch (\Throwable $e) {
+            BundleItem::query()->delete();
+            Bundle::query()->delete();
+        }
+
+        if (\Illuminate\Support\Facades\DB::getDriverName() === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = ON;');
+        } else {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
+
+        // 2. Fetch all perfumes keyed by SKU and slug for reliable mapping
+        $productsBySku = Product::all()->keyBy(fn($p) => strtoupper(trim($p->sku ?? '')));
+        $productsBySlug = Product::all()->keyBy(fn($p) => strtolower(trim($p->slug ?? '')));
+
+        $skuToSlugMap = [
+            'RVH-001' => 'lattafa-khamrah-sweet-spice',
+            'RVH-002' => 'ysl-libre-french-freedom',
+            'RVH-003' => 'bdk-gris-charnel-spiced-fig',
+            'RVH-004' => 'my-way-my-path',
+            'RVH-005' => 'afnan-supremacy-silver-aventus',
+            'RVH-006' => 'gucci-bloom-floral-garden',
+            'RVH-007' => '9pm-night-out',
+            'RVH-008' => 'arabian-sea-bleu-de-chanel',
+            'RVH-009' => 'azzaro-most-wanted-wanted-night',
+            'RVH-010' => 'ombre-leather-the-leather',
+            'RVH-011' => 'tuscan-leather-leather-temptation',
+            'RVH-012' => 'baccarat-rouge-540-crystal-amber',
+            'RVH-013' => 'black-opium-charm',
+            'RVH-014' => 'lost-cherry-cherry-temptation',
+            'RVH-015' => 'stronger-with-you-intensely-sweet-leather',
+            'RVH-016' => 'bombshell-sensual-bloom',
+            'RVH-017' => 'xerjoff-naxos-royal-honey',
+            'RVH-018' => 'creed-silver-mountain-water-silver-stream',
+            'RVH-019' => 'white-oud-white-agarwood',
+            'RVH-020' => 'aqua-di-gio-marine-breeze',
+            'RVH-021' => 'erba-pura-roman-memory',
+            'RVH-022' => 'hawas-ice-ice-heaven',
+            'RVH-023' => 'velvet-musk-royal-santal',
+            'RVH-024' => 'sauvage-elixir-desert-phantom',
+            'RVH-025' => 'sovereign-smoke-oud-wood',
+            'RVH-026' => '91-gold-edition-all-exclusive',
+        ];
 
         $bundlesData = [
             [
@@ -141,8 +194,15 @@ class BundleSeeder extends Seeder
             $matchedProducts = [];
 
             foreach ($data['skus'] as $sku) {
-                if (isset($productsBySku[$sku])) {
-                    $prod = $productsBySku[$sku];
+                $cleanSku = strtoupper(trim($sku));
+                $prod = $productsBySku[$cleanSku] ?? null;
+
+                if (!$prod && isset($skuToSlugMap[$cleanSku])) {
+                    $expectedSlug = $skuToSlugMap[$cleanSku];
+                    $prod = $productsBySlug[$expectedSlug] ?? null;
+                }
+
+                if ($prod) {
                     $matchedProducts[] = $prod;
                     $totalOrigPrice += (float) ($prod->price ?: 2500);
                 }

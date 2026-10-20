@@ -10,7 +10,11 @@ class RealisticReviewsSeeder extends Seeder
 {
     public function run()
     {
-        Review::truncate();
+        try {
+            Review::query()->delete();
+        } catch (\Throwable $e) {
+            Review::truncate();
+        }
 
         $products = Product::all();
         if ($products->isEmpty()) {
