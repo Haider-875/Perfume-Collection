@@ -98,6 +98,8 @@
     cursor: pointer;
     transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(84, 27, 41, 0.08);
 }
 .flacon-clickable:hover {
     transform: translateY(-2px);
@@ -105,22 +107,40 @@
     background: linear-gradient(135deg, #FFFFFF 0%, #FAF5EE 100%) !important;
     box-shadow: 0 4px 14px rgba(84, 27, 41, 0.1) !important;
 }
+.flacon-clickable:active {
+    transform: scale(0.985);
+}
 .badge-price-tap {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: rgba(84, 27, 41, 0.05);
+    background: rgba(84, 27, 41, 0.06);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1px solid rgba(84, 27, 41, 0.08);
 }
 .flacon-clickable:hover .badge-price-tap {
     background: #541B29;
+    border-color: #541B29;
 }
 .flacon-clickable:hover .badge-price-tap i {
     -webkit-text-fill-color: #FFFFFF !important;
     color: #FFFFFF !important;
+}
+.flacon-direct-link {
+    cursor: pointer;
+    z-index: 2;
+}
+.flacon-direct-link:hover {
+    background: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+}
+.flacon-direct-link:hover i {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
 
 /* Flacon Price Popup Modal - Product Page Typography & Generous Spacing */
@@ -611,19 +631,32 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div 
                                                         class="bundle-flacon-card d-flex align-items-center gap-2 p-1.5 flacon-clickable" 
-                                                        style="border-radius: 8px;"
+                                                        style="border-radius: 8px; cursor: pointer; touch-action: manipulation;"
+                                                        role="button"
+                                                        tabindex="0"
                                                         data-flacon="{{ json_encode($prodPayload) }}"
-                                                        onclick="openFlaconPriceModal(JSON.parse(this.dataset.flacon))"
-                                                        title="Click to view single bottle prices (30ml, 50ml, 100ml)"
+                                                        data-url="{{ route('shop.show', $bProd->slug) }}"
+                                                        onclick="handleFlaconCardClick(this, event)"
+                                                        onkeydown="if(event.key === 'Enter' || event.key === ' ') { handleFlaconCardClick(this, event); }"
+                                                        title="View {{ $bProd->name }} details & prices"
                                                     >
-                                                        <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0 rounded-1" style="width: 30px; height: 30px; background: #FAF7F2;">
-                                                        <div class="text-truncate flex-grow-1">
+                                                        <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0 rounded-1" style="width: 32px; height: 32px; background: #FAF7F2; pointer-events: none;">
+                                                        <div class="text-truncate flex-grow-1" style="pointer-events: none;">
                                                             <div class="fw-medium text-truncate" style="color: #211D1E; font-size: 10.5px; line-height: 1.25;">{{ $bProd->name }}</div>
                                                             <div style="font-size: 9px; font-weight: 400; color: #786C67; line-height: 1.2;">{{ $bProd->volume_ml ?? 50 }}ml &bull; Extrait de Parfum</div>
                                                         </div>
-                                                        <span class="badge-price-tap flex-shrink-0" title="View individual bottle prices">
-                                                            <i class="fas fa-tag gradient-gold-icon" style="font-size: 9.5px;"></i>
-                                                        </span>
+                                                        <div class="d-flex align-items-center gap-1 flex-shrink-0">
+                                                            <span class="badge-price-tap" title="View standalone bottle prices" style="pointer-events: none;">
+                                                                <i class="fas fa-tag gradient-gold-icon" style="font-size: 9.5px;"></i>
+                                                            </span>
+                                                            <a href="{{ route('shop.show', $bProd->slug) }}" 
+                                                               class="badge-price-tap flacon-direct-link" 
+                                                               onclick="event.stopPropagation();" 
+                                                               title="Open {{ $bProd->name }} page"
+                                                               aria-label="Open perfume product page">
+                                                                <i class="fas fa-arrow-up-right-from-square" style="font-size: 8.5px; color: #541B29;"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif
@@ -673,19 +706,32 @@
                                             <div class="col-12 col-sm-6">
                                                 <div 
                                                     class="bundle-flacon-card d-flex align-items-center gap-2 p-1.5 flacon-clickable" 
-                                                    style="border-radius: 8px;"
+                                                    style="border-radius: 8px; cursor: pointer; touch-action: manipulation;"
+                                                    role="button"
+                                                    tabindex="0"
                                                     data-flacon="{{ json_encode($prodPayload) }}"
-                                                    onclick="openFlaconPriceModal(JSON.parse(this.dataset.flacon))"
-                                                    title="Click to view single bottle prices (30ml, 50ml, 100ml)"
+                                                    data-url="{{ route('shop.show', $bProd->slug) }}"
+                                                    onclick="handleFlaconCardClick(this, event)"
+                                                    onkeydown="if(event.key === 'Enter' || event.key === ' ') { handleFlaconCardClick(this, event); }"
+                                                    title="View {{ $bProd->name }} details & prices"
                                                 >
-                                                    <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0 rounded-1" style="width: 30px; height: 30px; background: #FAF7F2;">
-                                                    <div class="text-truncate flex-grow-1">
+                                                    <img src="{{ $bProd->primary_image_url }}" alt="{{ $bProd->name }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';" class="img-fluid object-fit-contain flex-shrink-0 rounded-1" style="width: 32px; height: 32px; background: #FAF7F2; pointer-events: none;">
+                                                    <div class="text-truncate flex-grow-1" style="pointer-events: none;">
                                                         <div class="fw-medium text-truncate" style="color: #211D1E; font-size: 10.5px; line-height: 1.25;">{{ $bProd->name }}</div>
                                                         <div style="font-size: 9px; font-weight: 400; color: #786C67; line-height: 1.2;">{{ $bProd->volume_ml ?? 50 }}ml &bull; Extrait de Parfum</div>
                                                     </div>
-                                                    <span class="badge-price-tap flex-shrink-0" title="View individual bottle prices">
-                                                        <i class="fas fa-tag gradient-gold-icon" style="font-size: 9.5px;"></i>
-                                                    </span>
+                                                    <div class="d-flex align-items-center gap-1 flex-shrink-0">
+                                                        <span class="badge-price-tap" title="View standalone bottle prices" style="pointer-events: none;">
+                                                            <i class="fas fa-tag gradient-gold-icon" style="font-size: 9.5px;"></i>
+                                                        </span>
+                                                        <a href="{{ route('shop.show', $bProd->slug) }}" 
+                                                           class="badge-price-tap flacon-direct-link" 
+                                                           onclick="event.stopPropagation();" 
+                                                           title="Open {{ $bProd->name }} page"
+                                                           aria-label="Open perfume product page">
+                                                            <i class="fas fa-arrow-up-right-from-square" style="font-size: 8.5px; color: #541B29;"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -845,55 +891,110 @@
             <!-- Dynamically populated cards for 30ml, 50ml, 100ml -->
         </div>
 
-        <!-- Single Action Button (VIEW FULL DETAILS full width, icons removed, close removed) -->
         <div class="mt-2.5">
-            <a id="fModalLink" href="#" class="btn-bundle-bag w-100 text-center text-decoration-none py-2.5 text-uppercase fw-semibold d-block" style="font-size: 11px; letter-spacing: 0.08em; border-radius: 8px;">
-                VIEW FULL DETAILS
+            <a id="fModalLink" href="#" class="btn-bundle-bag w-100 text-center text-decoration-none py-2.5 text-uppercase fw-semibold d-flex align-items-center justify-content-center gap-2" style="font-size: 11px; letter-spacing: 0.08em; border-radius: 8px;">
+                <span>VIEW FULL PERFUME DETAILS & BOTTLE SIZES</span>
+                <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
             </a>
         </div>
     </div>
 </div>
 
 <script>
+function handleFlaconCardClick(element, event) {
+    if (event) {
+        if (event.target && event.target.closest && event.target.closest('.flacon-direct-link')) {
+            return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    try {
+        const raw = element.getAttribute('data-flacon');
+        let data = null;
+        if (raw) {
+            data = typeof raw === 'string' ? JSON.parse(raw) : raw;
+        } else if (element.dataset && element.dataset.flacon) {
+            data = JSON.parse(element.dataset.flacon);
+        }
+        
+        if (data) {
+            openFlaconPriceModal(data);
+            return;
+        }
+    } catch (e) {
+        console.warn('Flacon data parse error:', e);
+    }
+    
+    const url = element.getAttribute('data-url') || (element.dataset ? element.dataset.url : null);
+    if (url && url !== '#') {
+        window.location.href = url;
+    }
+}
+
 function openFlaconPriceModal(data) {
     if (!data) return;
     const modal = document.getElementById('flaconPriceModal');
-    if (!modal) return;
+    if (!modal) {
+        if (data.url && data.url !== '#') {
+            window.location.href = data.url;
+        }
+        return;
+    }
     
-    document.getElementById('fModalName').textContent = data.name || '';
-    document.getElementById('fModalTagline').textContent = data.tagline || 'Haute Parfumerie Impression';
-    document.getElementById('fModalImage').src = data.image || '';
-    document.getElementById('fModalImage').alt = data.name || 'Perfume Flacon';
-    document.getElementById('fModalConcentration').textContent = data.concentration || 'Extrait de Parfum';
-    document.getElementById('fModalBundleName').textContent = data.bundle_name || 'this coffret';
-    document.getElementById('fModalBundlePrice').textContent = data.bundle_price || '';
-    document.getElementById('fModalLink').href = data.url || '#';
+    const setSafeText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text || '';
+    };
+
+    setSafeText('fModalName', data.name);
+    setSafeText('fModalTagline', data.tagline || 'Haute Parfumerie Impression');
+    
+    const imgEl = document.getElementById('fModalImage');
+    if (imgEl) {
+        imgEl.src = data.image || '';
+        imgEl.alt = data.name || 'Perfume Flacon';
+    }
+    
+    setSafeText('fModalConcentration', data.concentration || 'Extrait de Parfum');
+    setSafeText('fModalBundleName', data.bundle_name || 'this coffret');
+    setSafeText('fModalBundlePrice', data.bundle_price || '');
+    
+    const linkEl = document.getElementById('fModalLink');
+    if (linkEl) {
+        linkEl.href = data.url || '#';
+    }
     
     const sizesGrid = document.getElementById('fModalSizesGrid');
-    sizesGrid.innerHTML = '';
-    
-    if (Array.isArray(data.sizes) && data.sizes.length > 0) {
-        data.sizes.forEach(function(s) {
-            const isCoffret = !!s.is_coffret_size;
-            let tierName = 'Flacon';
-            if (s.size.includes('30')) tierName = 'Travel Size';
-            else if (s.size.includes('50')) tierName = 'Signature';
-            else if (s.size.includes('100')) tierName = 'Grand Flacon';
-            
-            const col = document.createElement('div');
-            col.className = data.sizes.length === 2 ? 'col-6' : 'col-4';
-            col.innerHTML = `
-                <div class="size-card text-center p-2 rounded-3 h-100 ${isCoffret ? 'is-coffret-highlight' : ''}">
-                    ${isCoffret 
-                        ? '<span class="coffret-chip">Coffret Size</span>' 
-                        : `<span class="size-tier-chip">${tierName}</span>`}
-                    <div class="size-volume mt-1.5">${s.size}</div>
-                    <div class="size-price my-0.5">${s.formatted}</div>
-                    <div class="size-label">${isCoffret ? 'In this Bundle' : 'Single Bottle'}</div>
-                </div>
-            `;
-            sizesGrid.appendChild(col);
-        });
+    if (sizesGrid) {
+        sizesGrid.innerHTML = '';
+        if (Array.isArray(data.sizes) && data.sizes.length > 0) {
+            data.sizes.forEach(function(s) {
+                const isCoffret = !!s.is_coffret_size;
+                let tierName = 'Flacon';
+                if (s.size.includes('30')) tierName = 'Travel Size';
+                else if (s.size.includes('50')) tierName = 'Signature';
+                else if (s.size.includes('100')) tierName = 'Grand Flacon';
+                
+                const col = document.createElement('div');
+                col.className = data.sizes.length === 2 ? 'col-6' : 'col-4';
+                col.innerHTML = `
+                    <div class="size-card text-center p-2 rounded-3 h-100 ${isCoffret ? 'is-coffret-highlight' : ''}"
+                         style="cursor: pointer; touch-action: manipulation;"
+                         onclick="window.location.href='${data.url || '#'}'"
+                         title="View ${s.size} single bottle on product page">
+                        ${isCoffret 
+                            ? '<span class="coffret-chip">Coffret Size</span>' 
+                            : `<span class="size-tier-chip">${tierName}</span>`}
+                        <div class="size-volume mt-1.5">${s.size}</div>
+                        <div class="size-price my-0.5">${s.formatted}</div>
+                        <div class="size-label">${isCoffret ? 'In this Bundle' : 'Single Bottle'}</div>
+                    </div>
+                `;
+                sizesGrid.appendChild(col);
+            });
+        }
     }
     
     modal.classList.remove('d-none');
