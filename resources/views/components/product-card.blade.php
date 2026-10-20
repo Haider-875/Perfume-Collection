@@ -84,12 +84,18 @@
         </h3>
 
         <!-- Unique Luxury Price & Volume Presentation (Center Aligned, Clear & Prominent) -->
-        <div class="product-card-pricing my-1.5 d-flex align-items-center justify-content-center gap-2 flex-wrap">
-            <span class="product-price-main price-gradient-luxury fw-bold font-serif" style="font-size: 1.18rem !important; line-height: 1.2; letter-spacing: -0.01em;">
+        <div class="product-card-pricing my-1.5 d-flex align-items-center justify-content-center gap-1.5 flex-wrap">
+            @if($product->compare_at_price && $product->compare_at_price > $product->effective_price)
+                <span class="product-price-compare text-decoration-line-through text-nowrap" 
+                      style="color: #8C827A; font-size: 0.85rem; font-weight: 400; opacity: 0.9;">
+                    Rs. {{ number_format($product->compare_at_price, 0) }}
+                </span>
+            @endif
+            <span class="product-price-main price-gradient-luxury fw-bold font-serif text-nowrap" style="font-size: 1.15rem !important; line-height: 1.2; letter-spacing: -0.01em;">
                 {{ $product->formatted_effective_price }}
             </span>
             <span class="product-volume-pill text-uppercase fw-semibold d-inline-flex align-items-center justify-content-center shadow-2xs"
-                  style="font-size: 9.5px; color: #541B29; background-color: #FAF4EB; border: 1px solid #EAD8B8; border-radius: 999px; padding: 2.5px 8px; letter-spacing: 0.05em; line-height: 1.15; font-family: 'Poppins', sans-serif;">
+                  style="font-size: 9.5px; color: #541B29; background-color: #FAF4EB; border: 1px solid #EAD8B8; border-radius: 999px; padding: 2px 7px; letter-spacing: 0.04em; line-height: 1.15; font-family: 'Poppins', sans-serif;">
                 {{ $product->volume_ml ?: 50 }}ml
             </span>
         </div>

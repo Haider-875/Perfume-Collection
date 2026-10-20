@@ -976,10 +976,9 @@
                             prevEl: prevEl,
                         },
                         breakpoints: {
-                            340: { slidesPerView: 1.15, spaceBetween: 12 },
-                            400: { slidesPerView: 1.35, spaceBetween: 14 },
-                            480: { slidesPerView: 1.8, spaceBetween: 16 },
-                            576: { slidesPerView: 2.2, spaceBetween: 18 },
+                            320: { slidesPerView: 2.05, spaceBetween: 10 },
+                            480: { slidesPerView: 2.25, spaceBetween: 12 },
+                            576: { slidesPerView: 2.5, spaceBetween: 16 },
                             768: { slidesPerView: 3, spaceBetween: 20 },
                             1024: { slidesPerView: 4, spaceBetween: 24 }
                         }
