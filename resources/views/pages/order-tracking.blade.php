@@ -191,18 +191,28 @@
                                     Delivery Address
                                 </h4>
                                 
-                                <div class="fw-bold mb-0.5" style="font-size: 13.5px; color: #211D1E;">
+                                <div class="fw-bold mb-1" style="font-size: 14px; color: #211D1E;">
                                     {{ $order->customer_name }}
                                 </div>
                                 
-                                <div class="d-flex align-items-start gap-2.5" style="font-size: 12px; color: #6B605B; line-height: 1.7;">
-                                    <i class="fas fa-location-dot mt-1 flex-shrink-0" style="color: #541B29; font-size: 12px;"></i>
-                                    <span>{{ $order->shipping_address }}{{ $order->area ? ', ' . $order->area : '' }}, {{ $order->city }}, {{ $order->province }}</span>
+                                <div class="d-flex align-items-start" style="font-size: 12.5px; color: #6B605B; line-height: 1.7;">
+                                    <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-circle me-3 mt-0.5 shadow-xs" 
+                                          style="width: 30px; height: 30px; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">
+                                        <i class="fas fa-location-dot" style="font-size: 12px; color: #541B29;"></i>
+                                    </span>
+                                    <span class="pt-0.5 flex-grow-1" style="word-break: break-word;">
+                                        {{ $order->shipping_address }}{{ $order->area ? ', ' . $order->area : '' }}, {{ $order->city }}, {{ $order->province }}
+                                    </span>
                                 </div>
 
-                                <div class="d-flex align-items-center gap-2.5 pt-2 mt-auto" style="border-top: 1px solid #E8E0DA; font-size: 12px;">
-                                    <i class="fas fa-phone flex-shrink-0" style="color: #541B29; font-size: 11px;"></i>
-                                    <span class="font-mono fw-bold" style="color: #541B29;">{{ $order->customer_phone }}</span>
+                                <div class="d-flex align-items-center pt-2.5 mt-auto" style="border-top: 1px solid #E8E0DA; font-size: 12.5px;">
+                                    <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-circle me-3 shadow-xs" 
+                                          style="width: 30px; height: 30px; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">
+                                        <i class="fas fa-phone" style="font-size: 11px; color: #541B29;"></i>
+                                    </span>
+                                    <span class="font-mono fw-bold pt-0.5" style="color: #541B29; font-size: 13.5px;">
+                                        {{ $order->customer_phone }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -243,17 +253,17 @@
                         </div>
                     </div>
 
-                    <!-- Items Ordered in this Parcel -->
+                    <!-- Items Ordered in this Parcel (Spacious, Zero-Cutoff on Mobile) -->
                     <div>
                         <h4 class="mb-3 fw-semibold" style="font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #541B29;">Items in this Parcel</h4>
                         <div class="rounded-3 overflow-hidden" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                             @foreach($order->items as $item)
-                                <div class="p-3.5 p-md-4 d-flex align-items-center justify-content-between gap-3 {{ !$loop->last ? 'border-bottom' : '' }}" style="{{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
-                                    <div class="min-w-0">
-                                        <h5 class="font-serif fw-semibold mb-1 text-truncate" style="font-size: 14px; color: #211D1E; line-height: 1.45;">{{ $item->product_name }}</h5>
+                                <div class="p-3.5 p-sm-4 d-flex align-items-start justify-content-between gap-3 {{ !$loop->last ? 'border-bottom' : '' }}" style="{{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
+                                    <div class="flex-grow-1 min-w-0 pe-2">
+                                        <h5 class="font-serif fw-semibold mb-1" style="font-size: 14.5px; color: #211D1E; line-height: 1.4; word-break: break-word;">{{ $item->product_name }}</h5>
                                         <p class="mb-0" style="font-size: 12px; color: #6B605B; line-height: 1.55;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
                                     </div>
-                                    <div class="text-end font-mono fw-bold flex-shrink-0" style="font-size: 13.5px; color: #541B29 !important;">
+                                    <div class="text-end font-mono fw-bold flex-shrink-0 text-nowrap ps-2 pt-0.5" style="font-size: 14px; color: #541B29 !important; white-space: nowrap;">
                                         Rs. {{ number_format($item->total, 0) }}
                                     </div>
                                 </div>
@@ -285,7 +295,7 @@
         @php
             $storePhone = settings('site_phone', '+92 336 3685732');
         @endphp
-        <div class="text-center p-4 p-sm-4.5 p-md-5 rounded-4 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+        <div class="text-center p-4 p-sm-4.5 p-md-5 rounded-4 shadow-sm mb-4" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
             <h4 class="font-serif fw-bold mb-2" style="font-size: 16px; color: #211D1E; letter-spacing: 0.01em;">Need Assistance With Your Delivery?</h4>
             <p class="mx-auto mb-3.5" style="max-width: 500px; font-size: 0.88rem; color: #6B605B; line-height: 1.75;">
                 Our concierge team is available Mon–Sat from 10:00 AM to 10:00 PM PKT for order status inquiries, address corrections, or dispatch updates.
@@ -303,6 +313,17 @@
                     <span>{{ $storePhone }}</span>
                 </a>
             </div>
+        </div>
+
+        <!-- Continue Shopping Luxury Button (Arrow Removed) -->
+        <div class="text-center pt-2 pb-3">
+            <a href="{{ route('collections.show', 'all') }}" 
+               class="fw-bold text-uppercase tracking-wider text-decoration-none d-inline-flex align-items-center justify-content-center shadow-xs transition" 
+               style="height: 48px; min-width: 260px; padding: 0 32px; font-size: 12px; letter-spacing: 0.12em; background-color: #FAF7F2; border: 1.5px solid #541B29; color: #541B29; border-radius: 8px;"
+               onmouseover="this.style.background='linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%)'; this.style.color='#FFFFFF'; this.style.borderColor='transparent';"
+               onmouseout="this.style.background='#FAF7F2'; this.style.color='#541B29'; this.style.borderColor='#541B29';">
+                <span>Continue Shopping</span>
+            </a>
         </div>
     </div>
 </div>
