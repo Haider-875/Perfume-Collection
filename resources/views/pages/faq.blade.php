@@ -10,8 +10,7 @@
     <div class="container px-3 px-lg-4 position-relative z-1">
         <!-- Breadcrumbs Component -->
         <x-breadcrumbs :items="[
-            ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Client Care & FAQ']
+            ['label' => 'Home', 'url' => route('home')]
         ]" />
 
         <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #541B29;">CONCIERGE INQUIRIES</span>
@@ -64,9 +63,13 @@
             <p class="text-xs mx-auto mb-0" style="max-width: 512px; color: #6B605B;">
                 Our Private Concierge advisors are available 7 days a week on WhatsApp to assist with bridal gifting, corporate orders, and personal scent consultations.
             </p>
-            <div class="d-flex flex-wrap justify-content-center gap-3 pt-2">
-                <a href="https://wa.me/923363685732?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" target="_blank" class="btn-whatsapp py-3 px-4 text-xs text-uppercase tracking-wider text-decoration-none rounded-3">
-                    <i class="fab fa-whatsapp me-2"></i> CHAT WITH CONCIERGE (+92 336 3685732)
+            <div class="d-flex flex-wrap justify-content-center gap-3 pt-1">
+                <a href="https://wa.me/{{ $whatsappNum ?? '923363685732' }}?text={{ urlencode('Salam! I have a question regarding Perfumes Collection.') }}" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="btn-whatsapp d-inline-flex align-items-center justify-content-center gap-2 px-3.5 py-2 text-decoration-none rounded-pill shadow-sm"
+                   style="min-height: 38px; height: 38px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important;">
+                    <i class="fab fa-whatsapp fs-6"></i>
+                    <span>CHAT WITH CONCIERGE</span>
                 </a>
             </div>
         </div>
