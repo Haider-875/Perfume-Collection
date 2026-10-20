@@ -671,72 +671,40 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null, btnEl
 };
 
 window.addBundleToCart = function(bundleId, btnElement = null) {
-    const originalHtml = btnElement ? btnElement.innerHTML : null;
-    if (btnElement) {
-        btnElement.disabled = true;
-        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-white"></i> <span>ADDING...</span>';
-    }
-
-    fetch('/cart/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': getCsrfToken()
-        },
-        body: JSON.stringify({ bundle_id: bundleId, quantity: 1 })
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-    })
-    .then(data => {
-        if (typeof renderCartUI === 'function') {
-            renderCartUI(data);
-        }
-        window.openCartDrawer();
-
-        document.querySelectorAll('.cart-count, #cartCountBadge, #headerCartCount').forEach(el => {
-            el.textContent = data.count || (parseInt(el.textContent || '0') + 1);
-            el.style.display = 'inline-flex';
-        });
-
-        if (btnElement) {
-            btnElement.innerHTML = '<i class="fas fa-check text-white"></i> <span>ADDED!</span>';
-            setTimeout(() => {
-                btnElement.disabled = false;
-                btnElement.innerHTML = originalHtml;
-            }, 1800);
-        }
-    })
-    .catch(err => {
-        console.error('Error adding bundle:', err);
-        if (btnElement) {
-            btnElement.disabled = false;
-            btnElement.innerHTML = originalHtml;
-        }
-        alert('Could not add bundle to bag. Please try again.');
-    });
+    window.buyBundleNow(bundleId, btnElement);
 };
 
 window.buyBundleNow = function(bundleId, btnElement = null) {
     if (btnElement) {
         btnElement.disabled = true;
-        btnElement.innerHTML = '<span>PROCESSING...</span>';
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-white"></i> <span>CHECKOUT...</span>';
     }
-    fetch('/cart/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': getCsrfToken()
-        },
-        body: JSON.stringify({ bundle_id: bundleId, quantity: 1 })
-    })
-    .then(() => {
-        window.location.href = '/checkout';
-    })
-    .catch(() => {
-        window.location.href = '/checkout';
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/cart/add';
+    form.style.display = 'none';
+
+    const csrf = (typeof getCsrfToken === 'function' ? getCsrfToken() : '') ||
+                 document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+    const fields = [
+        { name: '_token', value: csrf },
+        { name: 'bundle_id', value: bundleId },
+        { name: 'quantity', value: 1 },
+        { name: 'redirect', value: 'checkout' }
+    ];
+
+    fields.forEach(function(f) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = f.name;
+        input.value = f.value;
+        form.appendChild(input);
     });
+
+    document.body.appendChild(form);
+    form.submit();
 };
 
 window.buyProductNow = function(productId, quantity = 1, variantId = null) {

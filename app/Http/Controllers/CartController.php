@@ -65,6 +65,10 @@ class CartController extends Controller
 
         $this->cartService->addItem($cart, $productId, $variantId, $bundleId, $quantity);
 
+        if ($request->input('redirect') === 'checkout' || $request->boolean('buy_now') || (!$request->wantsJson() && !$request->ajax())) {
+            return redirect()->to('/checkout', 303);
+        }
+
         return $this->getDrawer($request);
     }
 

@@ -36,6 +36,7 @@
     letter-spacing: 0.04em;
     box-shadow: 0 2px 6px rgba(84, 27, 41, 0.04);
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 .btn-view-inside:hover,
 .btn-view-inside:active {
@@ -46,6 +47,41 @@
 .btn-view-inside.is-open {
     background: linear-gradient(135deg, #F5EBEF 0%, #FAF4EB 100%);
     border-color: #780D24 !important;
+}
+
+/* Included Items Preview: Always visible on Desktop (>=992px), Collapsible on Mobile (<992px) */
+@media (min-width: 992px) {
+    .btn-view-inside {
+        display: none !important;
+    }
+    .bundle-included-wrap {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+    }
+}
+@media (max-width: 991.98px) {
+    .btn-view-inside {
+        display: flex !important;
+    }
+    .bundle-included-wrap {
+        display: none;
+    }
+    .bundle-included-wrap.is-expanded {
+        display: block !important;
+        animation: bundleFadeSlide 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+}
+@keyframes bundleFadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .badge-pill-chip {
     width: 22px;
@@ -453,12 +489,12 @@
                         ? $bundle->items->count() 
                         : (($bundle->products && $bundle->products->count()) ? $bundle->products->count() : 2);
                 @endphp
-                <div class="bundle-card-master p-3 p-md-4 p-lg-5" x-data="{ openDetails: false }">
+                <div class="bundle-card-master p-3 p-md-4 p-lg-5">
                     <div class="row g-3 g-lg-4 align-items-center">
                         
                         <!-- Left: Bundle Image Showcase -->
                         <div class="col-12 col-lg-4 position-relative">
-                            <div class="bundle-image-pedestal" @click="openDetails = !openDetails" style="cursor: pointer;" title="Click to view coffret details">
+                            <div class="bundle-image-pedestal" onclick="toggleBundleIncluded(this)" style="cursor: pointer;" title="Click to view coffret details">
                                 <img 
                                     src="{{ $bundle->image_url }}" 
                                     alt="{{ $bundle->name }}" 
@@ -483,7 +519,7 @@
 
                         <!-- Center: Bundle Details & Included Flacons -->
                         <div class="col-12 col-lg-5 d-flex flex-column gap-2 gap-lg-3">
-                            <div @click="openDetails = !openDetails" style="cursor: pointer;">
+                            <div onclick="toggleBundleIncluded(this)" style="cursor: pointer;">
                                 <span class="d-inline-flex align-items-center gap-1.5 fw-medium" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #541B29;">
                                     <i class="fas fa-gem gradient-gold-icon" style="font-size: 10px;"></i>
                                     <span>EXCLUSIVE SIGNATURE COFFRET</span>
@@ -497,20 +533,21 @@
                             <!-- Mobile Collapsible Trigger Button / Badge -->
                             <button 
                                 type="button" 
-                                @click="openDetails = !openDetails"
-                                class="d-lg-none w-100 d-flex align-items-center justify-content-between btn-view-inside"
-                                :class="{ 'is-open': openDetails }"
+                                onclick="toggleBundleIncluded(this)"
+                                class="btn-view-inside w-100 align-items-center justify-content-between"
+                                data-items-count="{{ $itemsCount }}"
                                 aria-label="Toggle fragrances included"
+                                aria-expanded="false"
                             >
                                 <span class="d-flex align-items-center gap-2">
                                     <span class="badge-pill-chip flex-shrink-0">
                                         <i class="fas fa-sparkles gradient-gold-icon" style="font-size: 10px;"></i>
                                     </span>
-                                    <span class="text-uppercase" style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em;" x-text="openDetails ? 'Hide Included Fragrances' : 'View What\'s Inside ({{ $itemsCount }} Fragrances)'">
+                                    <span class="text-uppercase btn-view-inside-label" style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em;">
                                         View What's Inside ({{ $itemsCount }} Fragrances)
                                     </span>
                                 </span>
-                                <span class="badge-pill-chip flex-shrink-0 transition" :style="openDetails ? 'transform: rotate(180deg);' : ''">
+                                <span class="badge-pill-chip flex-shrink-0 transition btn-view-inside-chevron">
                                     <i class="fas fa-chevron-down" style="font-size: 8.5px; color: #541B29;"></i>
                                 </span>
                             </button>
@@ -518,7 +555,6 @@
                             <!-- Included Items Preview (Always visible on Desktop, Collapsible on Mobile) -->
                             <div 
                                 class="bundle-included-wrap py-2.5 py-lg-3 my-1"
-                                :class="{ 'd-block': openDetails, 'd-none d-lg-block': !openDetails }"
                                 style="border-top: 1px solid #E8E0DA; border-bottom: 1px solid #E8E0DA;"
                             >
                                 <h5 class="fw-semibold mb-2.5 d-flex align-items-center gap-2" style="font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #541B29; margin-top: 5px; padding-top: 3px;">
@@ -892,6 +928,67 @@ document.addEventListener('keydown', function(e) {
         closeFlaconPriceModal();
     }
 });
+
+function toggleBundleIncluded(trigger) {
+    const card = trigger.closest('.bundle-card-master');
+    if (!card) return;
+    const wrap = card.querySelector('.bundle-included-wrap');
+    const btn = card.querySelector('.btn-view-inside');
+    if (!wrap) return;
+
+    const isOpen = wrap.classList.toggle('is-expanded');
+    if (btn) {
+        btn.classList.toggle('is-open', isOpen);
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        const label = btn.querySelector('.btn-view-inside-label');
+        const chevron = btn.querySelector('.btn-view-inside-chevron');
+        const count = btn.dataset.itemsCount || '2';
+        if (label) {
+            label.textContent = isOpen ? 'Hide Included Fragrances' : `View What's Inside (${count} Fragrances)`;
+        }
+        if (chevron) {
+            chevron.style.transform = isOpen ? 'rotate(180deg)' : '';
+        }
+    }
+}
+
+function buyBundleNow(bundleId, btnElement) {
+    if (btnElement) {
+        btnElement.disabled = true;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-white"></i> <span>CHECKOUT...</span>';
+    }
+
+    // Direct Form Submission: guarantees 100% reliable session persistence and direct checkout navigation
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '{{ route("cart.add") }}';
+    form.style.display = 'none';
+
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}';
+    
+    const fields = [
+        { name: '_token', value: csrf },
+        { name: 'bundle_id', value: bundleId },
+        { name: 'quantity', value: 1 },
+        { name: 'redirect', value: 'checkout' }
+    ];
+
+    fields.forEach(function(f) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = f.name;
+        input.value = f.value;
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function addBundleToCart(bundleId, btnElement) {
+    // Both Add Bundle and Buy Now proceed directly to checkout as requested
+    buyBundleNow(bundleId, btnElement);
+}
 </script>
 
 @endsection

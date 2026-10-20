@@ -18,5 +18,7 @@ class VerifyCsrfToken extends Middleware
         'payments/easypaisa/*',
         'payments/safepay/*',
         'admin/products/import*',
+        'cart/add',
+        'cart/drawer',
     ];
 }
