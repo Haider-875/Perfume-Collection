@@ -253,17 +253,18 @@
                         </div>
                     </div>
 
-                    <!-- Items Ordered in this Parcel (Spacious, Zero-Cutoff on Mobile) -->
+                    <!-- Items Ordered in this Parcel (Spacious, Guaranteed Padding, Small Font Size) -->
                     <div>
                         <h4 class="mb-3 fw-semibold" style="font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #541B29;">Items in this Parcel</h4>
                         <div class="rounded-3 overflow-hidden" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                             @foreach($order->items as $item)
-                                <div class="p-3.5 p-sm-4 d-flex align-items-start justify-content-between gap-3 {{ !$loop->last ? 'border-bottom' : '' }}" style="{{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
-                                    <div class="flex-grow-1 min-w-0 pe-2">
-                                        <h5 class="font-serif fw-semibold mb-1" style="font-size: 14.5px; color: #211D1E; line-height: 1.4; word-break: break-word;">{{ $item->product_name }}</h5>
-                                        <p class="mb-0" style="font-size: 12px; color: #6B605B; line-height: 1.55;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
+                                <div class="d-flex align-items-start justify-content-between {{ !$loop->last ? 'border-bottom' : '' }}" 
+                                     style="padding: 14px 18px !important; gap: 14px; {{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
+                                    <div class="flex-grow-1 min-w-0" style="padding-right: 8px;">
+                                        <h5 class="font-serif fw-semibold mb-1" style="font-size: 13px; color: #211D1E; line-height: 1.4; word-break: break-word;">{{ $item->product_name }}</h5>
+                                        <p class="mb-0" style="font-size: 11px; color: #6B605B; line-height: 1.5;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
                                     </div>
-                                    <div class="text-end font-mono fw-bold flex-shrink-0 text-nowrap ps-2 pt-0.5" style="font-size: 14px; color: #541B29 !important; white-space: nowrap;">
+                                    <div class="text-end font-mono fw-bold flex-shrink-0 text-nowrap" style="font-size: 13px; color: #541B29 !important; white-space: nowrap; padding-top: 2px;">
                                         Rs. {{ number_format($item->total, 0) }}
                                     </div>
                                 </div>
@@ -282,9 +283,9 @@
                         We could not find an order matching the details provided. Please verify the order number (e.g. PC-100245) or the phone number used during checkout.
                     </p>
                     <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" 
-                       class="fw-bold text-uppercase d-inline-flex align-items-center gap-2.5 text-decoration-none shadow-sm"
-                       style="height: 48px; padding: 0 24px; font-size: 12px; letter-spacing: 0.08em; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.25) !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(18, 140, 126, 0.35) !important;">
-                        <i class="fab fa-whatsapp" style="font-size: 18px;"></i>
+                       class="fw-bold text-uppercase d-inline-flex align-items-center justify-content-center text-decoration-none shadow-sm transition"
+                       style="height: 48px; padding: 0 28px; font-size: 12px; letter-spacing: 0.08em; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.25) !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(18, 140, 126, 0.35) !important;">
+                        <i class="fab fa-whatsapp flex-shrink-0" style="font-size: 19px; margin-right: 12px !important;"></i>
                         <span>Contact WhatsApp Support</span>
                     </a>
                 </div>
@@ -300,30 +301,17 @@
             <p class="mx-auto mb-3.5" style="max-width: 500px; font-size: 0.88rem; color: #6B605B; line-height: 1.75;">
                 Our concierge team is available Mon–Sat from 10:00 AM to 10:00 PM PKT for order status inquiries, address corrections, or dispatch updates.
             </p>
-            <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 pt-1">
+            <div class="pt-1">
                 <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" 
-                   class="fw-bold text-uppercase text-decoration-none d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill shadow-xs" 
-                   style="font-size: 12px; background-color: #DEF7EC; color: #0E9F6E; border: 1px solid #31C48D;">
-                    <i class="fab fa-whatsapp" style="font-size: 16px;"></i>
-                    <span>WhatsApp Concierge &rarr;</span>
-                </a>
-                <span class="d-none d-sm-inline" style="color: #9E7D3B; opacity: 0.5;">&bull;</span>
-                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $storePhone) }}" class="text-uppercase tracking-wider text-decoration-none fw-semibold d-inline-flex align-items-center gap-2 px-3.5 py-2 rounded-pill" style="font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
-                    <i class="fas fa-phone-alt" style="font-size: 11px; color: #541B29;"></i>
-                    <span>{{ $storePhone }}</span>
+                   class="fw-bold text-uppercase d-inline-flex align-items-center justify-content-center text-decoration-none shadow-sm transition" 
+                   style="height: 48px; padding: 0 28px; font-size: 12px; letter-spacing: 0.08em; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.25) !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(18, 140, 126, 0.35) !important;">
+                    <i class="fab fa-whatsapp flex-shrink-0" style="font-size: 19px; margin-right: 12px !important;"></i>
+                    <span>Contact WhatsApp Support</span>
                 </a>
             </div>
-        </div>
-
-        <!-- Continue Shopping Luxury Button (Arrow Removed) -->
-        <div class="text-center pt-2 pb-3">
-            <a href="{{ route('collections.show', 'all') }}" 
-               class="fw-bold text-uppercase tracking-wider text-decoration-none d-inline-flex align-items-center justify-content-center shadow-xs transition" 
-               style="height: 48px; min-width: 260px; padding: 0 32px; font-size: 12px; letter-spacing: 0.12em; background-color: #FAF7F2; border: 1.5px solid #541B29; color: #541B29; border-radius: 8px;"
-               onmouseover="this.style.background='linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%)'; this.style.color='#FFFFFF'; this.style.borderColor='transparent';"
-               onmouseout="this.style.background='#FAF7F2'; this.style.color='#541B29'; this.style.borderColor='#541B29';">
-                <span>Continue Shopping</span>
-            </a>
+            <div class="pt-3 text-muted" style="font-size: 12px; color: #786C67;">
+                Or call our support desk: <a href="tel:{{ preg_replace('/[^0-9+]/', '', $storePhone) }}" class="fw-semibold text-decoration-none" style="color: #541B29;">{{ $storePhone }}</a>
+            </div>
         </div>
     </div>
 </div>

@@ -61,17 +61,18 @@
                 </div>
             @endif
 
-            <!-- Items Ordered Breakdown (Spacious, Zero-Cutoff on Mobile) -->
+            <!-- Items Ordered Breakdown (Spacious, Guaranteed Padding, Small Font Size) -->
             <div class="mb-4 pb-2">
                 <h3 class="fw-semibold mb-3.5" style="font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #541B29;">Items Ordered</h3>
                 <div class="rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; overflow: hidden;">
                     @foreach($order->items as $item)
-                        <div class="p-3.5 p-sm-4 d-flex align-items-start justify-content-between gap-3 {{ !$loop->last ? 'border-bottom' : '' }}" style="{{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
-                            <div class="flex-grow-1 min-w-0 pe-2">
-                                <h4 class="font-serif fw-semibold mb-1" style="font-size: 14.5px; color: #211D1E; line-height: 1.4; word-break: break-word;">{{ $item->product_name }}</h4>
-                                <p class="mb-0" style="font-size: 12px; color: #6B605B; line-height: 1.55;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
+                        <div class="d-flex align-items-start justify-content-between {{ !$loop->last ? 'border-bottom' : '' }}" 
+                             style="padding: 14px 18px !important; gap: 14px; {{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
+                            <div class="flex-grow-1 min-w-0" style="padding-right: 8px;">
+                                <h4 class="font-serif fw-semibold mb-1" style="font-size: 13px; color: #211D1E; line-height: 1.4; word-break: break-word;">{{ $item->product_name }}</h4>
+                                <p class="mb-0" style="font-size: 11px; color: #6B605B; line-height: 1.5;">{{ $item->variant_label ?? 'Standard Flacon' }} &bull; Qty: {{ $item->quantity }}</p>
                             </div>
-                            <div class="text-end font-mono fw-bold flex-shrink-0 text-nowrap ps-2 pt-0.5" style="font-size: 14px; color: #541B29 !important; white-space: nowrap;">
+                            <div class="text-end font-mono fw-bold flex-shrink-0 text-nowrap" style="font-size: 13px; color: #541B29 !important; white-space: nowrap; padding-top: 2px;">
                                 Rs. {{ number_format($item->total, 0) }}
                             </div>
                         </div>
@@ -179,9 +180,9 @@
                 <!-- WhatsApp Button (Signature Green Gradient) -->
                 <div class="col-12 col-sm-6">
                     <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" 
-                       class="w-100 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2.5 text-decoration-none transition shadow-sm"
+                       class="w-100 fw-bold text-uppercase d-flex align-items-center justify-content-center text-decoration-none transition shadow-sm"
                        style="height: 50px; padding: 0 24px; font-size: 12px; letter-spacing: 0.08em; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.25) !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(18, 140, 126, 0.35) !important;">
-                        <i class="fab fa-whatsapp" style="font-size: 18px;"></i>
+                        <i class="fab fa-whatsapp flex-shrink-0" style="font-size: 19px; margin-right: 12px !important;"></i>
                         <span>Send Slip to WhatsApp</span>
                     </a>
                 </div>
@@ -189,9 +190,9 @@
                 <!-- Live Tracking Button (Signature Wine/Ruby Luxury Gradient) -->
                 <div class="col-12 col-sm-6">
                     <a href="{{ route('order.tracking', ['order_number' => $order->order_number, 'phone' => $order->customer_phone]) }}" 
-                       class="w-100 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2.5 text-decoration-none transition shadow-sm"
+                       class="w-100 fw-bold text-uppercase d-flex align-items-center justify-content-center text-decoration-none transition shadow-sm"
                        style="height: 50px; padding: 0 24px; font-size: 12px; letter-spacing: 0.08em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: none !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(122, 28, 51, 0.3) !important;">
-                        <i class="fas fa-truck-fast" style="font-size: 15px;"></i>
+                        <i class="fas fa-truck-fast flex-shrink-0" style="font-size: 16px; margin-right: 12px !important;"></i>
                         <span>Track Live Consignment</span>
                     </a>
                 </div>
