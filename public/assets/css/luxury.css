@@ -8075,6 +8075,16 @@ p, .lead {
     transition: all 0.25s ease !important;
 }
 
+.breadcrumb-parents-pill a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+}
+
+.breadcrumb-parents-pill a i {
+    margin-right: 1px !important;
+}
+
 .breadcrumb-parents-pill a:hover {
     color: #541B29 !important;
 }

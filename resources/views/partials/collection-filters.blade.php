@@ -238,32 +238,32 @@
         <div class="pb-2" style="border-bottom: 1px solid #E8E0DA;">
             <div class="d-flex flex-wrap gap-1.5">
                 @if(request('q'))
-                    <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1.5 px-2.5 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
+                    <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
                         <span>"{{ Str::limit(request('q'), 14) }}"</span>
-                        <i class="fas fa-times" style="font-size: 9px;"></i>
+                        <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
                     </a>
                 @endif
 
                 @if(request('family'))
                     @php $activeFam = $fragranceFamilies->firstWhere('slug', request('family')); @endphp
-                    <a href="{{ request()->fullUrlWithQuery(['family' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1.5 px-2.5 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
+                    <a href="{{ request()->fullUrlWithQuery(['family' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
                         <span>{{ $activeFam ? $activeFam->name : ucfirst(request('family')) }}</span>
-                        <i class="fas fa-times" style="font-size: 9px;"></i>
+                        <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
                     </a>
                 @endif
 
                 @if(request('note'))
                     @php $activeNote = $scentNotes->firstWhere('slug', request('note')); @endphp
-                    <a href="{{ request()->fullUrlWithQuery(['note' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1.5 px-2.5 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
+                    <a href="{{ request()->fullUrlWithQuery(['note' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
                         <span>Note: {{ $activeNote ? $activeNote->name : ucfirst(str_replace('-', ' ', request('note'))) }}</span>
-                        <i class="fas fa-times" style="font-size: 9px;"></i>
+                        <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
                     </a>
                 @endif
 
                 @if(request('volume_ml'))
-                    <a href="{{ request()->fullUrlWithQuery(['volume_ml' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-1.5 px-2.5 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
+                    <a href="{{ request()->fullUrlWithQuery(['volume_ml' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
                         <span>{{ request('volume_ml') }} ml</span>
-                        <i class="fas fa-times" style="font-size: 9px;"></i>
+                        <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
                     </a>
                 @endif
             </div>
