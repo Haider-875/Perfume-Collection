@@ -3,6 +3,207 @@
  * High-performance Vanilla JS, Swiper & Alpine.js bridges for Hostinger shared hosting
  */
 
+/**
+ * Universal Mobile & Desktop ScrollLock Manager
+ * Prevents background scrolling on iOS Safari, Android Chrome, and Desktop browsers.
+ * Preserves exact scroll position, eliminates layout shifts, and handles nested overlays.
+ */
+window.ScrollLock = (function() {
+    const activeLocks = new Set();
+    let savedScrollY = 0;
+    let savedStyles = null;
+    let touchStartY = 0;
+    let touchMoveAttached = false;
+    let touchStartAttached = false;
+
+    function isElementScrollable(el) {
+        if (!el || el === document.body || el === document.documentElement) return false;
+        try {
+            const style = window.getComputedStyle(el);
+            const overflowY = style.overflowY;
+            return (overflowY === 'auto' || overflowY === 'scroll') && el.scrollHeight > (el.clientHeight + 1);
+        } catch(e) {
+            return false;
+        }
+    }
+
+    function findScrollableParent(el, root) {
+        let current = el;
+        while (current && current !== document.body && current !== document.documentElement) {
+            if (isElementScrollable(current)) {
+                return current;
+            }
+            if (root && current === root) break;
+            current = current.parentElement;
+        }
+        return null;
+    }
+
+    function onTouchStart(e) {
+        if (e.touches && e.touches.length === 1) {
+            touchStartY = e.touches[0].clientY;
+        }
+    }
+
+    function onTouchMove(e) {
+        if (activeLocks.size === 0) return;
+
+        const cartDrawer = document.getElementById('luxuryCartDrawer');
+        const mobileNav = document.getElementById('mobileNavDrawer');
+        const searchModal = document.getElementById('searchModal');
+        const scentModal = document.getElementById('scentQuizModal');
+        const quickModal = document.getElementById('quickViewModal');
+
+        // Locate any active overlay currently displayed
+        const activeOverlay = (cartDrawer && cartDrawer.classList.contains('active')) ? cartDrawer
+            : (mobileNav && mobileNav.classList.contains('active')) ? mobileNav
+            : (searchModal && searchModal.classList.contains('active')) ? searchModal
+            : (scentModal && scentModal.classList.contains('active')) ? scentModal
+            : (quickModal && quickModal.classList.contains('active')) ? quickModal
+            : null;
+
+        // If touching outside the active overlay (e.g. on backdrop, overlay, or page), cancel scroll
+        if (!activeOverlay || !activeOverlay.contains(e.target)) {
+            if (e.cancelable) e.preventDefault();
+            return;
+        }
+
+        // Inside active overlay: locate scrollable container
+        const scrollable = findScrollableParent(e.target, activeOverlay);
+        if (!scrollable) {
+            // Touch is on fixed/static part of drawer (e.g. header, footer, action buttons)
+            if (e.cancelable) e.preventDefault();
+            return;
+        }
+
+        // Check edge overscroll bounce to prevent scroll chaining
+        if (e.touches && e.touches.length === 1) {
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - touchStartY;
+            const isAtTop = scrollable.scrollTop <= 0;
+            const isAtBottom = (scrollable.scrollTop + scrollable.clientHeight) >= (scrollable.scrollHeight - 1);
+
+            if ((isAtTop && deltaY > 0) || (isAtBottom && deltaY < 0)) {
+                if (e.cancelable) e.preventDefault();
+            }
+        }
+    }
+
+    return {
+        lock: function(lockId) {
+            if (!lockId) lockId = 'overlay-' + Date.now();
+            const wasLocked = activeLocks.size > 0;
+            activeLocks.add(lockId);
+
+            if (!wasLocked) {
+                // Record current scroll position before modifying styles
+                savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+
+                // Detect desktop scrollbar width to prevent horizontal layout shift
+                const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+                savedStyles = {
+                    position: document.body.style.position,
+                    top: document.body.style.top,
+                    left: document.body.style.left,
+                    width: document.body.style.width,
+                    height: document.body.style.height,
+                    overflow: document.body.style.overflow,
+                    paddingRight: document.body.style.paddingRight
+                };
+
+                document.documentElement.classList.add('scroll-locked');
+                document.body.classList.add('scroll-locked');
+
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${savedScrollY}px`;
+                document.body.style.left = '0';
+                document.body.style.width = '100%';
+                document.body.style.height = '100%';
+                document.body.style.overflow = 'hidden';
+
+                if (scrollbarWidth > 0) {
+                    document.body.style.paddingRight = `${scrollbarWidth}px`;
+                    const header = document.querySelector('.site-header');
+                    if (header) header.style.paddingRight = `${scrollbarWidth}px`;
+                }
+
+                if (!touchStartAttached) {
+                    document.addEventListener('touchstart', onTouchStart, { passive: true });
+                    touchStartAttached = true;
+                }
+                if (!touchMoveAttached) {
+                    document.addEventListener('touchmove', onTouchMove, { passive: false });
+                    touchMoveAttached = true;
+                }
+            }
+        },
+
+        unlock: function(lockId) {
+            if (!lockId) lockId = 'default';
+            activeLocks.delete(lockId);
+
+            // Only release when no overlays are active
+            if (activeLocks.size === 0) {
+                const targetY = savedScrollY;
+
+                // Disable smooth scrolling temporarily to prevent jump animation
+                const html = document.documentElement;
+                const prevBehavior = html.style.scrollBehavior;
+                html.style.scrollBehavior = 'auto';
+
+                document.documentElement.classList.remove('scroll-locked');
+                document.body.classList.remove('scroll-locked');
+
+                if (savedStyles) {
+                    document.body.style.position = savedStyles.position || '';
+                    document.body.style.top = savedStyles.top || '';
+                    document.body.style.left = savedStyles.left || '';
+                    document.body.style.width = savedStyles.width || '';
+                    document.body.style.height = savedStyles.height || '';
+                    document.body.style.overflow = savedStyles.overflow || '';
+                    document.body.style.paddingRight = savedStyles.paddingRight || '';
+                    savedStyles = null;
+                } else {
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.left = '';
+                    document.body.style.width = '';
+                    document.body.style.height = '';
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                }
+
+                const header = document.querySelector('.site-header');
+                if (header) header.style.paddingRight = '';
+
+                if (touchStartAttached) {
+                    document.removeEventListener('touchstart', onTouchStart, { passive: true });
+                    touchStartAttached = false;
+                }
+                if (touchMoveAttached) {
+                    document.removeEventListener('touchmove', onTouchMove, { passive: false });
+                    touchMoveAttached = false;
+                }
+
+                window.scrollTo(0, targetY);
+                requestAnimationFrame(() => {
+                    window.scrollTo(0, targetY);
+                    html.style.scrollBehavior = prevBehavior;
+                });
+            }
+        },
+
+        isLocked: function() {
+            return activeLocks.size > 0;
+        },
+
+        getScrollY: function() {
+            return savedScrollY;
+        }
+    };
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
     initSwiperSliders();
@@ -242,7 +443,9 @@ window.openCartDrawer = function() {
     }
     if (drawer) drawer.classList.add('active');
     if (overlay) overlay.classList.add('active');
-    document.body.classList.add('overflow-hidden');
+    if (window.ScrollLock) {
+        window.ScrollLock.lock('cart-drawer');
+    }
 };
 
 window.closeCartDrawer = function() {
@@ -250,7 +453,9 @@ window.closeCartDrawer = function() {
     const overlay = document.getElementById('cartDrawerOverlay');
     if (drawer) drawer.classList.remove('active');
     if (overlay) overlay.classList.remove('active');
-    document.body.classList.remove('overflow-hidden');
+    if (window.ScrollLock) {
+        window.ScrollLock.unlock('cart-drawer');
+    }
 };
 
 function initCartDrawer() {
@@ -488,10 +693,7 @@ window.addBundleToCart = function(bundleId, btnElement = null) {
         if (typeof renderCartUI === 'function') {
             renderCartUI(data);
         }
-        const drawer = document.getElementById('luxuryCartDrawer');
-        const overlay = document.getElementById('cartDrawerOverlay');
-        if (drawer) drawer.classList.add('active');
-        if (overlay) overlay.classList.add('active');
+        window.openCartDrawer();
 
         document.querySelectorAll('.cart-count, #cartCountBadge, #headerCartCount').forEach(el => {
             el.textContent = data.count || (parseInt(el.textContent || '0') + 1);
@@ -652,12 +854,19 @@ function initScentQuiz() {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
+            if (window.ScrollLock) window.ScrollLock.lock('scent-quiz');
         });
     });
 
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        if (window.ScrollLock) window.ScrollLock.unlock('scent-quiz');
+    });
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            if (window.ScrollLock) window.ScrollLock.unlock('scent-quiz');
+        }
     });
 
     const quizForm = document.getElementById('scentQuizForm');
@@ -707,12 +916,19 @@ function initSearchModal() {
     searchTrigger.addEventListener('click', (e) => {
         e.preventDefault();
         modal.classList.add('active');
+        if (window.ScrollLock) window.ScrollLock.lock('search-modal');
         if (input) input.focus();
     });
 
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        if (window.ScrollLock) window.ScrollLock.unlock('search-modal');
+    });
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            if (window.ScrollLock) window.ScrollLock.unlock('search-modal');
+        }
     });
 
     if (input && results) {
@@ -786,9 +1002,15 @@ function initQuickView() {
     const closeBtn = document.getElementById('closeQuickView');
     if (!modal) return;
 
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        if (window.ScrollLock) window.ScrollLock.unlock('quick-view');
+    });
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            if (window.ScrollLock) window.ScrollLock.unlock('quick-view');
+        }
     });
 
     quickViewBtns.forEach(btn => {
@@ -826,6 +1048,7 @@ function initQuickView() {
                     </div>
                 `;
                 modal.classList.add('active');
+                if (window.ScrollLock) window.ScrollLock.lock('quick-view');
             }
         });
     });
@@ -858,7 +1081,9 @@ window.openMobileNav = function() {
         backdrop.classList.add('active');
         backdrop.removeAttribute('x-cloak');
     }
-    document.body.classList.add('overflow-hidden');
+    if (window.ScrollLock) {
+        window.ScrollLock.lock('mobile-nav');
+    }
     if (window.Alpine) {
         try {
             const bodyData = Alpine.$data(document.body);
@@ -878,7 +1103,9 @@ window.closeMobileNav = function() {
     if (backdrop) {
         backdrop.classList.remove('active');
     }
-    document.body.classList.remove('overflow-hidden');
+    if (window.ScrollLock) {
+        window.ScrollLock.unlock('mobile-nav');
+    }
     if (window.Alpine) {
         try {
             const bodyData = Alpine.$data(document.body);

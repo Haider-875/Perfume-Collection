@@ -70,8 +70,11 @@
 
 <body class="bg-theme-main text-ivory font-sans"
     x-data="{ mobileMenuOpen: false }"
-    x-init="$watch('mobileMenuOpen', val => document.body.classList.toggle('overflow-hidden', val))"
-    :class="{ 'overflow-hidden': mobileMenuOpen }">
+    x-init="$watch('mobileMenuOpen', val => {
+        if (window.ScrollLock) {
+            val ? window.ScrollLock.lock('mobile-nav') : window.ScrollLock.unlock('mobile-nav');
+        }
+    })">
 
     @php
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
@@ -263,8 +266,8 @@
         </div>
 
         <!-- Mobile Menu Navigation Links -->
-        <div class="py-3 vstack gap-2 flex-grow-1 overflow-y-auto">
-            <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
+        <div id="mobileNavItems" class="py-3 vstack gap-2 flex-grow-1 overflow-y-auto" style="overscroll-behavior: contain; -webkit-overflow-scrolling: touch;">
+            <a href="{{ route('home') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                 class="font-hero fs-5 py-2 text-decoration-none"
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Home
@@ -280,25 +283,25 @@
                         :class="colOpen ? 'rotate-180' : ''"></i>
                 </button>
                 <div x-show="colOpen" class="ps-3 pt-2 vstack gap-2 text-sm font-hero" style="color: #6B605B; letter-spacing: 0.03em;">
-                    <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false"
+                    <a href="{{ route('collections.show', 'all') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">All Impressions Catalog</a>
-                    <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false"
+                    <a href="{{ route('collections.show', 'men') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Men's Impressions</a>
-                    <a href="{{ route('collections.show', 'women') }}" @click="mobileMenuOpen = false"
+                    <a href="{{ route('collections.show', 'women') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Women's Impressions</a>
-                    <a href="{{ route('collections.show', 'unisex') }}" @click="mobileMenuOpen = false"
+                    <a href="{{ route('collections.show', 'unisex') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Unisex & Pure Oud</a>
-                    <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false"
+                    <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 fw-semibold text-decoration-none" style="color: #541B29;">Bundles & Discovery Sets (Save 25%)</a>
                 </div>
             </div>
 
-            <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false"
+            <a href="{{ route('bundles.index') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                 class="font-hero fs-5 py-2 text-decoration-none"
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Bundles & Discovery Sets
             </a>
-            <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false"
+            <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                 class="font-hero fs-5 py-2 text-decoration-none"
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Our Artisanal Craft
@@ -315,7 +318,7 @@
                     <span>WHATSAPP</span>
                 </a>
                 <button type="button"
-                    @click="document.getElementById('scentQuizModal').classList.add('active'); mobileMenuOpen = false;"
+                    onclick="if(window.closeMobileNav) window.closeMobileNav(); const m = document.getElementById('scentQuizModal'); if(m){ m.classList.add('active'); if(window.ScrollLock) window.ScrollLock.lock('scent-quiz'); }"
                     class="cart-btn-checkout border-0 text-decoration-none">
                     <i class="fas fa-wand-magic-sparkles" style="font-size: 11px;"></i>
                     <span>SCENT QUIZ</span>
