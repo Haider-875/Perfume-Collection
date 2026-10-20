@@ -82,9 +82,17 @@
                             $statusKeys = array_keys($statuses);
                             $currentStatus = $order->order_status;
                             if ($currentStatus === 'pending_verification') $currentStatus = 'pending';
+                            if ($currentStatus === 'processing') $currentStatus = 'packed';
                             $currentIndex = array_search($currentStatus, $statusKeys);
                             if ($currentIndex === false) $currentIndex = 0;
                         @endphp
+
+                        @if($order->order_status === 'cancelled')
+                            <div class="p-3 rounded-3 mb-3.5 d-flex align-items-center gap-2.5" style="background-color: #FDF2F2; border: 1px solid #F8B4B4; color: #C81E1E; font-size: 12.5px;">
+                                <i class="fas fa-circle-xmark flex-shrink-0" style="font-size: 16px;"></i>
+                                <span>This order has been marked as <strong>Cancelled</strong>. If you have questions, please reach out via WhatsApp Support.</span>
+                            </div>
+                        @endif
 
                         <!-- Desktop & Tablet Horizontal Stepper (>= 768px) -->
                         <div class="d-none d-md-block position-relative pt-3 pb-3">
