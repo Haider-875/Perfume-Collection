@@ -449,7 +449,7 @@
         </div>
 
         <!-- Dynamic Drawer Cart Items Body (Loaded via AJAX) -->
-        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto p-4 vstack gap-3" style="background-color: #FAF7F2 !important; color: #211D1E !important;">
+        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto overflow-x-hidden p-3 p-sm-4 vstack gap-3" style="background-color: #FAF7F2 !important; color: #211D1E !important; box-sizing: border-box; width: 100%;">
             <div class="text-center py-5" style="color: #6B605B;">
                 <i class="fas fa-gem fs-2 opacity-50 mb-3 animate-pulse" style="color: #9E7D3B;"></i>
                 <p class="mb-0">Retrieving your selected impressions...</p>

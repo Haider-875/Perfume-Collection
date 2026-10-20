@@ -577,36 +577,36 @@ function renderCartUI(data) {
     if (footerEl) footerEl.style.display = 'flex';
 
     body.innerHTML = data.items.map(item => `
-        <div class="cart-item-luxury d-flex align-items-center gap-3 p-3 rounded-4 shadow-sm position-relative" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+        <div class="cart-item-luxury d-flex align-items-center gap-2.5 gap-sm-3 p-2.5 p-sm-3 rounded-4 shadow-sm position-relative w-100" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; min-width: 0; box-sizing: border-box; overflow: hidden;">
             <!-- Left: Flacon Image Stage Pedestal -->
             <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                 <img src="${item.image}" alt="${item.name}" class="img-fluid object-fit-contain">
             </a>
 
             <!-- Center: Product Info & Quantity Stepper -->
-            <div class="flex-grow-1 min-w-0">
-                <a href="${item.url}" class="cart-item-name font-serif d-block text-truncate text-decoration-none" style="color: #211D1E;" title="${item.name}">
+            <div class="flex-grow-1 min-w-0" style="min-width: 0; overflow: hidden;">
+                <a href="${item.url}" class="cart-item-name font-serif d-block text-decoration-none" style="color: #211D1E !important;" title="${item.name}">
                     ${item.name}
                 </a>
-                <div class="cart-item-variant text-uppercase mt-0.5" style="color: #6B605B; font-size: 11px;">
+                <div class="cart-item-variant text-uppercase text-truncate mt-0.5" style="color: #6B605B; font-size: 11px; max-width: 100%;">
                     ${item.variant}
                 </div>
-                <div class="d-flex align-items-center justify-content-between mt-2.5">
+                <div class="d-flex align-items-center justify-content-between gap-2 mt-2 pt-0.5" style="min-width: 0;">
                     <!-- Luxury Qty Stepper Pill -->
-                    <div class="cart-qty-pill d-inline-flex align-items-center" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                    <div class="cart-qty-pill d-inline-flex align-items-center flex-shrink-0" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                         <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" class="cart-qty-btn" style="color: #541B29;" aria-label="Decrease quantity">&minus;</button>
-                        <span class="cart-qty-val font-sans" style="color: #211D1E;">${item.quantity}</span>
+                        <span class="cart-qty-val font-sans" style="color: #211D1E !important;">${item.quantity}</span>
                         <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity + 1})" class="cart-qty-btn" style="color: #541B29;" aria-label="Increase quantity">&plus;</button>
                     </div>
                     <!-- Total Price -->
-                    <div class="cart-item-price font-sans fw-bold" style="color: #541B29 !important;">
+                    <div class="cart-item-price font-sans fw-bold flex-shrink-0 text-end" style="color: #541B29 !important; font-size: 0.92rem; white-space: nowrap;">
                         ${item.total}
                     </div>
                 </div>
             </div>
 
             <!-- Right: Trash Remove Button -->
-            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0" title="Remove Flacon" aria-label="Remove item" style="color: #C81E1E;">
+            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0 ms-1" title="Remove Flacon" aria-label="Remove item" style="color: #C81E1E;">
                 <i class="fas fa-trash-can"></i>
             </button>
         </div>

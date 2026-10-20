@@ -89,17 +89,17 @@
                         <div class="d-flex flex-column gap-4">
                             @foreach($cart->items as $item)
                                 <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 text-xs {{ !$loop->last ? 'pb-4' : '' }}" style="{{ !$loop->last ? 'border-bottom: 1px solid #E8E0DA;' : '' }}">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div class="rounded-3 p-2 flex-shrink-0 d-flex align-items-center justify-content-center overflow-hidden" style="width: 64px; height: 64px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                                    <div class="d-flex align-items-center gap-3 min-w-0" style="min-width: 0; flex: 1 1 auto;">
+                                        <div class="rounded-3 p-2 flex-shrink-0 d-flex align-items-center justify-content-center overflow-hidden" style="width: 64px; height: 64px; min-width: 64px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                             @if($item->product)
                                                 <img src="{{ asset($item->product->primary_image_url) }}" alt="{{ $item->product->name }}" class="img-fluid mh-100 object-contain">
                                             @elseif($item->bundle)
                                                 <img src="{{ asset($item->bundle->image_url) }}" alt="{{ $item->bundle->name }}" class="img-fluid mh-100 object-contain">
                                             @endif
                                         </div>
-                                        <div>
-                                            <h3 class="font-serif fs-6 fw-semibold mb-1" style="color: #211D1E;">{{ $item->bundle ? $item->bundle->name : $item->product->name }}</h3>
-                                            <p class="fw-semibold mb-1" style="font-size: 11px; color: #6B605B;">{{ $item->variant ? $item->variant->size_label : ($item->bundle ? 'Curated Bundle' : $item->product->volume_ml . 'ml Flacon') }}</p>
+                                        <div class="min-w-0" style="min-width: 0; overflow: hidden;">
+                                            <h3 class="font-serif fs-6 fw-semibold mb-1 text-truncate" style="color: #211D1E; max-width: 100%;" title="{{ $item->bundle ? $item->bundle->name : $item->product->name }}">{{ $item->bundle ? $item->bundle->name : $item->product->name }}</h3>
+                                            <p class="fw-semibold mb-1 text-truncate" style="font-size: 11px; color: #6B605B; max-width: 100%;">{{ $item->variant ? $item->variant->size_label : ($item->bundle ? 'Curated Bundle' : $item->product->volume_ml . 'ml Flacon') }}</p>
                                             <div class="fw-bold" style="color: #541B29 !important; font-size: 0.95rem;">Rs. {{ number_format($item->price, 0) }}</div>
                                         </div>
                                     </div>
