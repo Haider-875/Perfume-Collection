@@ -161,6 +161,35 @@
                             @endif
                         </div>
 
+                        @php
+                            $freeShippingThreshold = 5000;
+                            $shippingCost = $cart->subtotal >= $freeShippingThreshold ? 0 : 399;
+                            $remainingForFree = max(0, $freeShippingThreshold - $cart->subtotal);
+                            $shippingPercent = min(100, round(($cart->subtotal / $freeShippingThreshold) * 100));
+                            $cartTotal = max(0, $cart->subtotal - $cart->discount_amount + $shippingCost);
+                        @endphp
+
+                        <!-- Free Delivery Progress Tracker -->
+                        <div class="p-3 rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                            <div class="d-flex align-items-center justify-content-between gap-2 mb-1.5" style="font-size: 11.5px;">
+                                @if($remainingForFree > 0)
+                                    <span style="color: #514744;">
+                                        <i class="fas fa-truck-fast text-gold me-1"></i> Add <strong class="fw-bold" style="color: #541B29;">Rs. {{ number_format($remainingForFree, 0) }}</strong> more for <strong>FREE Delivery</strong>!
+                                    </span>
+                                @else
+                                    <span class="text-success fw-bold">
+                                        <i class="fas fa-circle-check text-success me-1"></i> You Unlocked <strong>FREE Delivery</strong>!
+                                    </span>
+                                @endif
+                                <span class="fw-bold font-mono" style="font-size: 11px; color: #541B29;">{{ $shippingPercent }}%</span>
+                            </div>
+                            <div class="progress" style="height: 6px; background-color: #E8E0DA; border-radius: 999px;">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: {{ $shippingPercent }}%; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); border-radius: 999px;" 
+                                     aria-valuenow="{{ $shippingPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
                         <!-- Totals -->
                         <div class="d-flex flex-column gap-2 text-xs">
                             <div class="d-flex justify-content-between" style="color: #6B605B;">
@@ -173,14 +202,20 @@
                                     <span class="font-mono">- Rs. {{ number_format($cart->discount_amount, 0) }}</span>
                                 </div>
                             @endif
-                            <div class="d-flex justify-content-between" style="color: #6B605B;">
+                            <div class="d-flex justify-content-between align-items-center" style="color: #6B605B;">
                                 <span>Courier Delivery:</span>
-                                <span class="fw-semibold" style="color: #541B29;">{{ $cart->subtotal >= 3500 ? 'COMPLIMENTARY' : 'Calculated at Checkout' }}</span>
+                                @if($shippingCost == 0)
+                                    <span class="badge px-2 py-0.5 rounded-pill" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 11px; font-weight: 700;">
+                                        FREE
+                                    </span>
+                                @else
+                                    <span class="fw-bold font-mono" style="color: #541B29; font-size: 12px;">Rs. 399</span>
+                                @endif
                             </div>
                             <div class="d-flex justify-content-between align-items-baseline pt-3" style="border-top: 1px solid #E8E0DA;">
                                 <span class="font-serif fs-5" style="color: #211D1E;">Total:</span>
                                 <span class="font-serif fs-3 fw-bold font-mono" style="color: #541B29 !important;">
-                                    Rs. {{ number_format(max(0, $cart->subtotal - $cart->discount_amount), 0) }}
+                                    Rs. {{ number_format($cartTotal, 0) }}
                                 </span>
                             </div>
                         </div>

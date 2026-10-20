@@ -22,11 +22,24 @@ class CartController extends Controller
         $cart = $this->cartService->getCart($request);
         $cart->load(['items.product', 'items.variant', 'items.bundle']);
 
+        $subtotal = (float) $cart->subtotal;
+        $shippingCost = $this->cartService->calculateShipping($cart);
+        $threshold = 5000;
+        $remainingForFree = max(0, $threshold - $subtotal);
+        $shippingPercent = min(100, round(($subtotal / $threshold) * 100));
+
         return response()->json([
             'count' => $cart->items->sum('quantity'),
             'subtotal' => $cart->formatted_subtotal,
-            'total' => $cart->formatted_total,
+            'subtotal_raw' => $subtotal,
+            'total' => 'Rs. ' . number_format(max(0, $subtotal - $cart->discount_amount + $shippingCost), 0),
             'discount' => 'Rs. ' . number_format($cart->discount_amount, 0),
+            'shipping_cost' => $shippingCost,
+            'shipping_formatted' => $shippingCost == 0 ? 'FREE' : 'Rs. ' . number_format($shippingCost, 0),
+            'free_shipping_threshold' => $threshold,
+            'remaining_for_free' => $remainingForFree,
+            'remaining_formatted' => 'Rs. ' . number_format($remainingForFree, 0),
+            'shipping_percent' => $shippingPercent,
             'items' => $cart->items->map(function($item) {
                 return [
                     'id' => $item->id,

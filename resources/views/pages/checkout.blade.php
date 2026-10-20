@@ -269,10 +269,92 @@
                         </div>
                     </div>
 
-                    <!-- Step 2: Payment Methods -->
+                    <!-- Step 2: Delivery & Shipping Options -->
+                    <div class="p-3 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
+                        <div class="d-flex align-items-center justify-content-between gap-3 mb-3 pb-3" style="border-bottom: 1px solid #E8E0DA;">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
+                                <div>
+                                    <h2 class="font-serif fw-normal mb-0" style="font-size: 1.25rem; color: #211D1E;">Delivery Method</h2>
+                                    <span class="d-block text-muted" style="font-size: 11px; margin-top: 2px;">Insured express delivery across Pakistan (2-4 Working Days)</span>
+                                </div>
+                            </div>
+                            @if($cart->subtotal >= 5000)
+                                <span class="badge px-2.5 py-1 rounded-pill d-none d-sm-inline-flex align-items-center gap-1" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 11px; font-weight: 700;">
+                                    <i class="fas fa-check-circle"></i> Free Delivery Unlocked
+                                </span>
+                            @endif
+                        </div>
+
+                        @if($cart->subtotal >= 5000)
+                            <!-- Option A: Free Delivery (Active & Selected) -->
+                            <div class="rounded-3 p-3 p-sm-3.5 d-flex align-items-start gap-3 position-relative" 
+                                 style="border: 2px solid #047857; background-color: #F0FDF4; box-shadow: 0 4px 14px rgba(4, 120, 87, 0.08);">
+                                <input type="radio" name="shipping_method_option" value="free" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #047857; width: 18px; height: 18px; cursor: pointer;">
+                                <div class="flex-grow-1 min-w-0">
+                                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold" style="font-size: 14px; color: #064E3B;">Complimentary Express Delivery</span>
+                                            <span class="badge rounded-pill px-2 py-0.5" style="background-color: #047857; color: #FFFFFF; font-size: 10px; letter-spacing: 0.05em;">FREE</span>
+                                        </div>
+                                        <span class="font-mono fw-bold text-success fs-6">Rs. 0</span>
+                                    </div>
+                                    <p class="mb-1 text-muted" style="font-size: 12px; line-height: 1.45; color: #374151;">
+                                        Fast, tracked delivery via premium couriers (TCS / PostEx / Leopards). Complimentary because your subtotal is Rs. 5,000 or above.
+                                    </p>
+                                    <div class="d-flex align-items-center gap-2 mt-2 pt-2" style="border-top: 1px dashed #A7F3D0; font-size: 11px; color: #047857;">
+                                        <i class="fas fa-shield-halved"></i>
+                                        <span>Fully insured transit with tamper-proof luxury packaging</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <!-- Option B: Standard Delivery Rs. 399 (Active & Selected) -->
+                            <div class="d-flex flex-column gap-3">
+                                <div class="rounded-3 p-3 p-sm-3.5 d-flex align-items-start gap-3" 
+                                     style="border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);">
+                                    <input type="radio" name="shipping_method_option" value="standard" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 18px; height: 18px; cursor: pointer;">
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="fw-bold" style="font-size: 14px; color: #211D1E;">Standard Express Delivery</span>
+                                                <span class="badge rounded px-2 py-0.5" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29; font-size: 9.5px;">All Pakistan</span>
+                                            </div>
+                                            <span class="font-mono fw-bold fs-6" style="color: #541B29;">Rs. 399</span>
+                                        </div>
+                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">
+                                            Nationwide express courier dispatch within 2-4 working days via TCS / PostEx / Leopards. Standard delivery charges of Rs. 399 apply on orders under Rs. 5,000.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Free Delivery Motivational Nudge Card -->
+                                <div class="rounded-3 p-3 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2" 
+                                     style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FDE68A;">
+                                    <div class="d-flex align-items-center gap-2.5">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px; background-color: #F59E0B; color: #FFFFFF;">
+                                            <i class="fas fa-gift" style="font-size: 13px;"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold" style="font-size: 12.5px; color: #92400E;">Want FREE Delivery?</div>
+                                            <div style="font-size: 11.5px; color: #78350F;">
+                                                Add only <strong class="fw-bold" style="color: #92400E;">Rs. {{ number_format(5000 - $cart->subtotal, 0) }}</strong> more to unlock <strong>FREE Nationwide Delivery</strong>!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 mt-2 mt-sm-0 text-decoration-none d-inline-flex align-items-center justify-content-center" 
+                                       style="height: 32px; padding: 0 16px; font-size: 11px; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); color: #FFFFFF; border-radius: 6px; box-shadow: 0 2px 6px rgba(122,28,51,0.25);">
+                                        Add Flacon &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Step 3: Payment Methods -->
                     <div class="p-3 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid #E8E0DA;">
-                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
+                            <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">3</span>
                             <div>
                                 <h2 class="font-serif fw-normal mb-0" style="font-size: 1.25rem; color: #211D1E;">Select Payment Method</h2>
                                 <span class="d-block text-muted" style="font-size: 11px; margin-top: 2px;">Encrypted, safe and verified payment channels</span>
@@ -502,11 +584,17 @@
                                 </div>
                             @endif
 
-                            <div class="d-flex justify-content-between" style="color: #6B605B;">
+                            <div class="d-flex justify-content-between align-items-center" style="color: #6B605B;">
                                 <span>Express Courier Delivery:</span>
-                                <span class="font-mono fw-semibold" style="color: #541B29;">
-                                    {{ $shippingCost == 0 ? 'FREE' : 'Rs. ' . number_format($shippingCost, 0) }}
-                                </span>
+                                @if($shippingCost == 0)
+                                    <span class="badge px-2 py-0.5 rounded-pill" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 11px; font-weight: 700;">
+                                        FREE
+                                    </span>
+                                @else
+                                    <span class="font-mono fw-semibold" style="color: #541B29;">
+                                        Rs. {{ number_format($shippingCost, 0) }}
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="d-flex justify-content-between align-items-baseline pt-3" style="border-top: 1px solid #E8E0DA;">

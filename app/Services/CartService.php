@@ -206,9 +206,9 @@ class CartService
 
     public function calculateShipping(Cart $cart, ?string $city = null): float
     {
-        $subtotal = $cart->subtotal;
-        $threshold = (float) Setting::get('free_shipping_threshold', 4999);
-        $defaultCost = (float) Setting::get('default_shipping_cost', 250);
+        $subtotal = (float) $cart->subtotal;
+        $threshold = (float) Setting::get('free_shipping_threshold', 5000);
+        $defaultCost = (float) (Setting::get('shipping_cost') ?: (Setting::get('default_shipping_cost') ?: 399));
 
         if ($subtotal >= $threshold || $subtotal == 0) {
             return 0.00;

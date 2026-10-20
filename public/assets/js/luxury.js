@@ -276,6 +276,36 @@ function renderCartUI(data) {
     if (countEl) countEl.innerText = `${data.count} items`;
     if (subtotalEl) subtotalEl.innerText = data.subtotal;
 
+    const shippingFeeEl = document.getElementById('cartDrawerShippingFee');
+    const shippingTextEl = document.getElementById('cartDrawerShippingText');
+    const shippingPercentEl = document.getElementById('cartDrawerShippingPercent');
+    const shippingBarEl = document.getElementById('cartDrawerShippingProgressBar');
+
+    if (shippingFeeEl && data.shipping_formatted) {
+        if (data.shipping_cost === 0) {
+            shippingFeeEl.innerHTML = '<span class="badge px-1.5 py-0.5 rounded-pill" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 10px;">FREE</span>';
+        } else {
+            shippingFeeEl.innerText = data.shipping_formatted;
+        }
+    }
+
+    if (shippingPercentEl && typeof data.shipping_percent !== 'undefined') {
+        shippingPercentEl.innerText = `${data.shipping_percent}%`;
+    }
+
+    if (shippingBarEl && typeof data.shipping_percent !== 'undefined') {
+        shippingBarEl.style.width = `${data.shipping_percent}%`;
+        shippingBarEl.setAttribute('aria-valuenow', data.shipping_percent);
+    }
+
+    if (shippingTextEl && typeof data.remaining_for_free !== 'undefined') {
+        if (data.remaining_for_free <= 0) {
+            shippingTextEl.innerHTML = '<span class="text-success fw-bold"><i class="fas fa-circle-check text-success me-1"></i> You Unlocked <strong>FREE Delivery</strong>!</span>';
+        } else {
+            shippingTextEl.innerHTML = `<i class="fas fa-truck-fast text-gold me-1"></i> Add <strong style="color: #541B29;">${data.remaining_formatted}</strong> more for <strong>FREE Delivery</strong>!`;
+        }
+    }
+
     if (!body) return;
 
     if (data.items.length === 0) {

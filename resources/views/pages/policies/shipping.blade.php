@@ -82,7 +82,7 @@
                         2. Complimentary Shipping Privilege
                     </h3>
                     <p class="mb-0 fw-light text-center mx-auto" style="max-width: 640px; font-size: clamp(0.88rem, 1.8vw, 0.95rem); color: #514744; line-height: 1.85;">
-                        All orders with a subtotal of <strong style="color: #211D1E;">Rs. 4,999 and above</strong> receive complimentary Express Air shipping anywhere in Pakistan. For orders below Rs. 4,999, a nominal flat courier fee of Rs. 250 is applied at checkout.
+                        All orders with a subtotal of <strong style="color: #211D1E;">Rs. 5,000 and above</strong> receive complimentary Express Air shipping anywhere in Pakistan. For orders below Rs. 5,000, standard delivery charges of Rs. 399 are applied at checkout.
                     </p>
                 </div>
 

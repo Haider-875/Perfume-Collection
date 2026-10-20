@@ -124,7 +124,7 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Standard Shipping Rate (PKR)</label>
-                            <input type="number" name="shipping_cost" value="{{ $settings['shipping_cost'] ?? '250' }}">
+                            <input type="number" name="shipping_cost" value="{{ $settings['shipping_cost'] ?? '399' }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Free Shipping Threshold (PKR)</label>

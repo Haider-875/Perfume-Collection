@@ -74,7 +74,7 @@
         $whatsappNum = \App\Models\Setting::get('whatsapp', '923363685732');
         $phoneNum = \App\Models\Setting::get('phone', '+92 336 3685732');
         $announcementText = \App\Models\Setting::get('announcement_text', '✨ SPECIAL LAUNCH: 15% OFF On All Luxury Impressions Over Rs. 4,000 + Free Nationwide Shipping | Code: PERFUME15');
-        $freeShippingThreshold = \App\Models\Setting::get('free_shipping_threshold', '3000');
+        $freeShippingThreshold = \App\Models\Setting::get('free_shipping_threshold', '5000');
     @endphp
     <!-- 1. Top Rotating Announcement Bar (Royal Imperial Wine & Gold Haute Parfumerie) -->
     <div class="top-ticker overflow-hidden">
@@ -458,9 +458,30 @@
 
         <!-- Drawer Footer with Subtotal, Trust Assurance & Checkout -->
         <div id="cartDrawerFooter" class="p-3.5 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF !important; border-top: 1px solid #E8E0DA !important;">
-            <div class="d-flex align-items-center justify-content-between px-2">
-                <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Subtotal:</span>
-                <span id="cartDrawerSubtotal" class="font-serif fs-4 fw-bold" style="color: #541B29 !important;">Rs. 0</span>
+            <!-- Free Shipping Progress Tracker -->
+            <div id="cartDrawerShippingBox" class="p-2.5 rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+                <div class="d-flex align-items-center justify-content-between gap-2 mb-1" style="font-size: 11px;">
+                    <span id="cartDrawerShippingText" style="color: #514744;">
+                        <i class="fas fa-truck-fast text-gold me-1"></i> Free delivery on orders over Rs. 5,000
+                    </span>
+                    <span id="cartDrawerShippingPercent" class="fw-bold font-mono" style="font-size: 10px; color: #541B29;">0%</span>
+                </div>
+                <div class="progress" style="height: 5px; background-color: #E8E0DA; border-radius: 999px;">
+                    <div id="cartDrawerShippingProgressBar" class="progress-bar" role="progressbar" 
+                         style="width: 0%; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); border-radius: 999px;" 
+                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column gap-1.5 px-1">
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Subtotal:</span>
+                    <span id="cartDrawerSubtotal" class="font-serif fs-5 fw-bold" style="color: #211D1E !important;">Rs. 0</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Delivery:</span>
+                    <span id="cartDrawerShippingFee" class="text-xs fw-bold font-mono" style="color: #541B29 !important;">Rs. 399</span>
+                </div>
             </div>
 
             <!-- Customer Trust & Authenticity Assurance Strip -->
