@@ -8073,16 +8073,18 @@ p, .lead {
     border: 1px solid #E8E0DA !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
     transition: all 0.25s ease !important;
+    padding: 7px 18px !important;
+    line-height: 1.2 !important;
 }
 
 .breadcrumb-parents-pill a {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 7px !important;
+    gap: 8px !important;
 }
 
 .breadcrumb-parents-pill a i {
-    margin-right: 1px !important;
+    margin-right: 2px !important;
 }
 
 .breadcrumb-parents-pill a:hover {
@@ -8097,6 +8099,8 @@ p, .lead {
     transition: all 0.25s ease !important;
     text-align: center !important;
     word-break: break-word;
+    padding: 7px 18px !important;
+    line-height: 1.2 !important;
 }
 
 @media (min-width: 768px) {
