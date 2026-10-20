@@ -217,6 +217,7 @@ class Product extends Model
             if (file_exists(public_path($webpPath))) {
                 return asset($webpPath);
             }
+            return null;
         }
         $defaultWebp = 'assets/images/perfumes/prod_signature.webp';
         return file_exists(public_path($defaultWebp)) ? asset($defaultWebp) : null;
@@ -245,6 +246,7 @@ class Product extends Model
             if (file_exists(public_path($webpPath))) {
                 return asset($webpPath);
             }
+            return null;
         }
         return $this->primary_webp_url;
     }
