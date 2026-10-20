@@ -83,20 +83,14 @@
             <a href="{{ route('shop.show', $product->slug) }}" class="text-decoration-none" style="color: #211D1E !important;">{{ $product->name }}</a>
         </h3>
 
-        <!-- Dual Pricing / Range in Charcoal & Maroon -->
-        <div class="product-card-pricing my-1 d-flex align-items-baseline justify-content-center gap-1 flex-wrap">
-            <span class="text-nowrap d-inline-flex align-items-baseline gap-1">
-                <span class="product-price-min fw-medium" style="color: #6B605B !important;">
-                    Rs. {{ number_format(max(450, round($product->effective_price * 0.22, -1))) }}
-                </span>
-                <span class="product-price-unit fw-medium text-uppercase" style="color: #786C67; font-size: 10px;">/10ml</span>
+        <!-- Unique Luxury Price & Volume Presentation (Center Aligned, Clear & Prominent) -->
+        <div class="product-card-pricing my-1.5 d-flex align-items-center justify-content-center gap-2 flex-wrap">
+            <span class="product-price-main price-gradient-luxury fw-bold font-serif" style="font-size: 1.18rem !important; line-height: 1.2; letter-spacing: -0.01em;">
+                {{ $product->formatted_effective_price }}
             </span>
-            <span class="product-price-sep opacity-50 fw-light" style="color: #786C67 !important;">&ndash;</span>
-            <span class="text-nowrap d-inline-flex align-items-baseline gap-1">
-                <span class="product-price-main price-gradient-luxury fw-bold">
-                    {{ $product->formatted_effective_price }}
-                </span>
-                <span class="product-price-unit fw-medium text-uppercase" style="color: #786C67; font-size: 10px;">/{{ $product->volume_ml }}ml</span>
+            <span class="product-volume-pill text-uppercase fw-semibold d-inline-flex align-items-center justify-content-center shadow-2xs"
+                  style="font-size: 9.5px; color: #541B29; background-color: #FAF4EB; border: 1px solid #EAD8B8; border-radius: 999px; padding: 2.5px 8px; letter-spacing: 0.05em; line-height: 1.15; font-family: 'Poppins', sans-serif;">
+                {{ $product->volume_ml ?: 50 }}ml
             </span>
         </div>
 
