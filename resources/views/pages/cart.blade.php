@@ -223,8 +223,10 @@
                         <!-- Checkout Button -->
                         <div class="pt-2">
                             <a href="{{ route('checkout.index') }}" 
-                               class="w-100 btn-gold py-3 text-xs tracking-widest text-uppercase d-block text-center text-decoration-none shadow" style="border-radius: 8px;">
-                                PROCEED TO CHECKOUT
+                               class="w-100 fw-bold text-uppercase tracking-wider d-flex align-items-center justify-content-center text-decoration-none shadow transition" 
+                               style="height: 48px; font-size: 12px; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: none !important; border-radius: 8px; box-shadow: 0 4px 14px rgba(122, 28, 51, 0.3) !important;">
+                                <span>PROCEED TO CHECKOUT</span>
+                                <i class="fas fa-arrow-right-long ms-2"></i>
                             </a>
                         </div>
                     </div>
