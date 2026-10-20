@@ -113,13 +113,13 @@
                 <div class="d-flex align-items-center d-lg-none flex-shrink-0" style="z-index: 2;">
                     <button type="button"
                         id="mobileMenuToggle"
+                        onclick="if(window.toggleMobileNav) window.toggleMobileNav()"
                         @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn"
+                        class="border-0 bg-transparent p-2 me-1 fs-4 mobile-hamburger-btn d-inline-flex align-items-center justify-content-center"
                         aria-label="Toggle Navigation Menu"
                         :aria-expanded="mobileMenuOpen.toString()"
-                        style="color: #211D1E !important; touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
-                        <i class="fas fa-bars" x-show="!mobileMenuOpen"></i>
-                        <i class="fas fa-times" x-show="mobileMenuOpen" x-cloak></i>
+                        style="color: #211D1E !important; touch-action: manipulation; -webkit-tap-highlight-color: transparent; width: 44px; height: 44px; min-width: 44px; min-height: 44px;">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
 
@@ -214,12 +214,13 @@
 
                     <!-- Slide-in Cart Trigger -->
                     <button type="button" id="cartDrawerTrigger"
-                        class="position-relative border-0 bg-transparent p-1 fs-5 site-nav-icon-btn"
+                        onclick="if(window.openCartDrawer) window.openCartDrawer();"
+                        class="position-relative border-0 bg-transparent p-1 fs-5 site-nav-icon-btn d-inline-flex align-items-center justify-content-center"
                         title="Your Cart"
                         aria-label="View Shopping Cart"
-                        style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease;">
+                        style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease; width: 44px; height: 44px; min-width: 44px; min-height: 44px;">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count-badge position-absolute rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: -6px; right: -6px; width: 18px; height: 18px; font-size: 10px; font-weight: 600; background-color: #541B29 !important; color: #FFFFFF !important;">
+                        <span class="cart-count-badge position-absolute rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: 2px; right: 2px; width: 18px; height: 18px; font-size: 10px; font-weight: 600; background-color: #541B29 !important; color: #FFFFFF !important;">
                             0
                         </span>
                     </button>
@@ -233,12 +234,7 @@
         x-cloak
         id="mobileNavBackdrop"
         @click="mobileMenuOpen = false"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
+        onclick="if(window.closeMobileNav) window.closeMobileNav();"
         class="mobile-offcanvas-backdrop d-lg-none"
         :class="{ 'active': mobileMenuOpen }"
         style="z-index: 1055;"></div>
@@ -247,12 +243,6 @@
         x-cloak
         id="mobileNavDrawer"
         @keydown.escape.window="mobileMenuOpen = false"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 -translate-x-full" 
-        x-transition:enter-end="opacity-100 translate-x-0"
-        x-transition:leave="transition ease-in duration-200" 
-        x-transition:leave-start="opacity-100 translate-x-0"
-        x-transition:leave-end="opacity-0 -translate-x-full"
         class="mobile-offcanvas-drawer p-3 p-sm-4 d-lg-none"
         :class="{ 'active': mobileMenuOpen }"
         style="z-index: 1060; background-color: #FFFFFF !important; color: #211D1E !important; border-right: 1px solid #E8E0DA;">
@@ -266,8 +256,9 @@
             <button type="button"
                 id="closeMobileNav"
                 @click="mobileMenuOpen = false"
+                onclick="if(window.closeMobileNav) window.closeMobileNav();"
                 class="border-0 bg-transparent fs-2 p-1 d-flex align-items-center justify-content-center"
-                style="width: 44px; height: 44px; touch-action: manipulation; color: #211D1E !important;"
+                style="width: 44px; height: 44px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; color: #211D1E !important; cursor: pointer;"
                 aria-label="Close navigation">&times;</button>
         </div>
 
@@ -436,7 +427,7 @@
     </footer>
 
     <!-- 7. Slide-In Cart Drawer -->
-    <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
+    <div id="cartDrawerOverlay" class="cart-drawer-overlay" onclick="if(window.closeCartDrawer) window.closeCartDrawer();"></div>
     <aside id="luxuryCartDrawer" class="cart-drawer" style="background-color: #FFFFFF !important; border-left: 1px solid #E8E0DA;">
         <!-- Drawer Header -->
         <div class="p-4 d-flex align-items-center justify-content-between" style="background-color: #FFFFFF !important; border-bottom: 1px solid #E8E0DA !important;">
@@ -448,7 +439,10 @@
                 </div>
             </div>
             <button type="button" id="closeCartDrawer"
-                class="border-0 bg-transparent fs-3 p-0" style="color: #211D1E !important;">&times;</button>
+                onclick="if(window.closeCartDrawer) window.closeCartDrawer();"
+                class="border-0 bg-transparent fs-2 p-1 d-flex align-items-center justify-content-center"
+                style="width: 44px; height: 44px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; color: #211D1E !important; cursor: pointer;"
+                aria-label="Close Shopping Bag">&times;</button>
         </div>
 
         <!-- Dynamic Drawer Cart Items Body (Loaded via AJAX) -->

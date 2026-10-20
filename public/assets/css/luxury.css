@@ -5354,7 +5354,7 @@ body.overflow-hidden {
 .mobile-filter-drawer:not([style*="display: none"]):not([style*="display:none"]) {
     visibility: visible !important;
     pointer-events: auto !important;
-    transform: translateX(0);
+    transform: translateX(0) !important;
     box-shadow: 8px 0 35px rgba(84, 27, 41, 0.2) !important;
 }
 

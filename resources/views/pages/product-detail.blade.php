@@ -11,6 +11,10 @@
             selectedComparePrice: {{ $product->variants->first()?->compare_at_price ?? ($product->compare_at_price ?? round($product->price * 1.35, -1)) }},
             selectedLabel: '{{ $product->variants->first()?->size_label ?? ($product->volume_ml . 'ml Flacon') }}',
             quantity: 1,
+            init() {
+                window.pdpSelectedVariantId = this.selectedVariantId;
+                window.pdpQuantity = this.quantity;
+            },
             get formattedPrice() {
                 return 'Rs. ' + new Intl.NumberFormat().format(this.selectedPrice);
             },
@@ -27,17 +31,22 @@
                 const text = encodeURIComponent('Salam! I want to order ' + '{{ addslashes($product->name) }}' + ' (' + this.selectedLabel + ') for ' + this.formattedPrice + ' with Cash on Delivery.');
                 return 'https://wa.me/{{ $whatsappNum }}?text=' + text;
             },
-            addToCart() {
-                addToCartAjax({{ $product->id }}, this.quantity, this.selectedVariantId);
+            addToCart(btn) {
+                const targetBtn = btn || (this && this.$el) || null;
+                if (typeof addToCartAjax === 'function') {
+                    addToCartAjax({{ $product->id }}, this.quantity, this.selectedVariantId, targetBtn);
+                }
             },
             buyNow() {
+                const variantId = this.selectedVariantId || (window.pdpSelectedVariantId || {{ $product->variants->first()?->id ?? 'null' }});
+                const qty = this.quantity || 1;
                 fetch('/cart/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    body: JSON.stringify({ product_id: {{ $product->id }}, quantity: this.quantity, variant_id: this.selectedVariantId })
+                    body: JSON.stringify({ product_id: {{ $product->id }}, quantity: qty, variant_id: variantId })
                 })
                 .then(res => res.json())
                 .then(() => {
@@ -244,7 +253,8 @@
                                         $shortSize = preg_match('/^\d+\s*ml/i', $variant->size_label, $m) ? $m[0] : (explode(' ', $variant->size_label)[0] ?? $variant->size_label);
                                     @endphp
                                     <button type="button"
-                                        @click="selectedVariantId = {{ $variant->id }}; selectedPrice = {{ $variant->price }}; selectedComparePrice = {{ $variant->compare_at_price ?? 0 }}; selectedLabel = '{{ $variant->size_label }}';"
+                                        @click="selectedVariantId = {{ $variant->id }}; selectedPrice = {{ $variant->price }}; selectedComparePrice = {{ $variant->compare_at_price ?? 0 }}; selectedLabel = '{{ $variant->size_label }}'; window.pdpSelectedVariantId = {{ $variant->id }};"
+                                        onclick="window.pdpSelectedVariantId = {{ $variant->id }};"
                                         :class="selectedVariantId === {{ $variant->id }} ? 'active' : ''"
                                         class="pdp-size-btn shadow-xs">
                                         <span>{{ $shortSize }}</span>
@@ -265,26 +275,29 @@
 
                                 <!-- Custom Luxury Quantity Stepper -->
                                 <div class="pdp-qty-stepper-box shadow-xs">
-                                    <button type="button" @click="if(quantity > 1) quantity--" class="pdp-qty-btn-luxury"
+                                    <button type="button" @click="if(quantity > 1) { quantity--; window.pdpQuantity = quantity; }" class="pdp-qty-btn-luxury"
                                         aria-label="Decrease quantity">
                                         <i class="fas fa-minus"></i>
                                     </button>
                                     <span class="pdp-qty-display-luxury" x-text="quantity">1</span>
-                                    <button type="button" @click="if(quantity < 10) quantity++" class="pdp-qty-btn-luxury"
+                                    <button type="button" @click="if(quantity < 10) { quantity++; window.pdpQuantity = quantity; }" class="pdp-qty-btn-luxury"
                                         aria-label="Increase quantity">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
 
                                 <!-- Primary Add To Bag Button -->
-                                <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2"
-                                    style="min-height: 42px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25) !important;">
+                                <button type="button" 
+                                    id="pdpMainAddToCartBtn"
+                                    @click="addToCart($event.currentTarget)" 
+                                    onclick="if(typeof addToCartAjax === 'function'){ addToCartAjax({{ $product->id }}, (window.pdpQuantity || 1), (window.pdpSelectedVariantId || {{ $product->variants->first()?->id ?? 'null' }}), this); }"
+                                    class="btn-pill-gold shadow-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2"
+                                    style="min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25) !important;">
                                     <i class="fas fa-cart-shopping text-white" style="font-size: 12px;" aria-hidden="true"></i>
-                                    <span class="text-nowrap text-white" style="font-size: 12px;">ADD TO BAG</span>
+                                    <span class="text-nowrap text-white" style="font-size: 12px; font-weight: 600;">ADD TO BAG</span>
                                 </button>
-                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 42px; font-size: 12px;">
+                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 44px; font-size: 12px; touch-action: manipulation; cursor: pointer;">
                                     <span>BUY NOW</span>
-                                    <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
                                 </button>
                             </div>
 
@@ -738,10 +751,16 @@
 
                 <!-- Right Buttons: BUY NOW + ADD TO BAG -->
                 <div class="pdp-sticky-actions">
-                    <button type="button" @click="buyNow()" class="pdp-sticky-btn-buy" aria-label="Buy Now Instantly">
+                    <button type="button" @click="buyNow()" class="pdp-sticky-btn-buy" style="touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer;" aria-label="Buy Now Instantly">
                         <span>BUY NOW</span>
                     </button>
-                    <button type="button" @click="addToCart()" class="pdp-sticky-btn-bag d-inline-flex align-items-center justify-content-center gap-1.5" aria-label="Add to Bag">
+                    <button type="button" 
+                        id="pdpStickyAddToCartBtn"
+                        @click="addToCart($event.currentTarget)" 
+                        onclick="if(typeof addToCartAjax === 'function'){ addToCartAjax({{ $product->id }}, (window.pdpQuantity || 1), (window.pdpSelectedVariantId || {{ $product->variants->first()?->id ?? 'null' }}), this); }"
+                        class="pdp-sticky-btn-bag d-inline-flex align-items-center justify-content-center gap-1.5" 
+                        style="touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; min-height: 40px;"
+                        aria-label="Add to Bag">
                         <i class="fas fa-cart-shopping text-white" style="font-size: 11.5px;" aria-hidden="true"></i>
                         <span>ADD TO BAG</span>
                     </button>

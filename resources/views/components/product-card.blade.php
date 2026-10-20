@@ -114,9 +114,9 @@
 
     <!-- Prominent Full-Width Luxury Add to Cart Button -->
     <div class="product-card-action mt-auto pt-2.5 pt-md-3" style="border-top: 1px solid #E8E0DA;">
-        <button onclick="addToCartAjax({{ $product->id }}, 1)" 
+        <button type="button" onclick="addToCartAjax({{ $product->id }}, 1, null, this)" 
                 class="w-100 btn-gold btn-cart-gradient py-2.5 px-3 tracking-wider fw-semibold d-flex align-items-center justify-content-center gap-2 text-white"
-                style="min-height: 42px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation;"
+                style="min-height: 42px; background-color: #541B29 !important; border-radius: 8px; border: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer;"
                 title="Add to Cart">
             <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 12px;" aria-hidden="true"></i>
             <span class="text-white text-nowrap" style="font-size: 12px; letter-spacing: 0.05em;">Add to Cart</span>

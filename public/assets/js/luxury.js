@@ -234,6 +234,25 @@ window.showLuxuryToast = function(message, type = 'success') {
 };
 
 // 5. Cart Drawer AJAX Engine
+window.openCartDrawer = function() {
+    const drawer = document.getElementById('luxuryCartDrawer');
+    const overlay = document.getElementById('cartDrawerOverlay');
+    if (typeof refreshCartDrawer === 'function') {
+        refreshCartDrawer();
+    }
+    if (drawer) drawer.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.classList.add('overflow-hidden');
+};
+
+window.closeCartDrawer = function() {
+    const drawer = document.getElementById('luxuryCartDrawer');
+    const overlay = document.getElementById('cartDrawerOverlay');
+    if (drawer) drawer.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.classList.remove('overflow-hidden');
+};
+
 function initCartDrawer() {
     const trigger = document.getElementById('cartDrawerTrigger');
     const drawer = document.getElementById('luxuryCartDrawer');
@@ -242,20 +261,30 @@ function initCartDrawer() {
 
     if (!drawer) return;
 
-    const openDrawer = () => {
-        refreshCartDrawer();
-        drawer.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-    };
+    if (trigger) {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.openCartDrawer();
+        });
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.closeCartDrawer();
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.closeCartDrawer();
+        });
+    }
 
-    const closeDrawer = () => {
-        drawer.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-    };
-
-    if (trigger) trigger.addEventListener('click', (e) => { e.preventDefault(); openDrawer(); });
-    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-    if (overlay) overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('active')) {
+            window.closeCartDrawer();
+        }
+    });
 }
 
 window.refreshCartDrawer = function() {
@@ -268,16 +297,25 @@ window.refreshCartDrawer = function() {
 };
 
 function renderCartUI(data) {
-    // Update badge counts
-    document.querySelectorAll('.cart-count-badge').forEach(b => b.innerText = data.count);
+    if (!data) return;
+
+    // Update all badge counts everywhere across desktop and mobile
+    const cartCount = data.count || 0;
+    document.querySelectorAll('.cart-count-badge, .cart-count, #cartCountBadge, #headerCartCount').forEach(b => {
+        b.innerText = cartCount;
+        b.textContent = cartCount;
+        if (cartCount > 0) {
+            b.style.display = 'inline-flex';
+        }
+    });
 
     const body = document.getElementById('cartDrawerItems');
     const subtotalEl = document.getElementById('cartDrawerSubtotal');
     const countEl = document.getElementById('cartDrawerHeaderCount');
     const footerEl = document.getElementById('cartDrawerFooter');
 
-    if (countEl) countEl.innerText = `${data.count} items`;
-    if (subtotalEl) subtotalEl.innerText = data.subtotal;
+    if (countEl) countEl.innerText = `${cartCount} items`;
+    if (subtotalEl) subtotalEl.innerText = data.subtotal || 'Rs. 0';
 
     const shippingFeeEl = document.getElementById('cartDrawerShippingFee');
     const shippingTextEl = document.getElementById('cartDrawerShippingText');
@@ -311,7 +349,7 @@ function renderCartUI(data) {
 
     if (!body) return;
 
-    if (data.items.length === 0) {
+    if (!data.items || data.items.length === 0) {
         if (footerEl) footerEl.style.display = 'none';
         body.innerHTML = `
             <div class="cart-empty-state text-center py-5 px-3">
@@ -322,7 +360,7 @@ function renderCartUI(data) {
                 <p class="text-xs font-sans mb-4 mx-auto" style="max-width: 270px; line-height: 1.6; color: #6B605B;">
                     Explore our handcrafted Extrait de Parfum impressions with 14+ hours longevity.
                 </p>
-                <a href="/collections/all" onclick="document.getElementById('closeCartDrawer').click()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-3 text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
+                <a href="/collections/all" onclick="window.closeCartDrawer()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-3 text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
                     <span>EXPLORE IMPRESSIONS</span>
                     <i class="fas fa-arrow-right-long"></i>
                 </a>
@@ -370,7 +408,23 @@ function renderCartUI(data) {
     `).join('');
 }
 
-window.addToCartAjax = function(productId, quantity = 1, variantId = null) {
+window.addToCartAjax = function(productId, quantity = 1, variantId = null, btnElement = null) {
+    if (!productId) return;
+
+    // Resolve trigger button if not passed directly
+    if (!btnElement && typeof event !== 'undefined' && event && event.target) {
+        btnElement = event.target.closest('button');
+    }
+    if (!btnElement) {
+        btnElement = document.querySelector('.pdp-sticky-btn-bag, .btn-pill-gold');
+    }
+
+    const originalHtml = btnElement ? btnElement.innerHTML : null;
+    if (btnElement) {
+        btnElement.disabled = true;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-white"></i> <span style="font-size: 11px;">ADDING...</span>';
+    }
+
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -379,15 +433,36 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null) {
         },
         body: JSON.stringify({ product_id: productId, quantity: quantity, variant_id: variantId })
     })
-    .then(res => res.json())
-    .then(data => {
-        renderCartUI(data);
-        const drawer = document.getElementById('luxuryCartDrawer');
-        const overlay = document.getElementById('cartDrawerOverlay');
-        if (drawer) drawer.classList.add('active');
-        if (overlay) overlay.classList.add('active');
+    .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
     })
-    .catch(err => console.error(err));
+    .then(data => {
+        if (typeof renderCartUI === 'function') {
+            renderCartUI(data);
+        }
+        window.openCartDrawer();
+
+        if (typeof window.bounceCartBadge === 'function') {
+            window.bounceCartBadge();
+        }
+
+        if (btnElement) {
+            btnElement.innerHTML = '<i class="fas fa-check text-white"></i> <span style="font-size: 11px;">ADDED!</span>';
+            setTimeout(() => {
+                btnElement.disabled = false;
+                if (originalHtml) btnElement.innerHTML = originalHtml;
+            }, 1400);
+        }
+    })
+    .catch(err => {
+        console.error('Add to cart request failed:', err);
+        if (btnElement) {
+            btnElement.disabled = false;
+            if (originalHtml) btnElement.innerHTML = originalHtml;
+        }
+        window.openCartDrawer();
+    });
 };
 
 window.addBundleToCart = function(bundleId, btnElement = null) {
@@ -772,74 +847,95 @@ function initPDPGallery() {
 }
 
 // 11. Mobile Nav Drawer & Accordion
+window.openMobileNav = function() {
+    const navDrawer = document.getElementById('mobileNavDrawer');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (navDrawer) {
+        navDrawer.classList.add('active');
+        navDrawer.removeAttribute('x-cloak');
+    }
+    if (backdrop) {
+        backdrop.classList.add('active');
+        backdrop.removeAttribute('x-cloak');
+    }
+    document.body.classList.add('overflow-hidden');
+    if (window.Alpine) {
+        try {
+            const bodyData = Alpine.$data(document.body);
+            if (bodyData && typeof bodyData.mobileMenuOpen !== 'undefined') {
+                bodyData.mobileMenuOpen = true;
+            }
+        } catch(e) {}
+    }
+};
+
+window.closeMobileNav = function() {
+    const navDrawer = document.getElementById('mobileNavDrawer');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (navDrawer) {
+        navDrawer.classList.remove('active');
+    }
+    if (backdrop) {
+        backdrop.classList.remove('active');
+    }
+    document.body.classList.remove('overflow-hidden');
+    if (window.Alpine) {
+        try {
+            const bodyData = Alpine.$data(document.body);
+            if (bodyData && typeof bodyData.mobileMenuOpen !== 'undefined') {
+                bodyData.mobileMenuOpen = false;
+            }
+        } catch(e) {}
+    }
+};
+
+window.toggleMobileNav = function() {
+    const navDrawer = document.getElementById('mobileNavDrawer');
+    if (navDrawer && navDrawer.classList.contains('active')) {
+        window.closeMobileNav();
+    } else {
+        window.openMobileNav();
+    }
+};
+
 function initMobileNav() {
     const menuBtn = document.getElementById('mobileMenuToggle');
     const navDrawer = document.getElementById('mobileNavDrawer');
     const closeBtn = document.getElementById('closeMobileNav');
     const backdrop = document.getElementById('mobileNavBackdrop');
 
-    if (!menuBtn && !navDrawer) return;
-
-    const openNav = () => {
-        if (navDrawer) navDrawer.classList.add('active');
-        if (backdrop) backdrop.classList.add('active');
-        document.body.classList.add('overflow-hidden');
-    };
-
-    const closeNav = () => {
-        if (navDrawer) navDrawer.classList.remove('active');
-        if (backdrop) backdrop.classList.remove('active');
-        document.body.classList.remove('overflow-hidden');
-    };
-
-    // If Alpine.js is loaded, Alpine handles @click and state synchronization.
-    // This vanilla listener acts as a bulletproof fallback if Alpine fails or is delayed.
     if (menuBtn) {
         menuBtn.addEventListener('click', (e) => {
-            if (!window.Alpine) {
-                e.preventDefault();
-                if (navDrawer && navDrawer.classList.contains('active')) {
-                    closeNav();
-                } else {
-                    openNav();
-                }
-            }
+            e.preventDefault();
+            window.toggleMobileNav();
         });
     }
 
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
-            if (!window.Alpine) {
-                e.preventDefault();
-                closeNav();
-            }
+            e.preventDefault();
+            window.closeMobileNav();
         });
     }
 
     if (backdrop) {
         backdrop.addEventListener('click', (e) => {
-            if (!window.Alpine) {
-                e.preventDefault();
-                closeNav();
-            }
+            e.preventDefault();
+            window.closeMobileNav();
         });
     }
 
     if (navDrawer) {
         navDrawer.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                if (!window.Alpine) {
-                    closeNav();
-                }
+                window.closeMobileNav();
             });
         });
     }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navDrawer && navDrawer.classList.contains('active')) {
-            if (!window.Alpine) {
-                closeNav();
-            }
+            window.closeMobileNav();
         }
     });
 }
