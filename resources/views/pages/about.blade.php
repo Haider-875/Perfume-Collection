@@ -14,16 +14,13 @@
             ['label' => 'Home', 'url' => route('home')]
         ]" />
 
-        <!-- Clean Atelier Pill Badge (Luxury Gradient) -->
-        <div class="d-inline-flex align-items-center justify-content-center mb-3 px-3.5 py-1.5 rounded-pill shadow-xs" 
-             style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; border: 1px solid rgba(255, 255, 255, 0.35);">
-            <span class="fw-bold text-uppercase tracking-luxury text-white" style="font-size: 10.5px; letter-spacing: 0.22em;">
-                HAUTE PARFUMERIE ATELIER • PAKISTAN
-            </span>
-        </div>
+        <!-- Subtitle Text (Clean luxury text, no pill badge) -->
+        <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #541B29;">
+            HAUTE PARFUMERIE ATELIER • PAKISTAN
+        </span>
 
         <h1 class="font-serif fw-bold mb-3" style="color: #211D1E; font-size: clamp(1.65rem, 3.5vw, 2.65rem); line-height: 1.25; letter-spacing: -0.01em;">
-            The Sacred Alchemy of <span class="gradient-gold-icon" style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; display: inline-block;">Extrait de Parfum</span>
+            The Sacred Alchemy of Extrait de Parfum
         </h1>
 
         <p class="mx-auto lh-base mb-4 fw-light" style="max-width: 680px; font-size: clamp(0.92rem, 1.8vw, 1.05rem); color: #5C524D; line-height: 1.7;">
@@ -96,12 +93,9 @@
         
         <!-- High Authority Narrative & Statement -->
         <div class="mx-auto text-center" style="max-width: 840px;">
-            <div class="d-inline-flex align-items-center justify-content-center mb-2 px-3 py-1 rounded-pill shadow-xs"
-                 style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; border: 1px solid rgba(255, 255, 255, 0.35);">
-                <span class="fw-bold text-uppercase tracking-luxury text-white" style="font-size: 10px; letter-spacing: 0.2em;">
-                    THE INDUSTRY REALITY
-                </span>
-            </div>
+            <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">
+                THE INDUSTRY REALITY
+            </span>
             <h2 class="font-serif fw-bold mb-3" style="color: #211D1E; font-size: clamp(1.4rem, 2.8vw, 2.2rem); line-height: 1.3;">
                 Why Designer Fragrances Vanish in Pakistan
             </h2>
@@ -168,12 +162,9 @@
     <div class="container px-3 px-lg-4">
         
         <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 700px;">
-            <div class="d-inline-flex align-items-center justify-content-center mb-2 px-3 py-1 rounded-pill shadow-xs"
-                 style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; border: 1px solid rgba(255, 255, 255, 0.35);">
-                <span class="fw-bold text-uppercase tracking-luxury text-white" style="font-size: 10px; letter-spacing: 0.2em;">
-                    OUR FOUR PILLARS
-                </span>
-            </div>
+            <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">
+                OUR FOUR PILLARS
+            </span>
             <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase mb-2" style="letter-spacing: 0.02em; color: #211D1E !important;">
                 The Compounding Standards
             </h2>
@@ -266,12 +257,9 @@
         
         <!-- Section Header -->
         <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 680px;">
-            <div class="d-inline-flex align-items-center justify-content-center mb-2 px-3 py-1 rounded-pill shadow-xs"
-                 style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; border: 1px solid rgba(255, 255, 255, 0.35);">
-                <span class="fw-bold text-uppercase tracking-luxury text-white" style="font-size: 10px; letter-spacing: 0.2em;">
-                    HONEST TRANSPARENCY
-                </span>
-            </div>
+            <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">
+                HONEST TRANSPARENCY
+            </span>
             <h2 class="font-serif fw-bold text-uppercase mb-2" style="color: #211D1E !important; font-size: clamp(1.4rem, 2.8vw, 2.15rem); line-height: 1.3;">
                 Commercial Designer vs. Perfumes Collection
             </h2>
@@ -532,12 +520,9 @@
     <div class="container px-3 px-lg-4">
         
         <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 680px;">
-            <div class="d-inline-flex align-items-center justify-content-center mb-2 px-3 py-1 rounded-pill shadow-xs"
-                 style="background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; border: 1px solid rgba(255, 255, 255, 0.35);">
-                <span class="fw-bold text-uppercase tracking-luxury text-white" style="font-size: 10px; letter-spacing: 0.2em;">
-                    OUR PROMISE TO YOU
-                </span>
-            </div>
+            <span class="d-inline-block mb-2 fw-semibold" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #541B29;">
+                OUR PROMISE TO YOU
+            </span>
             <h2 class="font-serif fs-2 fs-md-1 fw-bold text-uppercase mb-2" style="color: #211D1E !important;">
                 The Pakistani Patron Privilege
             </h2>
