@@ -61,6 +61,9 @@
 
     <style>
         [x-cloak] { display: none !important; }
+        body.page-entrance-active {
+            animation: pageEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
     @stack('styles')
 </head>
@@ -632,7 +635,7 @@
         <a href="https://wa.me/{{ $whatsappNum }}?text={{ urlencode('Salam! I am reaching out from your website for fragrance assistance.') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="luxury-dock-btn dock-btn-whatsapp text-white text-decoration-none shadow-lg position-relative"
+            class="luxury-dock-btn dock-btn-whatsapp text-white text-decoration-none shadow-lg position-relative pulse-luxury-ring"
             title="WhatsApp Concierge"
             aria-label="Contact Concierge on WhatsApp">
             <i class="fab fa-whatsapp fs-5"></i>

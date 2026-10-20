@@ -112,7 +112,7 @@
                                     @endphp
                                     <div class="col text-center">
                                         <div class="d-flex flex-column align-items-center gap-2.5">
-                                            <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 transition shadow-xs" 
+                                            <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 transition shadow-xs {{ $isCurrent ? 'pulse-luxury-ring' : '' }}" 
                                                  style="width: 40px; height: 40px; {{ $isPassed ? 'background: linear-gradient(135deg, #B83A58 0%, #7A1C33 100%); color: #FFFFFF;' : 'background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #6B605B;' }}">
                                                 @if($isPassed)
                                                     <i class="fas fa-check" style="font-size: 12px;"></i>
@@ -142,7 +142,7 @@
                                         $isCurrent = $index === $currentIndex;
                                     @endphp
                                     <div class="d-flex align-items-start gap-3 position-relative">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" 
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 {{ $isCurrent ? 'pulse-luxury-ring' : '' }}" 
                                              style="width: 30px; height: 30px; margin-left: -30px; {{ $isPassed ? 'background: linear-gradient(135deg, #B83A58 0%, #7A1C33 100%); color: #FFFFFF;' : 'background-color: #FFFFFF; border: 2px solid #D4C7BD; color: #786C67;' }}">
                                             @if($isPassed)
                                                 <i class="fas fa-check" style="font-size: 10px;"></i>

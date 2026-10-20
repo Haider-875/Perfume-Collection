@@ -61,33 +61,34 @@
                         <div class="pdp-flacon-stage w-100">
 
                             <!-- Badges Header -->
-                            <div class="position-absolute top-0 start-0 m-3 z-2 d-flex flex-column gap-1.5 font-sans">
+                            <div class="position-absolute top-0 start-0 m-3 z-2 d-flex flex-column gap-2 font-sans" style="gap: 8px;">
                                 @if($product->is_bestseller)
                                     <span
-                                        class="bg-wine-accent text-gold-soft border border-gold-40 px-2.5 py-1 rounded-pill shadow-sm text-uppercase fw-semibold"
-                                        style="font-size: 9.5px; letter-spacing: 0.1em;">
+                                        class="pdp-image-badge bg-wine-accent text-gold-soft border border-gold-40 px-2.5 py-1 rounded-pill shadow-sm text-uppercase fw-semibold d-inline-flex align-items-center justify-content-center text-center"
+                                        style="font-size: 9.5px; letter-spacing: 0.1em; line-height: 1.2;">
                                         ★ BESTSELLER
                                     </span>
                                 @elseif($product->is_new_arrival)
                                     <span
-                                        class="bg-success text-white border border-success px-2.5 py-1 rounded-pill shadow-sm text-uppercase fw-semibold"
-                                        style="font-size: 9.5px; letter-spacing: 0.1em;">
+                                        class="pdp-image-badge bg-success text-white border border-success px-2.5 py-1 rounded-pill shadow-sm text-uppercase fw-semibold d-inline-flex align-items-center justify-content-center text-center"
+                                        style="font-size: 9.5px; letter-spacing: 0.1em; line-height: 1.2;">
                                         NEW ARRIVAL
                                     </span>
                                 @endif
 
                                 <template x-if="savingsPercent > 0">
                                     <span
-                                        class="bg-gradient-discount-badge text-white px-2.5 py-0.5 rounded-pill shadow-sm border border-gold-30 fw-bold"
-                                        style="font-size: 9.5px; width: fit-content;">
-                                        UP TO <span x-text="savingsPercent"></span>% OFF
+                                        class="pdp-image-badge bg-gradient-discount-badge text-white px-2.5 py-1 rounded-pill shadow-sm border border-gold-30 fw-bold d-inline-flex align-items-center justify-content-center text-center"
+                                        style="font-size: 9.5px; width: fit-content; line-height: 1.2;">
+                                        UP TO <span x-text="savingsPercent" class="mx-1"></span>% OFF
                                     </span>
                                 </template>
                             </div>
 
                             <!-- 38% Extrait Badge on Right -->
                             <div class="position-absolute top-0 end-0 m-3 z-2 font-sans">
-                                <span class="badge-extrait shadow-sm">
+                                <span class="pdp-image-badge badge-extrait shadow-sm d-inline-flex align-items-center justify-content-center text-center"
+                                    style="font-size: 9.5px; letter-spacing: 0.08em; line-height: 1.2;">
                                     38% EXTRAIT
                                 </span>
                             </div>
@@ -229,19 +230,15 @@
                                     </span>
                                 </template>
                             </div>
-                            <div class="d-flex align-items-center gap-2 pt-1" style="font-size: 11.5px; color: #4A4240;">
-                                <i class="fas fa-truck-fast pdp-icon-gradient"></i>
-                                <span>Complimentary TCS Express Air Delivery on Orders Above Rs. 3,500</span>
-                            </div>
                         </div>
 
                         <!-- Flacon Size Variant Selector -->
                         <div class="d-flex flex-column gap-2.5 font-sans text-start my-1">
-                            <label class="d-block text-xs text-uppercase tracking-wider fw-medium mb-1"
-                                style="color: #110D0E !important;">
+                            <label class="d-block text-uppercase fw-semibold mb-1"
+                                style="font-size: 10px; letter-spacing: 0.12em; color: #541B29 !important;">
                                 SELECT BOTTLE SIZE
                             </label>
-                            <div class="d-flex flex-wrap gap-2 gap-sm-3">
+                            <div class="d-flex flex-wrap pdp-size-container gap-2 gap-sm-2.5" style="gap: 8px;">
                                 @forelse($product->variants as $variant)
                                     @php
                                         $shortSize = preg_match('/^\d+\s*ml/i', $variant->size_label, $m) ? $m[0] : (explode(' ', $variant->size_label)[0] ?? $variant->size_label);
@@ -250,12 +247,10 @@
                                         @click="selectedVariantId = {{ $variant->id }}; selectedPrice = {{ $variant->price }}; selectedComparePrice = {{ $variant->compare_at_price ?? 0 }}; selectedLabel = '{{ $variant->size_label }}';"
                                         :class="selectedVariantId === {{ $variant->id }} ? 'active' : ''"
                                         class="pdp-size-btn shadow-xs">
-                                        <i class="fas fa-wine-bottle pdp-size-btn-icon" aria-hidden="true"></i>
                                         <span>{{ $shortSize }}</span>
                                     </button>
                                 @empty
                                     <button type="button" class="pdp-size-btn active shadow-xs">
-                                        <i class="fas fa-wine-bottle pdp-size-btn-icon" aria-hidden="true"></i>
                                         <span>{{ $product->volume_ml }}ml</span>
                                     </button>
                                 @endforelse
@@ -283,11 +278,11 @@
 
                                 <!-- Primary Add To Bag Button -->
                                 <button type="button" @click="addToCart()" class="btn-pill-gold shadow-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2"
-                                    style="min-height: 48px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 18px rgba(120, 13, 36, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35) !important;">
-                                    <i class="fas fa-cart-shopping text-white" style="font-size: 13px;" aria-hidden="true"></i>
-                                    <span class="text-nowrap text-white">ADD TO BAG</span>
+                                    style="min-height: 42px; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25) !important;">
+                                    <i class="fas fa-cart-shopping text-white" style="font-size: 12px;" aria-hidden="true"></i>
+                                    <span class="text-nowrap text-white" style="font-size: 12px;">ADD TO BAG</span>
                                 </button>
-                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1">
+                                <button type="button" @click="buyNow()" class="btn-pill-buynow shadow-sm flex-grow-1" style="min-height: 42px; font-size: 12px;">
                                     <span>BUY NOW</span>
                                     <!-- <i class="fas fa-arrow-right-long btn-arrow"></i> -->
                                 </button>

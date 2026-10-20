@@ -184,8 +184,8 @@
                                 <span class="fw-bold font-mono" style="font-size: 11px; color: #541B29;">{{ $shippingPercent }}%</span>
                             </div>
                             <div class="progress" style="height: 6px; background-color: #E8E0DA; border-radius: 999px;">
-                                <div class="progress-bar" role="progressbar" 
-                                     style="width: {{ $shippingPercent }}%; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); border-radius: 999px;" 
+                                <div class="progress-bar progress-bar-luxury-shimmer" role="progressbar" 
+                                     style="width: {{ $shippingPercent }}%; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); border-radius: 999px; transition: width 0.8s var(--ease-luxury);" 
                                      aria-valuenow="{{ $shippingPercent }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>

@@ -6,9 +6,9 @@
 <div class="py-4 py-md-5 min-vh-100" style="background-color: #F7F3EE; border-bottom: 1px solid #E8E0DA; color: #211D1E;">
     <div class="container px-3 px-sm-4" style="max-width: 840px;">
         <!-- Success Celebration Banner -->
-        <div class="text-center mb-4 mb-md-5">
-            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 shadow-sm" style="width: 58px; height: 58px; background-color: #DEF7EC; border: 1px solid #31C48D; color: #0E9F6E;">
-                <i class="fas fa-check" style="font-size: 1.35rem;"></i>
+        <div class="text-center mb-4 mb-md-5 reveal-up">
+            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 shadow-sm pulse-success-ring" style="width: 62px; height: 62px; background-color: #DEF7EC; border: 1.5px solid #31C48D; color: #0E9F6E;">
+                <i class="fas fa-check" style="font-size: 1.45rem;"></i>
             </div>
 
             <span class="d-inline-block fw-semibold px-3 py-1 rounded-pill mb-2.5" style="font-size: 10.5px; letter-spacing: 0.25em; text-transform: uppercase; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">

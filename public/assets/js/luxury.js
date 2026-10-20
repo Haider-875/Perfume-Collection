@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuickView();
     initPDPGallery();
     initMobileNav();
+    initScrollRevealEngine();
+    initLuxuryMicroInteractions();
+    initPageTransitions();
 });
 
 // 1. Header scroll blur
@@ -840,3 +843,97 @@ function initMobileNav() {
         }
     });
 }
+
+// 12. High-Performance IntersectionObserver Scroll-Reveal Engine
+function initScrollRevealEngine() {
+    // If user prefers reduced motion, immediately reveal everything
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-fade, .reveal-scale').forEach(el => {
+            el.classList.add('is-revealed');
+        });
+        return;
+    }
+
+    // Auto-tag major content blocks across pages that don't have manual reveal classes
+    const autoRevealTargets = document.querySelectorAll(
+        'section:not(.hero-slider-section), .home-category-card, .blog-card, .why-choose-card, .order-details-card'
+    );
+    autoRevealTargets.forEach(el => {
+        if (!el.classList.contains('reveal-on-scroll') && !el.classList.contains('reveal-up')) {
+            el.classList.add('reveal-on-scroll');
+        }
+    });
+
+    // Auto-stagger card grids across the site
+    const cardGrids = document.querySelectorAll('.row, .swiper-wrapper, .products-grid');
+    cardGrids.forEach(grid => {
+        const cards = grid.querySelectorAll('.product-card, .bundle-card, .home-category-card, .luxury-hover-card');
+        cards.forEach((card, idx) => {
+            if (!card.classList.contains('reveal-on-scroll')) {
+                card.classList.add('reveal-on-scroll');
+                const staggerIndex = (idx % 6) + 1;
+                card.classList.add(`stagger-${staggerIndex}`);
+            }
+        });
+    });
+
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-fade, .reveal-scale').forEach(el => {
+            el.classList.add('is-revealed');
+        });
+        return;
+    }
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-up, .reveal-fade, .reveal-scale');
+    revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// 13. Luxury Micro-Interactions & Tap Physics
+function initLuxuryMicroInteractions() {
+    // Shimmer sheen on primary gold action buttons & badges
+    document.querySelectorAll('.collidez-pill--gold, .btn-pill-gold, .btn-luxury-primary').forEach(btn => {
+        if (!btn.classList.contains('shimmer-gold')) {
+            btn.classList.add('shimmer-gold');
+        }
+    });
+
+    // Animate cart badge on update
+    window.bounceCartBadge = function() {
+        const badge = document.querySelector('.cart-count-badge');
+        if (badge) {
+            badge.classList.remove('cart-bounce-pop');
+            void badge.offsetWidth; // Trigger reflow for spring animation
+            badge.classList.add('cart-bounce-pop');
+        }
+    };
+
+    // Global listener for cart additions
+    window.addEventListener('cart-updated', () => {
+        window.bounceCartBadge();
+    });
+}
+
+// 14. Smooth Page Entrance
+function initPageTransitions() {
+    document.body.classList.add('page-entrance-active');
+    requestAnimationFrame(() => {
+        document.body.classList.add('page-loaded');
+    });
+}
+
