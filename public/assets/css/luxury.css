@@ -1536,9 +1536,38 @@ h3.product-card-title {
 }
 
 .product-card-pricing {
-    min-height: 1.5rem;
+    display: flex;
     align-items: baseline;
     justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    white-space: nowrap;
+    min-height: 1.5rem;
+}
+
+.product-price-compare {
+    color: #8C827A !important;
+    font-size: 13px !important;
+    text-decoration: line-through !important;
+    font-weight: 400 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.product-price-main {
+    color: #541B29 !important;
+    background: none !important;
+    -webkit-text-fill-color: #541B29 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    font-family: 'Poppins', sans-serif !important;
+    letter-spacing: -0.01em !important;
+}
+
+.product-price-volume {
+    color: #786C67 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .product-card-rating {
@@ -3731,8 +3760,12 @@ svg {
 
     .product-card-pricing {
         font-size: 11px !important;
-        flex-wrap: wrap !important;
-        gap: 2px !important;
+        display: flex !important;
+        align-items: baseline !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+        gap: 4.5px !important;
+        white-space: nowrap !important;
     }
 
     .product-card .btn-gold {
@@ -3876,6 +3909,7 @@ svg {
 
     .product-card-pricing {
         font-size: 10.5px !important;
+        flex-wrap: nowrap !important;
     }
 
     .btn-pill-gold,
@@ -5865,8 +5899,6 @@ body.overflow-hidden {
 /* -------------------------------------------------------------------------- */
 /* 14. Master Global White Price Typography Suite                             */
 /* -------------------------------------------------------------------------- */
-.product-card-pricing,
-.product-card-pricing span:not(.product-price-main):not(.product-price-savings),
 .cart-item-price,
 #cartDrawerSubtotal,
 .bundle-pricing-card .hero-title,
@@ -5877,7 +5909,6 @@ body.overflow-hidden {
 }
 
 .pdp-sticky-price,
-.product-price-main,
 .price-gradient-luxury {
     background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important;
     -webkit-background-clip: text !important;
@@ -6899,19 +6930,20 @@ body.overflow-hidden {
         text-decoration: none !important;
     }
 
-    /* 3. Product Price: Clear, prominent Maroon & Charcoal contrast with uniform row height */
+    /* 3. Product Price: Clear, prominent Maroon & Charcoal contrast strictly on a single baseline row */
     .product-card .product-card-pricing,
     .bundle-card .product-card-pricing {
         display: flex !important;
-        align-items: center !important;
+        align-items: baseline !important;
         justify-content: center !important;
-        flex-wrap: wrap !important;
-        gap: 6px !important;
+        flex-wrap: nowrap !important;
+        gap: 4px !important;
         margin-top: 4px !important;
         margin-bottom: 6px !important;
         line-height: 1.2 !important;
         text-align: center !important;
         min-height: unset !important;
+        white-space: nowrap !important;
     }
 
     .product-card .product-price-compare {
@@ -6919,19 +6951,28 @@ body.overflow-hidden {
         color: #8C827A !important;
         text-decoration: line-through !important;
         font-weight: 400 !important;
-        opacity: 0.9 !important;
+        opacity: 0.85 !important;
+        font-family: 'Poppins', sans-serif !important;
+        white-space: nowrap !important;
     }
 
     .product-card .product-price-main {
-        font-size: 15px !important;
+        font-size: 14.5px !important;
         font-weight: 700 !important;
         color: #541B29 !important;
+        background: none !important;
+        -webkit-text-fill-color: #541B29 !important;
         line-height: 1.2 !important;
+        font-family: 'Poppins', sans-serif !important;
+        white-space: nowrap !important;
     }
 
-    .product-card .product-volume-pill {
-        font-size: 9px !important;
-        padding: 2px 6.5px !important;
+    .product-card .product-price-volume {
+        font-size: 10.5px !important;
+        font-weight: 500 !important;
+        color: #786C67 !important;
+        font-family: 'Poppins', sans-serif !important;
+        white-space: nowrap !important;
     }
 
     /* 4. Product & Bundle Button: Full-width, comfortable touch size (>= 40px), elegant typography */

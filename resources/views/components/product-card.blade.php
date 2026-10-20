@@ -83,20 +83,18 @@
             <a href="{{ route('shop.show', $product->slug) }}" class="text-decoration-none" style="color: #211D1E !important;">{{ $product->name }}</a>
         </h3>
 
-        <!-- Unique Luxury Price & Volume Presentation (Center Aligned, Clear & Prominent) -->
-        <div class="product-card-pricing my-1.5 d-flex align-items-center justify-content-center gap-1.5 flex-wrap">
+        <!-- Simple Clean Luxury Pricing: Compare At Price + Our Price + Volume ML -->
+        <div class="product-card-pricing my-1.5 d-flex align-items-baseline justify-content-center gap-1.5 flex-nowrap">
             @if($product->compare_at_price && $product->compare_at_price > $product->effective_price)
-                <span class="product-price-compare text-decoration-line-through text-nowrap" 
-                      style="color: #8C827A; font-size: 0.85rem; font-weight: 400; opacity: 0.9;">
+                <span class="product-price-compare text-decoration-line-through text-nowrap">
                     Rs. {{ number_format($product->compare_at_price, 0) }}
                 </span>
             @endif
-            <span class="product-price-main price-gradient-luxury fw-bold font-serif text-nowrap" style="font-size: 1.15rem !important; line-height: 1.2; letter-spacing: -0.01em;">
-                {{ $product->formatted_effective_price }}
+            <span class="product-price-main fw-bold text-nowrap">
+                Rs. {{ number_format($product->effective_price, 0) }}
             </span>
-            <span class="product-volume-pill text-uppercase fw-semibold d-inline-flex align-items-center justify-content-center shadow-2xs"
-                  style="font-size: 9.5px; color: #541B29; background-color: #FAF4EB; border: 1px solid #EAD8B8; border-radius: 999px; padding: 2px 7px; letter-spacing: 0.04em; line-height: 1.15; font-family: 'Poppins', sans-serif;">
-                {{ $product->volume_ml ?: 50 }}ml
+            <span class="product-price-volume text-nowrap">
+                ({{ $product->volume_ml ?: 50 }}ml)
             </span>
         </div>
 

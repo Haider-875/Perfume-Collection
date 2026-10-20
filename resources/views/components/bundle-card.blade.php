@@ -62,20 +62,19 @@
             </p>
         @endif
 
-        <!-- Dual Pricing / Range (Increased price size for prominent luxury presentation) -->
-        <div class="product-card-pricing mt-auto pt-2 mb-1 d-flex align-items-baseline justify-content-center gap-2 flex-wrap">
+        <!-- Dual Pricing / Range (Clean Luxury Presentation: Compare at + Bundle Price) -->
+        <div class="product-card-pricing mt-auto pt-2 mb-1 d-flex align-items-baseline justify-content-center gap-1.5 flex-nowrap">
             @if($bundle->original_price > $bundle->bundle_price)
-                <span class="product-price-min text-decoration-line-through fw-normal text-nowrap" style="color: #786C67; font-size: 13px;">
+                <span class="product-price-compare text-decoration-line-through text-nowrap">
                     {{ $bundle->formatted_original_price }}
                 </span>
-                <span class="product-price-sep opacity-50 fw-light d-none d-sm-inline" style="color: #786C67 !important;">&bull;</span>
             @endif
-            <span class="product-price-main price-gradient-luxury fw-bold font-serif text-nowrap" style="font-size: 1.45rem !important; line-height: 1.2;">
+            <span class="product-price-main fw-bold text-nowrap">
                 {{ $bundle->formatted_bundle_price }}
             </span>
             @if($bundle->savings_amount > 0)
-                <span class="product-price-savings fw-semibold text-nowrap" style="font-size: 11px;">
-                    Save {{ $bundle->formatted_savings }}
+                <span class="product-price-volume text-nowrap" style="color: #2D6A4F !important; font-weight: 600;">
+                    (Save {{ $bundle->formatted_savings }})
                 </span>
             @endif
         </div>
