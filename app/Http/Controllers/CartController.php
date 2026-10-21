@@ -63,13 +63,42 @@ class CartController extends Controller
         $bundleId = $request->input('bundle_id');
         $quantity = max(1, (int)$request->input('quantity', 1));
 
+        // Clean string literals and empty inputs from JS requests
+        if ($variantId === 'null' || $variantId === '' || $variantId === 0 || $variantId === 'undefined') {
+            $variantId = null;
+        }
+        if ($productId === 'null' || $productId === '' || $productId === 0 || $productId === 'undefined') {
+            $productId = null;
+        }
+        if ($bundleId === 'null' || $bundleId === '' || $bundleId === 0 || $bundleId === 'undefined') {
+            $bundleId = null;
+        }
+
+        $productId = $productId !== null ? (int)$productId : null;
+        $variantId = $variantId !== null ? (int)$variantId : null;
+        $bundleId = $bundleId !== null ? (int)$bundleId : null;
+
+        if (!$productId && !$variantId && !$bundleId) {
+            if ($request->wantsJson() || $request->ajax() || $request->isJson() || str_contains($request->header('Content-Type', ''), 'application/json')) {
+                return response()->json(['error' => 'Product or bundle is required'], 422);
+            }
+            return redirect()->back()->with('error', 'Please select a valid fragrance or bundle.');
+        }
+
         $this->cartService->addItem($cart, $productId, $variantId, $bundleId, $quantity);
 
-        if ($request->input('redirect') === 'checkout' || $request->boolean('buy_now') || (!$request->wantsJson() && !$request->ajax())) {
+        if ($request->input('redirect') === 'checkout' || $request->boolean('buy_now')) {
             return redirect()->to('/checkout', 303);
         }
 
-        return $this->getDrawer($request);
+        // Return JSON drawer response for AJAX/Fetch requests
+        if ($request->wantsJson() || $request->ajax() || $request->isJson() || 
+            str_contains($request->header('Content-Type', ''), 'application/json') ||
+            str_contains($request->header('Accept', ''), 'application/json')) {
+            return $this->getDrawer($request);
+        }
+
+        return redirect()->to('/checkout', 303);
     }
 
     public function update(Request $request)

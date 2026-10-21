@@ -96,30 +96,15 @@ window.ScrollLock = (function() {
             activeLocks.add(lockId);
 
             if (!wasLocked) {
-                // Record current scroll position before modifying styles
                 savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-
-                // Detect desktop scrollbar width to prevent horizontal layout shift
                 const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
                 savedStyles = {
-                    position: document.body.style.position,
-                    top: document.body.style.top,
-                    left: document.body.style.left,
-                    width: document.body.style.width,
-                    height: document.body.style.height,
                     overflow: document.body.style.overflow,
                     paddingRight: document.body.style.paddingRight
                 };
 
-                document.documentElement.classList.add('scroll-locked');
                 document.body.classList.add('scroll-locked');
-
-                document.body.style.position = 'fixed';
-                document.body.style.top = `-${savedScrollY}px`;
-                document.body.style.left = '0';
-                document.body.style.width = '100%';
-                document.body.style.height = '100%';
                 document.body.style.overflow = 'hidden';
 
                 if (scrollbarWidth > 0) {
@@ -145,31 +130,13 @@ window.ScrollLock = (function() {
 
             // Only release when no overlays are active
             if (activeLocks.size === 0) {
-                const targetY = savedScrollY;
-
-                // Disable smooth scrolling temporarily to prevent jump animation
-                const html = document.documentElement;
-                const prevBehavior = html.style.scrollBehavior;
-                html.style.scrollBehavior = 'auto';
-
-                document.documentElement.classList.remove('scroll-locked');
                 document.body.classList.remove('scroll-locked');
 
                 if (savedStyles) {
-                    document.body.style.position = savedStyles.position || '';
-                    document.body.style.top = savedStyles.top || '';
-                    document.body.style.left = savedStyles.left || '';
-                    document.body.style.width = savedStyles.width || '';
-                    document.body.style.height = savedStyles.height || '';
                     document.body.style.overflow = savedStyles.overflow || '';
                     document.body.style.paddingRight = savedStyles.paddingRight || '';
                     savedStyles = null;
                 } else {
-                    document.body.style.position = '';
-                    document.body.style.top = '';
-                    document.body.style.left = '';
-                    document.body.style.width = '';
-                    document.body.style.height = '';
                     document.body.style.overflow = '';
                     document.body.style.paddingRight = '';
                 }
@@ -181,16 +148,10 @@ window.ScrollLock = (function() {
                     document.removeEventListener('touchstart', onTouchStart, { passive: true });
                     touchStartAttached = false;
                 }
-                if (touchMoveAttached) {
+                if (!touchMoveAttached) {
                     document.removeEventListener('touchmove', onTouchMove, { passive: false });
                     touchMoveAttached = false;
                 }
-
-                window.scrollTo(0, targetY);
-                requestAnimationFrame(() => {
-                    window.scrollTo(0, targetY);
-                    html.style.scrollBehavior = prevBehavior;
-                });
             }
         },
 
@@ -208,6 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
     initSwiperSliders();
     initCartDrawer();
+    if (typeof window.refreshCartCount === 'function') {
+        window.refreshCartCount();
+    }
     initBackToTop();
     initScentQuiz();
     initDeliveryEstimator();
@@ -438,6 +402,8 @@ window.showLuxuryToast = function(message, type = 'success') {
 window.openCartDrawer = function() {
     const drawer = document.getElementById('luxuryCartDrawer');
     const overlay = document.getElementById('cartDrawerOverlay');
+    // Guard: already open
+    if (drawer && drawer.classList.contains('active')) return;
     if (typeof refreshCartDrawer === 'function') {
         refreshCartDrawer();
     }
@@ -446,6 +412,7 @@ window.openCartDrawer = function() {
     if (window.ScrollLock) {
         window.ScrollLock.lock('cart-drawer');
     }
+    document.body.setAttribute('data-cart-open', '1');
 };
 
 window.closeCartDrawer = function() {
@@ -456,25 +423,24 @@ window.closeCartDrawer = function() {
     if (window.ScrollLock) {
         window.ScrollLock.unlock('cart-drawer');
     }
+    document.body.removeAttribute('data-cart-open');
 };
 
 function initCartDrawer() {
-    const trigger = document.getElementById('cartDrawerTrigger');
     const drawer = document.getElementById('luxuryCartDrawer');
     const overlay = document.getElementById('cartDrawerOverlay');
     const closeBtn = document.getElementById('closeCartDrawer');
 
     if (!drawer) return;
 
-    if (trigger) {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.openCartDrawer();
-        });
-    }
+    // NOTE: The cartDrawerTrigger button already has onclick="window.openCartDrawer()"
+    // in the HTML. We do NOT add another click listener here to avoid double-firing.
+    // Only wire up close button and overlay click.
+
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             window.closeCartDrawer();
         });
     }
@@ -493,12 +459,40 @@ function initCartDrawer() {
 }
 
 window.refreshCartDrawer = function() {
-    fetch('/cart/drawer')
+    fetch('/cart/drawer', {
+        headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
         .then(res => res.json())
         .then(data => {
             renderCartUI(data);
         })
         .catch(err => console.error('Cart drawer fetch failed', err));
+};
+
+/**
+ * Silently refresh only the cart badge count without opening the drawer.
+ * Called on every page load so the badge is accurate after refresh.
+ */
+window.refreshCartCount = function() {
+    fetch('/cart/drawer', {
+        headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (!data) return;
+            const cartCount = data.count || 0;
+            document.querySelectorAll('.cart-count-badge, .cart-count, #cartCountBadge, #headerCartCount').forEach(b => {
+                b.innerText = cartCount;
+                b.textContent = cartCount;
+            });
+        })
+        .catch(() => {}); // Fail silently on page load
 };
 
 function renderCartUI(data) {
@@ -634,6 +628,8 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null, btnEl
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN': getCsrfToken()
         },
         body: JSON.stringify({ product_id: productId, quantity: quantity, variant_id: variantId })
@@ -646,7 +642,12 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null, btnEl
         if (typeof renderCartUI === 'function') {
             renderCartUI(data);
         }
-        window.openCartDrawer();
+
+        // Only open drawer on desktop/tablet (never on mobile < 768px as requested)
+        const isMobile = window.innerWidth < 768;
+        if (!isMobile && typeof window.openCartDrawer === 'function') {
+            window.openCartDrawer();
+        }
 
         if (typeof window.bounceCartBadge === 'function') {
             window.bounceCartBadge();
@@ -666,7 +667,6 @@ window.addToCartAjax = function(productId, quantity = 1, variantId = null, btnEl
             btnElement.disabled = false;
             if (originalHtml) btnElement.innerHTML = originalHtml;
         }
-        window.openCartDrawer();
     });
 };
 
@@ -748,6 +748,8 @@ window.updateCartItemQty = function(itemId, qty) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN': getCsrfToken()
         },
         body: JSON.stringify({ item_id: itemId, quantity: qty })
@@ -761,6 +763,8 @@ window.removeCartItem = function(itemId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN': getCsrfToken()
         },
         body: JSON.stringify({ item_id: itemId })
@@ -1206,11 +1210,20 @@ function initLuxuryMicroInteractions() {
 
     // Animate cart badge on update
     window.bounceCartBadge = function() {
-        const badge = document.querySelector('.cart-count-badge');
-        if (badge) {
+        document.querySelectorAll('.cart-count-badge, .cart-count, #cartCountBadge').forEach(badge => {
             badge.classList.remove('cart-bounce-pop');
             void badge.offsetWidth; // Trigger reflow for spring animation
             badge.classList.add('cart-bounce-pop');
+        });
+
+        // Spring bounce the navbar cart trigger icon so user gets immediate visual feedback
+        const trigger = document.getElementById('cartDrawerTrigger');
+        if (trigger) {
+            trigger.style.transition = 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            trigger.style.transform = 'scale(1.22)';
+            setTimeout(() => {
+                trigger.style.transform = 'scale(1)';
+            }, 250);
         }
     };
 
@@ -1223,8 +1236,9 @@ function initLuxuryMicroInteractions() {
 // 14. Smooth Page Entrance
 function initPageTransitions() {
     document.body.classList.add('page-entrance-active');
-    requestAnimationFrame(() => {
+    setTimeout(() => {
+        document.body.classList.remove('page-entrance-active');
         document.body.classList.add('page-loaded');
-    });
+    }, 400);
 }
 

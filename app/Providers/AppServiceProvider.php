@@ -39,6 +39,17 @@ class AppServiceProvider extends ServiceProvider
             }
             $view->with('whatsappNum', $cleanWhatsapp ?: '923363685732');
             $view->with('settings', function_exists('settings') ? settings() : []);
+
+            $cartCount = 0;
+            try {
+                if (request()->hasSession()) {
+                    $cart = app(\App\Services\CartService::class)->getCart(request());
+                    $cartCount = (int) $cart->items->sum('quantity');
+                }
+            } catch (\Throwable $e) {
+                // Fail silently
+            }
+            $view->with('cartCount', $cartCount);
         });
     }
 }

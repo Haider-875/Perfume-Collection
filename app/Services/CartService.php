@@ -21,8 +21,16 @@ class CartService
         if ($userId) {
             $userCart = Cart::firstOrCreate(['user_id' => $userId]);
 
-            // Merge guest cart if one exists with this session
-            $guestCart = Cart::where('session_id', $sessionId)->whereNull('user_id')->first();
+            // Merge guest cart if one exists with this session or session cart_id
+            $guestCartId = $request->session()->get('cart_id');
+            $guestCart = null;
+            if ($guestCartId) {
+                $guestCart = Cart::where('id', $guestCartId)->whereNull('user_id')->first();
+            }
+            if (!$guestCart && $sessionId) {
+                $guestCart = Cart::where('session_id', $sessionId)->whereNull('user_id')->first();
+            }
+
             if ($guestCart && $guestCart->id !== $userCart->id) {
                 $this->mergeCarts($guestCart, $userCart);
             }
@@ -32,7 +40,25 @@ class CartService
             return $userCart;
         }
 
-        $guestCart = Cart::firstOrCreate(['session_id' => $sessionId]);
+        // Guest cart: lookup by session cart_id first, then session_id
+        $cartId = $request->session()->get('cart_id');
+        $guestCart = null;
+        if ($cartId) {
+            $guestCart = Cart::where('id', $cartId)->whereNull('user_id')->first();
+        }
+        if (!$guestCart && $sessionId) {
+            $guestCart = Cart::where('session_id', $sessionId)->whereNull('user_id')->first();
+        }
+        if (!$guestCart) {
+            $guestCart = Cart::create(['session_id' => $sessionId]);
+        } elseif ($sessionId && $guestCart->session_id !== $sessionId) {
+            $guestCart->session_id = $sessionId;
+            $guestCart->save();
+        }
+
+        // Store in session so Laravel persists the session file and Set-Cookie header
+        $request->session()->put('cart_id', $guestCart->id);
+
         $guestCart->load(['items.product', 'items.variant', 'items.bundle']);
         $this->revalidateCartTotals($guestCart);
         return $guestCart;
@@ -85,9 +111,15 @@ class CartService
                 $productId = $firstItem ? $firstItem->product_id : Product::first()?->id;
             }
         } elseif ($variantId) {
-            $variant = ProductVariant::findOrFail($variantId);
-            $price = $variant->effective_price;
-            $productId = $variant->product_id;
+            $variant = ProductVariant::find($variantId);
+            if ($variant) {
+                $price = $variant->effective_price;
+                $productId = $variant->product_id;
+            } elseif ($productId) {
+                $product = Product::findOrFail($productId);
+                $price = $product->effective_price;
+                $variantId = null;
+            }
         } elseif ($productId) {
             $product = Product::findOrFail($productId);
             $price = $product->effective_price;
@@ -153,6 +185,9 @@ class CartService
         $cart->coupon_code = null;
         $cart->discount_amount = 0;
         $cart->save();
+        if (request()->hasSession()) {
+            request()->session()->forget('cart_id');
+        }
     }
 
     public function applyCoupon(Cart $cart, string $code): array

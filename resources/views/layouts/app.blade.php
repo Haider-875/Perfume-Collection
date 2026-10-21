@@ -62,7 +62,7 @@
     <style>
         [x-cloak] { display: none !important; }
         body.page-entrance-active {
-            animation: pageEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: pageEntrance 0.35s ease-out;
         }
     </style>
     @stack('styles')
@@ -224,7 +224,7 @@
                         style="color: #211D1E !important; touch-action: manipulation; cursor: pointer; transition: opacity 0.2s ease; width: 44px; height: 44px; min-width: 44px; min-height: 44px;">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="cart-count-badge position-absolute rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="top: 2px; right: 2px; width: 18px; height: 18px; font-size: 10px; font-weight: 600; background-color: #541B29 !important; color: #FFFFFF !important;">
-                            0
+                            {{ $cartCount ?? 0 }}
                         </span>
                     </button>
                 </div>

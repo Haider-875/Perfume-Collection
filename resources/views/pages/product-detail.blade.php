@@ -290,7 +290,6 @@
                                 <button type="button" 
                                     id="pdpMainAddToCartBtn"
                                     @click="addToCart($event.currentTarget)" 
-                                    onclick="if(typeof addToCartAjax === 'function'){ addToCartAjax({{ $product->id }}, (window.pdpQuantity || 1), (window.pdpSelectedVariantId || {{ $product->variants->first()?->id ?? 'null' }}), this); }"
                                     class="btn-pill-gold shadow-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2"
                                     style="min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; border: none !important; outline: none !important; color: #FFFFFF !important; box-shadow: 0 4px 14px rgba(120, 13, 36, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25) !important;">
                                     <i class="fas fa-cart-shopping text-white" style="font-size: 12px;" aria-hidden="true"></i>
@@ -757,7 +756,6 @@
                     <button type="button" 
                         id="pdpStickyAddToCartBtn"
                         @click="addToCart($event.currentTarget)" 
-                        onclick="if(typeof addToCartAjax === 'function'){ addToCartAjax({{ $product->id }}, (window.pdpQuantity || 1), (window.pdpSelectedVariantId || {{ $product->variants->first()?->id ?? 'null' }}), this); }"
                         class="pdp-sticky-btn-bag d-inline-flex align-items-center justify-content-center gap-1.5" 
                         style="touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer; min-height: 40px;"
                         aria-label="Add to Bag">
