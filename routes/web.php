@@ -271,6 +271,7 @@ Route::get('/seed-bundles', function (\Illuminate\Http\Request $request) {
 
 Route::get('/seed-production-migrate', function (\Illuminate\Http\Request $request) {
     Artisan::call('migrate', ['--force' => true]);
+    dd('d');
 
 });
 Route::get('/seed-production-catalog', function (\Illuminate\Http\Request $request) {
