@@ -255,6 +255,8 @@ class AdminProductController extends Controller
             'is_best_seller' => ['nullable'],
             'is_new_arrival' => ['nullable'],
             'primary_image' => ['nullable', 'image', 'max:4096'],
+            'hover_image' => ['nullable', 'image', 'max:4096'],
+            'gallery_images.*' => ['nullable', 'image', 'max:4096'],
         ]);
 
         $oldPrice = $product->price;
@@ -265,7 +267,20 @@ class AdminProductController extends Controller
             $dest = public_path('uploads/products');
             if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
             $file->move($dest, $filename);
+            $oldThumb = $product->thumbnail_image;
             $product->thumbnail_image = 'uploads/products/' . $filename;
+            $this->safelyDeleteImageFile($oldThumb);
+        }
+
+        if ($request->hasFile('hover_image')) {
+            $file = $request->file('hover_image');
+            $filename = 'hover_' . time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            $dest = public_path('uploads/products');
+            if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
+            $file->move($dest, $filename);
+            $oldHover = $product->hover_image;
+            $product->hover_image = 'uploads/products/' . $filename;
+            $this->safelyDeleteImageFile($oldHover);
         }
 
         $isBestseller = $request->has('is_bestseller') || $request->has('is_best_seller');
@@ -328,6 +343,25 @@ class AdminProductController extends Controller
             }
         }
 
+        // Upload additional gallery images if provided
+        if ($request->hasFile('gallery_images')) {
+            $dest = public_path('uploads/products');
+            if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
+            foreach ($request->file('gallery_images') as $file) {
+                if ($file && $file->isValid()) {
+                    $filename = 'gallery_' . time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+                    $file->move($dest, $filename);
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => 'uploads/products/' . $filename,
+                        'alt_text' => $product->name,
+                        'sort_order' => $product->images()->count() + 1,
+                        'is_primary' => false,
+                    ]);
+                }
+            }
+        }
+
         if ($oldPrice != $product->price) {
             ActivityLog::record('price_change', "Price updated for [{$product->name}] from Rs. {$oldPrice} to Rs. {$product->price}", $product, [
                 'old_price' => $oldPrice,
@@ -338,6 +372,86 @@ class AdminProductController extends Controller
         }
 
         return redirect()->route('admin.products.index')->with('success', "Fragrance [{$product->name}] updated successfully.");
+    }
+
+    /**
+     * Remove an extra gallery image from a product and safely delete the file if unused
+     */
+    public function destroyGalleryImage($productId, $imageId)
+    {
+        $product = Product::findOrFail($productId);
+        $image = ProductImage::where('product_id', $product->id)->where('id', $imageId)->firstOrFail();
+
+        $path = $image->image_path;
+        $image->delete();
+
+        $this->safelyDeleteImageFile($path);
+
+        ActivityLog::record('image_deleted', "Removed gallery image for product [{$product->name}]", $product);
+
+        if (request()->ajax() || request()->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'Gallery image removed successfully.']);
+        }
+
+        return back()->with('success', 'Gallery image removed successfully.');
+    }
+
+    /**
+     * Remove a primary (thumbnail) or hover image from a product and safely clean up file
+     */
+    public function removeSpecialImage($productId, Request $request)
+    {
+        $product = Product::findOrFail($productId);
+        $type = $request->input('type');
+
+        if ($type === 'primary') {
+            $path = $product->thumbnail_image;
+            $product->thumbnail_image = null;
+            $product->save();
+            $this->safelyDeleteImageFile($path);
+            ActivityLog::record('image_deleted', "Removed primary image for product [{$product->name}]", $product);
+            $msg = 'Primary image removed successfully.';
+        } elseif ($type === 'hover') {
+            $path = $product->hover_image;
+            $product->hover_image = null;
+            $product->save();
+            $this->safelyDeleteImageFile($path);
+            ActivityLog::record('image_deleted', "Removed hover image for product [{$product->name}]", $product);
+            $msg = 'Hover image removed successfully.';
+        } else {
+            return back()->with('error', 'Invalid image type requested for removal.');
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => $msg]);
+        }
+
+        return back()->with('success', $msg);
+    }
+
+    /**
+     * Accidental Data Loss Prevention: Safely delete an uploaded image file ONLY if not used elsewhere
+     */
+    protected function safelyDeleteImageFile(?string $path): void
+    {
+        if (!$path) return;
+
+        // Never delete system/theme default assets
+        if (!str_starts_with($path, 'uploads/')) {
+            return;
+        }
+
+        // Verify no other product or gallery item references this file
+        $inProductsThumb = Product::where('thumbnail_image', $path)->exists();
+        $inProductsHover = Product::where('hover_image', $path)->exists();
+        $inGallery = ProductImage::where('image_path', $path)->exists();
+
+        if (!$inProductsThumb && !$inProductsHover && !$inGallery) {
+            $fullPath = public_path($path);
+            if (File::exists($fullPath) && is_file($fullPath)) {
+                File::delete($fullPath);
+            }
+        }
     }
 
     public function destroy($id)
@@ -645,5 +759,113 @@ class AdminProductController extends Controller
         }
 
         return back()->with('success', "Stock for '{$product->name}' updated to {$product->stock} bottles successfully.");
+    }
+
+    /**
+     * Scan uploaded product images and find unused/orphaned files
+     */
+    public function unusedImagesIndex()
+    {
+        $dir = public_path('uploads/products');
+        $allFiles = [];
+        $unusedFiles = [];
+        $totalBytes = 0;
+        $unusedBytes = 0;
+
+        if (File::isDirectory($dir)) {
+            $files = File::files($dir);
+
+            $usedThumbnails = Product::whereNotNull('thumbnail_image')->pluck('thumbnail_image')->toArray();
+            $usedHovers = Product::whereNotNull('hover_image')->pluck('hover_image')->toArray();
+            $usedGallery = ProductImage::whereNotNull('image_path')->pluck('image_path')->toArray();
+
+            $normalize = function ($path) {
+                return ltrim(str_replace(['\\', '//'], '/', $path), '/');
+            };
+
+            $usedSet = array_flip(array_map($normalize, array_merge($usedThumbnails, $usedHovers, $usedGallery)));
+
+            foreach ($files as $file) {
+                $filename = $file->getFilename();
+                $relPath = 'uploads/products/' . $filename;
+                $size = $file->getSize();
+                $totalBytes += $size;
+
+                $fileData = [
+                    'filename' => $filename,
+                    'path' => $relPath,
+                    'url' => asset($relPath),
+                    'size' => $size,
+                    'size_formatted' => round($size / 1024, 1) . ' KB',
+                    'updated_at' => date('Y-m-d H:i', $file->getMTime()),
+                ];
+
+                $allFiles[] = $fileData;
+
+                if (!isset($usedSet[$relPath])) {
+                    $unusedFiles[] = $fileData;
+                    $unusedBytes += $size;
+                }
+            }
+        }
+
+        return view('admin.products.unused-images', [
+            'allFilesCount' => count($allFiles),
+            'unusedFiles' => $unusedFiles,
+            'unusedCount' => count($unusedFiles),
+            'totalBytesFormatted' => round($totalBytes / (1024 * 1024), 2) . ' MB',
+            'unusedBytesFormatted' => round($unusedBytes / (1024 * 1024), 2) . ' MB',
+        ]);
+    }
+
+    /**
+     * Purge specific unused image or all unused images
+     */
+    public function purgeUnusedImages(Request $request)
+    {
+        $targetFile = $request->input('filename');
+
+        $dir = public_path('uploads/products');
+        if (!File::isDirectory($dir)) {
+            return back()->with('info', 'No uploaded product images directory found.');
+        }
+
+        $usedThumbnails = Product::whereNotNull('thumbnail_image')->pluck('thumbnail_image')->toArray();
+        $usedHovers = Product::whereNotNull('hover_image')->pluck('hover_image')->toArray();
+        $usedGallery = ProductImage::whereNotNull('image_path')->pluck('image_path')->toArray();
+
+        $normalize = function ($path) {
+            return ltrim(str_replace(['\\', '//'], '/', $path), '/');
+        };
+
+        $usedSet = array_flip(array_map($normalize, array_merge($usedThumbnails, $usedHovers, $usedGallery)));
+
+        $deletedCount = 0;
+        $freedBytes = 0;
+
+        $files = File::files($dir);
+        foreach ($files as $file) {
+            $filename = $file->getFilename();
+            $relPath = 'uploads/products/' . $filename;
+
+            if ($targetFile && $filename !== $targetFile) {
+                continue;
+            }
+
+            if (!isset($usedSet[$relPath])) {
+                $freedBytes += $file->getSize();
+                File::delete($file->getRealPath());
+                $deletedCount++;
+            }
+        }
+
+        $freedFormatted = round($freedBytes / 1024, 1) . ' KB';
+        if ($freedBytes > 1024 * 1024) {
+            $freedFormatted = round($freedBytes / (1024 * 1024), 2) . ' MB';
+        }
+
+        ActivityLog::record('images_purged', "Purged {$deletedCount} unused uploaded product images (Freed {$freedFormatted})");
+
+        return back()->with('success', "Cleaned {$deletedCount} unused image(s) from storage. Freed {$freedFormatted}.");
     }
 }

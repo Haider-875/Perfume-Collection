@@ -27,6 +27,10 @@
         <i class="fa-solid fa-file-export text-muted"></i>
         <span class="d-none d-sm-inline">Export CSV</span>
     </a>
+    <a href="{{ route('admin.products.unused-images') }}" class="admin-btn-secondary" title="Find and remove unused product images from storage">
+        <i class="fa-solid fa-broom text-primary"></i>
+        <span class="d-none d-sm-inline">Clean Unused Images</span>
+    </a>
     <a href="{{ url('/seed-production-catalog') }}" class="admin-btn-secondary"
         title="Sync & Seed Catalog Products (Wasmer / No-Terminal)">
         <i class="fa-solid fa-arrows-rotate text-warning"></i>

@@ -114,15 +114,15 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
     Route::get('/orders', [AccountController::class, 'orders'])->name('orders');
     Route::get('/orders/{order_number}', [AccountController::class, 'orderDetail'])->name('order.show');
     Route::post('/orders/{order_number}/receipt', [AccountController::class, 'uploadReceipt'])->name('order.receipt');
-    
+
     Route::get('/addresses', [AccountController::class, 'addresses'])->name('addresses');
     Route::post('/addresses/store', [AccountController::class, 'storeAddress'])->name('address.store');
     Route::post('/addresses/{id}/default', [AccountController::class, 'setDefaultAddress'])->name('address.default');
     Route::delete('/addresses/{id}', [AccountController::class, 'deleteAddress'])->name('address.delete');
-    
+
     Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('wishlist');
     Route::post('/wishlist/toggle', [AccountController::class, 'toggleWishlist'])->name('wishlist.toggle');
-    
+
     Route::get('/reviews', [AccountController::class, 'reviews'])->name('reviews');
     Route::post('/reviews/store', [AccountController::class, 'storeReview'])->name('review.store');
 });
@@ -148,6 +148,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{productId}/gallery-images/{imageId}', [AdminProductController::class, 'destroyGalleryImage'])->name('products.gallery-images.destroy');
+    Route::post('/products/{productId}/remove-image', [AdminProductController::class, 'removeSpecialImage'])->name('products.remove-image');
+    Route::get('/products/unused-images', [AdminProductController::class, 'unusedImagesIndex'])->name('products.unused-images');
+    Route::post('/products/unused-images/purge', [AdminProductController::class, 'purgeUnusedImages'])->name('products.unused-images.purge');
     Route::post('/products/{id}/quick-stock', [AdminProductController::class, 'quickStock'])->name('products.quick-stock');
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
     Route::post('/products/bulk-action', [AdminProductController::class, 'bulkAction'])->name('products.bulk');
@@ -263,7 +267,12 @@ Route::get('/seed-bundles', function (\Illuminate\Http\Request $request) {
         ], 500);
     }
 });
+// Route::get('');
 
+Route::get('/seed-production-migrate', function (\Illuminate\Http\Request $request) {
+    Artisan::call('migrate', ['--force' => true]);
+
+});
 Route::get('/seed-production-catalog', function (\Illuminate\Http\Request $request) {
     $executedSteps = [];
     $startTime = microtime(true);

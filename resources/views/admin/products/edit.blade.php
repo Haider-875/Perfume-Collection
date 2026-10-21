@@ -153,50 +153,102 @@
                         <i class="fa-solid fa-images text-primary small"></i>
                         <span>Visual Assets & Flacon Imagery</span>
                     </h6>
+                    <span class="badge bg-light text-muted border font-monospace" style="font-size: 0.7rem;">Safe Disk Cleanup Active</span>
                 </div>
                 <div class="p-4">
                     <div class="row g-4 mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="primary-image-container">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-2" style="font-size: 0.72rem; letter-spacing: 0.05em;">Primary Flacon Image</label>
                             @if($product->thumbnail_image)
-                                <div class="d-flex align-items-center gap-3 mb-2 p-2 bg-light border rounded">
-                                    <div class="admin-thumb-box" style="width: 56px; height: 56px;" onclick="window.previewImage('{{ asset($product->thumbnail_image) }}', '{{ $product->name }} Primary')">
-                                        <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}" class="admin-thumb-img">
+                                <div class="d-flex align-items-center justify-content-between mb-2 p-2 bg-light border rounded" id="primary-image-preview">
+                                    <div class="d-flex align-items-center gap-2 overflow-hidden">
+                                        <div class="admin-thumb-box flex-shrink-0" style="width: 56px; height: 56px; cursor: pointer;" onclick="window.previewImage('{{ asset($product->thumbnail_image) }}', '{{ addslashes($product->name) }} Primary')">
+                                            <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}" class="admin-thumb-img">
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <div class="small fw-semibold text-dark text-truncate" style="font-size: 0.78rem;">Current Primary Shot</div>
+                                            <div class="text-muted text-truncate" style="font-size: 0.7rem;">{{ basename($product->thumbnail_image) }}</div>
+                                        </div>
                                     </div>
-                                    <div class="small text-muted" style="font-size: 0.75rem;">Current primary image</div>
+                                    <button type="button" class="btn btn-sm btn-outline-danger px-2.5 py-1 d-inline-flex align-items-center gap-1.5 flex-shrink-0" style="font-size: 0.75rem;" onclick="removeSpecialImage('primary')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        <span>Remove</span>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="mb-2 p-2 bg-light border rounded text-muted small d-flex align-items-center gap-2" style="font-size: 0.75rem;" id="primary-image-empty">
+                                    <i class="fa-solid fa-image text-muted"></i>
+                                    <span>No primary image set (default placeholder used).</span>
                                 </div>
                             @endif
                             <input type="file" name="primary_image" accept="image/*" class="form-control form-control-sm">
-                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Leave empty to keep existing flacon shot.</small>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Select a new file to set or replace primary flacon shot.</small>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="hover-image-container">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-2" style="font-size: 0.72rem; letter-spacing: 0.05em;">Hover / Box Image</label>
                             @if($product->hover_image)
-                                <div class="d-flex align-items-center gap-3 mb-2 p-2 bg-light border rounded">
-                                    <div class="admin-thumb-box" style="width: 56px; height: 56px;" onclick="window.previewImage('{{ asset($product->hover_image) }}', '{{ $product->name }} Box')">
-                                        <img src="{{ asset($product->hover_image) }}" alt="{{ $product->name }}" class="admin-thumb-img">
+                                <div class="d-flex align-items-center justify-content-between mb-2 p-2 bg-light border rounded" id="hover-image-preview">
+                                    <div class="d-flex align-items-center gap-2 overflow-hidden">
+                                        <div class="admin-thumb-box flex-shrink-0" style="width: 56px; height: 56px; cursor: pointer;" onclick="window.previewImage('{{ asset($product->hover_image) }}', '{{ addslashes($product->name) }} Box')">
+                                            <img src="{{ asset($product->hover_image) }}" alt="{{ $product->name }}" class="admin-thumb-img">
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <div class="small fw-semibold text-dark text-truncate" style="font-size: 0.78rem;">Current Box / Hover Shot</div>
+                                            <div class="text-muted text-truncate" style="font-size: 0.7rem;">{{ basename($product->hover_image) }}</div>
+                                        </div>
                                     </div>
-                                    <div class="small text-muted" style="font-size: 0.75rem;">Current hover/packaging image</div>
+                                    <button type="button" class="btn btn-sm btn-outline-danger px-2.5 py-1 d-inline-flex align-items-center gap-1.5 flex-shrink-0" style="font-size: 0.75rem;" onclick="removeSpecialImage('hover')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        <span>Remove</span>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="mb-2 p-2 bg-light border rounded text-muted small d-flex align-items-center gap-2" style="font-size: 0.75rem;" id="hover-image-empty">
+                                    <i class="fa-solid fa-image text-muted"></i>
+                                    <span>No secondary hover image set.</span>
                                 </div>
                             @endif
                             <input type="file" name="hover_image" accept="image/*" class="form-control form-control-sm">
-                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Secondary image displayed on hover.</small>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Secondary packaging or box shot displayed on hover.</small>
                         </div>
                     </div>
 
-                    @if($product->images && $product->images->count() > 0)
-                        <div class="pt-3 border-top">
-                            <label class="form-label small fw-semibold text-muted text-uppercase mb-2" style="font-size: 0.72rem; letter-spacing: 0.05em;">Extra Gallery Shots</label>
-                            <div class="d-flex flex-wrap gap-2">
+                    <div class="pt-3 border-top mt-3">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <label class="form-label small fw-semibold text-muted text-uppercase mb-0" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                Extra Gallery Shots (<span id="gallery-count">{{ $product->images ? $product->images->count() : 0 }}</span>)
+                            </label>
+                            <span class="text-muted" style="font-size: 0.72rem;">Click the red trash button to remove any gallery image</span>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mb-3" id="gallery-container">
+                            @if($product->images && $product->images->count() > 0)
                                 @foreach($product->images as $img)
-                                    <div class="admin-thumb-box" style="width: 64px; height: 64px;" onclick="window.previewImage('{{ asset($img->image_path) }}', 'Gallery Shot')">
-                                        <img src="{{ asset($img->image_path) }}" alt="{{ $product->name }}" class="admin-thumb-img">
+                                    <div class="position-relative gallery-item-card border rounded p-1 bg-white shadow-sm" id="gallery-item-{{ $img->id }}" style="width: 80px;">
+                                        <div class="admin-thumb-box w-100" style="height: 70px; cursor: pointer;" onclick="window.previewImage('{{ asset($img->image_path) }}', 'Gallery Shot')">
+                                            <img src="{{ asset($img->image_path) }}" alt="{{ $product->name }}" class="admin-thumb-img rounded">
+                                        </div>
+                                        <button type="button" 
+                                                class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-0 d-flex align-items-center justify-content-center shadow"
+                                                style="width: 22px; height: 22px; font-size: 10px;"
+                                                title="Remove this image"
+                                                onclick="removeGalleryImage({{ $img->id }})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </div>
                                 @endforeach
-                            </div>
+                            @endif
                         </div>
-                    @endif
+
+                        <div class="p-3 bg-light rounded border">
+                            <label class="form-label small fw-semibold text-dark text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                                <i class="fa-solid fa-cloud-arrow-up text-primary me-1"></i> Add More Gallery Images
+                            </label>
+                            <input type="file" name="gallery_images[]" multiple accept="image/*" class="form-control form-control-sm">
+                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">Select one or multiple images to add to the fragrance gallery upon saving.</small>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -400,6 +452,97 @@
                 }
             }
         }
+    }
+
+    function removeSpecialImage(type) {
+        const label = type === 'primary' ? 'Primary Flacon Image' : 'Hover / Box Image';
+        if (!confirm(`Are you sure you want to remove the ${label}? If this file is not used by any other fragrance, it will also be safely removed from disk.`)) {
+            return;
+        }
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '{{ csrf_token() }}';
+        const url = '{{ route('admin.products.remove-image', $product->id) }}';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ type: type })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const previewEl = document.getElementById(`${type}-image-preview`);
+                if (previewEl) {
+                    previewEl.style.transition = 'all 0.3s ease';
+                    previewEl.style.opacity = '0';
+                    previewEl.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        previewEl.remove();
+                        const container = document.getElementById(`${type}-image-container`);
+                        const emptyState = document.createElement('div');
+                        emptyState.id = `${type}-image-empty`;
+                        emptyState.className = 'mb-2 p-2 bg-light border rounded text-muted small d-flex align-items-center gap-2';
+                        emptyState.style.fontSize = '0.75rem';
+                        emptyState.innerHTML = `<i class="fa-solid fa-circle-check text-success"></i> <span class="text-success">${data.message}</span>`;
+                        container.insertBefore(emptyState, container.querySelector('input[type="file"]'));
+                    }, 300);
+                }
+            } else {
+                alert(data.message || 'Error removing image.');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Network error while removing image. Please try again.');
+        });
+    }
+
+    function removeGalleryImage(imageId) {
+        if (!confirm('Are you sure you want to remove this gallery image? If the image is not used elsewhere, it will be safely deleted from disk.')) {
+            return;
+        }
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '{{ csrf_token() }}';
+        const baseUrl = '{{ url('admin/products/' . $product->id . '/gallery-images') }}';
+        const url = `${baseUrl}/${imageId}`;
+
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const item = document.getElementById(`gallery-item-${imageId}`);
+                if (item) {
+                    item.style.transition = 'all 0.3s ease';
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        item.remove();
+                        const countEl = document.getElementById('gallery-count');
+                        if (countEl) {
+                            const current = parseInt(countEl.innerText) || 0;
+                            countEl.innerText = Math.max(0, current - 1);
+                        }
+                    }, 300);
+                }
+            } else {
+                alert(data.message || 'Error removing gallery image.');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Network error while removing gallery image. Please try again.');
+        });
     }
 </script>
 @endpush
