@@ -126,15 +126,16 @@
                             <div class="d-flex align-items-center justify-content-center gap-2 overflow-x-auto py-1">
                                 @foreach($product->images as $img)
                                     <button type="button"
-                                        onclick="if (window.switchPdpImage) { window.switchPdpImage('{{ asset($img->image_path) }}', this); } else { document.getElementById('pdpMasterImage').src='{{ asset($img->image_path) }}'; }"
+                                        onclick="if (window.switchPdpImage) { window.switchPdpImage('{{ $img->url }}', this); } else { document.getElementById('pdpMasterImage').src='{{ $img->url }}'; }"
                                         class="pdp-thumb-item {{ $loop->first ? 'active' : '' }}">
-                                        <img src="{{ asset($img->image_path) }}" alt="{{ $img->alt_text }}"
+                                        <img src="{{ $img->url }}" alt="{{ $img->alt_text }}"
                                             onerror="this.onerror=null; this.src='{{ asset('assets/images/perfumes/prod_signature.jpg') }}';"
                                             class="img-fluid mh-100 object-contain">
                                     </button>
                                 @endforeach
                             </div>
                         @endif
+
 
                         <!-- 4-Pillar Trust Highlights (Desktop only under gallery) -->
                         <div class="pdp-trust-grid font-sans d-none d-md-grid">

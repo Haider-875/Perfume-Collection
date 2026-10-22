@@ -99,9 +99,10 @@
 
                                         <div>
                                             <a href="{{ route('shop.show', $prod->slug) }}" class="d-block ratio ratio-1x1 rounded-3 p-2 mb-3 overflow-hidden text-center" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                                <img src="{{ asset($prod->primary_image_url) }}" alt="{{ $prod->name }}" 
+                                                <img src="{{ $prod->primary_image_url }}" alt="{{ $prod->name }}" 
                                                      class="w-100 h-100 object-fit-contain hover-scale transition duration-500">
                                             </a>
+
 
                                             <div class="text-uppercase tracking-widest fw-semibold fs-8 mb-1" style="color: #541B29;">
                                                 {{ $prod->category->name ?? 'Extrait de Parfum' }}

@@ -203,16 +203,44 @@ class Product extends Model
     public function getPrimaryImageUrlAttribute()
     {
         if ($this->thumbnail_image) {
-            if (filter_var($this->thumbnail_image, FILTER_VALIDATE_URL)) {
-                return $this->thumbnail_image;
+            $raw = trim($this->thumbnail_image);
+            if (filter_var($raw, FILTER_VALIDATE_URL)) {
+                return $raw;
             }
-            if (file_exists(public_path($this->thumbnail_image))) {
-                return asset($this->thumbnail_image);
+            $clean = ltrim(str_replace('\\', '/', $raw), '/');
+            if (file_exists(public_path($clean))) {
+                return asset($clean);
             }
-            if (!str_ends_with(strtolower($this->thumbnail_image), '.svg')) {
-                return asset($this->thumbnail_image);
+            if (str_starts_with($clean, 'uploads/')) {
+                return asset($clean);
+            }
+            if (!str_ends_with(strtolower($clean), '.svg')) {
+                return asset($clean);
             }
         }
+
+        // Check if product has an image in ProductImage relation
+        $primaryImg = $this->images()->orderByDesc('is_primary')->orderBy('sort_order', 'asc')->first();
+        if ($primaryImg && $primaryImg->image_path) {
+            $imgPath = ltrim(str_replace('\\', '/', $primaryImg->image_path), '/');
+            if (filter_var($imgPath, FILTER_VALIDATE_URL)) {
+                return $imgPath;
+            }
+            return asset($imgPath);
+        }
+
+        // Smart Match by Name or Impression
+        $byName = 'assets/Perfume_Images_By_Name/' . $this->name . '.jpeg';
+        if (file_exists(public_path($byName))) {
+            return asset($byName);
+        }
+        if ($this->impression_of) {
+            $byImp = 'assets/Perfume_Images_By_Name/' . $this->impression_of . '.jpeg';
+            if (file_exists(public_path($byImp))) {
+                return asset($byImp);
+            }
+        }
+
         return asset('assets/images/perfumes/prod_signature.jpg');
     }
 
@@ -220,8 +248,9 @@ class Product extends Model
     {
         if ($this->thumbnail_image) {
             $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $this->thumbnail_image);
-            if (file_exists(public_path($webpPath))) {
-                return asset($webpPath);
+            $cleanWebp = ltrim(str_replace('\\', '/', $webpPath), '/');
+            if (file_exists(public_path($cleanWebp))) {
+                return asset($cleanWebp);
             }
             return null;
         }
@@ -232,16 +261,23 @@ class Product extends Model
     public function getHoverImageUrlAttribute()
     {
         if ($this->hover_image) {
-            if (filter_var($this->hover_image, FILTER_VALIDATE_URL)) {
-                return $this->hover_image;
+            $raw = trim($this->hover_image);
+            if (filter_var($raw, FILTER_VALIDATE_URL)) {
+                return $raw;
             }
-            if (file_exists(public_path($this->hover_image))) {
-                return asset($this->hover_image);
-            }
-            if (!str_ends_with(strtolower($this->hover_image), '.svg')) {
-                return asset($this->hover_image);
+            $clean = ltrim(str_replace('\\', '/', $raw), '/');
+            if (file_exists(public_path($clean)) || str_starts_with($clean, 'uploads/') || !str_ends_with(strtolower($clean), '.svg')) {
+                return asset($clean);
             }
         }
+
+        // Secondary image in gallery
+        $secondImg = $this->images()->where('is_primary', false)->orderBy('sort_order', 'asc')->first();
+        if ($secondImg && $secondImg->image_path) {
+            $imgPath = ltrim(str_replace('\\', '/', $secondImg->image_path), '/');
+            return asset($imgPath);
+        }
+
         return $this->primary_image_url;
     }
 
@@ -249,8 +285,9 @@ class Product extends Model
     {
         if ($this->hover_image) {
             $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $this->hover_image);
-            if (file_exists(public_path($webpPath))) {
-                return asset($webpPath);
+            $cleanWebp = ltrim(str_replace('\\', '/', $webpPath), '/');
+            if (file_exists(public_path($cleanWebp))) {
+                return asset($cleanWebp);
             }
             return null;
         }
@@ -261,6 +298,7 @@ class Product extends Model
     {
         return $this->primary_image_url;
     }
+
 
     // WhatsApp Direct Order Message Generator
     public function getWhatsAppOrderUrlAttribute()

@@ -125,7 +125,9 @@ class AdminCategoryController extends Controller
             }
             $file->move($destinationPath, $filename);
             $imagePath = 'uploads/categories/' . $filename;
+            \App\Models\UploadedFile::storeFromPath($imagePath);
         }
+
 
         $slug = Str::slug($request->name);
 
@@ -202,7 +204,9 @@ class AdminCategoryController extends Controller
             }
             $file->move($destinationPath, $filename);
             $imagePath = 'uploads/categories/' . $filename;
+            \App\Models\UploadedFile::storeFromPath($imagePath);
         }
+
 
         $newSlug = Str::slug($request->name);
         $oldSlug = $category->slug;

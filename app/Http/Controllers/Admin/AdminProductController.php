@@ -13,10 +13,14 @@ use App\Models\ProductPrice;
 use App\Models\ProductVariant;
 use App\Models\ScentNote;
 use App\Services\PerfumeProductImportService;
+
+use App\Models\UploadedFile;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class AdminProductController extends Controller
 {
@@ -99,6 +103,8 @@ class AdminProductController extends Controller
             'is_best_seller' => ['nullable'],
             'is_new_arrival' => ['nullable'],
             'primary_image' => ['nullable', 'image', 'max:4096'],
+            'hover_image' => ['nullable', 'image', 'max:4096'],
+            'gallery_images.*' => ['nullable', 'image', 'max:4096'],
         ]);
 
         $slug = Str::slug($validated['name']);
@@ -106,7 +112,7 @@ class AdminProductController extends Controller
             $slug .= '-' . rand(100, 999);
         }
 
-        $imagePath = 'assets/images/perfumes/oud_royale.svg';
+        $imagePath = 'assets/images/perfumes/prod_signature.jpg';
         if ($request->hasFile('primary_image')) {
             $file = $request->file('primary_image');
             $filename = 'prod_' . time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
@@ -114,6 +120,18 @@ class AdminProductController extends Controller
             if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
             $file->move($dest, $filename);
             $imagePath = 'uploads/products/' . $filename;
+            UploadedFile::storeFromPath($imagePath);
+        }
+
+        $hoverPath = null;
+        if ($request->hasFile('hover_image')) {
+            $file = $request->file('hover_image');
+            $filename = 'hover_' . time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
+            $dest = public_path('uploads/products');
+            if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
+            $file->move($dest, $filename);
+            $hoverPath = 'uploads/products/' . $filename;
+            UploadedFile::storeFromPath($hoverPath);
         }
 
         $isBestseller = $request->has('is_bestseller') || $request->has('is_best_seller');
@@ -141,6 +159,7 @@ class AdminProductController extends Controller
             'tagline' => $validated['tagline'] ?? null,
             'description' => $validated['description'] ?? null,
             'thumbnail_image' => $imagePath,
+            'hover_image' => $hoverPath,
             'meta_title' => $request->input('meta_title') ?? ($validated['name'] . ' | Ravaha Fragrances Pakistan'),
             'meta_description' => $request->input('meta_description'),
             'is_active' => $request->has('is_active'),
@@ -148,6 +167,58 @@ class AdminProductController extends Controller
             'is_bestseller' => $isBestseller,
             'is_new_arrival' => $request->has('is_new_arrival'),
         ]);
+
+        // Create ProductImage records for primary and hover images
+        if ($imagePath && !str_ends_with(strtolower($imagePath), '.svg')) {
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $imagePath,
+                'alt_text' => $product->name,
+                'sort_order' => 0,
+                'is_primary' => true,
+            ]);
+        }
+
+        if ($hoverPath) {
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $hoverPath,
+                'alt_text' => $product->name . ' Hover Presentation',
+                'sort_order' => 1,
+                'is_primary' => false,
+            ]);
+        }
+
+        // Handle gallery images
+        if ($request->hasFile('gallery_images')) {
+            $dest = public_path('uploads/products');
+            if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
+            $firstGallery = null;
+            foreach ($request->file('gallery_images') as $gFile) {
+                if ($gFile && $gFile->isValid()) {
+                    $gFilename = 'gallery_' . time() . '_' . Str::random(6) . '.' . $gFile->getClientOriginalExtension();
+                    $gFile->move($dest, $gFilename);
+                    $gPath = 'uploads/products/' . $gFilename;
+                    UploadedFile::storeFromPath($gPath);
+                    if (!$firstGallery) $firstGallery = $gPath;
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => $gPath,
+                        'alt_text' => $product->name . ' Gallery Shot',
+                        'sort_order' => $product->images()->count() + 1,
+                        'is_primary' => false,
+                    ]);
+                }
+            }
+
+            if ((!$imagePath || str_ends_with(strtolower($imagePath), '.svg') || $imagePath === 'assets/images/perfumes/prod_signature.jpg') && $firstGallery) {
+                $product->thumbnail_image = $firstGallery;
+                $product->save();
+                ProductImage::where('product_id', $product->id)->where('image_path', $firstGallery)->update(['is_primary' => true]);
+            }
+        }
+
 
         // Attach collections if provided, or auto-sync matching collection from category
         if ($request->has('collections') && is_array($request->collections)) {
@@ -274,7 +345,19 @@ class AdminProductController extends Controller
             $file->move($dest, $filename);
             $oldThumb = $product->thumbnail_image;
             $product->thumbnail_image = 'uploads/products/' . $filename;
+            UploadedFile::storeFromPath($product->thumbnail_image);
             $this->safelyDeleteImageFile($oldThumb);
+
+            // Synchronize with ProductImage table
+            ProductImage::where('product_id', $product->id)->where('is_primary', true)->update(['is_primary' => false]);
+            ProductImage::updateOrCreate(
+                ['product_id' => $product->id, 'sort_order' => 0],
+                [
+                    'image_path' => $product->thumbnail_image,
+                    'alt_text' => $product->name,
+                    'is_primary' => true,
+                ]
+            );
         }
 
         if ($request->hasFile('hover_image')) {
@@ -285,8 +368,19 @@ class AdminProductController extends Controller
             $file->move($dest, $filename);
             $oldHover = $product->hover_image;
             $product->hover_image = 'uploads/products/' . $filename;
+            UploadedFile::storeFromPath($product->hover_image);
             $this->safelyDeleteImageFile($oldHover);
+
+            ProductImage::updateOrCreate(
+                ['product_id' => $product->id, 'sort_order' => 1],
+                [
+                    'image_path' => $product->hover_image,
+                    'alt_text' => $product->name . ' Hover Presentation',
+                    'is_primary' => false,
+                ]
+            );
         }
+
 
         $isBestseller = $request->has('is_bestseller') || $request->has('is_best_seller');
 
@@ -352,20 +446,32 @@ class AdminProductController extends Controller
         if ($request->hasFile('gallery_images')) {
             $dest = public_path('uploads/products');
             if (!File::isDirectory($dest)) File::makeDirectory($dest, 0755, true, true);
+            $firstGallery = null;
             foreach ($request->file('gallery_images') as $file) {
                 if ($file && $file->isValid()) {
                     $filename = 'gallery_' . time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
                     $file->move($dest, $filename);
+                    $gPath = 'uploads/products/' . $filename;
+                    UploadedFile::storeFromPath($gPath);
+                    if (!$firstGallery) $firstGallery = $gPath;
+
                     ProductImage::create([
                         'product_id' => $product->id,
-                        'image_path' => 'uploads/products/' . $filename,
+                        'image_path' => $gPath,
                         'alt_text' => $product->name,
                         'sort_order' => $product->images()->count() + 1,
                         'is_primary' => false,
                     ]);
                 }
             }
+
+            if ((!$product->thumbnail_image || str_ends_with(strtolower($product->thumbnail_image), '.svg') || $product->thumbnail_image === 'assets/images/perfumes/prod_signature.jpg') && $firstGallery) {
+                $product->thumbnail_image = $firstGallery;
+                $product->save();
+                ProductImage::where('product_id', $product->id)->where('image_path', $firstGallery)->update(['is_primary' => true]);
+            }
         }
+
 
         if ($oldPrice != $product->price) {
             ActivityLog::record('price_change', "Price updated for [{$product->name}] from Rs. {$oldPrice} to Rs. {$product->price}", $product, [

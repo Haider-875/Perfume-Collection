@@ -10,8 +10,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE products MODIFY thumbnail_image VARCHAR(255) NULL DEFAULT NULL');
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE products MODIFY thumbnail_image VARCHAR(255) NULL DEFAULT NULL');
+        }
     }
+
 
     /**
      * Reverse the migrations.

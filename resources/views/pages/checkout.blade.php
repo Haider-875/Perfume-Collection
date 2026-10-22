@@ -525,10 +525,11 @@
                             @foreach($cart->items as $item)
                                 <div class="py-2 d-flex align-items-center gap-3 text-xs {{ !$loop->last ? 'border-bottom' : '' }}" style="{{ !$loop->last ? 'border-color: #E8E0DA !important;' : '' }}">
                                     <div class="rounded-3 p-1 flex-shrink-0 d-flex align-items-center justify-content-center overflow-hidden" style="width: 56px; height: 56px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">
-                                        <img src="{{ asset($item->bundle ? $item->bundle->image_url : $item->product->primary_image_url) }}" 
+                                        <img src="{{ $item->bundle ? $item->bundle->image_url : $item->product->primary_image_url }}" 
                                              alt="{{ $item->bundle ? $item->bundle->name : $item->product->name }}" 
                                              class="img-fluid mh-100 object-contain">
                                     </div>
+
                                     <div class="flex-grow-1">
                                         <h4 class="font-serif fs-6 fw-semibold mb-0 lh-sm" style="color: #211D1E;">{{ $item->bundle ? $item->bundle->name : $item->product->name }}</h4>
                                         <p class="mb-0" style="font-size: 11px; color: #6B605B;">{{ $item->variant ? $item->variant->size_label : ($item->bundle ? 'Artisan Bundle' : $item->product->volume_ml . 'ml Flacon') }}</p>

@@ -917,10 +917,14 @@ class ProductionCatalogSeeder extends Seeder
         // 9. Seed curated bundles linked to the 26 live perfumes
         $this->call(BundleSeeder::class);
 
+        // 10. Sync physical files into uploaded_files table and link ProductImage records
+        \App\Http\Controllers\UploadController::syncUploadedFilesAndProductMedia();
+
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
         \Illuminate\Support\Facades\Cache::flush();
+
 
         ActivityLog::record(
             'production_catalog_seeded',

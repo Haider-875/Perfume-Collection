@@ -619,6 +619,10 @@ Route::get('/run-production-seeder', function () {
 });
 
 Route::get('/clear-cache', function () {
+    if (!\Illuminate\Support\Facades\Schema::hasTable('uploaded_files')) {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    }
+    $mediaSync = \App\Http\Controllers\UploadController::syncUploadedFilesAndProductMedia();
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     \Illuminate\Support\Facades\Artisan::call('config:clear');
@@ -628,20 +632,45 @@ Route::get('/clear-cache', function () {
     \Illuminate\Support\Facades\Cache::flush();
     return response()->json([
         'status' => 'success',
-        'message' => 'Blade views, application, and config caches cleared successfully for Wasmer/production.'
+        'message' => 'Blade views, application, config caches cleared, and media synced successfully.',
+        'media' => $mediaSync,
+    ]);
+});
+
+Route::get('/sync-images', function () {
+    if (!\Illuminate\Support\Facades\Schema::hasTable('uploaded_files')) {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    }
+    $res = \App\Http\Controllers\UploadController::syncUploadedFilesAndProductMedia();
+    \Illuminate\Support\Facades\Cache::flush();
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Uploaded images and product media synchronized successfully.',
+        'details' => $res,
     ]);
 });
 
 Route::get('/sync-categories', function () {
+    if (!\Illuminate\Support\Facades\Schema::hasTable('uploaded_files')) {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    }
     \App\Http\Controllers\Admin\AdminCategoryController::ensureCoreCategoriesExist();
+    \App\Http\Controllers\UploadController::syncUploadedFilesAndProductMedia();
     \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
     \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
     \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
     \Illuminate\Support\Facades\Cache::flush();
     return response()->json([
         'status' => 'success',
-        'message' => 'Core categories (Men, Women, Unisex, Exclusive) synchronized and cache flushed successfully on Wasmer.'
+        'message' => 'Core categories and media synchronized successfully on Wasmer.'
     ]);
 });
+
+
+// Dynamic & Persistent Media Handler for Uploaded Images
+Route::get('/uploads/{folder}/{filename}', [\App\Http\Controllers\UploadController::class, 'serve'])
+    ->where('folder', '[a-zA-Z0-9_\-]+')
+    ->where('filename', '[a-zA-Z0-9_\-\.]+');
+
 
 

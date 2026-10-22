@@ -148,10 +148,11 @@
                             <div class="d-flex align-items-center gap-3">
                                 <div class="rounded-2 p-1 flex-shrink-0 d-flex align-items-center justify-content-center overflow-hidden" style="width: 48px; height: 48px; background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                                     @if($item->product)
-                                        <img src="{{ asset($item->product->primary_image_url) }}" alt="{{ $item->product_name }}" class="img-fluid mh-100 object-contain">
+                                        <img src="{{ $item->product->primary_image_url }}" alt="{{ $item->product_name }}" class="img-fluid mh-100 object-contain">
                                     @elseif($item->bundle)
-                                        <img src="{{ asset($item->bundle->image_url) }}" alt="{{ $item->product_name }}" class="img-fluid mh-100 object-contain">
+                                        <img src="{{ $item->bundle->image_url }}" alt="{{ $item->product_name }}" class="img-fluid mh-100 object-contain">
                                     @endif
+
                                 </div>
                                 <div>
                                     <h4 class="font-serif fs-6 fw-semibold mb-0" style="color: #211D1E;">{{ $item->product_name }}</h4>
