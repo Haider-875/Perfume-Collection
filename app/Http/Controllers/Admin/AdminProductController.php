@@ -160,7 +160,7 @@ class AdminProductController extends Controller
             'description' => $validated['description'] ?? null,
             'thumbnail_image' => $imagePath,
             'hover_image' => $hoverPath,
-            'meta_title' => $request->input('meta_title') ?? ($validated['name'] . ' | Ravaha Fragrances Pakistan'),
+            'meta_title' => $request->input('meta_title') ?? ($validated['name'] . ' | Perfumes Collection Pakistan'),
             'meta_description' => $request->input('meta_description'),
             'is_active' => $request->has('is_active'),
             'is_featured' => $request->has('is_featured'),
@@ -599,7 +599,7 @@ class AdminProductController extends Controller
     public function exportCsv()
     {
         $products = Product::with('category')->get();
-        $filename = 'ravaha_perfumes_catalog_' . date('Y_m_d_His') . '.csv';
+        $filename = 'perfumes_collection_catalog_' . date('Y_m_d_His') . '.csv';
 
         $headers = [
             'Content-Type' => 'text/csv',
@@ -736,13 +736,13 @@ class AdminProductController extends Controller
 
     public function sampleExcel()
     {
-        $filename = 'ravaha_perfume_pricelist_template.xlsx';
+        $filename = 'perfumes_collection_pricelist_template.xlsx';
         return Excel::download(new PerfumePriceListSampleExport, $filename);
     }
 
     public function sampleCsv()
     {
-        $filename = 'ravaha_perfume_pricelist_template.csv';
+        $filename = 'perfumes_collection_pricelist_template.csv';
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
@@ -762,12 +762,12 @@ class AdminProductController extends Controller
                 '100ml Price (PKR)',
                 'Stock'
             ]);
-            fputcsv($handle, ['Oud Royale Extrait', 'Imperial Agarwood & Rose', 'RVH-OUD-01', 'Woody & Oriental', 'Unisex', '1850', '2850', '3450', '4950', '45']);
-            fputcsv($handle, ['Baroque Rouge 540', 'Baccarat Rouge 540 by MFK', 'RVH-BR-02', 'Amber & Warm', 'Unisex', '1950', '2950', '3650', '5200', '35']);
-            fputcsv($handle, ['Santal Desire', 'Santal 33 by Le Labo', 'RVH-SAN-03', 'Woody & Smoky', 'Unisex', '1750', '2750', '3350', '4800', '40']);
-            fputcsv($handle, ['Smoked Birch & Leather', 'Tuscan Leather by Tom Ford', 'RVH-LTHR-04', 'Smoky & Leathery', 'Men', '1850', '2850', '3450', '4950', '30']);
-            fputcsv($handle, ['Taif Velvet Rose', 'Velvet Rose & Oud by Jo Malone', 'RVH-ROSE-05', 'Floral & Oriental', 'Women', '1650', '2550', '3150', '4500', '25']);
-            fputcsv($handle, ['Murree Mist', 'Silver Mountain Water by Creed', 'RVH-MIST-06', 'Fresh & Citrus', 'Unisex', '1500', '2400', '2950', '4200', '50']);
+            fputcsv($handle, ['Oud Royale Extrait', 'Imperial Agarwood & Rose', 'PC-OUD-01', 'Woody & Oriental', 'Unisex', '1850', '2850', '3450', '4950', '45']);
+            fputcsv($handle, ['Baroque Rouge 540', 'Baccarat Rouge 540 by MFK', 'PC-BR-02', 'Amber & Warm', 'Unisex', '1950', '2950', '3650', '5200', '35']);
+            fputcsv($handle, ['Santal Desire', 'Santal 33 by Le Labo', 'PC-SAN-03', 'Woody & Smoky', 'Unisex', '1750', '2750', '3350', '4800', '40']);
+            fputcsv($handle, ['Smoked Birch & Leather', 'Tuscan Leather by Tom Ford', 'PC-LTHR-04', 'Smoky & Leathery', 'Men', '1850', '2850', '3450', '4950', '30']);
+            fputcsv($handle, ['Taif Velvet Rose', 'Velvet Rose & Oud by Jo Malone', 'PC-ROSE-05', 'Floral & Oriental', 'Women', '1650', '2550', '3150', '4500', '25']);
+            fputcsv($handle, ['Murree Mist', 'Silver Mountain Water by Creed', 'PC-MIST-06', 'Fresh & Citrus', 'Unisex', '1500', '2400', '2950', '4200', '50']);
             fclose($handle);
         };
 
@@ -782,7 +782,7 @@ class AdminProductController extends Controller
             return back()->with('error', 'No recent import error report found.');
         }
 
-        $filename = 'ravaha_import_errors_' . date('Y-m-d_His') . '.csv';
+        $filename = 'perfumes_collection_import_errors_' . date('Y-m-d_His') . '.csv';
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",

@@ -41,7 +41,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Oud Royale Extrait',
                 'Imperial Agarwood & Rose',
-                'RVH-OUD-01',
+                'PC-OUD-01',
                 'Woody & Oriental',
                 'Unisex',
                 1850,
@@ -53,7 +53,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Baroque Rouge 540',
                 'Baccarat Rouge 540 by MFK',
-                'RVH-BR-02',
+                'PC-BR-02',
                 'Amber & Warm',
                 'Unisex',
                 1950,
@@ -65,7 +65,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Santal Desire',
                 'Santal 33 by Le Labo',
-                'RVH-SAN-03',
+                'PC-SAN-03',
                 'Woody & Smoky',
                 'Unisex',
                 1750,
@@ -77,7 +77,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Smoked Birch & Leather',
                 'Tuscan Leather by Tom Ford',
-                'RVH-LTHR-04',
+                'PC-LTHR-04',
                 'Smoky & Leathery',
                 'Men',
                 1850,
@@ -89,7 +89,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Taif Velvet Rose',
                 'Velvet Rose & Oud by Jo Malone',
-                'RVH-ROSE-05',
+                'PC-ROSE-05',
                 'Floral & Oriental',
                 'Women',
                 1650,
@@ -101,7 +101,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Murree Mist',
                 'Silver Mountain Water by Creed',
-                'RVH-MIST-06',
+                'PC-MIST-06',
                 'Fresh & Citrus',
                 'Unisex',
                 1500,
@@ -113,7 +113,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Executive Gentleman',
                 'Tuxedo by YSL',
-                'RVH-TUX-07',
+                'PC-TUX-07',
                 'Spicy & Amber',
                 'Men',
                 1950,
@@ -125,7 +125,7 @@ class PerfumePriceListSampleExport implements FromArray, WithHeadings, ShouldAut
             [
                 'Gourmand Tonka Vanilla',
                 'Tobacco Vanille by Tom Ford',
-                'RVH-VNL-08',
+                'PC-VNL-08',
                 'Sweet & Gourmand',
                 'Unisex',
                 1850,

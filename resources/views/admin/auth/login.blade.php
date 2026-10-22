@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,9 @@
     <!-- Google Fonts: DM Sans & Jost -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Jost:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Bootstrap 5.3 CSS ONLY -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -114,18 +117,25 @@
             color: #475569;
         }
 
-        small, .small, .form-text, .form-label, label, .badge {
+        small,
+        .small,
+        .form-text,
+        .form-label,
+        label,
+        .badge {
             font-size: 13px !important;
         }
     </style>
 </head>
+
 <body>
 
     <div class="login-card">
         <!-- Brand Header with Logo -->
         <div class="text-center mb-4">
             <a href="{{ route('home') }}" class="d-inline-block text-decoration-none">
-                <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection" style="height: 65px; width: auto; object-fit: contain;">
+                <img src="{{ asset('assets/images/brand/logo.png') }}" alt="Perfumes Collection"
+                    style="height: 65px; width: auto; object-fit: contain;">
                 <div class="brand-title">PERFUMES COLLECTION</div>
                 <div class="brand-subtitle">Administrative Control Center</div>
             </a>
@@ -133,7 +143,8 @@
 
         <!-- Flash & Error Messages -->
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2" role="alert">
+            <div class="alert alert-success alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2"
+                role="alert">
                 <i class="fa-solid fa-circle-check text-success"></i>
                 <div>{{ session('success') }}</div>
                 <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -141,7 +152,8 @@
         @endif
 
         @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2"
+                role="alert">
                 <i class="fa-solid fa-triangle-exclamation text-danger"></i>
                 <div>{{ session('error') }}</div>
                 <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -149,7 +161,8 @@
         @endif
 
         @if(session('warning'))
-            <div class="alert alert-warning alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2" role="alert">
+            <div class="alert alert-warning alert-dismissible fade show text-xs py-2 px-3 mb-3 d-flex align-items-center gap-2"
+                role="alert">
                 <i class="fa-solid fa-circle-exclamation text-warning"></i>
                 <div>{{ session('warning') }}</div>
                 <button type="button" class="btn-close ms-auto p-2" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -180,14 +193,9 @@
                 <label for="adminEmail" class="form-label small fw-semibold text-secondary">Administrator Email</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                    <input type="email" 
-                           class="form-control" 
-                           id="adminEmail" 
-                           name="email" 
-                           value="{{ old('email', 'admin@perfumecollection.pk') }}" 
-                           placeholder="admin@perfumecollection.pk" 
-                           required 
-                           autofocus>
+                    <input type="email" class="form-control" id="adminEmail" name="email"
+                        value="{{ old('email', 'admin@perfumecollection.pk') }}"
+                        placeholder="admin@perfumecollection.pk" required autofocus>
                 </div>
             </div>
 
@@ -198,18 +206,10 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" 
-                           class="form-control border-end-0" 
-                           id="adminPassword" 
-                           name="password" 
-                           value="admin123456"
-                           placeholder="••••••••" 
-                           required>
-                    <button class="btn btn-outline-secondary border-start-0 border-start-0 bg-white" 
-                            type="button" 
-                            id="togglePasswordBtn"
-                            title="Show/Hide Password"
-                            style="border-color: #cbd5e1;">
+                    <input type="password" class="form-control border-end-0" id="adminPassword" name="password"
+                        value="admin123456" placeholder="••••••••" required>
+                    <button class="btn btn-outline-secondary border-start-0 border-start-0 bg-white" type="button"
+                        id="togglePasswordBtn" title="Show/Hide Password" style="border-color: #cbd5e1;">
                         <i class="fa-solid fa-eye text-muted" id="togglePasswordIcon"></i>
                     </button>
                 </div>
@@ -227,28 +227,15 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-admin-submit w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
+            <button type="submit"
+                class="btn btn-admin-submit w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
                 <i class="fa-solid fa-right-to-bracket"></i>
                 <span>Sign In to Admin Panel</span>
             </button>
         </form>
 
         <!-- Quick One-Click Credentials Helper -->
-        <div class="credential-helper mb-3">
-            <div class="d-flex align-items-center justify-content-between mb-1.5">
-                <strong class="text-dark small"><i class="fa-solid fa-key text-primary me-1"></i> Admin Credentials:</strong>
-                <button type="button" class="btn btn-xs btn-outline-primary py-0 px-2" style="font-size: 13px;" onclick="fillCredentials('admin@perfumecollection.pk', 'admin123456')">
-                    Auto-Fill
-                </button>
-            </div>
-            <div class="text-muted d-flex justify-content-between">
-                <span>Email: <code class="text-dark">admin@perfumecollection.pk</code></span>
-            </div>
-            <div class="text-muted d-flex justify-content-between mt-1">
-                <span>Pass: <code class="text-dark">admin123456</code></span>
-                <span class="text-muted">or <code class="text-dark">admin@ravaha.pk</code></span>
-            </div>
-        </div>
+
 
         <!-- Back to Storefront Link -->
         <div class="text-center pt-2">
@@ -283,4 +270,5 @@
         }
     </script>
 </body>
+
 </html>

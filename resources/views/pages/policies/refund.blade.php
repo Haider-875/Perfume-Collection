@@ -61,7 +61,7 @@
                         3. Transit Damage &amp; Guarantee
                     </h3>
                     <p class="mb-0 fw-light text-center mx-auto" style="max-width: 640px; font-size: clamp(0.88rem, 1.8vw, 0.95rem); color: #514744; line-height: 1.85;">
-                        In the unlikely event of transit damage or leak during courier handling, please notify us within 24 hours on WhatsApp (<a href="{{ ravaha_whatsapp_url('Transit damage notification') }}" class="text-decoration-none fw-semibold" style="color: #541B29;" target="_blank">+92 336 3685732</a>) with a photograph. A pristine replacement will be dispatched via Express Air with no additional charges.
+                        In the unlikely event of transit damage or leak during courier handling, please notify us within 24 hours on WhatsApp (<a href="{{ perfumes_collection_whatsapp_url('Transit damage notification') }}" class="text-decoration-none fw-semibold" style="color: #541B29;" target="_blank">+92 336 3685732</a>) with a photograph. A pristine replacement will be dispatched via Express Air with no additional charges.
                     </p>
                 </div>
 

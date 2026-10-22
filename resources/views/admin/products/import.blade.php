@@ -281,7 +281,7 @@
                     <i class="fa-solid fa-file-arrow-down text-primary me-2"></i>Sample Price Lists
                 </h6>
                 <p class="text-muted small mb-3">
-                    Download pre-formatted templates populated with sample Ravaha fragrance formulations:
+                    Download pre-formatted templates populated with sample Perfumes Collection fragrance formulations:
                 </p>
                 <div class="d-grid gap-2">
                     <a href="{{ route('admin.products.sample-excel') }}" class="btn btn-outline-success d-flex align-items-center justify-content-between p-2">

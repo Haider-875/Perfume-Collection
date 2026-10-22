@@ -67,8 +67,8 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // 1. Staff & Patron Users with Granular Permissions
         $superAdmin = User::create([
-            'name' => 'Ravaha Super Admin',
-            'email' => 'admin@ravaha.pk',
+            'name' => 'Perfumes Collection Admin',
+            'email' => 'admin@perfumecollection.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'super_admin',
             'permissions' => ['*'],
@@ -80,7 +80,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         $storeManager = User::create([
             'name' => 'Asad Khan (Store Manager)',
-            'email' => 'manager@ravaha.pk',
+            'email' => 'manager@perfumecollection.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'admin',
             'permissions' => ['view_products', 'manage_products', 'view_orders', 'manage_orders', 'view_customers', 'manage_settings', 'view_analytics'],
@@ -92,7 +92,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         $orderSpecialist = User::create([
             'name' => 'Zainab Order Specialist',
-            'email' => 'orders@ravaha.pk',
+            'email' => 'orders@perfumecollection.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'order_manager',
             'permissions' => ['view_orders', 'manage_orders', 'view_customers'],
@@ -104,7 +104,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         $catalogLead = User::create([
             'name' => 'Hamza Catalog Lead',
-            'email' => 'catalog@ravaha.pk',
+            'email' => 'catalog@perfumecollection.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'catalog_manager',
             'permissions' => ['view_products', 'manage_products'],
@@ -116,7 +116,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         $customer = User::create([
             'name' => 'Tariq Al-Hashmi',
-            'email' => 'customer@ravaha.pk',
+            'email' => 'customer@perfumecollection.pk',
             'password' => Hash::make('admin123456'),
             'role' => 'customer',
             'permissions' => [],
@@ -126,15 +126,15 @@ class LuxuryPerfumeSeeder extends Seeder
             'address' => 'DHA Phase 6, Karachi',
         ]);
 
-        // 2. Settings (RAVAHA Store Details & Gateways)
+        // 2. Settings (Perfumes Collection Store Details & Gateways)
         $settings = [
-            'store_name' => "RAVAHA Parfums",
+            'store_name' => "Perfumes Collection",
             'site_tagline' => "Artisanal Luxury Impressions • Extrait de Parfum",
             'currency' => 'PKR',
             'currency_symbol' => 'Rs. ',
             'phone' => '+92 336 3685732',
             'whatsapp' => '923363685732',
-            'email' => 'concierge@ravaha.pk',
+            'email' => 'concierge@perfumecollection.pk',
             'address_lahore' => 'Plaza 18, Commercial Zone, Phase 5 DHA, Lahore, Pakistan',
             'address_karachi' => 'Bukhari Commercial Area, Phase 6 DHA, Karachi, Pakistan',
             'address_islamabad' => 'Beverly Centre, Blue Area, Islamabad, Pakistan',
@@ -275,9 +275,9 @@ class LuxuryPerfumeSeeder extends Seeder
         $catDiscovery = Category::create(['name' => 'Discovery Sets & Gifting', 'slug' => 'discovery-sets-gifting', 'badge_text' => 'Bespoke', 'sort_order' => 5, 'image' => 'assets/images/categories/collection_signature.jpg']);
 
         // 7. Brands
-        $brandRoyal = Brand::create(['name' => "RAVAHA Signature Ateliers", 'slug' => 'ravaha-signature-ateliers', 'origin_country' => 'Paris / Lahore Atelier', 'is_featured' => true]);
-        $brandImperial = Brand::create(['name' => 'RAVAHA Private Reserve', 'slug' => 'ravaha-private-reserve', 'origin_country' => 'Lahore / Taif', 'is_featured' => true]);
-        $brandModern = Brand::create(['name' => 'RAVAHA Couture Paris', 'slug' => 'ravaha-couture-paris', 'origin_country' => 'Grasse, France', 'is_featured' => true]);
+        $brandRoyal = Brand::create(['name' => "Perfumes Collection Signature Ateliers", 'slug' => 'perfumes-collection-signature-ateliers', 'origin_country' => 'Paris / Lahore Atelier', 'is_featured' => true]);
+        $brandImperial = Brand::create(['name' => 'Perfumes Collection Private Reserve', 'slug' => 'perfumes-collection-private-reserve', 'origin_country' => 'Lahore / Taif', 'is_featured' => true]);
+        $brandModern = Brand::create(['name' => 'Perfumes Collection Couture Paris', 'slug' => 'perfumes-collection-couture-paris', 'origin_country' => 'Grasse, France', 'is_featured' => true]);
 
         // 8. Scent Notes
         $notesList = [
@@ -1427,7 +1427,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 1: Delivered COD in Lahore
         $order1 = Order::create([
-            'order_number' => 'RAV-2026-1001',
+            'order_number' => 'PC-2026-1001',
             'user_id' => $customer->id,
             'customer_name' => 'Kamran Akram',
             'customer_email' => 'kamran.akram@gmail.com',
@@ -1472,7 +1472,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 2: Pending Bank Transfer Verification (Receipt Attached!)
         $order2 = Order::create([
-            'order_number' => 'RAV-2026-1002',
+            'order_number' => 'PC-2026-1002',
             'user_id' => null,
             'customer_name' => 'Ayesha Siddiqui',
             'customer_email' => 'ayesha.s@outlook.com',
@@ -1519,7 +1519,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 3: Shipped via Leopards to Islamabad
         $order3 = Order::create([
-            'order_number' => 'RAV-2026-1003',
+            'order_number' => 'PC-2026-1003',
             'user_id' => null,
             'customer_name' => 'Dr. Omar Farooq',
             'customer_email' => 'omar.farooq@shifa.pk',
@@ -1556,7 +1556,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 4: Shipped via PostEx to Peshawar
         $order4 = Order::create([
-            'order_number' => 'RAV-2026-1004',
+            'order_number' => 'PC-2026-1004',
             'user_id' => null,
             'customer_name' => 'Zainab Tariq',
             'customer_email' => 'zainab.tariq@gmail.com',
@@ -1591,7 +1591,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 5: Processing COD in Faisalabad
         $order5 = Order::create([
-            'order_number' => 'RAV-2026-1005',
+            'order_number' => 'PC-2026-1005',
             'user_id' => null,
             'customer_name' => 'Bilal Hassan',
             'customer_email' => 'bilal.hassan@yahoo.com',
@@ -1628,7 +1628,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 6: Pending Verification with Bank Receipt
         $order6 = Order::create([
-            'order_number' => 'RAV-2026-1006',
+            'order_number' => 'PC-2026-1006',
             'user_id' => null,
             'customer_name' => 'Usman Ghani',
             'customer_email' => 'usman.ghani@gmail.com',
@@ -1664,7 +1664,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // Order 7: Confirmed COD in Rawalpindi
         $order7 = Order::create([
-            'order_number' => 'RAV-2026-1007',
+            'order_number' => 'PC-2026-1007',
             'user_id' => null,
             'customer_name' => 'Murtaza Shah',
             'customer_email' => 'murtaza.shah@gmail.com',
@@ -1698,13 +1698,13 @@ class LuxuryPerfumeSeeder extends Seeder
         ActivityLog::create([
             'user_id' => $superAdmin->id,
             'action' => 'system_bootstrapped',
-            'description' => 'RAVAHA Parfums master vault initialized with 26 luxury impressions & administrative security policies.',
+            'description' => 'Perfumes Collection master vault initialized with 26 luxury impressions & administrative security policies.',
             'created_at' => now()->subDays(6),
         ]);
         ActivityLog::create([
             'user_id' => $orderSpecialist->id,
             'action' => 'order_verified',
-            'description' => 'Verified Raast transaction RAAST-8829103 for order #RAV-2026-1003.',
+            'description' => 'Verified Raast transaction RAAST-8829103 for order #PC-2026-1003.',
             'created_at' => now()->subDays(2),
         ]);
         ActivityLog::create([

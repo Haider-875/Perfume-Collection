@@ -70,14 +70,14 @@ if (!function_exists('format_pkr')) {
     }
 }
 
-if (!function_exists('ravaha_whatsapp_url')) {
+if (!function_exists('perfumes_collection_whatsapp_url')) {
     /**
-     * Generate direct WhatsApp link with message
+     * Generate direct WhatsApp link with message for Perfumes Collection
      *
      * @param string $message
      * @return string
      */
-    function ravaha_whatsapp_url($message = 'Assalam o Alaikum! I would like to inquire about Perfumes Collection.')
+    function perfumes_collection_whatsapp_url($message = 'Assalam o Alaikum! I would like to inquire about Perfumes Collection.')
     {
         $rawNumber = settings('site_whatsapp', '+92 336 3685732');
         $cleanNumber = preg_replace('/[^0-9]/', '', $rawNumber);
@@ -87,3 +87,4 @@ if (!function_exists('ravaha_whatsapp_url')) {
         return 'https://wa.me/' . $cleanNumber . '?text=' . urlencode($message);
     }
 }
+
