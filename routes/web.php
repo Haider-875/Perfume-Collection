@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminActivityLogController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +126,11 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
 
     Route::get('/reviews', [AccountController::class, 'reviews'])->name('reviews');
     Route::post('/reviews/store', [AccountController::class, 'storeReview'])->name('review.store');
+
+    // Patron Security & Profile
+    Route::get('/settings', [AccountController::class, 'settings'])->name('settings');
+    Route::put('/settings/password', [AccountController::class, 'updatePassword'])->name('password.update')->middleware('throttle:6,1');
+    Route::put('/settings/profile', [AccountController::class, 'updateProfile'])->name('profile.update');
 });
 
 // ==========================================
@@ -226,6 +232,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Activity Logs & Audit Trail
     Route::get('/activity-logs', [AdminActivityLogController::class, 'index'])->name('activity-logs.index');
+
+    // Personal Administrator Profile & Security
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/password', [AdminProfileController::class, 'updatePassword'])->name('profile.password')->middleware('throttle:6,1');
+    Route::put('/profile/info', [AdminProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
 /*

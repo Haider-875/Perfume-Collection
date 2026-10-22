@@ -41,6 +41,10 @@
                         <i class="fas fa-star"></i>
                         <span>Olfactory Reviews</span>
                     </a>
+                    <a href="{{ route('account.settings') }}" class="d-flex align-items-center gap-3 px-3 py-2 rounded-2 text-decoration-none transition" style="color: #6B605B;">
+                        <i class="fas fa-lock"></i>
+                        <span>Security & Password</span>
+                    </a>
                 </nav>
             </div>
 

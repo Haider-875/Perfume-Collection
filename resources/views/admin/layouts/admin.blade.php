@@ -1481,6 +1481,13 @@
                 </div>
             </a>
 
+            <a href="{{ route('admin.profile') }}" class="sidebar-link {{ request()->routeIs('admin.profile*') ? 'active' : '' }}">
+                <div class="sidebar-link-inner">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Profile & Password</span>
+                </div>
+            </a>
+
             <a href="{{ route('admin.settings.index') }}" class="sidebar-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                 <div class="sidebar-link-inner">
                     <i class="fa-solid fa-gear"></i>
@@ -1508,7 +1515,7 @@
 
         <!-- Sidebar Footer (Monogram Avatar & Sign Out) -->
         <div class="sidebar-footer">
-            <div class="d-flex align-items-center text-decoration-none">
+            <a href="{{ route('admin.profile') }}" class="d-flex align-items-center text-decoration-none" title="My Profile & Security">
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 36px; height: 36px; font-size: 13px; background-color: #1e293b; color: #60a5fa; border: 1.5px solid rgba(255, 255, 255, 0.12);">
                     {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                 </div>
@@ -1516,7 +1523,7 @@
                     <div class="fw-semibold text-truncate text-white" style="font-size: 13px;">{{ Auth::user()->name ?? 'Admin' }}</div>
                     <small class="text-secondary d-block text-truncate" style="font-size: 11px;">{{ Auth::user()->role ?? 'Store Admin' }}</small>
                 </div>
-            </div>
+            </a>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
                 <button type="submit" class="btn btn-sm border-0 p-1 text-secondary" style="background: transparent; color: #94a3b8;" title="Logout" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'">
@@ -1582,6 +1589,7 @@
                             <div class="fw-bold text-dark small">{{ Auth::user()->name ?? 'Admin' }}</div>
                             <div class="text-muted small" style="font-size: 11px;">{{ Auth::user()->email ?? 'admin@store.com' }}</div>
                         </li>
+                        <li><a class="dropdown-item py-2" href="{{ route('admin.profile') }}"><i class="fa-solid fa-key me-2 text-primary"></i>Profile & Password</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('home') }}" target="_blank"><i class="fa-solid fa-store me-2 text-muted"></i>View Boutique</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('admin.settings.index') }}"><i class="fa-solid fa-gear me-2 text-muted"></i>Store Settings</a></li>
                         <li><hr class="dropdown-divider my-1"></li>

@@ -15,6 +15,8 @@ use App\Services\PaymentGateways\WalletTransferGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AccountController extends Controller
 {
@@ -261,5 +263,54 @@ class AccountController extends Controller
         ]);
 
         return back()->with('success', 'Thank you for documenting your olfactory review. It is now published.');
+    }
+
+    /**
+     * Display Patron Security & Profile Settings
+     */
+    public function settings()
+    {
+        $user = Auth::user();
+        return view('account.settings', compact('user'));
+    }
+
+    /**
+     * Update Patron Account Password
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string', 'current_password'],
+            'password' => ['required', 'string', Password::min(8)->letters()->numbers(), 'confirmed', 'different:current_password'],
+        ], [
+            'current_password.current_password' => 'The provided current password does not match your records.',
+            'password.different' => 'Your new password cannot be identical to your current password.',
+            'password.confirmed' => 'Password confirmation does not match.',
+            'password.min' => 'Your new password must be at least 8 characters and include letters and numbers.',
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with('success', 'Your fragrance vault access password has been successfully updated.');
+    }
+
+    /**
+     * Update Patron Profile Details
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'city' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $user->update($validated);
+
+        return back()->with('success', 'Your patron profile information has been refreshed.');
     }
 }
