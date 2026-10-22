@@ -39,8 +39,8 @@ class CollectionController extends Controller
             return view('pages.bundles', compact('bundles', 'bundleProducts'));
         }
 
-        // Explicitly disallow candles, attar & exclusive pages
-        if (in_array($slug, ['candles', 'candle', 'attar', 'attars', 'exclusive', 'exclusive-reserve', 'exclusive-edition'])) {
+        // Explicitly disallow candles & attar pages
+        if (in_array($slug, ['candles', 'candle', 'attar', 'attars'])) {
             abort(404);
         }
 
@@ -182,6 +182,7 @@ class CollectionController extends Controller
         $fragranceFamilies = FragranceFamily::has('products')->withCount('products')->orderBy('name')->get();
         $scentNotes = ScentNote::has('products')->withCount('products')->orderBy('name')->get();
         $allCollections = Collection::where('is_active', true)->orderBy('sort_order')->get();
+        $allCategories = Category::where('is_active', true)->orderBy('sort_order')->get();
 
         return view('pages.collection-detail', compact(
             'collection',
@@ -189,7 +190,8 @@ class CollectionController extends Controller
             'products',
             'fragranceFamilies',
             'scentNotes',
-            'allCollections'
+            'allCollections',
+            'allCategories'
         ));
     }
 }

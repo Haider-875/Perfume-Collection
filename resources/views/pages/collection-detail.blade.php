@@ -80,7 +80,7 @@
                 <button type="button" @click="mobileFiltersOpen = false" class="flex-grow-1 btn-view-compositions">
                     <span>View Compositions</span>
                 </button>
-                @if(request()->hasAny(['family', 'note', 'volume_ml', 'q']))
+                @if(request()->hasAny(['note', 'volume_ml', 'q']))
                     <a href="{{ url()->current() }}" class="py-2.5 px-3 text-center text-xs text-uppercase tracking-wider rounded-3 text-decoration-none shadow-sm fw-semibold" style="background-color: #FFFFFF; border: 1px solid #541B29; color: #541B29; white-space: nowrap;">
                         Reset
                     </a>
@@ -105,7 +105,6 @@
                         <span>Filters</span>
                         @php
                             $activeFilterCount = (request('q') ? 1 : 0) 
-                                + (request('family') ? 1 : 0) 
                                 + (request('note') ? 1 : 0) 
                                 + (request('volume_ml') ? 1 : 0);
                         @endphp

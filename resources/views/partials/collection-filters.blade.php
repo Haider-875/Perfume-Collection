@@ -162,9 +162,6 @@
 
 <form action="{{ url()->current() }}" method="GET" id="{{ $formId ?? 'collectionFilterForm' }}" class="collection-filter-form d-flex flex-column gap-3" style="font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;">
     {{-- Preserve active filters as hidden inputs for text/filter submissions --}}
-    @if(request('family'))
-        <input type="hidden" name="family" value="{{ request('family') }}">
-    @endif
     @if(request('note'))
         <input type="hidden" name="note" value="{{ request('note') }}">
     @endif
@@ -209,7 +206,7 @@
                 <i class="fas fa-sliders-h" style="font-size: 11px; color: #541B29;"></i>
                 <span>Filter Fragrances</span>
             </span>
-            @if(request()->hasAny(['family', 'note', 'volume_ml', 'q']))
+            @if(request()->hasAny(['note', 'volume_ml', 'q']))
                 <a href="{{ url()->current() }}" class="text-decoration-none d-inline-flex align-items-center gap-1 transition" style="font-size: 10.5px; font-weight: 600; color: #541B29;" title="Reset all filters">
                     <i class="fas fa-rotate-left" style="font-size: 9.5px;"></i>
                     <span>Reset All</span>
@@ -234,20 +231,12 @@
     </div>
 
     {{-- Active Filter Chips --}}
-    @if(request()->hasAny(['family', 'note', 'volume_ml', 'q']))
+    @if(request()->hasAny(['note', 'volume_ml', 'q']))
         <div class="pb-2" style="border-bottom: 1px solid #E8E0DA;">
             <div class="d-flex flex-wrap gap-1.5">
                 @if(request('q'))
                     <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
                         <span>"{{ Str::limit(request('q'), 14) }}"</span>
-                        <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
-                    </a>
-                @endif
-
-                @if(request('family'))
-                    @php $activeFam = $fragranceFamilies->firstWhere('slug', request('family')); @endphp
-                    <a href="{{ request()->fullUrlWithQuery(['family' => null]) }}" class="badge rounded-pill text-decoration-none d-inline-flex align-items-center gap-2 px-3 py-1 text-white shadow-xs" style="font-size: 10.5px; font-weight: 500; background-color: #541B29;">
-                        <span>{{ $activeFam ? $activeFam->name : ucfirst(request('family')) }}</span>
                         <i class="fas fa-times ms-1" style="font-size: 9px;"></i>
                     </a>
                 @endif
@@ -270,51 +259,7 @@
         </div>
     @endif
 
-    {{-- Group 1: Fragrance Family (Primary Filter - 4 Core Families in the Shop) --}}
-    <div class="pt-2" style="border-top: 1px solid #E8E0DA;" x-data="{ openFamily: true }">
-        <button 
-            type="button" 
-            @click="openFamily = !openFamily"
-            class="w-100 bg-transparent border-0 p-0 d-flex align-items-center justify-content-between text-start cursor-pointer mb-2 text-decoration-none"
-            aria-label="Toggle Fragrance Family"
-        >
-            <span class="d-flex align-items-center gap-1.5" style="color: #211D1E; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
-                <span>Fragrance Family</span>
-                @if(request('family'))
-                    <span class="badge rounded-pill text-white fw-bold px-1.5 py-0.5" style="font-size: 9px; background-color: #541B29;">1</span>
-                @endif
-            </span>
-            <i class="fas fa-chevron-down" :style="openFamily ? 'transform: rotate(180deg); transition: transform 0.2s ease;' : 'transition: transform 0.2s ease;'" style="font-size: 10px; color: #A89F99;"></i>
-        </button>
-
-        <div x-show="openFamily" x-cloak class="d-flex flex-column pt-1.5" style="gap: 8px !important;">
-            <a 
-                href="{{ request()->fullUrlWithQuery(['family' => null]) }}" 
-                class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ !request('family') ? 'filter-item-active' : '' }}"
-                style="{{ !request('family') ? 'background-color: #F5EBEF; color: #541B29; font-weight: 600;' : 'color: #554D49; background-color: transparent;' }}"
-            >
-                <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
-                    <span class="filter-bullet-point"></span>
-                    <span>All Families</span>
-                </span>
-            </a>
-            @foreach($fragranceFamilies as $family)
-                <a 
-                    href="{{ request()->fullUrlWithQuery(['family' => request('family') == $family->slug ? null : $family->slug]) }}" 
-                    class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ request('family') == $family->slug ? 'filter-item-active' : '' }}"
-                    style="{{ request('family') == $family->slug ? 'background-color: #F5EBEF; color: #541B29; font-weight: 600;' : 'color: #554D49; background-color: transparent;' }}"
-                >
-                    <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
-                        <span class="filter-bullet-point"></span>
-                        <span>{{ $family->name }}</span>
-                    </span>
-                    <span class="badge rounded-pill fw-medium" style="background-color: #FAF7F2; color: #786C67; font-size: 10px; border: 1px solid #E8E0DA;">{{ $family->products_count }}</span>
-                </a>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- Group 2: Bottle Size (Compact, Small Luxury Buttons: 30ml, 50ml, 100ml) --}}
+    {{-- Group 1: Bottle Size (Compact, Small Luxury Buttons: 30ml, 50ml, 100ml) --}}
     <div class="pt-2 pb-1" style="border-top: 1px solid #E8E0DA;" x-data="{ openVolume: true }">
         <button 
             type="button" 
@@ -346,7 +291,7 @@
         </div>
     </div>
 
-    {{-- Group 3: Collections Navigation --}}
+    {{-- Group 2: All Impressions Navigation --}}
     <div class="pt-2" style="border-top: 1px solid #E8E0DA;" x-data="{ openCollections: true }">
         <button 
             type="button" 
@@ -356,7 +301,7 @@
         >
             <span class="d-flex align-items-center gap-1.5" style="color: #211D1E; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
                 <span>All Impressions</span>
-                @if($slug !== 'all')
+                @if(in_array($slug, ['men', 'women', 'unisex', 'exclusive']))
                     <span class="badge rounded-pill text-white fw-bold px-1.5 py-0.5" style="font-size: 9px; background-color: #541B29;">Active</span>
                 @endif
             </span>
@@ -365,39 +310,42 @@
 
         <div x-show="openCollections" x-cloak class="pt-1.5">
             <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px !important;">
-                <li>
-                    <a href="{{ route('collections.show', 'all') }}" class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ $slug === 'all' ? 'filter-item-active' : '' }}" style="{{ $slug === 'all' ? 'color: #541B29; font-weight: 600; background-color: #F5EBEF;' : 'color: #554D49;' }}">
-                        <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
-                            <span class="filter-bullet-point"></span>
-                            <span>All Impressions</span>
-                        </span>
-                        @if($slug === 'all')
-                            <i class="fas fa-check" style="font-size: 8.5px; color: #541B29;"></i>
-                        @endif
-                    </a>
-                </li>
-                @foreach($allCollections as $col)
+                @php
+                    $impressionLinks = [
+                        ['slug' => 'men', 'name' => 'Men'],
+                        ['slug' => 'women', 'name' => 'Women'],
+                        ['slug' => 'unisex', 'name' => 'Unisex'],
+                        ['slug' => 'exclusive', 'name' => 'Exclusive'],
+                    ];
+                    $coreSlugs = ['men', 'women', 'unisex', 'exclusive'];
+                    $customCategories = isset($allCategories) ? $allCategories->whereNotIn('slug', $coreSlugs)->where('is_active', true) : collect();
+                @endphp
+                @foreach($impressionLinks as $col)
                     <li>
-                        <a href="{{ route('collections.show', $col->slug) }}" class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ $slug === $col->slug ? 'filter-item-active' : '' }}" style="{{ $slug === $col->slug ? 'color: #541B29; font-weight: 600; background-color: #F5EBEF;' : 'color: #554D49;' }}">
+                        <a href="{{ route('collections.show', $col['slug']) }}" class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ $slug === $col['slug'] ? 'filter-item-active' : '' }}" style="{{ $slug === $col['slug'] ? 'color: #541B29; font-weight: 600; background-color: #F5EBEF;' : 'color: #554D49;' }}">
                             <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
                                 <span class="filter-bullet-point"></span>
-                                <span>{{ $col->name }}</span>
+                                <span>{{ $col['name'] }}</span>
                             </span>
-                            @if($slug === $col->slug)
+                            @if($slug === $col['slug'])
                                 <i class="fas fa-check" style="font-size: 8.5px; color: #541B29;"></i>
                             @endif
                         </a>
                     </li>
                 @endforeach
-                <li class="pt-0.5">
-                    <a href="{{ route('collections.show', 'bundles') }}" class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none filter-item-link" style="color: #541B29; font-weight: 600; background-color: #FAF7F2; border: 1px dashed #541B29;">
-                        <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
-                            <span class="filter-bullet-point" style="background-color: #D4AF37;"></span>
-                            <span>Curated Bundles</span>
-                        </span>
-                        <span class="text-white px-2 py-0.5 rounded-pill fw-bold badge-save-gradient" style="font-size: 8.5px; background: linear-gradient(135deg, #d49a3d 0%, #c4244b 45%, #780d24 100%) !important; letter-spacing: 0.05em; border: 1px solid rgba(255, 255, 255, 0.35);">SAVE 25%</span>
-                    </a>
-                </li>
+                @foreach($customCategories as $customCat)
+                    <li>
+                        <a href="{{ route('collections.show', $customCat->slug) }}" class="d-flex align-items-center justify-content-between py-2 px-2.5 rounded-2 text-decoration-none transition filter-item-link {{ $slug === $customCat->slug ? 'filter-item-active' : '' }}" style="{{ $slug === $customCat->slug ? 'color: #541B29; font-weight: 600; background-color: #F5EBEF;' : 'color: #554D49;' }}">
+                            <span class="d-flex align-items-center" style="font-size: 11.5px; gap: 8px;">
+                                <span class="filter-bullet-point"></span>
+                                <span>{{ $customCat->name }}</span>
+                            </span>
+                            @if($slug === $customCat->slug)
+                                <i class="fas fa-check" style="font-size: 8.5px; color: #541B29;"></i>
+                            @endif
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
