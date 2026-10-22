@@ -83,9 +83,9 @@
             <a href="{{ route('shop.show', $product->slug) }}" class="text-decoration-none" style="color: #211D1E !important;">{{ $product->name }}</a>
         </h3>
 
-        <!-- Pricing: Compare at Price + Our Price Agy Peche with Luxury Gradient, Bottle Size Neche -->
+        <!-- Pricing: Compare at Price + Our Price -->
         <div class="product-card-pricing-wrap my-2 my-md-2.5 text-center">
-            <div class="product-card-pricing d-flex align-items-baseline justify-content-center gap-2 flex-wrap mb-1">
+            <div class="product-card-pricing d-flex align-items-baseline justify-content-center gap-2 flex-wrap">
                 @if($product->compare_at_price && $product->compare_at_price > $product->effective_price)
                     <span class="product-price-compare text-decoration-line-through text-nowrap">
                         Rs. {{ number_format($product->compare_at_price, 0) }}
@@ -93,13 +93,6 @@
                 @endif
                 <span class="product-price-main price-gradient-luxury fw-bold text-nowrap">
                     Rs. {{ number_format($product->effective_price, 0) }}
-                </span>
-            </div>
-
-            <!-- Bottle Size Neche -->
-            <div class="product-card-volume-row">
-                <span class="product-price-volume text-nowrap">
-                    {{ $product->volume_ml ?: 50 }}ml Bottle
                 </span>
             </div>
         </div>
