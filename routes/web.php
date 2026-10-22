@@ -622,9 +622,26 @@ Route::get('/clear-cache', function () {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+    \Illuminate\Support\Facades\Cache::flush();
     return response()->json([
         'status' => 'success',
         'message' => 'Blade views, application, and config caches cleared successfully for Wasmer/production.'
     ]);
 });
+
+Route::get('/sync-categories', function () {
+    \App\Http\Controllers\Admin\AdminCategoryController::ensureCoreCategoriesExist();
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+    \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+    \Illuminate\Support\Facades\Cache::flush();
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Core categories (Men, Women, Unisex, Exclusive) synchronized and cache flushed successfully on Wasmer.'
+    ]);
+});
+
 

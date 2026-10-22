@@ -30,10 +30,16 @@ class HeroSlide extends Model
     protected static function booted()
     {
         static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
             \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+            \Illuminate\Support\Facades\Cache::flush();
         });
         static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
             \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+            \Illuminate\Support\Facades\Cache::flush();
         });
     }
 

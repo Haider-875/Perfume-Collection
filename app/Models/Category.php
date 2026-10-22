@@ -29,11 +29,33 @@ class Category extends Model
     protected static function booted()
     {
         static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
             \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+            \Illuminate\Support\Facades\Cache::flush();
         });
         static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
             \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+            \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+            \Illuminate\Support\Facades\Cache::flush();
         });
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return $this->image;
+            }
+            if (file_exists(public_path($this->image))) {
+                return asset($this->image);
+            }
+            if (!str_ends_with(strtolower($this->image), '.svg')) {
+                return asset($this->image);
+            }
+        }
+        return asset('assets/images/categories/collection_signature.jpg');
     }
 
     public function products()

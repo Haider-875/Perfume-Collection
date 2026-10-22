@@ -36,6 +36,54 @@ class ProductionCatalogSeeder extends Seeder
         );
 
         // 2. Ensure Categories
+        $catMen = Category::firstOrCreate(
+            ['slug' => 'men'],
+            [
+                'name' => 'Men',
+                'description' => 'Commanding, smoky leather, aromatic woods, and rich spices.',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'badge_text' => 'Power & Sillage',
+                'sort_order' => 1,
+                'is_active' => true,
+            ]
+        );
+
+        $catWomen = Category::firstOrCreate(
+            ['slug' => 'women'],
+            [
+                'name' => 'Women',
+                'description' => 'Sensual florals, luscious gourmands, and luminous amber extraits.',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'badge_text' => 'Sensual & Radiant',
+                'sort_order' => 2,
+                'is_active' => true,
+            ]
+        );
+
+        $catUnisex = Category::firstOrCreate(
+            ['slug' => 'unisex'],
+            [
+                'name' => 'Unisex',
+                'description' => 'Transcendent compositions balancing ambergris, warm woods, and precious resins.',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'badge_text' => 'Transcendent',
+                'sort_order' => 3,
+                'is_active' => true,
+            ]
+        );
+
+        $catExclusive = Category::firstOrCreate(
+            ['slug' => 'exclusive'],
+            [
+                'name' => 'Exclusive',
+                'description' => 'Hand-macerated private reserve formulations for connoisseurs.',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'badge_text' => 'Private Reserve',
+                'sort_order' => 4,
+                'is_active' => true,
+            ]
+        );
+
         $catPerfume = Category::firstOrCreate(
             ['slug' => 'perfume'],
             [
@@ -43,7 +91,7 @@ class ProductionCatalogSeeder extends Seeder
                 'description' => 'Master-crafted luxury impressions and haute parfumerie extraits.',
                 'image' => 'assets/images/categories/collection_signature.jpg',
                 'badge_text' => 'Signature Extrait',
-                'sort_order' => 1,
+                'sort_order' => 5,
                 'is_active' => true,
             ]
         );
@@ -737,6 +785,17 @@ class ProductionCatalogSeeder extends Seeder
             if (!$product) {
                 $product = Product::create($payload);
             } else {
+                // Safeguard: Never overwrite user-uploaded product images with default seeder assets
+                if ($product->thumbnail_image && (Str::startsWith($product->thumbnail_image, 'uploads/') || !empty($product->thumbnail_image))) {
+                    unset($payload['thumbnail_image']);
+                }
+                if ($product->hover_image && (Str::startsWith($product->hover_image, 'uploads/') || !empty($product->hover_image))) {
+                    unset($payload['hover_image']);
+                }
+                // Safeguard: Never overwrite customized category_id if already set by user
+                if ($product->category_id) {
+                    unset($payload['category_id']);
+                }
                 $product->update($payload);
             }
 
@@ -857,6 +916,11 @@ class ProductionCatalogSeeder extends Seeder
 
         // 9. Seed curated bundles linked to the 26 live perfumes
         $this->call(BundleSeeder::class);
+
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         ActivityLog::record(
             'production_catalog_seeded',

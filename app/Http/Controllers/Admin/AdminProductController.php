@@ -211,6 +211,11 @@ class AdminProductController extends Controller
 
         ActivityLog::record('product_created', "Added fragrance [{$product->name}] (" . ($product->impression_of ? "Impression of {$product->impression_of}" : "Signature") . ") with SKU {$product->sku}", $product);
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
+
         return redirect()->route('admin.products.index')->with('success', "Fragrance [{$product->name}] successfully added to catalog.");
     }
 
@@ -371,6 +376,11 @@ class AdminProductController extends Controller
             ActivityLog::record('product_updated', "Updated product specifications for [{$product->name}]", $product);
         }
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
+
         return redirect()->route('admin.products.index')->with('success', "Fragrance [{$product->name}] updated successfully.");
     }
 
@@ -388,6 +398,11 @@ class AdminProductController extends Controller
         $this->safelyDeleteImageFile($path);
 
         ActivityLog::record('image_deleted', "Removed gallery image for product [{$product->name}]", $product);
+
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         if (request()->ajax() || request()->wantsJson()) {
             return response()->json(['success' => true, 'message' => 'Gallery image removed successfully.']);
@@ -421,6 +436,11 @@ class AdminProductController extends Controller
         } else {
             return back()->with('error', 'Invalid image type requested for removal.');
         }
+
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json(['success' => true, 'message' => $msg]);
@@ -461,6 +481,11 @@ class AdminProductController extends Controller
         $product->delete();
 
         ActivityLog::record('product_deleted', "Deleted perfume [{$name}] from catalog");
+
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         return back()->with('success', "Fragrance [{$name}] deleted from catalog.");
     }

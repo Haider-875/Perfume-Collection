@@ -14,6 +14,8 @@ class AdminCategoryController extends Controller
 {
     public function index()
     {
+        self::ensureCoreCategoriesExist();
+
         $categories = Category::withCount('products')
             ->with(['products:id,name,category_id'])
             ->orderBy('sort_order')
@@ -28,6 +30,79 @@ class AdminCategoryController extends Controller
         return view('admin.categories.index', compact('categories', 'allProducts'));
     }
 
+    /**
+     * Guarantees core categories (Men, Women, Unisex, Exclusive) always exist with proper products & collections
+     */
+    public static function ensureCoreCategoriesExist()
+    {
+        $coreCategories = [
+            'men' => [
+                'name' => 'Men',
+                'description' => "Commanding, smoky leather, aromatic woods, and rich spices.",
+                'badge_text' => 'Power & Sillage',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'sort_order' => 1,
+            ],
+            'women' => [
+                'name' => 'Women',
+                'description' => "Sensual florals, luscious gourmands, and luminous amber extraits.",
+                'badge_text' => 'Sensual & Radiant',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'sort_order' => 2,
+            ],
+            'unisex' => [
+                'name' => 'Unisex',
+                'description' => "Transcendent compositions balancing ambergris, warm woods, and precious resins.",
+                'badge_text' => 'Transcendent',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'sort_order' => 3,
+            ],
+            'exclusive' => [
+                'name' => 'Exclusive',
+                'description' => "Hand-macerated private reserve formulations for connoisseurs.",
+                'badge_text' => 'Private Reserve',
+                'image' => 'assets/images/categories/collection_signature.jpg',
+                'sort_order' => 4,
+            ],
+        ];
+
+        foreach ($coreCategories as $slug => $data) {
+            $cat = Category::where('slug', $slug)->first();
+            if (!$cat) {
+                $cat = Category::create([
+                    'name' => $data['name'],
+                    'slug' => $slug,
+                    'description' => $data['description'],
+                    'badge_text' => $data['badge_text'],
+                    'image' => $data['image'],
+                    'sort_order' => $data['sort_order'],
+                    'is_active' => true,
+                ]);
+            }
+
+            // Ensure matching Collection exists
+            $col = Collection::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'badge_text' => $data['badge_text'],
+                    'image' => $data['image'],
+                    'sort_order' => $data['sort_order'],
+                    'is_active' => true,
+                ]
+            );
+
+            // If category has 0 products but collection has products, sync them
+            if ($cat->products()->count() === 0 && $col) {
+                $pIds = $col->products()->pluck('products.id')->toArray();
+                if (!empty($pIds)) {
+                    Product::whereIn('id', $pIds)->whereNull('category_id')->update(['category_id' => $cat->id]);
+                }
+            }
+        }
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -40,13 +115,13 @@ class AdminCategoryController extends Controller
             'product_ids.*' => 'exists:products,id',
         ]);
 
-        $imagePath = 'assets/images/perfumes/oud_royale.svg';
+        $imagePath = 'assets/images/categories/collection_signature.jpg';
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '_' . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('uploads/categories');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            if (!\Illuminate\Support\Facades\File::isDirectory($destinationPath)) {
+                \Illuminate\Support\Facades\File::makeDirectory($destinationPath, 0775, true, true);
             }
             $file->move($destinationPath, $filename);
             $imagePath = 'uploads/categories/' . $filename;
@@ -76,6 +151,9 @@ class AdminCategoryController extends Controller
                 'is_active' => $request->has('is_active'),
             ]
         );
+        if ($collection && $collection->image !== $imagePath) {
+            $collection->update(['image' => $imagePath]);
+        }
 
         // Assign selected products if any
         $assignedCount = 0;
@@ -87,7 +165,10 @@ class AdminCategoryController extends Controller
             $assignedCount = count($request->product_ids);
         }
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         ActivityLog::record('category_created', "Created category '{$category->name}' with {$assignedCount} assigned perfumes", $category);
 
@@ -116,8 +197,8 @@ class AdminCategoryController extends Controller
             $file = $request->file('image');
             $filename = time() . '_' . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('uploads/categories');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            if (!\Illuminate\Support\Facades\File::isDirectory($destinationPath)) {
+                \Illuminate\Support\Facades\File::makeDirectory($destinationPath, 0775, true, true);
             }
             $file->move($destinationPath, $filename);
             $imagePath = 'uploads/categories/' . $filename;
@@ -136,7 +217,7 @@ class AdminCategoryController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        // Keep matching collection in sync
+        // Keep matching collection in sync including image
         $collection = Collection::where('slug', $oldSlug)->orWhere('slug', $newSlug)->first();
         if ($collection) {
             $collection->update([
@@ -144,12 +225,16 @@ class AdminCategoryController extends Controller
                 'slug' => $newSlug,
                 'description' => $request->description,
                 'badge_text' => $request->badge_text,
+                'image' => $imagePath,
                 'sort_order' => $request->sort_order ?? 0,
                 'is_active' => $request->has('is_active'),
             ]);
         }
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         ActivityLog::record('category_updated', "Updated category '{$category->name}'", $category);
 
@@ -184,7 +269,10 @@ class AdminCategoryController extends Controller
             $collection->products()->sync($selectedIds);
         }
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         ActivityLog::record('category_products_updated', "Updated assigned perfumes for category '{$category->name}' (" . count($selectedIds) . " perfumes)", $category);
 
@@ -212,7 +300,10 @@ class AdminCategoryController extends Controller
 
         $category->delete();
 
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v3');
         \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v1');
+        \Illuminate\Support\Facades\Cache::forget('homepage_curated_data_v2');
+        \Illuminate\Support\Facades\Cache::flush();
 
         ActivityLog::record('category_deleted', "Deleted category '{$name}'" . ($productsCount > 0 ? " ({$productsCount} associated fragrances unassigned)" : ""));
 
