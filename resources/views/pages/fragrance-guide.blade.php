@@ -59,8 +59,8 @@
                                 <i class="fas fa-crown text-gold"></i> Perfumes Collection Extrait
                             </td>
                             <td style="padding: 16px; color: var(--gold-bright); font-weight: 700;">35% - 40%</td>
-                            <td style="padding: 16px; color: var(--gold-bright); font-weight: 700;">14 - 18+ Hours</td>
-                            <td style="padding: 16px; color: var(--gold-bright); font-weight: 700;">Monumental beast-mode sillage</td>
+                            <td style="padding: 16px; color: var(--gold-bright); font-weight: 700;">8 - 10 Hours</td>
+                            <td style="padding: 16px; color: var(--gold-bright); font-weight: 700;">Exceptional long-lasting sillage</td>
                         </tr>
                         <tr style="background: rgba(212,175,55,0.04);">
                             <td style="padding: 16px; color: var(--gold-champagne); font-weight: 700;">

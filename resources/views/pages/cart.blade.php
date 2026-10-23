@@ -239,7 +239,7 @@
                     <i class="fas fa-shopping-bag"></i>
                 </div>
                 <h3 class="font-serif fs-3 fw-normal mb-0" style="color: #211D1E;">Your Fragrance Bag is Empty</h3>
-                <p class="mb-0" style="color: #6B605B;">Discover our handcrafted impression extraits with monumental 14+ hours longevity.</p>
+                <p class="mb-0" style="color: #6B605B;">Discover our handcrafted impression extraits with rich 8-10 hours longevity.</p>
                 <div class="pt-2">
                     <a href="{{ route('collections.show', 'all') }}" class="btn-gold py-3 px-4 text-xs text-uppercase tracking-widest d-inline-block text-decoration-none" style="border-radius: 8px;">
                         Explore All Impressions

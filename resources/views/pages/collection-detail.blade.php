@@ -19,7 +19,7 @@
             {{ $collection ? $collection->name : 'All Fragrance Impressions' }}
         </h1>
         <p class="mx-auto lh-base mb-0" style="max-width: 672px; font-size: 0.95rem; color: #6B605B;">
-            {{ $collection && $collection->description ? $collection->description : 'Handcrafted French-Oriental compositions macerated with up to 40% natural perfume compounds for unprecedented 14+ hours sillage in Pakistan.' }}
+            {{ $collection && $collection->description ? $collection->description : 'Handcrafted French-Oriental compositions macerated with up to 40% natural perfume compounds for unprecedented 8-10 hours sillage in Pakistan.' }}
         </p>
     </div>
 </section>

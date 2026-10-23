@@ -194,7 +194,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
         HeroSlide::create([
             'title' => "REVIVAL 50",
-            'subtitle' => "Hand-crafted with 40% Extrait de Parfum concentration, blending aged Cambodian agarwood and smoky birch. Engineered for 16+ hours of beast-mode projection across Pakistan.",
+            'subtitle' => "Hand-crafted with 40% Extrait de Parfum concentration, blending aged Cambodian agarwood and smoky birch. Engineered for 8-10 hours of long-lasting projection across Pakistan.",
             'badge_text' => "WINNER FRAGRANCE OF THE YEAR 2026",
             'image' => 'assets/videos/91_perfume_banner.mp4',
             'cta_text' => "SHOP IMPRESSIONS",
@@ -1319,7 +1319,7 @@ class LuxuryPerfumeSeeder extends Seeder
 
             // Reviews with diverse Pakistani connoisseurs
             $sampleReviews = [
-                ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Unbelievable longevity in Karachi humidity. Projects effortlessly for 14+ hours.'],
+                ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Unbelievable longevity in Karachi humidity. Projects effortlessly for 8-10 hours.'],
                 ['name' => 'Hina Rizvi', 'city' => 'Karachi, DHA Phase 6', 'comment' => 'Exquisite maceration with zero synthetic sharpness. Smells like pure luxury.'],
                 ['name' => 'Syed Tariq Mehmood', 'city' => 'Karachi, PECHS', 'comment' => 'Super fast delivery to PECHS. Easily rivals imported 300 USD niche extrait.'],
                 ['name' => 'Usman Tariq', 'city' => 'Lahore, Gulberg III', 'comment' => 'Rich, regal projection that lasts all day on clothes. Highly recommended.'],
@@ -1360,10 +1360,10 @@ class LuxuryPerfumeSeeder extends Seeder
 
         // 11. Blogs / Fragrance Chronicles
         Blog::create([
-            'title' => 'Why Commercial Perfumes Disappear in Pakistan (And Why Extrait Lasts 18+ Hours)',
+            'title' => 'Why Commercial Perfumes Disappear in Pakistan (And Why Extrait Lasts 8-10 Hours)',
             'slug' => 'why-commercial-perfumes-disappear-in-pakistan',
             'excerpt' => 'An insider look into perfume concentration physics, alcohol volatility in 40°C heat, and the power of aged natural fixatives.',
-            'content' => "In Pakistan's climate, conventional designer fragrances bottled at 12-15% concentration evaporate within 3 to 4 hours. The high atmospheric temperature accelerates alcohol vaporization, leaving little trail behind.\n\nAt Perfumes Collection, all spray compositions are formulated at 35% to 40% Extrait de Parfum strength. By using dense, natural base notes such as 15-year aged Cambodian agarwood and natural ambergris, we anchor volatile floral and citrus notes to skin lipids and cloth fibers for over 18 hours.",
+            'content' => "In Pakistan's climate, conventional designer fragrances bottled at 12-15% concentration evaporate within 3 to 4 hours. The high atmospheric temperature accelerates alcohol vaporization, leaving little trail behind.\n\nAt Perfumes Collection, all spray compositions are formulated at 35% to 40% Extrait de Parfum strength. By using dense, natural base notes such as 15-year aged Cambodian agarwood and natural ambergris, we anchor volatile floral and citrus notes to skin lipids and cloth fibers for over 8-10 hours.",
             'image' => 'assets/images/blogs/blog_extrait_science.jpg',
             'author_name' => 'Master Parfumeur M. Al-Farabi',
             'category' => 'Olfactory Science',

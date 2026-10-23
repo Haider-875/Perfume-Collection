@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Perfumes Collection | Luxury Extrait de Parfum Impressions Pakistan')
-@section('meta_description', 'Discover hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration, 14+ hours longevity, Cash on Delivery nationwide.')
+@section('meta_description', 'Discover hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration, 8-10 hours longevity, Cash on Delivery nationwide.')
 
 @section('content')
 
@@ -214,7 +214,7 @@
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
                     <i class="fas fa-hourglass-half"></i>
-                    <span>Long Lasting for 14+ Hours</span>
+                    <span>Long Lasting for 8-10 Hours</span>
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
@@ -245,7 +245,7 @@
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
                     <i class="fas fa-hourglass-half"></i>
-                    <span>Long Lasting for 14+ Hours</span>
+                    <span>Long Lasting for 8-10 Hours</span>
                 </span>
                 <span class="luxury-marquee-sep">✦</span>
                 <span class="luxury-marquee-item">
@@ -343,7 +343,7 @@
                                 Signature<br><span class="fs-6 tracking-widest fw-bold" style="color: #780d24 !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.15), 0 2px 10px rgba(0, 0, 0, 0.9);">COLLECTION</span>
                             </h3>
                             <p class="pt-2 lh-base mb-0" style="color: #FFFFFF !important; font-size: 13.5px; font-weight: 400; line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); max-width: 20rem;">
-                                Most loved and iconic designer scents with 14+ hours projection.
+                                Most loved and iconic designer scents with 8-10 hours projection.
                             </p>
                         </div>
 
@@ -656,7 +656,7 @@
                         <h3 class="font-serif fs-4 fw-medium text-uppercase mb-0" style="color: #211D1E !important;">35% - 40% Extrait Concentration
                         </h3>
                         <p class="text-xs text-sm lh-base fw-light mb-0" style="color: #6B605B;">
-                            Nearly double the oil density of department store Eau de Parfum. Delivers monumental 14 to 18
+                            Nearly double the oil density of department store Eau de Parfum. Delivers rich 8 to 10
                             hours longevity on skin and fabric without synthetic alcohol harshness.
                         </p>
                     </div>

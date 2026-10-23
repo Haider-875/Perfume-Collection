@@ -88,7 +88,7 @@ class HomeController extends Controller
                     'default_rating' => 4.9,
                     'default_reviews' => 48,
                     'volume' => '50ml Extrait de Parfum',
-                    'longevity' => '16+ Hours Longevity',
+                    'longevity' => '8-10 Hours Longevity',
                 ],
                 [
                     'slug' => 'marjaan',
@@ -102,7 +102,7 @@ class HomeController extends Controller
                     'default_rating' => 5.0,
                     'default_reviews' => 62,
                     'volume' => '50ml Extrait de Parfum',
-                    'longevity' => '14+ Hours Longevity',
+                    'longevity' => '8-10 Hours Longevity',
                 ],
                 [
                     'slug' => '91-sports',
@@ -116,7 +116,7 @@ class HomeController extends Controller
                     'default_rating' => 4.9,
                     'default_reviews' => 46,
                     'volume' => '60ml Extrait de Parfum',
-                    'longevity' => '14+ Hours Longevity',
+                    'longevity' => '8-10 Hours Longevity',
                 ],
             ];
 
@@ -228,7 +228,7 @@ class HomeController extends Controller
             ],
             3 => [
                 'title' => "REVIVAL 50",
-                'subtitle' => "Hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration for 14+ hours longevity across Pakistan.",
+                'subtitle' => "Hand-macerated Extrait de Parfum impressions inspired by iconic global niche fragrance houses. 35%-40% oil concentration for 8-10 hours longevity across Pakistan.",
                 'badge_text' => "HAUTE PARFUMERIE • EXTRAIT DE PARFUM",
                 'image' => 'assets/videos/91_perfume_banner.mp4',
                 'cta_text' => "DISCOVER COLLECTION",

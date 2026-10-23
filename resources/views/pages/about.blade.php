@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Our Artisanal Craft & Heritage | Perfumes Collection Haute Parfumerie Pakistan')
-@section('meta_description', 'Discover how Perfumes Collection crafts 35%-40% pure Extrait de Parfum hand-macerated for 90 days, calibrated specifically to withstand Pakistan’s climate with 18+ hours longevity.')
+@section('meta_description', 'Discover how Perfumes Collection crafts 35%-40% pure Extrait de Parfum hand-macerated for 90 days, calibrated specifically to withstand Pakistan’s climate with 8-10 hours longevity.')
 
 @section('content')
 
@@ -24,7 +24,7 @@
         </h1>
 
         <p class="mx-auto lh-base mb-4 fw-light" style="max-width: 680px; font-size: clamp(0.92rem, 1.8vw, 1.05rem); color: #5C524D; line-height: 1.7;">
-            Commercial designer fragrances dilute formulations down to 10%–15% alcohol solutions that disappear in Pakistan’s heat. At Perfumes Collection, we compound authentic <strong>35% to 40% pure oil concentrations</strong>, hand-macerated for 90 days to achieve legendary 14 to 18+ hours sillage.
+            Commercial designer fragrances dilute formulations down to 10%–15% alcohol solutions that disappear in Pakistan’s heat. At Perfumes Collection, we compound authentic <strong>35% to 40% pure oil concentrations</strong>, hand-macerated for 90 days to achieve legendary 8 to 10 hours sillage.
         </p>
 
         <!-- 4 Quick Trust Badges (Perfect Centering, No Overflow on Mobile) -->
@@ -64,7 +64,7 @@
                          style="width: 36px; height: 36px; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%); border: 1px solid #EAD8B8;">
                         <i class="fas fa-shield-halved gradient-gold-icon" style="font-size: 13px;"></i>
                     </div>
-                    <span class="fw-bold font-serif d-block" style="color: #211D1E; font-size: clamp(0.88rem, 3vw, 1.05rem); line-height: 1.2;">18+ Hours</span>
+                    <span class="fw-bold font-serif d-block" style="color: #211D1E; font-size: clamp(0.88rem, 3vw, 1.05rem); line-height: 1.2;">8-10 Hours</span>
                     <span class="d-block text-muted fw-normal" style="font-size: clamp(9.5px, 2.2vw, 11px); color: #786C67 !important; line-height: 1.25;">Pakistan Heat Tested</span>
                 </div>
             </div>
@@ -379,7 +379,7 @@
                                     </span>
                                 </div>
                                 <span class="fw-bold d-block mb-2 gradient-gold-icon" style="font-size: clamp(1.05rem, 2.2vw, 1.22rem); background: linear-gradient(135deg, #d49a3d 0%, #c4244b 50%, #780d24 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important;">
-                                    14 to 18+ Hours Beast Mode
+                                    8 to 10 Hours Long Lasting
                                 </span>
                             </div>
                             <p class="mb-0 fw-medium" style="font-size: 12px; line-height: 1.5; color: #541B29;">
@@ -597,7 +597,7 @@
         </h2>
         
         <p class="lh-base mb-3 fw-light" style="font-size: clamp(0.9rem, 1.8vw, 1rem); color: #6B605B; max-width: 600px; line-height: 1.7;">
-            Experience monumental projection, pure French grade essences, and guaranteed 18-hour hold. Discover our iconic individual flacons or curate your custom coffret.
+            Experience monumental projection, pure French grade essences, and guaranteed 8-10 hour hold. Discover our iconic individual flacons or curate your custom coffret.
         </p>
 
         <!-- Gradient Action Buttons Row (Generous gap on mobile, no icons except WhatsApp) -->

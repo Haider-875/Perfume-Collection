@@ -86,7 +86,7 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Longevity Rating</label>
-                            <input type="text" name="longevity" value="{{ old('longevity', '10-12+ Hours') }}" placeholder="e.g. 10-12+ Hours">
+                            <input type="text" name="longevity" value="{{ old('longevity', '8-10 Hours') }}" placeholder="e.g. 8-10 Hours">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Sillage / Projection</label>

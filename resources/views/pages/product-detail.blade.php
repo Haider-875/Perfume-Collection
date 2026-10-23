@@ -150,8 +150,8 @@
                             <div class="pdp-trust-card">
                                 <i class="fas fa-hourglass-half fs-5 pdp-icon-gradient"></i>
                                 <div>
-                                    <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours
-                                        Beast Mode</div>
+                                    <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">8-10 Hours
+                                        Long Lasting</div>
                                     <div style="font-size: 9.5px; color: #4A4240;">Artisanal macerated sillage</div>
                                 </div>
                             </div>
@@ -335,8 +335,8 @@
                             <div class="pdp-trust-card">
                                 <i class="fas fa-hourglass-half fs-5 pdp-icon-gradient"></i>
                                 <div>
-                                    <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">14+ Hours
-                                        Beast Mode</div>
+                                    <div class="fw-semibold" style="font-size: 11px; color: #110D0E !important;">8-10 Hours
+                                        Long Lasting</div>
                                     <div style="font-size: 9.5px; color: #4A4240;">Artisanal macerated sillage</div>
                                 </div>
                             </div>
@@ -443,7 +443,7 @@
                                 style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: #110D0E !important;">The Fragrance
                                 Notes Pyramid</h3>
                             <p class="text-xs mt-1 mb-0 font-sans" style="color: #4A4240;">Evolution of accords on skin over
-                                16+ hours</p>
+                                8-10 hours</p>
                         </div>
 
                         <!-- Top Notes Tier -->
@@ -487,9 +487,9 @@
                                     class="text-xs text-uppercase tracking-widest fw-semibold d-flex align-items-center gap-2"
                                     style="color: #541B29;">
                                     <i class="fas fa-gem pdp-note-icon-gradient" aria-hidden="true"></i>
-                                    <span>Base Notes (6 - 18+ Hours)</span>
+                                    <span>Base Notes (4 - 10 Hours)</span>
                                 </span>
-                                <span class="text-uppercase fw-semibold" style="font-size: 10px; color: #541B29;">14+ Hours
+                                <span class="text-uppercase fw-semibold" style="font-size: 10px; color: #541B29;">8-10 Hours
                                     Longevity</span>
                             </div>
                             <p class="font-sans mb-0 lh-base" style="font-size: 0.92rem; color: #241D1B;">
@@ -516,7 +516,7 @@
                                 <span class="text-uppercase tracking-wider" style="color: #110D0E;">Longevity on Skin &
                                     Fabric:</span>
                                 <span class="fw-semibold" style="color: #541B29;">{{ $product->longevity_rating ?? 9.5 }}/10
-                                    (16-18 Hours)</span>
+                                    (8-10 Hours)</span>
                             </div>
                             <div class="w-100 rounded-pill overflow-hidden"
                                 style="height: 8px; background-color: #FAF7F2; border: 1px solid #E8E0DA;">

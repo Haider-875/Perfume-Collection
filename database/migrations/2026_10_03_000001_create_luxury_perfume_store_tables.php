@@ -95,7 +95,7 @@ return new class extends Migration
             $table->boolean('in_stock')->default(true);
             
             // Olfactory Metrics
-            $table->string('longevity')->default('14+ Hours');
+            $table->string('longevity')->default('8-10 Hours');
             $table->string('sillage')->default('Heavy / Room Filling');
             $table->string('season')->default('All Seasons / Evening');
             $table->string('time_of_day')->default('Evening & Signature');

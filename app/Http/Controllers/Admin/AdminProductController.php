@@ -150,7 +150,7 @@ class AdminProductController extends Controller
             'volume_ml' => $request->input('volume_ml', 100),
             'gender' => $request->input('gender', 'Unisex'),
             'concentration' => $validated['concentration'] ?? 'Extrait de Parfum (35% Oil)',
-            'longevity' => $request->input('longevity', '14+ Hours Beast Mode'),
+            'longevity' => $request->input('longevity', '8-10 Hours (Long Lasting)'),
             'sillage' => $request->input('sillage', 'Heavy / Room-Filling'),
             'season' => $request->input('season', 'All Seasons / Signature'),
             'top_notes_summary' => $request->input('top_notes'),
@@ -419,7 +419,9 @@ class AdminProductController extends Controller
             if ($selectedCat) {
                 $matchingCol = Collection::where('slug', $selectedCat->slug)->first();
                 if ($matchingCol) {
-                    $product->collections()->syncWithoutDetaching([$matchingCol->id]);
+                    $coreColIds = Collection::whereIn('slug', ['men', 'women', 'unisex', 'exclusive'])->pluck('id')->toArray();
+                    $nonCoreCols = $product->collections()->whereNotIn('collections.id', $coreColIds)->pluck('collections.id')->toArray();
+                    $product->collections()->sync(array_merge($nonCoreCols, [$matchingCol->id]));
                 }
             }
         }

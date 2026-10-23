@@ -557,7 +557,7 @@ function renderCartUI(data) {
                 </div>
                 <h4 class="font-hero fs-4 mb-2" style="color: #211D1E;">Your Fragrance Bag is Empty</h4>
                 <p class="text-xs font-sans mb-4 mx-auto" style="max-width: 270px; line-height: 1.6; color: #6B605B;">
-                    Explore our handcrafted Extrait de Parfum impressions with 14+ hours longevity.
+                    Explore our handcrafted Extrait de Parfum impressions with 8-10 hours longevity.
                 </p>
                 <a href="/collections/all" onclick="window.closeCartDrawer()" class="btn-gold px-4 py-2.5 text-xs text-uppercase rounded-3 text-decoration-none shadow-md d-inline-flex align-items-center gap-2">
                     <span>EXPLORE IMPRESSIONS</span>

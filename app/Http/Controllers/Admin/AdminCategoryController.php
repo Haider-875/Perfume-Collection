@@ -262,10 +262,15 @@ class AdminCategoryController extends Controller
             Product::whereIn('id', $selectedIds)->update(['category_id' => $category->id]);
         }
 
-        // 2. Remove category_id from unselected products that previously belonged to this category
-        Product::where('category_id', $category->id)
+        // 2. Safely reassign unselected products that previously belonged to this category
+        $removedProducts = Product::where('category_id', $category->id)
             ->whereNotIn('id', $selectedIds)
-            ->update(['category_id' => null]);
+            ->get();
+        foreach ($removedProducts as $rem) {
+            $fallbackSlug = strtolower($rem->gender ?? 'unisex');
+            $fallbackCat = Category::where('slug', $fallbackSlug)->first() ?? Category::where('slug', 'unisex')->first();
+            $rem->update(['category_id' => $fallbackCat ? $fallbackCat->id : null]);
+        }
 
         // 3. If there is a matching Collection (e.g. men, women, unisex, exclusive), sync pivot
         $collection = Collection::where('slug', $category->slug)->first();

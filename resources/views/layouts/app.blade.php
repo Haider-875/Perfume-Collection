@@ -10,7 +10,7 @@
     <!-- Dynamic Luxury SEO & Meta -->
     <title>@yield('title', 'Perfumes Collection | Luxury Extrait de Parfum Impressions Pakistan')</title>
     <meta name="description"
-        content="@yield('meta_description', 'Handcrafted Extrait de Parfum luxury impressions formulated with French oils for 14+ hour longevity in Pakistan. 100% authentic impressions.')">
+        content="@yield('meta_description', 'Handcrafted Extrait de Parfum luxury impressions formulated with French oils for 8-10 hours longevity in Pakistan. 100% authentic impressions.')">
     <meta name="keywords"
         content="perfumes collection, luxury impressions pakistan, extrait de parfum lahore, buy perfume online karachi, best long lasting fragrance islamabad">
 
@@ -93,7 +93,7 @@
                     </div>
                     <div class="swiper-slide">
                         <i class="fas fa-crown text-gold"></i>
-                        <span>35% - 40% Pure Extrait Strength &bull; 14+ Hours Beast Mode Longevity</span>
+                        <span>35% - 40% Pure Extrait Strength &bull; 8-10 Hours Long Lasting Longevity</span>
                     </div>
                     <div class="swiper-slide">
                         <i class="fas fa-hand-holding-dollar text-gold"></i>
@@ -154,7 +154,7 @@
                          @keydown.escape.window="shopDropdownOpen = false">
                         <button type="button"
                             @click="shopDropdownOpen = !shopDropdownOpen"
-                            class="nav-link-luxury border-0 bg-transparent p-0 d-inline-flex align-items-center {{ request()->is('collections*') && !request()->is('collections/bundles*') ? 'active' : '' }}"
+                            class="nav-link-luxury border-0 bg-transparent p-0 d-inline-flex align-items-center {{ request()->is('collections*') && !request()->is('collections/bundles*') && !request()->is('collections/exclusive*') ? 'active' : '' }}"
                             :class="{ 'active': shopDropdownOpen }"
                             aria-haspopup="true"
                             :aria-expanded="shopDropdownOpen.toString()"
@@ -173,6 +173,12 @@
                                 <span>All Fragrances</span>
                                 <i class="fas fa-arrow-right opacity-50" style="font-size: 9px;"></i>
                             </a>
+                            <a href="{{ route('collections.show', 'exclusive') }}"
+                                @click="shopDropdownOpen = false"
+                                class="dropdown-item-luxury d-flex align-items-center justify-content-between">
+                                <span>Exclusive Reserve</span>
+                                <span class="nav-badge-exclusive">NEW</span>
+                            </a>
                             <a href="{{ route('collections.show', 'men') }}"
                                 @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury">
@@ -190,6 +196,13 @@
                             </a>
                         </div>
                     </div>
+
+                    <!-- Exclusive Link -->
+                    <a href="{{ route('collections.show', 'exclusive') }}"
+                        class="nav-link-luxury {{ request()->is('collections/exclusive*') ? 'active' : '' }}">
+                        <span>Exclusive</span>
+                        <span class="nav-badge-exclusive">NEW</span>
+                    </a>
 
                     <!-- Bundles Link -->
                     <a href="{{ route('bundles.index') }}"
@@ -273,6 +286,14 @@
                 Home
             </a>
 
+            <!-- Mobile Exclusive Link -->
+            <a href="{{ route('collections.show', 'exclusive') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
+                class="font-hero fs-5 py-2 text-decoration-none d-flex align-items-center justify-content-between pe-2"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
+                <span>Exclusive</span>
+                <span class="nav-badge-exclusive">NEW</span>
+            </a>
+
             <!-- Mobile Collections Accordion -->
             <div x-data="{ colOpen: true }" class="py-2" style="border-bottom: 1px solid #E8E0DA;">
                 <button type="button" @click="colOpen = !colOpen"
@@ -291,8 +312,6 @@
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Women's Impressions</a>
                     <a href="{{ route('collections.show', 'unisex') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                         class="d-block py-1 text-decoration-none" style="color: #6B605B;">Unisex & Pure Oud</a>
-                    <a href="{{ route('collections.show', 'bundles') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
-                        class="d-block py-1 fw-semibold text-decoration-none" style="color: #541B29;">Bundles & Discovery Sets (Save 25%)</a>
                 </div>
             </div>
 
@@ -361,7 +380,7 @@
                         <p class="lh-base fw-light mb-0" style="font-size: 0.76rem; color: #6B605B;">
                             {{ $settings['site_name'] ?? 'Perfumes Collection' }} crafts high-fidelity Extrait de Parfum
                             impressions inspired by iconic global niche perfumeries. Formulated at 35%–40% pure oil
-                            concentration for monumental 14+ hours longevity.
+                            concentration for monumental 8-10 hours longevity.
                         </p>
                     </div>
                 </div>
@@ -371,6 +390,8 @@
                     <h4 class="font-serif text-xs text-uppercase tracking-widest mb-3 fw-semibold pb-2" style="color: #541B29 !important; border-bottom: 1px solid #E8E0DA !important;">
                         Top Collections</h4>
                     <ul class="list-unstyled vstack gap-2 mb-0" style="font-size: 0.76rem;">
+                        <li><a href="{{ route('collections.show', 'exclusive') }}"
+                                class="text-decoration-none transition-all fw-medium" style="color: #541B29;">Exclusive Reserve</a></li>
                         <li><a href="{{ route('collections.show', 'men') }}"
                                 class="text-decoration-none transition-all" style="color: #6B605B;">Men's Designer Impressions</a></li>
                         <li><a href="{{ route('collections.show', 'women') }}"
@@ -597,7 +618,7 @@
                         <div class="col-6">
                             <label class="w-100 p-3 rounded cursor-pointer d-flex align-items-center gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #211D1E;">
                                 <input type="radio" name="quiz_intensity" value="beast" checked class="form-check-input mt-0">
-                                <span>Beast Mode (16+ Hours)</span>
+                                <span>Long Lasting (8-10 Hours)</span>
                             </label>
                         </div>
                         <div class="col-6">

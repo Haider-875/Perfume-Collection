@@ -29,7 +29,7 @@
         
         <!-- Accordion 1 -->
         <x-accordion title="What makes Extrait de Parfum superior to standard Eau de Parfum (EDP)?" :open="true">
-            Extrait de Parfum is the pinnacle of the perfumer's craft, containing 35% to 40% pure concentrated perfume compounds (compared to 12%-18% in standard commercial EDPs). This extraordinarily high concentration ensures that top notes do not immediately evaporate in Pakistan's summer humidity, while the base notes of vintage Cambodian agarwood, ambergris, and musk project for 16 to 24+ hours on fabrics and skin.
+            Extrait de Parfum is the pinnacle of the perfumer's craft, containing 35% to 40% pure concentrated perfume compounds (compared to 12%-18% in standard commercial EDPs). This extraordinarily high concentration ensures that top notes do not immediately evaporate in Pakistan's summer humidity, while the base notes of vintage Cambodian agarwood, ambergris, and musk project for 8 to 10 hours on fabrics and skin.
         </x-accordion>
 
         <!-- Accordion 2 -->

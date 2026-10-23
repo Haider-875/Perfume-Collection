@@ -23,7 +23,7 @@ class RealisticReviewsSeeder extends Seeder
 
         $allReviews = [
             // Karachi Connoisseurs (Majority)
-            ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Incredible longevity in Karachi humidity. Projects effortlessly for 14+ hours without turning cloying.'],
+            ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Incredible longevity in Karachi humidity. Projects effortlessly for 8-10 hours without turning cloying.'],
             ['name' => 'Hina Rizvi', 'city' => 'Karachi, DHA Phase 6', 'comment' => 'Exquisite unboxing and heavy magnetic cap. Smells distinctly luxurious with zero synthetic alcohol blast.'],
             ['name' => 'Syed Tariq Mehmood', 'city' => 'Karachi, PECHS', 'comment' => 'True extrait de parfum concentration with visible oil sheen. Easily rivals 300 USD niche bottles.'],
             ['name' => 'Zainab Murtaza', 'city' => 'Karachi, Gulshan-e-Iqbal', 'comment' => 'Warm, soothing, and incredibly addictive. Received compliments throughout an evening family wedding.'],
@@ -46,7 +46,7 @@ class RealisticReviewsSeeder extends Seeder
             ['name' => 'Usman Tariq', 'city' => 'Lahore, Gulberg III', 'comment' => 'Received next day in Lahore via COD. Rich projection that lingers on clothes for days.'],
             ['name' => 'Dr. Omer Siddiqui', 'city' => 'Lahore, DHA Phase 5', 'comment' => 'I collect Roja and Clive Christian. This formulation has phenomenal depth and natural maceration.'],
             ['name' => 'Mahnoor Shah', 'city' => 'Lahore, Model Town', 'comment' => 'Addictive dark vanille and woody notes that don’t feel cloying in cool evenings.'],
-            ['name' => 'Ali Raza Chatha', 'city' => 'Lahore, Cantt', 'comment' => 'Stout magnetic bottle and stellar atomiser mist. 3 sprays easily last past 12 hours.'],
+            ['name' => 'Ali Raza Chatha', 'city' => 'Lahore, Cantt', 'comment' => 'Stout magnetic bottle and stellar atomiser mist. 3 sprays easily last 8-10 hours.'],
             ['name' => 'Waqas Mansoor', 'city' => 'Lahore, Johar Town', 'comment' => 'Magnificent oriental accords. Perfect longevity for Lahore wedding season.'],
 
             // Islamabad & Rawalpindi Connoisseurs
@@ -69,7 +69,7 @@ class RealisticReviewsSeeder extends Seeder
         $aquaAmbergris = $products->firstWhere('slug', 'aqua-ambergris-oceanic-extrait');
         if ($aquaAmbergris) {
             $aquaReviews = [
-                ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Unbelievable ocean-breeze and ambergris sillage in Karachi humidity. Projects for 14+ hours.'],
+                ['name' => 'Bilal Farooqui', 'city' => 'Karachi, Clifton', 'comment' => 'Unbelievable ocean-breeze and ambergris sillage in Karachi humidity. Projects for 8-10 hours.'],
                 ['name' => 'Syed Tariq Mehmood', 'city' => 'Karachi, PECHS', 'comment' => 'Crisp bergamot and salted amber depth. My absolute signature scent for summers.'],
                 ['name' => 'Usman Tariq', 'city' => 'Lahore, Gulberg III', 'comment' => 'Refreshing yet powerful projection. Received multiple compliments at office.'],
                 ['name' => 'Saadullah Khan', 'city' => 'Peshawar, University Town', 'comment' => 'Extraordinary oceanic accords that hold up in dry and warm climate effortlessly.'],

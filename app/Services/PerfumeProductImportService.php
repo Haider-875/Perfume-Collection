@@ -315,7 +315,7 @@ class PerfumeProductImportService
                     'in_stock' => $stock > 0,
                     'volume_ml' => isset($prices['100ml']) ? 100 : (isset($prices['50ml']) ? 50 : 30),
                     'concentration' => 'Extrait de Parfum (35% Oil)',
-                    'longevity' => '14+ Hours Beast Mode',
+                    'longevity' => '8-10 Hours (Long Lasting)',
                     'sillage' => 'Heavy / Room-Filling',
                     'thumbnail_image' => 'assets/images/perfumes/prod_oud_royale.jpg',
                     'is_active' => true,
