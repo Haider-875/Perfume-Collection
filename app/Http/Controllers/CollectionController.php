@@ -46,6 +46,10 @@ class CollectionController extends Controller
 
         $collection = null;
         if ($slug !== 'all') {
+            if ($slug === 'exclusive') {
+                \App\Http\Controllers\Admin\AdminCategoryController::ensureCoreCategoriesExist();
+            }
+
             // Find collection by slug
             $collection = Collection::where('slug', $slug)->first();
 

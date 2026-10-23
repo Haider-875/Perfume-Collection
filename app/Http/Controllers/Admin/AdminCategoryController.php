@@ -101,6 +101,34 @@ class AdminCategoryController extends Controller
                 }
             }
         }
+
+        // Auto-heal Exclusive Category & Collection on Wasmer / Production
+        $exclusiveCat = Category::where('slug', 'exclusive')->first();
+        $exclusiveCol = Collection::where('slug', 'exclusive')->first();
+        if ($exclusiveCat && $exclusiveCol) {
+            $exclusiveNames = [
+                'Lattafa Khumrah', 'Eclair', 'Marjaan', '9PM Night Out', 
+                'Sentinal', 'Xerjoff Naxos', 'Silk Musk', '91 Sports', 
+                '91 Degree', '91 Gold Edition'
+            ];
+            $targetProductIds = Product::where(function($q) use ($exclusiveNames) {
+                foreach ($exclusiveNames as $name) {
+                    $q->orWhere('name', 'like', '%' . $name . '%');
+                }
+            })->pluck('id')->toArray();
+
+            if (!empty($targetProductIds)) {
+                Product::whereIn('id', $targetProductIds)->update(['category_id' => $exclusiveCat->id]);
+                $exclusiveCol->products()->sync($targetProductIds);
+            }
+        }
+
+        // Auto-heal database longevity strings (ensure no 14+ or 16+ or 18+ remains in DB on Wasmer)
+        Product::where('longevity', 'LIKE', '%14%')
+            ->orWhere('longevity', 'LIKE', '%16%')
+            ->orWhere('longevity', 'LIKE', '%18%')
+            ->orWhere('longevity', 'LIKE', '%12-16%')
+            ->update(['longevity' => '8-10 Hours (Long Lasting)']);
     }
 
     public function store(Request $request)

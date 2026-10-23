@@ -52,7 +52,7 @@
     <link rel="preload" href="{{ asset('assets/fonts/Wasted-Vindey.ttf') }}" as="font" type="font/ttf" crossorigin>
 
     <!-- Master Luxury Theme Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}?v={{ filemtime(public_path('assets/css/luxury.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/luxury.css') }}?v={{ filemtime(public_path('assets/css/luxury.css')) ?: '2.0.9' }}-v2">
 
     <!-- Alpine.js & Collapse Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.13.5/dist/cdn.min.js"></script>
