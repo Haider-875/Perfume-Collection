@@ -129,6 +129,13 @@ class AdminCategoryController extends Controller
             ->orWhere('longevity', 'LIKE', '%18%')
             ->orWhere('longevity', 'LIKE', '%12-16%')
             ->update(['longevity' => '8-10 Hours (Long Lasting)']);
+
+        // Auto-heal old phone numbers in settings and user records on Wasmer / Production
+        \App\Models\Setting::where('value', '03008765432')->update(['value' => '03363685732']);
+        \App\Models\Setting::where('value', 'PK89SADA00000003008765432')->update(['value' => 'PK89SADA00000003363685732']);
+        \App\Models\Setting::where('value', '923008765432')->update(['value' => '923363685732']);
+        \App\Models\Setting::where('value', '+92 300 8765432')->update(['value' => '+92 336 3685732']);
+        \App\Models\User::where('phone', '0300-8765432')->orWhere('phone', '+92 300 8765432')->update(['phone' => '+92 336 3685732']);
     }
 
     public function store(Request $request)

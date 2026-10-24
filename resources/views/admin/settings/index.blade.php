@@ -202,7 +202,7 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-primary text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Raast Instant ID</label>
-                            <input type="text" name="bank_raast_id" value="{{ $settings['bank_raast_id'] ?? '923008765432' }}" class="font-monospace fw-bold">
+                            <input type="text" name="bank_raast_id" value="{{ $settings['bank_raast_id'] ?? '03363685732' }}" class="font-monospace fw-bold">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Branch Name / City</label>
@@ -237,7 +237,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Mobile Number</label>
-                                <input type="text" name="easypaisa_number" value="{{ $settings['easypaisa_number'] ?? '03008765432' }}" class="font-monospace">
+                                <input type="text" name="easypaisa_number" value="{{ $settings['easypaisa_number'] ?? '03363685732' }}" class="font-monospace">
                             </div>
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Mobile Number</label>
-                                <input type="text" name="jazzcash_number" value="{{ $settings['jazzcash_number'] ?? '03008765432' }}" class="font-monospace">
+                                <input type="text" name="jazzcash_number" value="{{ $settings['jazzcash_number'] ?? '03363685732' }}" class="font-monospace">
                             </div>
                         </div>
                     </div>
@@ -267,11 +267,11 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Mobile / Account Number</label>
-                                <input type="text" name="sadapay_number" value="{{ $settings['sadapay_number'] ?? '03008765432' }}" class="font-monospace">
+                                <input type="text" name="sadapay_number" value="{{ $settings['sadapay_number'] ?? '03363685732' }}" class="font-monospace">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">SadaPay IBAN</label>
-                                <input type="text" name="sadapay_iban" value="{{ $settings['sadapay_iban'] ?? 'PK89SADA00000003008765432' }}" class="font-monospace">
+                                <input type="text" name="sadapay_iban" value="{{ $settings['sadapay_iban'] ?? 'PK89SADA00000003363685732' }}" class="font-monospace">
                             </div>
                         </div>
                     </div>

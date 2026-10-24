@@ -73,7 +73,7 @@ class LuxuryPerfumeSeeder extends Seeder
             'role' => 'super_admin',
             'permissions' => ['*'],
             'is_active' => true,
-            'phone' => '0300-8765432',
+            'phone' => '+92 336 3685732',
             'city' => 'Lahore',
             'address' => 'Executive Suite, Phase 5 DHA, Lahore',
         ]);
