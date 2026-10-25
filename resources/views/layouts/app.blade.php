@@ -462,7 +462,7 @@
     <aside id="luxuryCartDrawer" class="cart-drawer" style="background-color: #FFFFFF !important; border-left: 1px solid #E8E0DA;">
         <!-- Drawer Header -->
         <div class="cart-drawer-header px-3.5 py-3 px-sm-4 py-sm-3.5 d-flex align-items-center justify-content-between" style="background-color: #FFFFFF !important; border-bottom: 1px solid #E8E0DA !important;">
-            <div class="d-flex align-items-center gap-2.5">
+            <div class="d-flex align-items-center" style="gap: 15px;">
                 <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width: 36px; height: 36px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
                     <i class="fas fa-shopping-bag" style="font-size: 14px;"></i>
                 </div>
@@ -491,7 +491,7 @@
         <!-- Drawer Footer with Subtotal, Trust Assurance & Checkout -->
         <div id="cartDrawerFooter" class="p-3.5 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF !important; border-top: 1px solid #E8E0DA !important;">
             <!-- Free Shipping Progress Tracker -->
-            <div id="cartDrawerShippingBox" class="p-2.5 rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+            <div id="cartDrawerShippingBox" class="p-2.5 rounded-3" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; margin-left: 10px; margin-right: 10px;">
                 <div class="d-flex align-items-center justify-content-between gap-2 mb-1" style="font-size: 11px;">
                     <span id="cartDrawerShippingText" style="color: #514744;">
                         <i class="fas fa-truck-fast text-gold me-1"></i> Free delivery on orders over Rs. 5,000
@@ -505,7 +505,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-column gap-1.5 px-1">
+            <div class="d-flex flex-column gap-1.5 px-1" style="margin-left: 10px; margin-right: 10px;">
                 <div class="d-flex align-items-center justify-content-between">
                     <span class="text-uppercase tracking-wider text-xs fw-medium" style="color: #786C67;">Subtotal:</span>
                     <span id="cartDrawerSubtotal" class="font-serif fs-5 fw-bold" style="color: #211D1E !important;">Rs. 0</span>
