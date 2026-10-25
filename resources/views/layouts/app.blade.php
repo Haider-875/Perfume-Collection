@@ -213,7 +213,8 @@
 
                     <a href="{{ route('collections.show', 'all') }}?sort=bestseller"
                         class="nav-link-luxury">
-                        Bestsellers
+                        <span>Bestsellers</span>
+                        <span class="nav-badge-sale">SALE</span>
                     </a>
                 </nav>
 
@@ -319,6 +320,14 @@
                 class="font-hero fs-5 py-2 text-decoration-none"
                 style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
                 Bundles & Discovery Sets
+            </a>
+
+            <!-- Mobile Bestsellers Link -->
+            <a href="{{ route('collections.show', 'all') }}?sort=bestseller" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
+                class="font-hero fs-5 py-2 text-decoration-none d-flex align-items-center justify-content-between pe-2"
+                style="color: #211D1E !important; border-bottom: 1px solid #E8E0DA; letter-spacing: 0.04em;">
+                <span>Bestsellers</span>
+                <span class="nav-badge-sale">SALE</span>
             </a>
             <a href="{{ route('pages.about') }}" @click="mobileMenuOpen = false" onclick="if(window.closeMobileNav) window.closeMobileNav();"
                 class="font-hero fs-5 py-2 text-decoration-none"
