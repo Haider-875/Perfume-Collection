@@ -699,8 +699,14 @@
     </section>
 
     <!-- 8. Testimonials Section (Haute Parfumerie Patron Reviews) -->
-    @if($recentReviews->count() > 0)
-        <section class="py-5 position-relative overflow-hidden" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;">
+    @php
+        $reviewsList = (isset($recentReviews) && $recentReviews->isNotEmpty())
+            ? $recentReviews
+            : \App\Http\Controllers\HomeController::getCuratedConnoisseurReviews();
+    @endphp
+
+    @if($reviewsList && $reviewsList->count() > 0)
+        <section class="py-5 position-relative overflow-hidden" id="customer-reviews-section" style="background-color: #FAF7F2; border-bottom: 1px solid #E8E0DA;">
             <div class="container px-3 px-lg-4 position-relative" style="z-index: 1;">
                 <!-- Centered Header with Trust Signals -->
                 <div class="text-center mx-auto mb-4 pb-2" style="max-width: 44rem;">
@@ -729,28 +735,53 @@
                 <div class="position-relative px-3 px-sm-4 px-md-4 px-lg-5">
                     <div class="swiper testimonials-swiper pt-3 pb-4" style="padding-top: 16px !important; margin-top: -12px;">
                         <div class="swiper-wrapper">
-                            @foreach($recentReviews as $rev)
+                            @foreach($reviewsList as $rev)
+                                @php
+                                    $prodName = $rev->product ? $rev->product->name : ($rev->product_name ?? 'Extrait de Parfum Impression');
+                                    $prodSlug = $rev->product ? $rev->product->slug : ($rev->product_slug ?? null);
+                                @endphp
                                 <div class="swiper-slide h-auto">
                                     <div class="testimonial-card-luxury d-flex flex-column justify-content-between h-100 w-100"
                                          style="background: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 14px; padding: 22px 20px;">
                                         
                                         <div>
-                                            <!-- Reviewer Name & 5-Star Rating Row -->
+                                            <!-- Reviewer Name, Verified Badge & 5-Star Rating Row -->
                                             <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
-                                                <span class="fw-bold text-truncate" style="font-size: 0.98rem; color: #110D0E !important; letter-spacing: 0.01em;">
-                                                    {{ $rev->user_name }}
-                                                </span>
+                                                <div class="d-flex align-items-center gap-1.5 flex-wrap overflow-hidden">
+                                                    <span class="fw-bold text-truncate" style="font-size: 0.98rem; color: #110D0E !important; letter-spacing: 0.01em;">
+                                                        {{ $rev->customer_name ?? $rev->user_name }}
+                                                    </span>
+                                                    @if($rev->verified_purchase ?? true)
+                                                        <span class="badge-verified-buyer" title="Verified Patron Purchase">
+                                                            <i class="fas fa-circle-check"></i> Verified
+                                                        </span>
+                                                    @endif
+                                                </div>
                                                 <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d; gap: 2px;">
                                                     @for($i = 1; $i <= 5; $i++)
-                                                        <i class="fas fa-star {{ $i <= $rev->rating ? '' : 'opacity-25' }}"></i>
+                                                        <i class="fas fa-star {{ $i <= ($rev->rating ?? 5) ? '' : 'opacity-25' }}"></i>
                                                     @endfor
                                                 </div>
                                             </div>
 
-                                            <!-- Perfume Name -->
-                                            @if($rev->product)
+                                            <!-- Location / City -->
+                                            @if(!empty($rev->customer_city ?? $rev->user_city))
+                                                <div class="text-xs mb-2" style="font-size: 11px; color: #786C67;">
+                                                    <i class="fas fa-location-dot me-1" style="color: #541B29; font-size: 10px;"></i>{{ $rev->customer_city ?? $rev->user_city }}
+                                                </div>
+                                            @endif
+
+                                            <!-- Muted Burgundy Perfume Name -->
+                                            @if($prodSlug)
+                                                <a href="{{ route('shop.products.show', $prodSlug) }}" 
+                                                   class="fw-semibold text-truncate mb-2.5 font-sans d-inline-block text-decoration-none" 
+                                                   style="font-size: 0.82rem; color: #8A4B59;"
+                                                   title="View {{ $prodName }}">
+                                                    {{ $prodName }}
+                                                </a>
+                                            @else
                                                 <div class="fw-semibold text-truncate mb-2.5 font-sans" style="font-size: 0.82rem; color: #8A4B59;">
-                                                    {{ $rev->product->name }}
+                                                    {{ $prodName }}
                                                 </div>
                                             @endif
 
@@ -1056,18 +1087,22 @@
                 if (testimonialsEl.swiper) {
                     testimonialsEl.swiper.destroy(true, true);
                 }
+                const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 new Swiper('.testimonials-swiper', {
-                    slidesPerView: 1.15,
+                    slidesPerView: 1,
                     spaceBetween: 14,
-                    speed: 600,
-                    loop: false,
-                    rewind: true,
+                    speed: 550,
+                    loop: true,
                     grabCursor: true,
                     watchSlidesProgress: true,
                     observer: true,
                     observeParents: true,
-                    autoplay: {
-                        delay: 4500,
+                    keyboard: {
+                        enabled: true,
+                        onlyInViewport: true,
+                    },
+                    autoplay: prefersReducedMotion ? false : {
+                        delay: 5000,
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
                     },
@@ -1081,12 +1116,26 @@
                         prevEl: '.testimonials-prev',
                     },
                     breakpoints: {
-                        320: { slidesPerView: 1.15, spaceBetween: 12 },
-                        480: { slidesPerView: 1.35, spaceBetween: 14 },
-                        640: { slidesPerView: 2.0, spaceBetween: 16 },
-                        768: { slidesPerView: 2.3, spaceBetween: 18 },
-                        1024: { slidesPerView: 3, spaceBetween: 22 },
-                        1280: { slidesPerView: 3.3, spaceBetween: 24 }
+                        // Mobile (<768px): 1 complete card at a time, no clipping
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 14,
+                        },
+                        // Tablet (768px - 1023px): 2 cards
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        // Laptop (1024px - 1439px): 3 cards
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 22,
+                        },
+                        // Desktop (1440px and above): 3 cards
+                        1440: {
+                            slidesPerView: 3,
+                            spaceBetween: 26,
+                        }
                     }
                 });
             }

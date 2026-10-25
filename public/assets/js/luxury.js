@@ -339,21 +339,17 @@ function initSwiperSliders() {
 
     // Testimonials Carousel (Voices of Our Connoisseurs)
     if (document.querySelector('.testimonials-swiper') && !document.querySelector('.testimonials-swiper').swiper && typeof Swiper !== 'undefined') {
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         new Swiper('.testimonials-swiper', {
-            slidesPerView: 1.15,
+            slidesPerView: 1,
             spaceBetween: 14,
-            speed: 700,
-            loop: false,
-            rewind: true,
+            speed: 550,
+            loop: true,
             grabCursor: true,
-            resistance: true,
-            resistanceRatio: 0.75,
-            touchRatio: 1.15,
-            touchAngle: 45,
-            threshold: 4,
+            keyboard: { enabled: true, onlyInViewport: true },
             watchSlidesProgress: true,
-            autoplay: { 
-                delay: 4000, 
+            autoplay: prefersReducedMotion ? false : { 
+                delay: 5000, 
                 disableOnInteraction: false, 
                 pauseOnMouseEnter: true
             },
@@ -363,12 +359,10 @@ function initSwiperSliders() {
                 prevEl: '.testimonials-prev',
             },
             breakpoints: {
-                340: { slidesPerView: 1.12, spaceBetween: 14 },
-                480: { slidesPerView: 1.25, spaceBetween: 16 },
-                640: { slidesPerView: 1.8, spaceBetween: 18 },
-                768: { slidesPerView: 2.2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 24 },
-                1280: { slidesPerView: 3.2, spaceBetween: 24 }
+                0: { slidesPerView: 1, spaceBetween: 14 },
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 22 },
+                1440: { slidesPerView: 3, spaceBetween: 26 }
             }
         });
     }

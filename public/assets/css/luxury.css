@@ -6656,11 +6656,11 @@ body.overflow-hidden {
 }
 
 .testimonials-prev {
-    left: -8px !important;
+    left: 4px !important;
 }
 
 .testimonials-next {
-    right: -8px !important;
+    right: 4px !important;
 }
 
 .testimonials-prev:hover,
