@@ -745,31 +745,17 @@
                                          style="background: #FFFFFF; border: 1px solid #E8E0DA; border-radius: 14px; padding: 22px 20px;">
                                         
                                         <div>
-                                            <!-- Reviewer Name, Verified Badge & 5-Star Rating Row -->
+                                            <!-- Reviewer Name & 5-Star Rating Row -->
                                             <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
-                                                <div class="d-flex align-items-center gap-1.5 flex-wrap overflow-hidden">
-                                                    <span class="fw-bold text-truncate" style="font-size: 0.98rem; color: #110D0E !important; letter-spacing: 0.01em;">
-                                                        {{ $rev->customer_name ?? $rev->user_name }}
-                                                    </span>
-                                                    @if($rev->verified_purchase ?? true)
-                                                        <span class="badge-verified-buyer" title="Verified Patron Purchase">
-                                                            <i class="fas fa-circle-check"></i> Verified
-                                                        </span>
-                                                    @endif
-                                                </div>
+                                                <span class="fw-bold text-truncate" style="font-size: 0.98rem; color: #110D0E !important; letter-spacing: 0.01em;">
+                                                    {{ $rev->customer_name ?? $rev->user_name }}
+                                                </span>
                                                 <div class="d-flex flex-shrink-0" style="font-size: 11px; color: #d49a3d; gap: 2px;">
                                                     @for($i = 1; $i <= 5; $i++)
                                                         <i class="fas fa-star {{ $i <= ($rev->rating ?? 5) ? '' : 'opacity-25' }}"></i>
                                                     @endfor
                                                 </div>
                                             </div>
-
-                                            <!-- Location / City -->
-                                            @if(!empty($rev->customer_city ?? $rev->user_city))
-                                                <div class="text-xs mb-2" style="font-size: 11px; color: #786C67;">
-                                                    <i class="fas fa-location-dot me-1" style="color: #541B29; font-size: 10px;"></i>{{ $rev->customer_city ?? $rev->user_city }}
-                                                </div>
-                                            @endif
 
                                             <!-- Muted Burgundy Perfume Name -->
                                             @if($prodSlug)
