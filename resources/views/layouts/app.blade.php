@@ -461,23 +461,27 @@
     <div id="cartDrawerOverlay" class="cart-drawer-overlay" onclick="if(window.closeCartDrawer) window.closeCartDrawer();"></div>
     <aside id="luxuryCartDrawer" class="cart-drawer" style="background-color: #FFFFFF !important; border-left: 1px solid #E8E0DA;">
         <!-- Drawer Header -->
-        <div class="p-4 d-flex align-items-center justify-content-between" style="background-color: #FFFFFF !important; border-bottom: 1px solid #E8E0DA !important;">
-            <div class="d-flex align-items-center gap-3">
-                <i class="fas fa-shopping-bag fs-5" style="color: #541B29;"></i>
+        <div class="cart-drawer-header px-3.5 py-3 px-sm-4 py-sm-3.5 d-flex align-items-center justify-content-between" style="background-color: #FFFFFF !important; border-bottom: 1px solid #E8E0DA !important;">
+            <div class="d-flex align-items-center gap-2.5">
+                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width: 36px; height: 36px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
+                    <i class="fas fa-shopping-bag" style="font-size: 14px;"></i>
+                </div>
                 <div>
-                    <h3 class="font-serif fs-5 tracking-wider fw-semibold mb-0" style="color: #211D1E !important;">Your Fragrance Bag</h3>
-                    <span id="cartDrawerHeaderCount" style="color: #786C67; font-size: 11px;">0 items</span>
+                    <h3 class="font-serif fs-6 tracking-wider fw-semibold mb-0" style="color: #211D1E !important; line-height: 1.2;">Your Fragrance Bag</h3>
+                    <span id="cartDrawerHeaderCount" style="color: #786C67; font-size: 11px; font-weight: 500; display: inline-block; margin-top: 2px;">0 items</span>
                 </div>
             </div>
             <button type="button" id="closeCartDrawer"
                 onclick="if(window.closeCartDrawer) window.closeCartDrawer();"
-                class="border-0 bg-transparent fs-2 p-1 d-flex align-items-center justify-content-center"
-                style="width: 44px; height: 44px; min-width: 44px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; color: #211D1E !important; cursor: pointer;"
+                class="border-0 bg-transparent d-flex align-items-center justify-content-center rounded-circle"
+                style="width: 36px; height: 36px; min-width: 36px; min-height: 36px; font-size: 20px; line-height: 1; padding: 0; color: #6B605B !important; cursor: pointer; transition: all 0.2s ease;"
+                onmouseover="this.style.backgroundColor='#FAF7F2'; this.style.color='#211D1E';"
+                onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6B605B';"
                 aria-label="Close Shopping Bag">&times;</button>
         </div>
 
         <!-- Dynamic Drawer Cart Items Body (Loaded via AJAX) -->
-        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto overflow-x-hidden p-3 p-sm-4 vstack gap-3" style="background-color: #FAF7F2 !important; color: #211D1E !important; box-sizing: border-box; width: 100%;">
+        <div id="cartDrawerItems" class="flex-grow-1 overflow-y-auto overflow-x-hidden p-3 p-sm-3.5 vstack gap-2.5" style="background-color: #FAF7F2 !important; color: #211D1E !important; box-sizing: border-box; width: 100%;">
             <div class="text-center py-5" style="color: #6B605B;">
                 <i class="fas fa-gem fs-2 opacity-50 mb-3 animate-pulse" style="color: #9E7D3B;"></i>
                 <p class="mb-0">Retrieving your selected impressions...</p>

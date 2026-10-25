@@ -565,21 +565,31 @@ function renderCartUI(data) {
     if (footerEl) footerEl.style.display = 'flex';
 
     body.innerHTML = data.items.map(item => `
-        <div class="cart-item-luxury d-flex align-items-center gap-2.5 gap-sm-3 p-2.5 p-sm-3 rounded-4 shadow-sm position-relative w-100" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; min-width: 0; box-sizing: border-box; overflow: hidden;">
+        <div class="cart-item-luxury d-flex align-items-start position-relative w-100" style="gap: 16px !important; background-color: #FFFFFF; border: 1px solid #E8E0DA; min-width: 0; box-sizing: border-box;">
             <!-- Left: Flacon Image Stage Pedestal -->
-            <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
+            <a href="${item.url}" class="cart-item-img-stage flex-shrink-0 text-decoration-none" style="width: 72px; height: 72px; min-width: 72px; min-height: 72px; background-color: #FAF7F2; border: 1px solid #E8E0DA; padding: 6px;">
                 <img src="${item.image}" alt="${item.name}" class="img-fluid object-fit-contain">
             </a>
 
-            <!-- Center: Product Info & Quantity Stepper -->
-            <div class="flex-grow-1 min-w-0" style="min-width: 0; overflow: hidden;">
-                <a href="${item.url}" class="cart-item-name font-serif d-block text-decoration-none" style="color: #211D1E !important;" title="${item.name}">
-                    ${item.name}
-                </a>
-                <div class="cart-item-variant text-uppercase text-truncate mt-0.5" style="color: #6B605B; font-size: 11px; max-width: 100%;">
+            <!-- Center/Right: Product Info & Controls -->
+            <div class="flex-grow-1 min-w-0" style="min-width: 0;">
+                <!-- Top Row: Name and Remove Button -->
+                <div class="d-flex align-items-start justify-content-between gap-2 mb-1">
+                    <a href="${item.url}" class="cart-item-name font-serif text-decoration-none" style="color: #211D1E !important;" title="${item.name}">
+                        ${item.name}
+                    </a>
+                    <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0" title="Remove Flacon" aria-label="Remove item">
+                        <i class="fas fa-trash-can"></i>
+                    </button>
+                </div>
+
+                <!-- Variant / Concentration -->
+                <div class="cart-item-variant text-uppercase text-truncate" style="color: #786C67; font-size: 11px; max-width: 100%;">
                     ${item.variant}
                 </div>
-                <div class="d-flex align-items-center justify-content-between gap-2 mt-2 pt-0.5" style="min-width: 0;">
+
+                <!-- Bottom Row: Stepper and Price -->
+                <div class="d-flex align-items-center justify-content-between gap-2 pt-1" style="min-width: 0;">
                     <!-- Luxury Qty Stepper Pill -->
                     <div class="cart-qty-pill d-inline-flex align-items-center flex-shrink-0" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                         <button type="button" onclick="updateCartItemQty(${item.id}, ${item.quantity - 1})" class="cart-qty-btn" style="color: #541B29;" aria-label="Decrease quantity">&minus;</button>
@@ -592,11 +602,6 @@ function renderCartUI(data) {
                     </div>
                 </div>
             </div>
-
-            <!-- Right: Trash Remove Button -->
-            <button type="button" onclick="removeCartItem(${item.id})" class="cart-item-remove-btn flex-shrink-0 ms-1" title="Remove Flacon" aria-label="Remove item" style="color: #C81E1E;">
-                <i class="fas fa-trash-can"></i>
-            </button>
         </div>
     `).join('');
 }

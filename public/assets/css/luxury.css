@@ -6112,56 +6112,60 @@ body.overflow-hidden {
 
 /* Cart Item Luxury Card */
 .cart-item-luxury {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
     background: #FFFFFF !important;
     border: 1px solid #E8E0DA !important;
-    border-radius: 14px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 12px !important;
+    padding: 14px !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cart-item-luxury:hover {
     border-color: rgba(158, 125, 59, 0.45) !important;
-    box-shadow: 0 4px 16px rgba(84, 27, 41, 0.08) !important;
-    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(84, 27, 41, 0.07) !important;
 }
 
 /* Image Pedestal inside Cart Drawer */
 .cart-item-img-stage {
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
-    min-height: 64px;
-    border-radius: 10px;
+    width: 72px !important;
+    height: 72px !important;
+    min-width: 72px !important;
+    min-height: 72px !important;
+    border-radius: 10px !important;
     background: #FAF7F2 !important;
     border: 1px solid #E8E0DA !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    padding: 6px !important;
+    flex-shrink: 0 !important;
 }
 
 .cart-item-img-stage img {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    object-fit: contain;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
     transition: transform 0.3s ease;
 }
 
 .cart-item-luxury:hover .cart-item-img-stage img {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 /* Typography inside Cart Item */
 .cart-item-name {
-    font-size: 0.92rem;
-    font-weight: 600;
-    line-height: 1.3;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
     color: #211D1E !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2;
@@ -6169,8 +6173,8 @@ body.overflow-hidden {
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
-    max-width: 100%;
-    margin-bottom: 2px;
+    margin: 0 0 4px 0 !important;
+    padding-top: 1px;
     transition: color 0.2s ease;
 }
 
@@ -6179,15 +6183,17 @@ body.overflow-hidden {
 }
 
 .cart-item-variant {
-    font-size: 11px;
+    font-size: 11px !important;
     letter-spacing: 0.04em;
     font-weight: 500;
-    color: #6B605B !important;
+    color: #786C67 !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
     display: block;
+    margin-top: 2px !important;
+    margin-bottom: 10px !important;
 }
 
 /* Luxury Compact Quantity Stepper Pill */
@@ -6200,14 +6206,16 @@ body.overflow-hidden {
     gap: 2px;
     user-select: none;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
 }
 
 .cart-qty-btn {
     background: transparent !important;
     border: none !important;
     color: #541B29 !important;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6229,8 +6237,9 @@ body.overflow-hidden {
     font-size: 12px;
     font-weight: 700;
     color: #211D1E !important;
-    min-width: 16px;
+    min-width: 18px;
     text-align: center;
+    padding: 0 2px;
 }
 
 .cart-item-price {
@@ -6240,30 +6249,32 @@ body.overflow-hidden {
     color: #541B29 !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
+    margin-left: auto;
 }
 
 /* Remove Trash Button */
 .cart-item-remove-btn {
     background: transparent;
     border: none;
-    color: #C81E1E !important;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 8px;
+    color: #9E8E87 !important;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 13px;
-    transition: all 0.25s ease;
+    font-size: 12px;
+    transition: all 0.2s ease;
     padding: 0;
+    margin: 0;
     flex-shrink: 0;
 }
 
 .cart-item-remove-btn:hover {
-    color: #9B1C1C !important;
+    color: #C81E1E !important;
     background: rgba(200, 30, 30, 0.08) !important;
     transform: scale(1.08);
 }
