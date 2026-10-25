@@ -179,7 +179,7 @@
             Sort By
         </label>
         <div class="position-relative">
-            <i class="fas fa-arrow-down-short-wide position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
+            <i class="fas fa-sliders position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
             <select 
                 name="sort" 
                 id="mobileSortSelect" 

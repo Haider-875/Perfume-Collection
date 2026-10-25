@@ -171,7 +171,6 @@
                                 @click="shopDropdownOpen = false"
                                 class="dropdown-item-luxury d-flex align-items-center justify-content-between">
                                 <span>All Fragrances</span>
-                                <i class="fas fa-arrow-right opacity-50" style="font-size: 9px;"></i>
                             </a>
                             <a href="{{ route('collections.show', 'exclusive') }}"
                                 @click="shopDropdownOpen = false"
@@ -536,7 +535,6 @@
                 <a href="{{ route('checkout.index') }}"
                     class="cart-btn-checkout text-decoration-none">
                     <span>CHECKOUT</span>
-                    <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
                 </a>
             </div>
         </div>
@@ -654,7 +652,7 @@
             class="luxury-dock-btn dock-btn-top opacity-0 pe-none transition-smooth"
             title="Back to Top"
             aria-label="Back to Top">
-            <i class="fas fa-arrow-up text-xs"></i>
+            <i class="fas fa-chevron-up text-xs"></i>
         </button>
 
         <!-- Floating WhatsApp Concierge Button -->

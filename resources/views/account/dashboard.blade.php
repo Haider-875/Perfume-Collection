@@ -90,7 +90,7 @@
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4" style="border-bottom: 1px solid #E8E0DA;">
                         <h2 class="font-serif fs-4 fw-normal mb-0" style="color: #211D1E;">Recent Order Dossiers</h2>
                         <a href="{{ route('account.orders') }}" class="text-xs text-uppercase tracking-wider fw-semibold text-decoration-none" style="color: #541B29;">
-                            View All Dossiers &rarr;
+                            View All Dossiers
                         </a>
                     </div>
 

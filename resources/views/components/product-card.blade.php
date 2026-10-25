@@ -113,7 +113,6 @@
                 title="Add to Cart">
             <i class="fas fa-cart-shopping text-white btn-cart-icon flex-shrink-0" style="font-size: 12px;" aria-hidden="true"></i>
             <span class="text-white text-nowrap" style="font-size: 12px; letter-spacing: 0.05em;">Add to Cart</span>
-            <i class="fas fa-arrow-right-long btn-arrow text-white d-none d-md-inline-block" style="font-size: 11px;"></i>
         </button>
     </div>
 </div>

@@ -44,7 +44,7 @@
                     Found <span class="fw-semibold" style="color: #541B29;">{{ $products->total() }}</span> matching compositions
                 </p>
                 <a href="{{ route('collections.show', 'all') }}" class="text-xs text-decoration-none text-uppercase tracking-wider fw-semibold" style="color: #541B29;">
-                    Browse All Masterpieces &rarr;
+                    Browse All Masterpieces
                 </a>
             </div>
 

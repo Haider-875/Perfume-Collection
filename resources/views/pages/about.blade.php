@@ -235,7 +235,7 @@
                      style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
                     <div class="rounded-3 d-flex align-items-center justify-content-center shadow-xs"
                          style="width: 48px; height: 48px; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%); border: 1px solid #EAD8B8;">
-                        <i class="fas fa-temperature-arrow-up gradient-gold-icon fs-5"></i>
+                        <i class="fas fa-temperature-high gradient-gold-icon fs-5"></i>
                     </div>
                     <div>
                         <span class="text-uppercase fw-semibold" style="font-size: 10px; letter-spacing: 0.15em; color: #9E7D3B;">PILLAR 04</span>
@@ -569,7 +569,7 @@
                      style="background: #FFFFFF; border: 1px solid #E8E0DA;">
                     <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-xs"
                          style="width: 52px; height: 52px; background: linear-gradient(135deg, #FAF4EB 0%, #F5EBEF 100%); border: 1px solid #EAD8B8;">
-                        <i class="fas fa-arrow-rotate-left gradient-gold-icon fs-5"></i>
+                        <i class="fas fa-rotate-left gradient-gold-icon fs-5"></i>
                     </div>
                     <h3 class="font-serif fs-5 fw-bold mb-0" style="color: #211D1E;">7-Day Return Policy</h3>
                     <p class="text-xs mb-0 fw-light" style="color: #6B605B; font-size: 0.84rem; line-height: 1.6;">

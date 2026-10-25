@@ -46,7 +46,7 @@
                 <h1 class="font-serif fs-2 fs-md-1 fw-normal mb-0" style="color: #211D1E;">Your Preserved Wishlist</h1>
             </div>
             <a href="{{ route('collections.index') }}" class="fs-7 text-uppercase tracking-wider fw-semibold text-decoration-none" style="color: #541B29;">
-                &larr; Discover New Extrait Creations
+                Discover New Extrait Creations
             </a>
         </div>
 

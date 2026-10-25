@@ -670,7 +670,6 @@
                                 <button type="submit" class="align-self-start border-0 fw-semibold"
                                     style="background: linear-gradient(135deg, #a31838 0%, #780d24 50%, #4a0915 100%) !important; color: #FFFFFF; border-radius: 8px; padding: 12px 28px; font-size: 0.85rem; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none !important; outline: none !important; box-shadow: 0 4px 16px rgba(120, 13, 36, 0.35);">
                                     <span>Submit Verified Review</span>
-                                    <i class="fas fa-arrow-right-long"></i>
                                 </button>
                             </form>
                         </div>

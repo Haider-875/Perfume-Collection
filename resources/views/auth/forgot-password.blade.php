@@ -43,7 +43,7 @@
 
         <div class="text-center pt-4 mt-4 border-top border-gold-20 text-xs text-muted-parchment">
             <a href="{{ route('login') }}" class="text-gold fw-semibold text-gold-hover text-decoration-none text-uppercase tracking-wider">
-                &larr; Back to Patron Sign In
+                Back to Patron Sign In
             </a>
         </div>
     </div>

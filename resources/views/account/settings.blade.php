@@ -16,7 +16,7 @@
             </div>
             <div class="d-flex align-items-center gap-3">
                 <a href="{{ route('account.dashboard') }}" class="btn py-2 px-3 text-xs text-uppercase tracking-wider rounded-3 shadow-sm" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">
-                    &larr; Return to Dashboard
+                    Return to Dashboard
                 </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

@@ -344,7 +344,7 @@
                                     </div>
                                     <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center" 
                                        style="height: 36px; padding: 0 18px; font-size: 11.5px; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%); color: #FFFFFF; border-radius: 6px; box-shadow: 0 2px 8px rgba(122,28,51,0.25);">
-                                        Add Flacon &rarr;
+                                        Add Flacon
                                     </a>
                                 </div>
                             </div>
@@ -456,7 +456,7 @@
                                                            style="z-index: 2;"
                                                            @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''">
                                                     <div class="d-flex align-items-center gap-2 overflow-hidden pe-2" style="z-index: 1;">
-                                                        <i :class="fileName ? 'fas fa-check-circle text-success' : 'fas fa-cloud-arrow-up'" 
+                                                        <i :class="fileName ? 'fas fa-check-circle text-success' : 'fas fa-paperclip'" 
                                                            :style="fileName ? 'font-size: 13px;' : 'color: #541B29; font-size: 13px;'"></i>
                                                         <span class="text-truncate" style="font-size: 12px; color: #211D1E;" 
                                                               x-text="fileName ? fileName : 'Upload receipt (Image / PDF)'">
@@ -504,7 +504,6 @@
                                 class="w-100 py-3 text-xs fw-semibold text-uppercase tracking-widest shadow-xl d-flex align-items-center justify-content-center gap-2 transition" 
                                 style="height: 48px; border-radius: 8px; border: none !important; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; box-shadow: 0 4px 18px rgba(122, 28, 51, 0.35) !important;">
                             <span>Place Confirmed Order</span>
-                            <i class="fas fa-arrow-right ms-1"></i>
                         </button>
                         <p class="text-center mt-3 mb-0" style="font-size: 11px; color: #6B605B;">
                             By placing this order, you confirm acceptance of our delivery policies and 7-day scent satisfaction guarantee.

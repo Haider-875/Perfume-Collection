@@ -654,7 +654,7 @@
                                                                onclick="event.stopPropagation();" 
                                                                title="Open {{ $bProd->name }} page"
                                                                aria-label="Open perfume product page">
-                                                                <i class="fas fa-arrow-up-right-from-square" style="font-size: 8.5px; color: #541B29;"></i>
+                                                                <i class="fas fa-eye" style="font-size: 8.5px; color: #541B29;"></i>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -729,7 +729,7 @@
                                                            onclick="event.stopPropagation();" 
                                                            title="Open {{ $bProd->name }} page"
                                                            aria-label="Open perfume product page">
-                                                            <i class="fas fa-arrow-up-right-from-square" style="font-size: 8.5px; color: #541B29;"></i>
+                                                            <i class="fas fa-eye" style="font-size: 8.5px; color: #541B29;"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -894,7 +894,6 @@
         <div class="mt-2.5">
             <a id="fModalLink" href="#" class="btn-bundle-bag w-100 text-center text-decoration-none py-2.5 text-uppercase fw-semibold d-flex align-items-center justify-content-center gap-2" style="font-size: 11px; letter-spacing: 0.08em; border-radius: 8px;">
                 <span>VIEW FULL PERFUME DETAILS & BOTTLE SIZES</span>
-                <i class="fas fa-arrow-right-long" style="font-size: 10px;"></i>
             </a>
         </div>
     </div>

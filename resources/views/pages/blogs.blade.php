@@ -74,7 +74,6 @@
 
                             <a href="{{ route('blogs.show', $featuredBlog->slug) }}" class="text-xs text-uppercase tracking-widest fw-semibold d-flex align-items-center gap-2 text-decoration-none" style="color: #541B29;">
                                 <span>Read Chronicle</span>
-                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -131,7 +130,7 @@
                             <div class="pt-3 mt-3 d-flex align-items-center justify-content-between text-xs" style="border-top: 1px solid #E8E0DA;">
                                 <span style="color: #786C67;">{{ $blog->author_name ?? 'Maison d\'Orient' }}</span>
                                 <a href="{{ route('blogs.show', $blog->slug) }}" class="text-decoration-none fw-semibold" style="color: #541B29;">
-                                    Read Full Article &rarr;
+                                    Read Full Article
                                 </a>
                             </div>
                         </div>

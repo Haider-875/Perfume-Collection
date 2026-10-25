@@ -140,7 +140,7 @@
                         
                         <label for="sortSelect" class="text-xs text-uppercase tracking-wider fw-bold mb-0" style="color: #6B605B; font-size: 11px; letter-spacing: 0.08em;">Sort By:</label>
                         <div class="position-relative">
-                            <i class="fas fa-arrow-down-short-wide position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
+                            <i class="fas fa-sliders position-absolute top-50 translate-middle-y" style="left: 14px; font-size: 11px; color: #541B29; pointer-events: none; z-index: 2;"></i>
                             <select 
                                 name="sort" 
                                 id="sortSelect" 

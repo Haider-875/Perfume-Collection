@@ -9,7 +9,7 @@
         <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 pb-4 mb-4" style="border-bottom: 1px solid #E8E0DA;">
             <div>
                 <a href="{{ route('account.orders') }}" class="text-xs text-uppercase tracking-wider fw-semibold text-decoration-none d-inline-block mb-1" style="color: #541B29;">
-                    &larr; Back to Order Dossiers
+                    Back to Order Dossiers
                 </a>
                 <h1 class="font-serif fs-2 fw-normal mb-1" style="color: #211D1E;">
                     Dossier Reference: {{ $order->order_number }}
@@ -86,7 +86,7 @@
                     @if($order->tracking_link)
                         <a href="{{ $order->tracking_link }}" target="_blank" rel="noopener noreferrer" 
                            class="btn py-2 px-3 fw-semibold text-uppercase tracking-wider text-decoration-none rounded-3 text-white shadow-sm" style="font-size: 11px; background-color: #541B29;">
-                            Track Courier Live &rarr;
+                            Track Courier Live
                         </a>
                     @endif
                 </div>

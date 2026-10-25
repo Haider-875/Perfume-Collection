@@ -161,18 +161,18 @@
                 @endforelse
             </div>
 
-            <!-- Collidez Minimalist Circular Arrow Controls -->
+            <!-- Collidez Minimalist Circular Chevron Controls -->
             <button type="button" class="collidez-hero-arrow collidez-hero-arrow--prev hero-prev-btn"
                 aria-label="Previous Slide">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"
+                    <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
             </button>
             <button type="button" class="collidez-hero-arrow collidez-hero-arrow--next hero-next-btn"
                 aria-label="Next Slide">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"
+                    <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
             </button>
