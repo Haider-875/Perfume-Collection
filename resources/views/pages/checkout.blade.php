@@ -271,7 +271,7 @@
 
                     <!-- Step 2: Delivery & Shipping Options -->
                     <div class="p-3.5 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card" style="background-color: #FFFFFF; border: 1px solid #E8E0DA;">
-                        <div class="d-flex align-items-center justify-content-between gap-3 mb-3.5 pb-3" style="border-bottom: 1px solid #E8E0DA;">
+                        <div class="d-flex align-items-center justify-content-between gap-3 mb-3 pb-3" style="border-bottom: 1px solid #E8E0DA;">
                             <div class="d-flex align-items-center gap-3">
                                 <span class="rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
                                 <div>
@@ -288,7 +288,7 @@
 
                         @if($cart->subtotal >= 5000)
                             <!-- Option A: Free Delivery (Active & Selected) -->
-                            <div class="rounded-3 p-3.5 p-sm-4 d-flex align-items-start gap-3 position-relative" 
+                            <div class="rounded-3 p-3 p-sm-4 d-flex align-items-start gap-3 position-relative" 
                                  style="border: 2px solid #047857; background-color: #F0FDF4; box-shadow: 0 4px 14px rgba(4, 120, 87, 0.08); border-radius: 10px;">
                                 <input type="radio" name="shipping_method_option" value="free" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #047857; width: 18px; height: 18px; cursor: pointer;">
                                 <div class="flex-grow-1 min-w-0">
@@ -310,8 +310,8 @@
                             </div>
                         @else
                             <!-- Option B: Standard Delivery Rs. 399 (Active & Selected) -->
-                            <div class="d-flex flex-column gap-3.5">
-                                <div class="rounded-3 p-3.5 p-sm-4 d-flex align-items-start gap-3" 
+                            <div class="d-flex flex-column gap-3" style="gap: 16px;">
+                                <div class="rounded-3 p-3 p-sm-4 d-flex align-items-start gap-3" 
                                      style="border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06); border-radius: 10px;">
                                     <input type="radio" name="shipping_method_option" value="standard" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 18px; height: 18px; cursor: pointer;">
                                     <div class="flex-grow-1 min-w-0">
@@ -329,7 +329,7 @@
                                 </div>
 
                                 <!-- Free Delivery Motivational Nudge Card -->
-                                <div class="rounded-3 p-3.5 p-sm-4 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" 
+                                <div class="rounded-3 p-3 p-sm-4 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" 
                                      style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FDE68A; border-radius: 10px;">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px; background-color: #F59E0B; color: #FFFFFF;">
@@ -394,7 +394,7 @@
 
                                 <!-- Easypaisa Drawer -->
                                 <div x-show="paymentMethod === 'wallet_transfer'" x-cloak class="p-3 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA; padding: 20px !important;">
-                                    <input type="hidden" name="wallet_type" value="easypaisa">
+                                    <input type="hidden" name="wallet_type" value="easypaisa" :disabled="paymentMethod !== 'wallet_transfer'">
 
                                     <!-- EasyPaisa Account Details Card -->
                                     <div class="rounded-3 shadow-xs d-flex flex-column gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; padding: 16px 18px;">
@@ -436,7 +436,7 @@
                                                 <span class="position-absolute start-0 ps-3 d-flex align-items-center pointer-events-none" style="color: #7A1C33; z-index: 2;">
                                                     <i class="fas fa-receipt" style="font-size: 13px;"></i>
                                                 </span>
-                                                <input type="text" name="transaction_id" placeholder="e.g. 10-digit TID (from SMS)"
+                                                <input type="text" name="transaction_id" placeholder="e.g. 10-digit TID (from SMS)" :disabled="paymentMethod !== 'wallet_transfer'"
                                                        class="form-control font-mono tid-input" 
                                                        style="height: 44px; padding-left: 38px; padding-right: 14px; font-size: 12px; background-color: #FAF7F2; border: 1.5px solid #D4C7BD; color: #211D1E; border-radius: 8px;">
                                             </div>
@@ -451,7 +451,7 @@
                                             <div class="position-relative">
                                                 <label class="d-flex align-items-center justify-content-between rounded-3 cursor-pointer transition w-100 m-0"
                                                        style="height: 44px; padding: 0 8px 0 14px; background-color: #FAF7F2; border: 1.5px dashed #D4C7BD; border-radius: 8px;">
-                                                    <input type="file" name="receipt_file" accept="image/*,.pdf" 
+                                                    <input type="file" name="receipt_file" accept="image/*,.pdf" :disabled="paymentMethod !== 'wallet_transfer'"
                                                            class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" 
                                                            style="z-index: 2;"
                                                            @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''">
@@ -476,7 +476,128 @@
                                 </div>
                             </div>
 
-                            <!-- 3. Debit / Credit Card (Visa / MasterCard / PayPak) -->
+                            
+                            @if(\App\Models\Setting::get('payment_bank_enabled', '1') !== '0')
+                            <!-- 3. Direct Bank Transfer (Bank Al Habib / All Banks / Raast) -->
+                            <div class="rounded-3 transition overflow-hidden cursor-pointer"
+                                 :style="paymentMethod === 'bank_transfer' ? 'border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'">
+                                <div class="p-3 p-sm-4 d-flex align-items-start gap-3" @click="paymentMethod = 'bank_transfer'">
+                                    <input type="radio" name="payment_method" value="bank_transfer" x-model="paymentMethod" class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 17px; height: 17px; cursor: pointer;">
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
+                                            <span class="fw-semibold" style="font-size: 14px; color: #211D1E;">Bank Transfer</span>
+                                            <span class="text-uppercase fw-bold px-2 py-0.5 rounded flex-shrink-0" style="font-size: 9.5px; letter-spacing: 0.05em; background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29;">All Banks / IBAN</span>
+                                        </div>
+                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">Transfer payment directly to our corporate bank account via any banking app or ATM</p>
+                                    </div>
+                                </div>
+
+                                <!-- Bank Transfer Drawer -->
+                                <div x-show="paymentMethod === 'bank_transfer'" x-cloak class="p-3 p-sm-4 d-flex flex-column gap-3" style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA; padding: 20px !important;">
+                                    <!-- Bank Account Details Card -->
+                                    <div class="rounded-3 shadow-xs d-flex flex-column gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; padding: 16px 18px;">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="fa-solid fa-building-columns" style="color: #541B29; font-size: 13px;"></i>
+                                                <span class="fw-bold text-uppercase" style="font-size: 11.5px; letter-spacing: 0.04em; color: #541B29;">Bank Account Details</span>
+                                            </div>
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0.5" style="font-size: 10px;">Official</span>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center py-1.5" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
+                                            <span style="color: #6B605B;">Bank Name:</span>
+                                            <span class="fw-semibold" style="color: #211D1E;">{{ $bankDetails['bank_name'] ?? 'BANK AL HABIB LIMITED' }}</span>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center py-1.5" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
+                                            <span style="color: #6B605B;">Account Title:</span>
+                                            <span class="fw-semibold text-uppercase" style="color: #211D1E;">{{ $bankDetails['account_title'] ?? 'PERFUMES COLLECTION' }}</span>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center py-1" style="font-size: 12px;">
+                                            <span style="color: #6B605B;">IBAN:</span>
+                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
+                                                <span class="font-mono fw-bold px-2 py-0.5 rounded text-break" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12.5px;">{{ $bankDetails['iban'] ?? 'PK04 BAHL 1209 0981 0030 0001' }}</span>
+                                                <button type="button" 
+                                                        @click="navigator.clipboard.writeText('{{ str_replace(' ', '', $bankDetails['iban'] ?? 'PK04BAHL1209098100300001') }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
+                                                        class="btn btn-sm text-uppercase fw-semibold transition d-inline-flex align-items-center justify-content-center" 
+                                                        style="height: 28px; min-width: 68px; padding: 0 14px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: none !important; border-radius: 6px; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.3) !important;">
+                                                    <span x-text="copied ? 'Copied' : 'Copy'">Copy</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        @if(!empty($bankDetails['raast_id']))
+                                        <div class="d-flex justify-content-between align-items-center pt-1" style="border-top: 1px dashed #E8E0DA; font-size: 12px;">
+                                            <span style="color: #6B605B;">Raast ID:</span>
+                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
+                                                <span class="font-mono fw-semibold px-2 py-0.5 rounded" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px;">{{ $bankDetails['raast_id'] }}</span>
+                                                <button type="button" 
+                                                        @click="navigator.clipboard.writeText('{{ $bankDetails['raast_id'] }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
+                                                        class="btn btn-sm text-uppercase fw-semibold transition d-inline-flex align-items-center justify-content-center" 
+                                                        style="height: 26px; min-width: 58px; padding: 0 10px; font-size: 10px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
+                                                    <span x-text="copied ? 'Copied' : 'Copy'">Copy</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <!-- TID & Custom File Upload Inputs Row -->
+                                    <div class="row g-3 pt-2">
+                                        <!-- TID Input -->
+                                        <div class="col-12 col-md-6">
+                                            <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; color: #541B29;">
+                                                Bank Reference / Transaction ID (TID)
+                                            </label>
+                                            <div class="position-relative d-flex align-items-center">
+                                                <span class="position-absolute start-0 ps-3 d-flex align-items-center pointer-events-none" style="color: #7A1C33; z-index: 2;">
+                                                    <i class="fas fa-receipt" style="font-size: 13px;"></i>
+                                                </span>
+                                                <input type="text" name="transaction_id" placeholder="e.g. Bank Ref / Transaction ID"
+                                                       :disabled="paymentMethod !== 'bank_transfer'"
+                                                       class="form-control font-mono tid-input" 
+                                                       style="height: 44px; padding-left: 38px; padding-right: 14px; font-size: 12px; background-color: #FAF7F2; border: 1.5px solid #D4C7BD; color: #211D1E; border-radius: 8px;">
+                                            </div>
+                                            <small class="d-block mt-1 text-muted" style="font-size: 10.5px;">Enter bank transfer reference number from your receipt/app.</small>
+                                        </div>
+
+                                        <!-- Custom File Upload UI -->
+                                        <div class="col-12 col-md-6" x-data="{ fileName: '' }">
+                                            <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; color: #541B29;">
+                                                Payment Screenshot <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <label class="d-flex align-items-center justify-content-between rounded-3 cursor-pointer transition w-100 m-0"
+                                                       style="height: 44px; padding: 0 8px 0 14px; background-color: #FAF7F2; border: 1.5px dashed #D4C7BD; border-radius: 8px;">
+                                                    <input type="file" name="receipt_file" accept="image/*,.pdf" 
+                                                           :disabled="paymentMethod !== 'bank_transfer'"
+                                                           class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" 
+                                                           style="z-index: 2;"
+                                                           @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''">
+                                                    <div class="d-flex align-items-center gap-2 overflow-hidden pe-2" style="z-index: 1;">
+                                                        <i :class="fileName ? 'fas fa-check-circle text-success' : 'fas fa-paperclip'" 
+                                                           :style="fileName ? 'font-size: 13px;' : 'color: #541B29; font-size: 13px;'"></i>
+                                                        <span class="text-truncate" style="font-size: 12px; color: #211D1E;" 
+                                                              x-text="fileName ? fileName : 'Upload receipt (Image / PDF)'">
+                                                            Upload receipt (Image / PDF)
+                                                        </span>
+                                                    </div>
+                                                    <span class="d-inline-flex align-items-center justify-content-center flex-shrink-0 fw-semibold text-uppercase transition" 
+                                                           style="height: 30px; padding: 0 14px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border-radius: 6px; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.3) !important; z-index: 1;"
+                                                           x-text="fileName ? 'Change' : 'Browse'">
+                                                        Browse
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <small class="d-block mt-1 text-muted" style="font-size: 10.5px;">Attach screenshot of transfer or PDF receipt.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            <!-- 4. Debit / Credit Card (Visa / MasterCard / PayPak) -->
                             <div class="rounded-3 transition overflow-hidden cursor-pointer"
                                  :style="paymentMethod === 'safepay' ? 'border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06);' : 'border: 1px solid #E8E0DA; background-color: #FFFFFF;'"
                                  @click="paymentMethod = 'safepay'">

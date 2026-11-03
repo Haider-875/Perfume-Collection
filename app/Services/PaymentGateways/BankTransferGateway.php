@@ -32,10 +32,10 @@ class BankTransferGateway implements PaymentGatewayInterface
     public function getBankDetails(): array
     {
         return [
-            'bank_name' => Setting::get('bank_name', env('BANK_NAME', 'Bank Alfalah Limited')),
-            'account_title' => Setting::get('bank_account_title', env('BANK_ACCOUNT_TITLE', 'Perfumes Collection (Pvt) Ltd')),
-            'account_number' => Setting::get('bank_account_number', env('BANK_ACCOUNT_NUMBER', '0142-1007894561')),
-            'iban' => Setting::get('bank_iban', env('BANK_IBAN', 'PK36ALFH01421007894561')),
+            'bank_name' => Setting::get('bank_name', env('BANK_NAME', 'BANK AL HABIB LIMITED')),
+            'account_title' => Setting::get('bank_account_title', env('BANK_ACCOUNT_TITLE', 'PERFUMES COLLECTION')),
+            'account_number' => Setting::get('bank_account_number', env('BANK_ACCOUNT_NUMBER', '1209-0981-0030-0001')),
+            'iban' => Setting::get('bank_iban', env('BANK_IBAN', 'PK04 BAHL 1209 0981 0030 0001')),
             'raast_id' => Setting::get('bank_raast_id', env('BANK_RAAST_ID', '03001234567')),
             'branch' => Setting::get('bank_branch', env('BANK_BRANCH', 'Main Boulevard Gulberg, Lahore')),
         ];

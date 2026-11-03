@@ -180,22 +180,22 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Bank Name</label>
-                            <input type="text" name="bank_name" value="{{ $settings['bank_name'] ?? 'Bank Alfalah Limited' }}">
+                            <input type="text" name="bank_name" value="{{ $settings['bank_name'] ?? 'BANK AL HABIB LIMITED' }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Account Title</label>
-                            <input type="text" name="bank_account_title" value="{{ $settings['bank_account_title'] ?? 'PERFUMES COLLECTION PVT LTD' }}">
+                            <input type="text" name="bank_account_title" value="{{ $settings['bank_account_title'] ?? 'PERFUMES COLLECTION' }}">
                         </div>
                     </div>
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">Account Number</label>
-                            <input type="text" name="bank_account_number" value="{{ $settings['bank_account_number'] ?? '0142-1007894561' }}" class="font-monospace">
+                            <input type="text" name="bank_account_number" value="{{ $settings['bank_account_number'] ?? '1209-0981-0030-0001' }}" class="font-monospace">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.72rem; letter-spacing: 0.05em;">IBAN Number</label>
-                            <input type="text" name="bank_iban" value="{{ $settings['bank_iban'] ?? 'PK36ALFH01421007894561' }}" class="font-monospace">
+                            <input type="text" name="bank_iban" value="{{ $settings['bank_iban'] ?? 'PK04 BAHL 1209 0981 0030 0001' }}" class="font-monospace">
                         </div>
                     </div>
 
