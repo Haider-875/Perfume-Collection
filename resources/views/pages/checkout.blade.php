@@ -996,18 +996,18 @@
                                                 <span style="color: #6B605B; font-size: 11px; font-weight: 500;">Raast ID:</span>
                                             </div>
                                             <div class="d-flex align-items-stretch gap-1.5" x-data="{ copied: false }">
-                                                <span class="font-mono fw-semibold px-2.5 py-1.5 rounded flex-grow-1 text-break d-flex align-items-center" 
+                                                <span class="font-mono fw-semibold px-3 py-1.5 rounded flex-grow-1 text-break d-flex align-items-center" 
                                                       style="background-color: #FFFFFF; border: 1.5px solid #E8E0DA; color: #211D1E; font-size: 12px; min-height: 34px;">
                                                     {{ $bankDetails['raast_id'] }}
                                                 </span>
                                                 <button type="button" 
                                                         @click="navigator.clipboard.writeText('{{ $bankDetails['raast_id'] }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
-                                                        class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0"
+                                                        class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0 mx-2"
                                                         :class="{ 'is-copied': copied }">
                                                     <span x-show="!copied">Copy</span>
                                                     <span x-show="copied" x-cloak>Copied</span>
                                                 </button>
-                                            </div>
+                                            </div>  
                                         </div>
                                         @endif
                                     </div>
@@ -1099,7 +1099,7 @@
                                 <!-- <span>Placing Order...</span> -->
                             </span>
                         </button>
-                        <p class="text-center mt-2.5 mb-0" style="font-size: 10.5px; color: #6B605B; line-height: 1.4;">
+                        <p class="text-center mt-3 mb-0" style="font-size: 10.5px; color: #6B605B; line-height: 1.4;">
                             <i class="fas fa-shield-halved me-1" style="color: #9E7D3B; font-size: 10px;"></i>
                             By placing this order, you confirm acceptance of our delivery policies.
                         </p>
