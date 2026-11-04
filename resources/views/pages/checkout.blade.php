@@ -262,15 +262,38 @@
     }
 
     /* --- Bank Details Card & Copy Button --- */
+    .bank-details-drawer {
+        padding: 20px;
+    }
+    .bank-details-card {
+        padding: 16px 18px;
+    }
     .luxury-copy-btn {
+        height: 36px;
+        min-width: 76px;
+        padding: 0 12px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(122, 28, 51, 0.28) !important;
+        cursor: pointer;
         transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s ease, background 0.25s ease !important;
     }
     .luxury-copy-btn:hover {
-        transform: translateY(-1px) scale(1.03);
-        box-shadow: 0 4px 12px rgba(122, 28, 51, 0.4) !important;
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 4px 12px rgba(122, 28, 51, 0.42) !important;
+        filter: brightness(1.05);
     }
     .luxury-copy-btn:active {
         transform: scale(0.96);
+    }
+    .luxury-copy-btn.is-copied {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+        box-shadow: 0 2px 8px rgba(4, 120, 87, 0.35) !important;
     }
 
     .receipt-upload-box {
@@ -396,6 +419,93 @@
     /* --- Free Delivery Motivational Card Float --- */
     .gift-float-icon {
         animation: luxuryFloat 3s infinite ease-in-out;
+    }
+
+    /* =========================================================
+       --- Mobile Screen Responsive Polish (Badges & Buttons) ---
+       ========================================================= */
+    @media (max-width: 767.98px) {
+        /* Badges: smaller font, refined paddings & margins */
+        .luxury-header-badge {
+            font-size: 9px !important;
+            letter-spacing: 0.16em !important;
+            padding: 3.5px 10px !important;
+            margin-bottom: 6px !important;
+        }
+
+        .checkout-step-badge {
+            width: 24px !important;
+            height: 24px !important;
+            font-size: 10.5px !important;
+        }
+
+        .badge {
+            font-size: 9px !important;
+            padding: 2.5px 6.5px !important;
+            letter-spacing: 0.02em !important;
+            line-height: 1.2 !important;
+            margin: 0 2px !important;
+        }
+
+        .badge.rounded-pill {
+            padding: 2.5px 7.5px !important;
+        }
+
+        .badge-official {
+            font-size: 8.5px !important;
+            padding: 2px 6px !important;
+        }
+
+        .card-brand-badge {
+            font-size: 8px !important;
+            padding: 1px 4.5px !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        .checkout-step-card h2 {
+            font-size: 1.12rem !important;
+        }
+
+        /* Buttons on Mobile */
+        .btn-place-order {
+            height: 48px !important;
+            font-size: 11.5px !important;
+            letter-spacing: 0.08em !important;
+            padding: 0 14px !important;
+            border-radius: 8px !important;
+        }
+
+        .free-delivery-cta-btn {
+            width: 100% !important;
+            height: 38px !important;
+            margin-top: 6px;
+        }
+
+        .luxury-copy-btn {
+            height: 34px !important;
+            min-width: 68px !important;
+            padding: 0 10px !important;
+            font-size: 10.5px !important;
+            letter-spacing: 0.03em !important;
+            border-radius: 6px !important;
+        }
+
+        /* Bank Details Drawer & Card on Mobile */
+        .bank-details-drawer {
+            padding: 14px 12px !important;
+        }
+        .bank-details-card {
+            padding: 12px 14px !important;
+        }
+
+        /* Assurance Badges on Mobile */
+        .assurance-badge-col {
+            font-size: 10px !important;
+            gap: 5px !important;
+        }
+        .assurance-badge-col i {
+            font-size: 11.5px !important;
+        }
     }
 
     /* --- Accessibility Reduced Motion --- */
@@ -712,7 +822,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center btn-gradient" 
+                                    <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center btn-gradient free-delivery-cta-btn" 
                                        style="height: 36px; padding: 0 18px; font-size: 11.5px; border-radius: 6px;">
                                         Add Flacon
                                     </a>
@@ -780,56 +890,78 @@
                                      x-transition:leave="transition ease-in duration-200"
                                      x-transition:leave-start="opacity-100 transform translate-y-0"
                                      x-transition:leave-end="opacity-0 transform -translate-y-2"
-                                     class="p-3 p-sm-4 d-flex flex-column gap-3" 
-                                     style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA; padding: 20px !important;">
+                                     class="p-3 p-sm-4 d-flex flex-column gap-3 bank-details-drawer" 
+                                     style="background-color: #FFFFFF; border-top: 1px solid #E8E0DA;">
                                     
                                     <!-- Bank Account Details Card -->
-                                    <div class="rounded-3 shadow-xs d-flex flex-column gap-2" style="background-color: #FAF7F2; border: 1px solid #E8E0DA; padding: 16px 18px;">
+                                    <div class="rounded-3 shadow-xs d-flex flex-column gap-2 bank-details-card" style="background-color: #FAF7F2; border: 1px solid #E8E0DA;">
                                         <div class="d-flex align-items-center justify-content-between mb-1">
                                             <div class="d-flex align-items-center gap-2">
                                                 <i class="fa-solid fa-building-columns" style="color: #541B29; font-size: 13px;"></i>
                                                 <span class="fw-bold text-uppercase" style="font-size: 11.5px; letter-spacing: 0.04em; color: #541B29;">Bank Account Details</span>
                                             </div>
-                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0.5" style="font-size: 10px;">Official</span>
+                                            <span class="badge badge-official bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0.5" style="font-size: 10px;">Official</span>
                                         </div>
 
-                                        <div class="d-flex justify-content-between align-items-center py-1.5" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
-                                            <span style="color: #6B605B;">Bank Name:</span>
-                                            <span class="fw-semibold" style="color: #211D1E;">{{ $bankDetails['bank_name'] ?? 'BANK AL HABIB LIMITED' }}</span>
+                                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center py-1.5 gap-1" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
+                                            <span style="color: #6B605B; font-size: 11px;">Bank Name:</span>
+                                            <span class="fw-semibold" style="color: #211D1E; font-size: 12px;">{{ $bankDetails['bank_name'] ?? 'BANK AL HABIB LIMITED' }}</span>
                                         </div>
 
-                                        <div class="d-flex justify-content-between align-items-center py-1.5" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
-                                            <span style="color: #6B605B;">Account Title:</span>
-                                            <span class="fw-semibold text-uppercase" style="color: #211D1E;">{{ $bankDetails['account_title'] ?? 'PERFUMES COLLECTION' }}</span>
+                                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center py-1.5 gap-1" style="border-bottom: 1px solid #E8E0DA; font-size: 12px;">
+                                            <span style="color: #6B605B; font-size: 11px;">Account Title:</span>
+                                            <span class="fw-semibold text-uppercase" style="color: #211D1E; font-size: 12px;">{{ $bankDetails['account_title'] ?? 'PERFUMES COLLECTION' }}</span>
                                         </div>
 
-                                        <div class="d-flex justify-content-between align-items-center py-1" style="font-size: 12px;">
-                                            <span style="color: #6B605B;">IBAN:</span>
-                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
-                                                <span class="font-mono fw-bold px-2 py-0.5 rounded text-break" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12.5px;">{{ $bankDetails['iban'] ?? 'PK04 BAHL 1209 0981 0030 0001' }}</span>
+                                        <div class="py-2" style="border-bottom: 1px solid #E8E0DA;">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <span style="color: #6B605B; font-size: 11px; font-weight: 500;">IBAN (Bank Account):</span>
+                                                <span class="text-muted d-none d-sm-inline" style="font-size: 10px;">Tap to copy</span>
+                                            </div>
+                                            <div class="d-flex align-items-stretch gap-1.5" x-data="{ copied: false }">
+                                                <span class="font-mono fw-bold px-2.5 py-1.5 rounded flex-grow-1 text-break d-flex align-items-center" 
+                                                      style="background-color: #FFFFFF; border: 1.5px solid #E8E0DA; color: #211D1E; font-size: 12px; letter-spacing: 0.03em; min-height: 36px;">
+                                                    {{ $bankDetails['iban'] ?? 'PK04 BAHL 1209 0981 0030 0001' }}
+                                                </span>
                                                 <button type="button" 
                                                         @click="navigator.clipboard.writeText('{{ str_replace(' ', '', $bankDetails['iban'] ?? 'PK04BAHL1209098100300001') }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
-                                                        class="btn btn-sm text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center" 
-                                                        style="height: 28px; min-width: 68px; padding: 0 14px; font-size: 11px; letter-spacing: 0.05em; background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important; color: #FFFFFF !important; border: none !important; border-radius: 6px; box-shadow: 0 2px 8px rgba(122, 28, 51, 0.3) !important;">
-                                                    <span x-show="!copied">Copy</span>
+                                                        class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0"
+                                                        :class="{ 'is-copied': copied }"
+                                                        title="Copy IBAN">
+                                                    <span x-show="!copied" class="d-inline-flex align-items-center gap-1">
+                                                        <i class="far fa-copy" style="font-size: 11px;"></i>
+                                                        <span>Copy</span>
+                                                    </span>
                                                     <span x-show="copied" x-cloak class="d-inline-flex align-items-center gap-1">
-                                                        <i class="fas fa-check"></i> Copied
+                                                        <i class="fas fa-check" style="font-size: 11px;"></i>
+                                                        <span>Copied</span>
                                                     </span>
                                                 </button>
                                             </div>
                                         </div>
 
                                         @if(!empty($bankDetails['raast_id']))
-                                        <div class="d-flex justify-content-between align-items-center pt-1" style="border-top: 1px dashed #E8E0DA; font-size: 12px;">
-                                            <span style="color: #6B605B;">Raast ID:</span>
-                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
-                                                <span class="font-mono fw-semibold px-2 py-0.5 rounded" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #211D1E; font-size: 12px;">{{ $bankDetails['raast_id'] }}</span>
+                                        <div class="pt-2">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <span style="color: #6B605B; font-size: 11px; font-weight: 500;">Raast ID:</span>
+                                            </div>
+                                            <div class="d-flex align-items-stretch gap-1.5" x-data="{ copied: false }">
+                                                <span class="font-mono fw-semibold px-2.5 py-1.5 rounded flex-grow-1 text-break d-flex align-items-center" 
+                                                      style="background-color: #FFFFFF; border: 1.5px solid #E8E0DA; color: #211D1E; font-size: 12px; min-height: 34px;">
+                                                    {{ $bankDetails['raast_id'] }}
+                                                </span>
                                                 <button type="button" 
                                                         @click="navigator.clipboard.writeText('{{ $bankDetails['raast_id'] }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
-                                                        class="btn btn-sm text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center" 
-                                                        style="height: 26px; min-width: 58px; padding: 0 10px; font-size: 10px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">
-                                                    <span x-show="!copied">Copy</span>
-                                                    <span x-show="copied" x-cloak>Copied</span>
+                                                        class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0"
+                                                        :class="{ 'is-copied': copied }">
+                                                    <span x-show="!copied" class="d-inline-flex align-items-center gap-1">
+                                                        <i class="far fa-copy" style="font-size: 10.5px;"></i>
+                                                        <span>Copy</span>
+                                                    </span>
+                                                    <span x-show="copied" x-cloak class="d-inline-flex align-items-center gap-1">
+                                                        <i class="fas fa-check" style="font-size: 10.5px;"></i>
+                                                        <span>Copied</span>
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
@@ -900,9 +1032,9 @@
                                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
                                             <span class="fw-semibold" style="font-size: 14px; color: #211D1E;">Debit / Credit Card</span>
                                             <div class="d-flex align-items-center gap-1 font-mono fw-bold flex-shrink-0" style="font-size: 9.5px; color: #541B29;">
-                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">VISA</span>
-                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">MC</span>
-                                                <span class="px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">PAYPAK</span>
+                                                <span class="card-brand-badge px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">VISA</span>
+                                                <span class="card-brand-badge px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">MC</span>
+                                                <span class="card-brand-badge px-1.5 py-0.5 rounded shadow-xs" style="background: #FFFFFF; border: 1px solid #E8E0DA;">PAYPAK</span>
                                             </div>
                                         </div>
                                         <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.45; color: #6B605B;">256-bit encrypted card checkout powered by Safepay</p>
