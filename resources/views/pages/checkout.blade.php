@@ -556,7 +556,7 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider fw-semibold">Confirmation <span class="text-danger">*</span></label>
+                                        <label class="d-block text-uppercase tracking-wider fw-semibold">Email Address <span class="text-danger">*</span></label>
                                         <input type="email" name="customer_email" required 
                                                value="{{ old('customer_email') }}" 
                                                placeholder="e.g. name@example.com"
