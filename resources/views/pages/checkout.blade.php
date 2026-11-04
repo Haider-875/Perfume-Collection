@@ -148,10 +148,10 @@
     .checkout-select,
     textarea.checkout-input {
         width: 100%;
-        font-size: 12.5px !important;
+        font-size: 11px !important;
         background-color: #FAF7F2 !important;
         border: 1.5px solid #E8E0DA !important;
-        border-radius: 9px !important;
+        border-radius: 6px !important;
         color: #211D1E !important;
         outline: none !important;
         transition: border-color 0.25s var(--ease-luxury), 
@@ -161,27 +161,35 @@
     }
 
     .checkout-input {
-        height: 42px !important;
-        padding: 0 14px !important;
+        height: 36px !important;
+        padding: 0 12px !important;
+        font-size: 11px !important;
     }
 
     textarea.checkout-input {
-        padding: 10px 14px !important;
+        padding: 8px 12px !important;
         resize: vertical;
-        min-height: 60px;
+        min-height: 52px;
+        font-size: 11px !important;
     }
 
     .checkout-select {
-        height: 40px !important;
-        min-height: 40px !important;
-        max-height: 40px !important;
-        font-size: 12px !important;
-        padding: 0 32px 0 14px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        font-size: 11px !important;
+        padding: 0 28px 0 12px !important;
         cursor: pointer;
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23541B29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
         background-repeat: no-repeat !important;
-        background-position: right 12px center !important;
-        background-size: 11px 9px !important;
+        background-position: right 10px center !important;
+        background-size: 10px 8px !important;
+    }
+
+    .checkout-select option {
+        font-size: 11px !important;
+        color: #211D1E;
+        background: #FAF7F2;
     }
 
     .checkout-input:hover,
@@ -310,8 +318,10 @@
     .btn-place-order {
         position: relative;
         overflow: hidden;
-        height: 42px;
-        border-radius: 7px;
+        height: 38px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
         border: none !important;
         background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important;
         color: #FFFFFF !important;
@@ -466,20 +476,65 @@
             font-size: 1.12rem !important;
         }
 
+        /* Inputs & Selects on Mobile */
+        .checkout-input,
+        .checkout-select,
+        textarea.checkout-input {
+            font-size: 10.5px !important;
+        }
+        .checkout-input,
+        .checkout-select {
+            height: 34px !important;
+            padding: 0 10px !important;
+        }
+
+        /* Delivery Method on Mobile */
+        .delivery-method-step-card {
+            padding: 12px 10px !important;
+        }
+        .delivery-option-card {
+            padding: 10px 10px !important;
+            gap: 8px !important;
+            border-radius: 8px !important;
+        }
+        .delivery-title {
+            font-size: 12px !important;
+        }
+        .delivery-price {
+            font-size: 12.5px !important;
+        }
+        .delivery-desc {
+            font-size: 10px !important;
+            line-height: 1.4 !important;
+        }
+        .delivery-upsell-card {
+            padding: 8px 10px !important;
+            gap: 6px !important;
+            border-radius: 8px !important;
+        }
+        .upsell-title {
+            font-size: 11px !important;
+        }
+        .upsell-desc {
+            font-size: 10px !important;
+            line-height: 1.35 !important;
+        }
+
         /* Buttons on Mobile */
         .btn-place-order {
-            height: 40px !important;
+            height: 36px !important;
             font-size: 11px !important;
-            letter-spacing: 0.08em !important;
+            letter-spacing: 0.05em !important;
             padding: 0 14px !important;
             border-radius: 6px !important;
         }
 
         .free-delivery-cta-btn {
             width: 100% !important;
-            height: 32px !important;
-            font-size: 10.5px !important;
-            margin-top: 4px;
+            height: 28px !important;
+            font-size: 10px !important;
+            padding: 0 10px !important;
+            margin-top: 2px !important;
         }
 
         .luxury-copy-btn {
@@ -751,17 +806,17 @@
                     </div>
 
                     <!-- Step 2: Delivery & Shipping Options -->
-                    <div class="p-3.5 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card anim-reveal anim-delay-step-2" style="border: 1px solid #E8E0DA;">
-                        <div class="d-flex align-items-center justify-content-between gap-3 mb-3 pb-3" style="border-bottom: 1px solid #E8E0DA;">
-                            <div class="d-flex align-items-center gap-3">
-                                <span class="checkout-step-badge rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px; font-size: 12px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
+                    <div class="p-3 p-sm-4 p-md-4 rounded-4 shadow-sm checkout-step-card anim-reveal anim-delay-step-2 delivery-method-step-card" style="border: 1px solid #E8E0DA;">
+                        <div class="d-flex align-items-center justify-content-between gap-3 mb-3 pb-2.5" style="border-bottom: 1px solid #E8E0DA;">
+                            <div class="d-flex align-items-center gap-2.5">
+                                <span class="checkout-step-badge rounded-circle fw-bold text-xs d-flex align-items-center justify-content-center flex-shrink-0" style="width: 26px; height: 26px; font-size: 11.5px; background-color: #FAF7F2; border: 1px solid #E8E0DA; color: #541B29;">2</span>
                                 <div>
-                                    <h2 class="font-serif fw-normal mb-0" style="font-size: 1.25rem; color: #211D1E;">Delivery Method</h2>
-                                    <span class="d-block text-muted" style="font-size: 11px; margin-top: 2px;">Insured express delivery across Pakistan (2-4 Working Days)</span>
+                                    <h2 class="font-serif fw-normal mb-0" style="font-size: 1.15rem; color: #211D1E;">Delivery Method</h2>
+                                    <span class="d-block text-muted" style="font-size: 10.5px; margin-top: 1px;">Insured express delivery across Pakistan (2-4 Working Days)</span>
                                 </div>
                             </div>
                             @if($cart->subtotal >= 5000)
-                                <span class="badge px-2.5 py-1 rounded-pill d-none d-sm-inline-flex align-items-center gap-1" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 11px; font-weight: 700;">
+                                <span class="badge px-2.5 py-1 rounded-pill d-none d-sm-inline-flex align-items-center gap-1" style="background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 10.5px; font-weight: 700;">
                                     <i class="fas fa-check-circle"></i> Free Delivery Unlocked
                                 </span>
                             @endif
@@ -769,21 +824,21 @@
 
                         @if($cart->subtotal >= 5000)
                             <!-- Option A: Free Delivery (Active & Selected) -->
-                            <div class="rounded-3 p-3 p-sm-4 d-flex align-items-start gap-3 position-relative transition" 
-                                 style="border: 2px solid #047857; background-color: #F0FDF4; box-shadow: 0 4px 14px rgba(4, 120, 87, 0.08); border-radius: 10px;">
-                                <input type="radio" name="shipping_method_option" value="free" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #047857; width: 18px; height: 18px; cursor: pointer;">
+                            <div class="rounded-3 p-2.5 p-sm-3.5 d-flex align-items-start gap-2.5 position-relative transition delivery-option-card" 
+                                 style="border: 2px solid #047857; background-color: #F0FDF4; box-shadow: 0 3px 12px rgba(4, 120, 87, 0.08); border-radius: 9px;">
+                                <input type="radio" name="shipping_method_option" value="free" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #047857; width: 17px; height: 17px; cursor: pointer;">
                                 <div class="flex-grow-1 min-w-0">
-                                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
+                                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1">
                                         <div class="d-flex align-items-center gap-2">
-                                            <span class="fw-bold" style="font-size: 14px; color: #064E3B;">Complimentary Express Delivery</span>
-                                            <span class="badge rounded-pill px-2.5 py-0.5" style="background-color: #047857; color: #FFFFFF; font-size: 10px; letter-spacing: 0.05em;">FREE</span>
+                                            <span class="fw-bold delivery-title" style="font-size: 13px; color: #064E3B;">Complimentary Express Delivery</span>
+                                            <span class="badge rounded-pill px-2 py-0.5" style="background-color: #047857; color: #FFFFFF; font-size: 9.5px; letter-spacing: 0.04em;">FREE</span>
                                         </div>
-                                        <span class="font-mono fw-bold text-success fs-6">Rs. 0</span>
+                                        <span class="font-mono fw-bold text-success delivery-price" style="font-size: 13px;">Rs. 0</span>
                                     </div>
-                                    <p class="mb-2 text-muted" style="font-size: 12px; line-height: 1.5; color: #374151;">
+                                    <p class="mb-1.5 text-muted delivery-desc" style="font-size: 11px; line-height: 1.45; color: #374151;">
                                         Fast, tracked delivery via premium couriers (TCS / PostEx / Leopards). Complimentary because your subtotal is Rs. 5,000 or above.
                                     </p>
-                                    <div class="d-flex align-items-center gap-2 pt-2" style="border-top: 1px dashed #A7F3D0; font-size: 11px; color: #047857;">
+                                    <div class="d-flex align-items-center gap-2 pt-1.5" style="border-top: 1px dashed #A7F3D0; font-size: 10.5px; color: #047857;">
                                         <i class="fas fa-shield-halved"></i>
                                         <span>Fully insured transit with tamper-proof luxury packaging</span>
                                     </div>
@@ -791,40 +846,40 @@
                             </div>
                         @else
                             <!-- Option B: Standard Delivery Rs. 399 (Active & Selected) -->
-                            <div class="d-flex flex-column gap-3" style="gap: 16px;">
-                                <div class="rounded-3 p-3 p-sm-4 d-flex align-items-start gap-3 transition" 
-                                     style="border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 4px 14px rgba(84,27,41,0.06); border-radius: 10px;">
-                                    <input type="radio" name="shipping_method_option" value="standard" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 18px; height: 18px; cursor: pointer;">
+                            <div class="d-flex flex-column gap-2.5" style="gap: 12px;">
+                                <div class="rounded-3 p-2.5 p-sm-3.5 d-flex align-items-start gap-2.5 transition delivery-option-card" 
+                                     style="border: 2px solid #541B29; background-color: #FAF7F2; box-shadow: 0 3px 12px rgba(84,27,41,0.06); border-radius: 9px;">
+                                    <input type="radio" name="shipping_method_option" value="standard" checked class="form-check-input mt-1 flex-shrink-0" style="accent-color: #541B29; width: 17px; height: 17px; cursor: pointer;">
                                     <div class="flex-grow-1 min-w-0">
-                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1.5">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span class="fw-bold" style="font-size: 14px; color: #211D1E;">Standard Express Delivery</span>
-                                                <span class="badge rounded px-2 py-0.5" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29; font-size: 9.5px;">All Pakistan</span>
+                                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-1.5 mb-1">
+                                            <div class="d-flex align-items-center gap-1.5">
+                                                <span class="fw-bold delivery-title" style="font-size: 13px; color: #211D1E;">Standard Express Delivery</span>
+                                                <span class="badge rounded px-1.5 py-0.5" style="background-color: #FFFFFF; border: 1px solid #E8E0DA; color: #541B29; font-size: 8.5px;">All Pakistan</span>
                                             </div>
-                                            <span class="font-mono fw-bold fs-6" style="color: #541B29;">Rs. 399</span>
+                                            <span class="font-mono fw-bold delivery-price" style="color: #541B29; font-size: 13px;">Rs. 399</span>
                                         </div>
-                                        <p class="mb-0 text-muted" style="font-size: 12px; line-height: 1.5; color: #6B605B;">
+                                        <p class="mb-0 text-muted delivery-desc" style="font-size: 11px; line-height: 1.45; color: #6B605B;">
                                             Nationwide express courier dispatch within 2-4 working days via TCS / PostEx / Leopards. Standard delivery charges of Rs. 399 apply on orders under Rs. 5,000.
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- Free Delivery Motivational Nudge Card -->
-                                <div class="rounded-3 p-3 p-sm-4 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 transition" 
-                                     style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FDE68A; border-radius: 10px; box-shadow: 0 2px 10px rgba(245, 158, 11, 0.08);">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div class="gift-float-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 36px; height: 36px; background-color: #F59E0B; color: #FFFFFF; box-shadow: 0 3px 8px rgba(245, 158, 11, 0.35);">
-                                            <i class="fas fa-gift" style="font-size: 14px;"></i>
+                                <div class="rounded-3 p-2.5 p-sm-3 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2.5 transition delivery-upsell-card" 
+                                     style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FDE68A; border-radius: 9px; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.08);">
+                                    <div class="d-flex align-items-center gap-2.5">
+                                        <div class="gift-float-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 30px; height: 30px; background-color: #F59E0B; color: #FFFFFF; box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);">
+                                            <i class="fas fa-gift" style="font-size: 12px;"></i>
                                         </div>
                                         <div>
-                                            <div class="fw-bold" style="font-size: 13px; color: #92400E;">Want FREE Delivery?</div>
-                                            <div style="font-size: 12px; color: #78350F; line-height: 1.45;">
+                                            <div class="fw-bold upsell-title" style="font-size: 11.5px; color: #92400E;">Want FREE Delivery?</div>
+                                            <div class="upsell-desc" style="font-size: 10.5px; color: #78350F; line-height: 1.4;">
                                                 Add only <strong class="fw-bold" style="color: #92400E;">Rs. {{ number_format(5000 - $cart->subtotal, 0) }}</strong> more to unlock <strong>FREE Nationwide Delivery</strong>!
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center btn-gradient free-delivery-cta-btn" 
-                                       style="height: 30px; padding: 0 14px; font-size: 10.5px; border-radius: 5px;">
+                                    <a href="{{ route('collections.show', 'all') }}" class="btn text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center btn-gradient free-delivery-cta-btn" 
+                                       style="height: 28px; padding: 0 12px; font-size: 10px; border-radius: 5px;">
                                         Add Flacon
                                     </a>
                                 </div>
@@ -1037,20 +1092,16 @@
                     <div class="anim-reveal anim-delay-submit">
                         <button type="submit" 
                                 :disabled="orderSubmitting"
-                                class="w-100 btn-place-order text-xs fw-semibold text-uppercase tracking-widest d-flex align-items-center justify-content-center gap-2">
-                            <span x-show="!orderSubmitting" class="d-inline-flex align-items-center gap-2">
-                                <i class="fas fa-lock" style="font-size: 11px; opacity: 0.9;"></i>
-                                <span>Place Order</span>
-                                <i class="fas fa-arrow-right ms-1" style="font-size: 11px; opacity: 0.9;"></i>
-                            </span>
+                                class="w-100 btn-place-order fw-semibold text-uppercase d-flex align-items-center justify-content-center">
+                            <span x-show="!orderSubmitting">Place Order</span>
                             <span x-show="orderSubmitting" x-cloak class="d-inline-flex align-items-center gap-2">
-                                <span class="luxury-spinner"></span>
-                                <span>Securing & Placing Order...</span>
+                                <span class="luxury-spinner" style="width: 13px; height: 13px; border-width: 2px;"></span>
+                                <!-- <span>Placing Order...</span> -->
                             </span>
                         </button>
-                        <p class="text-center mt-3 mb-0" style="font-size: 11px; color: #6B605B;">
-                            <i class="fas fa-shield-halved me-1" style="color: #9E7D3B;"></i>
-                            By placing this order, you confirm acceptance of our delivery policies and 7-day scent satisfaction guarantee.
+                        <p class="text-center mt-2.5 mb-0" style="font-size: 10.5px; color: #6B605B; line-height: 1.4;">
+                            <i class="fas fa-shield-halved me-1" style="color: #9E7D3B; font-size: 10px;"></i>
+                            By placing this order, you confirm acceptance of our delivery policies.
                         </p>
                     </div>
                 </div>
