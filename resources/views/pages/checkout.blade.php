@@ -126,24 +126,6 @@
     }
 
     /* --- Form Controls & Inputs Polish --- */
-    .luxury-input-wrapper {
-        position: relative;
-        transition: transform 0.25s var(--ease-luxury);
-    }
-    .luxury-input-icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #9E7D3B;
-        font-size: 13px;
-        pointer-events: none;
-        transition: color 0.25s ease, transform 0.25s var(--ease-luxury);
-        z-index: 3;
-    }
-    .luxury-input-group:focus-within .luxury-input-icon {
-        color: #541B29;
-        transform: translateY(-50%) scale(1.1);
-    }
 
     .checkout-input, 
     .checkout-select,
@@ -164,9 +146,6 @@
     .checkout-input {
         height: 42px !important;
         padding: 0 14px !important;
-    }
-    .checkout-input.with-icon {
-        padding-left: 38px !important;
     }
 
     textarea.checkout-input {
@@ -552,25 +531,19 @@
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
                                         <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Full Name <span class="text-danger">*</span></label>
-                                        <div class="luxury-input-wrapper">
-                                            <i class="fa-regular fa-user luxury-input-icon start-0 ps-3"></i>
-                                            <input type="text" id="input_name" name="customer_name" required 
-                                                   value="{{ old('customer_name') }}" 
-                                                   placeholder="e.g. Muhammad Ali"
-                                                   class="form-control checkout-input with-icon">
-                                        </div>
+                                        <input type="text" id="input_name" name="customer_name" required 
+                                               value="{{ old('customer_name') }}" 
+                                               placeholder="e.g. Muhammad Ali"
+                                               class="form-control checkout-input">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Email Address (Order Confirmation) <span class="text-danger">*</span></label>
-                                        <div class="luxury-input-wrapper">
-                                            <i class="fa-regular fa-envelope luxury-input-icon start-0 ps-3"></i>
-                                            <input type="email" name="customer_email" required 
-                                                   value="{{ old('customer_email') }}" 
-                                                   placeholder="e.g. name@example.com"
-                                                   class="form-control checkout-input with-icon">
-                                        </div>
+                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Confirmation <span class="text-danger">*</span></label>
+                                        <input type="email" name="customer_email" required 
+                                               value="{{ old('customer_email') }}" 
+                                               placeholder="e.g. name@example.com"
+                                               class="form-control checkout-input">
                                     </div>
                                 </div>
                             </div>
@@ -578,13 +551,10 @@
                             <!-- Mobile Contact -->
                             <div class="luxury-input-group">
                                 <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Pakistani Mobile Contact (03XX-XXXXXXX) <span class="text-danger">*</span></label>
-                                <div class="luxury-input-wrapper">
-                                    <i class="fa-solid fa-phone luxury-input-icon start-0 ps-3"></i>
-                                    <input type="tel" id="input_phone" name="customer_phone" required 
-                                           value="{{ old('customer_phone') }}" 
-                                           placeholder="e.g. 03001234567"
-                                           class="form-control font-mono checkout-input with-icon">
-                                </div>
+                                <input type="tel" id="input_phone" name="customer_phone" required 
+                                       value="{{ old('customer_phone') }}" 
+                                       placeholder="e.g. 03001234567"
+                                       class="form-control font-mono checkout-input">
                                 <small class="d-block mt-1 text-muted" style="font-size: 11px;">
                                     <i class="fas fa-info-circle me-1" style="color: #541B29;"></i>Courier rider will call you on this active number prior to doorstep delivery.
                                 </small>
@@ -622,13 +592,10 @@
                             <!-- Street Address -->
                             <div class="luxury-input-group">
                                 <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Street Address / House / Flat Number <span class="text-danger">*</span></label>
-                                <div class="luxury-input-wrapper">
-                                    <i class="fa-solid fa-location-dot luxury-input-icon start-0 ps-3"></i>
-                                    <input type="text" id="input_address" name="shipping_address" required 
-                                           value="{{ old('shipping_address') }}" 
-                                           placeholder="e.g. House #, Street #, Apartment"
-                                           class="form-control checkout-input with-icon">
-                                </div>
+                                <input type="text" id="input_address" name="shipping_address" required 
+                                       value="{{ old('shipping_address') }}" 
+                                       placeholder="e.g. House #, Street #, Apartment"
+                                       class="form-control checkout-input">
                             </div>
 
                             <!-- Area / Sector / Landmark -->
@@ -860,12 +827,9 @@
                                                 <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; color: #541B29;">
                                                     Bank Reference / Transaction ID (TID)
                                                 </label>
-                                                <div class="luxury-input-wrapper">
-                                                    <i class="fas fa-receipt luxury-input-icon start-0 ps-3"></i>
-                                                    <input type="text" name="transaction_id" placeholder="e.g. Bank Ref / Transaction ID"
-                                                           :disabled="paymentMethod !== 'bank_transfer'"
-                                                           class="form-control font-mono checkout-input with-icon tid-input">
-                                                </div>
+                                                <input type="text" name="transaction_id" placeholder="e.g. Bank Ref / Transaction ID"
+                                                       :disabled="paymentMethod !== 'bank_transfer'"
+                                                       class="form-control font-mono checkout-input tid-input">
                                                 <small class="d-block mt-1 text-muted" style="font-size: 10.5px;">Enter bank transfer reference number from your receipt/app.</small>
                                             </div>
                                         </div>
