@@ -269,10 +269,10 @@
         padding: 16px 18px;
     }
     .luxury-copy-btn {
-        height: 36px;
-        min-width: 76px;
-        padding: 0 12px;
-        font-size: 11px;
+        height: 28px;
+        min-width: 58px;
+        padding: 0 10px;
+        font-size: 10.5px;
         font-weight: 600;
         letter-spacing: 0.04em;
         background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important;
@@ -310,8 +310,8 @@
     .btn-place-order {
         position: relative;
         overflow: hidden;
-        height: 50px;
-        border-radius: 9px;
+        height: 42px;
+        border-radius: 7px;
         border: none !important;
         background: linear-gradient(135deg, #B83A58 0%, #7A1C33 50%, #4A1220 100%) !important;
         color: #FFFFFF !important;
@@ -468,26 +468,27 @@
 
         /* Buttons on Mobile */
         .btn-place-order {
-            height: 48px !important;
-            font-size: 11.5px !important;
+            height: 40px !important;
+            font-size: 11px !important;
             letter-spacing: 0.08em !important;
             padding: 0 14px !important;
-            border-radius: 8px !important;
+            border-radius: 6px !important;
         }
 
         .free-delivery-cta-btn {
             width: 100% !important;
-            height: 38px !important;
-            margin-top: 6px;
+            height: 32px !important;
+            font-size: 10.5px !important;
+            margin-top: 4px;
         }
 
         .luxury-copy-btn {
-            height: 34px !important;
-            min-width: 68px !important;
-            padding: 0 10px !important;
-            font-size: 10.5px !important;
-            letter-spacing: 0.03em !important;
-            border-radius: 6px !important;
+            height: 26px !important;
+            min-width: 52px !important;
+            padding: 0 8px !important;
+            font-size: 10px !important;
+            letter-spacing: 0.02em !important;
+            border-radius: 5px !important;
         }
 
         /* Bank Details Drawer & Card on Mobile */
@@ -823,7 +824,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('collections.show', 'all') }}" class="btn btn-sm text-uppercase fw-semibold flex-shrink-0 text-decoration-none d-inline-flex align-items-center justify-content-center btn-gradient free-delivery-cta-btn" 
-                                       style="height: 36px; padding: 0 18px; font-size: 11.5px; border-radius: 6px;">
+                                       style="height: 30px; padding: 0 14px; font-size: 10.5px; border-radius: 5px;">
                                         Add Flacon
                                     </a>
                                 </div>
@@ -913,14 +914,14 @@
                                             <span class="fw-semibold text-uppercase" style="color: #211D1E; font-size: 12px;">{{ $bankDetails['account_title'] ?? 'PERFUMES COLLECTION' }}</span>
                                         </div>
 
-                                        <div class="py-2" style="border-bottom: 1px solid #E8E0DA;">
-                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div class="py-2.5" style="border-bottom: 1px solid #E8E0DA;">
+                                            <div class="d-flex justify-content-between align-items-center mb-1.5">
                                                 <span style="color: #6B605B; font-size: 11px; font-weight: 500;">IBAN (Bank Account):</span>
                                                 <span class="text-muted d-none d-sm-inline" style="font-size: 10px;">Tap to copy</span>
                                             </div>
-                                            <div class="d-flex align-items-stretch gap-1.5" x-data="{ copied: false }">
-                                                <span class="font-mono fw-bold px-2.5 py-1.5 rounded flex-grow-1 text-break d-flex align-items-center" 
-                                                      style="background-color: #FFFFFF; border: 1.5px solid #E8E0DA; color: #211D1E; font-size: 12px; letter-spacing: 0.03em; min-height: 36px;">
+                                            <div class="d-flex align-items-center gap-2" x-data="{ copied: false }">
+                                                <span class="font-mono fw-bold rounded flex-grow-1 text-break d-flex align-items-center" 
+                                                      style="background-color: #FFFFFF; border: 1.5px solid #E8E0DA; color: #211D1E; font-size: 12px; letter-spacing: 0.05em; min-height: 38px; padding: 8px 14px !important;">
                                                     {{ $bankDetails['iban'] ?? 'PK04 BAHL 1209 0981 0030 0001' }}
                                                 </span>
                                                 <button type="button" 
@@ -928,14 +929,8 @@
                                                         class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0"
                                                         :class="{ 'is-copied': copied }"
                                                         title="Copy IBAN">
-                                                    <span x-show="!copied" class="d-inline-flex align-items-center gap-1">
-                                                        <i class="far fa-copy" style="font-size: 11px;"></i>
-                                                        <span>Copy</span>
-                                                    </span>
-                                                    <span x-show="copied" x-cloak class="d-inline-flex align-items-center gap-1">
-                                                        <i class="fas fa-check" style="font-size: 11px;"></i>
-                                                        <span>Copied</span>
-                                                    </span>
+                                                    <span x-show="!copied">Copy</span>
+                                                    <span x-show="copied" x-cloak>Copied</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -954,14 +949,8 @@
                                                         @click="navigator.clipboard.writeText('{{ $bankDetails['raast_id'] }}'); copied = true; setTimeout(() => { copied = false }, 2000)" 
                                                         class="btn text-uppercase fw-semibold luxury-copy-btn d-inline-flex align-items-center justify-content-center flex-shrink-0"
                                                         :class="{ 'is-copied': copied }">
-                                                    <span x-show="!copied" class="d-inline-flex align-items-center gap-1">
-                                                        <i class="far fa-copy" style="font-size: 10.5px;"></i>
-                                                        <span>Copy</span>
-                                                    </span>
-                                                    <span x-show="copied" x-cloak class="d-inline-flex align-items-center gap-1">
-                                                        <i class="fas fa-check" style="font-size: 10.5px;"></i>
-                                                        <span>Copied</span>
-                                                    </span>
+                                                    <span x-show="!copied">Copy</span>
+                                                    <span x-show="copied" x-cloak>Copied</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -1051,7 +1040,7 @@
                                 class="w-100 btn-place-order text-xs fw-semibold text-uppercase tracking-widest d-flex align-items-center justify-content-center gap-2">
                             <span x-show="!orderSubmitting" class="d-inline-flex align-items-center gap-2">
                                 <i class="fas fa-lock" style="font-size: 11px; opacity: 0.9;"></i>
-                                <span>Place Confirmed Order</span>
+                                <span>Place Order</span>
                                 <i class="fas fa-arrow-right ms-1" style="font-size: 11px; opacity: 0.9;"></i>
                             </span>
                             <span x-show="orderSubmitting" x-cloak class="d-inline-flex align-items-center gap-2">
@@ -1115,10 +1104,10 @@
                                     <div class="d-flex gap-2">
                                         <input type="text" x-model="couponCode" placeholder="ENTER CODE" 
                                                class="form-control text-xs text-uppercase font-mono checkout-input" 
-                                               style="height: 38px; background-color: #FAF7F2; border: 1.5px solid #E8E0DA; color: #211D1E; border-radius: 8px; font-size: 12px; padding: 0 12px;">
+                                               style="height: 34px; background-color: #FAF7F2; border: 1.5px solid #E8E0DA; color: #211D1E; border-radius: 6px; font-size: 11.5px; padding: 0 12px;">
                                         <button type="button" @click="applyCoupon()" :disabled="couponLoading"
                                                 class="fw-semibold text-xs text-uppercase px-3 rounded-3 text-nowrap transition d-inline-flex align-items-center justify-content-center btn-gradient"
-                                                style="height: 38px; border-radius: 8px;">
+                                                style="height: 34px; padding: 0 14px; font-size: 11px; border-radius: 6px;">
                                             <span x-show="!couponLoading">Apply</span>
                                             <span x-show="couponLoading" x-cloak class="luxury-spinner" style="width: 14px; height: 14px;"></span>
                                         </button>
