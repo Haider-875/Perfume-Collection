@@ -126,6 +126,23 @@
     }
 
     /* --- Form Controls & Inputs Polish --- */
+    .checkout-address-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .luxury-input-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .luxury-input-group label {
+        margin-bottom: 7px !important;
+        font-size: 11px !important;
+        letter-spacing: 0.05em;
+        color: #541B29;
+    }
 
     .checkout-input, 
     .checkout-select,
@@ -525,12 +542,12 @@
                             </div>
                         @endif
 
-                        <div class="d-flex flex-column gap-3.5">
+                        <div class="checkout-address-fields">
                             <!-- Full Name & Email -->
-                            <div class="row g-3">
+                            <div class="row g-3" style="row-gap: 20px;">
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Full Name <span class="text-danger">*</span></label>
+                                        <label class="d-block text-uppercase tracking-wider fw-semibold">Full Name <span class="text-danger">*</span></label>
                                         <input type="text" id="input_name" name="customer_name" required 
                                                value="{{ old('customer_name') }}" 
                                                placeholder="e.g. Muhammad Ali"
@@ -539,7 +556,7 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Confirmation <span class="text-danger">*</span></label>
+                                        <label class="d-block text-uppercase tracking-wider fw-semibold">Confirmation <span class="text-danger">*</span></label>
                                         <input type="email" name="customer_email" required 
                                                value="{{ old('customer_email') }}" 
                                                placeholder="e.g. name@example.com"
@@ -550,21 +567,21 @@
 
                             <!-- Mobile Contact -->
                             <div class="luxury-input-group">
-                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Pakistani Mobile Contact (03XX-XXXXXXX) <span class="text-danger">*</span></label>
+                                <label class="d-block text-uppercase tracking-wider fw-semibold">Pakistani Mobile Contact (03XX-XXXXXXX) <span class="text-danger">*</span></label>
                                 <input type="tel" id="input_phone" name="customer_phone" required 
                                        value="{{ old('customer_phone') }}" 
                                        placeholder="e.g. 03001234567"
                                        class="form-control font-mono checkout-input">
-                                <small class="d-block mt-1 text-muted" style="font-size: 11px;">
+                                <small class="d-block text-muted" style="font-size: 11px; margin-top: 6px;">
                                     <i class="fas fa-info-circle me-1" style="color: #541B29;"></i>Courier rider will call you on this active number prior to doorstep delivery.
                                 </small>
                             </div>
 
                             <!-- Province & City -->
-                            <div class="row g-3">
+                            <div class="row g-3" style="row-gap: 20px;">
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Province / Region <span class="text-danger">*</span></label>
+                                        <label class="d-block text-uppercase tracking-wider fw-semibold">Province / Region <span class="text-danger">*</span></label>
                                         <select name="province" x-model="province" required 
                                                 class="form-select checkout-select">
                                             <option value="" disabled :selected="!province">Select Province</option>
@@ -577,7 +594,7 @@
 
                                 <div class="col-12 col-md-6">
                                     <div class="luxury-input-group">
-                                        <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">City in Pakistan <span class="text-danger">*</span></label>
+                                        <label class="d-block text-uppercase tracking-wider fw-semibold">City in Pakistan <span class="text-danger">*</span></label>
                                         <select name="city" x-model="city" required 
                                                 class="form-select checkout-select">
                                             <option value="" disabled :selected="!city">Select City</option>
@@ -591,7 +608,7 @@
 
                             <!-- Street Address -->
                             <div class="luxury-input-group">
-                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Street Address / House / Flat Number <span class="text-danger">*</span></label>
+                                <label class="d-block text-uppercase tracking-wider fw-semibold">Street Address / House / Flat Number <span class="text-danger">*</span></label>
                                 <input type="text" id="input_address" name="shipping_address" required 
                                        value="{{ old('shipping_address') }}" 
                                        placeholder="e.g. House #, Street #, Apartment"
@@ -600,7 +617,7 @@
 
                             <!-- Area / Sector / Landmark -->
                             <div class="luxury-input-group">
-                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Area / Sector / Landmark <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
+                                <label class="d-block text-uppercase tracking-wider fw-semibold">Area / Sector / Landmark <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
                                 <input type="text" name="area" value="{{ old('area') }}" 
                                        placeholder="e.g. Area, Sector, Block or Nearest Landmark"
                                        class="form-control checkout-input">
@@ -608,7 +625,7 @@
 
                             <!-- Special Delivery Instructions -->
                             <div class="luxury-input-group">
-                                <label class="d-block text-uppercase tracking-wider mb-1.5 fw-semibold" style="font-size: 11px; letter-spacing: 0.05em; color: #541B29;">Special Delivery Instructions <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
+                                <label class="d-block text-uppercase tracking-wider fw-semibold">Special Delivery Instructions <span class="fw-normal text-muted" style="text-transform: none;">(Optional)</span></label>
                                 <textarea name="order_notes" rows="2" placeholder="e.g. Call before arrival or leave with security gate"
                                           class="form-control checkout-input">{{ old('order_notes') }}</textarea>
                             </div>
