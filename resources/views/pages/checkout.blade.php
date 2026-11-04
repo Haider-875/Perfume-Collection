@@ -329,18 +329,7 @@
         transition: transform 0.25s var(--ease-luxury), box-shadow 0.25s var(--ease-luxury), filter 0.25s ease !important;
         cursor: pointer;
         font-weight: 600;
-        letter-spacing: 0.12em;
-    }
-    .btn-place-order::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
-        animation: luxuryShimmer 3.8s infinite ease-in-out;
-        pointer-events: none;
+        letter-spacing: 0.08em;
     }
     .btn-place-order:hover {
         transform: translateY(-2px);
@@ -665,7 +654,7 @@
             </div>
         @endif
 
-        <form action="{{ route('checkout.process') }}" method="POST" enctype="multipart/form-data" @submit="orderSubmitting = true">
+        <form action="{{ route('checkout.process') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="row g-4 g-lg-5">
@@ -1091,13 +1080,8 @@
                     <!-- Submit Button -->
                     <div class="anim-reveal anim-delay-submit">
                         <button type="submit" 
-                                :disabled="orderSubmitting"
                                 class="w-100 btn-place-order fw-semibold text-uppercase d-flex align-items-center justify-content-center">
-                            <span x-show="!orderSubmitting">Place Order</span>
-                            <span x-show="orderSubmitting" x-cloak class="d-inline-flex align-items-center gap-2">
-                                <span class="luxury-spinner" style="width: 13px; height: 13px; border-width: 2px;"></span>
-                                <!-- <span>Placing Order...</span> -->
-                            </span>
+                            <span>Place Order</span>
                         </button>
                         <p class="text-center mt-3 mb-0" style="font-size: 10.5px; color: #6B605B; line-height: 1.4;">
                             <i class="fas fa-shield-halved me-1" style="color: #9E7D3B; font-size: 10px;"></i>
